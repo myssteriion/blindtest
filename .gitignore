@@ -7,5 +7,6 @@ bin/
 .gradle/
 build/
 
+delivery/
 
 ####### front #######

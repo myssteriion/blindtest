@@ -26,3 +26,26 @@ dependencies {
 	
 	testImplementation "org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE"
 }
+
+
+
+def deliveryFolder = "delivery"
+
+clean {
+	delete deliveryFolder
+}
+
+build {
+	doLast {
+		copy {
+		    from "conf"
+	    	include "**/*"
+		    into deliveryFolder
+		}
+		copy {
+		    from "build/libs/"
+		    include "*"
+		    into deliveryFolder
+		}
+	}
+}
