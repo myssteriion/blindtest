@@ -22,6 +22,7 @@ repositories {
 dependencies {
 	implementation "org.springframework.boot:spring-boot-starter:2.1.5.RELEASE"
 	implementation "org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE"
+	implementation "com.h2database:h2:1.4.199"
 	
 	testImplementation "org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE"
 }
