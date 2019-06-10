@@ -1,7 +1,11 @@
+####### back #######
 .project
 .classpath
 .settings/
-
-gradle/
-
 bin/
+
+.gradle/
+build/
+
+
+####### front #######
