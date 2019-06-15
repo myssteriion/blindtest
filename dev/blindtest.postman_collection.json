@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "44159c23-3c70-4570-bf22-1b5036e3b44b",
+		"name": "blindtest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "music",
+			"item": [
+				{
+					"name": "music",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/music",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"music"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
