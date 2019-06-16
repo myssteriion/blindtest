@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.music;
 import java.util.Objects;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 
 public class MusicDTO extends AbstractDTO {
@@ -20,7 +21,7 @@ public class MusicDTO extends AbstractDTO {
 		Tool.verifyValue("name", name);
 		Tool.verifyValue("theme", theme);
 		
-		this.name = name;
+		this.name = name.replace(Constant.QUOTE, Constant.DOUBLE_QUOTE);
 		this.theme = theme;
 		this.nbPlayed = 0;
 	}

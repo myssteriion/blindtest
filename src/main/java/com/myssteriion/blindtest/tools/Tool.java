@@ -29,4 +29,5 @@ public class Tool {
 		if ( !isNullOrEmpty(key) && isNullOrEmpty(value) )
 			throw new IllegalArgumentException("Le champ '" + key + "' est obligatoire.");
 	}
+
 }

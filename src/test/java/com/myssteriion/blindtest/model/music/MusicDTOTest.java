@@ -42,7 +42,8 @@ public class MusicDTOTest extends AbstractTest {
 		
 		
 		
-		MusicDTO musicDTO = new MusicDTO(name, theme, 2);
+		MusicDTO musicDTO = new MusicDTO(name + "'a'b'c''", theme, 2);
+		Assert.assertEquals( name + "''a''b''c''''", musicDTO.getName() );
 		Assert.assertEquals( 2, musicDTO.getNbPlayed() );
 		
 		musicDTO = new MusicDTO(name, theme, -2);
