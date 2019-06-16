@@ -14,10 +14,10 @@ public class Tool {
 			return ((String) o).isEmpty();
 		}
 		else if (o instanceof List) {
-			return ((List) o).isEmpty();
+			return ((List<?>) o).isEmpty();
 		}
 		else if (o instanceof Map) {
-			return ((Map) o).isEmpty();
+			return ((Map<?, ?>) o).isEmpty();
 		}
 		else {
 			return false;
