@@ -25,6 +25,12 @@ public class MusicDTO extends AbstractDTO {
 		this.nbPlayed = 0;
 	}
 	
+	public MusicDTO(String name, Theme theme, int nbPlayed) {
+		
+		this(name, theme);
+		this.nbPlayed = (nbPlayed < 0) ? 0 : nbPlayed;
+	}
+	
 	
 	
 	public String getName() {
@@ -39,15 +45,15 @@ public class MusicDTO extends AbstractDTO {
 		return nbPlayed;
 	}
 
-	public void setNbPlayed(int nbPlayed) {
-		this.nbPlayed = nbPlayed;
+	public void incrementNbPlayed() {
+		this.nbPlayed++;
 	}
 	
 	
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode() + Objects.hash(name, theme, nbPlayed);
+		return Objects.hash(name, theme);
 	}
 
 	@Override
@@ -60,10 +66,8 @@ public class MusicDTO extends AbstractDTO {
             return false; 
 		
 		MusicDTO other = (MusicDTO) obj;
-		return super.equals(obj) && 
-				Objects.equals(this.name, other.name) &&
-				Objects.equals(this.theme, other.theme) &&
-				Objects.equals(this.nbPlayed, other.nbPlayed);
+		return Objects.equals(this.name, other.name) && 
+				Objects.equals(this.theme, other.theme);
 	}
 
 	@Override
