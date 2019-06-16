@@ -1,14 +1,17 @@
 package com.myssteriion.blindtest.tools;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.exception.EntityManagerException;
 
 public class ToolTest extends AbstractTest {
 
@@ -28,6 +31,9 @@ public class ToolTest extends AbstractTest {
 		Assert.assertFalse( Tool.isNullOrEmpty(map) );
 		
 		Assert.assertFalse( Tool.isNullOrEmpty(new Integer(1)) );
+		
+		Assert.assertTrue( Tool.isNullOrEmpty( new File(".") ) );
+		Assert.assertFalse( Tool.isNullOrEmpty( new File("./exitePas") ) );
 	}
 
 	@Test
@@ -71,4 +77,39 @@ public class ToolTest extends AbstractTest {
 		Tool.verifyValue("key", "pouet");
 	}
 
+	@Test
+	public void transformToList() {
+		
+		Assert.assertEquals( new ArrayList<>(), Tool.transformToList(null) );
+		
+		NullPointerException npe = new NullPointerException("npe");
+		List<String> expected = new ArrayList<>();
+		expected.add( npe.getMessage() );
+		List<String> actual = Tool.transformToList(npe);
+		for (int i = 0; i < expected.size(); i++) {
+			Assert.assertEquals( expected.get(i), actual.get(i) );
+		}
+		
+
+		IllegalArgumentException iae = new IllegalArgumentException("iea", npe);
+		expected = new ArrayList<>();
+		expected.add( iae.getMessage() );
+		expected.add( npe.getMessage() );
+		actual = Tool.transformToList(iae);
+		for (int i = 0; i < expected.size(); i++) {
+			Assert.assertEquals( expected.get(i), actual.get(i) );
+		}
+		
+		
+		EntityManagerException eme = new EntityManagerException("eme", iae);
+		expected = new ArrayList<>();
+		expected.add( eme.getMessage() );
+		expected.add( iae.getMessage() );
+		expected.add( npe.getMessage() );
+		actual = Tool.transformToList(eme);
+		for (int i = 0; i < expected.size(); i++) {
+			Assert.assertEquals( expected.get(i), actual.get(i) );
+		}
+	}
+	
 }
