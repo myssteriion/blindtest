@@ -36,16 +36,23 @@ public class DbConnection {
 
 	private void initTableIfNeedIt() throws SQLException {
 		
+		StringBuilder sb;
+		
 		try ( Statement statement = connection.createStatement() ) {
 			
-			StringBuilder sb = new StringBuilder();
-			sb.append("CREATE TABLE IF NOT EXISTS musique (");
-			sb.append("id INT,");
-			sb.append("name VARCHAR2,");
-			sb.append("theme VARCHAR2,");
-			sb.append("nbPlayed INT");
-			sb.append(")");
+			sb = new StringBuilder();
+			sb.append("CREATE SEQUENCE IF NOT EXISTS music_seq ");
+			sb.append("START WITH 0 ");
+			sb.append("INCREMENT BY 1 ");
+			statement.execute( sb.toString() );
 			
+			sb = new StringBuilder();
+			sb.append("CREATE TABLE IF NOT EXISTS musique (");
+			sb.append("id BIGINT DEFAULT music_seq.nextval PRIMARY KEY,");
+			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
+			sb.append("theme VARCHAR2 NOT NULL,");
+			sb.append("nbPlayed INT NOT NULL");
+			sb.append(")");
 			statement.execute( sb.toString() );
 		}
 	}
