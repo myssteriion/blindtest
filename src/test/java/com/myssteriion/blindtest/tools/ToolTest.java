@@ -32,8 +32,8 @@ public class ToolTest extends AbstractTest {
 		
 		Assert.assertFalse( Tool.isNullOrEmpty(new Integer(1)) );
 		
-		Assert.assertTrue( Tool.isNullOrEmpty( new File(".") ) );
-		Assert.assertFalse( Tool.isNullOrEmpty( new File("./exitePas") ) );
+		Assert.assertFalse( Tool.isNullOrEmpty( new File(".") ) );
+		Assert.assertTrue( Tool.isNullOrEmpty( new File("./exitePas") ) );
 	}
 
 	@Test

@@ -22,7 +22,7 @@ public class Tool {
 			return ((Map<?, ?>) o).isEmpty();
 		}
 		else if (o instanceof File) {
-			return ((File) o).exists();
+			return !((File) o).exists();
 		}
 		else {
 			return false;
