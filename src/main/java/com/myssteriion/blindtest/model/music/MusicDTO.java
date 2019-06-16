@@ -17,18 +17,16 @@ public class MusicDTO extends AbstractDTO {
 	
 	
 	public MusicDTO(String name, Theme theme) {
+		this(name, theme, 0);
+	}
+	
+	public MusicDTO(String name, Theme theme, int nbPlayed) {
 		
 		Tool.verifyValue("name", name);
 		Tool.verifyValue("theme", theme);
 		
 		this.name = name.replace(Constant.QUOTE, Constant.DOUBLE_QUOTE);
 		this.theme = theme;
-		this.nbPlayed = 0;
-	}
-	
-	public MusicDTO(String name, Theme theme, int nbPlayed) {
-		
-		this(name, theme);
 		this.nbPlayed = (nbPlayed < 0) ? 0 : nbPlayed;
 	}
 	
