@@ -101,8 +101,8 @@ public class MusicDAOTest extends AbstractTest {
 	@Test
 	public void saveOrUpdate() throws EntityManagerException, SQLException {
 
-		dao = Mockito.spy( new MusicDAO() {{ em = MusicDAOTest.this.em; }} );
-		MockitoAnnotations.initMocks(dao);
+		dao = Mockito.spy( new MusicDAO() );
+		MockitoAnnotations.initMocks(this);
 		
 		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
 		dto.setId("1");
