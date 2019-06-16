@@ -9,19 +9,20 @@
 			"name": "music",
 			"item": [
 				{
-					"name": "music",
+					"name": "refresh",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/music",
+							"raw": "http://localhost:8080/music/refresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"music"
+								"music",
+								"refresh"
 							]
 						}
 					},
