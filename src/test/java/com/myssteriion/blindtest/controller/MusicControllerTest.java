@@ -24,9 +24,11 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void refresh() throws EntityManagerException {
 
-		NullPointerException npe = new NullPointerException("npe");
+//		NullPointerException npe = new NullPointerException("npe");
+//		Mockito.doThrow(npe).doNothing().when(service).refresh();
 		Mockito.doNothing().when(service).refresh();
 
 		ResponseEntity<RestError> re = controller.refresh();
@@ -34,7 +36,7 @@ public class MusicControllerTest extends AbstractTest {
 //		Assert.assertEquals( "Can't refresh musics.", ((RestError) re.getBody()).getMessage() );
 //		Assert.assertEquals( "npe", ((RestError) re.getBody()).getCauses().get(0) );
 		
-		re = controller.refresh();
+//		re = controller.refresh();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 	}
 
