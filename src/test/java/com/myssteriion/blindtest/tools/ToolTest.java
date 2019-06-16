@@ -38,6 +38,7 @@ public class ToolTest extends AbstractTest {
 		
 		try {
 			Tool.verifyValue("key", null);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'key' est obligatoire."), e);
@@ -45,6 +46,7 @@ public class ToolTest extends AbstractTest {
 		
 		try {
 			Tool.verifyValue("key", "");
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'key' est obligatoire."), e);
@@ -52,6 +54,7 @@ public class ToolTest extends AbstractTest {
 		
 		try {
 			Tool.verifyValue("key", new ArrayList<>());
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'key' est obligatoire."), e);
@@ -59,6 +62,7 @@ public class ToolTest extends AbstractTest {
 
 		try {
 			Tool.verifyValue("key", new HashMap<>());
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'key' est obligatoire."), e);

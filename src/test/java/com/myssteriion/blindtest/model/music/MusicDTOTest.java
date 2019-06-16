@@ -16,6 +16,7 @@ public class MusicDTOTest extends AbstractTest {
 		
 		try {
 			new MusicDTO(null, theme);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
@@ -23,6 +24,7 @@ public class MusicDTOTest extends AbstractTest {
 		
 		try {
 			new MusicDTO("", theme);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
@@ -30,6 +32,7 @@ public class MusicDTOTest extends AbstractTest {
 		
 		try {
 			new MusicDTO(name, null);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
