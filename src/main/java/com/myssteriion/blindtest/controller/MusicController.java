@@ -3,11 +3,11 @@ package com.myssteriion.blindtest.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myssteriion.blindtest.rest.ResponseIModel;
 import com.myssteriion.blindtest.rest.RestBuilder;
 import com.myssteriion.blindtest.service.MusicService;
 
@@ -28,12 +28,12 @@ public class MusicController {
 	path = "/refresh",
 		method = RequestMethod.GET
 	)
-	public ResponseEntity refresh() {
+	public ResponseIModel<?> refresh() {
 		
 		try {
 			
 			service.refresh();
-			return RestBuilder.createEmpty200();
+			return RestBuilder.create204();
 		}
 		catch (Exception e) {
 

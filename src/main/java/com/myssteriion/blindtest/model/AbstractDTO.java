@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.model;
 
-public abstract class AbstractDTO {
+public abstract class AbstractDTO implements IModel {
 
 	private String id;
 

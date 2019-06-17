@@ -1,21 +1,21 @@
 package com.myssteriion.blindtest.rest;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.model.base.EmptyModel;
+import com.myssteriion.blindtest.model.base.ErrorModel;
 
 
 public class RestBuilder {
 
-	public static ResponseEntity createEmpty200() {
-		return new ResponseEntity(HttpStatus.OK);
+	public static ResponseIModel<EmptyModel> create204() {
+		return new ResponseIModel<EmptyModel>(HttpStatus.NO_CONTENT);
 	}
 	
-	public static ResponseEntity<RestError> create500(String message, Throwable cause) {
+	public static ResponseIModel<ErrorModel> create500(String message, Throwable cause) {
 
-		RestError restError = new RestError(HttpStatus.INTERNAL_SERVER_ERROR, message, cause);
-		return new ResponseEntity<RestError>(restError, HttpStatus.INTERNAL_SERVER_ERROR);
+		ErrorModel restError = new ErrorModel(HttpStatus.INTERNAL_SERVER_ERROR, message, cause);
+		return new ResponseIModel<ErrorModel>(restError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }

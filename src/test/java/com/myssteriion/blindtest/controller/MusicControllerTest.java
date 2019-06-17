@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
-import com.myssteriion.blindtest.rest.RestError;
 import com.myssteriion.blindtest.service.MusicService;
 
 public class MusicControllerTest extends AbstractTest {
@@ -24,20 +23,20 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void refresh() throws EntityManagerException {
 
 //		NullPointerException npe = new NullPointerException("npe");
 //		Mockito.doThrow(npe).doNothing().when(service).refresh();
 		Mockito.doNothing().when(service).refresh();
 
-		ResponseEntity<RestError> re = controller.refresh();
+		ResponseEntity re = controller.refresh();
 //		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
-//		Assert.assertEquals( "Can't refresh musics.", ((RestError) re.getBody()).getMessage() );
-//		Assert.assertEquals( "npe", ((RestError) re.getBody()).getCauses().get(0) );
+//		Assert.assertEquals( "Can't refresh musics.", ((ErrorModel) re.getBody()).getMessage() );
+//		Assert.assertEquals( "npe", ((ErrorModel) re.getBody()).getCauses().get(0) );
 		
-//		re = controller.refresh();
-		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+		re = controller.refresh();
+		Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
 	}
 
 }

@@ -1,13 +1,14 @@
-package com.myssteriion.blindtest.rest;
+package com.myssteriion.blindtest.model.base;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.tools.Tool;
 
-public class RestError {
+public class ErrorModel implements IModel {
 	
 	private HttpStatus status;
 	
@@ -17,11 +18,11 @@ public class RestError {
 	
 	
 	
-	public RestError(HttpStatus status, String message) {
+	public ErrorModel(HttpStatus status, String message) {
 		this(status, message, null);
 	}
 
-	public RestError(HttpStatus status, String message, Throwable e) {
+	public ErrorModel(HttpStatus status, String message, Throwable e) {
 		
 		Tool.verifyValue("status", status);
 		Tool.verifyValue("message", message);
