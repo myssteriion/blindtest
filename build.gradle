@@ -32,6 +32,7 @@ dependencies {
 
 
 def deliveryFolder = "delivery"
+def logsFolder = "logs"
 
 clean {
 	delete deliveryFolder
@@ -49,6 +50,7 @@ build {
 		    include "*"
 		    into deliveryFolder
 		}
+		delete logsFolder
 	}
 }
 
