@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
@@ -16,6 +18,10 @@ import com.myssteriion.blindtest.tools.Tool;
 @Component
 public class MusicDAO extends AbstractDAO<MusicDTO> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(MusicDAO.class);
+	
+	
+	
 	@Override
 	public MusicDTO find(MusicDTO dto) throws EntityManagerException {
 		
@@ -39,7 +45,10 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return dtoToReturn;
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("Can't find dto.", e);
+			
+			String message = "Can't find dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 	
@@ -64,7 +73,10 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return dtoList;
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("Can't find all dto.", e);
+			
+			String message = "Can't find all dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 	
@@ -90,10 +102,17 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', " + dto.getNbPlayed() + ")");
 			
 			statement.execute( sb.toString() );
-			return find(dto);
+			
+			MusicDTO dtoSaved = find(dto);
+			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
+			
+			return dtoSaved;
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("Can't save dto.", e);
+			
+			String message = "Can't save dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 	
@@ -112,7 +131,10 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return dto;
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("Can't update dto.", e);
+			
+			String message = "Can't update dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 

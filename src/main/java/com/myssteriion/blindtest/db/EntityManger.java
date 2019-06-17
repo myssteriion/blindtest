@@ -6,6 +6,8 @@ import java.sql.Statement;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
@@ -13,6 +15,8 @@ import com.myssteriion.blindtest.tools.Constant;
 
 @Component
 public class EntityManger {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManger.class);
 	
 	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIRE + "/data/blindtest";
 	
@@ -24,11 +28,15 @@ public class EntityManger {
 	private void init() throws EntityManagerException {
 		
 		try {
+			
 			connection = DriverManager.getConnection(URL);
 			initTableIfNeedIt();
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("save", e);
+			
+			String message = "Can't init DataBase";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 
@@ -54,7 +62,10 @@ public class EntityManger {
 			statement.execute( sb.toString() );
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("save", e);
+			
+			String message = "Can't create table.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 	
@@ -66,7 +77,10 @@ public class EntityManger {
 			return connection.createStatement();
 		}
 		catch (Exception e) {
-			throw new EntityManagerException("Can't create statement.", e);
+			
+			String message = "Can't create statement.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
 		}
 	}
 	
