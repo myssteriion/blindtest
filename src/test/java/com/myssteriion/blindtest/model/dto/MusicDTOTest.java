@@ -1,9 +1,11 @@
-package com.myssteriion.blindtest.model.music;
+package com.myssteriion.blindtest.model.dto;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 
 public class MusicDTOTest extends AbstractTest {
 

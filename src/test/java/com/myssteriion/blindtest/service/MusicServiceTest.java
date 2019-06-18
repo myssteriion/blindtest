@@ -9,8 +9,8 @@ import org.mockito.Mockito;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
-import com.myssteriion.blindtest.model.music.MusicDTO;
-import com.myssteriion.blindtest.model.music.Theme;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 
 public class MusicServiceTest extends AbstractTest {
 

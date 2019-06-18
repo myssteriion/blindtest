@@ -13,16 +13,16 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.EntityManger;
+import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
-import com.myssteriion.blindtest.model.music.MusicDTO;
-import com.myssteriion.blindtest.model.music.Theme;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 
 
 public class MusicDAOTest extends AbstractTest {
 
 	@Mock
-	protected EntityManger em;
+	protected EntityManager em;
 	
 	@InjectMocks
 	private MusicDAO dao;

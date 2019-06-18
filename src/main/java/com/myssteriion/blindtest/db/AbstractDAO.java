@@ -10,7 +10,7 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 public abstract class AbstractDAO<T extends AbstractDTO> {
 
 	@Autowired
-	protected EntityManger em;
+	protected EntityManager em;
 	
 	
 	public abstract T find(T dto) throws EntityManagerException;

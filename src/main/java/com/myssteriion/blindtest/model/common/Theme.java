@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.music;
+package com.myssteriion.blindtest.model.common;
 
 public enum Theme {
 

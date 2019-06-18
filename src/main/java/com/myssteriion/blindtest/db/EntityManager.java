@@ -14,9 +14,9 @@ import com.myssteriion.blindtest.db.exception.EntityManagerException;
 import com.myssteriion.blindtest.tools.Constant;
 
 @Component
-public class EntityManger {
+public class EntityManager {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManger.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManager.class);
 	
 	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIR + "/data/blindtest";
 	

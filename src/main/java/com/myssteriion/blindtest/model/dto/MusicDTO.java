@@ -1,8 +1,9 @@
-package com.myssteriion.blindtest.model.music;
+package com.myssteriion.blindtest.model.dto;
 
 import java.util.Objects;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 

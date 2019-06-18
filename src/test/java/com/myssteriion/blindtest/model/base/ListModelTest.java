@@ -5,8 +5,8 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.myssteriion.blindtest.model.music.MusicDTO;
-import com.myssteriion.blindtest.model.music.Theme;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 
 public class ListModelTest {
 

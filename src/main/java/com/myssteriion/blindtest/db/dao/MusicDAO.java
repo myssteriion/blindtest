@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
-import com.myssteriion.blindtest.model.music.MusicDTO;
-import com.myssteriion.blindtest.model.music.Theme;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
 @Component

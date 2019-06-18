@@ -13,13 +13,13 @@ import org.mockito.Mockito;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.exception.EntityManagerException;
 
-public class EntityMangerTest extends AbstractTest {
+public class EntityManagerTest extends AbstractTest {
 
 	@Mock
 	private Connection connection;
 	
 	@InjectMocks
-	private EntityManger em;
+	private EntityManager em;
 	
 	
 	
