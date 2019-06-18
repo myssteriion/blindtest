@@ -32,7 +32,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			MusicDTO dtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM musique ");
+			sb.append("SELECT * FROM music ");
 			sb.append("WHERE name = '" + dto.getName() + "' AND theme = '" + dto.getTheme() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
@@ -60,7 +60,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			List<MusicDTO> dtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM musique");
+			sb.append("SELECT * FROM music");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
@@ -98,7 +98,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO musique(name, theme, nbPlayed) ");
+			sb.append("INSERT INTO music(name, theme, nbPlayed) ");
 			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', " + dto.getNbPlayed() + ")");
 			
 			statement.execute( sb.toString() );
@@ -123,7 +123,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE musique ");
+			sb.append("UPDATE music ");
 			sb.append("SET nbPlayed = " + dto.getNbPlayed() + " ");
 			sb.append("WHERE id = " + dto.getId());
 			

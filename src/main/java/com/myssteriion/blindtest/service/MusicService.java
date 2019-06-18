@@ -30,7 +30,7 @@ public class MusicService {
 		for ( Theme theme : Theme.values() ) {
 			
 			String themeFolder = theme.getFolderName();
-			Path path = Paths.get(Constant.BASE_DIRE, Constant.MUSIQUES_FOLDER, themeFolder);
+			Path path = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, themeFolder);
 			
 			File themeDirectory = path.toFile();
 			if ( !Tool.isNullOrEmpty(themeDirectory) && themeDirectory.isDirectory() ) {

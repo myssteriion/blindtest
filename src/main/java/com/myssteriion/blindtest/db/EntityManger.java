@@ -18,7 +18,7 @@ public class EntityManger {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManger.class);
 	
-	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIRE + "/data/blindtest";
+	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIR + "/data/blindtest";
 	
 	private Connection connection;
 	
@@ -46,6 +46,7 @@ public class EntityManger {
 		
 		try ( Statement statement = connection.createStatement() ) {
 			
+			// music
 			sb = new StringBuilder();
 			sb.append("CREATE SEQUENCE IF NOT EXISTS music_seq ");
 			sb.append("START WITH 0 ");
@@ -53,7 +54,7 @@ public class EntityManger {
 			statement.execute( sb.toString() );
 			
 			sb = new StringBuilder();
-			sb.append("CREATE TABLE IF NOT EXISTS musique (");
+			sb.append("CREATE TABLE IF NOT EXISTS music (");
 			sb.append("id BIGINT DEFAULT music_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
 			sb.append("theme VARCHAR2 NOT NULL,");
@@ -63,7 +64,7 @@ public class EntityManger {
 		}
 		catch (Exception e) {
 			
-			String message = "Can't create table.";
+			String message = "Can't create tables.";
 			LOGGER.error(message, e);
 			throw new EntityManagerException(message, e);
 		}
