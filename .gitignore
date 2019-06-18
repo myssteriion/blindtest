@@ -10,3 +10,33 @@ build/
 delivery/
 
 ####### front #######
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+node_modules
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
