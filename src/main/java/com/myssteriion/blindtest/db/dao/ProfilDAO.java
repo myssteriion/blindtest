@@ -59,7 +59,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			List<ProfilDTO> dtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM music");
+			sb.append("SELECT * FROM profil");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
