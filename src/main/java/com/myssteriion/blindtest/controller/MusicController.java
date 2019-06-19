@@ -13,7 +13,7 @@ import com.myssteriion.blindtest.service.MusicService;
 
 @RestController
 @RequestMapping(
-	path = "music"
+	path = "musics"
 )
 public class MusicController {
 
@@ -25,7 +25,7 @@ public class MusicController {
 	
 	
 	@RequestMapping(
-	path = "/refresh",
+		path = "/refresh",
 		method = RequestMethod.GET
 	)
 	public ResponseIModel<?> refresh() {

@@ -14,14 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/music/refresh",
+							"raw": "http://localhost:8080/musics/refresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"music",
+								"musics",
 								"refresh"
 							]
 						}
