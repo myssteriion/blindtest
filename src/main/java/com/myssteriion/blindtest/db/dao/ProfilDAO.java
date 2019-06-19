@@ -84,10 +84,10 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		
 		Tool.verifyValue("dto", dto);
 
-		ProfilDTO dtoFinded = find(dto);
-		ProfilDTO dtoSaved = (dtoFinded == null) ? save(dto) : update(dtoFinded);
+		ProfilDTO foudDTO = find(dto);
+		ProfilDTO savedDTO = (foudDTO == null) ? save(dto) : update(foudDTO);
 		
-		return dtoSaved;
+		return savedDTO;
 	}
 	
 	
@@ -98,7 +98,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO music(name, avatar, playedGames, listenedMusics, foundMusics) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', " + dto.getPlayedGames() + ", " + dto.getListenedMusics() + ", " + dto.getFoundMusics() + ")");
+			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
 			

@@ -85,10 +85,10 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		
 		Tool.verifyValue("dto", dto);
 
-		MusicDTO dtoFinded = find(dto);
-		MusicDTO dtoSaved = (dtoFinded == null) ? save(dto) : update(dtoFinded);
+		MusicDTO foundDTO = find(dto);
+		MusicDTO savedDTO = (foundDTO == null) ? save(dto) : update(foundDTO);
 		
-		return dtoSaved;
+		return savedDTO;
 	}
 	
 	
@@ -99,7 +99,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO music(name, theme, played) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', " + dto.getPlayed() + ")");
+			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', 0)");
 			
 			statement.execute( sb.toString() );
 			
