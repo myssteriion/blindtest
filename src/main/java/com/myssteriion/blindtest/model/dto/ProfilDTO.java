@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.dto;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -18,7 +19,7 @@ public class ProfilDTO extends AbstractDTO {
 	private int foundMusics;
 
 	
-	
+	@JsonCreator
 	public ProfilDTO(String name, String avatar) {
 		this(name, avatar, 0, 0, 0);
 	}
