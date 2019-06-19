@@ -67,7 +67,7 @@ public class MusicServiceTest extends AbstractTest {
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 0, dtoSaved.getNbPlayed() );
+		Assert.assertEquals( 0, dtoSaved.getPlayed() );
 	}
 
 }

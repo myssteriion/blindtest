@@ -13,7 +13,7 @@ public class MusicDTO extends AbstractDTO {
 	
 	private Theme theme;
 	
-	private int nbPlayed;
+	private int played;
 	
 	
 	
@@ -21,14 +21,14 @@ public class MusicDTO extends AbstractDTO {
 		this(name, theme, 0);
 	}
 	
-	public MusicDTO(String name, Theme theme, int nbPlayed) {
+	public MusicDTO(String name, Theme theme, int played) {
 		
 		Tool.verifyValue("name", name);
 		Tool.verifyValue("theme", theme);
 		
 		this.name = name.replace(Constant.QUOTE, Constant.DOUBLE_QUOTE);
 		this.theme = theme;
-		this.nbPlayed = (nbPlayed < 0) ? 0 : nbPlayed;
+		this.played = (played < 0) ? 0 : played;
 	}
 	
 	
@@ -41,12 +41,12 @@ public class MusicDTO extends AbstractDTO {
 		return theme;
 	}
 
-	public int getNbPlayed() {
-		return nbPlayed;
+	public int getPlayed() {
+		return played;
 	}
 
-	public void incrementNbPlayed() {
-		this.nbPlayed++;
+	public void incrementPlayed() {
+		this.played++;
 	}
 	
 	
@@ -75,7 +75,7 @@ public class MusicDTO extends AbstractDTO {
 		return super.toString() + 
 				", name=" + name +
 				", theme=" + theme +
-				", nbPlayed=" + nbPlayed;
+				", played=" + played;
 	}
 
 }

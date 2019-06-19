@@ -58,7 +58,7 @@ public class EntityManager {
 			sb.append("id BIGINT DEFAULT music_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
 			sb.append("theme VARCHAR2 NOT NULL,");
-			sb.append("nbPlayed INT NOT NULL");
+			sb.append("played INT NOT NULL");
 			sb.append(")");
 			statement.execute( sb.toString() );
 			

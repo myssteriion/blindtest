@@ -95,7 +95,7 @@ public class MusicDAOTest extends AbstractTest {
 		Assert.assertEquals( "1", dto.getId() );
 		Assert.assertEquals( "name", dto.getName() );
 		Assert.assertEquals( Theme.ANNEES_80, dto.getTheme() );
-		Assert.assertEquals( 3, dto.getNbPlayed() );
+		Assert.assertEquals( 3, dto.getPlayed() );
 	}
 
 	@Test
@@ -158,7 +158,7 @@ public class MusicDAOTest extends AbstractTest {
 		rs.addColumn("id", Types.BIGINT, 100, 0);
 		rs.addColumn("name", Types.VARCHAR, 255, 0);
 		rs.addColumn("theme", Types.VARCHAR, 255, 0);
-		rs.addColumn("nbPlayed", Types.INTEGER, 100, 0);
+		rs.addColumn("played", Types.INTEGER, 100, 0);
 		return rs;
 	}
 	

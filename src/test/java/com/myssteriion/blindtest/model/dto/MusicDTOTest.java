@@ -46,10 +46,10 @@ public class MusicDTOTest extends AbstractTest {
 		
 		MusicDTO musicDTO = new MusicDTO(name + "'a'b'c''", theme, 2);
 		Assert.assertEquals( name + "''a''b''c''''", musicDTO.getName() );
-		Assert.assertEquals( 2, musicDTO.getNbPlayed() );
+		Assert.assertEquals( 2, musicDTO.getPlayed() );
 		
 		musicDTO = new MusicDTO(name, theme, -2);
-		Assert.assertEquals( 0, musicDTO.getNbPlayed() );
+		Assert.assertEquals( 0, musicDTO.getPlayed() );
 	}
 	
 	@Test
@@ -62,13 +62,13 @@ public class MusicDTOTest extends AbstractTest {
 		Assert.assertNull( musicDTO.getId() );
 		Assert.assertEquals( name, musicDTO.getName() );
 		Assert.assertEquals( theme, musicDTO.getTheme() );
-		Assert.assertEquals( 0, musicDTO.getNbPlayed() );
+		Assert.assertEquals( 0, musicDTO.getPlayed() );
 		
 		musicDTO.setId("123");
 		Assert.assertEquals( "123", musicDTO.getId() );
 		
-		musicDTO.incrementNbPlayed();
-		Assert.assertEquals( 1, musicDTO.getNbPlayed() );
+		musicDTO.incrementPlayed();
+		Assert.assertEquals( 1, musicDTO.getPlayed() );
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class MusicDTOTest extends AbstractTest {
 		Theme theme = Theme.ANNEES_80;
 		MusicDTO musicDTOUn = new MusicDTO(name, theme);
 		
-		Assert.assertEquals( "id=null, name=name, theme=ANNEES_80, nbPlayed=0", musicDTOUn.toString() );
+		Assert.assertEquals( "id=null, name=name, theme=ANNEES_80, played=0", musicDTOUn.toString() );
 		
 		MusicDTO musicDTOUnIso = new MusicDTO(name, theme);
 		MusicDTO musicDTODeux = new MusicDTO(name + "1", theme);
