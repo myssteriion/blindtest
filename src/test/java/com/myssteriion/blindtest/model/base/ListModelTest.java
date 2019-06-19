@@ -19,5 +19,18 @@ public class ListModelTest {
 		list = new ListModel<>(Arrays.asList( new MusicDTO("name", Theme.ANNEES_80) ));
 		Assert.assertEquals( 1, list.getItems().size() );
 	}
+	
+	@Test
+	public void getterSeter() {
+
+		ListModel<MusicDTO> list = new ListModel<>(null);
+		Assert.assertNotNull( list.getItems() );
+		Assert.assertEquals( 0, list.getItems().size() );
+		Assert.assertEquals( 0, list.getSize() );
+		
+		list = new ListModel<>(Arrays.asList( new MusicDTO("name", Theme.ANNEES_80) ));
+		Assert.assertEquals( 1, list.getItems().size() );
+		Assert.assertEquals( 1, list.getSize() );
+	}
 
 }
