@@ -39,7 +39,7 @@ public class ProfilControllerTest extends AbstractTest {
 
 		ResponseEntity re = controller.findAll();
 		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
-		Assert.assertEquals( "Can't find all dto.", ((ErrorModel) re.getBody()).getMessage() );
+		Assert.assertEquals( "Can't find all profil.", ((ErrorModel) re.getBody()).getMessage() );
 		Assert.assertEquals( "npe", ((ErrorModel) re.getBody()).getCauses().get(0) );
 		
 		re = controller.findAll();

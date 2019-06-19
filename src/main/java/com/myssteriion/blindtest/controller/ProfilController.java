@@ -39,7 +39,7 @@ public class ProfilController {
 		}
 		catch (Exception e) {
 
-			String message = "Can't find all dto.";
+			String message = "Can't find all profil.";
 			LOGGER.error(message, e);
 			return RestBuilder.create500(message, e);
 		}
