@@ -61,6 +61,25 @@ public class EntityManager {
 			sb.append("nbPlayed INT NOT NULL");
 			sb.append(")");
 			statement.execute( sb.toString() );
+			
+			
+			// profil
+			sb = new StringBuilder();
+			sb.append("CREATE SEQUENCE IF NOT EXISTS profil_seq ");
+			sb.append("START WITH 0 ");
+			sb.append("INCREMENT BY 1 ");
+			statement.execute( sb.toString() );
+			
+			sb = new StringBuilder();
+			sb.append("CREATE TABLE IF NOT EXISTS profil (");
+			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
+			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
+			sb.append("avatar VARCHAR2 NOT NULL,");
+			sb.append("playedGames INT NOT NULL,");
+			sb.append("listenedMusics INT NOT NULL,");
+			sb.append("foundMusics INT NOT NULL");
+			sb.append(")");
+			statement.execute( sb.toString() );
 		}
 		catch (Exception e) {
 			
