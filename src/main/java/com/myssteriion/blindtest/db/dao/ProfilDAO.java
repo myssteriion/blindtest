@@ -97,7 +97,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO music(name, avatar, playedGames, listenedMusics, foundMusics) ");
+			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
 			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
@@ -122,8 +122,8 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE music ");
-			sb.append("SET avatar = " + dto.getAvatar() + ", avatar = " + dto.getAvatar() + ", playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
+			sb.append("UPDATE profil ");
+			sb.append("SET avatar = " + dto.getAvatar() + ", playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
 			sb.append("WHERE id = " + dto.getId());
 			
 			statement.execute( sb.toString() );
