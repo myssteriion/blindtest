@@ -29,6 +29,30 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "profil",
+			"item": [
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profils",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profils"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
