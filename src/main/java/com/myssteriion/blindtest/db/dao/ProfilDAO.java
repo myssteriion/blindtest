@@ -22,6 +22,56 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 	
 	
 	@Override
+	public ProfilDTO save(ProfilDTO dto) throws EntityManagerException {
+		
+		Tool.verifyValue("dto", dto);
+		
+		try ( Statement statement = em.createStatement() ) {
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
+			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', 0, 0, 0)");
+			
+			statement.execute( sb.toString() );
+			
+			ProfilDTO dtoSaved = find(dto);
+			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
+			
+			return dtoSaved;
+		}
+		catch (Exception e) {
+			
+			String message = "Can't save dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
+		}
+	}
+	
+	@Override
+	public ProfilDTO update(ProfilDTO dto) throws EntityManagerException {
+		
+		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("dto -> id", dto.getId());
+		
+		try ( Statement statement = em.createStatement() ) {
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE profil ");
+			sb.append("SET avatar = " + dto.getAvatar() + ", playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
+			sb.append("WHERE id = " + dto.getId());
+			
+			statement.execute( sb.toString() );
+			return dto;
+		}
+		catch (Exception e) {
+			
+			String message = "Can't update dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
+		}
+	}
+	
+	@Override
 	public ProfilDTO find(ProfilDTO dto) throws EntityManagerException {
 		
 		Tool.verifyValue("dto", dto);
@@ -79,62 +129,4 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		}
 	}
 	
-	@Override
-	public ProfilDTO saveOrUpdate(ProfilDTO dto) throws EntityManagerException {
-		
-		Tool.verifyValue("dto", dto);
-
-		ProfilDTO foudDTO = find(dto);
-		ProfilDTO savedDTO = (foudDTO == null) ? save(dto) : update(foudDTO);
-		
-		return savedDTO;
-	}
-	
-	
-	
-	private ProfilDTO save(ProfilDTO dto) throws EntityManagerException {
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', 0, 0, 0)");
-			
-			statement.execute( sb.toString() );
-			
-			ProfilDTO dtoSaved = find(dto);
-			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
-			
-			return dtoSaved;
-		}
-		catch (Exception e) {
-			
-			String message = "Can't save dto.";
-			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
-		}
-	}
-	
-	private ProfilDTO update(ProfilDTO dto) throws EntityManagerException {
-		
-		Tool.verifyValue("dto -> id", dto.getId());
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE profil ");
-			sb.append("SET avatar = " + dto.getAvatar() + ", playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
-			sb.append("WHERE id = " + dto.getId());
-			
-			statement.execute( sb.toString() );
-			return dto;
-		}
-		catch (Exception e) {
-			
-			String message = "Can't update dto.";
-			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
-		}
-	}
-
 }

@@ -56,10 +56,14 @@ public class EntityManager {
 			sb = new StringBuilder();
 			sb.append("CREATE TABLE IF NOT EXISTS music (");
 			sb.append("id BIGINT DEFAULT music_seq.nextval PRIMARY KEY,");
-			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
+			sb.append("name VARCHAR2 NOT NULL,");
 			sb.append("theme VARCHAR2 NOT NULL,");
 			sb.append("played INT NOT NULL");
 			sb.append(")");
+			statement.execute( sb.toString() );
+			
+			sb = new StringBuilder();
+			sb.append("ALTER TABLE music ADD CONSTRAINT name_theme_unique UNIQUE(name, theme)");
 			statement.execute( sb.toString() );
 			
 			

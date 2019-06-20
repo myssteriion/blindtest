@@ -30,6 +30,90 @@ public class MusicDAOTest extends AbstractTest {
 	
 	
 	@Test
+	public void save() throws EntityManagerException, SQLException {
+
+		dao = Mockito.spy( new MusicDAO() );
+		MockitoAnnotations.initMocks(this);
+
+		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
+		dto.setId("1");
+		Mockito.doReturn(dto).when(dao).find(Mockito.any(MusicDTO.class));
+		
+		
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
+		
+		EntityManagerException eme = new EntityManagerException("fake");
+		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		
+		
+		try {
+			dao.save(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		
+		MusicDTO dtoToSave = new MusicDTO("name", Theme.ANNEES_80);
+		try {
+			dao.save(dtoToSave);
+			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+		}
+		catch (EntityManagerException e) {
+			verifyException(new EntityManagerException("Can't save dto.", eme), e);
+		}
+		
+		MusicDTO dtoReturned = dao.save(dtoToSave);
+		Assert.assertEquals(dtoReturned.getId(), "1");
+	}
+	
+	@Test
+	public void update() throws EntityManagerException, SQLException {
+		
+		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
+		dto.setId("1");
+		
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
+		
+		EntityManagerException eme = new EntityManagerException("fake");
+		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		
+		
+		try {
+			dao.update(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		
+		MusicDTO dtoToUpdate = new MusicDTO("name", Theme.ANNEES_80);
+		try {
+			dao.update(dtoToUpdate);
+			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+		
+		dtoToUpdate.setId("1");
+		try {
+			dao.update(dtoToUpdate);
+			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+		}
+		catch (EntityManagerException e) {
+			verifyException(new EntityManagerException("Can't update dto.", eme), e);
+		}
+		
+		MusicDTO dtoReturned = dao.update(dtoToUpdate);
+		Assert.assertEquals(dtoReturned.getId(), "1");
+	}
+	
+	@Test
 	public void find() throws SQLException, EntityManagerException {
 
 		SimpleResultSet rsEmpty = getResultSet();
@@ -96,58 +180,6 @@ public class MusicDAOTest extends AbstractTest {
 		Assert.assertEquals( "name", dto.getName() );
 		Assert.assertEquals( Theme.ANNEES_80, dto.getTheme() );
 		Assert.assertEquals( 3, dto.getPlayed() );
-	}
-
-	@Test
-	public void saveOrUpdate() throws EntityManagerException, SQLException {
-
-		dao = Mockito.spy( new MusicDAO() );
-		MockitoAnnotations.initMocks(this);
-		
-		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
-		dto.setId("1");
-		Mockito.doReturn(null).doReturn(null).doReturn(dto).when(dao).find(Mockito.any(MusicDTO.class));
-		
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
-		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement).thenThrow(eme).thenReturn(statement);
-		
-		
-		try {
-			dao.saveOrUpdate(null);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
-		}
-		
-		
-		MusicDTO dtoToSave = new MusicDTO("name", Theme.ANNEES_80);
-		try {
-			dao.saveOrUpdate(dtoToSave);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
-		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't save dto.", eme), e);
-		}
-		
-		MusicDTO dtoReturned = dao.saveOrUpdate(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
-		
-		
-		dtoToSave.setId("1");
-		try {
-			dao.saveOrUpdate(dtoToSave);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
-		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't update dto.", eme), e);
-		}
-		
-		dtoReturned = dao.saveOrUpdate(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
 	}
 	
 	

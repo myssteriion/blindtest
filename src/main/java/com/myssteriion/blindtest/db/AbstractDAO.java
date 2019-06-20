@@ -13,10 +13,13 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 	protected EntityManager em;
 	
 	
+	
+	public abstract T save(T dto) throws EntityManagerException;
+	
+	public abstract T update(T dto) throws EntityManagerException;
+	
 	public abstract T find(T dto) throws EntityManagerException;
 	
 	public abstract List<T> findAll() throws EntityManagerException;
-	
-	public abstract T saveOrUpdate(T dto) throws EntityManagerException;
 	
 }

@@ -29,6 +29,91 @@ public class ProfilDAOTest extends AbstractTest {
 	
 	
 	@Test
+	public void save() throws EntityManagerException, SQLException {
+
+		dao = Mockito.spy( new ProfilDAO() );
+		MockitoAnnotations.initMocks(this);
+
+		ProfilDTO dto = new ProfilDTO("name", "avatar");
+		dto.setId("1");
+		Mockito.doReturn(dto).when(dao).find(Mockito.any(ProfilDTO.class));
+		
+		
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
+		
+		EntityManagerException eme = new EntityManagerException("fake");
+		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		
+		
+		try {
+			dao.save(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		
+		ProfilDTO dtoToSave = new ProfilDTO("name", "avatar");
+		try {
+			dao.save(dtoToSave);
+			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+		}
+		catch (EntityManagerException e) {
+			verifyException(new EntityManagerException("Can't save dto.", eme), e);
+		}
+		
+		ProfilDTO dtoReturned = dao.save(dtoToSave);
+		Assert.assertEquals(dtoReturned.getId(), "1");
+	}
+	
+	@Test
+	public void update() throws EntityManagerException, SQLException {
+
+		ProfilDTO dto = new ProfilDTO("name", "avatar");
+		dto.setId("1");
+		
+		
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
+		
+		EntityManagerException eme = new EntityManagerException("fake");
+		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		
+		
+		try {
+			dao.update(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		
+		ProfilDTO dtoToUpdate = new ProfilDTO("name", "avatar");
+		try {
+			dao.update(dtoToUpdate);
+			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+		
+		dtoToUpdate.setId("1");
+		try {
+			dao.update(dtoToUpdate);
+			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+		}
+		catch (EntityManagerException e) {
+			verifyException(new EntityManagerException("Can't update dto.", eme), e);
+		}
+		
+		ProfilDTO dtoReturned = dao.update(dtoToUpdate);
+		Assert.assertEquals(dtoReturned.getId(), "1");
+	}
+	
+	@Test
 	public void find() throws SQLException, EntityManagerException {
 
 		SimpleResultSet rsEmpty = getResultSet();
@@ -97,58 +182,6 @@ public class ProfilDAOTest extends AbstractTest {
 		Assert.assertEquals( 1, dto.getPlayedGames() );
 		Assert.assertEquals( 2, dto.getListenedMusics() );
 		Assert.assertEquals( 3, dto.getFoundMusics() );
-	}
-
-	@Test
-	public void saveOrUpdate() throws EntityManagerException, SQLException {
-
-		dao = Mockito.spy( new ProfilDAO() );
-		MockitoAnnotations.initMocks(this);
-		
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
-		dto.setId("1");
-		Mockito.doReturn(null).doReturn(null).doReturn(dto).when(dao).find(Mockito.any(ProfilDTO.class));
-		
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
-		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement).thenThrow(eme).thenReturn(statement);
-		
-		
-		try {
-			dao.saveOrUpdate(null);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
-		}
-		
-		
-		ProfilDTO dtoToSave = new ProfilDTO("name", "avatar");
-		try {
-			dao.saveOrUpdate(dtoToSave);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
-		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't save dto.", eme), e);
-		}
-		
-		ProfilDTO dtoReturned = dao.saveOrUpdate(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
-		
-		
-		dtoToSave.setId("1");
-		try {
-			dao.saveOrUpdate(dtoToSave);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
-		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't update dto.", eme), e);
-		}
-		
-		dtoReturned = dao.saveOrUpdate(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
 	}
 	
 	

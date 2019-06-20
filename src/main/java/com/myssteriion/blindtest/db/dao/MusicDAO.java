@@ -23,6 +23,56 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 	
 	
 	@Override
+	public MusicDTO save(MusicDTO dto) throws EntityManagerException {
+		
+		Tool.verifyValue("dto", dto);
+		
+		try ( Statement statement = em.createStatement() ) {
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO music(name, theme, played) ");
+			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', 0)");
+			
+			statement.execute( sb.toString() );
+			
+			MusicDTO dtoSaved = find(dto);
+			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
+			
+			return dtoSaved;
+		}
+		catch (Exception e) {
+			
+			String message = "Can't save dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
+		}
+	}
+	
+	@Override
+	public MusicDTO update(MusicDTO dto) throws EntityManagerException {
+		
+		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("dto -> id", dto.getId());
+		
+		try ( Statement statement = em.createStatement() ) {
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE music ");
+			sb.append("SET played = " + dto.getPlayed() + " ");
+			sb.append("WHERE id = " + dto.getId());
+			
+			statement.execute( sb.toString() );
+			return dto;
+		}
+		catch (Exception e) {
+			
+			String message = "Can't update dto.";
+			LOGGER.error(message, e);
+			throw new EntityManagerException(message, e);
+		}
+	}
+	
+	@Override
 	public MusicDTO find(MusicDTO dto) throws EntityManagerException {
 		
 		Tool.verifyValue("dto", dto);
@@ -80,62 +130,4 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		}
 	}
 	
-	@Override
-	public MusicDTO saveOrUpdate(MusicDTO dto) throws EntityManagerException {
-		
-		Tool.verifyValue("dto", dto);
-
-		MusicDTO foundDTO = find(dto);
-		MusicDTO savedDTO = (foundDTO == null) ? save(dto) : update(foundDTO);
-		
-		return savedDTO;
-	}
-	
-	
-	
-	private MusicDTO save(MusicDTO dto) throws EntityManagerException {
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO music(name, theme, played) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', 0)");
-			
-			statement.execute( sb.toString() );
-			
-			MusicDTO dtoSaved = find(dto);
-			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
-			
-			return dtoSaved;
-		}
-		catch (Exception e) {
-			
-			String message = "Can't save dto.";
-			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
-		}
-	}
-	
-	private MusicDTO update(MusicDTO dto) throws EntityManagerException {
-		
-		Tool.verifyValue("dto -> id", dto.getId());
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE music ");
-			sb.append("SET played = " + dto.getPlayed() + " ");
-			sb.append("WHERE id = " + dto.getId());
-			
-			statement.execute( sb.toString() );
-			return dto;
-		}
-		catch (Exception e) {
-			
-			String message = "Can't update dto.";
-			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
-		}
-	}
-
 }
