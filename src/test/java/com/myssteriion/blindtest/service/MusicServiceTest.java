@@ -28,42 +28,26 @@ public class MusicServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void saveOrUpdate() throws EntityManagerException {
+	public void save() throws EntityManagerException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
 		
 		
 		try {
-			service.saveOrUpdate(null, theme);
+			service.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
-		}
-		
-		try {
-			service.saveOrUpdate("", theme);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
-		}
-		
-		try {
-			service.saveOrUpdate(name, null);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
 		MusicDTO dto = new MusicDTO(name, theme);
 		dto.setId("1");
-		Mockito.when(dao.saveOrUpdate(Mockito.any(MusicDTO.class))).thenReturn(dto);
+		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dto);
 		
-		MusicDTO dtoSaved = service.saveOrUpdate(name, theme);
+		MusicDTO dtoSaved = service.save(dto);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );

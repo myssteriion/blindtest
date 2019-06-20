@@ -18,17 +18,19 @@ public class ProfilService {
 	
 	
 	
-	public List<ProfilDTO> findAll() throws EntityManagerException {
-		return dao.findAll();
+	public ProfilDTO save(ProfilDTO dto) throws EntityManagerException {
+		
+		Tool.verifyValue("dto", dto);
+		
+		ProfilDTO foundDto = dao.find(dto);
+		if (foundDto == null)
+			foundDto = dao.save(dto);
+		
+		return foundDto;
 	}
 	
-	public ProfilDTO saveOrUpdate(String name, String avatar) throws EntityManagerException {
-		
-		Tool.verifyValue("name", name);
-		Tool.verifyValue("avatar", avatar);
-		
-		ProfilDTO dto = new ProfilDTO(name, avatar);
-		return dao.saveOrUpdate(dto);
+	public List<ProfilDTO> findAll() throws EntityManagerException {
+		return dao.findAll();
 	}
 	
 }

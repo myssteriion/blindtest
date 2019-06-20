@@ -36,25 +36,27 @@ public class MusicService {
 			if ( !Tool.isNullOrEmpty(themeDirectory) && themeDirectory.isDirectory() ) {
 
 				for ( File music : themeDirectory.listFiles() ) {
-					saveOrUpdate(music.getName(), theme);
+					save( new MusicDTO(music.getName(), theme) );
 				}
 			}
 		}
 	}
 	
-	
-	
 	public void refresh() throws EntityManagerException {
 		init();
 	}
 	
-	public MusicDTO saveOrUpdate(String name, Theme theme) throws EntityManagerException {
+	
+	
+	public MusicDTO save(MusicDTO dto) throws EntityManagerException {
 		
-		Tool.verifyValue("name", name);
-		Tool.verifyValue("theme", theme);
+		Tool.verifyValue("dto", dto);
 		
-		MusicDTO dto = new MusicDTO(name, theme);
-		return dao.saveOrUpdate(dto);
+		MusicDTO foundDto = dao.find(dto);
+		if (foundDto == null)
+			foundDto = dao.save(dto);
+		
+		return foundDto;
 	}
 	
 }
