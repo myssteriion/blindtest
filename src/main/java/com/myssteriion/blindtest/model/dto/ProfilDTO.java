@@ -19,6 +19,7 @@ public class ProfilDTO extends AbstractDTO {
 	private int foundMusics;
 
 	
+	
 	@JsonCreator
 	public ProfilDTO(String name, String avatar) {
 		this(name, avatar, 0, 0, 0);
@@ -91,7 +92,6 @@ public class ProfilDTO extends AbstractDTO {
 		return Objects.hash(name);
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 
