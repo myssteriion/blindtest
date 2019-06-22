@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 

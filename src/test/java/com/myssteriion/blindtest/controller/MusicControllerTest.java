@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.service.MusicService;
 
 public class MusicControllerTest extends AbstractTest {

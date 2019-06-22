@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;

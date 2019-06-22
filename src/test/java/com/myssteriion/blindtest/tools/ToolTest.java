@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 
 public class ToolTest extends AbstractTest {
 

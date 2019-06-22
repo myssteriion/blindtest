@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.db.exception;
+package com.myssteriion.blindtest.db.common;
 
 import com.myssteriion.blindtest.tools.Tool;
 

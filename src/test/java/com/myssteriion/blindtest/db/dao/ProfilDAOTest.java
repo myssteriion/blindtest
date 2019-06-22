@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 
 

@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.SqlException;
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.service.ProfilService;

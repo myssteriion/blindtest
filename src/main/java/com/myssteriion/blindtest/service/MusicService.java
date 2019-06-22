@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Constant;
