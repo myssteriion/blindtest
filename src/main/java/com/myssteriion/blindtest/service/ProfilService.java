@@ -18,13 +18,47 @@ public class ProfilService {
 	
 	
 	
-	public ProfilDTO save(ProfilDTO dto) throws SqlException {
+	public ProfilDTO save(ProfilDTO dto, boolean throwIfExsits) throws SqlException  {
+		
+		Tool.verifyValue("dto", dto);
+		
+		ProfilDTO savedDTO = dto;
+		try {
+			savedDTO = dao.save(dto);
+		}
+		catch (SqlException e) {
+			if (throwIfExsits)
+				throw e;
+		}
+		
+		return savedDTO;
+	}
+	
+	public ProfilDTO update(ProfilDTO dto, boolean throwIfNotExsits) throws SqlException {
+		
+		Tool.verifyValue("dto", dto);
+		
+		ProfilDTO savedDTO = dto;
+		try {
+			savedDTO = dao.update(dto);
+		}
+		catch (SqlException e) {
+			if (throwIfNotExsits)
+				throw e;
+		}
+		
+		return savedDTO;
+	}
+	
+	public ProfilDTO saveOrUpdate(ProfilDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
 		ProfilDTO foundDto = dao.find(dto);
 		if (foundDto == null)
 			foundDto = dao.save(dto);
+		else
+			foundDto = dao.update(dto);
 		
 		return foundDto;
 	}
