@@ -46,8 +46,15 @@ public class MusicServiceTest extends AbstractTest {
 		MusicDTO dto = new MusicDTO(name, theme);
 		dto.setId("1");
 		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dto);
 		
 		MusicDTO dtoSaved = service.save(dto);
+		Assert.assertEquals( "1", dtoSaved.getId() );
+		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( theme, dtoSaved.getTheme() );
+		Assert.assertEquals( 0, dtoSaved.getPlayed() );
+		
+		dtoSaved = service.save(dto);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );

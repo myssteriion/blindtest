@@ -42,8 +42,17 @@ public class ProfilServiceTest extends AbstractTest {
 		ProfilDTO dto = new ProfilDTO(name, avatar);
 		dto.setId("1");
 		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dto);
 		
 		ProfilDTO dtoSaved = service.save(dto);
+		Assert.assertEquals( "1", dtoSaved.getId() );
+		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( avatar, dtoSaved.getAvatar() );
+		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );
+		Assert.assertEquals( 0, dtoSaved.getListenedMusics() );
+		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
+		
+		dtoSaved = service.save(dto);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( avatar, dtoSaved.getAvatar() );
