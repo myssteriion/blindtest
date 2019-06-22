@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -26,6 +28,30 @@ public class ProfilControllerTest extends AbstractTest {
 	private ProfilController controller;
 	
 	
+	
+	@Test
+	public void save() throws SqlException, AlreadyExistsException {
+		
+		ProfilDTO dto = new ProfilDTO("name", "avatar");
+		Mockito.when(service.save(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(dto);
+		
+		ResponseEntity<ProfilDTO> actual = controller.save(dto);
+		Assert.assertEquals( HttpStatus.CREATED, actual.getStatusCode() );
+		Assert.assertEquals( "name", actual.getBody().getName() );
+		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
+	}
+	
+	@Test
+	public void update() throws SqlException, NotFoundException {
+		
+		ProfilDTO dto = new ProfilDTO("name", "avatar");
+		Mockito.when(service.update(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(dto);
+		
+		ResponseEntity<ProfilDTO> actual = controller.update(dto);
+		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
+		Assert.assertEquals( "name", actual.getBody().getName() );
+		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
+	}
 	
 	@Test
 	public void findAll() throws SqlException {

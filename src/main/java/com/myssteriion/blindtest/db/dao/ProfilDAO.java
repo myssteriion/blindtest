@@ -43,7 +43,6 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		catch (SQLException e) {
 			
 			String message = "Can't save dto.";
-			LOGGER.error(message, e);
 			throw new SqlException(message, e);
 		}
 	}
@@ -62,12 +61,13 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			sb.append("WHERE id = " + dto.getId());
 			
 			statement.execute( sb.toString() );
+			LOGGER.info("DTO updated (" + dto.toString() + ").");
+			
 			return dto;
 		}
 		catch (SQLException e) {
 			
 			String message = "Can't update dto.";
-			LOGGER.error(message, e);
 			throw new SqlException(message, e);
 		}
 	}
@@ -97,7 +97,6 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		catch (SQLException e) {
 			
 			String message = "Can't find dto.";
-			LOGGER.error(message, e);
 			throw new SqlException(message, e);
 		}
 	}
@@ -125,7 +124,6 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		catch (SQLException e) {
 			
 			String message = "Can't find all dto.";
-			LOGGER.error(message, e);
 			throw new SqlException(message, e);
 		}
 	}

@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -23,12 +25,12 @@ public class MusicServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws SqlException {
+	public void refresh() throws SqlException, AlreadyExistsException {
 		service.refresh();
 	}
 	
 	@Test
-	public void save() throws SqlException {
+	public void save() throws SqlException, AlreadyExistsException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -45,8 +47,8 @@ public class MusicServiceTest extends AbstractTest {
 		
 		MusicDTO dto = new MusicDTO(name, theme);
 		dto.setId("1");
-		SqlException sql = new SqlException("sql");
-		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenThrow(sql, sql).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dto);
+		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dto);
 		
 		MusicDTO dtoSaved = service.save(dto, false);
 		Assert.assertSame(dto, dtoSaved);
@@ -55,8 +57,8 @@ public class MusicServiceTest extends AbstractTest {
 			service.save(dto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("sql"), e);
+		catch (AlreadyExistsException e) {
+			verifyException(new AlreadyExistsException("DTO already exists."), e);
 		}
 
 		dtoSaved = service.save(dto, false);
@@ -67,7 +69,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException {
+	public void update() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -84,8 +86,8 @@ public class MusicServiceTest extends AbstractTest {
 		
 		MusicDTO dto = new MusicDTO(name, theme);
 		dto.setId("1");
-		SqlException sql = new SqlException("sql");
-		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenThrow(sql, sql).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, null, dto);
+		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenReturn(dto);
 		
 		MusicDTO dtoSaved = service.update(dto, false);
 		Assert.assertSame(dto, dtoSaved);
@@ -94,8 +96,8 @@ public class MusicServiceTest extends AbstractTest {
 			service.update(dto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("sql"), e);
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("DTO not found."), e);
 		}
 
 		dtoSaved = service.update(dto, false);

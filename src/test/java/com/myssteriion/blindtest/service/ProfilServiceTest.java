@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -25,7 +27,7 @@ public class ProfilServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException {
+	public void save() throws SqlException, AlreadyExistsException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -42,8 +44,8 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		ProfilDTO dto = new ProfilDTO(name, avatar);
 		dto.setId("1");
-		SqlException sql = new SqlException("sql");
-		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenThrow(sql, sql).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dto);
+		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenReturn(dto);
 		
 		ProfilDTO dtoSaved = service.save(dto, false);
 		Assert.assertSame(dto, dtoSaved);
@@ -52,8 +54,8 @@ public class ProfilServiceTest extends AbstractTest {
 			service.save(dto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("sql"), e);
+		catch (AlreadyExistsException e) {
+			verifyException(new AlreadyExistsException("DTO already exists."), e);
 		}
 
 		dtoSaved = service.save(dto, false);
@@ -65,7 +67,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException {
+	public void update() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -82,8 +84,8 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		ProfilDTO dto = new ProfilDTO(name, avatar);
 		dto.setId("1");
-		SqlException sql = new SqlException("sql");
-		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenThrow(sql, sql).thenReturn(dto);
+		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, null, dto);
+		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenReturn(dto);
 		
 		ProfilDTO dtoSaved = service.update(dto, false);
 		Assert.assertSame(dto, dtoSaved);
@@ -92,8 +94,8 @@ public class ProfilServiceTest extends AbstractTest {
 			service.update(dto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("sql"), e);
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("DTO not found."), e);
 		}
 
 		dtoSaved = service.update(dto, false);

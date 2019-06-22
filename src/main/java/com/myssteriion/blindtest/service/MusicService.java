@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -25,7 +27,7 @@ public class MusicService {
 	
 	
 	@PostConstruct
-	private void init() throws SqlException {
+	private void init() throws SqlException, AlreadyExistsException {
 		
 		for ( Theme theme : Theme.values() ) {
 			
@@ -42,42 +44,47 @@ public class MusicService {
 		}
 	}
 	
-	public void refresh() throws SqlException {
+	public void refresh() throws SqlException, AlreadyExistsException {
 		init();
 	}
 	
 	
 	
-	public MusicDTO save(MusicDTO dto, boolean throwIfExsits) throws SqlException  {
+	public MusicDTO save(MusicDTO dto, boolean throwIfExsits) throws SqlException, AlreadyExistsException  {
 		
 		Tool.verifyValue("dto", dto);
 		
-		MusicDTO savedDTO = dto;
-		try {
-			savedDTO = dao.save(dto);
-		}
-		catch (SqlException e) {
-			if (throwIfExsits)
-				throw e;
-		}
+		MusicDTO foundDTO = dao.find(dto);
 		
-		return savedDTO;
+		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExsits) {
+			throw new AlreadyExistsException("DTO already exists.");
+		}
+		else if ( Tool.isNullOrEmpty(foundDTO) ) {
+			foundDTO = dao.save(dto);
+		}
+		else
+			foundDTO = dto;
+		
+		return foundDTO;
 	}
 	
-	public MusicDTO update(MusicDTO dto, boolean throwIfNotExsits) throws SqlException {
+	public MusicDTO update(MusicDTO dto, boolean throwIfNotExsits) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("dto", dto);
 		
-		MusicDTO savedDTO = dto;
-		try {
-			savedDTO = dao.update(dto);
-		}
-		catch (SqlException e) {
-			if (throwIfNotExsits)
-				throw e;
-		}
+		MusicDTO foundDTO = dao.find(dto);
 		
-		return savedDTO;
+		if (Tool.isNullOrEmpty(foundDTO) && throwIfNotExsits) {
+			throw new NotFoundException("DTO not found.");
+		}
+		else if ( !Tool.isNullOrEmpty(foundDTO) ) {
+			dto.setId( foundDTO.getId() );
+			foundDTO = dao.update(dto);
+		}
+		else
+			foundDTO = dto;
+		
+		return foundDTO;
 	}
 	
 	public MusicDTO saveOrUpdate(MusicDTO dto) throws SqlException {

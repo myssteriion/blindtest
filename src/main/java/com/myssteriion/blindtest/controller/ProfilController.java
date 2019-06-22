@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -25,6 +28,20 @@ public class ProfilController {
 	
 	
 	
+	@RequestMapping(
+		method = RequestMethod.POST
+	)
+	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO dto) throws SqlException, AlreadyExistsException {
+		return ResponseBuilder.create201( service.save(dto, true) );
+	}
+	
+	@RequestMapping(
+		method = RequestMethod.PUT
+	)
+	public ResponseEntity<ProfilDTO> update(@RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
+		return ResponseBuilder.create200( service.update(dto, true) );
+	}
+		
 	@RequestMapping(
 		method = RequestMethod.GET
 	)

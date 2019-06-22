@@ -1,5 +1,7 @@
 package com.myssteriion.blindtest.rest;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -13,19 +15,25 @@ import com.myssteriion.blindtest.model.dto.ProfilDTO;
 public class ResponseBuilderTest extends AbstractTest {
 
 	@Test
-	public void catchException() {
+	public void create200() {
 		
-		ResponseBuilder rb = new ResponseBuilder();
-		ResponseEntity<ErrorMessage> re = rb.catchException( new IllegalArgumentException("iae") );
-		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
-		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getBody().getStatus() );
-		Assert.assertEquals( "iae", re.getBody().getMessage() );
+		try {
+			ResponseBuilder.create200( (ProfilDTO) null );
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		ResponseEntity<ProfilDTO> re = ResponseBuilder.create200( new ProfilDTO("name", "avatar") );
+		Assert.assertEquals( HttpStatus.OK , re.getStatusCode() );
+		Assert.assertNotNull( re.getBody() );
 	}
 	
 	@Test
-	public void create200() {
+	public void create200List() {
 		
-		ResponseEntity< ListDTO<ProfilDTO> > re = ResponseBuilder.create200(null);
+		ResponseEntity< ListDTO<ProfilDTO> > re = ResponseBuilder.create200( (List<ProfilDTO>) null );
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		ListDTO<ProfilDTO> body = re.getBody();
 		Assert.assertTrue( body.getItems().isEmpty() );
@@ -38,4 +46,34 @@ public class ResponseBuilderTest extends AbstractTest {
 		Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
 	}
 
+	@Test
+	public void create404() {
+		
+		ResponseBuilder rb = new ResponseBuilder();
+		ResponseEntity<ErrorMessage> re = rb.create404( new IllegalArgumentException("iae") );
+		Assert.assertEquals( HttpStatus.NOT_FOUND, re.getStatusCode() );
+		Assert.assertEquals( HttpStatus.NOT_FOUND, re.getBody().getStatus() );
+		Assert.assertEquals( "iae", re.getBody().getMessage() );
+	}
+	
+	@Test
+	public void create409() {
+		
+		ResponseBuilder rb = new ResponseBuilder();
+		ResponseEntity<ErrorMessage> re = rb.create409( new IllegalArgumentException("iae") );
+		Assert.assertEquals( HttpStatus.CONFLICT, re.getStatusCode() );
+		Assert.assertEquals( HttpStatus.CONFLICT, re.getBody().getStatus() );
+		Assert.assertEquals( "iae", re.getBody().getMessage() );
+	}
+	
+	@Test
+	public void create500() {
+		
+		ResponseBuilder rb = new ResponseBuilder();
+		ResponseEntity<ErrorMessage> re = rb.create500( new IllegalArgumentException("iae") );
+		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
+		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getBody().getStatus() );
+		Assert.assertEquals( "iae", re.getBody().getMessage() );
+	}
+	
 }

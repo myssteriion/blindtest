@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
@@ -26,7 +27,7 @@ public class MusicController {
 		path = "/refresh",
 		method = RequestMethod.GET
 	)
-	public ResponseEntity<Empty> refresh() throws SqlException {
+	public ResponseEntity<Empty> refresh() throws SqlException, AlreadyExistsException {
 		
 		service.refresh();
 		return ResponseBuilder.create204();
