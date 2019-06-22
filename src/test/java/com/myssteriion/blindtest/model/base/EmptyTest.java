@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.model.base;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EmptyModelTest {
+public class EmptyTest {
 
 	@Test
 	public void constructor() {

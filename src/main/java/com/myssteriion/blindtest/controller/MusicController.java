@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.rest.RestBuilder;
+import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.MusicService;
 
 @RestController
@@ -29,7 +29,7 @@ public class MusicController {
 	public ResponseEntity<Empty> refresh() throws SqlException {
 		
 		service.refresh();
-		return RestBuilder.create204();
+		return ResponseBuilder.create204();
 	}
 	
 }

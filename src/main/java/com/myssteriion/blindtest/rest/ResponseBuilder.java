@@ -15,9 +15,9 @@ import com.myssteriion.blindtest.model.base.ErrorMessage;
 import com.myssteriion.blindtest.model.base.ListDTO;
 
 @ControllerAdvice
-public class RestBuilder {
+public class ResponseBuilder {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RestBuilder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ResponseBuilder.class);
 	
 	
 	
@@ -29,6 +29,7 @@ public class RestBuilder {
 		ErrorMessage error = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e.getCause());
 		return new ResponseEntity<ErrorMessage>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 	
 	
 	public static <T extends AbstractDTO> ResponseEntity< ListDTO<T> > create200(List<T> dto) {

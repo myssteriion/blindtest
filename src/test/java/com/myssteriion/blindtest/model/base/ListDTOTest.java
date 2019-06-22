@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 
-public class ListModelTest {
+public class ListDTOTest {
 
 	@Test
 	public void constructor() {

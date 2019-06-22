@@ -2,7 +2,7 @@ package com.myssteriion.blindtest;
 
 import org.junit.Test;
 
-import com.myssteriion.blindtest.rest.RestBuilder;
+import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -13,7 +13,7 @@ public class BlindtestApplicationTest extends AbstractTest {
 
 		new Constant();
 		new Tool();
-		new RestBuilder();
+		new ResponseBuilder();
 	}
 
 }

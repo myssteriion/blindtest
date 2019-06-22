@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
-import com.myssteriion.blindtest.rest.RestBuilder;
+import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.ProfilService;
 
 @RestController
@@ -31,7 +31,7 @@ public class ProfilController {
 	public ResponseEntity< ListDTO<ProfilDTO> > findAll() throws SqlException {
 		
 		List<ProfilDTO> list = service.findAll();
-		return RestBuilder.create200(list);
+		return ResponseBuilder.create200(list);
 	}
 	
 }

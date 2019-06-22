@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.rest;
+package com.myssteriion.blindtest.model.base;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
 
-public class RestErrorTest extends AbstractTest {
+public class ErrorMessageTest extends AbstractTest {
 
 	@Test
 	public void contructor() {
