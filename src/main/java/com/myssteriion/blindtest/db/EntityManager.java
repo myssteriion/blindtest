@@ -64,7 +64,7 @@ public class EntityManager {
 			statement.execute( sb.toString() );
 			
 			sb = new StringBuilder();
-			sb.append("ALTER TABLE music ADD CONSTRAINT name_theme_unique UNIQUE(name, theme)");
+			sb.append("ALTER TABLE music ADD CONSTRAINT IF NOT EXISTS name_theme_unique UNIQUE(name, theme)");
 			statement.execute( sb.toString() );
 			
 			
