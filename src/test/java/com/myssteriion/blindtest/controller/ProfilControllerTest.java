@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.exception.SqlException;
-import com.myssteriion.blindtest.model.base.ErrorModel;
-import com.myssteriion.blindtest.model.base.ListModel;
+import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.service.ProfilService;
 
@@ -43,9 +42,9 @@ public class ProfilControllerTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(iae, e);
 		}
-		ResponseEntity< ListModel<ProfilDTO> > re = controller.findAll();
+		ResponseEntity< ListDTO<ProfilDTO> > re = controller.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ListModel<ProfilDTO> actual = re.getBody();
+		ListDTO<ProfilDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getItems().size() );		
 	}
 

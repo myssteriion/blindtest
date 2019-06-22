@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myssteriion.blindtest.db.exception.SqlException;
-import com.myssteriion.blindtest.model.base.EmptyModel;
+import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.rest.RestBuilder;
 import com.myssteriion.blindtest.service.MusicService;
 
@@ -26,7 +26,7 @@ public class MusicController {
 		path = "/refresh",
 		method = RequestMethod.GET
 	)
-	public ResponseEntity<EmptyModel> refresh() throws SqlException {
+	public ResponseEntity<Empty> refresh() throws SqlException {
 		
 		service.refresh();
 		return RestBuilder.create204();

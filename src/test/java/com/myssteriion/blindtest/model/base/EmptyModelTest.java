@@ -7,7 +7,7 @@ public class EmptyModelTest {
 
 	@Test
 	public void constructor() {
-		Assert.assertNotNull( new EmptyModel() );
+		Assert.assertNotNull( new Empty() );
 	}
 
 }

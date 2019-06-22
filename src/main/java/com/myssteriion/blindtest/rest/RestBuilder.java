@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
-import com.myssteriion.blindtest.model.base.EmptyModel;
-import com.myssteriion.blindtest.model.base.ErrorModel;
-import com.myssteriion.blindtest.model.base.ListModel;
+import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.base.ErrorMessage;
+import com.myssteriion.blindtest.model.base.ListDTO;
 
 @ControllerAdvice
 public class RestBuilder {
@@ -22,23 +22,23 @@ public class RestBuilder {
 	
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorModel> catchException(Exception e) {
+	public ResponseEntity<ErrorMessage> catchException(Exception e) {
 	    
 		LOGGER.error("Technical error", e);
 		
-		ErrorModel error = new ErrorModel(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e.getCause());
-		return new ResponseEntity<ErrorModel>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		ErrorMessage error = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e.getCause());
+		return new ResponseEntity<ErrorMessage>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	
-	public static <T extends AbstractDTO> ResponseEntity< ListModel<T> > create200(List<T> dto) {
+	public static <T extends AbstractDTO> ResponseEntity< ListDTO<T> > create200(List<T> dto) {
 		
-		ListModel<T> list = new ListModel<>(dto);
-		return new ResponseEntity< ListModel<T> >(list, HttpStatus.OK);
+		ListDTO<T> list = new ListDTO<>(dto);
+		return new ResponseEntity< ListDTO<T> >(list, HttpStatus.OK);
 	}
 	
-	public static ResponseEntity<EmptyModel> create204() {
-		return new ResponseEntity<EmptyModel>(HttpStatus.NO_CONTENT);
+	public static ResponseEntity<Empty> create204() {
+		return new ResponseEntity<Empty>(HttpStatus.NO_CONTENT);
 	}
 	
 }

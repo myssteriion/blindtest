@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.tools.Tool;
 
-public class ErrorModel implements IModel {
+public class ErrorMessage implements IModel {
 	
 	private HttpStatus status;
 	
@@ -18,11 +18,11 @@ public class ErrorModel implements IModel {
 	
 	
 	
-	public ErrorModel(HttpStatus status, String message) {
+	public ErrorMessage(HttpStatus status, String message) {
 		this(status, message, null);
 	}
 
-	public ErrorModel(HttpStatus status, String message, Throwable e) {
+	public ErrorMessage(HttpStatus status, String message, Throwable e) {
 		
 		Tool.verifyValue("status", status);
 		Tool.verifyValue("message", message);

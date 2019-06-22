@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.base.ErrorModel;
+import com.myssteriion.blindtest.model.base.ErrorMessage;
 
 public class RestErrorTest extends AbstractTest {
 
@@ -18,7 +18,7 @@ public class RestErrorTest extends AbstractTest {
 		String message = "message";
 		
 		try {
-			new ErrorModel(null, message);
+			new ErrorMessage(null, message);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -26,7 +26,7 @@ public class RestErrorTest extends AbstractTest {
 		}
 		
 		try {
-			new ErrorModel(status, null);
+			new ErrorMessage(status, null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -34,25 +34,25 @@ public class RestErrorTest extends AbstractTest {
 		}
 		
 		try {
-			new ErrorModel(status, "");
+			new ErrorMessage(status, "");
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
 		}
 
-		ErrorModel re = new ErrorModel(status, message);
+		ErrorMessage re = new ErrorMessage(status, message);
 		Assert.assertEquals( status, re.getStatus() );
 		Assert.assertEquals( message, re.getMessage() );
 		Assert.assertTrue( re.getCauses().isEmpty() );
 		
-		re = new ErrorModel(status, message, null);
+		re = new ErrorMessage(status, message, null);
 		Assert.assertEquals( status, re.getStatus() );
 		Assert.assertEquals( message, re.getMessage() );
 		Assert.assertEquals( new ArrayList<>(), re.getCauses() );
 		
 		NullPointerException npe = new NullPointerException("npe");
-		re = new ErrorModel(status, message, npe);
+		re = new ErrorMessage(status, message, npe);
 		Assert.assertEquals( status, re.getStatus() );
 		Assert.assertEquals( message, re.getMessage() );
 		Assert.assertEquals( 1, re.getCauses().size() );
@@ -65,7 +65,7 @@ public class RestErrorTest extends AbstractTest {
 		HttpStatus status = HttpStatus.OK;
 		String message = "message";
 		
-		ErrorModel re = new ErrorModel(status, message);
+		ErrorMessage re = new ErrorMessage(status, message);
 		Assert.assertEquals( status, re.getStatus() );
 		Assert.assertEquals( message, re.getMessage() );
 		Assert.assertTrue( re.getCauses().isEmpty() );
