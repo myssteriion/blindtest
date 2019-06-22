@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.tools.Constant;
 
 @Component
@@ -25,22 +26,22 @@ public class EntityManager {
 	
 	
 	@PostConstruct
-	private void init() throws EntityManagerException {
+	private void init() throws SqlException {
 		
 		try {
 			
 			connection = DriverManager.getConnection(URL);
 			initTableIfNeedIt();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't init DataBase";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 
-	private void initTableIfNeedIt() throws EntityManagerException {
+	private void initTableIfNeedIt() throws SqlException {
 		
 		StringBuilder sb;
 		
@@ -85,26 +86,26 @@ public class EntityManager {
 			sb.append(")");
 			statement.execute( sb.toString() );
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't create tables.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	
 	
-	public Statement createStatement() throws EntityManagerException {
+	public Statement createStatement() throws SqlException {
 		
 		try {
 			return connection.createStatement();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't create statement.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	

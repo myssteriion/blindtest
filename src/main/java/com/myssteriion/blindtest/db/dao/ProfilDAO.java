@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.db.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -22,7 +23,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 	
 	
 	@Override
-	public ProfilDTO save(ProfilDTO dto) throws EntityManagerException {
+	public ProfilDTO save(ProfilDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
@@ -35,20 +36,20 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			statement.execute( sb.toString() );
 			
 			ProfilDTO dtoSaved = find(dto);
-			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
+			LOGGER.info("DTO inserted (" + dtoSaved.toString() + ").");
 			
 			return dtoSaved;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't save dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO update(ProfilDTO dto) throws EntityManagerException {
+	public ProfilDTO update(ProfilDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		Tool.verifyValue("dto -> id", dto.getId());
@@ -63,16 +64,16 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			statement.execute( sb.toString() );
 			return dto;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't update dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO find(ProfilDTO dto) throws EntityManagerException {
+	public ProfilDTO find(ProfilDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
@@ -93,16 +94,16 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 
 			return dtoToReturn;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't find dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public List<ProfilDTO> findAll() throws EntityManagerException {
+	public List<ProfilDTO> findAll() throws SqlException {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
@@ -121,11 +122,11 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			return dtoList;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't find all dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	

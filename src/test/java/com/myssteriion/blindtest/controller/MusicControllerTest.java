@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.service.MusicService;
 
 public class MusicControllerTest extends AbstractTest {
@@ -24,7 +24,7 @@ public class MusicControllerTest extends AbstractTest {
 	
 	@Test
 	@SuppressWarnings("rawtypes")
-	public void refresh() throws EntityManagerException {
+	public void refresh() throws SqlException {
 
 //		NullPointerException npe = new NullPointerException("npe");
 //		Mockito.doThrow(npe).doNothing().when(service).refresh();

@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 
 
@@ -29,7 +29,7 @@ public class ProfilDAOTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws EntityManagerException, SQLException {
+	public void save() throws SqlException, SQLException {
 
 		dao = Mockito.spy( new ProfilDAO() );
 		MockitoAnnotations.initMocks(this);
@@ -39,11 +39,10 @@ public class ProfilDAOTest extends AbstractTest {
 		Mockito.doReturn(dto).when(dao).find(Mockito.any(ProfilDTO.class));
 		
 		
+		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
-		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
+		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		
 		try {
@@ -58,10 +57,10 @@ public class ProfilDAOTest extends AbstractTest {
 		ProfilDTO dtoToSave = new ProfilDTO("name", "avatar");
 		try {
 			dao.save(dtoToSave);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't save dto.", eme), e);
+		catch (SqlException e) {
+			verifyException(new SqlException("Can't save dto.", sql), e);
 		}
 		
 		ProfilDTO dtoReturned = dao.save(dtoToSave);
@@ -69,17 +68,16 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws EntityManagerException, SQLException {
+	public void update() throws SqlException, SQLException {
 
 		ProfilDTO dto = new ProfilDTO("name", "avatar");
 		dto.setId("1");
 		
-		
+
+		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenReturn(true);
-		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
+		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		
 		try {
@@ -103,10 +101,10 @@ public class ProfilDAOTest extends AbstractTest {
 		dtoToUpdate.setId("1");
 		try {
 			dao.update(dtoToUpdate);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't update dto.", eme), e);
+		catch (SqlException e) {
+			verifyException(new SqlException("Can't update dto.", sql), e);
 		}
 		
 		ProfilDTO dtoReturned = dao.update(dtoToUpdate);
@@ -114,18 +112,18 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void find() throws SQLException, EntityManagerException {
+	public void find() throws SQLException, SqlException {
 
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
 		rs.addRow("1", "name", "avatar", 1, 2, 3);
 		
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenReturn(rsEmpty, rs);
 		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		SQLException sql = new SQLException("sql");
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs);
+		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		
 		try {
@@ -140,10 +138,10 @@ public class ProfilDAOTest extends AbstractTest {
 		ProfilDTO dto = new ProfilDTO("name", "avatar");
 		try {
 			dao.find(dto);
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("fake"), eme);
+		catch (SqlException e) {
+			verifyException(new SqlException("Can't find dto.", sql), e);
 		}
 		
 		ProfilDTO emDto = dao.find(dto);
@@ -155,24 +153,24 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void findAll() throws EntityManagerException, SQLException {
+	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
 		rs.addRow("1", "name", "avatar", 1, 2, 3);
 		
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenReturn(rs);
 		
-		EntityManagerException eme = new EntityManagerException("fake");
-		Mockito.when(em.createStatement()).thenThrow(eme).thenReturn(statement);
+		SQLException sql = new SQLException("sql");
+		Statement statement = Mockito.mock(Statement.class);
+		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs);
+		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		
 		try {
 			dao.findAll();
-			Assert.fail("Doit lever une EntityManagerException car le mock throw.");
+			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("fake"), eme);
+		catch (SqlException e) {
+			verifyException(new SqlException("Can't find all dto.", sql), e);
 		}
 		
 		ProfilDTO dto = dao.findAll().get(0);

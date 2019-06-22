@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.base.ErrorModel;
 import com.myssteriion.blindtest.model.base.ListModel;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -29,22 +29,23 @@ public class ProfilControllerTest extends AbstractTest {
 	
 	
 	@Test
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void findAll() throws EntityManagerException {
+	public void findAll() throws SqlException {
 
 		List<ProfilDTO> list = Arrays.asList( new ProfilDTO("name", "avatar") );
 		
-		NullPointerException npe = new NullPointerException("npe");
-		Mockito.when(service.findAll()).thenThrow(npe).thenReturn(list);
+		IllegalArgumentException iae = new IllegalArgumentException("iae");
+		Mockito.when(service.findAll()).thenThrow(iae).thenReturn(list);
 
-		ResponseEntity re = controller.findAll();
-		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
-		Assert.assertEquals( "Can't find all profil.", ((ErrorModel) re.getBody()).getMessage() );
-		Assert.assertEquals( "npe", ((ErrorModel) re.getBody()).getCauses().get(0) );
-		
-		re = controller.findAll();
+		try {
+			controller.findAll();
+			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(iae, e);
+		}
+		ResponseEntity< ListModel<ProfilDTO> > re = controller.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ListModel<ProfilDTO> actual = (ListModel<ProfilDTO>) re.getBody();
+		ListModel<ProfilDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getItems().size() );		
 	}
 

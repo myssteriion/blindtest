@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 
@@ -23,12 +23,12 @@ public class MusicServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws EntityManagerException {
+	public void refresh() throws SqlException {
 		service.refresh();
 	}
 	
 	@Test
-	public void save() throws EntityManagerException {
+	public void save() throws SqlException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;

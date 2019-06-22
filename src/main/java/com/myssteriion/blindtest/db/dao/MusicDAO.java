@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.db.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Tool;
@@ -23,7 +24,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 	
 	
 	@Override
-	public MusicDTO save(MusicDTO dto) throws EntityManagerException {
+	public MusicDTO save(MusicDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
@@ -36,20 +37,20 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			statement.execute( sb.toString() );
 			
 			MusicDTO dtoSaved = find(dto);
-			LOGGER.info( "DTO inserted (" + dtoSaved.toString() + ").");
+			LOGGER.info("DTO inserted (" + dtoSaved.toString() + ").");
 			
 			return dtoSaved;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't save dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public MusicDTO update(MusicDTO dto) throws EntityManagerException {
+	public MusicDTO update(MusicDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		Tool.verifyValue("dto -> id", dto.getId());
@@ -64,16 +65,16 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			statement.execute( sb.toString() );
 			return dto;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't update dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public MusicDTO find(MusicDTO dto) throws EntityManagerException {
+	public MusicDTO find(MusicDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
@@ -94,16 +95,16 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 
 			return dtoToReturn;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't find dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public List<MusicDTO> findAll() throws EntityManagerException {
+	public List<MusicDTO> findAll() throws SqlException {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
@@ -122,11 +123,11 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			return dtoList;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			String message = "Can't find all dto.";
 			LOGGER.error(message, e);
-			throw new EntityManagerException(message, e);
+			throw new SqlException(message, e);
 		}
 	}
 	

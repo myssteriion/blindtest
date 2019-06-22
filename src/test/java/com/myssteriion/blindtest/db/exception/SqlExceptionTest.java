@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
 
-public class EntityManagerExceptionTest extends AbstractTest {
+public class SqlExceptionTest extends AbstractTest {
 
 	@Test
 	public void constructor() {
@@ -13,7 +13,7 @@ public class EntityManagerExceptionTest extends AbstractTest {
 		String message = "failed";
 		
 		try {
-			new EntityManagerException(null);
+			new SqlException(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -21,14 +21,14 @@ public class EntityManagerExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new EntityManagerException("");
+			new SqlException("");
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
 		}
 		
-		EntityManagerException eme = new EntityManagerException(message);
+		SqlException eme = new SqlException(message);
 		Assert.assertEquals( message, eme.getMessage() );
 		
 		
@@ -37,7 +37,7 @@ public class EntityManagerExceptionTest extends AbstractTest {
 		NullPointerException npe = new NullPointerException("npe");
 		
 		try {
-			new EntityManagerException(null, npe);
+			new SqlException(null, npe);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -45,7 +45,7 @@ public class EntityManagerExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new EntityManagerException("", npe);
+			new SqlException("", npe);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -53,14 +53,14 @@ public class EntityManagerExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new EntityManagerException(message, null);
+			new SqlException(message, null);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'cause' est obligatoire."), e);
 		}
 		
-		eme = new EntityManagerException(message, npe);
+		eme = new SqlException(message, npe);
 		Assert.assertEquals( message, eme.getMessage() );
 		Assert.assertEquals( npe, eme.getCause() );
 	}

@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 
 public class ProfilServiceTest extends AbstractTest {
@@ -25,7 +25,7 @@ public class ProfilServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws EntityManagerException {
+	public void save() throws SqlException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -53,7 +53,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void findAll() throws EntityManagerException {
+	public void findAll() throws SqlException {
 
 		ProfilDTO dto = new ProfilDTO("name", "avatar");
 		Mockito.when(dao.findAll()).thenReturn( Arrays.asList(dto) );

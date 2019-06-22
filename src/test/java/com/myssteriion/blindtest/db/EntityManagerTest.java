@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 
 public class EntityManagerTest extends AbstractTest {
 
@@ -24,7 +24,7 @@ public class EntityManagerTest extends AbstractTest {
 	
 	
 	@Test
-	public void createStatement() throws SQLException, EntityManagerException {
+	public void createStatement() throws SQLException, SqlException {
 
 		Statement statement = Mockito.mock(Statement.class);
 		SQLException sqle = new SQLException("fake");
@@ -35,8 +35,8 @@ public class EntityManagerTest extends AbstractTest {
 			em.createStatement();
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
-		catch (EntityManagerException e) {
-			verifyException(new EntityManagerException("Can't create statement.", sqle), e);
+		catch (SqlException e) {
+			verifyException(new SqlException("Can't create statement.", sqle), e);
 		}
 		
 		Assert.assertSame( statement, em.createStatement() );

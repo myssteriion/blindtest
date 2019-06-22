@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 
 public class ToolTest extends AbstractTest {
 
@@ -101,12 +101,12 @@ public class ToolTest extends AbstractTest {
 		}
 		
 		
-		EntityManagerException eme = new EntityManagerException("eme", iae);
+		SqlException sql = new SqlException("sql", iae);
 		expected = new ArrayList<>();
-		expected.add( eme.getMessage() );
+		expected.add( sql.getMessage() );
 		expected.add( iae.getMessage() );
 		expected.add( npe.getMessage() );
-		actual = Tool.transformToList(eme);
+		actual = Tool.transformToList(sql);
 		for (int i = 0; i < expected.size(); i++) {
 			Assert.assertEquals( expected.get(i), actual.get(i) );
 		}

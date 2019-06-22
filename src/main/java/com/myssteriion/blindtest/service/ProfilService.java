@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
-import com.myssteriion.blindtest.db.exception.EntityManagerException;
+import com.myssteriion.blindtest.db.exception.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -18,7 +18,7 @@ public class ProfilService {
 	
 	
 	
-	public ProfilDTO save(ProfilDTO dto) throws EntityManagerException {
+	public ProfilDTO save(ProfilDTO dto) throws SqlException {
 		
 		Tool.verifyValue("dto", dto);
 		
@@ -29,7 +29,7 @@ public class ProfilService {
 		return foundDto;
 	}
 	
-	public List<ProfilDTO> findAll() throws EntityManagerException {
+	public List<ProfilDTO> findAll() throws SqlException {
 		return dao.findAll();
 	}
 	

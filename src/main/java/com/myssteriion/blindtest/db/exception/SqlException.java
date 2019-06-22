@@ -2,9 +2,9 @@ package com.myssteriion.blindtest.db.exception;
 
 import com.myssteriion.blindtest.tools.Tool;
 
-public class EntityManagerException extends Exception {
+public class SqlException extends Exception {
 
-	public EntityManagerException(String message, Throwable cause) {
+	public SqlException(String message, Throwable cause) {
 		
 		super(message, cause);
 		
@@ -12,7 +12,7 @@ public class EntityManagerException extends Exception {
 		Tool.verifyValue("cause", cause);
 	}
 
-	public EntityManagerException(String message) {
+	public SqlException(String message) {
 		
 		super(message);
 		
