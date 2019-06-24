@@ -50,7 +50,11 @@ build {
 		    include "*"
 		    into deliveryFolder
 		}
+		
 		delete logsFolder
+		
+		mkdir deliveryFolder + "/musique/annees_80"
+		mkdir deliveryFolder + "/musique/annees_90"
 	}
 }
 
