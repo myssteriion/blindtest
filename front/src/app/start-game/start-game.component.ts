@@ -8,11 +8,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class StartGameComponent implements OnInit {
 
-  public gameFullySet: boolean = false;
+  public gameFullySet: boolean = true;
   constructor(private _activeModal: NgbActiveModal) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public onClose() {
     this._activeModal.close('Close click')

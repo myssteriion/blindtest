@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { ResourceService, UrlInterceptor } from './resources/resources'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,9 +24,14 @@ import { StartGameComponent } from './start-game/start-game.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ResourceService,
+    { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
