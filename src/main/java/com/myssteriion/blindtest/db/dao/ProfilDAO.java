@@ -57,7 +57,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE profil ");
-			sb.append("SET avatar = " + dto.getAvatar() + ", playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
+			sb.append("SET avatar = '" + dto.getAvatar() + "', playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
 			sb.append("WHERE id = " + dto.getId());
 			
 			statement.execute( sb.toString() );
