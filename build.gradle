@@ -1,19 +1,26 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.5.RELEASE"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
     }
 }
+
 
 apply plugin: "java"
 apply plugin: "eclipse"
 apply plugin: "org.springframework.boot"
+apply plugin: "com.moowork.node"
 
 group = "com.myssteriion"
 version = "1.0"
 sourceCompatibility = "1.8"
+
 
 repositories {
 	mavenCentral()
@@ -30,12 +37,30 @@ dependencies {
 }
 
 
-
 def deliveryFolder = "delivery"
-def logsFolder = "logs"
+
+
+node {
+	version = "10.16.0"
+	npmVersion = "6.9.0"
+	download = true
+	
+	workDir = file("libs/nodejs")
+	nodeModulesDir = file("front")
+}
+
+npm_run_build {
+    inputs.files fileTree("front/src")
+    inputs.file "front/package.json"
+    inputs.file "front/package-lock.json"
+}
+
+build.dependsOn npm_run_build
+
 
 clean {
 	delete deliveryFolder
+	delete "front/dist"
 }
 
 build {
@@ -46,13 +71,22 @@ build {
 		    into deliveryFolder
 		}
 		copy {
-		    from "build/libs/"
+		    from "libs"
+		    include "**/*"
+		    into deliveryFolder + "/libs"
+		}
+		copy {
+		    from "build/libs"
 		    include "*"
-		    into deliveryFolder
+		    into deliveryFolder + "/libs"
+		}
+		copy {
+		    from "front/dist"
+		    include "**/*"
+		    into deliveryFolder + "/libs"
 		}
 		
-		delete logsFolder
-		
+		delete "logs"		
 		mkdir deliveryFolder + "/musique/annees_80"
 		mkdir deliveryFolder + "/musique/annees_90"
 	}

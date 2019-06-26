@@ -1,2 +1,3 @@
-java -jar blindtest-1.0.jar
-pauses
+call libs/start-backend.bat
+call libs/start-frontend.bat
+pause
