@@ -13,7 +13,7 @@ import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.MusicService;
 
-@CrossOrigin(origins = "http://localhost:3002")
+@CrossOrigin
 @RestController
 @RequestMapping(
 	path = "musics"

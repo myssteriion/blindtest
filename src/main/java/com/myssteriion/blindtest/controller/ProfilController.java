@@ -18,7 +18,7 @@ import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.ProfilService;
 
-@CrossOrigin(origins = "http://localhost:3002")
+@CrossOrigin
 @RestController
 @RequestMapping(
 	path = "profils"
