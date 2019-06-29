@@ -47,7 +47,7 @@ public class ProfilControllerTest extends AbstractTest {
 		ProfilDTO dto = new ProfilDTO("name", "avatar");
 		Mockito.when(service.update(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(dto);
 		
-		ResponseEntity<ProfilDTO> actual = controller.update(dto);
+		ResponseEntity<ProfilDTO> actual = controller.update("1", dto);
 		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
 		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );

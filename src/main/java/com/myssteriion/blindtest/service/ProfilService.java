@@ -41,6 +41,7 @@ public class ProfilService {
 	public ProfilDTO update(ProfilDTO dto, boolean throwIfNotExsits) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("dto -> id", dto.getId());
 		
 		ProfilDTO foundDTO = dao.find(dto);
 		

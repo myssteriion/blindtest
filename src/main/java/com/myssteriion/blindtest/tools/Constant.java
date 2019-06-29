@@ -10,4 +10,6 @@ public class Constant {
 	public static final String QUOTE				= "'";
 	public static final String DOUBLE_QUOTE 		= QUOTE + QUOTE;
 	
+	public static final String ID_PATH_PARAM		= "/{id}";
+	
 }

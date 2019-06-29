@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.ProfilService;
+import com.myssteriion.blindtest.tools.Constant;
 
 @CrossOrigin
 @RestController
@@ -38,9 +40,12 @@ public class ProfilController {
 	}
 	
 	@RequestMapping(
-		method = RequestMethod.PUT
+		method = RequestMethod.PUT,
+		path = Constant.ID_PATH_PARAM
 	)
-	public ResponseEntity<ProfilDTO> update(@RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
+	public ResponseEntity<ProfilDTO> update(@PathVariable("id") String id, @RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
+		
+		dto.setId(id);
 		return ResponseBuilder.create200( service.update(dto, true) );
 	}
 		

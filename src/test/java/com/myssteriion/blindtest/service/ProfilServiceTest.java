@@ -83,6 +83,14 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		
 		ProfilDTO dto = new ProfilDTO(name, avatar);
+		try {
+			service.update(dto, false);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+		
 		dto.setId("1");
 		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, null, dto);
 		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenReturn(dto);
