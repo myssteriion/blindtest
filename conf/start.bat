@@ -1,3 +1,2 @@
-call libs/start-backend.bat
-call libs/start-frontend.bat
-pause
+start /MIN libs\start-backend.bat
+start /MIN libs\start-frontend.bat
