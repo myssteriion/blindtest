@@ -20,11 +20,11 @@ public class ProfilDTO extends AbstractDTO {
 
 	
 	
-	@JsonCreator
 	public ProfilDTO(String name, String avatar) {
 		this(name, avatar, 0, 0, 0);
 	}
-
+	
+	@JsonCreator
 	public ProfilDTO(String name, String avatar, int playedGames, int listenedMusics, int foundMusics) {
 
 		Tool.verifyValue("name", name);
