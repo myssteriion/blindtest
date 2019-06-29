@@ -32,7 +32,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO music(name, theme, played) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getTheme() + "', 0)");
+			sb.append("VALUES ('" + escapeValue( dto.getName() ) + "', '" + dto.getTheme() + "', 0)");
 			
 			statement.execute( sb.toString() );
 			
@@ -84,7 +84,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM music ");
-			sb.append("WHERE name = '" + dto.getName() + "' AND theme = '" + dto.getTheme() + "'");
+			sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "' AND theme = '" + dto.getTheme() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {

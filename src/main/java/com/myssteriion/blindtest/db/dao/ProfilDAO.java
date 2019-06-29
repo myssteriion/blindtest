@@ -31,7 +31,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
-			sb.append("VALUES ('" + dto.getName() + "', '" + dto.getAvatar() + "', 0, 0, 0)");
+			sb.append("VALUES ('" + escapeValue( dto.getName() ) + "', '" + dto.getAvatar() + "', 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
 			
@@ -57,7 +57,8 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE profil ");
-			sb.append("SET avatar = '" + dto.getAvatar() + "', playedGames = " + dto.getPlayedGames() + ", listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
+			sb.append("SET name = '" + escapeValue( dto.getName() ) + "', avatar = '" + dto.getAvatar() + "', playedGames = " + dto.getPlayedGames() + ", ");
+			sb.append("listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
 			sb.append("WHERE id = " + dto.getId());
 			
 			statement.execute( sb.toString() );
@@ -83,7 +84,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM profil ");
-			sb.append("WHERE name = '" + dto.getName() + "'");
+			sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
@@ -113,7 +114,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
-				
+
 				ProfilDTO dto = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
 				dto.setId( rs.getString("id") );
 				dtoList.add(dto);
