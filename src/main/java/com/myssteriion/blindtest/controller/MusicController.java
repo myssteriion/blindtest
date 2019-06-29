@@ -26,8 +26,8 @@ public class MusicController {
 	
 	
 	@RequestMapping(
-		path = "/refresh",
-		method = RequestMethod.GET
+		method = RequestMethod.GET,
+		path = "/refresh"
 	)
 	public ResponseEntity<Empty> refresh() throws SqlException, AlreadyExistsException {
 		
