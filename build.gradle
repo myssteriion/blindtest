@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.5.RELEASE"
-        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.3.1"
     }
 }
 
@@ -45,17 +45,10 @@ node {
 	npmVersion = "6.9.0"
 	download = true
 	
-	workDir = file("libs/nodejs")
 	nodeModulesDir = file("front")
 }
 
-npm_run_build {
-    inputs.files fileTree("front/src")
-    inputs.file "front/package.json"
-    inputs.file "front/package-lock.json"
-}
-
-build.dependsOn npm_run_build
+assemble.dependsOn npm_run_build
 
 
 clean {
@@ -71,9 +64,9 @@ build {
 		    into deliveryFolder
 		}
 		copy {
-		    from "libs"
+		    from ".gradle/nodejs"
 		    include "**/*"
-		    into deliveryFolder + "/libs"
+		    into deliveryFolder + "/libs/nodejs"
 		}
 		copy {
 		    from "build/libs"
@@ -87,8 +80,8 @@ build {
 		}
 		
 		delete "logs"		
-		mkdir deliveryFolder + "/musique/annees_80"
-		mkdir deliveryFolder + "/musique/annees_90"
+		mkdir deliveryFolder + "/musiques/annees_80"
+		mkdir deliveryFolder + "/musiques/annees_90"
 	}
 }
 
