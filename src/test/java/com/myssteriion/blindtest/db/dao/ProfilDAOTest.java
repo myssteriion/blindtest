@@ -118,6 +118,7 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		SimpleResultSet rs = getResultSet();
 		rs.addRow("1", "name", "avatar", 1, 2, 3);
+		rs.addRow("2", "name", "avatar", 1, 2, 3);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -148,6 +149,10 @@ public class ProfilDAOTest extends AbstractTest {
 		Assert.assertNull(emDto);
 		
 		dto = new ProfilDTO("name", "avatar");
+		emDto = dao.find(dto);
+		Assert.assertNotNull(emDto);
+		
+		dto.setId("1");
 		emDto = dao.find(dto);
 		Assert.assertNotNull(emDto);
 	}

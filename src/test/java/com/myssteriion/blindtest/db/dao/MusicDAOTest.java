@@ -119,6 +119,7 @@ public class MusicDAOTest extends AbstractTest {
 		
 		SimpleResultSet rs = getResultSet();
 		rs.addRow("1", "name", "ANNEES_80", 1);
+		rs.addRow("2", "name", "ANNEES_80", 1);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -149,6 +150,10 @@ public class MusicDAOTest extends AbstractTest {
 		Assert.assertNull(emDto);
 		
 		dto = new MusicDTO("name", Theme.ANNEES_80);
+		emDto = dao.find(dto);
+		Assert.assertNotNull(emDto);
+		
+		dto.setId("1");
 		emDto = dao.find(dto);
 		Assert.assertNotNull(emDto);
 	}

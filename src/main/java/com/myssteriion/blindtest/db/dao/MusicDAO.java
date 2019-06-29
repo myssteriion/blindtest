@@ -84,10 +84,14 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM music ");
-			sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "' AND theme = '" + dto.getTheme() + "'");
+			
+			if ( Tool.isNullOrEmpty(dto.getId()) )
+				sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "' AND theme = '" + dto.getTheme() + "'");
+			else
+				sb.append("WHERE id = '" + dto.getId() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
-			while ( rs.next() ) {
+			if ( rs.next() ) {
 				
 				dtoToReturn = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
 				dtoToReturn.setId( rs.getString("id") );

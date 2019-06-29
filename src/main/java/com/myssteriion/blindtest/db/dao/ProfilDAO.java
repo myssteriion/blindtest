@@ -84,10 +84,14 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM profil ");
-			sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "'");
+			
+			if ( Tool.isNullOrEmpty(dto.getId()) )
+				sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "'");
+			else
+				sb.append("WHERE id = '" + dto.getId() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
-			while ( rs.next() ) {
+			if ( rs.next() ) {
 				
 				dtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
 				dtoToReturn.setId( rs.getString("id") );
