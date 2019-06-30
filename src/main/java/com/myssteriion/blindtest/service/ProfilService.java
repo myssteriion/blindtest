@@ -24,16 +24,15 @@ public class ProfilService {
 		
 		Tool.verifyValue("dto", dto);
 		
+		dto.setId(null);
 		ProfilDTO foundDTO = dao.find(dto);
 		
 		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExsits)
 			throw new AlreadyExistsException("DTO already exists.");
 		
-		else if ( Tool.isNullOrEmpty(foundDTO) )
-			foundDTO = dao.save(dto);
 		
-		else
-			foundDTO = dto;
+		if ( Tool.isNullOrEmpty(foundDTO) )
+			foundDTO = dao.save(dto);
 		
 		return foundDTO;
 	}

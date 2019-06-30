@@ -27,6 +27,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "nextMusic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/musics/nextMusic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"musics",
+								"nextMusic"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -80,14 +100,15 @@
 							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/profils",
+							"raw": "http://localhost:8080/profils/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"profils"
+								"profils",
+								"2"
 							]
 						}
 					},

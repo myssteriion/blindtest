@@ -42,13 +42,13 @@ public class ProfilServiceTest extends AbstractTest {
 		}
 		
 		
-		ProfilDTO dto = new ProfilDTO(name, avatar);
-		dto.setId("1");
-		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dto);
-		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenReturn(dto);
+		ProfilDTO dtoMock = new ProfilDTO(name, avatar);
+		dtoMock.setId("1");
+		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dtoMock);
+		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenReturn(dtoMock);
 		
-		ProfilDTO dtoSaved = service.save(dto, false);
-		Assert.assertSame(dto, dtoSaved);
+		ProfilDTO dto = new ProfilDTO(name, avatar);
+		Assert.assertSame( dtoMock, service.save(dto, false) );
 		
 		try {
 			service.save(dto, true);
@@ -58,7 +58,7 @@ public class ProfilServiceTest extends AbstractTest {
 			verifyException(new AlreadyExistsException("DTO already exists."), e);
 		}
 
-		dtoSaved = service.save(dto, false);
+		ProfilDTO dtoSaved = service.save(dto, false);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );

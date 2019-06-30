@@ -45,13 +45,13 @@ public class MusicServiceTest extends AbstractTest {
 		}
 		
 		
-		MusicDTO dto = new MusicDTO(name, theme);
-		dto.setId("1");
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dto);
-		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dto);
+		MusicDTO dtoMock = new MusicDTO(name, theme);
+		dtoMock.setId("1");
+		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dtoMock);
+		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dtoMock);
 		
-		MusicDTO dtoSaved = service.save(dto, false);
-		Assert.assertSame(dto, dtoSaved);
+		MusicDTO dto = new MusicDTO(name, theme);
+		Assert.assertSame( dtoMock, service.save(dto, false) );
 		
 		try {
 			service.save(dto, true);
@@ -61,7 +61,7 @@ public class MusicServiceTest extends AbstractTest {
 			verifyException(new AlreadyExistsException("DTO already exists."), e);
 		}
 
-		dtoSaved = service.save(dto, false);
+		MusicDTO dtoSaved = service.save(dto, false);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );

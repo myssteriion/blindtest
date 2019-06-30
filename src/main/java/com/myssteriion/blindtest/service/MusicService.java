@@ -54,6 +54,7 @@ public class MusicService {
 		
 		Tool.verifyValue("dto", dto);
 		
+		dto.setId(null);
 		MusicDTO foundDTO = dao.find(dto);
 		
 		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExists)
