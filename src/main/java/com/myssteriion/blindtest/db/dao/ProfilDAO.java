@@ -23,85 +23,85 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 	
 	
 	@Override
-	public ProfilDTO save(ProfilDTO dto) throws SqlException {
+	public ProfilDTO save(ProfilDTO profilDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("profilDto", profilDto);
 		
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
-			sb.append("VALUES ('" + escapeValue( dto.getName() ) + "', '" + dto.getAvatar() + "', 0, 0, 0)");
+			sb.append("VALUES ('" + escapeValue( profilDto.getName() ) + "', '" + profilDto.getAvatar() + "', 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
 			
-			ProfilDTO dtoSaved = find(dto);
-			LOGGER.info("DTO inserted (" + dtoSaved.toString() + ").");
+			ProfilDTO dtoSaved = find(profilDto);
+			LOGGER.info("profilDto inserted (" + dtoSaved.toString() + ").");
 			
 			return dtoSaved;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't save dto.";
+			String message = "Can't save profilDto.";
 			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO update(ProfilDTO dto) throws SqlException {
+	public ProfilDTO update(ProfilDTO profilDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
-		Tool.verifyValue("dto -> id", dto.getId());
+		Tool.verifyValue("profilDto", profilDto);
+		Tool.verifyValue("profilDto -> id", profilDto.getId());
 		
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE profil ");
-			sb.append("SET name = '" + escapeValue( dto.getName() ) + "', avatar = '" + dto.getAvatar() + "', playedGames = " + dto.getPlayedGames() + ", ");
-			sb.append("listenedMusics = " + dto.getListenedMusics() + ", foundMusics = " + dto.getFoundMusics() + " ");
-			sb.append("WHERE id = " + dto.getId());
+			sb.append("SET name = '" + escapeValue( profilDto.getName() ) + "', avatar = '" + profilDto.getAvatar() + "', playedGames = " + profilDto.getPlayedGames() + ", ");
+			sb.append("listenedMusics = " + profilDto.getListenedMusics() + ", foundMusics = " + profilDto.getFoundMusics() + " ");
+			sb.append("WHERE id = " + profilDto.getId());
 			
 			statement.execute( sb.toString() );
-			LOGGER.info("DTO updated (" + dto.toString() + ").");
+			LOGGER.info("profilDto updated (" + profilDto.toString() + ").");
 			
-			return dto;
+			return profilDto;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't update dto.";
+			String message = "Can't update profilDto.";
 			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO find(ProfilDTO dto) throws SqlException {
+	public ProfilDTO find(ProfilDTO profilDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("profilDto", profilDto);
 		
 		try ( Statement statement = em.createStatement() ) {
 			
-			ProfilDTO dtoToReturn = null;
+			ProfilDTO profilDtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM profil ");
 			
-			if ( Tool.isNullOrEmpty(dto.getId()) )
-				sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "'");
+			if ( Tool.isNullOrEmpty(profilDto.getId()) )
+				sb.append("WHERE name = '" + escapeValue( profilDto.getName() ) + "'");
 			else
-				sb.append("WHERE id = '" + dto.getId() + "'");
+				sb.append("WHERE id = '" + profilDto.getId() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
-				dtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
-				dtoToReturn.setId( rs.getString("id") );
+				profilDtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
+				profilDtoToReturn.setId( rs.getString("id") );
 			}
 
-			return dtoToReturn;
+			return profilDtoToReturn;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't find dto.";
+			String message = "Can't find profilDto.";
 			throw new SqlException(message, e);
 		}
 	}
@@ -111,7 +111,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
-			List<ProfilDTO> dtoList = new ArrayList<>();
+			List<ProfilDTO> profilDtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM profil");
@@ -119,16 +119,16 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
 
-				ProfilDTO dto = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
-				dto.setId( rs.getString("id") );
-				dtoList.add(dto);
+				ProfilDTO profilDto = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
+				profilDto.setId( rs.getString("id") );
+				profilDtoList.add(profilDto);
 			}
 			
-			return dtoList;
+			return profilDtoList;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't find all dto.";
+			String message = "Can't find all profilDto.";
 			throw new SqlException(message, e);
 		}
 	}

@@ -16,66 +16,66 @@ import com.myssteriion.blindtest.tools.Tool;
 public class ProfilService {
 
 	@Autowired
-	private ProfilDAO dao;
+	private ProfilDAO profilDao;
 	
 	
 	
-	public ProfilDTO save(ProfilDTO dto, boolean throwIfExsits) throws SqlException, AlreadyExistsException  {
+	public ProfilDTO save(ProfilDTO profilDto, boolean throwIfExsits) throws SqlException, AlreadyExistsException  {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("profilDto", profilDto);
 		
-		dto.setId(null);
-		ProfilDTO foundDTO = dao.find(dto);
+		profilDto.setId(null);
+		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
-		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExsits)
-			throw new AlreadyExistsException("DTO already exists.");
+		if (!Tool.isNullOrEmpty(foundProfilDto) && throwIfExsits)
+			throw new AlreadyExistsException("profilDto already exists.");
 		
 		
-		if ( Tool.isNullOrEmpty(foundDTO) )
-			foundDTO = dao.save(dto);
+		if ( Tool.isNullOrEmpty(foundProfilDto) )
+			foundProfilDto = profilDao.save(profilDto);
 		
-		return foundDTO;
+		return foundProfilDto;
 	}
 	
-	public ProfilDTO profilWasUpdated(ProfilDTO dto) throws SqlException, NotFoundException {
+	public ProfilDTO profilWasUpdated(ProfilDTO profilDto) throws SqlException, NotFoundException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("profilDto", profilDto);
 		
-		ProfilDTO foundDTO = dao.find(dto);
+		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
-		if ( Tool.isNullOrEmpty(foundDTO) )
-			throw new NotFoundException("DTO not found.");
+		if ( Tool.isNullOrEmpty(foundProfilDto) )
+			throw new NotFoundException("profilDto not found.");
 
 		
-		foundDTO.setName( dto.getName() );
-		foundDTO.setAvatar( dto.getAvatar() );
+		foundProfilDto.setName( profilDto.getName() );
+		foundProfilDto.setAvatar( profilDto.getAvatar() );
 		
-		return dao.update(foundDTO);
+		return profilDao.update(foundProfilDto);
 	}
 	
-	public ProfilDTO profilWasPlayed(ProfilDTO dto, boolean beginGame, boolean foundMusic) throws SqlException, NotFoundException {
+	public ProfilDTO profilWasPlayed(ProfilDTO profilDto, boolean firstMusic, boolean foundMusic) throws SqlException, NotFoundException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("profilDto", profilDto);
 		
-		ProfilDTO foundDTO = dao.find(dto);
+		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
-		if ( Tool.isNullOrEmpty(foundDTO) )
-			throw new NotFoundException("DTO not found.");
+		if ( Tool.isNullOrEmpty(foundProfilDto) )
+			throw new NotFoundException("profilDto not found.");
 		
 		
-		if (beginGame)
-			foundDTO.incrementPlayedGames();
+		if (firstMusic)
+			foundProfilDto.incrementPlayedGames();
 		
 		if (foundMusic)
-			foundDTO.incrementFoundMusics();
+			foundProfilDto.incrementFoundMusics();
 		
-		foundDTO.incrementListenedMusics();
+		foundProfilDto.incrementListenedMusics();
 		
-		return dao.update(foundDTO);
+		return profilDao.update(foundProfilDto);
 	}
 
 	public List<ProfilDTO> findAll() throws SqlException {
-		return dao.findAll();
+		return profilDao.findAll();
 	}
 	
 }

@@ -22,7 +22,7 @@ import com.myssteriion.blindtest.service.MusicService;
 public class MusicController {
 
 	@Autowired
-	private MusicService service;
+	private MusicService musicService;
 	
 	
 	
@@ -32,7 +32,7 @@ public class MusicController {
 	)
 	public ResponseEntity<Empty> refresh() throws SqlException, AlreadyExistsException {
 		
-		service.refresh();
+		musicService.refresh();
 		return ResponseBuilder.create204();
 	}
 	
@@ -41,7 +41,7 @@ public class MusicController {
 		path = "/next"
 	)
 	public ResponseEntity<MusicDTO> next() throws SqlException {
-		return ResponseBuilder.create200( service.next() );
+		return ResponseBuilder.create200( musicService.next() );
 	}
 	
 }

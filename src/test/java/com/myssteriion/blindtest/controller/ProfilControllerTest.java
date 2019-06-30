@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,20 +21,20 @@ import com.myssteriion.blindtest.service.ProfilService;
 public class ProfilControllerTest extends AbstractTest {
 
 	@Mock
-	private ProfilService service;
+	private ProfilService profilService;
 	
 	@InjectMocks
-	private ProfilController controller;
+	private ProfilController profilController;
 	
 	
 	
 	@Test
 	public void save() throws SqlException, AlreadyExistsException {
 		
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
-		Mockito.when(service.save(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(dto);
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(profilDto);
 		
-		ResponseEntity<ProfilDTO> actual = controller.save(dto);
+		ResponseEntity<ProfilDTO> actual = profilController.save(profilDto);
 		Assert.assertEquals( HttpStatus.CREATED, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
 		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
@@ -44,10 +43,10 @@ public class ProfilControllerTest extends AbstractTest {
 	@Test
 	public void update() throws SqlException, NotFoundException {
 		
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
-		Mockito.when(service.profilWasUpdated(Mockito.any(ProfilDTO.class))).thenReturn(dto);
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		Mockito.when(profilService.profilWasUpdated(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
-		ResponseEntity<ProfilDTO> actual = controller.update("1", dto);
+		ResponseEntity<ProfilDTO> actual = profilController.update("1", profilDto);
 		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
 		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
@@ -56,19 +55,18 @@ public class ProfilControllerTest extends AbstractTest {
 	@Test
 	public void findAll() throws SqlException {
 
-		List<ProfilDTO> list = Arrays.asList( new ProfilDTO("name", "avatar") );
-		
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Mockito.when(service.findAll()).thenThrow(iae).thenReturn(list);
+		Mockito.when(profilService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilDTO("name", "avatar") ) );
 
 		try {
-			controller.findAll();
+			profilController.findAll();
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(iae, e);
 		}
-		ResponseEntity< ListDTO<ProfilDTO> > re = controller.findAll();
+		
+		ResponseEntity< ListDTO<ProfilDTO> > re = profilController.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		ListDTO<ProfilDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getItems().size() );		

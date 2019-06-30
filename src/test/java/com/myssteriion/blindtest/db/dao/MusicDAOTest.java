@@ -25,19 +25,19 @@ public class MusicDAOTest extends AbstractTest {
 	protected EntityManager em;
 	
 	@InjectMocks
-	private MusicDAO dao;
+	private MusicDAO musicDao;
 	
 	
 	
 	@Test
 	public void save() throws SqlException, SQLException {
 
-		dao = Mockito.spy( new MusicDAO() );
+		musicDao = Mockito.spy( new MusicDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
-		dto.setId("1");
-		Mockito.doReturn(dto).when(dao).find(Mockito.any(MusicDTO.class));
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+		musicDto.setId("1");
+		Mockito.doReturn(musicDto).when(musicDao).find(Mockito.any(MusicDTO.class));
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -47,32 +47,32 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.save(null);
+			musicDao.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
 		
 		
-		MusicDTO dtoToSave = new MusicDTO("name", Theme.ANNEES_80);
+		MusicDTO musidcDtoToSave = new MusicDTO("name", Theme.ANNEES_80);
 		try {
-			dao.save(dtoToSave);
+			musicDao.save(musidcDtoToSave);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't save dto.", sql), e);
+			verifyException(new SqlException("Can't save musicDto.", sql), e);
 		}
 		
-		MusicDTO dtoReturned = dao.save(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
+		MusicDTO musicDtoReturned = musicDao.save(musidcDtoToSave);
+		Assert.assertEquals( "1", musicDtoReturned.getId() );
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
-		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
-		dto.setId("1");
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+		musicDto.setId("1");
 		
 
 		SQLException sql = new SQLException("sql");
@@ -82,34 +82,34 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.update(null);
+			musicDao.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
 		
 		
-		MusicDTO dtoToUpdate = new MusicDTO("name", Theme.ANNEES_80);
+		MusicDTO musicDtoToUpdate = new MusicDTO("name", Theme.ANNEES_80);
 		try {
-			dao.update(dtoToUpdate);
+			musicDao.update(musicDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto -> id' est obligatoire."), e);
 		}
 		
-		dtoToUpdate.setId("1");
+		musicDtoToUpdate.setId("1");
 		try {
-			dao.update(dtoToUpdate);
+			musicDao.update(musicDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't update dto.", sql), e);
+			verifyException(new SqlException("Can't update musicDto.", sql), e);
 		}
 		
-		MusicDTO dtoReturned = dao.update(dtoToUpdate);
-		Assert.assertEquals(dtoReturned.getId(), "1");
+		MusicDTO musicDtoReturned = musicDao.update(musicDtoToUpdate);
+		Assert.assertEquals( "1", musicDtoReturned.getId() );
 	}
 	
 	@Test
@@ -129,33 +129,33 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.find(null);
+			musicDao.find(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
 		
 		
-		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_80);
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
 		try {
-			dao.find(dto);
+			musicDao.find(musicDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find dto.", sql), e);
+			verifyException(new SqlException("Can't find musicDto.", sql), e);
 		}
 		
-		MusicDTO emDto = dao.find(dto);
-		Assert.assertNull(emDto);
+		musicDto = musicDao.find(musicDto);
+		Assert.assertNull(musicDto);
 		
-		dto = new MusicDTO("name", Theme.ANNEES_80);
-		emDto = dao.find(dto);
-		Assert.assertNotNull(emDto);
+		musicDto = new MusicDTO("name", Theme.ANNEES_80);
+		musicDto = musicDao.find(musicDto);
+		Assert.assertNotNull(musicDto);
 		
-		dto.setId("1");
-		emDto = dao.find(dto);
-		Assert.assertNotNull(emDto);
+		musicDto.setId("1");
+		musicDto = musicDao.find(musicDto);
+		Assert.assertNotNull(musicDto);
 	}
 	
 	@Test
@@ -172,17 +172,17 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.findAll();
+			musicDao.findAll();
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find all dto.", sql), e);
+			verifyException(new SqlException("Can't find all musicDto.", sql), e);
 		}
 		
-		MusicDTO dto = dao.findAll().get(0);
-		Assert.assertEquals( "1", dto.getId() );
-		Assert.assertEquals( "name", dto.getName() );
-		Assert.assertEquals( Theme.ANNEES_80, dto.getTheme() );
+		MusicDTO musicDto = musicDao.findAll().get(0);
+		Assert.assertEquals( "1", musicDto.getId() );
+		Assert.assertEquals( "name", musicDto.getName() );
+		Assert.assertEquals( Theme.ANNEES_80, musicDto.getTheme() );
 	}
 	
 	

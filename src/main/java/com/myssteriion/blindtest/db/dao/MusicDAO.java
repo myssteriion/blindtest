@@ -24,84 +24,84 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 	
 	
 	@Override
-	public MusicDTO save(MusicDTO dto) throws SqlException {
+	public MusicDTO save(MusicDTO musicDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("musicDto", musicDto);
 		
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO music(name, theme, played) ");
-			sb.append("VALUES ('" + escapeValue( dto.getName() ) + "', '" + dto.getTheme() + "', 0)");
+			sb.append("VALUES ('" + escapeValue( musicDto.getName() ) + "', '" + musicDto.getTheme() + "', 0)");
 			
 			statement.execute( sb.toString() );
 			
-			MusicDTO dtoSaved = find(dto);
-			LOGGER.info("DTO inserted (" + dtoSaved.toString() + ").");
+			MusicDTO dtoSaved = find(musicDto);
+			LOGGER.info("musicDto inserted (" + dtoSaved.toString() + ").");
 			
 			return dtoSaved;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't save dto.";
+			String message = "Can't save musicDto.";
 			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public MusicDTO update(MusicDTO dto) throws SqlException {
+	public MusicDTO update(MusicDTO musicDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
-		Tool.verifyValue("dto -> id", dto.getId());
+		Tool.verifyValue("musicDto", musicDto);
+		Tool.verifyValue("musicDto -> id", musicDto.getId());
 		
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE music ");
-			sb.append("SET played = " + dto.getPlayed() + " ");
-			sb.append("WHERE id = " + dto.getId());
+			sb.append("SET played = " + musicDto.getPlayed() + " ");
+			sb.append("WHERE id = " + musicDto.getId());
 			
 			statement.execute( sb.toString() );
-			LOGGER.info("DTO updated (" + dto.toString() + ").");
+			LOGGER.info("musicDto updated (" + musicDto.toString() + ").");
 			
-			return dto;
+			return musicDto;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't update dto.";
+			String message = "Can't update musicDto.";
 			throw new SqlException(message, e);
 		}
 	}
 	
 	@Override
-	public MusicDTO find(MusicDTO dto) throws SqlException {
+	public MusicDTO find(MusicDTO musicDto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("musicDto", musicDto);
 		
 		try ( Statement statement = em.createStatement() ) {
 			
-			MusicDTO dtoToReturn = null;
+			MusicDTO musicDtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM music ");
 			
-			if ( Tool.isNullOrEmpty(dto.getId()) )
-				sb.append("WHERE name = '" + escapeValue( dto.getName() ) + "' AND theme = '" + dto.getTheme() + "'");
+			if ( Tool.isNullOrEmpty(musicDto.getId()) )
+				sb.append("WHERE name = '" + escapeValue( musicDto.getName() ) + "' AND theme = '" + musicDto.getTheme() + "'");
 			else
-				sb.append("WHERE id = '" + dto.getId() + "'");
+				sb.append("WHERE id = '" + musicDto.getId() + "'");
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
-				dtoToReturn = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				dtoToReturn.setId( rs.getString("id") );
+				musicDtoToReturn = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
+				musicDtoToReturn.setId( rs.getString("id") );
 			}
 
-			return dtoToReturn;
+			return musicDtoToReturn;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't find dto.";
+			String message = "Can't find musicDto.";
 			throw new SqlException(message, e);
 		}
 	}
@@ -111,7 +111,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
-			List<MusicDTO> dtoList = new ArrayList<>();
+			List<MusicDTO> musicDtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM music");
@@ -119,16 +119,16 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
 				
-				MusicDTO dto = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				dto.setId( rs.getString("id") );
-				dtoList.add(dto);
+				MusicDTO musicDto = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
+				musicDto.setId( rs.getString("id") );
+				musicDtoList.add(musicDto);
 			}
 			
-			return dtoList;
+			return musicDtoList;
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't find all dto.";
+			String message = "Can't find all musicDto.";
 			throw new SqlException(message, e);
 		}
 	}

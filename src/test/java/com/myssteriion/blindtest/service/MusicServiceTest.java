@@ -20,16 +20,16 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 public class MusicServiceTest extends AbstractTest {
 
 	@Mock
-	private MusicDAO dao;
+	private MusicDAO musicDao;
 	
 	@InjectMocks
-	private MusicService service;
+	private MusicService musicService;
 	
 	
 	
 	@Test
 	public void refresh() throws SqlException, AlreadyExistsException {
-		service.refresh();
+		musicService.refresh();
 	}
 	
 	@Test
@@ -40,35 +40,35 @@ public class MusicServiceTest extends AbstractTest {
 		
 		
 		try {
-			service.save(null, false);
+			musicService.save(null, false);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
 		
 		
-		MusicDTO dtoMock = new MusicDTO(name, theme);
-		dtoMock.setId("1");
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dtoMock);
-		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dtoMock);
+		MusicDTO musicDtoMock = new MusicDTO(name, theme);
+		musicDtoMock.setId("1");
+		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
+		Mockito.when(musicDao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDtoMock);
 		
-		MusicDTO dto = new MusicDTO(name, theme);
-		Assert.assertSame( dtoMock, service.save(dto, false) );
+		MusicDTO musicDto = new MusicDTO(name, theme);
+		Assert.assertSame( musicDtoMock, musicService.save(musicDto, false) );
 		
 		try {
-			service.save(dto, true);
+			musicService.save(musicDto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("DTO already exists."), e);
+			verifyException(new AlreadyExistsException("musicDto already exists."), e);
 		}
 
-		MusicDTO dtoSaved = service.save(dto, false);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 0, dtoSaved.getPlayed() );
+		MusicDTO musicDtoSaved = musicService.save(musicDto, false);
+		Assert.assertEquals( "1", musicDtoSaved.getId() );
+		Assert.assertEquals( name, musicDtoSaved.getName() );
+		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
+		Assert.assertEquals( 0, musicDtoSaved.getPlayed() );
 	}
 	
 	@Test
@@ -79,32 +79,32 @@ public class MusicServiceTest extends AbstractTest {
 		
 		
 		try {
-			service.musicWasPlayed(null);
+			musicService.musicWasPlayed(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
 		
 		
-		MusicDTO dto = new MusicDTO(name, theme);
-		dto.setId("1");
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dto);
-		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenReturn(dto);
+		MusicDTO musicDto = new MusicDTO(name, theme);
+		musicDto.setId("1");
+		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDto);
+		Mockito.when(musicDao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
 		
 		try {
-			service.musicWasPlayed(dto);
+			musicService.musicWasPlayed(musicDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("DTO not found."), e);
+			verifyException(new NotFoundException("musicDto not found."), e);
 		}
 
-		MusicDTO dtoSaved = service.musicWasPlayed(dto);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 1, dtoSaved.getPlayed() );
+		MusicDTO musicDtoSaved = musicService.musicWasPlayed(musicDto);
+		Assert.assertEquals( "1", musicDtoSaved.getId() );
+		Assert.assertEquals( name, musicDtoSaved.getName() );
+		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
+		Assert.assertEquals( 1, musicDtoSaved.getPlayed() );
 	}
 	
 	@Test
@@ -115,10 +115,10 @@ public class MusicServiceTest extends AbstractTest {
 		List<MusicDTO> allMusics = new ArrayList<>();
 		allMusics.add(expected);
 		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, 1000000000) );
-		Mockito.when(dao.findAll()).thenReturn(allMusics);
+		Mockito.when(musicDao.findAll()).thenReturn(allMusics);
 		
-		MusicDTO dto = service.next();
-		Assert.assertEquals(expected, dto);
+		MusicDTO musicDto = musicService.next();
+		Assert.assertEquals(expected, musicDto);
 		
 		
 		
@@ -127,10 +127,10 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
-		Mockito.when(dao.findAll()).thenReturn(allMusics);
+		Mockito.when(musicDao.findAll()).thenReturn(allMusics);
 		
-		dto = service.next();
-		Assert.assertEquals(expected, dto);
+		musicDto = musicService.next();
+		Assert.assertEquals(expected, musicDto);
 	}
 	
 }

@@ -24,19 +24,19 @@ public class ProfilDAOTest extends AbstractTest {
 	protected EntityManager em;
 	
 	@InjectMocks
-	private ProfilDAO dao;
+	private ProfilDAO profilDao;
 	
 	
 	
 	@Test
 	public void save() throws SqlException, SQLException {
 
-		dao = Mockito.spy( new ProfilDAO() );
+		profilDao = Mockito.spy( new ProfilDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
-		dto.setId("1");
-		Mockito.doReturn(dto).when(dao).find(Mockito.any(ProfilDTO.class));
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		profilDto.setId("1");
+		Mockito.doReturn(profilDto).when(profilDao).find(Mockito.any(ProfilDTO.class));
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -46,32 +46,32 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.save(null);
+			profilDao.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO dtoToSave = new ProfilDTO("name", "avatar");
+		ProfilDTO profilDtoToSave = new ProfilDTO("name", "avatar");
 		try {
-			dao.save(dtoToSave);
+			profilDao.save(profilDtoToSave);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't save dto.", sql), e);
+			verifyException(new SqlException("Can't save profilDto.", sql), e);
 		}
 		
-		ProfilDTO dtoReturned = dao.save(dtoToSave);
-		Assert.assertEquals(dtoReturned.getId(), "1");
+		ProfilDTO profilDtoReturned = profilDao.save(profilDtoToSave);
+		Assert.assertEquals(profilDtoReturned.getId(), "1");
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
-		dto.setId("1");
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		profilDto.setId("1");
 		
 
 		SQLException sql = new SQLException("sql");
@@ -81,34 +81,34 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.update(null);
+			profilDao.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO dtoToUpdate = new ProfilDTO("name", "avatar");
+		ProfilDTO profilDtoToUpdate = new ProfilDTO("name", "avatar");
 		try {
-			dao.update(dtoToUpdate);
+			profilDao.update(profilDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilDto -> id' est obligatoire."), e);
 		}
 		
-		dtoToUpdate.setId("1");
+		profilDtoToUpdate.setId("1");
 		try {
-			dao.update(dtoToUpdate);
+			profilDao.update(profilDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't update dto.", sql), e);
+			verifyException(new SqlException("Can't update profilDto.", sql), e);
 		}
 		
-		ProfilDTO dtoReturned = dao.update(dtoToUpdate);
-		Assert.assertEquals(dtoReturned.getId(), "1");
+		ProfilDTO profilDtoReturned = profilDao.update(profilDtoToUpdate);
+		Assert.assertEquals(profilDtoReturned.getId(), "1");
 	}
 	
 	@Test
@@ -128,33 +128,33 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.find(null);
+			profilDao.find(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO dto = new ProfilDTO("name", "avatar");
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		try {
-			dao.find(dto);
+			profilDao.find(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find dto.", sql), e);
+			verifyException(new SqlException("Can't find profilDto.", sql), e);
 		}
 		
-		ProfilDTO emDto = dao.find(dto);
-		Assert.assertNull(emDto);
+		profilDto = profilDao.find(profilDto);
+		Assert.assertNull(profilDto);
 		
-		dto = new ProfilDTO("name", "avatar");
-		emDto = dao.find(dto);
-		Assert.assertNotNull(emDto);
+		profilDto = new ProfilDTO("name", "avatar");
+		profilDto = profilDao.find(profilDto);
+		Assert.assertNotNull(profilDto);
 		
-		dto.setId("1");
-		emDto = dao.find(dto);
-		Assert.assertNotNull(emDto);
+		profilDto.setId("1");
+		profilDto = profilDao.find(profilDto);
+		Assert.assertNotNull(profilDto);
 	}
 	
 	@Test
@@ -171,20 +171,20 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			dao.findAll();
+			profilDao.findAll();
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find all dto.", sql), e);
+			verifyException(new SqlException("Can't find all profilDto.", sql), e);
 		}
 		
-		ProfilDTO dto = dao.findAll().get(0);
-		Assert.assertEquals( "1", dto.getId() );
-		Assert.assertEquals( "name", dto.getName() );
-		Assert.assertEquals( "avatar", dto.getAvatar() );
-		Assert.assertEquals( 1, dto.getPlayedGames() );
-		Assert.assertEquals( 2, dto.getListenedMusics() );
-		Assert.assertEquals( 3, dto.getFoundMusics() );
+		ProfilDTO profilDto = profilDao.findAll().get(0);
+		Assert.assertEquals( "1", profilDto.getId() );
+		Assert.assertEquals( "name", profilDto.getName() );
+		Assert.assertEquals( "avatar", profilDto.getAvatar() );
+		Assert.assertEquals( 1, profilDto.getPlayedGames() );
+		Assert.assertEquals( 2, profilDto.getListenedMusics() );
+		Assert.assertEquals( 3, profilDto.getFoundMusics() );
 	}
 	
 	

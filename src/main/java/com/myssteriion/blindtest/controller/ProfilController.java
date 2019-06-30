@@ -28,25 +28,25 @@ import com.myssteriion.blindtest.tools.Constant;
 public class ProfilController {
 
 	@Autowired
-	private ProfilService service;
+	private ProfilService profilService;
 	
 	
 	
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO dto) throws SqlException, AlreadyExistsException {
-		return ResponseBuilder.create201( service.save(dto, true) );
+	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO profilDto) throws SqlException, AlreadyExistsException {
+		return ResponseBuilder.create201( profilService.save(profilDto, true) );
 	}
 	
 	@RequestMapping(
 		method = RequestMethod.PUT,
 		path = Constant.ID_PATH_PARAM
 	)
-	public ResponseEntity<ProfilDTO> update(@PathVariable("id") String id, @RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
+	public ResponseEntity<ProfilDTO> update(@PathVariable("id") String id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException {
 		
-		dto.setId(id);
-		return ResponseBuilder.create200( service.profilWasUpdated(dto) );
+		profilDto.setId(id);
+		return ResponseBuilder.create200( profilService.profilWasUpdated(profilDto) );
 	}
 		
 	@RequestMapping(
@@ -54,7 +54,7 @@ public class ProfilController {
 	)
 	public ResponseEntity< ListDTO<ProfilDTO> > findAll() throws SqlException {
 		
-		List<ProfilDTO> list = service.findAll();
+		List<ProfilDTO> list = profilService.findAll();
 		return ResponseBuilder.create200(list);
 	}
 	

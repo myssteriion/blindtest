@@ -25,7 +25,7 @@ import com.myssteriion.blindtest.tools.Tool;
 public class MusicService {
 
 	@Autowired
-	private MusicDAO dao;
+	private MusicDAO musicDao;
 	
 	
 	
@@ -53,50 +53,50 @@ public class MusicService {
 	
 	
 	
-	public MusicDTO save(MusicDTO dto, boolean throwIfExists) throws SqlException, AlreadyExistsException  {
+	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws SqlException, AlreadyExistsException  {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("musicDto", musicDto);
 		
-		dto.setId(null);
-		MusicDTO foundDTO = dao.find(dto);
+		musicDto.setId(null);
+		MusicDTO foundMusicDto = musicDao.find(musicDto);
 		
-		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExists)
-			throw new AlreadyExistsException("DTO already exists.");
+		if (!Tool.isNullOrEmpty(foundMusicDto) && throwIfExists)
+			throw new AlreadyExistsException("musicDto already exists.");
 		
 		
-		if ( Tool.isNullOrEmpty(foundDTO) )
-			foundDTO = dao.save(dto);
+		if ( Tool.isNullOrEmpty(foundMusicDto) )
+			foundMusicDto = musicDao.save(musicDto);
 		
-		return foundDTO;
+		return foundMusicDto;
 	}
 	
-	public MusicDTO musicWasPlayed(MusicDTO dto) throws SqlException, NotFoundException {
+	public MusicDTO musicWasPlayed(MusicDTO musicDto) throws SqlException, NotFoundException {
 		
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("musicDto", musicDto);
 		
-		MusicDTO foundDTO = dao.find(dto);
+		MusicDTO foundMusicDto = musicDao.find(musicDto);
 		
-		if ( Tool.isNullOrEmpty(foundDTO) )
-			throw new NotFoundException("DTO not found.");
+		if ( Tool.isNullOrEmpty(foundMusicDto) )
+			throw new NotFoundException("musicDto not found.");
 		
 		
-		foundDTO.incrementPlayed();
+		foundMusicDto.incrementPlayed();
 		
-		return dao.update(foundDTO);
+		return musicDao.update(foundMusicDto);
 	}
 	
 	
 	
 	public MusicDTO next() throws SqlException {
 	
-		List<MusicDTO> allMusics = dao.findAll();
+		List<MusicDTO> allMusics = musicDao.findAll();
 		
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(f -> f.doubleValue()).sum());
 		List<Double> cumulatifPercent = calculateCumulatifPercent(coefs, ratio);
-		Theme foundedTheme = foundTheme(cumulatifPercent);
+		Theme foundTheme = foundTheme(cumulatifPercent);
 		
-		return foundMusic(allMusics, foundedTheme);
+		return foundMusic(allMusics, foundTheme);
 	}
 
 	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
@@ -131,21 +131,21 @@ public class MusicService {
 	
 	private Theme foundTheme(List<Double> cumulatifPercent) {
 		
-		Theme foundedTheme = null;
+		Theme foundTheme = null;
 		
 		double random = Tool.RANDOM.nextDouble() * 100;
 		int index = 0;
 		
-		while (foundedTheme == null) {
+		while (foundTheme == null) {
 			
 			double cumul = cumulatifPercent.get(index);
 			if (random < cumul)
-				foundedTheme = Theme.getSortedTheme().get(index);
+				foundTheme = Theme.getSortedTheme().get(index);
 			else
 				index++;
 		}
 		
-		return foundedTheme;
+		return foundTheme;
 	}
 	
 	private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {

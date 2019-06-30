@@ -19,31 +19,31 @@ import com.myssteriion.blindtest.service.MusicService;
 public class MusicControllerTest extends AbstractTest {
 
 	@Mock
-	private MusicService service;
+	private MusicService musicService;
 	
 	@InjectMocks
-	private MusicController controller;
+	private MusicController musicController;
 	
 	
 	
 	@Test
 	public void refresh() throws SqlException, AlreadyExistsException {
 
-		Mockito.doNothing().when(service).refresh();
+		Mockito.doNothing().when(musicService).refresh();
 
-		ResponseEntity<Empty> re = controller.refresh();
+		ResponseEntity<Empty> re = musicController.refresh();
 		Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
 	}
 	
 	@Test
 	public void next() throws SqlException {
 		
-		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_60);
-		Mockito.when(service.next()).thenReturn(dto);
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
+		Mockito.when(musicService.next()).thenReturn(musicDto);
 		
-		ResponseEntity<MusicDTO> re = controller.next();
+		ResponseEntity<MusicDTO> re = musicController.next();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		Assert.assertEquals( dto, re.getBody() );
+		Assert.assertEquals( musicDto, re.getBody() );
 	}
 
 }
