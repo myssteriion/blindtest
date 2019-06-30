@@ -80,8 +80,11 @@ build {
 		}
 		
 		delete "logs"		
+		mkdir deliveryFolder + "/musiques/annees_60"
+		mkdir deliveryFolder + "/musiques/annees_70"
 		mkdir deliveryFolder + "/musiques/annees_80"
 		mkdir deliveryFolder + "/musiques/annees_90"
+		mkdir deliveryFolder + "/musiques/annees_2000"
 	}
 }
 

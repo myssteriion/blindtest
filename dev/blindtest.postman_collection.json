@@ -34,7 +34,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/musics/nextMusic",
+							"raw": "http://localhost:8080/musics/next",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -42,7 +42,7 @@
 							"port": "8080",
 							"path": [
 								"musics",
-								"nextMusic"
+								"next"
 							]
 						}
 					},

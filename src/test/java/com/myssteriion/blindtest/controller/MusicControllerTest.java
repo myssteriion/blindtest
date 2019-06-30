@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.service.MusicService;
 
 public class MusicControllerTest extends AbstractTest {
@@ -24,20 +27,23 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	@SuppressWarnings("rawtypes")
 	public void refresh() throws SqlException, AlreadyExistsException {
 
-//		NullPointerException npe = new NullPointerException("npe");
-//		Mockito.doThrow(npe).doNothing().when(service).refresh();
 		Mockito.doNothing().when(service).refresh();
 
-		ResponseEntity re = controller.refresh();
-//		Assert.assertEquals( HttpStatus.INTERNAL_SERVER_ERROR, re.getStatusCode() );
-//		Assert.assertEquals( "Can't refresh musics.", ((ErrorModel) re.getBody()).getMessage() );
-//		Assert.assertEquals( "npe", ((ErrorModel) re.getBody()).getCauses().get(0) );
-		
-		re = controller.refresh();
+		ResponseEntity<Empty> re = controller.refresh();
 		Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
+	}
+	
+	@Test
+	public void next() throws SqlException {
+		
+		MusicDTO dto = new MusicDTO("name", Theme.ANNEES_60);
+		Mockito.when(service.next()).thenReturn(dto);
+		
+		ResponseEntity<MusicDTO> re = controller.next();
+		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+		Assert.assertEquals( dto, re.getBody() );
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.myssteriion.blindtest.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -102,6 +105,32 @@ public class MusicServiceTest extends AbstractTest {
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );
 		Assert.assertEquals( 1, dtoSaved.getPlayed() );
+	}
+	
+	@Test
+	public void next() throws SqlException {
+		
+		MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, 0);
+		
+		List<MusicDTO> allMusics = new ArrayList<>();
+		allMusics.add(expected);
+		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, 1000000000) );
+		Mockito.when(dao.findAll()).thenReturn(allMusics);
+		
+		MusicDTO dto = service.next();
+		Assert.assertEquals(expected, dto);
+		
+		
+		
+		expected = new MusicDTO("70_a", Theme.ANNEES_70, 0);
+		
+		allMusics = new ArrayList<>();
+		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
+		allMusics.add(expected);
+		Mockito.when(dao.findAll()).thenReturn(allMusics);
+		
+		dto = service.next();
+		Assert.assertEquals(expected, dto);
 	}
 	
 }

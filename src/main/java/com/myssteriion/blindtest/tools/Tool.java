@@ -4,9 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Tool {
 
+	public static final Random RANDOM = new Random();
+	
+	
+	
 	public static boolean isNullOrEmpty(Object o) {
 		
 		if (o == null) {

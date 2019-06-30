@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.MusicService;
 
@@ -33,6 +34,14 @@ public class MusicController {
 		
 		service.refresh();
 		return ResponseBuilder.create204();
+	}
+	
+	@RequestMapping(
+		method = RequestMethod.GET,
+		path = "/next"
+	)
+	public ResponseEntity<MusicDTO> next() throws SqlException {
+		return ResponseBuilder.create200( service.next() );
 	}
 	
 }

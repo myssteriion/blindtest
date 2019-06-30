@@ -3,6 +3,9 @@ package com.myssteriion.blindtest.service;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -80,6 +83,88 @@ public class MusicService {
 		foundDTO.incrementPlayed();
 		
 		return dao.update(foundDTO);
+	}
+	
+	
+	
+	public MusicDTO next() throws SqlException {
+	
+		List<MusicDTO> allMusics = dao.findAll();
+		
+		List<Double> coefs = calculateCoefList(allMusics);
+		double ratio = 100 / (coefs.stream().mapToDouble(f -> f.doubleValue()).sum());
+		List<Double> cumulatifPercent = calculateCumulatifPercent(coefs, ratio);
+		Theme foundedTheme = foundTheme(cumulatifPercent);
+		
+		return foundMusic(allMusics, foundedTheme);
+	}
+
+	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
+		
+		List<Double> coefs = new ArrayList<>();
+		
+		for ( Theme theme : Theme.getSortedTheme() ) {
+			
+			List<MusicDTO> allMusicsInTheme = allMusics.stream()
+													.filter(music -> music.getTheme() == theme)
+													.collect( Collectors.toList() );
+			
+			double nbMusics = allMusicsInTheme.size();
+			double nbPlayedSum = allMusicsInTheme.stream().mapToDouble( music -> music.getPlayed() ).sum();
+			nbPlayedSum = (nbPlayedSum == 0) ? 1 : nbPlayedSum;
+			coefs.add(nbMusics / nbPlayedSum);
+		}
+		
+		return coefs;
+	}
+	
+	private List<Double> calculateCumulatifPercent(List<Double> coefs, double ratio) {
+		
+		List<Double> cumulatifPercent = new ArrayList<>();
+		
+		cumulatifPercent.add( coefs.get(0) * ratio );
+		for (int i = 1; i < coefs.size(); i++)
+			cumulatifPercent.add( cumulatifPercent.get(i-1) + (coefs.get(i) * ratio) );
+		
+		return cumulatifPercent;
+	}
+	
+	private Theme foundTheme(List<Double> cumulatifPercent) {
+		
+		Theme foundedTheme = null;
+		
+		double random = Tool.RANDOM.nextDouble() * 100;
+		int index = 0;
+		
+		while (foundedTheme == null) {
+			
+			double cumul = cumulatifPercent.get(index);
+			if (random < cumul)
+				foundedTheme = Theme.getSortedTheme().get(index);
+			else
+				index++;
+		}
+		
+		return foundedTheme;
+	}
+	
+	private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {
+	
+		List<MusicDTO> allMusicsTheme = allMusics.stream()
+												.filter(music -> music.getTheme() == theme)
+												.collect( Collectors.toList() );
+		
+		int min = allMusicsTheme.stream()
+								.mapToInt(music -> music.getPlayed())
+								.min()
+								.getAsInt();
+		
+		List<MusicDTO> potentialMusics = allMusicsTheme.stream()
+												.filter(music -> music.getPlayed() == min)
+												.collect( Collectors.toList() );
+		
+		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
+		return potentialMusics.get(random);
 	}
 	
 }
