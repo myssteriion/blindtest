@@ -134,6 +134,41 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "gameresult",
+			"item": [
+				{
+					"name": "apply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isFirstMusic\": true,\n\t\"musicDTO\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [\n\t\t{ \"name\": \"name\", \"avatar\": \"avatar\" }\n\t],\n\t\"loosers\": [\n\t\t{ \"name\": \"name2\", \"avatar\": \"avatar12\" },\n\t\t{ \"name\": \"name1\", \"avatar\": \"avatar\" }\t\n\t]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/gameresult",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gameresult"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
