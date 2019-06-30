@@ -27,7 +27,7 @@ public class ResponseBuilder {
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<ErrorMessage> create404(Exception e) {
 	    
-		LOGGER.error("already exists", e);
+		LOGGER.error("not found", e);
 		
 		ErrorMessage error = new ErrorMessage(HttpStatus.NOT_FOUND, e.getMessage(), e.getCause());
 		return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class ResponseBuilder {
 	@ExceptionHandler(AlreadyExistsException.class)
 	public ResponseEntity<ErrorMessage> create409(Exception e) {
 	    
-		LOGGER.error("not found", e);
+		LOGGER.error("already exists", e);
 		
 		ErrorMessage error = new ErrorMessage(HttpStatus.CONFLICT, e.getMessage(), e.getCause());
 		return new ResponseEntity<ErrorMessage>(error, HttpStatus.CONFLICT);
