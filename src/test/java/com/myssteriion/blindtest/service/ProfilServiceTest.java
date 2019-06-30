@@ -67,62 +67,14 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException {
+	public void profilWasUpdated() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		String avatar = "avatar";
 		
 		
 		try {
-			service.update(null, false);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
-		}
-		
-		
-		ProfilDTO dto = new ProfilDTO(name, avatar);
-		try {
-			service.update(dto, false);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
-		}
-		
-		dto.setId("1");
-		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, null, dto);
-		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenReturn(dto);
-		
-		ProfilDTO dtoSaved = service.update(dto, false);
-		Assert.assertSame(dto, dtoSaved);
-		
-		try {
-			service.update(dto, true);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("DTO not found."), e);
-		}
-
-		dtoSaved = service.update(dto, false);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );
-		Assert.assertEquals( 0, dtoSaved.getListenedMusics() );
-		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
-	}
-
-	@Test
-	public void saveOrUpdate() throws SqlException {
-		
-		String name = "name";
-		String avatar = "avatar";
-		
-		
-		try {
-			service.saveOrUpdate(null);
+			service.profilWasUpdated(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -133,24 +85,78 @@ public class ProfilServiceTest extends AbstractTest {
 		ProfilDTO dto = new ProfilDTO(name, avatar);
 		dto.setId("1");
 		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dto);
-		Mockito.when(dao.save(Mockito.any(ProfilDTO.class))).thenReturn(dto);
 		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenReturn(dto);
 		
-		ProfilDTO dtoSaved = service.saveOrUpdate(dto);
+		try {
+			service.profilWasUpdated(dto);
+			Assert.fail("Doit lever une SqlException car le mock throw.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("DTO not found."), e);
+		}
+		
+		dto.setName("pouet");
+		dto.setAvatar("avapouet");
+		ProfilDTO dtoSaved = service.profilWasUpdated(dto);
 		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );
-		Assert.assertEquals( 0, dtoSaved.getListenedMusics() );
-		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
-
-		dtoSaved = service.saveOrUpdate(dto);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( "pouet", dtoSaved.getName() );
+		Assert.assertEquals( "avapouet", dtoSaved.getAvatar());
 		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );
 		Assert.assertEquals( 0, dtoSaved.getListenedMusics() );
 		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
 	}
 
+	@Test
+	public void profilWasPlayed() throws SqlException, NotFoundException {
+		
+		String name = "name";
+		String avatar = "avatar";
+		
+		
+		try {
+			service.profilWasPlayed(null, false, false);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+		
+		
+		ProfilDTO dto = new ProfilDTO(name, avatar);
+		dto.setId("1");
+		Mockito.when(dao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, dto);
+		Mockito.when(dao.update(Mockito.any(ProfilDTO.class))).thenReturn(dto);
+		
+		try {
+			service.profilWasPlayed(dto, false, false);
+			Assert.fail("Doit lever une SqlException car le mock throw.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("DTO not found."), e);
+		}
+
+		ProfilDTO dtoSaved = service.profilWasPlayed(dto, false, false);
+		Assert.assertEquals( "1", dtoSaved.getId() );
+		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( 0, dtoSaved.getPlayedGames() );
+		Assert.assertEquals( 1, dtoSaved.getListenedMusics() );
+		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
+		
+		dtoSaved = service.profilWasPlayed(dto, true, false);
+		Assert.assertEquals( "1", dtoSaved.getId() );
+		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( 1, dtoSaved.getPlayedGames() );
+		Assert.assertEquals( 2, dtoSaved.getListenedMusics() );
+		Assert.assertEquals( 0, dtoSaved.getFoundMusics() );
+		
+		dtoSaved = service.profilWasPlayed(dto, false, true);
+		Assert.assertEquals( "1", dtoSaved.getId() );
+		Assert.assertEquals( name, dtoSaved.getName() );
+		Assert.assertEquals( 1, dtoSaved.getPlayedGames() );
+		Assert.assertEquals( 3, dtoSaved.getListenedMusics() );
+		Assert.assertEquals( 1, dtoSaved.getFoundMusics() );
+	}
+	
 	@Test
 	public void findAll() throws SqlException {
 

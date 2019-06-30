@@ -50,54 +50,35 @@ public class MusicService {
 	
 	
 	
-	public MusicDTO save(MusicDTO dto, boolean throwIfExsits) throws SqlException, AlreadyExistsException  {
+	public MusicDTO save(MusicDTO dto, boolean throwIfExists) throws SqlException, AlreadyExistsException  {
 		
 		Tool.verifyValue("dto", dto);
 		
 		MusicDTO foundDTO = dao.find(dto);
 		
-		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExsits) {
+		if (!Tool.isNullOrEmpty(foundDTO) && throwIfExists)
 			throw new AlreadyExistsException("DTO already exists.");
-		}
-		else if ( Tool.isNullOrEmpty(foundDTO) ) {
+		
+		
+		if ( Tool.isNullOrEmpty(foundDTO) )
 			foundDTO = dao.save(dto);
-		}
-		else
-			foundDTO = dto;
 		
 		return foundDTO;
 	}
 	
-	public MusicDTO update(MusicDTO dto, boolean throwIfNotExsits) throws SqlException, NotFoundException {
+	public MusicDTO musicWasPlayed(MusicDTO dto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("dto", dto);
 		
 		MusicDTO foundDTO = dao.find(dto);
 		
-		if (Tool.isNullOrEmpty(foundDTO) && throwIfNotExsits) {
+		if ( Tool.isNullOrEmpty(foundDTO) )
 			throw new NotFoundException("DTO not found.");
-		}
-		else if ( !Tool.isNullOrEmpty(foundDTO) ) {
-			dto.setId( foundDTO.getId() );
-			foundDTO = dao.update(dto);
-		}
-		else
-			foundDTO = dto;
 		
-		return foundDTO;
-	}
-	
-	public MusicDTO saveOrUpdate(MusicDTO dto) throws SqlException {
 		
-		Tool.verifyValue("dto", dto);
+		foundDTO.incrementPlayed();
 		
-		MusicDTO foundDto = dao.find(dto);
-		if (foundDto == null)
-			foundDto = dao.save(dto);
-		else
-			foundDto = dao.update(dto);
-		
-		return foundDto;
+		return dao.update(foundDTO);
 	}
 	
 }

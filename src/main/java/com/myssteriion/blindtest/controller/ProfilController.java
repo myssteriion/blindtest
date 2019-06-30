@@ -43,10 +43,10 @@ public class ProfilController {
 		method = RequestMethod.PUT,
 		path = Constant.ID_PATH_PARAM
 	)
-	public ResponseEntity<ProfilDTO> update(@PathVariable("id") String id, @RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
+	public ResponseEntity<ProfilDTO> profilWasUpdated(@PathVariable("id") String id, @RequestBody ProfilDTO dto) throws SqlException, NotFoundException {
 		
 		dto.setId(id);
-		return ResponseBuilder.create200( service.update(dto, true) );
+		return ResponseBuilder.create200( service.profilWasUpdated(dto) );
 	}
 		
 	@RequestMapping(

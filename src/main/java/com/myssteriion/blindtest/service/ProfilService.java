@@ -38,39 +38,43 @@ public class ProfilService {
 		return foundDTO;
 	}
 	
-	public ProfilDTO update(ProfilDTO dto, boolean throwIfNotExsits) throws SqlException, NotFoundException {
+	public ProfilDTO profilWasUpdated(ProfilDTO dto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("dto", dto);
-		Tool.verifyValue("dto -> id", dto.getId());
 		
 		ProfilDTO foundDTO = dao.find(dto);
 		
-		if (Tool.isNullOrEmpty(foundDTO) && throwIfNotExsits) {
+		if ( Tool.isNullOrEmpty(foundDTO) )
 			throw new NotFoundException("DTO not found.");
-		}
-		else if ( !Tool.isNullOrEmpty(foundDTO) ) {
-			dto.setId( foundDTO.getId() );
-			foundDTO = dao.update(dto);
-		}
-		else
-			foundDTO = dto;
+
 		
-		return foundDTO;
+		foundDTO.setName( dto.getName() );
+		foundDTO.setAvatar( dto.getAvatar() );
+		
+		return dao.update(foundDTO);
 	}
 	
-	public ProfilDTO saveOrUpdate(ProfilDTO dto) throws SqlException {
+	public ProfilDTO profilWasPlayed(ProfilDTO dto, boolean beginGame, boolean foundMusic) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("dto", dto);
 		
-		ProfilDTO foundDto = dao.find(dto);
-		if (foundDto == null)
-			foundDto = dao.save(dto);
-		else
-			foundDto = dao.update(dto);
+		ProfilDTO foundDTO = dao.find(dto);
 		
-		return foundDto;
+		if ( Tool.isNullOrEmpty(foundDTO) )
+			throw new NotFoundException("DTO not found.");
+		
+		
+		if (beginGame)
+			foundDTO.incrementPlayedGames();
+		
+		if (foundMusic)
+			foundDTO.incrementFoundMusics();
+		
+		foundDTO.incrementListenedMusics();
+		
+		return dao.update(foundDTO);
 	}
-	
+
 	public List<ProfilDTO> findAll() throws SqlException {
 		return dao.findAll();
 	}

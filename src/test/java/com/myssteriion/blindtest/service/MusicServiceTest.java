@@ -69,53 +69,14 @@ public class MusicServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException {
+	public void musicWasPlayed() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
 		
 		
 		try {
-			service.update(null, false);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
-		}
-		
-		
-		MusicDTO dto = new MusicDTO(name, theme);
-		dto.setId("1");
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, null, dto);
-		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenReturn(dto);
-		
-		MusicDTO dtoSaved = service.update(dto, false);
-		Assert.assertSame(dto, dtoSaved);
-		
-		try {
-			service.update(dto, true);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("DTO not found."), e);
-		}
-
-		dtoSaved = service.update(dto, false);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 0, dtoSaved.getPlayed() );
-	}
-
-	@Test
-	public void saveOrUpdate() throws SqlException {
-		
-		String name = "name";
-		Theme theme = Theme.ANNEES_80;
-		
-		
-		try {
-			service.saveOrUpdate(null);
+			service.musicWasPlayed(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -126,20 +87,21 @@ public class MusicServiceTest extends AbstractTest {
 		MusicDTO dto = new MusicDTO(name, theme);
 		dto.setId("1");
 		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, dto);
-		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(dto);
 		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenReturn(dto);
 		
-		MusicDTO dtoSaved = service.saveOrUpdate(dto);
-		Assert.assertEquals( "1", dtoSaved.getId() );
-		Assert.assertEquals( name, dtoSaved.getName() );
-		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 0, dtoSaved.getPlayed() );
+		try {
+			service.musicWasPlayed(dto);
+			Assert.fail("Doit lever une SqlException car le mock throw.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("DTO not found."), e);
+		}
 
-		dtoSaved = service.saveOrUpdate(dto);
+		MusicDTO dtoSaved = service.musicWasPlayed(dto);
 		Assert.assertEquals( "1", dtoSaved.getId() );
 		Assert.assertEquals( name, dtoSaved.getName() );
 		Assert.assertEquals( theme, dtoSaved.getTheme() );
-		Assert.assertEquals( 0, dtoSaved.getPlayed() );
+		Assert.assertEquals( 1, dtoSaved.getPlayed() );
 	}
 	
 }
