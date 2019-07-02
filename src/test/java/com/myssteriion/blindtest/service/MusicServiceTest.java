@@ -108,20 +108,28 @@ public class MusicServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void next() throws SqlException {
+	public void random() throws SqlException, NotFoundException {
 		
 		MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, 0);
 		
 		List<MusicDTO> allMusics = new ArrayList<>();
 		allMusics.add(expected);
 		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, 1000000000) );
-		Mockito.when(musicDao.findAll()).thenReturn(allMusics);
-		
-		MusicDTO musicDto = musicService.next();
+		Mockito.when(musicDao.findAll()).thenReturn(new ArrayList<>(), allMusics);
+
+		try {
+			musicService.random();
+			Assert.fail("Doit lever une v car le mock ne retrourne une liste vide.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("no music found"), e);
+		}
+
+
+		MusicDTO musicDto = musicService.random();
 		Assert.assertEquals(expected, musicDto);
 		
-		
-		
+
 		expected = new MusicDTO("70_a", Theme.ANNEES_70, 0);
 		
 		allMusics = new ArrayList<>();
@@ -129,7 +137,7 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics.add(expected);
 		Mockito.when(musicDao.findAll()).thenReturn(allMusics);
 		
-		musicDto = musicService.next();
+		musicDto = musicService.random();
 		Assert.assertEquals(expected, musicDto);
 	}
 	

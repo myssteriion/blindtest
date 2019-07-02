@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,10 +39,10 @@ public class MusicController {
 	
 	@RequestMapping(
 		method = RequestMethod.GET,
-		path = "/next"
+		path = "/random"
 	)
-	public ResponseEntity<MusicDTO> next() throws SqlException {
-		return ResponseBuilder.create200( musicService.next() );
+	public ResponseEntity<MusicDTO> random() throws SqlException, NotFoundException {
+		return ResponseBuilder.create200( musicService.random() );
 	}
 	
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "44159c23-3c70-4570-bf22-1b5036e3b44b",
+		"_postman_id": "d40b757b-6c2b-4d2a-a8fe-d7b9e26936cd",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -29,12 +29,12 @@
 					"response": []
 				},
 				{
-					"name": "nextMusic",
+					"name": "random",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/musics/next",
+							"raw": "http://localhost:8080/musics/random",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -42,7 +42,7 @@
 							"port": "8080",
 							"path": [
 								"musics",
-								"next"
+								"random"
 							]
 						}
 					},

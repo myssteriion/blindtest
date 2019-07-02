@@ -87,10 +87,14 @@ public class MusicService {
 	
 	
 	
-	public MusicDTO next() throws SqlException {
+	public MusicDTO random() throws SqlException, NotFoundException {
 	
 		List<MusicDTO> allMusics = musicDao.findAll();
-		
+
+		if ( Tool.isNullOrEmpty(allMusics) )
+			throw new NotFoundException("no music found");
+
+
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(f -> f.doubleValue()).sum());
 		List<Double> cumulatifPercent = calculateCumulatifPercent(coefs, ratio);

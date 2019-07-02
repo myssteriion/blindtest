@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.db.common.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -36,12 +37,12 @@ public class MusicControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void next() throws SqlException {
+	public void random() throws SqlException, NotFoundException {
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
-		Mockito.when(musicService.next()).thenReturn(musicDto);
+		Mockito.when(musicService.random()).thenReturn(musicDto);
 		
-		ResponseEntity<MusicDTO> re = musicController.next();
+		ResponseEntity<MusicDTO> re = musicController.random();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}
