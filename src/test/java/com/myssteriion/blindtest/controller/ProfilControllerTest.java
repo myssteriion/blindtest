@@ -44,7 +44,7 @@ public class ProfilControllerTest extends AbstractTest {
 	public void update() throws SqlException, NotFoundException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		Mockito.when(profilService.profilWasUpdated(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
+		Mockito.when(profilService.updated(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
 		ResponseEntity<ProfilDTO> actual = profilController.update("1", profilDto);
 		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );

@@ -30,8 +30,8 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO profil(name, avatar, playedGames, listenedMusics, foundMusics) ");
-			sb.append("VALUES ('" + escapeValue( profilDto.getName() ) + "', '" + profilDto.getAvatar() + "', 0, 0, 0)");
+			sb.append("INSERT INTO profil(name, avatar) ");
+			sb.append("VALUES ('" + escapeValue( profilDto.getName() ) + "', '" + profilDto.getAvatar() + "')");
 			
 			statement.execute( sb.toString() );
 			
@@ -57,8 +57,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE profil ");
-			sb.append("SET name = '" + escapeValue( profilDto.getName() ) + "', avatar = '" + profilDto.getAvatar() + "', playedGames = " + profilDto.getPlayedGames() + ", ");
-			sb.append("listenedMusics = " + profilDto.getListenedMusics() + ", foundMusics = " + profilDto.getFoundMusics() + " ");
+			sb.append("SET name = '" + escapeValue( profilDto.getName() ) + "', avatar = '" + profilDto.getAvatar() + "'" );
 			sb.append("WHERE id = " + profilDto.getId());
 			
 			statement.execute( sb.toString() );
@@ -93,7 +92,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
-				profilDtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
+				profilDtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
 				profilDtoToReturn.setId( rs.getString("id") );
 			}
 
@@ -119,7 +118,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
 
-				ProfilDTO profilDto = new ProfilDTO( rs.getString("name"), rs.getString("avatar"), rs.getInt("playedGames"), rs.getInt("listenedMusics"), rs.getInt("foundMusics") );
+				ProfilDTO profilDto = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
 				profilDto.setId( rs.getString("id") );
 				profilDtoList.add(profilDto);
 			}

@@ -79,10 +79,7 @@ public class EntityManager {
 			sb.append("CREATE TABLE IF NOT EXISTS profil (");
 			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
-			sb.append("avatar VARCHAR2 NOT NULL,");
-			sb.append("playedGames INT NOT NULL,");
-			sb.append("listenedMusics INT NOT NULL,");
-			sb.append("foundMusics INT NOT NULL");
+			sb.append("avatar VARCHAR2 NOT NULL");
 			sb.append(")");
 			statement.execute( sb.toString() );
 		}

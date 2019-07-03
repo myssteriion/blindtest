@@ -37,7 +37,7 @@ public class ProfilService {
 		return foundProfilDto;
 	}
 	
-	public ProfilDTO profilWasUpdated(ProfilDTO profilDto) throws SqlException, NotFoundException {
+	public ProfilDTO updated(ProfilDTO profilDto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -46,30 +46,8 @@ public class ProfilService {
 		if ( Tool.isNullOrEmpty(foundProfilDto) )
 			throw new NotFoundException("profilDto not found.");
 
-		
 		foundProfilDto.setName( profilDto.getName() );
 		foundProfilDto.setAvatar( profilDto.getAvatar() );
-		
-		return profilDao.update(foundProfilDto);
-	}
-	
-	public ProfilDTO profilWasPlayed(ProfilDTO profilDto, boolean firstMusic, boolean foundMusic) throws SqlException, NotFoundException {
-		
-		Tool.verifyValue("profilDto", profilDto);
-		
-		ProfilDTO foundProfilDto = profilDao.find(profilDto);
-		
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			throw new NotFoundException("profilDto not found.");
-		
-		
-		if (firstMusic)
-			foundProfilDto.incrementPlayedGames();
-		
-		if (foundMusic)
-			foundProfilDto.incrementFoundMusics();
-		
-		foundProfilDto.incrementListenedMusics();
 		
 		return profilDao.update(foundProfilDto);
 	}

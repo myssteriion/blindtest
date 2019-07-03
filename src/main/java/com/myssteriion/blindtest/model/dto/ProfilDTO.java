@@ -12,30 +12,16 @@ public class ProfilDTO extends AbstractDTO {
 	
 	private String avatar;
 	
-	private int playedGames;
 	
-	private int listenedMusics;
-	
-	private int foundMusics;
-
-	
-	
-	public ProfilDTO(String name, String avatar) {
-		this(name, avatar, 0, 0, 0);
-	}
 	
 	@JsonCreator
-	public ProfilDTO(String name, String avatar, int playedGames, int listenedMusics, int foundMusics) {
+	public ProfilDTO(String name, String avatar) {
 
 		Tool.verifyValue("name", name);
 		Tool.verifyValue("avatar", avatar);
 		
 		this.name = name.trim();
 		this.avatar = avatar;
-		
-		this.playedGames = (playedGames < 0) ? 0 : playedGames;
-		this.listenedMusics = (listenedMusics < 0) ? 0 : listenedMusics;
-		this.foundMusics = (foundMusics < 0) ? 0 : foundMusics;
 	}
 	
 	
@@ -59,31 +45,6 @@ public class ProfilDTO extends AbstractDTO {
 		Tool.verifyValue("avatar", avatar);
 		this.avatar = avatar;
 	}
-
-	public int getPlayedGames() {
-		return playedGames;
-	}
-
-	public void incrementPlayedGames() {
-		this.playedGames++;
-	}
-	
-	public int getListenedMusics() {
-		return listenedMusics;
-	}
-
-	public void incrementListenedMusics() {
-		this.listenedMusics++;
-	}
-	
-	public int getFoundMusics() {
-		return foundMusics;
-	}
-	
-	public void incrementFoundMusics() {
-		this.foundMusics++;
-	}
-
 	
 	
 	
@@ -109,10 +70,7 @@ public class ProfilDTO extends AbstractDTO {
 	public String toString() {
 		return super.toString() + 
 				", name=" + name +
-				", avatar=" + avatar +
-				", playedGames=" + playedGames +
-				", listenedMusics=" + listenedMusics +
-				", foundMusics=" + foundMusics;
+				", avatar=" + avatar;
 	}
 	
 }

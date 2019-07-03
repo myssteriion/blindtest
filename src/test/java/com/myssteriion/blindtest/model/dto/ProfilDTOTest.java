@@ -50,18 +50,9 @@ public class ProfilDTOTest extends AbstractTest {
 		
 		
 		
-		ProfilDTO profilDTO = new ProfilDTO(name + "'a'b'c''", avatar + "b", 1, 2, 3);
+		ProfilDTO profilDTO = new ProfilDTO(name + "'a'b'c''", avatar + "b");
 		Assert.assertEquals( name + "'a'b'c''", profilDTO.getName() );
 		Assert.assertEquals( avatar + "b", profilDTO.getAvatar() );
-		Assert.assertEquals( 1, profilDTO.getPlayedGames() );
-		Assert.assertEquals( 2, profilDTO.getListenedMusics() );
-		Assert.assertEquals( 3, profilDTO.getFoundMusics() );
-		
-		profilDTO = new ProfilDTO("   " + name + "  ", avatar + "b", -1, -2, -3);
-		Assert.assertEquals( name, profilDTO.getName() );
-		Assert.assertEquals( 0, profilDTO.getPlayedGames() );
-		Assert.assertEquals( 0, profilDTO.getListenedMusics() );
-		Assert.assertEquals( 0, profilDTO.getFoundMusics() );
 	}
 	
 	@Test
@@ -73,23 +64,13 @@ public class ProfilDTOTest extends AbstractTest {
 		ProfilDTO profilDTO = new ProfilDTO(name, avatar);
 		Assert.assertNull( profilDTO.getId() );
 		Assert.assertEquals( name, profilDTO.getName() );
-		Assert.assertEquals( 0, profilDTO.getPlayedGames() );
-		Assert.assertEquals( 0, profilDTO.getListenedMusics() );
-		Assert.assertEquals( 0, profilDTO.getFoundMusics() );
-		
+
 		profilDTO.setId("123");
 		profilDTO.setName("MonNom");
 		profilDTO.setAvatar("MonAvatar");
 		Assert.assertEquals( "123", profilDTO.getId() );
 		Assert.assertEquals( "MonNom", profilDTO.getName() );
 		Assert.assertEquals( "MonAvatar", profilDTO.getAvatar() );
-		
-		profilDTO.incrementPlayedGames();
-		profilDTO.incrementListenedMusics();
-		profilDTO.incrementFoundMusics();
-		Assert.assertEquals( 1, profilDTO.getPlayedGames() );
-		Assert.assertEquals( 1, profilDTO.getListenedMusics() );
-		Assert.assertEquals( 1, profilDTO.getFoundMusics() );
 	}
 	
 	@Test
@@ -99,7 +80,7 @@ public class ProfilDTOTest extends AbstractTest {
 		String avatar = "avatar";
 		ProfilDTO profilDTOUn = new ProfilDTO(name, avatar);
 		
-		Assert.assertEquals( "id=null, name=name, avatar=avatar, playedGames=0, listenedMusics=0, foundMusics=0", profilDTOUn.toString() );
+		Assert.assertEquals( "id=null, name=name, avatar=avatar", profilDTOUn.toString() );
 		
 		ProfilDTO profilDTOUnIso = new ProfilDTO(name, avatar);
 		ProfilDTO profilDTODeux = new ProfilDTO(name + "1", avatar);

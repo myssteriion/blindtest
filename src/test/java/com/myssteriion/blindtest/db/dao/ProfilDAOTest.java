@@ -182,9 +182,6 @@ public class ProfilDAOTest extends AbstractTest {
 		Assert.assertEquals( "1", profilDto.getId() );
 		Assert.assertEquals( "name", profilDto.getName() );
 		Assert.assertEquals( "avatar", profilDto.getAvatar() );
-		Assert.assertEquals( 1, profilDto.getPlayedGames() );
-		Assert.assertEquals( 2, profilDto.getListenedMusics() );
-		Assert.assertEquals( 3, profilDto.getFoundMusics() );
 	}
 	
 	
