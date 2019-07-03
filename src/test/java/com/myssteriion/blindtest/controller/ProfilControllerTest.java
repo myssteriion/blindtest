@@ -29,7 +29,7 @@ public class ProfilControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, AlreadyExistsException {
+	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);

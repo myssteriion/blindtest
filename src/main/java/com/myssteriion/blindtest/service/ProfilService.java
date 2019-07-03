@@ -10,6 +10,7 @@ import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
 @Service
@@ -18,9 +19,12 @@ public class ProfilService {
 	@Autowired
 	private ProfilDAO profilDao;
 	
+	@Autowired
+	private ProfilStatService profilStatService;
 	
 	
-	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, AlreadyExistsException  {
+	
+	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException  {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -32,6 +36,8 @@ public class ProfilService {
 		
 		
 		foundProfilDto = profilDao.save(profilDto);
+		
+		profilStatService.save( new ProfilStatDTO(foundProfilDto.getId()) );
 		
 		return foundProfilDto;
 	}

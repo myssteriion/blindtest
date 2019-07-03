@@ -35,7 +35,7 @@ public class ProfilController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO profilDto) throws SqlException, AlreadyExistsException {
+	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
 		return ResponseBuilder.create201( profilService.save(profilDto) );
 	}
 	

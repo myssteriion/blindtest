@@ -27,7 +27,7 @@ public class ProfilServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, AlreadyExistsException {
+	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		String name = "name";
 		String avatar = "avatar";
