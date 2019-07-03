@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d40b757b-6c2b-4d2a-a8fe-d7b9e26936cd",
+		"_postman_id": "01c6940d-b164-4d14-bf0a-2779f43e2604",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -100,7 +100,7 @@
 							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/profils/2",
+							"raw": "http://localhost:8080/profils/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -108,7 +108,7 @@
 							"port": "8080",
 							"path": [
 								"profils",
-								"2"
+								"0"
 							]
 						}
 					},
@@ -136,6 +136,30 @@
 			]
 		},
 		{
+			"name": "profilstat",
+			"item": [
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profilstats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profilstats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "gameresult",
 			"item": [
 				{
@@ -152,7 +176,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"isFirstMusic\": true,\n\t\"musicDTO\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [\n\t\t{ \"name\": \"name\", \"avatar\": \"avatar\" }\n\t],\n\t\"loosers\": [\n\t\t{ \"name\": \"name2\", \"avatar\": \"avatar12\" },\n\t\t{ \"name\": \"name1\", \"avatar\": \"avatar\" }\t\n\t]\n}"
+							"raw": "{\n\t\"isFirstMusic\": false,\n\t\"musicDTO\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [\n\t\t{ \"name\": \"name\" }\n\t],\n\t\"loosers\": [\n\t\t{ \"name\": \"name1\" }\n\t]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/gameresult",
