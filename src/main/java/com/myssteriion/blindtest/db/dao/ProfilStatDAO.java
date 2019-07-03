@@ -22,6 +22,12 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 	
 	
 	
+	public ProfilStatDAO() {
+		super("profil_stat");
+	}
+	
+	
+	
 	@Override
 	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws SqlException {
 		
@@ -30,7 +36,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO profil_stat(profil_id, played_games, listened_musics, found_musics) ");
+			sb.append("INSERT INTO " + tableName + "(profil_id, played_games, listened_musics, found_musics) ");
 			sb.append("VALUES (" + profilStatDto.getProfilId() + ", 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
@@ -56,7 +62,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE profil_stat ");
+			sb.append("UPDATE " + tableName + " ");
 			sb.append("SET played_games = " + profilStatDto.getPlayedGames() + ", ");
 			sb.append("listened_musics = " + profilStatDto.getListenedMusics() + ", ");
 			sb.append("found_musics = " + profilStatDto.getFoundMusics() + " ");
@@ -84,7 +90,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			ProfilStatDTO profilDtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM profil_stat ");
+			sb.append("SELECT * FROM " + tableName + " ");
 			
 			if ( Tool.isNullOrEmpty(profilStatDto.getId()) )
 				sb.append("WHERE profil_id = " + profilStatDto.getProfilId() );
@@ -116,7 +122,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			List<ProfilStatDTO> profilDtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM profil_stat");
+			sb.append("SELECT * FROM " + tableName);
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {

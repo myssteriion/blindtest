@@ -23,6 +23,12 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 	
 	
 	
+	public MusicDAO() {
+		super("music");
+	}
+	
+	
+	
 	@Override
 	public MusicDTO save(MusicDTO musicDto) throws SqlException {
 		
@@ -31,7 +37,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO music(name, theme, played) ");
+			sb.append("INSERT INTO " + tableName + "(name, theme, played) ");
 			sb.append("VALUES ('" + escapeValue( musicDto.getName() ) + "', '" + musicDto.getTheme() + "', 0)");
 			
 			statement.execute( sb.toString() );
@@ -57,7 +63,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE music ");
+			sb.append("UPDATE " + tableName + " ");
 			sb.append("SET played = " + musicDto.getPlayed() + " ");
 			sb.append("WHERE id = " + musicDto.getId());
 			
@@ -83,7 +89,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			MusicDTO musicDtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM music ");
+			sb.append("SELECT * FROM " + tableName + " ");
 			
 			if ( Tool.isNullOrEmpty(musicDto.getId()) )
 				sb.append("WHERE name = '" + escapeValue( musicDto.getName() ) + "' AND theme = '" + musicDto.getTheme() + "'");
@@ -114,7 +120,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			List<MusicDTO> musicDtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM music");
+			sb.append("SELECT * FROM " + tableName);
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {

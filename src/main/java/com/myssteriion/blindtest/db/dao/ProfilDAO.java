@@ -22,6 +22,12 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 	
 	
 	
+	public ProfilDAO() {
+		super("profil");
+	}
+	
+	
+	
 	@Override
 	public ProfilDTO save(ProfilDTO profilDto) throws SqlException {
 		
@@ -30,7 +36,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO profil(name, avatar) ");
+			sb.append("INSERT INTO " + tableName + "(name, avatar) ");
 			sb.append("VALUES ('" + escapeValue( profilDto.getName() ) + "', '" + profilDto.getAvatar() + "')");
 			
 			statement.execute( sb.toString() );
@@ -56,7 +62,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE profil ");
+			sb.append("UPDATE " + tableName + " ");
 			sb.append("SET name = '" + escapeValue( profilDto.getName() ) + "', avatar = '" + profilDto.getAvatar() + "'" );
 			sb.append("WHERE id = " + profilDto.getId());
 			
@@ -82,7 +88,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			ProfilDTO profilDtoToReturn = null;
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM profil ");
+			sb.append("SELECT * FROM " + tableName + " ");
 			
 			if ( Tool.isNullOrEmpty(profilDto.getId()) )
 				sb.append("WHERE name = '" + escapeValue( profilDto.getName() ) + "'");
@@ -113,7 +119,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			List<ProfilDTO> profilDtoList = new ArrayList<>();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM profil");
+			sb.append("SELECT * FROM " + tableName);
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {

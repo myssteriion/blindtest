@@ -14,6 +14,14 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 	@Autowired
 	protected EntityManager em;
 	
+	protected String tableName;
+	
+	
+	
+	protected AbstractDAO(String tableName) {
+		this.tableName = tableName;
+	}
+
 	
 	
 	public abstract T save(T dto) throws SqlException;
