@@ -15,6 +15,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.GameResultDTO;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 
 public class GameResultServiceTest extends AbstractTest {
 
@@ -24,21 +25,27 @@ public class GameResultServiceTest extends AbstractTest {
 	@Mock
 	private ProfilService profilService;
 	
+	@Mock
+	private ProfilStatService profilStatService;
+	
 	@InjectMocks
 	private GameResultService gameResultService;
 	
 	
 	
 	@Test
-	public void testApply() throws SqlException, NotFoundException {
+	public void apply() throws SqlException, NotFoundException {
 		
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar", 0, 0, 0);
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		profilDto.setId("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
 		
 		Mockito.when(musicService.musicWasPlayed( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
-		Mockito.when(profilService.profilWasPlayed( Mockito.any(ProfilDTO.class), Mockito.anyBoolean(), Mockito.anyBoolean() )).thenReturn(profilDto);
-		
-		
+		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(null, profilDto);
+		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
+
+
 		try {
 			gameResultService.apply(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -47,7 +54,25 @@ public class GameResultServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'gameResultDto' est obligatoire."), e);
 		}
 		
+		
 		GameResultDTO gameResultDto = new GameResultDTO( false, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		
+		try {
+			gameResultService.apply(gameResultDto);
+			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("profilDto not found."), e);
+		}
+		
+		try {
+			gameResultService.apply(gameResultDto);
+			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("profilStatDto not found."), e);
+		}
+		
 		gameResultService.apply(gameResultDto);
 	}
 

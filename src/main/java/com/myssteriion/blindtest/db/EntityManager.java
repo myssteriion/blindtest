@@ -35,7 +35,7 @@ public class EntityManager {
 		}
 		catch (SQLException e) {
 			
-			String message = "Can't init DataBase";
+			String message = "Can't init DataBase.";
 			LOGGER.error(message, e);
 			throw new SqlException(message, e);
 		}
@@ -80,6 +80,25 @@ public class EntityManager {
 			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
 			sb.append("avatar VARCHAR2 NOT NULL");
+			sb.append(")");
+			statement.execute( sb.toString() );
+			
+			
+			// profil stat
+			sb = new StringBuilder();
+			sb.append("CREATE SEQUENCE IF NOT EXISTS profil_stat_seq ");
+			sb.append("START WITH 0 ");
+			sb.append("INCREMENT BY 1 ");
+			statement.execute( sb.toString() );
+			
+			sb = new StringBuilder();
+			sb.append("CREATE TABLE IF NOT EXISTS profil_stat (");
+			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
+			sb.append("profil_id BIGINT NOT NULL UNIQUE,");
+			sb.append("played_games INT NOT NULL,");
+			sb.append("listened_musics INT NOT NULL,");
+			sb.append("found_musics INT NOT NULL,");
+			sb.append("FOREIGN KEY (profil_id) REFERENCES profil(id)");
 			sb.append(")");
 			statement.execute( sb.toString() );
 		}

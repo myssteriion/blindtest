@@ -15,28 +15,28 @@ import org.mockito.MockitoAnnotations;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.common.SqlException;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 
 
-public class ProfilDAOTest extends AbstractTest {
+public class ProfilStatDAOTest extends AbstractTest {
 
 	@Mock
 	protected EntityManager em;
 	
 	@InjectMocks
-	private ProfilDAO profilDao;
+	private ProfilStatDAO profilStatDao;
 	
 	
 	
 	@Test
 	public void save() throws SqlException, SQLException {
 
-		profilDao = Mockito.spy( new ProfilDAO() );
+		profilStatDao = Mockito.spy( new ProfilStatDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		profilDto.setId("1");
-		Mockito.doReturn(profilDto).when(profilDao).find(Mockito.any(ProfilDTO.class));
+		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
+		profilStatDto.setId("1");
+		Mockito.doReturn(profilStatDto).when(profilStatDao).find(Mockito.any(ProfilStatDTO.class));
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -46,32 +46,32 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			profilDao.save(null);
+			profilStatDao.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO profilDtoToSave = new ProfilDTO("name", "avatar");
+		ProfilStatDTO profilStatDtoToSave = new ProfilStatDTO("1");
 		try {
-			profilDao.save(profilDtoToSave);
+			profilStatDao.save(profilStatDtoToSave);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't save profilDto.", sql), e);
+			verifyException(new SqlException("Can't save profilStatDto.", sql), e);
 		}
 		
-		ProfilDTO profilDtoReturned = profilDao.save(profilDtoToSave);
-		Assert.assertEquals(profilDtoReturned.getId(), "1");
+		ProfilStatDTO profilStatDtoReturned = profilStatDao.save(profilStatDtoToSave);
+		Assert.assertEquals(profilStatDtoReturned.getId(), "1");
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		profilDto.setId("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
+		profilStatDto.setId("1");
 		
 
 		SQLException sql = new SQLException("sql");
@@ -81,34 +81,34 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			profilDao.update(null);
+			profilStatDao.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO profilDtoToUpdate = new ProfilDTO("name", "avatar");
+		ProfilStatDTO profilStatDtoToUpdate = new ProfilStatDTO("1");
 		try {
-			profilDao.update(profilDtoToUpdate);
+			profilStatDao.update(profilStatDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDto -> id' est obligatoire."), e);
 		}
 		
-		profilDtoToUpdate.setId("1");
+		profilStatDtoToUpdate.setId("1");
 		try {
-			profilDao.update(profilDtoToUpdate);
+			profilStatDao.update(profilStatDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't update profilDto.", sql), e);
+			verifyException(new SqlException("Can't update profilStatDto.", sql), e);
 		}
 		
-		ProfilDTO profilDtoReturned = profilDao.update(profilDtoToUpdate);
-		Assert.assertEquals(profilDtoReturned.getId(), "1");
+		ProfilStatDTO profilStatDtoReturned = profilStatDao.update(profilStatDtoToUpdate);
+		Assert.assertEquals(profilStatDtoReturned.getId(), "1");
 	}
 	
 	@Test
@@ -117,8 +117,8 @@ public class ProfilDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "avatar");
-		rs.addRow("2", "name", "avatar");
+		rs.addRow("1", "1", 1, 2, 3);
+		rs.addRow("2", "1", 1, 2, 3);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -128,40 +128,40 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			profilDao.find(null);
+			profilStatDao.find(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
 		try {
-			profilDao.find(profilDto);
+			profilStatDao.find(profilStatDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find profilDto.", sql), e);
+			verifyException(new SqlException("Can't find profilStatDto.", sql), e);
 		}
 		
-		profilDto = profilDao.find(profilDto);
-		Assert.assertNull(profilDto);
+		profilStatDto = profilStatDao.find(profilStatDto);
+		Assert.assertNull(profilStatDto);
 		
-		profilDto = new ProfilDTO("name", "avatar");
-		profilDto = profilDao.find(profilDto);
-		Assert.assertNotNull(profilDto);
+		profilStatDto = new ProfilStatDTO("1");
+		profilStatDto = profilStatDao.find(profilStatDto);
+		Assert.assertNotNull(profilStatDto);
 		
-		profilDto.setId("1");
-		profilDto = profilDao.find(profilDto);
-		Assert.assertNotNull(profilDto);
+		profilStatDto.setId("1");
+		profilStatDto = profilStatDao.find(profilStatDto);
+		Assert.assertNotNull(profilStatDto);
 	}
 	
 	@Test
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "avatar");
+		rs.addRow("1", "1", 1, 2, 3);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -171,17 +171,18 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		
 		try {
-			profilDao.findAll();
+			profilStatDao.findAll();
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (SqlException e) {
-			verifyException(new SqlException("Can't find all profilDto.", sql), e);
+			verifyException(new SqlException("Can't find all profilStatDto.", sql), e);
 		}
 		
-		ProfilDTO profilDto = profilDao.findAll().get(0);
-		Assert.assertEquals( "1", profilDto.getId() );
-		Assert.assertEquals( "name", profilDto.getName() );
-		Assert.assertEquals( "avatar", profilDto.getAvatar() );
+		ProfilStatDTO profilStatDto = profilStatDao.findAll().get(0);
+		Assert.assertEquals( "1", profilStatDto.getId() );
+		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
+		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
+		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );
 	}
 	
 	
@@ -190,8 +191,10 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		SimpleResultSet rs = new SimpleResultSet();
 		rs.addColumn("id", Types.BIGINT, 100, 0);
-		rs.addColumn("name", Types.VARCHAR, 255, 0);
-		rs.addColumn("avatar", Types.VARCHAR, 255, 0);
+		rs.addColumn("profil_id", Types.BIGINT, 100, 0);
+		rs.addColumn("played_games", Types.INTEGER, 100, 0);
+		rs.addColumn("listened_musics", Types.INTEGER, 100, 0);
+		rs.addColumn("found_musics", Types.INTEGER, 100, 0);
 		return rs;
 	}
 	

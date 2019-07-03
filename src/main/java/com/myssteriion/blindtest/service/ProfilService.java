@@ -52,6 +52,12 @@ public class ProfilService {
 		return profilDao.update(foundProfilDto);
 	}
 
+	public ProfilDTO find(ProfilDTO profilDto) throws SqlException {
+		
+		Tool.verifyValue("profilDto", profilDto);
+		return profilDao.find(profilDto);
+	}
+	
 	public List<ProfilDTO> findAll() throws SqlException {
 		return profilDao.findAll();
 	}
