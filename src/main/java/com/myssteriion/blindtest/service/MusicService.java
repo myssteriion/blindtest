@@ -70,7 +70,7 @@ public class MusicService {
 		return foundMusicDto;
 	}
 	
-	public MusicDTO musicWasPlayed(MusicDTO musicDto) throws SqlException, NotFoundException {
+	public MusicDTO updatePlayed(MusicDTO musicDto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		

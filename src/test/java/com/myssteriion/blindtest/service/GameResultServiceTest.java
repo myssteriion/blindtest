@@ -41,7 +41,7 @@ public class GameResultServiceTest extends AbstractTest {
 		profilDto.setId(1);
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		
-		Mockito.when(musicService.musicWasPlayed( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
+		Mockito.when(musicService.updatePlayed( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
 

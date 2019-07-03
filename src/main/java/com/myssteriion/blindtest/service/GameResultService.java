@@ -28,7 +28,7 @@ public class GameResultService {
 		
 		Tool.verifyValue("gameResultDto", gameResultDto);
 		
-		musicService.musicWasPlayed( gameResultDto.getMusicDTO() );
+		musicService.updatePlayed( gameResultDto.getMusicDTO() );
 		
 		for (ProfilDTO winner : gameResultDto.getWinners() ) {
 			

@@ -72,14 +72,14 @@ public class MusicServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void musicWasPlayed() throws SqlException, NotFoundException {
+	public void updatePlayed() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
 		
 		
 		try {
-			musicService.musicWasPlayed(null);
+			musicService.updatePlayed(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -93,14 +93,14 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(musicDao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
 		
 		try {
-			musicService.musicWasPlayed(musicDto);
+			musicService.updatePlayed(musicDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("musicDto not found."), e);
 		}
 
-		MusicDTO musicDtoSaved = musicService.musicWasPlayed(musicDto);
+		MusicDTO musicDtoSaved = musicService.updatePlayed(musicDto);
 		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( name, musicDtoSaved.getName() );
 		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
