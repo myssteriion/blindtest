@@ -93,7 +93,7 @@ public class EntityManager {
 			
 			sb = new StringBuilder();
 			sb.append("CREATE TABLE IF NOT EXISTS profil_stat (");
-			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
+			sb.append("id BIGINT DEFAULT profil_stat_seq.nextval PRIMARY KEY,");
 			sb.append("profil_id BIGINT NOT NULL UNIQUE,");
 			sb.append("played_games INT NOT NULL,");
 			sb.append("listened_musics INT NOT NULL,");
