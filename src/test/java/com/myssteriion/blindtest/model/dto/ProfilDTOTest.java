@@ -65,10 +65,10 @@ public class ProfilDTOTest extends AbstractTest {
 		Assert.assertNull( profilDTO.getId() );
 		Assert.assertEquals( name, profilDTO.getName() );
 
-		profilDTO.setId("123");
+		profilDTO.setId(123);
 		profilDTO.setName("MonNom");
 		profilDTO.setAvatar("MonAvatar");
-		Assert.assertEquals( "123", profilDTO.getId() );
+		Assert.assertEquals( new Integer(123), profilDTO.getId() );
 		Assert.assertEquals( "MonNom", profilDTO.getName() );
 		Assert.assertEquals( "MonAvatar", profilDTO.getAvatar() );
 	}

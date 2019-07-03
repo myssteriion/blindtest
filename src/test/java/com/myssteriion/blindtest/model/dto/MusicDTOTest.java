@@ -64,8 +64,8 @@ public class MusicDTOTest extends AbstractTest {
 		Assert.assertEquals( theme, musicDTO.getTheme() );
 		Assert.assertEquals( 0, musicDTO.getPlayed() );
 		
-		musicDTO.setId("123");
-		Assert.assertEquals( "123", musicDTO.getId() );
+		musicDTO.setId(123);
+		Assert.assertEquals( new Integer(123), musicDTO.getId() );
 		
 		musicDTO.incrementPlayed();
 		Assert.assertEquals( 1, musicDTO.getPlayed() );

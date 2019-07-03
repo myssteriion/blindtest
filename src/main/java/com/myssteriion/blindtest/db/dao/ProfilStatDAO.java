@@ -35,10 +35,10 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			
 			statement.execute( sb.toString() );
 			
-			ProfilStatDTO dtoSaved = find(profilStatDto);
-			LOGGER.info("profilStatDto inserted (" + dtoSaved.toString() + ").");
+			ProfilStatDTO profilStatDtoSaved = find(profilStatDto);
+			LOGGER.info("profilStatDto inserted (" + profilStatDtoSaved.toString() + ").");
 			
-			return dtoSaved;
+			return profilStatDtoSaved;
 		}
 		catch (SQLException e) {
 			
@@ -94,9 +94,9 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
-				profilDtoToReturn = new ProfilStatDTO(rs.getString("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"),
+				profilDtoToReturn = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"),
 													  rs.getInt("found_musics") );
-				profilDtoToReturn.setId( rs.getString("id") );
+				profilDtoToReturn.setId( rs.getInt("id") );
 			}
 
 			return profilDtoToReturn;
@@ -121,9 +121,9 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			while ( rs.next() ) {
 
-				ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getString("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"), 
+				ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"), 
 																rs.getInt("found_musics") );
-				profilStatDto.setId( rs.getString("id") );
+				profilStatDto.setId( rs.getInt("id") );
 				profilDtoList.add(profilStatDto);
 			}
 			

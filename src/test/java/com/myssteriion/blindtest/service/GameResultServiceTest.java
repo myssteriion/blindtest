@@ -38,8 +38,8 @@ public class GameResultServiceTest extends AbstractTest {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		profilDto.setId("1");
-		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
+		profilDto.setId(1);
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		
 		Mockito.when(musicService.musicWasPlayed( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(null, profilDto);

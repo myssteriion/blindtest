@@ -35,7 +35,7 @@ public class ProfilDAOTest extends AbstractTest {
 		MockitoAnnotations.initMocks(this);
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		profilDto.setId("1");
+		profilDto.setId(1);
 		Mockito.doReturn(profilDto).when(profilDao).find(Mockito.any(ProfilDTO.class));
 		
 		
@@ -64,14 +64,14 @@ public class ProfilDAOTest extends AbstractTest {
 		}
 		
 		ProfilDTO profilDtoReturned = profilDao.save(profilDtoToSave);
-		Assert.assertEquals(profilDtoReturned.getId(), "1");
+		Assert.assertEquals( new Integer(1), profilDtoReturned.getId() );
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		profilDto.setId("1");
+		profilDto.setId(1);
 		
 
 		SQLException sql = new SQLException("sql");
@@ -98,7 +98,7 @@ public class ProfilDAOTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'profilDto -> id' est obligatoire."), e);
 		}
 		
-		profilDtoToUpdate.setId("1");
+		profilDtoToUpdate.setId(1);
 		try {
 			profilDao.update(profilDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
@@ -108,7 +108,7 @@ public class ProfilDAOTest extends AbstractTest {
 		}
 		
 		ProfilDTO profilDtoReturned = profilDao.update(profilDtoToUpdate);
-		Assert.assertEquals(profilDtoReturned.getId(), "1");
+		Assert.assertEquals( new Integer(1), profilDtoReturned.getId() );
 	}
 	
 	@Test
@@ -117,8 +117,8 @@ public class ProfilDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "avatar");
-		rs.addRow("2", "name", "avatar");
+		rs.addRow(1, "name", "avatar");
+		rs.addRow(2, "name", "avatar");
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -152,7 +152,7 @@ public class ProfilDAOTest extends AbstractTest {
 		profilDto = profilDao.find(profilDto);
 		Assert.assertNotNull(profilDto);
 		
-		profilDto.setId("1");
+		profilDto.setId(1);
 		profilDto = profilDao.find(profilDto);
 		Assert.assertNotNull(profilDto);
 	}
@@ -161,7 +161,7 @@ public class ProfilDAOTest extends AbstractTest {
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "avatar");
+		rs.addRow(1, "name", "avatar");
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -179,7 +179,7 @@ public class ProfilDAOTest extends AbstractTest {
 		}
 		
 		ProfilDTO profilDto = profilDao.findAll().get(0);
-		Assert.assertEquals( "1", profilDto.getId() );
+		Assert.assertEquals( new Integer(1), profilDto.getId() );
 		Assert.assertEquals( "name", profilDto.getName() );
 		Assert.assertEquals( "avatar", profilDto.getAvatar() );
 	}

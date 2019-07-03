@@ -7,7 +7,7 @@ import com.myssteriion.blindtest.tools.Tool;
 
 public class ProfilStatDTO extends AbstractDTO {
 
-	private String profilId;
+	private Integer profilId;
 	
 	private int playedGames;
 	
@@ -17,11 +17,11 @@ public class ProfilStatDTO extends AbstractDTO {
 	
 	
 	
-	public ProfilStatDTO(String profilId) {
+	public ProfilStatDTO(Integer profilId) {
 		this(profilId, 0, 0, 0);
 	}
 	
-	public ProfilStatDTO(String profilId, int playedGames, int listenedMusics, int foundMusics) {
+	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics) {
 		
 		Tool.verifyValue("profilId", profilId);
 		
@@ -33,7 +33,7 @@ public class ProfilStatDTO extends AbstractDTO {
 	
 	
 	
-	public String getProfilId() {
+	public Integer getProfilId() {
 		return profilId;
 	}
 

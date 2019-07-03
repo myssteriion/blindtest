@@ -36,7 +36,7 @@ public class MusicDAOTest extends AbstractTest {
 		MockitoAnnotations.initMocks(this);
 
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-		musicDto.setId("1");
+		musicDto.setId(1);
 		Mockito.doReturn(musicDto).when(musicDao).find(Mockito.any(MusicDTO.class));
 		
 		
@@ -65,14 +65,14 @@ public class MusicDAOTest extends AbstractTest {
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.save(musidcDtoToSave);
-		Assert.assertEquals( "1", musicDtoReturned.getId() );
+		Assert.assertEquals( new Integer(1), musicDtoReturned.getId() );
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-		musicDto.setId("1");
+		musicDto.setId(1);
 		
 
 		SQLException sql = new SQLException("sql");
@@ -99,7 +99,7 @@ public class MusicDAOTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'musicDto -> id' est obligatoire."), e);
 		}
 		
-		musicDtoToUpdate.setId("1");
+		musicDtoToUpdate.setId(1);
 		try {
 			musicDao.update(musicDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
@@ -109,7 +109,7 @@ public class MusicDAOTest extends AbstractTest {
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.update(musicDtoToUpdate);
-		Assert.assertEquals( "1", musicDtoReturned.getId() );
+		Assert.assertEquals( new Integer(1), musicDtoReturned.getId() );
 	}
 	
 	@Test
@@ -118,8 +118,8 @@ public class MusicDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "ANNEES_80", 1);
-		rs.addRow("2", "name", "ANNEES_80", 1);
+		rs.addRow(1, "name", "ANNEES_80", 1);
+		rs.addRow(2, "name", "ANNEES_80", 1);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -153,7 +153,7 @@ public class MusicDAOTest extends AbstractTest {
 		musicDto = musicDao.find(musicDto);
 		Assert.assertNotNull(musicDto);
 		
-		musicDto.setId("1");
+		musicDto.setId(1);
 		musicDto = musicDao.find(musicDto);
 		Assert.assertNotNull(musicDto);
 	}
@@ -162,7 +162,7 @@ public class MusicDAOTest extends AbstractTest {
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "name", "ANNEES_80", 1);
+		rs.addRow(1, "name", "ANNEES_80", 1);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -180,7 +180,7 @@ public class MusicDAOTest extends AbstractTest {
 		}
 		
 		MusicDTO musicDto = musicDao.findAll().get(0);
-		Assert.assertEquals( "1", musicDto.getId() );
+		Assert.assertEquals( new Integer(1), musicDto.getId() );
 		Assert.assertEquals( "name", musicDto.getName() );
 		Assert.assertEquals( Theme.ANNEES_80, musicDto.getTheme() );
 	}

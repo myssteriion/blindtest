@@ -33,7 +33,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		try {
 			profilStatService.save(null);
@@ -45,11 +45,11 @@ public class ProfilStatServiceTest extends AbstractTest {
 		
 		
 		ProfilDTO profilDTOMock = new ProfilDTO("name", "avatar");
-		profilDTOMock.setId("1");
+		profilDTOMock.setId(1);
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDTOMock);
 		
 		ProfilStatDTO profilStatDtoMock = new ProfilStatDTO(profilId);
-		profilStatDtoMock.setId("1");
+		profilStatDtoMock.setId(1);
 		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDtoMock, (ProfilStatDTO) null);
 		Mockito.when(profilStatDao.save(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDtoMock);
 		
@@ -74,7 +74,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		}
 
 		ProfilStatDTO profilStatDtoSaved = profilStatService.save(profilStatDto);
-		Assert.assertEquals( "1", profilStatDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
 		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getPlayedGames() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getListenedMusics() );
@@ -84,7 +84,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void updatePlayedGames() throws SqlException, NotFoundException {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		try {
 			profilStatService.updatePlayedGames(null);
@@ -96,7 +96,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		
 		
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId("1");
+		profilStatDto.setId(1);
 		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
 		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
 		
@@ -109,7 +109,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDtoSaved = profilStatService.updatePlayedGames(profilStatDto);
-		Assert.assertEquals( "1", profilStatDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
 		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 1, profilStatDtoSaved.getPlayedGames() );
 	}
@@ -117,7 +117,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void updateListenedMusics() throws SqlException, NotFoundException {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		try {
 			profilStatService.updateListenedMusics(null);
@@ -129,7 +129,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		
 		
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId("1");
+		profilStatDto.setId(1);
 		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
 		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
 		
@@ -142,7 +142,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDtoSaved = profilStatService.updateListenedMusics(profilStatDto);
-		Assert.assertEquals( "1", profilStatDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
 		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 1, profilStatDtoSaved.getListenedMusics() );
 	}
@@ -150,7 +150,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void updateFoundMusics() throws SqlException, NotFoundException {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		try {
 			profilStatService.updateFoundMusics(null);
@@ -162,7 +162,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		
 		
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId("1");
+		profilStatDto.setId(1);
 		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
 		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
 		
@@ -175,7 +175,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDtoSaved = profilStatService.updateFoundMusics(profilStatDto);
-		Assert.assertEquals( "1", profilStatDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
 		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 1, profilStatDtoSaved.getFoundMusics() );
 	}
@@ -183,7 +183,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void findAll() throws SqlException {
 
-		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		Mockito.when(profilStatDao.findAll()).thenReturn( Arrays.asList(profilStatDto) );
 		
 		List<ProfilStatDTO> list = profilStatService.findAll();

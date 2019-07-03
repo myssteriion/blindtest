@@ -36,10 +36,10 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			statement.execute( sb.toString() );
 			
-			MusicDTO dtoSaved = find(musicDto);
-			LOGGER.info("musicDto inserted (" + dtoSaved.toString() + ").");
+			MusicDTO musicDtotoSaved = find(musicDto);
+			LOGGER.info("musicDto inserted (" + musicDtotoSaved.toString() + ").");
 			
-			return dtoSaved;
+			return musicDtotoSaved;
 		}
 		catch (SQLException e) {
 			
@@ -88,13 +88,13 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			if ( Tool.isNullOrEmpty(musicDto.getId()) )
 				sb.append("WHERE name = '" + escapeValue( musicDto.getName() ) + "' AND theme = '" + musicDto.getTheme() + "'");
 			else
-				sb.append("WHERE id = '" + musicDto.getId() + "'");
+				sb.append("WHERE id = " + musicDto.getId());
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
 				musicDtoToReturn = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				musicDtoToReturn.setId( rs.getString("id") );
+				musicDtoToReturn.setId( rs.getInt("id") );
 			}
 
 			return musicDtoToReturn;
@@ -120,7 +120,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			while ( rs.next() ) {
 				
 				MusicDTO musicDto = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				musicDto.setId( rs.getString("id") );
+				musicDto.setId( rs.getInt("id") );
 				musicDtoList.add(musicDto);
 			}
 			

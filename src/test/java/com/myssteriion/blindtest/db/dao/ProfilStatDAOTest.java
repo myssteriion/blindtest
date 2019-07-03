@@ -34,8 +34,8 @@ public class ProfilStatDAOTest extends AbstractTest {
 		profilStatDao = Mockito.spy( new ProfilStatDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
-		profilStatDto.setId("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
+		profilStatDto.setId(1);
 		Mockito.doReturn(profilStatDto).when(profilStatDao).find(Mockito.any(ProfilStatDTO.class));
 		
 		
@@ -54,7 +54,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfilStatDTO profilStatDtoToSave = new ProfilStatDTO("1");
+		ProfilStatDTO profilStatDtoToSave = new ProfilStatDTO(1);
 		try {
 			profilStatDao.save(profilStatDtoToSave);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
@@ -64,14 +64,14 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDtoReturned = profilStatDao.save(profilStatDtoToSave);
-		Assert.assertEquals(profilStatDtoReturned.getId(), "1");
+		Assert.assertEquals( new Integer(1), profilStatDtoReturned.getId() );
 	}
 	
 	@Test
 	public void update() throws SqlException, SQLException {
 
-		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
-		profilStatDto.setId("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
+		profilStatDto.setId(1);
 		
 
 		SQLException sql = new SQLException("sql");
@@ -89,7 +89,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfilStatDTO profilStatDtoToUpdate = new ProfilStatDTO("1");
+		ProfilStatDTO profilStatDtoToUpdate = new ProfilStatDTO(1);
 		try {
 			profilStatDao.update(profilStatDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
@@ -98,7 +98,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'profilStatDto -> id' est obligatoire."), e);
 		}
 		
-		profilStatDtoToUpdate.setId("1");
+		profilStatDtoToUpdate.setId(1);
 		try {
 			profilStatDao.update(profilStatDtoToUpdate);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
@@ -108,7 +108,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDtoReturned = profilStatDao.update(profilStatDtoToUpdate);
-		Assert.assertEquals(profilStatDtoReturned.getId(), "1");
+		Assert.assertEquals( new Integer(1), profilStatDtoReturned.getId() );
 	}
 	
 	@Test
@@ -117,8 +117,8 @@ public class ProfilStatDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "1", 1, 2, 3);
-		rs.addRow("2", "1", 1, 2, 3);
+		rs.addRow(1, 1, 1, 2, 3);
+		rs.addRow(2, 1, 1, 2, 3);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -136,7 +136,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO("1");
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		try {
 			profilStatDao.find(profilStatDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
@@ -148,11 +148,11 @@ public class ProfilStatDAOTest extends AbstractTest {
 		profilStatDto = profilStatDao.find(profilStatDto);
 		Assert.assertNull(profilStatDto);
 		
-		profilStatDto = new ProfilStatDTO("1");
+		profilStatDto = new ProfilStatDTO(1);
 		profilStatDto = profilStatDao.find(profilStatDto);
 		Assert.assertNotNull(profilStatDto);
 		
-		profilStatDto.setId("1");
+		profilStatDto.setId(1);
 		profilStatDto = profilStatDao.find(profilStatDto);
 		Assert.assertNotNull(profilStatDto);
 	}
@@ -161,7 +161,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow("1", "1", 1, 2, 3);
+		rs.addRow(1, 1, 1, 2, 3);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -179,7 +179,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		}
 		
 		ProfilStatDTO profilStatDto = profilStatDao.findAll().get(0);
-		Assert.assertEquals( "1", profilStatDto.getId() );
+		Assert.assertEquals( new Integer(1), profilStatDto.getId() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );

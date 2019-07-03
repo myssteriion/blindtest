@@ -30,7 +30,7 @@ public class ProfilStatControllerTest extends AbstractTest {
 	public void findAll() throws SqlException {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Mockito.when(profilStatService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilStatDTO("1") ) );
+		Mockito.when(profilStatService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilStatDTO(1) ) );
 
 		try {
 			profilStatController.findAll();

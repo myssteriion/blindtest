@@ -35,10 +35,10 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			statement.execute( sb.toString() );
 			
-			ProfilDTO dtoSaved = find(profilDto);
-			LOGGER.info("profilDto inserted (" + dtoSaved.toString() + ").");
+			ProfilDTO profilDtoSaved = find(profilDto);
+			LOGGER.info("profilDto inserted (" + profilDtoSaved.toString() + ").");
 			
-			return dtoSaved;
+			return profilDtoSaved;
 		}
 		catch (SQLException e) {
 			
@@ -87,13 +87,13 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			if ( Tool.isNullOrEmpty(profilDto.getId()) )
 				sb.append("WHERE name = '" + escapeValue( profilDto.getName() ) + "'");
 			else
-				sb.append("WHERE id = '" + profilDto.getId() + "'");
+				sb.append("WHERE id = " + profilDto.getId());
 			
 			ResultSet rs = statement.executeQuery( sb.toString() );
 			if ( rs.next() ) {
 				
 				profilDtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
-				profilDtoToReturn.setId( rs.getString("id") );
+				profilDtoToReturn.setId( rs.getInt("id") );
 			}
 
 			return profilDtoToReturn;
@@ -119,7 +119,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			while ( rs.next() ) {
 
 				ProfilDTO profilDto = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
-				profilDto.setId( rs.getString("id") );
+				profilDto.setId( rs.getInt("id") );
 				profilDtoList.add(profilDto);
 			}
 			

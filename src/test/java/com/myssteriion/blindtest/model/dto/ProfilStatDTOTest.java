@@ -10,7 +10,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 	@Test
 	public void constructor() {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		try {
 			new ProfilStatDTO(null);
@@ -21,23 +21,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 		}
 		
 		try {
-			new ProfilStatDTO("");
-			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilId' est obligatoire."), e);
-		}
-		
-		try {
 			new ProfilStatDTO(null, 0, 0, 0);
-			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilId' est obligatoire."), e);
-		}
-		
-		try {
-			new ProfilStatDTO("", 0, 0, 0);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -64,7 +48,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 	@Test
 	public void getterSetter() {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
 		Assert.assertNull( profilStatDto.getId() );
@@ -73,8 +57,8 @@ public class ProfilStatDTOTest extends AbstractTest {
 		Assert.assertEquals( 0, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 0, profilStatDto.getFoundMusics() );
 		
-		profilStatDto.setId("123");
-		Assert.assertEquals( "123", profilStatDto.getId() );
+		profilStatDto.setId(123);
+		Assert.assertEquals( new Integer(123), profilStatDto.getId() );
 		
 		profilStatDto.incrementPlayedGames();
 		profilStatDto.incrementListenedMusics();
@@ -87,13 +71,13 @@ public class ProfilStatDTOTest extends AbstractTest {
 	@Test
 	public void toStringAndEquals() {
 		
-		String profilId = "1";
+		Integer profilId = 1;
 		ProfilStatDTO profilStatDtoUn = new ProfilStatDTO(profilId);
 		
 		Assert.assertEquals( "id=null, profilId=1, playedGames=0, listenedMusics=0, foundMusics=0", profilStatDtoUn.toString() );
 		
-		ProfilStatDTO profilStatDtoUnIso = new ProfilStatDTO("1");
-		ProfilStatDTO profilStatDtoDeux = new ProfilStatDTO("2");
+		ProfilStatDTO profilStatDtoUnIso = new ProfilStatDTO(1);
+		ProfilStatDTO profilStatDtoDeux = new ProfilStatDTO(2);
 		
 		Assert.assertNotEquals(profilStatDtoUn, null);
 		Assert.assertNotEquals(profilStatDtoUn, "bad class");

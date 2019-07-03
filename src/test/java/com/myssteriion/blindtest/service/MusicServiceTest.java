@@ -49,7 +49,7 @@ public class MusicServiceTest extends AbstractTest {
 		
 		
 		MusicDTO musicDtoMock = new MusicDTO(name, theme);
-		musicDtoMock.setId("1");
+		musicDtoMock.setId(1);
 		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
 		Mockito.when(musicDao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDtoMock);
 		
@@ -65,7 +65,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 		MusicDTO musicDtoSaved = musicService.save(musicDto, false);
-		Assert.assertEquals( "1", musicDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( name, musicDtoSaved.getName() );
 		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
 		Assert.assertEquals( 0, musicDtoSaved.getPlayed() );
@@ -88,7 +88,7 @@ public class MusicServiceTest extends AbstractTest {
 		
 		
 		MusicDTO musicDto = new MusicDTO(name, theme);
-		musicDto.setId("1");
+		musicDto.setId(1);
 		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDto);
 		Mockito.when(musicDao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
 		
@@ -101,7 +101,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 		MusicDTO musicDtoSaved = musicService.musicWasPlayed(musicDto);
-		Assert.assertEquals( "1", musicDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( name, musicDtoSaved.getName() );
 		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
 		Assert.assertEquals( 1, musicDtoSaved.getPlayed() );

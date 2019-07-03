@@ -43,7 +43,7 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		
 		ProfilDTO profilDtoMock = new ProfilDTO(name, avatar);
-		profilDtoMock.setId("1");
+		profilDtoMock.setId(1);
 		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDtoMock);
 		Mockito.when(profilDao.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDtoMock);
 		
@@ -59,7 +59,7 @@ public class ProfilServiceTest extends AbstractTest {
 		}
 
 		ProfilDTO profilDtoSaved = profilService.save(profilDto, false);
-		Assert.assertEquals( "1", profilDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilDtoSaved.getId() );
 		Assert.assertEquals( name, profilDtoSaved.getName() );
 	}
 	
@@ -80,7 +80,7 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		
 		ProfilDTO profilDto = new ProfilDTO(name, avatar);
-		profilDto.setId("1");
+		profilDto.setId(1);
 		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
 		Mockito.when(profilDao.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
@@ -95,7 +95,7 @@ public class ProfilServiceTest extends AbstractTest {
 		profilDto.setName("pouet");
 		profilDto.setAvatar("avapouet");
 		ProfilDTO profilDtoSaved = profilService.updated(profilDto);
-		Assert.assertEquals( "1", profilDtoSaved.getId() );
+		Assert.assertEquals( new Integer(1), profilDtoSaved.getId() );
 		Assert.assertEquals( "pouet", profilDtoSaved.getName() );
 		Assert.assertEquals( "avapouet", profilDtoSaved.getAvatar());
 	}
