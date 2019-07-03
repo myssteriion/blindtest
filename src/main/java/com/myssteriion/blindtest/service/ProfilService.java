@@ -20,19 +20,18 @@ public class ProfilService {
 	
 	
 	
-	public ProfilDTO save(ProfilDTO profilDto, boolean throwIfExsits) throws SqlException, AlreadyExistsException  {
+	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, AlreadyExistsException  {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
 		profilDto.setId(null);
 		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
-		if (!Tool.isNullOrEmpty(foundProfilDto) && throwIfExsits)
+		if ( !Tool.isNullOrEmpty(foundProfilDto) )
 			throw new AlreadyExistsException("profilDto already exists.");
 		
 		
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			foundProfilDto = profilDao.save(profilDto);
+		foundProfilDto = profilDao.save(profilDto);
 		
 		return foundProfilDto;
 	}

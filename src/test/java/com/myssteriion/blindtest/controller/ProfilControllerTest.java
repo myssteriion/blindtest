@@ -32,7 +32,7 @@ public class ProfilControllerTest extends AbstractTest {
 	public void save() throws SqlException, AlreadyExistsException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class), Mockito.anyBoolean())).thenReturn(profilDto);
+		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
 		ResponseEntity<ProfilDTO> actual = profilController.save(profilDto);
 		Assert.assertEquals( HttpStatus.CREATED, actual.getStatusCode() );

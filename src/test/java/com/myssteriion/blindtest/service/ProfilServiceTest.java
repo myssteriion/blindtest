@@ -34,7 +34,7 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		
 		try {
-			profilService.save(null, false);
+			profilService.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -44,21 +44,21 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		ProfilDTO profilDtoMock = new ProfilDTO(name, avatar);
 		profilDtoMock.setId(1);
-		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDtoMock);
+		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDtoMock, null);
 		Mockito.when(profilDao.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDtoMock);
 		
 		ProfilDTO profilDto = new ProfilDTO(name, avatar);
-		Assert.assertSame( profilDtoMock, profilService.save(profilDto, false) );
+		Assert.assertSame( profilDtoMock, profilService.save(profilDto) );
 		
 		try {
-			profilService.save(profilDto, true);
+			profilService.save(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (AlreadyExistsException e) {
 			verifyException(new AlreadyExistsException("profilDto already exists."), e);
 		}
 
-		ProfilDTO profilDtoSaved = profilService.save(profilDto, false);
+		ProfilDTO profilDtoSaved = profilService.save(profilDto);
 		Assert.assertEquals( new Integer(1), profilDtoSaved.getId() );
 		Assert.assertEquals( name, profilDtoSaved.getName() );
 	}
