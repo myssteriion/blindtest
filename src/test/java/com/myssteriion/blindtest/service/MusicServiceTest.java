@@ -107,6 +107,7 @@ public class MusicServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, musicDtoSaved.getPlayed() );
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void random() throws SqlException, NotFoundException {
 		
