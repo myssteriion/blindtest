@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 
 public class ProfilDTO extends AbstractDTO {
@@ -18,10 +19,9 @@ public class ProfilDTO extends AbstractDTO {
 	public ProfilDTO(String name, String avatar) {
 
 		Tool.verifyValue("name", name);
-		Tool.verifyValue("avatar", avatar);
 		
 		this.name = name.trim();
-		this.avatar = avatar;
+		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;
 	}
 	
 	
@@ -31,9 +31,7 @@ public class ProfilDTO extends AbstractDTO {
 	}
 	
 	public void setName(String name) {
-		
-		Tool.verifyValue("name", name);
-		this.name = name;
+		this.name = ( Tool.isNullOrEmpty(name) ) ? Constant.DEFAULT_AVATAR : name;
 	}
 
 	public String getAvatar() {

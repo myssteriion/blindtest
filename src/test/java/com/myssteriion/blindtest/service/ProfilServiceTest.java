@@ -15,11 +15,15 @@ import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 
 public class ProfilServiceTest extends AbstractTest {
 
 	@Mock
 	private ProfilDAO profilDao;
+	
+	@Mock
+	private ProfilStatService profilStatService;
 	
 	@InjectMocks
 	private ProfilService profilService;
@@ -40,7 +44,9 @@ public class ProfilServiceTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
 		}
-		
+
+		ProfilStatDTO profilStatDtoMock = new ProfilStatDTO(1);
+		Mockito.when(profilStatService.save(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDtoMock);
 		
 		ProfilDTO profilDtoMock = new ProfilDTO(name, avatar);
 		profilDtoMock.setId(1);

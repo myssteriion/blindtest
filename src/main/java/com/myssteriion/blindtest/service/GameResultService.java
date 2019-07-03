@@ -35,12 +35,18 @@ public class GameResultService {
 			ProfilStatDTO profilStatDTO = findProfilStatDto(winner);
 			profilStatService.updateListenedMusics(profilStatDTO);
 			profilStatService.updateFoundMusics(profilStatDTO);
+			
+			if ( gameResultDto.isFirstMusic() )
+				profilStatService.updatePlayedGames(profilStatDTO);
 		}
 		
 		for (ProfilDTO looser : gameResultDto.getLoosers() ) {
 			
 			ProfilStatDTO profilStatDTO = findProfilStatDto(looser);
 			profilStatService.updateListenedMusics(profilStatDTO);
+			
+			if ( gameResultDto.isFirstMusic() )
+				profilStatService.updatePlayedGames(profilStatDTO);
 		}
 	}
 	

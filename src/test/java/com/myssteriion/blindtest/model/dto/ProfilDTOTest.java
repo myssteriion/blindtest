@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.tools.Constant;
 
 public class ProfilDTOTest extends AbstractTest {
 
@@ -30,22 +31,6 @@ public class ProfilDTOTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
 		}
 		
-		try {
-			new ProfilDTO(name, null);
-			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
-		}
-		
-		try {
-			new ProfilDTO(name, "");
-			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
-		}
-		
 		Assert.assertNotNull( new ProfilDTO(name, avatar) );
 		
 		
@@ -53,6 +38,14 @@ public class ProfilDTOTest extends AbstractTest {
 		ProfilDTO profilDTO = new ProfilDTO(name + "'a'b'c''", avatar + "b");
 		Assert.assertEquals( name + "'a'b'c''", profilDTO.getName() );
 		Assert.assertEquals( avatar + "b", profilDTO.getAvatar() );
+		
+		profilDTO = new ProfilDTO(name, null);
+		Assert.assertEquals( name, profilDTO.getName() );
+		Assert.assertEquals( Constant.DEFAULT_AVATAR, profilDTO.getAvatar() );
+		
+		profilDTO = new ProfilDTO(name, "");
+		Assert.assertEquals( name, profilDTO.getName() );
+		Assert.assertEquals( Constant.DEFAULT_AVATAR, profilDTO.getAvatar() );
 	}
 	
 	@Test
