@@ -56,7 +56,7 @@ public class GameResultServiceTest extends AbstractTest {
 		
 		
 		GameResultDTO gameResultDto = new GameResultDTO( false, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
-		
+
 		try {
 			gameResultService.apply(gameResultDto);
 			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
@@ -74,6 +74,17 @@ public class GameResultServiceTest extends AbstractTest {
 		}
 		
 		gameResultService.apply(gameResultDto);
+		Mockito.verify(musicService, Mockito.times(3)).updatePlayed( Mockito.any(MusicDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(0)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(2)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(1)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );
+		
+		gameResultDto = new GameResultDTO( true, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		gameResultService.apply(gameResultDto);
+		Mockito.verify(musicService, Mockito.times(4)).updatePlayed( Mockito.any(MusicDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(2)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(4)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(2)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );
 	}
 
 }

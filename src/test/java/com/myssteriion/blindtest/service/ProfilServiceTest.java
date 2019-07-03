@@ -107,6 +107,26 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 
 	@Test
+	public void find() throws SqlException {
+
+		ProfilDTO profilDtoMock = new ProfilDTO("name", "avatar");
+		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDtoMock);
+		
+		
+		try {
+			profilService.find(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
+		}
+		
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		Assert.assertNull( profilService.find(profilDto) );
+		Assert.assertNotNull( profilService.find(profilDto) );
+	}
+	
+	@Test
 	public void findAll() throws SqlException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
