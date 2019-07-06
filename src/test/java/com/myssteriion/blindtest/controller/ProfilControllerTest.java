@@ -41,7 +41,7 @@ public class ProfilControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException {
+	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);

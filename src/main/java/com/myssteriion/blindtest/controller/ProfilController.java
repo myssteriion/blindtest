@@ -43,7 +43,7 @@ public class ProfilController {
 		method = RequestMethod.PUT,
 		path = Constant.ID_PATH_PARAM
 	)
-	public ResponseEntity<ProfilDTO> update(@PathVariable("id") Integer id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException {
+	public ResponseEntity<ProfilDTO> update(@PathVariable("id") Integer id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		profilDto.setId(id);
 		return ResponseBuilder.create200( profilService.update(profilDto) );

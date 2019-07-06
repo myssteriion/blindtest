@@ -32,7 +32,7 @@ public class ProfilService {
 		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
 		if ( !Tool.isNullOrEmpty(foundProfilDto) )
-			throw new AlreadyExistsException("profilDto already exists.");
+			throw new AlreadyExistsException("the profilDto name is already used.");
 		
 		
 		foundProfilDto = profilDao.save(profilDto);
@@ -42,19 +42,25 @@ public class ProfilService {
 		return foundProfilDto;
 	}
 	
-	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException {
+	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		Tool.verifyValue("profilDto", profilDto);
+		Tool.verifyValue("profilDto -> id", profilDto.getId());
 		
 		ProfilDTO foundProfilDto = profilDao.find(profilDto);
-		
 		if ( Tool.isNullOrEmpty(foundProfilDto) )
 			throw new NotFoundException("profilDto not found.");
-
-		foundProfilDto.setName( profilDto.getName() );
-		foundProfilDto.setAvatar( profilDto.getAvatar() );
 		
-		return profilDao.update(foundProfilDto);
+		
+		Integer id = profilDto.getId();
+		profilDto.setId(null);
+		
+		foundProfilDto = profilDao.find(profilDto);
+		if ( foundProfilDto != null  && !foundProfilDto.getId().equals(id) )
+			throw new AlreadyExistsException("the profilDto name is already used.");
+		
+		profilDto.setId(id);
+		return profilDao.update(profilDto);
 	}
 
 	public ProfilDTO find(ProfilDTO profilDto) throws SqlException {

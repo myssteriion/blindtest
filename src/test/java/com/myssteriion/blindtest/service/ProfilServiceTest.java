@@ -61,7 +61,7 @@ public class ProfilServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("profilDto already exists."), e);
+			verifyException(new AlreadyExistsException("the profilDto name is already used."), e);
 		}
 
 		ProfilDTO profilDtoSaved = profilService.save(profilDto);
@@ -70,7 +70,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException {
+	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -86,11 +86,24 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		
 		ProfilDTO profilDto = new ProfilDTO(name, avatar);
-		profilDto.setId(1);
-		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
+		try {
+			profilService.update(profilDto);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'profilDto -> id' est obligatoire."), e);
+		}
+		
+
+		ProfilDTO profilStatDtoMockNotSame = new ProfilDTO(name, avatar);
+		profilStatDtoMockNotSame.setId(2);
+		ProfilDTO profilStatDtoMockSame = new ProfilDTO(name, avatar);
+		profilStatDtoMockSame.setId(1);
+		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilStatDtoMockNotSame, profilStatDtoMockNotSame, profilStatDtoMockSame);
 		Mockito.when(profilDao.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
 		try {
+			profilDto.setId(1);
 			profilService.update(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
@@ -98,6 +111,16 @@ public class ProfilServiceTest extends AbstractTest {
 			verifyException(new NotFoundException("profilDto not found."), e);
 		}
 		
+		try {
+			profilDto.setId(1);
+			profilService.update(profilDto);
+			Assert.fail("Doit lever une SqlException car le mock throw.");
+		}
+		catch (AlreadyExistsException e) {
+			verifyException(new AlreadyExistsException("the profilDto name is already used."), e);
+		}
+		
+		profilDto.setId(1);
 		profilDto.setName("pouet");
 		profilDto.setAvatar("avapouet");
 		ProfilDTO profilDtoSaved = profilService.update(profilDto);
