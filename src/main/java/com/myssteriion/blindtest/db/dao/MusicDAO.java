@@ -48,9 +48,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtotoSaved;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't save musicDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't save musicDto.", e);
 		}
 	}
 	
@@ -73,9 +71,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDto;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't update musicDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't update musicDto.", e);
 		}
 	}
 	
@@ -106,9 +102,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtoToReturn;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't find musicDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't find musicDto.", e);
 		}
 	}
 	
@@ -133,9 +127,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtoList;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't find all musicDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't find all musicDto.", e);
 		}
 	}
 	

@@ -47,9 +47,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoSaved;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't save profilDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't save profilDto.", e);
 		}
 	}
 	
@@ -72,9 +70,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDto;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't update profilDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't update profilDto.", e);
 		}
 	}
 	
@@ -105,9 +101,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoToReturn;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't find profilDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't find profilDto.", e);
 		}
 	}
 	
@@ -132,9 +126,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoList;
 		}
 		catch (SQLException e) {
-			
-			String message = "Can't find all profilDto.";
-			throw new SqlException(message, e);
+			throw new SqlException("Can't find all profilDto.", e);
 		}
 	}
 	
