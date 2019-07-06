@@ -9,7 +9,11 @@ public enum Theme {
 	ANNEES_70("annees_70"), 
 	ANNEES_80("annees_80"), 
 	ANNEES_90("annees_90"), 
-	ANNEES_2000("annees_2000");
+	ANNEES_2000("annees_2000"), 
+	CINEMAS("cinemas"), 
+	SERIES("series"), 
+	DISNEY("disney"), 
+	FRANCAIS("francais");
 	
 	
 	

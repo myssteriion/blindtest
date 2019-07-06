@@ -85,6 +85,10 @@ build {
 		mkdir deliveryFolder + "/musiques/annees_80"
 		mkdir deliveryFolder + "/musiques/annees_90"
 		mkdir deliveryFolder + "/musiques/annees_2000"
+		mkdir deliveryFolder + "/musiques/cinemas"
+		mkdir deliveryFolder + "/musiques/series"
+		mkdir deliveryFolder + "/musiques/disney"
+		mkdir deliveryFolder + "/musiques/francais"
 	}
 }
 
