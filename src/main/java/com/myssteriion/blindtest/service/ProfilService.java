@@ -42,7 +42,7 @@ public class ProfilService {
 		return foundProfilDto;
 	}
 	
-	public ProfilDTO updated(ProfilDTO profilDto) throws SqlException, NotFoundException {
+	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		

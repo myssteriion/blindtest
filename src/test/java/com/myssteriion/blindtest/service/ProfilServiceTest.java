@@ -70,14 +70,14 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void updated() throws SqlException, NotFoundException {
+	public void update() throws SqlException, NotFoundException {
 		
 		String name = "name";
 		String avatar = "avatar";
 		
 		
 		try {
-			profilService.updated(null);
+			profilService.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -91,7 +91,7 @@ public class ProfilServiceTest extends AbstractTest {
 		Mockito.when(profilDao.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
 		
 		try {
-			profilService.updated(profilDto);
+			profilService.update(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (NotFoundException e) {
@@ -100,7 +100,7 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		profilDto.setName("pouet");
 		profilDto.setAvatar("avapouet");
-		ProfilDTO profilDtoSaved = profilService.updated(profilDto);
+		ProfilDTO profilDtoSaved = profilService.update(profilDto);
 		Assert.assertEquals( new Integer(1), profilDtoSaved.getId() );
 		Assert.assertEquals( "pouet", profilDtoSaved.getName() );
 		Assert.assertEquals( "avapouet", profilDtoSaved.getAvatar());

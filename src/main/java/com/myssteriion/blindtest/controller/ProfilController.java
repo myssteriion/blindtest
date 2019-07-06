@@ -46,7 +46,7 @@ public class ProfilController {
 	public ResponseEntity<ProfilDTO> update(@PathVariable("id") Integer id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException {
 		
 		profilDto.setId(id);
-		return ResponseBuilder.create200( profilService.updated(profilDto) );
+		return ResponseBuilder.create200( profilService.update(profilDto) );
 	}
 		
 	@RequestMapping(
