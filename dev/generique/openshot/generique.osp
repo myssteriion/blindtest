@@ -3598,422 +3598,6 @@
                 ]
             },
             "display": 0,
-            "duration": 15.38612270355225,
-            "effects": [],
-            "end": 15.38612270355225,
-            "gravity": 4,
-            "has_audio": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "has_video": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "id": "HZIZ83OVE3",
-            "layer": 5000000,
-            "location_x": {
-                "Points": []
-            },
-            "location_y": {
-                "Points": []
-            },
-            "mixing": 0,
-            "perspective_c1_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c1_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "position": 2.1500000953674316,
-            "reader": {
-                "acodec": "mp3",
-                "audio_bit_rate": 320000,
-                "audio_stream_index": 0,
-                "audio_timebase": {
-                    "den": 14112000,
-                    "num": 1
-                },
-                "channel_layout": 3,
-                "channels": 2,
-                "display_ratio": {
-                    "den": 1,
-                    "num": 1
-                },
-                "duration": 15.38612270355225,
-                "file_size": "616533",
-                "fps": {
-                    "den": 1,
-                    "num": 24
-                },
-                "has_audio": true,
-                "has_single_image": false,
-                "has_video": false,
-                "height": 480,
-                "interlaced_frame": false,
-                "metadata": {
-                    "encoder": "Lavf58.27.103"
-                },
-                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\son\\bttf-sound_effect.mp3",
-                "pixel_format": -1,
-                "pixel_ratio": {
-                    "den": 1,
-                    "num": 1
-                },
-                "sample_rate": 44100,
-                "top_field_first": true,
-                "type": "FFmpegReader",
-                "vcodec": "",
-                "video_bit_rate": 0,
-                "video_length": "369",
-                "video_stream_index": -1,
-                "video_timebase": {
-                    "den": 24,
-                    "num": 1
-                },
-                "width": 720
-            },
-            "rotation": {
-                "Points": []
-            },
-            "scale": 1,
-            "scale_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "start": 0,
-            "time": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "volume": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.009999999776482582
-                        },
-                        "interpolation": 2
-                    },
-                    {
-                        "co": {
-                            "X": 386,
-                            "Y": 0.05000000074505806
-                        },
-                        "interpolation": 1
-                    }
-                ]
-            },
-            "wave_color": {
-                "alpha": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "blue": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "green": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 123.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "red": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 0.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                }
-            },
-            "waveform": false,
-            "file_id": "ZDILJTAGNF",
-            "title": "bttf-sound_effect.mp3",
-            "image": "C:\\Program Files\\OpenShot Video Editor\\images\\AudioThumbnail.png"
-        },
-        {
-            "alpha": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "anchor": 0,
-            "channel_filter": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "channel_mapping": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_height": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_width": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "display": 0,
             "duration": 86400.0,
             "effects": [],
             "end": 44.959999084472656,
@@ -9449,14 +9033,7 @@
                     {
                         "co": {
                             "X": 1,
-                            "Y": 0.05000000074505806
-                        },
-                        "interpolation": 1
-                    },
-                    {
-                        "co": {
-                            "X": 17,
-                            "Y": 0.20000000298023224
+                            "Y": 1.0
                         },
                         "interpolation": 1
                     }
@@ -14974,7 +14551,7 @@
                 "height": 1883,
                 "interlaced_frame": false,
                 "metadata": {},
-                "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/banderol.png",
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol.png",
                 "pixel_format": -1,
                 "pixel_ratio": {
                     "den": 1,
@@ -15412,7 +14989,7 @@
                 "height": 1883,
                 "interlaced_frame": false,
                 "metadata": {},
-                "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/deloran_04.png",
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\deloran_04.png",
                 "pixel_format": -1,
                 "pixel_ratio": {
                     "den": 1,
@@ -15922,7 +15499,7 @@
                 "height": 1883,
                 "interlaced_frame": false,
                 "metadata": {},
-                "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/banderol2.png",
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol2.png",
                 "pixel_format": -1,
                 "pixel_ratio": {
                     "den": 1,
@@ -16106,6 +15683,439 @@
             "file_id": "9YP1Z5XY21",
             "title": "banderol2.png",
             "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\9YP1Z5XY21.png"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 13.08734703063965,
+            "effects": [],
+            "end": 13.08,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "id": "L00WABEDO6",
+            "layer": 5000000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 2.1500000953674316,
+            "reader": {
+                "acodec": "mp3",
+                "audio_bit_rate": 128000,
+                "audio_stream_index": 0,
+                "audio_timebase": {
+                    "den": 14112000,
+                    "num": 1
+                },
+                "channel_layout": 3,
+                "channels": 2,
+                "display_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "duration": 13.08734703063965,
+                "file_size": "209859",
+                "fps": {
+                    "den": 1,
+                    "num": 24
+                },
+                "has_audio": true,
+                "has_single_image": false,
+                "has_video": false,
+                "height": 480,
+                "interlaced_frame": false,
+                "metadata": {
+                    "encoder": "Lavf58.27.103"
+                },
+                "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/son/bttf-sound_effect.mp3",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 44100,
+                "top_field_first": true,
+                "type": "FFmpegReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "314",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 24,
+                    "num": 1
+                },
+                "width": 720
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.5
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "XXIFM11RBP",
+            "title": "bttf-sound_effect.mp3",
+            "image": "C:\\Program Files\\OpenShot Video Editor\\images\\AudioThumbnail.png"
         }
     ],
     "effects": [
@@ -17695,7 +17705,7 @@
         }
     ],
     "export_path": "",
-    "import_path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images",
+    "import_path": "D:/FYAC/dev/REPO/blindtest/dev/generique/son",
     "files": [
         {
             "acodec": "mp3",
@@ -17745,55 +17755,6 @@
             "width": 720,
             "media_type": "audio",
             "id": "YUG6QH9G3L"
-        },
-        {
-            "acodec": "mp3",
-            "audio_bit_rate": 320000,
-            "audio_stream_index": 0,
-            "audio_timebase": {
-                "den": 14112000,
-                "num": 1
-            },
-            "channel_layout": 3,
-            "channels": 2,
-            "display_ratio": {
-                "den": 1,
-                "num": 1
-            },
-            "duration": 15.38612270355225,
-            "file_size": "616533",
-            "fps": {
-                "den": 1,
-                "num": 24
-            },
-            "has_audio": true,
-            "has_single_image": false,
-            "has_video": false,
-            "height": 480,
-            "interlaced_frame": false,
-            "metadata": {
-                "encoder": "Lavf58.27.103"
-            },
-            "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\son\\bttf-sound_effect.mp3",
-            "pixel_format": -1,
-            "pixel_ratio": {
-                "den": 1,
-                "num": 1
-            },
-            "sample_rate": 44100,
-            "top_field_first": true,
-            "type": "FFmpegReader",
-            "vcodec": "",
-            "video_bit_rate": 0,
-            "video_length": "369",
-            "video_stream_index": -1,
-            "video_timebase": {
-                "den": 24,
-                "num": 1
-            },
-            "width": 720,
-            "media_type": "audio",
-            "id": "ZDILJTAGNF"
         },
         {
             "acodec": "",
@@ -18902,7 +18863,7 @@
             "height": 1883,
             "interlaced_frame": false,
             "metadata": {},
-            "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/banderol.png",
+            "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol.png",
             "pixel_format": -1,
             "pixel_ratio": {
                 "den": 1,
@@ -18949,7 +18910,7 @@
             "height": 1883,
             "interlaced_frame": false,
             "metadata": {},
-            "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/deloran_04.png",
+            "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\deloran_04.png",
             "pixel_format": -1,
             "pixel_ratio": {
                 "den": 1,
@@ -18996,7 +18957,7 @@
             "height": 1883,
             "interlaced_frame": false,
             "metadata": {},
-            "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/images/banderol2.png",
+            "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol2.png",
             "pixel_format": -1,
             "pixel_ratio": {
                 "den": 1,
@@ -19016,6 +18977,55 @@
             "width": 2515,
             "media_type": "image",
             "id": "9YP1Z5XY21"
+        },
+        {
+            "acodec": "mp3",
+            "audio_bit_rate": 128000,
+            "audio_stream_index": 0,
+            "audio_timebase": {
+                "den": 14112000,
+                "num": 1
+            },
+            "channel_layout": 3,
+            "channels": 2,
+            "display_ratio": {
+                "den": 1,
+                "num": 1
+            },
+            "duration": 13.08734703063965,
+            "file_size": "209859",
+            "fps": {
+                "den": 1,
+                "num": 24
+            },
+            "has_audio": true,
+            "has_single_image": false,
+            "has_video": false,
+            "height": 480,
+            "interlaced_frame": false,
+            "metadata": {
+                "encoder": "Lavf58.27.103"
+            },
+            "path": "D:/FYAC/dev/REPO/blindtest/dev/generique/son/bttf-sound_effect.mp3",
+            "pixel_format": -1,
+            "pixel_ratio": {
+                "den": 1,
+                "num": 1
+            },
+            "sample_rate": 44100,
+            "top_field_first": true,
+            "type": "FFmpegReader",
+            "vcodec": "",
+            "video_bit_rate": 0,
+            "video_length": "314",
+            "video_stream_index": -1,
+            "video_timebase": {
+                "den": 24,
+                "num": 1
+            },
+            "width": 720,
+            "media_type": "audio",
+            "id": "XXIFM11RBP"
         }
     ],
     "duration": 300,
@@ -19065,13 +19075,6 @@
             "label": "image_04",
             "lock": false,
             "id": "3RW2J6UCWC"
-        },
-        {
-            "number": 6000000,
-            "y": 0,
-            "label": "",
-            "lock": false,
-            "id": "F08A6DC7JP"
         }
     ],
     "markers": [],
@@ -19094,7 +19097,5 @@
     "21": null,
     "14": null,
     "11": null,
-    "13": null,
-    "13": null,
-    "32": null
+    "13": null
 }
