@@ -13,8 +13,24 @@ public class ProfilDTOTest extends AbstractTest {
 		
 		String name = "name";
 		String avatar = "avatar";
-		
-		
+
+
+		try {
+			new ProfilDTO(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
+		}
+
+		try {
+			new ProfilDTO("");
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
+		}
+
 		try {
 			new ProfilDTO(null, avatar);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");

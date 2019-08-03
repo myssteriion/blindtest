@@ -61,7 +61,7 @@ public class GameService {
 
 		for (PlayerDTO playerDto : players) {
 
-			ProfilDTO profilDto = new ProfilDTO(playerDto.getName(), "");
+			ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
 			ProfilStatDTO profilStatDto = findProfilStatDto(profilDto);
 			profilStatDto.incrementListenedMusics();
 
@@ -115,7 +115,7 @@ public class GameService {
 
 		for (String playerName : playersNames) {
 
-			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerName, ""));
+			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerName));
 			if (profilDto == null)
 				throw new NotFoundException("player '" + playerName + "' must had a profil");
 		}

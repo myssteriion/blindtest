@@ -1,21 +1,23 @@
 package com.myssteriion.blindtest.model.dto;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
+
+import java.util.Objects;
 
 public class ProfilDTO extends AbstractDTO {
 
 	private String name;
 	
 	private String avatar;
-	
-	
-	
-	@JsonCreator
+
+
+
+	public ProfilDTO(String name) {
+		this(name, Constant.DEFAULT_AVATAR);
+	}
+
 	public ProfilDTO(String name, String avatar) {
 
 		Tool.verifyValue("name", name);

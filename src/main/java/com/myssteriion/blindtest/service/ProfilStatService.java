@@ -64,7 +64,7 @@ public class ProfilStatService {
 	
 	private void checkProfilDto(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
 	
-		ProfilDTO profilDto = new ProfilDTO("ANY", "ANY");
+		ProfilDTO profilDto = new ProfilDTO("ANY");
 		profilDto.setId( profilStatDto.getProfilId() );
 		profilDto = profilService.find(profilDto);
 		if ( Tool.isNullOrEmpty(profilDto) )
