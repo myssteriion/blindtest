@@ -88,6 +88,7 @@ public class GameService {
 			switch ( gameResultDto.getNumMusic() ) {
 				case FIRST: profilStatDto.incrementPlayedGames(); break;
 				case LAST: profilStatDto.setBestScoreIfBetter( playerDto.getScore() ); break;
+				case NORMAL: /* do nothing */ break;
 				default: new IllegalArgumentException("Il manque un case (" + gameResultDto.getRound() + ").");
 			}
 
