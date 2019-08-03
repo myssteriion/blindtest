@@ -18,7 +18,7 @@ public class Tool {
 			return true;
 		}
 		else if (o instanceof String) {
-			return ((String) o).isEmpty();
+			return ((String) o).trim().isEmpty();
 		}
 		else if (o instanceof List) {
 			return ((List<?>) o).isEmpty();

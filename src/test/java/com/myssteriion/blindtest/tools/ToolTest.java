@@ -22,7 +22,10 @@ public class ToolTest extends AbstractTest {
 		Assert.assertTrue( Tool.isNullOrEmpty("") );
 		Assert.assertTrue( Tool.isNullOrEmpty( new ArrayList<>() ) );
 		Assert.assertTrue( Tool.isNullOrEmpty( new HashMap<>() ) );
-		
+
+		Assert.assertTrue( Tool.isNullOrEmpty(" ") );
+		Assert.assertTrue( Tool.isNullOrEmpty("  ") );
+
 		Assert.assertFalse( Tool.isNullOrEmpty("test") );
 		Assert.assertFalse( Tool.isNullOrEmpty( Arrays.asList("test") ) );
 		
