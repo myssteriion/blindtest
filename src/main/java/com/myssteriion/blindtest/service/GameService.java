@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
@@ -52,9 +53,11 @@ public class GameService {
 							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
 
 
-		gameResultDto.getMusicDTO().incrementPlayed();
-		musicService.update( gameResultDto.getMusicDTO() );
+		MusicDTO musicDto = musicService.find( gameResultDto.getMusicDTO() );
+		if (musicDto == null)
+			throw new NotFoundException("musicDto not found");
 
+		musicService.update(musicDto);
 		List<PlayerDTO> players = gameDto.getPlayers();
 		List<ProfilDTO> winners = gameResultDto.getWinners();
 		List<ProfilDTO> loosers = gameResultDto.getLoosers();

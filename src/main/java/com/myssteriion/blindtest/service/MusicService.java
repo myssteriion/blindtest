@@ -6,6 +6,7 @@ import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,11 @@ public class MusicService {
 		return musicDao.update(musicDto);
 	}
 
+	public MusicDTO find(MusicDTO musicDto) throws SqlException {
+
+		Tool.verifyValue("musicDto", musicDto);
+		return musicDao.find(musicDto);
+	}
 
 
 	public MusicDTO random() throws SqlException, NotFoundException {

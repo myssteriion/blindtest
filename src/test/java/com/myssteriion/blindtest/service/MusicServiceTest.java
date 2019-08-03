@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -117,6 +118,26 @@ public class MusicServiceTest extends AbstractTest {
 		MusicDTO musicDtoSaved = musicService.update(musicDto);
 		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( "name", musicDtoSaved.getName() );
+	}
+
+	@Test
+	public void find() throws SqlException {
+
+		MusicDTO musicDtoMock = new MusicDTO("name", Theme.ANNEES_80);
+		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
+
+
+		try {
+			musicService.find(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
+		}
+
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+		Assert.assertNull( musicService.find(musicDto) );
+		Assert.assertNotNull( musicService.find(musicDto) );
 	}
 	
 	@SuppressWarnings("unchecked")
