@@ -1,10 +1,8 @@
 package com.myssteriion.blindtest.db.common;
 
+import com.myssteriion.blindtest.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.SqlException;
 
 public class SqlExceptionTest extends AbstractTest {
 
