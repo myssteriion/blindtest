@@ -36,8 +36,8 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO " + tableName + "(profil_id, played_games, listened_musics, found_musics) ");
-			sb.append("VALUES (" + profilStatDto.getProfilId() + ", 0, 0, 0)");
+			sb.append("INSERT INTO " + tableName + "(profil_id, played_games, listened_musics, found_musics, best_score) ");
+			sb.append("VALUES (" + profilStatDto.getProfilId() + ", 0, 0, 0, 0)");
 			
 			statement.execute( sb.toString() );
 			
@@ -64,6 +64,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			sb.append("SET played_games = " + profilStatDto.getPlayedGames() + ", ");
 			sb.append("listened_musics = " + profilStatDto.getListenedMusics() + ", ");
 			sb.append("found_musics = " + profilStatDto.getFoundMusics() + " ");
+			sb.append("best_score = " + profilStatDto.getBestScore() + " ");
 			sb.append("WHERE id = " + profilStatDto.getId());
 			
 			statement.execute( sb.toString() );
@@ -97,7 +98,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			if ( rs.next() ) {
 				
 				profilDtoToReturn = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"),
-													  rs.getInt("found_musics") );
+													  rs.getInt("found_musics"), rs.getInt("best_score") );
 				profilDtoToReturn.setId( rs.getInt("id") );
 			}
 
@@ -122,7 +123,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			while ( rs.next() ) {
 
 				ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"), rs.getInt("listened_musics"), 
-																rs.getInt("found_musics") );
+																rs.getInt("found_musics"), rs.getInt("best_score") );
 				profilStatDto.setId( rs.getInt("id") );
 				profilDtoList.add(profilStatDto);
 			}

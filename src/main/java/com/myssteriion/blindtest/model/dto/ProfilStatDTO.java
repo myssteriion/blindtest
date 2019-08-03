@@ -14,14 +14,16 @@ public class ProfilStatDTO extends AbstractDTO {
 	private int listenedMusics;
 	
 	private int foundMusics;
-	
+
+	private int bestScore;
+
 	
 	
 	public ProfilStatDTO(Integer profilId) {
-		this(profilId, 0, 0, 0);
+		this(profilId, 0, 0, 0, 0);
 	}
 	
-	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics) {
+	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics, int bestScore) {
 		
 		Tool.verifyValue("profilId", profilId);
 		
@@ -29,6 +31,7 @@ public class ProfilStatDTO extends AbstractDTO {
 		this.playedGames = (playedGames < 0) ? 0 : playedGames;
 		this.listenedMusics = (listenedMusics < 0) ? 0 : listenedMusics;
 		this.foundMusics = (foundMusics < 0) ? 0 : foundMusics;
+		this.bestScore = (bestScore < 0) ? 0 : bestScore;
 	}
 	
 	
@@ -60,9 +63,18 @@ public class ProfilStatDTO extends AbstractDTO {
 	public void incrementFoundMusics() {
 		this.foundMusics++;
 	}
-	
-	
-	
+
+	public int getBestScore() {
+		return bestScore;
+	}
+
+	public void setBestScoreIfBetter(int bestScore) {
+		 if (bestScore > this.bestScore)
+		 	this.bestScore = bestScore;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(profilId);
@@ -87,7 +99,8 @@ public class ProfilStatDTO extends AbstractDTO {
 				", profilId=" + profilId +
 				", playedGames=" + playedGames +
 				", listenedMusics=" + listenedMusics +
-				", foundMusics=" + foundMusics;
+				", foundMusics=" + foundMusics +
+				", bestScore=" + bestScore;
 	}
 	
 }

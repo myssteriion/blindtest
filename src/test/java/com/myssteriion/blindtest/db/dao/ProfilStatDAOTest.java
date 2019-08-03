@@ -117,8 +117,8 @@ public class ProfilStatDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3);
-		rs.addRow(2, 1, 1, 2, 3);
+		rs.addRow(1, 1, 1, 2, 3, 4);
+		rs.addRow(2, 1, 1, 2, 3, 4);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -161,7 +161,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3);
+		rs.addRow(1, 1, 1, 2, 3, 4);
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -183,6 +183,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( 4, profilStatDto.getBestScore() );
 	}
 	
 	
@@ -195,6 +196,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		rs.addColumn("played_games", Types.INTEGER, 100, 0);
 		rs.addColumn("listened_musics", Types.INTEGER, 100, 0);
 		rs.addColumn("found_musics", Types.INTEGER, 100, 0);
+		rs.addColumn("best_score", Types.INTEGER, 100, 0);
 		return rs;
 	}
 	
