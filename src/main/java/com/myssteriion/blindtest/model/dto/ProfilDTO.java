@@ -31,7 +31,8 @@ public class ProfilDTO extends AbstractDTO {
 	}
 	
 	public void setName(String name) {
-		this.name = ( Tool.isNullOrEmpty(name) ) ? Constant.DEFAULT_AVATAR : name;
+		Tool.verifyValue("name", name);
+		this.name = name.trim();
 	}
 
 	public String getAvatar() {
@@ -39,9 +40,7 @@ public class ProfilDTO extends AbstractDTO {
 	}
 
 	public void setAvatar(String avatar) {
-		
-		Tool.verifyValue("avatar", avatar);
-		this.avatar = avatar;
+		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;;
 	}
 	
 	
