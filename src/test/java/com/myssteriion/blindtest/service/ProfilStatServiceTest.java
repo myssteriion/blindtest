@@ -33,7 +33,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	@Test
 	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
 		
-		Integer profilId = 1;
+		Integer profilStatId = 1;
 		
 		try {
 			profilStatService.save(null);
@@ -48,12 +48,12 @@ public class ProfilStatServiceTest extends AbstractTest {
 		profilDTOMock.setId(1);
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDTOMock);
 		
-		ProfilStatDTO profilStatDtoMock = new ProfilStatDTO(profilId);
+		ProfilStatDTO profilStatDtoMock = new ProfilStatDTO(profilStatId);
 		profilStatDtoMock.setId(1);
 		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDtoMock, (ProfilStatDTO) null);
 		Mockito.when(profilStatDao.save(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDtoMock);
 		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilStatId);
 		
 		try {
 			profilStatService.save(profilStatDto);
@@ -75,109 +75,56 @@ public class ProfilStatServiceTest extends AbstractTest {
 
 		ProfilStatDTO profilStatDtoSaved = profilStatService.save(profilStatDto);
 		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
-		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
+		Assert.assertEquals( profilStatId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getPlayedGames() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getListenedMusics() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getFoundMusics() );
 	}
-	
-	@Test
-	public void updatePlayedGames() throws SqlException, NotFoundException {
-		
-		Integer profilId = 1;
-		
-		try {
-			profilStatService.updatePlayedGames(null);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
-		}
-		
-		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId(1);
-		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
-		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
-		
-		try {
-			profilStatService.updatePlayedGames(profilStatDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profilStatDto not found."), e);
-		}
-		
-		ProfilStatDTO profilStatDtoSaved = profilStatService.updatePlayedGames(profilStatDto);
-		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
-		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
-		Assert.assertEquals( 1, profilStatDtoSaved.getPlayedGames() );
-	}
 
 	@Test
-	public void updateListenedMusics() throws SqlException, NotFoundException {
-		
-		Integer profilId = 1;
-		
+	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+
+		Integer profilStatId = 1;
+
+
 		try {
-			profilStatService.updateListenedMusics(null);
+			profilStatService.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDTO' est obligatoire."), e);
 		}
-		
-		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId(1);
-		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
-		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
-		
+
+
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilStatId);
 		try {
-			profilStatService.updateListenedMusics(profilStatDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profilStatDto not found."), e);
-		}
-		
-		ProfilStatDTO profilStatDtoSaved = profilStatService.updateListenedMusics(profilStatDto);
-		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
-		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
-		Assert.assertEquals( 1, profilStatDtoSaved.getListenedMusics() );
-	}
-	
-	@Test
-	public void updateFoundMusics() throws SqlException, NotFoundException {
-		
-		Integer profilId = 1;
-		
-		try {
-			profilStatService.updateFoundMusics(null);
+			profilStatService.update(profilStatDto);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profilStatDTO -> id' est obligatoire."), e);
 		}
-		
-		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId);
-		profilStatDto.setId(1);
-		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDto);
+
+
+		ProfilStatDTO profilStatDtoMockNotSame = new ProfilStatDTO(profilStatId);
+		profilStatDtoMockNotSame.setId(2);
+		ProfilStatDTO profilStatDtoMockSame = new ProfilStatDTO(profilStatId);
+		profilStatDtoMockSame.setId(1);
+		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDtoMockNotSame, profilStatDtoMockNotSame, profilStatDtoMockSame);
 		Mockito.when(profilStatDao.update(Mockito.any(ProfilStatDTO.class))).thenReturn(profilStatDto);
-		
+
 		try {
-			profilStatService.updateFoundMusics(profilStatDto);
+			profilStatDto.setId(1);
+			profilStatService.update(profilStatDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profilStatDto not found."), e);
+			verifyException(new NotFoundException("profilStatDTO not found."), e);
 		}
-		
-		ProfilStatDTO profilStatDtoSaved = profilStatService.updateFoundMusics(profilStatDto);
-		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
-		Assert.assertEquals( profilId, profilStatDtoSaved.getProfilId() );
-		Assert.assertEquals( 1, profilStatDtoSaved.getFoundMusics() );
+
+		profilStatDto.setId(1);
+		ProfilStatDTO profilDtoSaved = profilStatService.update(profilStatDto);
+		Assert.assertEquals( new Integer(1), profilDtoSaved.getId() );
 	}
 	
 	@Test

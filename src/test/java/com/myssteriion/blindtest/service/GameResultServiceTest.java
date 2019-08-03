@@ -76,16 +76,12 @@ public class GameResultServiceTest extends AbstractTest {
 		
 		gameResultService.apply(gameResultDto);
 		Mockito.verify(musicService, Mockito.times(3)).update( Mockito.any(MusicDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(0)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(2)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(1)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(2)).update( Mockito.any(ProfilStatDTO.class) );
 		
 		gameResultDto = new GameResultDTO( GameResultType.FIRST, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
 		gameResultService.apply(gameResultDto);
 		Mockito.verify(musicService, Mockito.times(4)).update( Mockito.any(MusicDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(2)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(4)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
-		Mockito.verify(profilStatService, Mockito.times(2)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );
+		Mockito.verify(profilStatService, Mockito.times(4)).update( Mockito.any(ProfilStatDTO.class) );
 	}
 
 }
