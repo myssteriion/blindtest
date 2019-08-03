@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.common.NumMusic;
@@ -33,9 +34,9 @@ public class GameControllerTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws SqlException, NotFoundException {
+	public void newGame() throws SqlException, NotFoundException, AlreadyExistsException {
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
+		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
 		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(players));
 
 		ResponseEntity<GameDTO> re = gameController.newGame(players);
@@ -47,7 +48,7 @@ public class GameControllerTest extends AbstractTest {
 	@Test
 	public void apply() throws SqlException, NotFoundException {
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
+		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
 		Mockito.when(gameService.apply( Mockito.any(GameResultDTO.class) )).thenReturn(new GameDTO(players));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);

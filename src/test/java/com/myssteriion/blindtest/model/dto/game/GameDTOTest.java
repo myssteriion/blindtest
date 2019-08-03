@@ -18,7 +18,7 @@ public class GameDTOTest extends AbstractTest {
     @Test
     public void constructor() {
 
-        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name", 0) );
+        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name") );
 
         try {
             new GameDTO(null);
@@ -44,7 +44,7 @@ public class GameDTOTest extends AbstractTest {
     @Test
     public void getterSetter() {
 
-        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name", 0) );
+        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name") );
 
         GameDTO gameDTO = new GameDTO(players);
         Assert.assertNotNull(gameDTO);

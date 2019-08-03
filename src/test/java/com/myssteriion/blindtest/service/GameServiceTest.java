@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.common.NumMusic;
@@ -40,12 +41,12 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws SqlException, NotFoundException {
+	public void newGame() throws SqlException, NotFoundException, AlreadyExistsException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
+		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
 
 		try {
 			gameService.newGame(null);
@@ -64,11 +65,19 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
+			gameService.newGame( Arrays.asList(new PlayerDTO("name"), new PlayerDTO("name")));
+			Assert.fail("Doit lever une AlreadyExistsException car un param est KO.");
+		}
+		catch (AlreadyExistsException e) {
+			verifyException(new AlreadyExistsException("player can be appear only one time"), e);
+		}
+
+		try {
 			gameService.newGame(players);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("player 'name' need match with a profil"), e);
+			verifyException(new NotFoundException("player 'name' must had a profil"), e);
 		}
 
 
@@ -78,7 +87,7 @@ public class GameServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws SqlException, NotFoundException {
+	public void apply() throws SqlException, NotFoundException, AlreadyExistsException {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
@@ -89,7 +98,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto, null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
+		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
 		gameService.newGame(players);
 
 		try {

@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -30,16 +32,10 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException {
+	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException, AlreadyExistsException {
 
 		Tool.verifyValue("players", players);
-
-		for (PlayerDTO playerDto : players) {
-
-			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerDto.getName(), ""));
-			if (profilDto == null)
-				throw new NotFoundException("player '" + playerDto.getName() + "' need match with a profil");
-		}
+		checkPlayers(players);
 
 		GameDTO gameDto = new GameDTO(players);
 		gameDto.setId( games.size() );
@@ -110,6 +106,19 @@ public class GameService {
 			throw new NotFoundException("profilStatDto not found.");
 
 		return foundProfilStatDTO;
+	}
+
+	private void checkPlayers(List<PlayerDTO> players) throws SqlException, NotFoundException, AlreadyExistsException {
+
+		if ( players.size() != new HashSet<>(players).size() )
+			throw new AlreadyExistsException("player can be appear only one time");
+
+		for (PlayerDTO playerDto : players) {
+
+			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerDto.getName(), ""));
+			if (profilDto == null)
+				throw new NotFoundException("player '" + playerDto.getName() + "' must had a profil");
+		}
 	}
 
 }

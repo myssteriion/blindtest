@@ -14,12 +14,12 @@ public class PlayerDTO {
 
 
 	@JsonCreator
-	public PlayerDTO(String name, int score) {
+	public PlayerDTO(String name) {
 
 		Tool.verifyValue("name", name);
 
 		this.name = name.trim();
-		this.score = (score < 0) ? 0 : score;
+		this.score = 0;
 	}
 
 
