@@ -1,10 +1,5 @@
 package com.myssteriion.blindtest.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
@@ -12,6 +7,10 @@ import com.myssteriion.blindtest.db.dao.ProfilStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfilStatService {
@@ -27,7 +26,7 @@ public class ProfilStatService {
 	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException, AlreadyExistsException  {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
-		chekcProfilDto(profilStatDto);
+		checkProfilDto(profilStatDto);
 
 		profilStatDto.setId(null);
 		ProfilStatDTO foundProfilDto = profilStatDao.find(profilStatDto);
@@ -40,50 +39,17 @@ public class ProfilStatService {
 		
 		return foundProfilDto;
 	}
-	
-	public ProfilStatDTO updatePlayedGames(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
-		
-		Tool.verifyValue("profilStatDto", profilStatDto);
-		
-		ProfilStatDTO foundProfilDto = profilStatDao.find(profilStatDto);
-		
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			throw new NotFoundException("profilStatDto not found.");
 
-		
-		foundProfilDto.incrementPlayedGames();
-		
-		return profilStatDao.update(foundProfilDto);
-	}
-	
-	public ProfilStatDTO updateListenedMusics(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
-		
-		Tool.verifyValue("profilStatDto", profilStatDto);
-		
-		ProfilStatDTO foundProfilDto = profilStatDao.find(profilStatDto);
-		
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			throw new NotFoundException("profilStatDto not found.");
+	public ProfilStatDTO update(ProfilStatDTO profilStatDTO) throws SqlException, NotFoundException {
 
-		
-		foundProfilDto.incrementListenedMusics();
-		
-		return profilStatDao.update(foundProfilDto);
-	}
-	
-	public ProfilStatDTO updateFoundMusics(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
-		
-		Tool.verifyValue("profilStatDto", profilStatDto);
-		
-		ProfilStatDTO foundProfilDto = profilStatDao.find(profilStatDto);
-		
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			throw new NotFoundException("profilStatDto not found.");
+		Tool.verifyValue("profilStatDTO", profilStatDTO);
+		Tool.verifyValue("profilStatDTO -> id", profilStatDTO.getId());
 
-		
-		foundProfilDto.incrementFoundMusics();;
-		
-		return profilStatDao.update(foundProfilDto);
+		ProfilStatDTO foundProfilStatDto = profilStatDao.find(profilStatDTO);
+		if ( Tool.isNullOrEmpty(foundProfilStatDto) )
+			throw new NotFoundException("profilStatDTO not found.");
+
+		return profilStatDao.update(profilStatDTO);
 	}
 
 	public ProfilStatDTO find(ProfilStatDTO profilStatDto) throws SqlException {
@@ -96,7 +62,7 @@ public class ProfilStatService {
 		return profilStatDao.findAll();
 	}
 	
-	private void chekcProfilDto(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
+	private void checkProfilDto(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
 	
 		ProfilDTO profilDto = new ProfilDTO("ANY", "ANY");
 		profilDto.setId( profilStatDto.getProfilId() );
