@@ -82,7 +82,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 		Integer profilId = 1;
 		ProfilStatDTO profilStatDtoUn = new ProfilStatDTO(profilId);
 		
-²		Assert.assertEquals( "id=null, profilId=1, playedGames=0, listenedMusics=0, foundMusics=0, bestScore=0", profilStatDtoUn.toString() );
+		Assert.assertEquals( "id=null, profilId=1, playedGames=0, listenedMusics=0, foundMusics=0, bestScore=0", profilStatDtoUn.toString() );
 		
 		ProfilStatDTO profilStatDtoUnIso = new ProfilStatDTO(1);
 		ProfilStatDTO profilStatDtoDeux = new ProfilStatDTO(2);

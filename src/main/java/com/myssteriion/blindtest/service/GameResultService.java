@@ -36,17 +36,23 @@ public class GameResultService {
 			profilStatService.updateListenedMusics(profilStatDTO);
 			profilStatService.updateFoundMusics(profilStatDTO);
 			
-			if ( gameResultDto.isFirstMusic() )
-				profilStatService.updatePlayedGames(profilStatDTO);
+			switch ( gameResultDto.getType() ) {
+
+				case FIRST:		profilStatService.updatePlayedGames(profilStatDTO);
+								break;
+			}
 		}
 		
 		for (ProfilDTO looser : gameResultDto.getLoosers() ) {
 			
 			ProfilStatDTO profilStatDTO = findProfilStatDto(looser);
 			profilStatService.updateListenedMusics(profilStatDTO);
-			
-			if ( gameResultDto.isFirstMusic() )
-				profilStatService.updatePlayedGames(profilStatDTO);
+
+			switch ( gameResultDto.getType() ) {
+
+				case FIRST:		profilStatService.updatePlayedGames(profilStatDTO);
+								break;
+			}
 		}
 	}
 	

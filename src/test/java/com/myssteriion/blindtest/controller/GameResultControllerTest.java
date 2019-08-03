@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.model.common.GameResultType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -33,7 +34,7 @@ public class GameResultControllerTest extends AbstractTest {
 		Mockito.doNothing().when(gameResultService).apply( Mockito.any(GameResultDTO.class) );
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
-		GameResultDTO gameResultDto = new GameResultDTO(false, musicDto, null, null);
+		GameResultDTO gameResultDto = new GameResultDTO(GameResultType.NORMAL, musicDto, null, null);
 		
 		ResponseEntity<Empty> re = gameResultController.apply(gameResultDto);
 		Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
