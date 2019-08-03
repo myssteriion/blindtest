@@ -32,12 +32,12 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException, ConflictException {
+	public GameDTO newGame(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
 
-		Tool.verifyValue("players", players);
-		checkPlayers(players);
+		Tool.verifyValue("playersNames", playersNames);
+		checkPlayers(playersNames);
 
-		GameDTO gameDto = new GameDTO(players);
+		GameDTO gameDto = new GameDTO(playersNames);
 		gameDto.setId( games.size() );
 		games.add(gameDto);
 		return gameDto;
@@ -108,16 +108,16 @@ public class GameService {
 		return foundProfilStatDTO;
 	}
 
-	private void checkPlayers(List<PlayerDTO> players) throws SqlException, NotFoundException, ConflictException {
+	private void checkPlayers(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
 
-		if ( players.size() != new HashSet<>(players).size() )
+		if ( playersNames.size() != new HashSet<>(playersNames).size() )
 			throw new ConflictException("player can be appear only one time");
 
-		for (PlayerDTO playerDto : players) {
+		for (String playerName : playersNames) {
 
-			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerDto.getName(), ""));
+			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerName, ""));
 			if (profilDto == null)
-				throw new NotFoundException("player '" + playerDto.getName() + "' must had a profil");
+				throw new NotFoundException("player '" + playerName + "' must had a profil");
 		}
 	}
 
