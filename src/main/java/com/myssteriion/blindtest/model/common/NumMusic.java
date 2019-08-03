@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
-public enum GameResultType {
+public enum NumMusic {
 
     FIRST, NORMAL, LAST
 
