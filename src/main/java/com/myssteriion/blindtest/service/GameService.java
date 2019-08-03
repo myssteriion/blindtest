@@ -57,6 +57,7 @@ public class GameService {
 		if (musicDto == null)
 			throw new NotFoundException("musicDto not found");
 
+		musicDto.incrementPlayed();
 		musicService.update(musicDto);
 
 		List<PlayerDTO> players = gameDto.getPlayers();
