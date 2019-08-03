@@ -23,9 +23,9 @@ public class GameResultDTO {
 	
 	@JsonCreator
 	public GameResultDTO(GameResultType type, MusicDTO musicDTO, List<ProfilDTO> winners, List<ProfilDTO> loosers) {
-		
-		Tool.verifyValue("musicDto", musicDTO);
+
 		Tool.verifyValue("type", type);
+		Tool.verifyValue("musicDto", musicDTO);
 
 		this.type = type;
 		this.musicDTO = musicDTO;
