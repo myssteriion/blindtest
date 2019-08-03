@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.model.dto;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
+
+import java.util.Objects;
 
 public class MusicDTO extends AbstractDTO {
 
@@ -15,18 +15,18 @@ public class MusicDTO extends AbstractDTO {
 	
 	private int played;
 	
-	
-	
+
+
+	@JsonCreator
 	public MusicDTO(String name, Theme theme) {
 		this(name, theme, 0);
 	}
-	
-	@JsonCreator
+
 	public MusicDTO(String name, Theme theme, int played) {
-		
+
 		Tool.verifyValue("name", name);
 		Tool.verifyValue("theme", theme);
-		
+
 		this.name = name;
 		this.theme = theme;
 		this.played = (played < 0) ? 0 : played;
