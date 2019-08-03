@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.common.NumMusic;
@@ -41,7 +41,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void newGame() throws SqlException, NotFoundException, ConflictException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
@@ -66,10 +66,10 @@ public class GameServiceTest extends AbstractTest {
 
 		try {
 			gameService.newGame( Arrays.asList(new PlayerDTO("name"), new PlayerDTO("name")));
-			Assert.fail("Doit lever une AlreadyExistsException car un param est KO.");
+			Assert.fail("Doit lever une ConflictException car un param est KO.");
 		}
-		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("player can be appear only one time"), e);
+		catch (ConflictException e) {
+			verifyException(new ConflictException("player can be appear only one time"), e);
 		}
 
 		try {
@@ -87,7 +87,7 @@ public class GameServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void apply() throws SqlException, NotFoundException, ConflictException {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");

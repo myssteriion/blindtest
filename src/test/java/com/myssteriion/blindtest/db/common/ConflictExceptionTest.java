@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AlreadyExistsExceptionTest extends AbstractTest {
+public class ConflictExceptionTest extends AbstractTest {
 
 
     @Test
@@ -13,7 +13,7 @@ public class AlreadyExistsExceptionTest extends AbstractTest {
         String message = "failed";
 
         try {
-            new AlreadyExistsException(null);
+            new ConflictException(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -21,14 +21,14 @@ public class AlreadyExistsExceptionTest extends AbstractTest {
         }
 
         try {
-            new AlreadyExistsException("");
+            new ConflictException("");
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
-        AlreadyExistsException eme = new AlreadyExistsException(message);
+        ConflictException eme = new ConflictException(message);
         Assert.assertEquals( message, eme.getMessage() );
     }
     

@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
@@ -28,7 +28,7 @@ public class MusicService {
 	
 	
 	@PostConstruct
-	private void init() throws SqlException, AlreadyExistsException {
+	private void init() throws SqlException, ConflictException {
 		
 		for ( Theme theme : Theme.values() ) {
 			
@@ -45,13 +45,13 @@ public class MusicService {
 		}
 	}
 	
-	public void refresh() throws SqlException, AlreadyExistsException {
+	public void refresh() throws SqlException, ConflictException {
 		init();
 	}
 	
 	
 	
-	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws SqlException, AlreadyExistsException  {
+	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws SqlException, ConflictException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		
@@ -59,7 +59,7 @@ public class MusicService {
 		MusicDTO foundMusicDto = musicDao.find(musicDto);
 		
 		if (!Tool.isNullOrEmpty(foundMusicDto) && throwIfExists)
-			throw new AlreadyExistsException("musicDto already exists.");
+			throw new ConflictException("musicDto already exists.");
 		
 		
 		if ( Tool.isNullOrEmpty(foundMusicDto) )

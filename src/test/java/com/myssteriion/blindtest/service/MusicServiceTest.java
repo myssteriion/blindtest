@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,12 +12,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
 
 public class MusicServiceTest extends AbstractTest {
 
@@ -29,12 +28,12 @@ public class MusicServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws SqlException, AlreadyExistsException {
+	public void refresh() throws SqlException, ConflictException {
 		musicService.refresh();
 	}
 	
 	@Test
-	public void save() throws SqlException, AlreadyExistsException {
+	public void save() throws SqlException, ConflictException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -61,8 +60,8 @@ public class MusicServiceTest extends AbstractTest {
 			musicService.save(musicDto, true);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("musicDto already exists."), e);
+		catch (ConflictException e) {
+			verifyException(new ConflictException("musicDto already exists."), e);
 		}
 
 		MusicDTO musicDtoSaved = musicService.save(musicDto, false);
@@ -73,7 +72,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void update() throws SqlException, NotFoundException, ConflictException {
 
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;

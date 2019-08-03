@@ -2,10 +2,10 @@ package com.myssteriion.blindtest.service;
 
 import java.util.List;
 
+import com.myssteriion.blindtest.db.common.ConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
@@ -24,7 +24,7 @@ public class ProfilService {
 	
 	
 	
-	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException  {
+	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -32,7 +32,7 @@ public class ProfilService {
 		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
 		if ( !Tool.isNullOrEmpty(foundProfilDto) )
-			throw new AlreadyExistsException("the profilDto name is already used.");
+			throw new ConflictException("the profilDto name is already used.");
 		
 		
 		foundProfilDto = profilDao.save(profilDto);
@@ -42,7 +42,7 @@ public class ProfilService {
 		return foundProfilDto;
 	}
 	
-	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
+	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		Tool.verifyValue("profilDto -> id", profilDto.getId());
@@ -57,7 +57,7 @@ public class ProfilService {
 		
 		foundProfilDto = profilDao.find(profilDto);
 		if ( foundProfilDto != null  && !foundProfilDto.getId().equals(id) )
-			throw new AlreadyExistsException("the profilDto name is already used.");
+			throw new ConflictException("the profilDto name is already used.");
 		
 		profilDto.setId(id);
 		return profilDao.update(profilDto);

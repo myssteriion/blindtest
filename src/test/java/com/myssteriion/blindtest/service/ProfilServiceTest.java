@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import java.util.Arrays;
 import java.util.List;
 
+import com.myssteriion.blindtest.db.common.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
@@ -31,7 +31,7 @@ public class ProfilServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void save() throws SqlException, NotFoundException, ConflictException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -60,8 +60,8 @@ public class ProfilServiceTest extends AbstractTest {
 			profilService.save(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("the profilDto name is already used."), e);
+		catch (ConflictException e) {
+			verifyException(new ConflictException("the profilDto name is already used."), e);
 		}
 
 		ProfilDTO profilDtoSaved = profilService.save(profilDto);
@@ -70,7 +70,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void update() throws SqlException, NotFoundException, ConflictException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -116,8 +116,8 @@ public class ProfilServiceTest extends AbstractTest {
 			profilService.update(profilDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("the profilDto name is already used."), e);
+		catch (ConflictException e) {
+			verifyException(new ConflictException("the profilDto name is already used."), e);
 		}
 		
 		profilDto.setId(1);

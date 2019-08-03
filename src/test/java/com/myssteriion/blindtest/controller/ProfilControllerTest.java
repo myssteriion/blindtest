@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import java.util.Arrays;
 
+import com.myssteriion.blindtest.db.common.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
@@ -29,7 +29,7 @@ public class ProfilControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void save() throws SqlException, NotFoundException, ConflictException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
@@ -41,7 +41,7 @@ public class ProfilControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void update() throws SqlException, NotFoundException, ConflictException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);

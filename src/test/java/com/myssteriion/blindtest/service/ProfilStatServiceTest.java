@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import java.util.Arrays;
 import java.util.List;
 
+import com.myssteriion.blindtest.db.common.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.db.dao.ProfilStatDAO;
@@ -31,7 +31,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void save() throws SqlException, NotFoundException, ConflictException {
 		
 		Integer profilStatId = 1;
 		
@@ -69,8 +69,8 @@ public class ProfilStatServiceTest extends AbstractTest {
 			profilStatService.save(profilStatDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
-		catch (AlreadyExistsException e) {
-			verifyException(new AlreadyExistsException("profilStatDto already exists."), e);
+		catch (ConflictException e) {
+			verifyException(new ConflictException("profilStatDto already exists."), e);
 		}
 
 		ProfilStatDTO profilStatDtoSaved = profilStatService.save(profilStatDto);
@@ -82,7 +82,7 @@ public class ProfilStatServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+	public void update() throws SqlException, NotFoundException, ConflictException {
 
 		Integer profilStatId = 1;
 

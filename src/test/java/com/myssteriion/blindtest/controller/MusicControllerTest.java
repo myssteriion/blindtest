@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -28,7 +28,7 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws SqlException, AlreadyExistsException {
+	public void refresh() throws SqlException, ConflictException {
 
 		Mockito.doNothing().when(musicService).refresh();
 

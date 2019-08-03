@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -32,7 +32,7 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException, AlreadyExistsException {
+	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException, ConflictException {
 
 		Tool.verifyValue("players", players);
 		checkPlayers(players);
@@ -108,10 +108,10 @@ public class GameService {
 		return foundProfilStatDTO;
 	}
 
-	private void checkPlayers(List<PlayerDTO> players) throws SqlException, NotFoundException, AlreadyExistsException {
+	private void checkPlayers(List<PlayerDTO> players) throws SqlException, NotFoundException, ConflictException {
 
 		if ( players.size() != new HashSet<>(players).size() )
-			throw new AlreadyExistsException("player can be appear only one time");
+			throw new ConflictException("player can be appear only one time");
 
 		for (PlayerDTO playerDto : players) {
 

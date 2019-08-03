@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
@@ -29,7 +29,7 @@ public class GameController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<GameDTO> newGame(@RequestBody List<PlayerDTO> players) throws SqlException, NotFoundException, AlreadyExistsException {
+	public ResponseEntity<GameDTO> newGame(@RequestBody List<PlayerDTO> players) throws SqlException, NotFoundException, ConflictException {
 
 		GameDTO gameDTO = gameService.newGame(players);
 		return ResponseBuilder.create200(gameDTO);

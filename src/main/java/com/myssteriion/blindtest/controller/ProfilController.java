@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myssteriion.blindtest.db.common.AlreadyExistsException;
+import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
@@ -35,7 +35,7 @@ public class ProfilController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
+	public ResponseEntity<ProfilDTO> save(@RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
 		return ResponseBuilder.create201( profilService.save(profilDto) );
 	}
 	
@@ -43,7 +43,7 @@ public class ProfilController {
 		method = RequestMethod.PUT,
 		path = Constant.ID_PATH_PARAM
 	)
-	public ResponseEntity<ProfilDTO> update(@PathVariable("id") Integer id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, AlreadyExistsException {
+	public ResponseEntity<ProfilDTO> update(@PathVariable("id") Integer id, @RequestBody ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
 		
 		profilDto.setId(id);
 		return ResponseBuilder.create200( profilService.update(profilDto) );
