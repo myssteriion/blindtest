@@ -42,7 +42,7 @@ public class GameResultServiceTest extends AbstractTest {
 		profilDto.setId(1);
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		
-		Mockito.when(musicService.updatePlayed( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
+		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
 
@@ -75,14 +75,14 @@ public class GameResultServiceTest extends AbstractTest {
 		}
 		
 		gameResultService.apply(gameResultDto);
-		Mockito.verify(musicService, Mockito.times(3)).updatePlayed( Mockito.any(MusicDTO.class) );
+		Mockito.verify(musicService, Mockito.times(3)).update( Mockito.any(MusicDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(0)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(2)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(1)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );
 		
 		gameResultDto = new GameResultDTO( GameResultType.FIRST, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
 		gameResultService.apply(gameResultDto);
-		Mockito.verify(musicService, Mockito.times(4)).updatePlayed( Mockito.any(MusicDTO.class) );
+		Mockito.verify(musicService, Mockito.times(4)).update( Mockito.any(MusicDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(2)).updatePlayedGames( Mockito.any(ProfilStatDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(4)).updateListenedMusics( Mockito.any(ProfilStatDTO.class) );
 		Mockito.verify(profilStatService, Mockito.times(2)).updateFoundMusics( Mockito.any(ProfilStatDTO.class) );

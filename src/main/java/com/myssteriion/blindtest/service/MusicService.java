@@ -1,17 +1,5 @@
 package com.myssteriion.blindtest.service;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.myssteriion.blindtest.db.common.AlreadyExistsException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
@@ -20,6 +8,16 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MusicService {
@@ -69,24 +67,21 @@ public class MusicService {
 		
 		return foundMusicDto;
 	}
-	
-	public MusicDTO updatePlayed(MusicDTO musicDto) throws SqlException, NotFoundException {
-		
+
+	public MusicDTO update(MusicDTO musicDto) throws SqlException, NotFoundException {
+
 		Tool.verifyValue("musicDto", musicDto);
-		
+		Tool.verifyValue("musicDto -> id", musicDto.getId());
+
 		MusicDTO foundMusicDto = musicDao.find(musicDto);
-		
 		if ( Tool.isNullOrEmpty(foundMusicDto) )
 			throw new NotFoundException("musicDto not found.");
-		
-		
-		foundMusicDto.incrementPlayed();
-		
-		return musicDao.update(foundMusicDto);
+
+		return musicDao.update(musicDto);
 	}
-	
-	
-	
+
+
+
 	public MusicDTO random() throws SqlException, NotFoundException {
 	
 		List<MusicDTO> allMusics = musicDao.findAll();

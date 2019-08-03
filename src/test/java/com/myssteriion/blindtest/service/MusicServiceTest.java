@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -70,41 +71,53 @@ public class MusicServiceTest extends AbstractTest {
 		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
 		Assert.assertEquals( 0, musicDtoSaved.getPlayed() );
 	}
-	
+
 	@Test
-	public void updatePlayed() throws SqlException, NotFoundException {
-		
+	public void update() throws SqlException, NotFoundException, AlreadyExistsException {
+
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
-		
-		
+
+
 		try {
-			musicService.updatePlayed(null);
+			musicService.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
 		}
-		
-		
+
+
 		MusicDTO musicDto = new MusicDTO(name, theme);
-		musicDto.setId(1);
-		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDto);
-		Mockito.when(musicDao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
-		
 		try {
-			musicService.updatePlayed(musicDto);
+			musicService.update(musicDto);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'musicDto -> id' est obligatoire."), e);
+		}
+
+
+		MusicDTO musicStatDtoMockNotSame = new MusicDTO(name, theme);
+		musicStatDtoMockNotSame.setId(2);
+		MusicDTO musicStatDtoMockSame = new MusicDTO(name, theme);
+		musicStatDtoMockSame.setId(1);
+		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicStatDtoMockNotSame, musicStatDtoMockNotSame, musicStatDtoMockSame);
+		Mockito.when(musicDao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
+
+		try {
+			musicDto.setId(1);
+			musicService.update(musicDto);
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("musicDto not found."), e);
 		}
 
-		MusicDTO musicDtoSaved = musicService.updatePlayed(musicDto);
+		musicDto.setId(1);
+		MusicDTO musicDtoSaved = musicService.update(musicDto);
 		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
-		Assert.assertEquals( name, musicDtoSaved.getName() );
-		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
-		Assert.assertEquals( 1, musicDtoSaved.getPlayed() );
+		Assert.assertEquals( "name", musicDtoSaved.getName() );
 	}
 	
 	@SuppressWarnings("unchecked")

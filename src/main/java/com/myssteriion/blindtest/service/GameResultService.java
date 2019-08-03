@@ -27,8 +27,9 @@ public class GameResultService {
 	public void apply(GameResultDTO gameResultDto) throws SqlException, NotFoundException {
 		
 		Tool.verifyValue("gameResultDto", gameResultDto);
-		
-		musicService.updatePlayed( gameResultDto.getMusicDTO() );
+
+		gameResultDto.getMusicDTO().incrementPlayed();
+		musicService.update( gameResultDto.getMusicDTO() );
 		
 		for (ProfilDTO winner : gameResultDto.getWinners() ) {
 			
