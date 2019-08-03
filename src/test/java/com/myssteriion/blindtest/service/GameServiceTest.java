@@ -46,14 +46,14 @@ public class GameServiceTest extends AbstractTest {
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
+		List<String> playersNames = Collections.singletonList("name");
 
 		try {
 			gameService.newGame(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
 		}
 
 		try {
@@ -61,11 +61,11 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
 		}
 
 		try {
-			gameService.newGame( Arrays.asList(new PlayerDTO("name"), new PlayerDTO("name")));
+			gameService.newGame( Arrays.asList("name", "name"));
 			Assert.fail("Doit lever une ConflictException car un param est KO.");
 		}
 		catch (ConflictException e) {
@@ -73,7 +73,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame(players);
+			gameService.newGame(playersNames);
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -82,8 +82,8 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		GameDTO game = gameService.newGame(players);
-		Assert.assertEquals( players , game.getPlayers() );
+		GameDTO game = gameService.newGame(playersNames);
+		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 	}
 
 	@Test
@@ -98,8 +98,8 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto, null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
-		gameService.newGame(players);
+		List<String> playersNames = Collections.singletonList("name");
+		gameService.newGame(playersNames);
 
 		try {
 			gameService.apply(null);

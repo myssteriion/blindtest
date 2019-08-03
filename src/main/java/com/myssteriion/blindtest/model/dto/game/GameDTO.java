@@ -14,7 +14,7 @@ public class GameDTO extends AbstractDTO {
 
     public GameDTO(List<String> playersNames) {
 
-        Tool.verifyValue("players", playersNames);
+        Tool.verifyValue("playersNames", playersNames);
         this.players = playersNames.stream().map(PlayerDTO::new).collect(Collectors.toList());
     }
 

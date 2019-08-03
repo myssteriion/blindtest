@@ -36,20 +36,20 @@ public class GameControllerTest extends AbstractTest {
 	@Test
 	public void newGame() throws SqlException, NotFoundException, ConflictException {
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
-		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(players));
+		List<String> playersNames = Collections.singletonList("name");
+		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(playersNames));
 
-		ResponseEntity<GameDTO> re = gameController.newGame(players);
+		ResponseEntity<GameDTO> re = gameController.newGame(playersNames);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
-		Assert.assertEquals( players, re.getBody().getPlayers() );
+		Assert.assertEquals( playersNames.size(), re.getBody().getPlayers().size() );
 	}
 
 	@Test
 	public void apply() throws SqlException, NotFoundException {
 
-		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name"));
-		Mockito.when(gameService.apply( Mockito.any(GameResultDTO.class) )).thenReturn(new GameDTO(players));
+		List<String> playersNames = Collections.singletonList("name");
+		Mockito.when(gameService.apply( Mockito.any(GameResultDTO.class) )).thenReturn(new GameDTO(playersNames));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		GameResultDTO gameResultDto = new GameResultDTO(0, NumMusic.NORMAL, Round.CLASSIC, musicDto, null, null);
@@ -57,7 +57,7 @@ public class GameControllerTest extends AbstractTest {
 		ResponseEntity<GameDTO> re = gameController.apply(gameResultDto);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
-		Assert.assertEquals( players, re.getBody().getPlayers() );
+		Assert.assertEquals( playersNames.size(), re.getBody().getPlayers().size() );
 	}
 
 }

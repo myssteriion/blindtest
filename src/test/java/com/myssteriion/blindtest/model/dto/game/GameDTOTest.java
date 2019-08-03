@@ -18,14 +18,14 @@ public class GameDTOTest extends AbstractTest {
     @Test
     public void constructor() {
 
-        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name") );
+        List<String> playersNames = Arrays.asList("name");
 
         try {
             new GameDTO(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
         }
 
         try {
@@ -33,22 +33,22 @@ public class GameDTOTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
         }
 
-        GameDTO gameDTO = new GameDTO(players);
+        GameDTO gameDTO = new GameDTO(playersNames);
         Assert.assertNotNull(gameDTO);
-        Assert.assertEquals( players, gameDTO.getPlayers() );
+        Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
     }
 
     @Test
     public void getterSetter() {
 
-        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name") );
+        List<String> playersNames = Arrays.asList("name");
 
-        GameDTO gameDTO = new GameDTO(players);
+        GameDTO gameDTO = new GameDTO(playersNames);
         Assert.assertNotNull(gameDTO);
-        Assert.assertEquals( players, gameDTO.getPlayers() );
+        Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
     }
 
 }
