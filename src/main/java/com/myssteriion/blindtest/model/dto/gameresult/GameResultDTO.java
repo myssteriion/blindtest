@@ -1,9 +1,11 @@
-package com.myssteriion.blindtest.model.dto;
+package com.myssteriion.blindtest.model.dto.gameresult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
 public class GameResultDTO {

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
-import com.myssteriion.blindtest.model.dto.GameResultDTO;
+import com.myssteriion.blindtest.model.dto.gameresult.GameResultDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
