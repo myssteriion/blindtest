@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.dto.gameresult;
+package com.myssteriion.blindtest.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.GameResultType;

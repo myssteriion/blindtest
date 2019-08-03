@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.dto.gameresult.GameResultDTO;
+import com.myssteriion.blindtest.model.dto.GameResultDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.GameResultService;
 
