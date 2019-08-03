@@ -93,7 +93,8 @@ public class GameServiceTest extends AbstractTest {
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		profilDto.setId(1);
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
-		
+
+		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto, null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
@@ -110,7 +111,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 		
 		
-		GameResultDTO gameResultDto = new GameResultDTO( 0, NumMusic.NORMAL, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		GameResultDTO gameResultDto = new GameResultDTO( 0, NumMusic.NORMAL, Round.CLASSIC, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
 
 		try {
 			gameService.apply(gameResultDto);
@@ -131,11 +132,11 @@ public class GameServiceTest extends AbstractTest {
 		GameDTO game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
 
-		gameResultDto = new GameResultDTO( 0, NumMusic.FIRST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		gameResultDto = new GameResultDTO( 0, NumMusic.FIRST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
 		game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 200, game.getPlayers().get(0).getScore() );
 
-		gameResultDto = new GameResultDTO( 0, NumMusic.LAST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		gameResultDto = new GameResultDTO( 0, NumMusic.LAST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
 		game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 300, game.getPlayers().get(0).getScore() );
 	}

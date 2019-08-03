@@ -58,9 +58,10 @@ public class GameService {
 			throw new NotFoundException("musicDto not found");
 
 		musicService.update(musicDto);
+
 		List<PlayerDTO> players = gameDto.getPlayers();
-		List<ProfilDTO> winners = gameResultDto.getWinners();
-		List<ProfilDTO> loosers = gameResultDto.getLoosers();
+		List<String> winners = gameResultDto.getWinners();
+		List<String> loosers = gameResultDto.getLoosers();
 
 		for (PlayerDTO playerDto : players) {
 
@@ -68,7 +69,7 @@ public class GameService {
 			ProfilStatDTO profilStatDto = findProfilStatDto(profilDto);
 			profilStatDto.incrementListenedMusics();
 
-			if ( winners.stream().anyMatch(p -> p.getName().equals(profilDto.getName())) ) {
+			if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
 				profilStatDto.incrementFoundMusics();
 				switch ( gameResultDto.getRound() ) {
 					case CLASSIC : playerDto.addScore(100); break;
@@ -76,7 +77,7 @@ public class GameService {
 				}
 			}
 
-			if ( loosers.stream().anyMatch(p -> p.getName().equals(profilDto.getName())) ) {
+			if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
 				switch ( gameResultDto.getRound() ) {
 					case CLASSIC : /* do nothing */ break;
 					default: new IllegalArgumentException("Il manque un case (" + gameResultDto.getRound() + ").");

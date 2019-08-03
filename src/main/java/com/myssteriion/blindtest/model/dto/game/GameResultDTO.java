@@ -20,14 +20,14 @@ public class GameResultDTO {
 
 	private MusicDTO musicDTO;
 
-	private List<ProfilDTO> winners;
+	private List<String> winners;
 	
-	private List<ProfilDTO> loosers;
+	private List<String> loosers;
 	
 	
 	
 	@JsonCreator
-	public GameResultDTO(Integer gameId, NumMusic numMusic, Round round, MusicDTO musicDTO, List<ProfilDTO> winners, List<ProfilDTO> loosers) {
+	public GameResultDTO(Integer gameId, NumMusic numMusic, Round round, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("numMusic", numMusic);
@@ -61,11 +61,11 @@ public class GameResultDTO {
 		return musicDTO;
 	}
 	
-	public List<ProfilDTO> getWinners() {
+	public List<String> getWinners() {
 		return winners;
 	}
 	
-	public List<ProfilDTO> getLoosers() {
+	public List<String> getLoosers() {
 		return loosers;
 	}
 	
