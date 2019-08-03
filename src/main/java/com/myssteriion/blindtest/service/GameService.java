@@ -30,9 +30,18 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(List<PlayerDTO> playerDTO) {
+	public GameDTO newGame(List<PlayerDTO> players) throws SqlException, NotFoundException {
 
-		GameDTO gameDto = new GameDTO(playerDTO);
+		Tool.verifyValue("players", players);
+
+		for (PlayerDTO playerDto : players) {
+
+			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerDto.getName(), ""));
+			if (profilDto == null)
+				throw new NotFoundException("player '" + playerDto.getName() + "' need match with a profil");
+		}
+
+		GameDTO gameDto = new GameDTO(players);
 		gameDto.setId( games.size() );
 		games.add(gameDto);
 		return gameDto;

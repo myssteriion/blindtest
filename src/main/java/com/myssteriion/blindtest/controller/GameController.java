@@ -28,7 +28,7 @@ public class GameController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<GameDTO> newGame(@RequestBody List<PlayerDTO> players) {
+	public ResponseEntity<GameDTO> newGame(@RequestBody List<PlayerDTO> players) throws SqlException, NotFoundException {
 
 		GameDTO gameDTO = gameService.newGame(players);
 		return ResponseBuilder.create200(gameDTO);

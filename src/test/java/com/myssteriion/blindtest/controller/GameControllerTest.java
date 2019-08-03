@@ -33,7 +33,7 @@ public class GameControllerTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() {
+	public void newGame() throws SqlException, NotFoundException {
 
 		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
 		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(players));

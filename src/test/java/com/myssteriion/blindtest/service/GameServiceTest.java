@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,9 +40,39 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() {
+	public void newGame() throws SqlException, NotFoundException {
+
+		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
+		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
 
 		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
+
+		try {
+			gameService.newGame(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+		}
+
+		try {
+			gameService.newGame(new ArrayList<>());
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+		}
+
+		try {
+			gameService.newGame(players);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("player 'name' need match with a profil"), e);
+		}
+
+
+
 		GameDTO game = gameService.newGame(players);
 		Assert.assertEquals( players , game.getPlayers() );
 	}
@@ -55,7 +86,7 @@ public class GameServiceTest extends AbstractTest {
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 		
 		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
-		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(null, profilDto);
+		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto, null, profilDto);
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
 
 		List<PlayerDTO> players = Collections.singletonList(new PlayerDTO("name", 0));
