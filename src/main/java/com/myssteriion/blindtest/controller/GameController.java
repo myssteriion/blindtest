@@ -7,6 +7,7 @@ import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.GameService;
+import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,8 @@ public class GameController {
 	}
 
 	@RequestMapping(
-			method = RequestMethod.POST
+		method = RequestMethod.POST,
+		path = "/apply"
 	)
 	public ResponseEntity<GameDTO> apply(@RequestBody GameResultDTO gameResultDto) throws SqlException, NotFoundException {
 
