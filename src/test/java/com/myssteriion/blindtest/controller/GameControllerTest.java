@@ -19,9 +19,6 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +51,7 @@ public class GameControllerTest extends AbstractTest {
 		Mockito.when(gameService.apply( Mockito.any(GameResultDTO.class) )).thenReturn(new GameDTO(players));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
-		GameResultDTO gameResultDto = new GameResultDTO(NumMusic.NORMAL, Round.CLASSIC, musicDto, null, null);
+		GameResultDTO gameResultDto = new GameResultDTO(0, NumMusic.NORMAL, Round.CLASSIC, musicDto, null, null);
 		
 		ResponseEntity<GameDTO> re = gameController.apply(gameResultDto);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );

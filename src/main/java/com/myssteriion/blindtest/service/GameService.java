@@ -2,20 +2,17 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
-import com.myssteriion.blindtest.model.common.Round;
-import com.myssteriion.blindtest.model.dto.game.GameResultDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
+import com.myssteriion.blindtest.model.dto.game.GameResultDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class GameService {
@@ -29,19 +26,26 @@ public class GameService {
 	@Autowired
 	private ProfilStatService profilStatService;
 
-	private GameDTO gameDto;
+	private List<GameDTO> games = new ArrayList<>();
 	
 
 
 	public GameDTO newGame(List<PlayerDTO> playerDTO) {
 
-		gameDto = new GameDTO(playerDTO);
+		GameDTO gameDto = new GameDTO(playerDTO);
+		gameDto.setId( games.size() );
+		games.add(gameDto);
 		return gameDto;
 	}
 
 	public GameDTO apply(GameResultDTO gameResultDto) throws SqlException, NotFoundException {
 
 		Tool.verifyValue("gameResultDto", gameResultDto);
+		GameDTO gameDto = games.stream()
+							.filter( g -> g.getId().equals(gameResultDto.getGameId()) )
+							.findFirst()
+							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
+
 
 		gameResultDto.getMusicDTO().incrementPlayed();
 		musicService.update( gameResultDto.getMusicDTO() );

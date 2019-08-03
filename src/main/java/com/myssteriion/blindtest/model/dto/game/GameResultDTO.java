@@ -12,6 +12,8 @@ import java.util.List;
 
 public class GameResultDTO {
 
+	private Integer gameId;
+
 	private NumMusic numMusic;
 
 	private Round round;
@@ -25,12 +27,14 @@ public class GameResultDTO {
 	
 	
 	@JsonCreator
-	public GameResultDTO(NumMusic numMusic, Round round, MusicDTO musicDTO, List<ProfilDTO> winners, List<ProfilDTO> loosers) {
+	public GameResultDTO(Integer gameId, NumMusic numMusic, Round round, MusicDTO musicDTO, List<ProfilDTO> winners, List<ProfilDTO> loosers) {
 
+		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("numMusic", numMusic);
 		Tool.verifyValue("round", round);
 		Tool.verifyValue("musicDto", musicDTO);
 
+		this.gameId = gameId;
 		this.numMusic = numMusic;
 		this.round = round;
 		this.musicDTO = musicDTO;
@@ -38,9 +42,13 @@ public class GameResultDTO {
 		this.winners = (winners == null) ? new ArrayList<>() : winners;
 		this.loosers = (loosers == null) ? new ArrayList<>() : loosers;
 	}
-	
-	
-	
+
+
+
+	public Integer getGameId() {
+		return gameId;
+	}
+
 	public NumMusic getNumMusic() {
 		return numMusic;
 	}

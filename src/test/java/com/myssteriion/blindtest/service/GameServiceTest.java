@@ -70,7 +70,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 		
 		
-		GameResultDTO gameResultDto = new GameResultDTO( NumMusic.NORMAL, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		GameResultDTO gameResultDto = new GameResultDTO( 0, NumMusic.NORMAL, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
 
 		try {
 			gameService.apply(gameResultDto);
@@ -91,11 +91,11 @@ public class GameServiceTest extends AbstractTest {
 		GameDTO game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
 
-		gameResultDto = new GameResultDTO( NumMusic.FIRST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		gameResultDto = new GameResultDTO( 0, NumMusic.FIRST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
 		game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 200, game.getPlayers().get(0).getScore() );
 
-		gameResultDto = new GameResultDTO( NumMusic.LAST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
+		gameResultDto = new GameResultDTO( 0, NumMusic.LAST, Round.CLASSIC, musicDTO, Arrays.asList(profilDto), Arrays.asList(profilDto) );
 		game = gameService.apply(gameResultDto);
 		Assert.assertEquals( 300, game.getPlayers().get(0).getScore() );
 	}
