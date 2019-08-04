@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "01c6940d-b164-4d14-bf0a-2779f43e2604",
+		"_postman_id": "edb3867c-894f-4614-ad6e-719b78653fe9",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -67,7 +67,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
+							"raw": "{\n\t\"name\": \"name\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/profils",
@@ -163,6 +163,36 @@
 			"name": "gameresult",
 			"item": [
 				{
+					"name": "new game",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"name\"\n]\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/game",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"game"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "apply",
 					"request": {
 						"method": "POST",
@@ -176,17 +206,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"isFirstMusic\": false,\n\t\"musicDTO\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [\n\t\t{ \"name\": \"name\" }\n\t],\n\t\"loosers\": [\n\t\t{ \"name\": \"name1\" }\n\t]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"numMusic\": \"NORMAL\",\n\t\"round\": \"CLASSIC\",\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"loosers\": [ \"name\" ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/gameresult",
+							"raw": "http://localhost:8080/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"gameresult"
+								"game",
+								"apply"
 							]
 						}
 					},
