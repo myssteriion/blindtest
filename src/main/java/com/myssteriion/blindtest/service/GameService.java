@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -52,7 +53,7 @@ public class GameService {
 							.findFirst()
 							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
 
-
+		// update musicDto
 		MusicDTO musicDto = musicService.find( gameResultDto.getMusicDTO() );
 		if (musicDto == null)
 			throw new NotFoundException("musicDto not found");
@@ -60,6 +61,7 @@ public class GameService {
 		musicDto.incrementPlayed();
 		musicService.update(musicDto);
 
+		// update profilStatDto
 		List<PlayerDTO> players = gameDto.getPlayers();
 		List<String> winners = gameResultDto.getWinners();
 		List<String> loosers = gameResultDto.getLoosers();
@@ -72,25 +74,19 @@ public class GameService {
 
 			if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
 				profilStatDto.incrementFoundMusics();
-				switch ( gameResultDto.getRound() ) {
-					case CLASSIC : playerDto.addScore(100); break;
-					default: new IllegalArgumentException("Il manque un case (" + gameResultDto.getRound() + ").");
-				}
+				playerDto.addScore( gameDto.getCurrent().getNbPointWon() );
 			}
 
 			if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
-				switch ( gameResultDto.getRound() ) {
-					case CLASSIC : /* do nothing */ break;
-					default: new IllegalArgumentException("Il manque un case (" + gameResultDto.getRound() + ").");
-				}
+				playerDto.addScore( gameDto.getCurrent().getNbPointLost() );
 			}
 
-			switch ( gameResultDto.getNumMusic() ) {
-				case FIRST: profilStatDto.incrementPlayedGames(); break;
-				case LAST: profilStatDto.setBestScoreIfBetter( playerDto.getScore() ); break;
-				case NORMAL: /* do nothing */ break;
-				default: new IllegalArgumentException("Il manque un case (" + gameResultDto.getRound() + ").");
-			}
+			gameDto.next();
+
+			if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
+				profilStatDto.incrementPlayedGames();
+			else if ( gameDto.getNbMusicsPlayed() == Round.getNbMusicTotalForNormalParty() )
+				profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
 
 			profilStatService.update(profilStatDto);
 		}

@@ -1,10 +1,7 @@
 package com.myssteriion.blindtest.model.dto.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.myssteriion.blindtest.model.common.NumMusic;
-import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.ArrayList;
@@ -13,10 +10,6 @@ import java.util.List;
 public class GameResultDTO {
 
 	private Integer gameId;
-
-	private NumMusic numMusic;
-
-	private Round round;
 
 	private MusicDTO musicDTO;
 
@@ -27,16 +20,12 @@ public class GameResultDTO {
 	
 	
 	@JsonCreator
-	public GameResultDTO(Integer gameId, NumMusic numMusic, Round round, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
+	public GameResultDTO(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
 
 		Tool.verifyValue("gameId", gameId);
-		Tool.verifyValue("numMusic", numMusic);
-		Tool.verifyValue("round", round);
 		Tool.verifyValue("musicDto", musicDTO);
 
 		this.gameId = gameId;
-		this.numMusic = numMusic;
-		this.round = round;
 		this.musicDTO = musicDTO;
 		
 		this.winners = (winners == null) ? new ArrayList<>() : winners;
@@ -47,14 +36,6 @@ public class GameResultDTO {
 
 	public Integer getGameId() {
 		return gameId;
-	}
-
-	public NumMusic getNumMusic() {
-		return numMusic;
-	}
-
-	public Round getRound() {
-		return round;
 	}
 
 	public MusicDTO getMusicDTO() {

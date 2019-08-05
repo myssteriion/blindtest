@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.dto.game;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.NumMusic;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -16,13 +15,11 @@ public class GameResultDTOTest extends AbstractTest {
     public void constructor() {
 
         Integer gameId = 1;
-        NumMusic numMusic = NumMusic.NORMAL;
-        Round round = Round.CLASSIC;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
 
 
         try {
-            new GameResultDTO(null, numMusic, round, musicDTO, null, null);
+            new GameResultDTO(null, musicDTO, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -30,45 +27,26 @@ public class GameResultDTOTest extends AbstractTest {
         }
 
         try {
-            new GameResultDTO(gameId, null, round, musicDTO, null, null);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'numMusic' est obligatoire."), e);
-        }
-
-        try {
-            new GameResultDTO(gameId, numMusic, null, musicDTO, null, null);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'round' est obligatoire."), e);
-        }
-
-        try {
-            new GameResultDTO(gameId, numMusic, round, null, null, null);
+            new GameResultDTO(gameId, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new GameResultDTO(gameId, numMusic, round, musicDTO, null, null) );
+        Assert.assertNotNull( new GameResultDTO(gameId, musicDTO, null, null) );
     }
 
     @Test
     public void getterSetter() {
 
         Integer gameId = 1;
-        NumMusic type = NumMusic.NORMAL;
         Round round = Round.CLASSIC;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
 
 
-        GameResultDTO gameResultDTO = new GameResultDTO(gameId, type, round, musicDTO, null, null);
+        GameResultDTO gameResultDTO = new GameResultDTO(gameId, musicDTO, null, null);
         Assert.assertEquals( gameId, gameResultDTO.getGameId() );
-        Assert.assertEquals( NumMusic.NORMAL, gameResultDTO.getNumMusic() );
-        Assert.assertEquals( Round.CLASSIC, gameResultDTO.getRound() );
         Assert.assertEquals( musicDTO, gameResultDTO.getMusicDTO() );
         Assert.assertEquals( new ArrayList<>(), gameResultDTO.getWinners() );
         Assert.assertEquals( new ArrayList<>(), gameResultDTO.getLoosers() );
