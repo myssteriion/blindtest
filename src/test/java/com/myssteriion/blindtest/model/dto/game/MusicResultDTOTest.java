@@ -53,4 +53,13 @@ public class MusicResultDTOTest extends AbstractTest {
         Assert.assertEquals( new ArrayList<>(), musicResultDTO.getLoosers() );
     }
 
+    @Test
+    public void toStringAndEquals() {
+
+        Integer gameId = 1;
+        MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
+        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null, null);
+        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], neutral=[], loosers=[]", musicResultDTO.toString() );
+    }
+
 }

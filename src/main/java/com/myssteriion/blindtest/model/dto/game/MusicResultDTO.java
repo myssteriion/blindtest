@@ -56,5 +56,14 @@ public class MusicResultDTO {
 	public List<String> getLoosers() {
 		return loosers;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "gameId=" + gameId +
+				", musicDTO={" + musicDTO + "}" +
+				", winners=" + winners +
+				", neutral=" + neutral +
+				", loosers=" + loosers;
+	}
+
 }
