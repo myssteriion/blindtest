@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -11,6 +12,7 @@ import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -51,19 +53,11 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'newGameDto' est obligatoire."), e);
 		}
 
 		try {
-			gameService.newGame(new ArrayList<>());
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
-		}
-
-		try {
-			gameService.newGame( Arrays.asList("name", "name"));
+			gameService.newGame( new NewGameDTO(Arrays.asList("name", "name"), Duration.NORMAL) );
 			Assert.fail("Doit lever une ConflictException car un param est KO.");
 		}
 		catch (ConflictException e) {
@@ -71,7 +65,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame(playersNames);
+			gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -80,7 +74,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		GameDTO game = gameService.newGame(playersNames);
+		GameDTO game = gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 	}
 
@@ -116,7 +110,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame(playersNames);
+		gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
 
 
 		try {

@@ -5,13 +5,12 @@ import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -28,10 +27,10 @@ public class GameController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<GameDTO> newGame(@RequestBody List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
+	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws SqlException, NotFoundException, ConflictException {
 
-		GameDTO gameDTO = gameService.newGame(playersNames);
-		return ResponseBuilder.create200(gameDTO);
+		GameDTO gameDto = gameService.newGame(newGameDto);
+		return ResponseBuilder.create200(gameDto);
 	}
 
 	@RequestMapping(

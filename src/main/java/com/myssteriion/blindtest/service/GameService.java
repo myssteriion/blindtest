@@ -3,13 +3,12 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
-import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +34,12 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
+	public GameDTO newGame(NewGameDTO newGameDto) throws SqlException, NotFoundException, ConflictException {
 
-		Tool.verifyValue("playersNames", playersNames);
-		checkPlayers(playersNames);
+		Tool.verifyValue("newGameDto", newGameDto);
+		checkPlayers( newGameDto.getPlayersNames() );
 
-		GameDTO gameDto = new GameDTO(playersNames, Duration.NORMAL);
+		GameDTO gameDto = new GameDTO( newGameDto.getPlayersNames(), newGameDto.getDuration() );
 		gameDto.setId( games.size() );
 		games.add(gameDto);
 		return gameDto;

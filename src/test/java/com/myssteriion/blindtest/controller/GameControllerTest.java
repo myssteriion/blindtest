@@ -9,6 +9,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
 import com.myssteriion.blindtest.service.GameService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,12 +36,13 @@ public class GameControllerTest extends AbstractTest {
 	public void newGame() throws SqlException, NotFoundException, ConflictException {
 
 		List<String> playersNames = Collections.singletonList("name");
-		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
+		Mockito.when(gameService.newGame( Mockito.any(NewGameDTO.class) )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
 
-		ResponseEntity<GameDTO> re = gameController.newGame(playersNames);
+		NewGameDTO newGameDto = new NewGameDTO(playersNames, Duration.NORMAL);
+
+		ResponseEntity<GameDTO> re = gameController.newGame(newGameDto);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
-		Assert.assertEquals( playersNames.size(), re.getBody().getPlayers().size() );
 	}
 
 	@Test
