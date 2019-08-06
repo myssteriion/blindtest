@@ -86,6 +86,21 @@ public class GameDTOTest extends AbstractTest {
     }
 
     @Test
+    public void isFinished() {
+
+        List<String> playersNames = Arrays.asList("name");
+
+        GameDTO gameDTO = new GameDTO(playersNames);
+        gameDTO.next();
+        Assert.assertFalse( gameDTO.isFinished() );
+
+        for (int i = 1; i < Round.CLASSIC.getNbMusics(); i++)
+            gameDTO.next();
+
+        Assert.assertTrue( gameDTO.isFinished() );
+    }
+
+    @Test
     public void toStringAndEquals() {
 
         String name = "name";

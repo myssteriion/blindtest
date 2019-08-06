@@ -53,42 +53,45 @@ public class GameService {
 							.findFirst()
 							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
 
-		// update musicDto
-		MusicDTO musicDto = musicService.find( musicResultDto.getMusicDTO() );
-		if (musicDto == null)
-			throw new NotFoundException("musicDto not found");
+		if ( !gameDto.isFinished() ) {
 
-		musicDto.incrementPlayed();
-		musicService.update(musicDto);
+			// update musicDto
+			MusicDTO musicDto = musicService.find( musicResultDto.getMusicDTO() );
+			if (musicDto == null)
+				throw new NotFoundException("musicDto not found");
 
-		// update profilStatDto
-		List<PlayerDTO> players = gameDto.getPlayers();
-		List<String> winners = musicResultDto.getWinners();
-		List<String> loosers = musicResultDto.getLoosers();
+			musicDto.incrementPlayed();
+			musicService.update(musicDto);
 
-		for (PlayerDTO playerDto : players) {
+			// update profilStatDto
+			List<PlayerDTO> players = gameDto.getPlayers();
+			List<String> winners = musicResultDto.getWinners();
+			List<String> loosers = musicResultDto.getLoosers();
 
-			ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
-			ProfilStatDTO profilStatDto = findProfilStatDto(profilDto);
-			profilStatDto.incrementListenedMusics();
+			for (PlayerDTO playerDto : players) {
 
-			if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
-				profilStatDto.incrementFoundMusics();
-				playerDto.addScore( gameDto.getCurrent().getNbPointWon() );
+				ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
+				ProfilStatDTO profilStatDto = findProfilStatDto(profilDto);
+				profilStatDto.incrementListenedMusics();
+
+				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
+					profilStatDto.incrementFoundMusics();
+					playerDto.addScore( gameDto.getCurrent().getNbPointWon() );
+				}
+
+				if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
+					playerDto.addScore( gameDto.getCurrent().getNbPointLost() );
+				}
+
+				gameDto.next();
+
+				if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
+					profilStatDto.incrementPlayedGames();
+				else if ( gameDto.getNbMusicsPlayed() == Round.getNbMusicTotalForNormalParty() )
+					profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
+
+				profilStatService.update(profilStatDto);
 			}
-
-			if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
-				playerDto.addScore( gameDto.getCurrent().getNbPointLost() );
-			}
-
-			gameDto.next();
-
-			if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
-				profilStatDto.incrementPlayedGames();
-			else if ( gameDto.getNbMusicsPlayed() == Round.getNbMusicTotalForNormalParty() )
-				profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
-
-			profilStatService.update(profilStatDto);
 		}
 
 		return gameDto;

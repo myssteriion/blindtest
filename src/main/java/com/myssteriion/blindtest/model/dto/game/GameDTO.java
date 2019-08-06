@@ -62,6 +62,10 @@ public class GameDTO extends AbstractDTO {
         }
     }
 
+    public boolean isFinished() {
+        return Tool.isNullOrEmpty(current);
+    }
+
 
     @Override
     public String toString() {
