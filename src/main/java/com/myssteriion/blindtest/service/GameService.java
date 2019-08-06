@@ -71,7 +71,7 @@ public class GameService {
 			for (PlayerDTO playerDto : players) {
 
 				ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
-				ProfilStatDTO profilStatDto = findProfilStatDto(profilDto);
+				ProfilStatDTO profilStatDto = profilStatService.findByProfil(profilDto);
 				profilStatDto.incrementListenedMusics();
 
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
@@ -95,22 +95,6 @@ public class GameService {
 		}
 
 		return gameDto;
-	}
-
-	private ProfilStatDTO findProfilStatDto(ProfilDTO profilDto) throws SqlException, NotFoundException {
-
-		ProfilDTO foundProfilDto = profilService.find(profilDto);
-
-		if ( Tool.isNullOrEmpty(foundProfilDto) )
-			throw new NotFoundException("profilDto not found.");
-
-		ProfilStatDTO profilStatDTO = new ProfilStatDTO(foundProfilDto.getId());
-		ProfilStatDTO foundProfilStatDTO = profilStatService.find(profilStatDTO);
-
-		if ( Tool.isNullOrEmpty(foundProfilStatDTO) )
-			throw new NotFoundException("profilStatDto not found.");
-
-		return foundProfilStatDTO;
 	}
 
 	private void checkPlayers(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {

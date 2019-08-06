@@ -93,23 +93,31 @@ public class GameServiceTest extends AbstractTest {
 		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
 
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, musicDTO);
-		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
-		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto, null, profilDto);
-		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(null, profilStatDto);
+		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto);
 
 		List<String> playersNames = Collections.singletonList("name");
-		gameService.newGame(playersNames);
+		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, Arrays.asList(profilDto.getName()) );
+
 
 		try {
 			gameService.apply(null);
-			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+			Assert.fail("Doit lever une IllegalArgumentException le gameDto n'est pas retrouvée.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
 		}
-		
-		
-		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, Arrays.asList(profilDto.getName()) );
+
+		try {
+			gameService.apply(musicResultDto);
+			Assert.fail("Doit lever une NotFoundException le gameDto n'est pas retrouvée.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("gameDto not found."), e);
+		}
+
+
+		gameService.newGame(playersNames);
+
 
 		try {
 			gameService.apply(musicResultDto);
@@ -117,22 +125,6 @@ public class GameServiceTest extends AbstractTest {
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("musicDto not found"), e);
-		}
-
-		try {
-			gameService.apply(musicResultDto);
-			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profilDto not found."), e);
-		}
-		
-		try {
-			gameService.apply(musicResultDto);
-			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profilStatDto not found."), e);
 		}
 
 
@@ -145,8 +137,8 @@ public class GameServiceTest extends AbstractTest {
 		// refaire les when car les objets ont subit un new
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
-		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto);
-		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(profilStatDto);
+		Mockito.when(profilStatService.findByProfil( Mockito.any(ProfilDTO.class) )).thenReturn(profilStatDto);
+		Mockito.when(profilStatService.update( Mockito.any(ProfilStatDTO.class) )).thenReturn(profilStatDto);
 
 
 		GameDTO game = gameService.apply(musicResultDto);

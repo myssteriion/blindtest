@@ -57,11 +57,29 @@ public class ProfilStatService {
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		return profilStatDao.find(profilStatDto);
 	}
-	
+
+	public ProfilStatDTO findByProfil(ProfilDTO profilDto) throws SqlException, NotFoundException {
+
+		Tool.verifyValue("profilDto", profilDto);
+
+		ProfilDTO foundProfilDto = profilService.find(profilDto);
+
+		if ( Tool.isNullOrEmpty(foundProfilDto) )
+			throw new NotFoundException("profilDto not found.");
+
+		ProfilStatDTO profilStatDto = new ProfilStatDTO( foundProfilDto.getId() );
+		ProfilStatDTO foundProfilStatDTO = profilStatDao.find(profilStatDto);
+
+		if ( Tool.isNullOrEmpty(foundProfilStatDTO) )
+			throw new NotFoundException("profilStatDto not found.");
+
+		return foundProfilStatDTO;
+	}
+
 	public List<ProfilStatDTO> findAll() throws SqlException {
 		return profilStatDao.findAll();
 	}
-	
+
 	private void checkProfilDto(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
 	
 		ProfilDTO profilDto = new ProfilDTO("ANY");

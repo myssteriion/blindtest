@@ -146,7 +146,48 @@ public class ProfilStatServiceTest extends AbstractTest {
 		Assert.assertNull( profilStatService.find(profilStatDTO) );
 		Assert.assertNotNull( profilStatService.find(profilStatDTO) );
 	}
-	
+
+	@Test
+	public void findByProfil() throws SqlException, NotFoundException {
+
+		ProfilDTO profilDto = new ProfilDTO("name");
+		profilDto.setId(1);
+		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
+
+		ProfilStatDTO profilStatDtoMock = new ProfilStatDTO(1);
+		Mockito.when(profilStatDao.find(Mockito.any(ProfilStatDTO.class))).thenReturn(null, profilStatDtoMock);
+
+
+		try {
+			profilStatService.findByProfil(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'profilDto' est obligatoire."), e);
+		}
+
+		try {
+			profilStatService.findByProfil(profilDto);
+			Assert.fail("Doit lever une NotFoundException car le stub (profilService) renvoi null.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("profilDto not found."), e);
+		}
+
+		try {
+			profilStatService.findByProfil(profilDto);
+			Assert.fail("Doit lever une NotFoundException car le stub (profilStatDao) renvoi null.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("profilStatDto not found."), e);
+		}
+
+
+		ProfilStatDTO actual = profilStatService.findByProfil(profilDto);
+		Assert.assertNotNull(actual);
+		Assert.assertSame(profilStatDtoMock, actual);
+	}
+
 	@Test
 	public void findAll() throws SqlException {
 
