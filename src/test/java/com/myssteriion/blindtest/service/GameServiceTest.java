@@ -109,7 +109,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 		
 		
-		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
+		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, Arrays.asList(profilDto.getName()) );
 
 		try {
 			gameService.apply(musicResultDto);
@@ -140,7 +140,7 @@ public class GameServiceTest extends AbstractTest {
 		profilDto = new ProfilDTO("name", "avatar");
 		profilDto.setId(1);
 		profilStatDto = new ProfilStatDTO(1);
-		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, null );
 
 		// refaire les when car les objets ont subit un new
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
@@ -160,7 +160,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		musicResultDto = new MusicResultDTO( 0, musicDTO, null, Arrays.asList(profilDto.getName()) );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, null, null, Arrays.asList(profilDto.getName()) );
 		game = gameService.apply(musicResultDto);
 		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( Round.CLASSIC, game.getCurrent() );
@@ -172,7 +172,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, null );
 		for (int i = 2; i < Round.CLASSIC.getNbMusics(); i++)
 			game = gameService.apply(musicResultDto);
 

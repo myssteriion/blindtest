@@ -19,7 +19,7 @@ public class MusicResultDTOTest extends AbstractTest {
 
 
         try {
-            new MusicResultDTO(null, musicDTO, null, null);
+            new MusicResultDTO(null, musicDTO, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -27,14 +27,14 @@ public class MusicResultDTOTest extends AbstractTest {
         }
 
         try {
-            new MusicResultDTO(gameId, null, null, null);
+            new MusicResultDTO(gameId, null, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new MusicResultDTO(gameId, musicDTO, null, null) );
+        Assert.assertNotNull( new MusicResultDTO(gameId, musicDTO, null, null, null) );
     }
 
     @Test
@@ -45,10 +45,11 @@ public class MusicResultDTOTest extends AbstractTest {
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
 
 
-        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null);
+        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null, null);
         Assert.assertEquals( gameId, musicResultDTO.getGameId() );
         Assert.assertEquals( musicDTO, musicResultDTO.getMusicDTO() );
         Assert.assertEquals( new ArrayList<>(), musicResultDTO.getWinners() );
+        Assert.assertEquals( new ArrayList<>(), musicResultDTO.getNeutral() );
         Assert.assertEquals( new ArrayList<>(), musicResultDTO.getLoosers() );
     }
 
