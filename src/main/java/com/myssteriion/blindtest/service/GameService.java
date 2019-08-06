@@ -88,7 +88,7 @@ public class GameService {
 
 				if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
 					profilStatDto.incrementPlayedGames();
-				else if ( gameDto.getNbMusicsPlayed() == Round.getNbMusicTotalForNormalParty() )
+				else if ( gameDto.isFinished() )
 					profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
 
 				profilStatService.update(profilStatDto);

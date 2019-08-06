@@ -45,12 +45,7 @@ public enum Round {
 
 
     public Round next() {
-        return Arrays.stream(Round.values()).filter(round -> round.nbMusics == this.nbMusics+1).findFirst().orElse(null);
-    }
-
-
-    public static int getNbMusicTotalForNormalParty() {
-        return Arrays.stream(Round.values()).mapToInt(Round::getNbMusics).sum();
+        return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
     }
 
     public static Round getFirst() {
