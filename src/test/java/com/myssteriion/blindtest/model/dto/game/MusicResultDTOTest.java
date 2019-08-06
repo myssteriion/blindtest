@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class GameResultDTOTest extends AbstractTest {
+public class MusicResultDTOTest extends AbstractTest {
 
     @Test
     public void constructor() {
@@ -19,7 +19,7 @@ public class GameResultDTOTest extends AbstractTest {
 
 
         try {
-            new GameResultDTO(null, musicDTO, null, null);
+            new MusicResultDTO(null, musicDTO, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -27,14 +27,14 @@ public class GameResultDTOTest extends AbstractTest {
         }
 
         try {
-            new GameResultDTO(gameId, null, null, null);
+            new MusicResultDTO(gameId, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new GameResultDTO(gameId, musicDTO, null, null) );
+        Assert.assertNotNull( new MusicResultDTO(gameId, musicDTO, null, null) );
     }
 
     @Test
@@ -45,11 +45,11 @@ public class GameResultDTOTest extends AbstractTest {
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
 
 
-        GameResultDTO gameResultDTO = new GameResultDTO(gameId, musicDTO, null, null);
-        Assert.assertEquals( gameId, gameResultDTO.getGameId() );
-        Assert.assertEquals( musicDTO, gameResultDTO.getMusicDTO() );
-        Assert.assertEquals( new ArrayList<>(), gameResultDTO.getWinners() );
-        Assert.assertEquals( new ArrayList<>(), gameResultDTO.getLoosers() );
+        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null);
+        Assert.assertEquals( gameId, musicResultDTO.getGameId() );
+        Assert.assertEquals( musicDTO, musicResultDTO.getMusicDTO() );
+        Assert.assertEquals( new ArrayList<>(), musicResultDTO.getWinners() );
+        Assert.assertEquals( new ArrayList<>(), musicResultDTO.getLoosers() );
     }
 
 }

@@ -7,7 +7,7 @@ import com.myssteriion.blindtest.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameResultDTO {
+public class MusicResultDTO {
 
 	private Integer gameId;
 
@@ -20,7 +20,7 @@ public class GameResultDTO {
 	
 	
 	@JsonCreator
-	public GameResultDTO(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
+	public MusicResultDTO(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("musicDto", musicDTO);

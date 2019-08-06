@@ -10,7 +10,7 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.GameResultDTO;
+import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -105,14 +105,14 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'gameResultDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
 		}
 		
 		
-		GameResultDTO gameResultDto = new GameResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
+		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), Arrays.asList(profilDto.getName()) );
 
 		try {
-			gameService.apply(gameResultDto);
+			gameService.apply(musicResultDto);
 			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
 		}
 		catch (NotFoundException e) {
@@ -120,7 +120,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.apply(gameResultDto);
+			gameService.apply(musicResultDto);
 			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
 		}
 		catch (NotFoundException e) {
@@ -128,7 +128,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 		
 		try {
-			gameService.apply(gameResultDto);
+			gameService.apply(musicResultDto);
 			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
 		}
 		catch (NotFoundException e) {
@@ -140,7 +140,7 @@ public class GameServiceTest extends AbstractTest {
 		profilDto = new ProfilDTO("name", "avatar");
 		profilDto.setId(1);
 		profilStatDto = new ProfilStatDTO(1);
-		gameResultDto = new GameResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
 
 		// refaire les when car les objets ont subit un new
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
@@ -149,7 +149,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profilStatService.find( Mockito.any(ProfilStatDTO.class) )).thenReturn(profilStatDto);
 
 
-		GameDTO game = gameService.apply(gameResultDto);
+		GameDTO game = gameService.apply(musicResultDto);
 		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( Round.CLASSIC, game.getCurrent() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayed() );
@@ -160,8 +160,8 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		gameResultDto = new GameResultDTO( 0, musicDTO, null, Arrays.asList(profilDto.getName()) );
-		game = gameService.apply(gameResultDto);
+		musicResultDto = new MusicResultDTO( 0, musicDTO, null, Arrays.asList(profilDto.getName()) );
+		game = gameService.apply(musicResultDto);
 		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( Round.CLASSIC, game.getCurrent() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayed() );
@@ -172,9 +172,9 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		gameResultDto = new GameResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null );
 		for (int i = 2; i < Round.CLASSIC.getNbMusics(); i++)
-			game = gameService.apply(gameResultDto);
+			game = gameService.apply(musicResultDto);
 
 		Assert.assertEquals( 1900, game.getPlayers().get(0).getScore() );
 		Assert.assertNull( game.getCurrent() );

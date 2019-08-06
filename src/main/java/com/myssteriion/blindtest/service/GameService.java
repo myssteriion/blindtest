@@ -8,7 +8,7 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.GameResultDTO;
+import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +45,16 @@ public class GameService {
 		return gameDto;
 	}
 
-	public GameDTO apply(GameResultDTO gameResultDto) throws SqlException, NotFoundException {
+	public GameDTO apply(MusicResultDTO musicResultDto) throws SqlException, NotFoundException {
 
-		Tool.verifyValue("gameResultDto", gameResultDto);
+		Tool.verifyValue("musicResultDto", musicResultDto);
 		GameDTO gameDto = games.stream()
-							.filter( g -> g.getId().equals(gameResultDto.getGameId()) )
+							.filter( g -> g.getId().equals(musicResultDto.getGameId()) )
 							.findFirst()
 							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
 
 		// update musicDto
-		MusicDTO musicDto = musicService.find( gameResultDto.getMusicDTO() );
+		MusicDTO musicDto = musicService.find( musicResultDto.getMusicDTO() );
 		if (musicDto == null)
 			throw new NotFoundException("musicDto not found");
 
@@ -63,8 +63,8 @@ public class GameService {
 
 		// update profilStatDto
 		List<PlayerDTO> players = gameDto.getPlayers();
-		List<String> winners = gameResultDto.getWinners();
-		List<String> loosers = gameResultDto.getLoosers();
+		List<String> winners = musicResultDto.getWinners();
+		List<String> loosers = musicResultDto.getLoosers();
 
 		for (PlayerDTO playerDto : players) {
 

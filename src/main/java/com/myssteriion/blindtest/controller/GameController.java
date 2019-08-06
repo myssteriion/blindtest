@@ -4,8 +4,7 @@ import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.GameResultDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
+import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +38,9 @@ public class GameController {
 		method = RequestMethod.POST,
 		path = "/apply"
 	)
-	public ResponseEntity<GameDTO> apply(@RequestBody GameResultDTO gameResultDto) throws SqlException, NotFoundException {
+	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws SqlException, NotFoundException {
 
-		GameDTO gameDTO = gameService.apply(gameResultDto);
+		GameDTO gameDTO = gameService.apply(musicResultDto);
 		return ResponseBuilder.create200(gameDTO);
 	}
 	
