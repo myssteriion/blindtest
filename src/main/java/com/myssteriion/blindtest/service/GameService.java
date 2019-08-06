@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
@@ -39,7 +40,7 @@ public class GameService {
 		Tool.verifyValue("playersNames", playersNames);
 		checkPlayers(playersNames);
 
-		GameDTO gameDto = new GameDTO(playersNames);
+		GameDTO gameDto = new GameDTO(playersNames, Duration.NORMAL);
 		gameDto.setId( games.size() );
 		games.add(gameDto);
 		return gameDto;

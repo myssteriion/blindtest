@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.common.ConflictException;
 import com.myssteriion.blindtest.db.common.NotFoundException;
 import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
@@ -34,7 +35,7 @@ public class GameControllerTest extends AbstractTest {
 	public void newGame() throws SqlException, NotFoundException, ConflictException {
 
 		List<String> playersNames = Collections.singletonList("name");
-		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(playersNames));
+		Mockito.when(gameService.newGame( Mockito.anyList() )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
 
 		ResponseEntity<GameDTO> re = gameController.newGame(playersNames);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
@@ -46,7 +47,7 @@ public class GameControllerTest extends AbstractTest {
 	public void apply() throws SqlException, NotFoundException {
 
 		List<String> playersNames = Collections.singletonList("name");
-		Mockito.when(gameService.apply( Mockito.any(MusicResultDTO.class) )).thenReturn(new GameDTO(playersNames));
+		Mockito.when(gameService.apply( Mockito.any(MusicResultDTO.class) )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		MusicResultDTO musicResultDto = new MusicResultDTO(0, musicDto, null, null, null);

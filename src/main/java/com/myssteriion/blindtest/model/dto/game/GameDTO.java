@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.dto.game;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -15,6 +16,8 @@ public class GameDTO extends AbstractDTO {
 
     private List<PlayerDTO> players;
 
+    private Duration duration;
+
     private int nbMusicsPlayed;
 
     private int nbMusicsPlayedInRound;
@@ -23,10 +26,13 @@ public class GameDTO extends AbstractDTO {
 
 
 
-    public GameDTO(List<String> playersNames) {
+    public GameDTO(List<String> playersNames, Duration duration) {
 
         Tool.verifyValue("playersNames", playersNames);
+        Tool.verifyValue("duration", duration);
+
         this.players = playersNames.stream().map(PlayerDTO::new).collect(Collectors.toList());
+        this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
         this.current = Round.getFirst();
@@ -36,6 +42,10 @@ public class GameDTO extends AbstractDTO {
 
     public List<PlayerDTO> getPlayers() {
         return players;
+    }
+
+    public Duration getDuration() {
+        return duration;
     }
 
     public int getNbMusicsPlayed() {
@@ -56,7 +66,7 @@ public class GameDTO extends AbstractDTO {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
 
-        if ( nbMusicsPlayedInRound == current.getNbMusics() ) {
+        if ( nbMusicsPlayedInRound == (current.getNbMusics() * duration.getRatio()) ) {
             current = current.next();
             nbMusicsPlayedInRound = INIT;
         }
@@ -70,6 +80,7 @@ public class GameDTO extends AbstractDTO {
     @Override
     public String toString() {
         return "players=" + players +
+                ", duration=" + duration +
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
                 ", current=" + current;
