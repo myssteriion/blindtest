@@ -66,7 +66,7 @@ public class GameDTO extends AbstractDTO {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
 
-        if ( nbMusicsPlayedInRound == (current.getNbMusics() * duration.getRatio()) ) {
+        if ( nbMusicsPlayedInRound == Math.round(current.getNbMusics() * duration.getRatio()) ) {
             current = current.next();
             nbMusicsPlayedInRound = INIT;
         }
