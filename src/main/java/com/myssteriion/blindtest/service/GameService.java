@@ -100,13 +100,13 @@ public class GameService {
 	private void checkPlayers(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
 
 		if ( playersNames.size() != new HashSet<>(playersNames).size() )
-			throw new ConflictException("player can be appear only one time");
+			throw new ConflictException("Player can be appear only one time");
 
 		for (String playerName : playersNames) {
 
 			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerName));
 			if (profilDto == null)
-				throw new NotFoundException("player '" + playerName + "' must had a profil");
+				throw new NotFoundException("Player '" + playerName + "' must had a profil");
 		}
 	}
 

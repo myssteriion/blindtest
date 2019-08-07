@@ -156,7 +156,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une v car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("no music found"), e);
+			verifyException(new NotFoundException("No music found."), e);
 		}
 
 

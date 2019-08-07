@@ -93,7 +93,7 @@ public class MusicService {
 		List<MusicDTO> allMusics = musicDao.findAll();
 
 		if ( Tool.isNullOrEmpty(allMusics) )
-			throw new NotFoundException("no music found");
+			throw new NotFoundException("No music found.");
 
 
 		List<Double> coefs = calculateCoefList(allMusics);

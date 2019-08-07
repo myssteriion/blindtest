@@ -32,7 +32,7 @@ public class ProfilService {
 		ProfilDTO foundProfilDto = profilDao.find(profilDto);
 		
 		if ( !Tool.isNullOrEmpty(foundProfilDto) )
-			throw new ConflictException("the profilDto name is already used.");
+			throw new ConflictException("The profilDto name is already used.");
 		
 		
 		foundProfilDto = profilDao.save(profilDto);
@@ -57,7 +57,7 @@ public class ProfilService {
 		
 		foundProfilDto = profilDao.find(profilDto);
 		if ( foundProfilDto != null  && !foundProfilDto.getId().equals(id) )
-			throw new ConflictException("the profilDto name is already used.");
+			throw new ConflictException("The profilDto name is already used.");
 		
 		profilDto.setId(id);
 		return profilDao.update(profilDto);

@@ -61,7 +61,7 @@ public class ProfilServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("the profilDto name is already used."), e);
+			verifyException(new ConflictException("The profilDto name is already used."), e);
 		}
 
 		ProfilDTO profilDtoSaved = profilService.save(profilDto);
@@ -117,7 +117,7 @@ public class ProfilServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une SqlException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("the profilDto name is already used."), e);
+			verifyException(new ConflictException("The profilDto name is already used."), e);
 		}
 		
 		profilDto.setId(1);
