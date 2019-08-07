@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Round {
 
-    CLASSIC(0, 20, 100, 0);
+    CLASSIC(0, 8, 100, 0);
 
 
 
