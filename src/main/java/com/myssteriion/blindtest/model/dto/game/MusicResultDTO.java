@@ -15,6 +15,8 @@ public class MusicResultDTO {
 
 	private List<String> winners;
 
+	private List<String> winnersBonus;
+
 	private List<String> neutral;
 
 	private List<String> loosers;
@@ -22,7 +24,7 @@ public class MusicResultDTO {
 	
 	
 	@JsonCreator
-	public MusicResultDTO(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> neutral, List<String> loosers) {
+	public MusicResultDTO(Integer gameId, MusicDTO musicDTO, List<String> winners,  List<String> winnersBonus, List<String> neutral, List<String> loosers) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("musicDto", musicDTO);
@@ -31,6 +33,7 @@ public class MusicResultDTO {
 		this.musicDTO = musicDTO;
 		
 		this.winners = (winners == null) ? new ArrayList<>() : winners;
+		this.winnersBonus = (winnersBonus == null) ? new ArrayList<>() : winnersBonus;
 		this.neutral = (neutral == null) ? new ArrayList<>() : neutral;
 		this.loosers = (loosers == null) ? new ArrayList<>() : loosers;
 	}
@@ -49,6 +52,10 @@ public class MusicResultDTO {
 		return winners;
 	}
 
+	public List<String> getWinnersBonus() {
+		return winnersBonus;
+	}
+
 	public List<String> getNeutral() {
 		return neutral;
 	}
@@ -62,6 +69,7 @@ public class MusicResultDTO {
 		return "gameId=" + gameId +
 				", musicDTO={" + musicDTO + "}" +
 				", winners=" + winners +
+				", winnersBonus=" + winnersBonus +
 				", neutral=" + neutral +
 				", loosers=" + loosers;
 	}

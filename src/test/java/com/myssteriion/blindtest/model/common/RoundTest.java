@@ -8,15 +8,14 @@ public class RoundTest extends AbstractTest {
 
     @Test
     public void getter() {
-        Assert.assertEquals( 0, Round.CLASSIC.getRoundNumber() );
-        Assert.assertEquals( 20, Round.CLASSIC.getNbMusics() );
-        Assert.assertEquals( 100, Round.CLASSIC.getNbPointWon() );
-        Assert.assertEquals( 0, Round.CLASSIC.getNbPointLost() );
+        Assert.assertEquals( 0, Round.getFirst().getRoundNumber() );
     }
 
     @Test
     public void next() {
-        Assert.assertNull( Round.CLASSIC.next() );
+        Assert.assertEquals( Round.CHOICE, Round.CLASSIC.next() );
+        Assert.assertEquals( Round.THIEF, Round.CHOICE.next() );
+        Assert.assertNull( Round.THIEF.next() );
     }
 
     @Test

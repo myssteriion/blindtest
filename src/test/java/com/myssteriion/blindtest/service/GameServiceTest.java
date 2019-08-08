@@ -90,7 +90,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profilService.find( Mockito.any(ProfilDTO.class) )).thenReturn(profilDto);
 
 		List<String> playersNames = Collections.singletonList("name");
-		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, Arrays.asList(profilDto.getName()) );
+		MusicResultDTO musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, null, Arrays.asList(profilDto.getName()) );
 
 
 		try {
@@ -126,7 +126,8 @@ public class GameServiceTest extends AbstractTest {
 		profilDto = new ProfilDTO("name", "avatar");
 		profilDto.setId(1);
 		profilStatDto = new ProfilStatDTO(1);
-		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, null );
+		List<String> playersName = Collections.singletonList(profilDto.getName());
+		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, null, null, null );
 
 		// refaire les when car les objets ont subit un new
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
@@ -136,8 +137,8 @@ public class GameServiceTest extends AbstractTest {
 
 
 		GameDTO game = gameService.apply(musicResultDto);
-		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
-		Assert.assertEquals( Round.CLASSIC, game.getCurrent() );
+		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst().getNbPointWon(), game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 1, musicDTO.getPlayed() );
@@ -146,10 +147,10 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		musicResultDto = new MusicResultDTO( 0, musicDTO, null, null, Arrays.asList(profilDto.getName()) );
+		musicResultDto = new MusicResultDTO( 0, musicDTO, null, null, null, playersName );
 		game = gameService.apply(musicResultDto);
-		Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
-		Assert.assertEquals( Round.CLASSIC, game.getCurrent() );
+		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst().getNbPointWon(), game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 2, musicDTO.getPlayed() );
@@ -158,19 +159,23 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
-		musicResultDto = new MusicResultDTO( 0, musicDTO, Arrays.asList(profilDto.getName()), null, null );
-		for (int i = 2; i < Round.CLASSIC.getNbMusics(); i++)
+		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, playersName, null, null );
+		game = gameService.apply(musicResultDto);
+		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst().getNbPointWon()*2, game.getPlayers().get(0).getScore() );
+		Assert.assertEquals( 3, game.getNbMusicsPlayed() );
+		Assert.assertEquals( 3, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( 3, musicDTO.getPlayed() );
+		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 3, profilStatDto.getListenedMusics() );
+		Assert.assertEquals( 2, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
+
+		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, null, null, null );
+		while (game.getCurrent() !=null)
 			game = gameService.apply(musicResultDto);
 
-		Assert.assertEquals( 1900, game.getPlayers().get(0).getScore() );
-		Assert.assertNull( game.getCurrent() );
-		Assert.assertEquals( 20, game.getNbMusicsPlayed() );
-		Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
-		Assert.assertEquals( 20, musicDTO.getPlayed() );
-		Assert.assertEquals( 1900, profilStatDto.getBestScore() );
-		Assert.assertEquals( 20, profilStatDto.getListenedMusics() );
-		Assert.assertEquals( 19, profilStatDto.getFoundMusics() );
-		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
+		Assert.assertTrue( game.isFinished() );
 	}
 
 }
