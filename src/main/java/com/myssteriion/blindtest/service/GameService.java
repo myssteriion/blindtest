@@ -68,6 +68,7 @@ public class GameService {
 			List<String> winners = musicResultDto.getWinners();
 			List<String> winnersBonus = musicResultDto.getWinnersBonus();
 			List<String> loosers = musicResultDto.getLoosers();
+			List<String> loosersMalus = musicResultDto.getLoosersMalus();
 
 			for (PlayerDTO playerDto : players) {
 
@@ -86,6 +87,10 @@ public class GameService {
 
 				if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
 					playerDto.addScore( gameDto.getCurrent().getNbPointLost() );
+				}
+
+				if ( loosersMalus.stream().anyMatch(losserMalusName -> losserMalusName.equals(profilDto.getName())) ) {
+					playerDto.addScore( gameDto.getCurrent().getNbPointMalusLost() );
 				}
 
 				gameDto.next();

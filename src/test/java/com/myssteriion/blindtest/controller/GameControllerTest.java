@@ -52,7 +52,7 @@ public class GameControllerTest extends AbstractTest {
 		Mockito.when(gameService.apply( Mockito.any(MusicResultDTO.class) )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
-		MusicResultDTO musicResultDto = new MusicResultDTO(0, musicDto, null, null, null, null);
+		MusicResultDTO musicResultDto = new MusicResultDTO(0, musicDto, null, null, null, null, null);
 		
 		ResponseEntity<GameDTO> re = gameController.apply(musicResultDto);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );

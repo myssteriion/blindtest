@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public enum Round {
 
-    CLASSIC(0, 8, 100, 0, 0),
-    CHOICE(1, 8, 100, 50, 0),
-    THIEF(2, 8, 100, 0, 100);
+    CLASSIC(0, 8, 100, 0, 0, 0),
+    CHOICE(1, 8, 100, 50, 0, -50),
+    THIEF(2, 8, 100, 0, 100, 0);
 
 
 
@@ -20,14 +20,17 @@ public enum Round {
 
     private int nbPointLost;
 
+    private int nbPointMalusLost;
 
 
-    Round(int roundNumber, int nbMusics, int nbPointWon, int nbPointBonusWon, int nbPointLost) {
+
+    Round(int roundNumber, int nbMusics, int nbPointWon, int nbPointBonusWon, int nbPointLost, int nbPointMalusLost) {
         this.roundNumber = roundNumber;
         this.nbMusics = nbMusics;
         this.nbPointWon = nbPointWon;
         this.nbPointBonusWon = nbPointBonusWon;
         this.nbPointLost = nbPointLost;
+        this.nbPointMalusLost = nbPointMalusLost;
     }
 
 
@@ -50,6 +53,10 @@ public enum Round {
 
     public int getNbPointLost() {
         return nbPointLost;
+    }
+
+    public int getNbPointMalusLost() {
+        return nbPointMalusLost;
     }
 
 
