@@ -50,7 +50,7 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.CLASSIC, gameDTO.getCurrent() );
+        Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
     }
 
     @Test
@@ -65,7 +65,7 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.CLASSIC, gameDTO.getCurrent() );
+        Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
     }
 
     @Test
@@ -79,14 +79,14 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst(), gameDTO.getCurrent() );
+        Assert.assertEquals( Round.getFirst(), gameDTO.getRound() );
 
         gameDTO.next();
         Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 1, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 1, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst(), gameDTO.getCurrent() );
+        Assert.assertEquals( Round.getFirst(), gameDTO.getRound() );
 
         for (int i = 1; i < Round.getFirst().getNbMusics(); i++)
             gameDTO.next();
@@ -95,7 +95,7 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( Round.getFirst().getNbMusics(), gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst().next(), gameDTO.getCurrent() );
+        Assert.assertEquals( Round.getFirst().nextRound(), gameDTO.getRound() );
     }
 
     @Test
@@ -111,7 +111,7 @@ public class GameDTOTest extends AbstractTest {
         nbMusic++;
         Assert.assertFalse( gameDTO.isFinished() );
 
-        while (gameDTO.getCurrent() != null) {
+        while (gameDTO.getRound() != null) {
             gameDTO.next();
             nbMusic++;
         }

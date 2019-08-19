@@ -19,7 +19,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -137,7 +136,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 		GameDTO game = gameService.apply(musicResultDto);
-		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst(), game.getRound() );
 		Assert.assertEquals( Round.getFirst().getNbPointWon(), game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayedInRound() );
@@ -149,7 +148,7 @@ public class GameServiceTest extends AbstractTest {
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, null, null, null, playersName, playersName );
 		game = gameService.apply(musicResultDto);
-		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst(), game.getRound() );
 		Assert.assertEquals( Round.getFirst().getNbPointWon(), game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayedInRound() );
@@ -161,7 +160,7 @@ public class GameServiceTest extends AbstractTest {
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, playersName, null, null, null );
 		game = gameService.apply(musicResultDto);
-		Assert.assertEquals( Round.getFirst(), game.getCurrent() );
+		Assert.assertEquals( Round.getFirst(), game.getRound() );
 		Assert.assertEquals( Round.getFirst().getNbPointWon()*2, game.getPlayers().get(0).getScore() );
 		Assert.assertEquals( 3, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 3, game.getNbMusicsPlayedInRound() );
@@ -172,7 +171,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, null, null, null, null );
-		while (game.getCurrent() !=null)
+		while (game.getRound() !=null)
 			game = gameService.apply(musicResultDto);
 
 		Assert.assertTrue( game.isFinished() );

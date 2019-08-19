@@ -66,9 +66,6 @@ public class GameService {
 			// update profilStatDto
 			List<PlayerDTO> players = gameDto.getPlayers();
 			List<String> winners = musicResultDto.getWinners();
-			List<String> winnersBonus = musicResultDto.getWinnersBonus();
-			List<String> loosers = musicResultDto.getLoosers();
-			List<String> loosersMalus = musicResultDto.getLoosersMalus();
 
 			for (PlayerDTO playerDto : players) {
 
@@ -76,32 +73,20 @@ public class GameService {
 				ProfilStatDTO profilStatDto = profilStatService.findByProfil(profilDto);
 				profilStatDto.incrementListenedMusics();
 
-				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) ) {
+				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) )
 					profilStatDto.incrementFoundMusics();
-					playerDto.addScore( gameDto.getCurrent().getNbPointWon() );
-				}
-
-				if ( winnersBonus.stream().anyMatch(winnerBonusName -> winnerBonusName.equals(profilDto.getName())) ) {
-					playerDto.addScore( gameDto.getCurrent().getNbPointBonusWon() );
-				}
-
-				if ( loosers.stream().anyMatch(losserName -> losserName.equals(profilDto.getName())) ) {
-					playerDto.addScore( gameDto.getCurrent().getNbPointLost() );
-				}
-
-				if ( loosersMalus.stream().anyMatch(losserMalusName -> losserMalusName.equals(profilDto.getName())) ) {
-					playerDto.addScore( gameDto.getCurrent().getNbPointMalusLost() );
-				}
-
-				gameDto.next();
 
 				if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
 					profilStatDto.incrementPlayedGames();
-				else if ( gameDto.isFinished() )
+				else if ( gameDto.isLastNext() )
 					profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
 
 				profilStatService.update(profilStatDto);
 			}
+
+			gameDto = gameDto.getRoundContent().apply(gameDto, musicResultDto);
+
+			gameDto.next();
 		}
 
 		return gameDto;

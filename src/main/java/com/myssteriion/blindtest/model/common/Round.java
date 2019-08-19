@@ -1,36 +1,24 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
+
 import java.util.Arrays;
 
 public enum Round {
 
-    CLASSIC(0, 8, 100, 0, 0, 0),
-    CHOICE(1, 8, 100, 50, 0, -50),
-    THIEF(2, 8, 100, 0, 100, 0);
+    CLASSIC(0),
+    CHOICE(1),
+    THIEF(2 );
 
 
 
     private int roundNumber;
 
-    private int nbMusics;
-
-    private int nbPointWon;
-
-    private int nbPointBonusWon;
-
-    private int nbPointLost;
-
-    private int nbPointMalusLost;
 
 
-
-    Round(int roundNumber, int nbMusics, int nbPointWon, int nbPointBonusWon, int nbPointLost, int nbPointMalusLost) {
+    Round(int roundNumber) {
         this.roundNumber = roundNumber;
-        this.nbMusics = nbMusics;
-        this.nbPointWon = nbPointWon;
-        this.nbPointBonusWon = nbPointBonusWon;
-        this.nbPointLost = nbPointLost;
-        this.nbPointMalusLost = nbPointMalusLost;
     }
 
 
@@ -39,29 +27,16 @@ public enum Round {
         return roundNumber;
     }
 
-    public int getNbMusics() {
-        return nbMusics;
-    }
 
-    public int getNbPointWon() {
-        return nbPointWon;
-    }
-
-    public int getNbPointBonusWon() {
-        return nbPointBonusWon;
-    }
-
-    public int getNbPointLost() {
-        return nbPointLost;
-    }
-
-    public int getNbPointMalusLost() {
-        return nbPointMalusLost;
-    }
-
-
-    public Round next() {
+    public Round nextRound() {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
+    }
+
+    public AbstractRoundContent createRoundContent() {
+        switch (this) {
+            case CLASSIC:   return new ClassicContent(8, 100);
+            default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
+        }
     }
 
     public static Round getFirst() {

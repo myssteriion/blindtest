@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.dto.game;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
+import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.List;
@@ -22,7 +23,9 @@ public class GameDTO extends AbstractDTO {
 
     private int nbMusicsPlayedInRound;
 
-    private Round current;
+    private Round round;
+
+    private AbstractRoundContent roundContent;
 
 
 
@@ -35,7 +38,8 @@ public class GameDTO extends AbstractDTO {
         this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
-        this.current = Round.getFirst();
+        this.round = Round.getFirst();
+        this.roundContent = this.round.createRoundContent();
     }
 
 
@@ -56,8 +60,12 @@ public class GameDTO extends AbstractDTO {
         return nbMusicsPlayedInRound;
     }
 
-    public Round getCurrent() {
-        return current;
+    public Round getRound() {
+        return round;
+    }
+
+    public AbstractRoundContent getRoundContent() {
+        return roundContent;
     }
 
 
@@ -66,14 +74,28 @@ public class GameDTO extends AbstractDTO {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
 
-        if ( nbMusicsPlayedInRound == Math.round(current.getNbMusics() * duration.getRatio()) ) {
-            current = current.next();
+        if ( roundContent.isFinished(this) ) {
+            round = round.nextRound();
+            roundContent = (round == null) ? null : round.createRoundContent();
             nbMusicsPlayedInRound = INIT;
         }
     }
 
+    public boolean isLastNext() {
+
+        nbMusicsPlayed++;
+        nbMusicsPlayedInRound++;
+
+        boolean isLastNext = roundContent.isFinished(this) && round.nextRound() == null;
+
+        nbMusicsPlayed--;
+        nbMusicsPlayedInRound--;
+
+        return isLastNext;
+    }
+
     public boolean isFinished() {
-        return Tool.isNullOrEmpty(current);
+        return Tool.isNullOrEmpty(round);
     }
 
 
@@ -83,7 +105,8 @@ public class GameDTO extends AbstractDTO {
                 ", duration=" + duration +
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
-                ", current=" + current;
+                ", round=" + round +
+                ", roundContent={" + roundContent + "}";
     }
 
 }

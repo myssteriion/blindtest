@@ -12,10 +12,10 @@ public class RoundTest extends AbstractTest {
     }
 
     @Test
-    public void next() {
-        Assert.assertEquals( Round.CHOICE, Round.CLASSIC.next() );
-        Assert.assertEquals( Round.THIEF, Round.CHOICE.next() );
-        Assert.assertNull( Round.THIEF.next() );
+    public void nextRound() {
+        Assert.assertEquals( Round.CHOICE, Round.CLASSIC.nextRound() );
+        Assert.assertEquals( Round.THIEF, Round.CHOICE.nextRound() );
+        Assert.assertNull( Round.THIEF.nextRound() );
     }
 
     @Test
