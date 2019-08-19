@@ -76,7 +76,7 @@ public class GameService {
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) )
 					profilStatDto.incrementFoundMusics();
 
-				if (gameDto.getNbMusicsPlayed() == GameDTO.FIRST_MUSIC)
+				if (gameDto.getNbMusicsPlayed() == GameDTO.INIT)
 					profilStatDto.incrementPlayedGames();
 				else if ( gameDto.isLastNext() )
 					profilStatDto.setBestScoreIfBetter( playerDto.getScore() );

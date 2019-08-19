@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 
 public class GameDTO extends AbstractDTO {
 
-    private static final int INIT = 0;
-
-    public static final int FIRST_MUSIC = INIT + 1;
+    public static final int INIT = 0;
 
     private List<PlayerDTO> players;
 
