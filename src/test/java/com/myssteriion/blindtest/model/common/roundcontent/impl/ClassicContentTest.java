@@ -68,7 +68,7 @@ public class ClassicContentTest extends AbstractTest {
         }
 
 
-        GameDTO actual = classicContent.apply(gameDto, null);
+        GameDTO actual = classicContent.apply(gameDto, musicResultDto);
         Assert.assertEquals( nbPointWon, actual.getPlayers().get(0).getScore() );
     }
 
@@ -96,7 +96,7 @@ public class ClassicContentTest extends AbstractTest {
     public void toStringAndEquals() {
 
         ClassicContent classicContent = new ClassicContent(20,  100);
-        Assert.assertEquals( "nbMusics=20, nbMusics=100", classicContent.toString() );
+        Assert.assertEquals( "nbMusics=20, nbPointWon=100", classicContent.toString() );
     }
 
 }

@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.dto.game;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -79,23 +80,26 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst(), gameDTO.getRound() );
+        Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
+        Assert.assertEquals( ClassicContent.class, gameDTO.getRoundContent().getClass() );
 
         gameDTO.next();
         Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 1, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 1, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst(), gameDTO.getRound() );
+        Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
+        Assert.assertEquals( ClassicContent.class, gameDTO.getRoundContent().getClass() );
 
-        for (int i = 1; i < Round.getFirst().getNbMusics(); i++)
+        while ( !gameDTO.isFinished() )
             gameDTO.next();
 
         Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
-        Assert.assertEquals( Round.getFirst().getNbMusics(), gameDTO.getNbMusicsPlayed() );
-        Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
-        Assert.assertEquals( Round.getFirst().nextRound(), gameDTO.getRound() );
+        Assert.assertEquals( 8, gameDTO.getNbMusicsPlayed() );
+        Assert.assertEquals( 8, gameDTO.getNbMusicsPlayedInRound() );
+        Assert.assertNull( gameDTO.getRound() );
+        Assert.assertNull( gameDTO.getRoundContent() );
     }
 
     @Test
@@ -127,7 +131,7 @@ public class GameDTOTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
 
         GameDTO gameDtoUn = new GameDTO(playersNames, duration);
-        Assert.assertEquals( "players=[name=name, score=0], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, current=CLASSIC", gameDtoUn.toString() );
+        Assert.assertEquals( "players=[name=name, score=0], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=8, nbPointWon=100}", gameDtoUn.toString() );
     }
 
 }
