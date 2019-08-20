@@ -84,7 +84,7 @@ public class GameDTO extends AbstractDTO {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
 
-        boolean isLastNext = roundContent.isFinished(this) && round.nextRound() == null;
+        boolean isLastNext = roundContent != null && roundContent.isFinished(this) && round.nextRound() == null;
 
         nbMusicsPlayed--;
         nbMusicsPlayedInRound--;
