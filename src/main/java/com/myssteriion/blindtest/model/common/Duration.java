@@ -5,8 +5,8 @@ public enum Duration {
     VERY_SHORT(0.5),
     SHORT(0.75),
     NORMAL(1),
-    LONG(1.5),
-    VERY_LONG(2);
+    LONG(1.25),
+    VERY_LONG(1.5);
 
 
 
