@@ -4,6 +4,9 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
+import com.myssteriion.blindtest.model.dto.game.GameDTO;
+import com.myssteriion.blindtest.tools.Tool;
+import org.apache.commons.io.output.TaggedOutputStream;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,14 +38,17 @@ public enum Round {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
     }
 
-    public AbstractRoundContent createRoundContent(List<String> playersNames) {
+    public AbstractRoundContent createRoundContent(GameDTO gameDto) {
 
-        int nbPlayer = playersNames.size();
+        Tool.verifyValue("gameDto", gameDto);
+
+        int nbPlayer = gameDto.getPlayers().size();
+        double durationRatio = gameDto.getDuration().getRatio();
 
         switch (this) {
-            case CLASSIC:   return new ClassicContent(12, 100);
-            case CHOICE:    return new ChoiceContent(4 * nbPlayer, 100, 50, -50);
-            case THIEF:     return new ThiefContent(12, 100, 100);
+            case CLASSIC:   return new ClassicContent( (int) (12 * durationRatio), 100 );
+            case CHOICE:    return new ChoiceContent( (int) ((4 * nbPlayer) * durationRatio), 100, 50, -50);
+            case THIEF:     return new ThiefContent( (int) (12 * durationRatio), 100, -100);
             default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
     }

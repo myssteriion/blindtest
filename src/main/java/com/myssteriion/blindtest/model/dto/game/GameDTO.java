@@ -37,7 +37,7 @@ public class GameDTO extends AbstractDTO {
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
-        this.roundContent = this.round.createRoundContent(playersNames);
+        this.roundContent = this.round.createRoundContent(this);
     }
 
 
@@ -74,7 +74,7 @@ public class GameDTO extends AbstractDTO {
 
         if ( roundContent.isFinished(this) ) {
             round = round.nextRound();
-            roundContent = (round == null) ? null : round.createRoundContent( players.stream().map(PlayerDTO::getName).collect(Collectors.toList()) );
+            roundContent = (round == null) ? null : round.createRoundContent(this);
             nbMusicsPlayedInRound = INIT;
         }
     }

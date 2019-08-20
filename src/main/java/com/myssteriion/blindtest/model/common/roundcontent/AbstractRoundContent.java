@@ -51,7 +51,7 @@ public abstract class AbstractRoundContent {
 
         Tool.verifyValue("gameDto", gameDto);
 
-        return gameDto.getNbMusicsPlayedInRound() == nbMusics * gameDto.getDuration().getRatio();
+        return gameDto.getNbMusicsPlayedInRound() == nbMusics;
     }
 
 
