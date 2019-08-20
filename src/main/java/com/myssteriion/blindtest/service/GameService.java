@@ -63,6 +63,9 @@ public class GameService {
 			musicDto.incrementPlayed();
 			musicService.update(musicDto);
 
+			// apply score
+			gameDto = gameDto.getRoundContent().apply(gameDto, musicResultDto);
+
 			// update profilStatDto
 			List<PlayerDTO> players = gameDto.getPlayers();
 			List<String> winners = musicResultDto.getWinners();
@@ -83,8 +86,6 @@ public class GameService {
 
 				profilStatService.update(profilStatDto);
 			}
-
-			gameDto = gameDto.getRoundContent().apply(gameDto, musicResultDto);
 
 			gameDto.next();
 		}
