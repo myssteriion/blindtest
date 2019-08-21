@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.common.NotFoundException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -28,7 +28,7 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws SqlException, ConflictException {
+	public void refresh() throws DaoException, ConflictException {
 
 		Mockito.doNothing().when(musicService).refresh();
 
@@ -37,7 +37,7 @@ public class MusicControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void random() throws SqlException, NotFoundException {
+	public void random() throws DaoException, NotFoundException {
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		Mockito.when(musicService.random()).thenReturn(musicDto);

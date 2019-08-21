@@ -1,12 +1,11 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class MusicService {
 	
 	
 	@PostConstruct
-	private void init() throws SqlException, ConflictException {
+	private void init() throws DaoException, ConflictException {
 		
 		for ( Theme theme : Theme.values() ) {
 			
@@ -46,13 +45,13 @@ public class MusicService {
 		}
 	}
 	
-	public void refresh() throws SqlException, ConflictException {
+	public void refresh() throws DaoException, ConflictException {
 		init();
 	}
 	
 	
 	
-	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws SqlException, ConflictException {
+	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws DaoException, ConflictException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		
@@ -69,7 +68,7 @@ public class MusicService {
 		return foundMusicDto;
 	}
 
-	public MusicDTO update(MusicDTO musicDto) throws SqlException, NotFoundException {
+	public MusicDTO update(MusicDTO musicDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("musicDto", musicDto);
 		Tool.verifyValue("musicDto -> id", musicDto.getId());
@@ -81,14 +80,14 @@ public class MusicService {
 		return musicDao.update(musicDto);
 	}
 
-	public MusicDTO find(MusicDTO musicDto) throws SqlException {
+	public MusicDTO find(MusicDTO musicDto) throws DaoException {
 
 		Tool.verifyValue("musicDto", musicDto);
 		return musicDao.find(musicDto);
 	}
 
 
-	public MusicDTO random() throws SqlException, NotFoundException {
+	public MusicDTO random() throws DaoException, NotFoundException {
 	
 		List<MusicDTO> allMusics = musicDao.findAll();
 

@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.db.dao.ProfilStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -23,7 +23,7 @@ public class ProfilStatService {
 	
 	
 	
-	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException, ConflictException {
+	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		checkProfilDto(profilStatDto);
@@ -40,7 +40,7 @@ public class ProfilStatService {
 		return foundProfilDto;
 	}
 
-	public ProfilStatDTO update(ProfilStatDTO profilStatDTO) throws SqlException, NotFoundException {
+	public ProfilStatDTO update(ProfilStatDTO profilStatDTO) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("profilStatDTO", profilStatDTO);
 		Tool.verifyValue("profilStatDTO -> id", profilStatDTO.getId());
@@ -52,13 +52,13 @@ public class ProfilStatService {
 		return profilStatDao.update(profilStatDTO);
 	}
 
-	public ProfilStatDTO find(ProfilStatDTO profilStatDto) throws SqlException {
+	public ProfilStatDTO find(ProfilStatDTO profilStatDto) throws DaoException {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		return profilStatDao.find(profilStatDto);
 	}
 
-	public ProfilStatDTO findByProfil(ProfilDTO profilDto) throws SqlException, NotFoundException {
+	public ProfilStatDTO findByProfil(ProfilDTO profilDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("profilDto", profilDto);
 
@@ -76,11 +76,11 @@ public class ProfilStatService {
 		return foundProfilStatDTO;
 	}
 
-	public List<ProfilStatDTO> findAll() throws SqlException {
+	public List<ProfilStatDTO> findAll() throws DaoException {
 		return profilStatDao.findAll();
 	}
 
-	private void checkProfilDto(ProfilStatDTO profilStatDto) throws SqlException, NotFoundException {
+	private void checkProfilDto(ProfilStatDTO profilStatDto) throws DaoException, NotFoundException {
 	
 		ProfilDTO profilDto = new ProfilDTO("ANY");
 		profilDto.setId( profilStatDto.getProfilId() );

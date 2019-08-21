@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -33,7 +33,7 @@ public class GameControllerTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws SqlException, NotFoundException, ConflictException {
+	public void newGame() throws DaoException, NotFoundException, ConflictException {
 
 		List<String> playersNames = Collections.singletonList("name");
 		Mockito.when(gameService.newGame( Mockito.any(NewGameDTO.class) )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));
@@ -46,7 +46,7 @@ public class GameControllerTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws SqlException, NotFoundException {
+	public void apply() throws DaoException, NotFoundException {
 
 		List<String> playersNames = Collections.singletonList("name");
 		Mockito.when(gameService.apply( Mockito.any(MusicResultDTO.class) )).thenReturn(new GameDTO(playersNames, Duration.NORMAL));

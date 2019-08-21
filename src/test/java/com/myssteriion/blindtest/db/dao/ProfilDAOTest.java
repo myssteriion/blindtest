@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 
 
@@ -29,7 +29,7 @@ public class ProfilDAOTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, SQLException {
+	public void save() throws DaoException, SQLException {
 
 		profilDao = Mockito.spy( new ProfilDAO() );
 		MockitoAnnotations.initMocks(this);
@@ -57,10 +57,10 @@ public class ProfilDAOTest extends AbstractTest {
 		ProfilDTO profilDtoToSave = new ProfilDTO("name", "avatar");
 		try {
 			profilDao.save(profilDtoToSave);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't save profilDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't save profilDto.", sql), e);
 		}
 		
 		ProfilDTO profilDtoReturned = profilDao.save(profilDtoToSave);
@@ -68,7 +68,7 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, SQLException {
+	public void update() throws DaoException, SQLException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		profilDto.setId(1);
@@ -101,10 +101,10 @@ public class ProfilDAOTest extends AbstractTest {
 		profilDtoToUpdate.setId(1);
 		try {
 			profilDao.update(profilDtoToUpdate);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't update profilDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't update profilDto.", sql), e);
 		}
 		
 		ProfilDTO profilDtoReturned = profilDao.update(profilDtoToUpdate);
@@ -112,7 +112,7 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void find() throws SQLException, SqlException {
+	public void find() throws SQLException, DaoException {
 
 		SimpleResultSet rsEmpty = getResultSet();
 		
@@ -139,10 +139,10 @@ public class ProfilDAOTest extends AbstractTest {
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		try {
 			profilDao.find(profilDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't find profilDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't find profilDto.", sql), e);
 		}
 		
 		profilDto = profilDao.find(profilDto);
@@ -158,7 +158,7 @@ public class ProfilDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void findAll() throws SqlException, SQLException {
+	public void findAll() throws DaoException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
 		rs.addRow(1, "name", "avatar");
@@ -172,10 +172,10 @@ public class ProfilDAOTest extends AbstractTest {
 		
 		try {
 			profilDao.findAll();
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't find all profilDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't find all profilDto.", sql), e);
 		}
 		
 		ProfilDTO profilDto = profilDao.findAll().get(0);

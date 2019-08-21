@@ -3,8 +3,8 @@ package com.myssteriion.blindtest.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,8 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
 
@@ -29,12 +28,12 @@ public class MusicServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws SqlException, ConflictException {
+	public void refresh() throws DaoException, ConflictException {
 		musicService.refresh();
 	}
 	
 	@Test
-	public void save() throws SqlException, ConflictException {
+	public void save() throws DaoException, ConflictException {
 		
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -59,7 +58,7 @@ public class MusicServiceTest extends AbstractTest {
 		
 		try {
 			musicService.save(musicDto, true);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
 			verifyException(new ConflictException("musicDto already exists."), e);
@@ -73,7 +72,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws SqlException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException, ConflictException {
 
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -108,7 +107,7 @@ public class MusicServiceTest extends AbstractTest {
 		try {
 			musicDto.setId(1);
 			musicService.update(musicDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("musicDto not found."), e);
@@ -121,7 +120,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void find() throws SqlException {
+	public void find() throws DaoException {
 
 		MusicDTO musicDtoMock = new MusicDTO("name", Theme.ANNEES_80);
 		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
@@ -142,7 +141,7 @@ public class MusicServiceTest extends AbstractTest {
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void random() throws SqlException, NotFoundException {
+	public void random() throws DaoException, NotFoundException {
 		
 		MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, 0);
 		

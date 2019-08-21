@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -34,7 +34,7 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(NewGameDTO newGameDto) throws SqlException, NotFoundException, ConflictException {
+	public GameDTO newGame(NewGameDTO newGameDto) throws DaoException, NotFoundException, ConflictException {
 
 		Tool.verifyValue("newGameDto", newGameDto);
 		checkPlayers( newGameDto.getPlayersNames() );
@@ -45,7 +45,7 @@ public class GameService {
 		return gameDto;
 	}
 
-	public GameDTO apply(MusicResultDTO musicResultDto) throws SqlException, NotFoundException {
+	public GameDTO apply(MusicResultDTO musicResultDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("musicResultDto", musicResultDto);
 		GameDTO gameDto = games.stream()
@@ -93,7 +93,7 @@ public class GameService {
 		return gameDto;
 	}
 
-	private void checkPlayers(List<String> playersNames) throws SqlException, NotFoundException, ConflictException {
+	private void checkPlayers(List<String> playersNames) throws DaoException, NotFoundException, ConflictException {
 
 		if ( playersNames.size() != new HashSet<>(playersNames).size() )
 			throw new ConflictException("Player can be appear only one time");

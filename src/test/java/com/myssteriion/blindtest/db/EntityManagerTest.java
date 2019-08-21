@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -11,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.SqlException;
 
 public class EntityManagerTest extends AbstractTest {
 
@@ -24,7 +24,7 @@ public class EntityManagerTest extends AbstractTest {
 	
 	
 	@Test
-	public void createStatement() throws SQLException, SqlException {
+	public void createStatement() throws SQLException, DaoException {
 
 		Statement statement = Mockito.mock(Statement.class);
 		SQLException sqle = new SQLException("fake");
@@ -35,8 +35,8 @@ public class EntityManagerTest extends AbstractTest {
 			em.createStatement();
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't create statement.", sqle), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't create statement.", sqle), e);
 		}
 		
 		Assert.assertSame( statement, em.createStatement() );

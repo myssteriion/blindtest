@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
@@ -27,7 +27,7 @@ public class GameController {
 	@RequestMapping(
 		method = RequestMethod.POST
 	)
-	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws SqlException, NotFoundException, ConflictException {
+	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws DaoException, NotFoundException, ConflictException {
 
 		GameDTO gameDto = gameService.newGame(newGameDto);
 		return ResponseBuilder.create200(gameDto);
@@ -37,7 +37,7 @@ public class GameController {
 		method = RequestMethod.POST,
 		path = "/apply"
 	)
-	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws SqlException, NotFoundException {
+	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws DaoException, NotFoundException {
 
 		GameDTO gameDTO = gameService.apply(musicResultDto);
 		return ResponseBuilder.create200(gameDTO);

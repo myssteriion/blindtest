@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 
@@ -30,7 +30,7 @@ public class MusicDAOTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, SQLException {
+	public void save() throws DaoException, SQLException {
 
 		musicDao = Mockito.spy( new MusicDAO() );
 		MockitoAnnotations.initMocks(this);
@@ -58,10 +58,10 @@ public class MusicDAOTest extends AbstractTest {
 		MusicDTO musidcDtoToSave = new MusicDTO("name", Theme.ANNEES_80);
 		try {
 			musicDao.save(musidcDtoToSave);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't save musicDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't save musicDto.", sql), e);
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.save(musidcDtoToSave);
@@ -69,7 +69,7 @@ public class MusicDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, SQLException {
+	public void update() throws DaoException, SQLException {
 
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
 		musicDto.setId(1);
@@ -102,10 +102,10 @@ public class MusicDAOTest extends AbstractTest {
 		musicDtoToUpdate.setId(1);
 		try {
 			musicDao.update(musicDtoToUpdate);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't update musicDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't update musicDto.", sql), e);
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.update(musicDtoToUpdate);
@@ -113,7 +113,7 @@ public class MusicDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void find() throws SQLException, SqlException {
+	public void find() throws SQLException, DaoException {
 
 		SimpleResultSet rsEmpty = getResultSet();
 		
@@ -140,10 +140,10 @@ public class MusicDAOTest extends AbstractTest {
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
 		try {
 			musicDao.find(musicDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't find musicDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't find musicDto.", sql), e);
 		}
 		
 		musicDto = musicDao.find(musicDto);
@@ -159,7 +159,7 @@ public class MusicDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void findAll() throws SqlException, SQLException {
+	public void findAll() throws DaoException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
 		rs.addRow(1, "name", "ANNEES_80", 1);
@@ -173,10 +173,10 @@ public class MusicDAOTest extends AbstractTest {
 		
 		try {
 			musicDao.findAll();
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
-		catch (SqlException e) {
-			verifyException(new SqlException("Can't find all musicDto.", sql), e);
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't find all musicDto.", sql), e);
 		}
 		
 		MusicDTO musicDto = musicDao.findAll().get(0);

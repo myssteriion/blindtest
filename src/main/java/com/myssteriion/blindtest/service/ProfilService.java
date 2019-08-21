@@ -2,12 +2,12 @@ package com.myssteriion.blindtest.service;
 
 import java.util.List;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -24,7 +24,7 @@ public class ProfilService {
 	
 	
 	
-	public ProfilDTO save(ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
+	public ProfilDTO save(ProfilDTO profilDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -42,7 +42,7 @@ public class ProfilService {
 		return foundProfilDto;
 	}
 	
-	public ProfilDTO update(ProfilDTO profilDto) throws SqlException, NotFoundException, ConflictException {
+	public ProfilDTO update(ProfilDTO profilDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		Tool.verifyValue("profilDto -> id", profilDto.getId());
@@ -63,13 +63,13 @@ public class ProfilService {
 		return profilDao.update(profilDto);
 	}
 
-	public ProfilDTO find(ProfilDTO profilDto) throws SqlException {
+	public ProfilDTO find(ProfilDTO profilDto) throws DaoException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		return profilDao.find(profilDto);
 	}
 	
-	public List<ProfilDTO> findAll() throws SqlException {
+	public List<ProfilDTO> findAll() throws DaoException {
 		return profilDao.findAll();
 	}
 	

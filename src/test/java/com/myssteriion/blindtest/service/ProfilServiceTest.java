@@ -3,7 +3,8 @@ package com.myssteriion.blindtest.service;
 import java.util.Arrays;
 import java.util.List;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -11,8 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.db.dao.ProfilDAO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -31,7 +31,7 @@ public class ProfilServiceTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, NotFoundException, ConflictException {
+	public void save() throws DaoException, NotFoundException, ConflictException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -58,7 +58,7 @@ public class ProfilServiceTest extends AbstractTest {
 		
 		try {
 			profilService.save(profilDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
 			verifyException(new ConflictException("The profilDto name is already used."), e);
@@ -70,7 +70,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException, ConflictException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -105,7 +105,7 @@ public class ProfilServiceTest extends AbstractTest {
 		try {
 			profilDto.setId(1);
 			profilService.update(profilDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("profilDto not found."), e);
@@ -114,7 +114,7 @@ public class ProfilServiceTest extends AbstractTest {
 		try {
 			profilDto.setId(1);
 			profilService.update(profilDto);
-			Assert.fail("Doit lever une SqlException car le mock throw.");
+			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
 			verifyException(new ConflictException("The profilDto name is already used."), e);
@@ -130,7 +130,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void find() throws SqlException {
+	public void find() throws DaoException {
 
 		ProfilDTO profilDtoMock = new ProfilDTO("name", "avatar");
 		Mockito.when(profilDao.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDtoMock);
@@ -150,7 +150,7 @@ public class ProfilServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void findAll() throws SqlException {
+	public void findAll() throws DaoException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilDao.findAll()).thenReturn( Arrays.asList(profilDto) );

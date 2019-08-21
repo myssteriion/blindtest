@@ -6,12 +6,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -29,7 +29,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 	
 	
 	@Override
-	public ProfilDTO save(ProfilDTO profilDto) throws SqlException {
+	public ProfilDTO save(ProfilDTO profilDto) throws DaoException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -47,12 +47,12 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoSaved;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't save profilDto.", e);
+			throw new DaoException("Can't save profilDto.", e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO update(ProfilDTO profilDto) throws SqlException {
+	public ProfilDTO update(ProfilDTO profilDto) throws DaoException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		Tool.verifyValue("profilDto -> id", profilDto.getId());
@@ -70,12 +70,12 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDto;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't update profilDto.", e);
+			throw new DaoException("Can't update profilDto.", e);
 		}
 	}
 	
 	@Override
-	public ProfilDTO find(ProfilDTO profilDto) throws SqlException {
+	public ProfilDTO find(ProfilDTO profilDto) throws DaoException {
 		
 		Tool.verifyValue("profilDto", profilDto);
 		
@@ -101,12 +101,12 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoToReturn;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find profilDto.", e);
+			throw new DaoException("Can't find profilDto.", e);
 		}
 	}
 	
 	@Override
-	public List<ProfilDTO> findAll() throws SqlException {
+	public List<ProfilDTO> findAll() throws DaoException {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
@@ -126,7 +126,7 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			return profilDtoList;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find all profilDto.", e);
+			throw new DaoException("Can't find all profilDto.", e);
 		}
 	}
 	

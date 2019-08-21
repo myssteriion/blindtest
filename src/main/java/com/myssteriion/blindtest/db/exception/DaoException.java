@@ -1,10 +1,10 @@
-package com.myssteriion.blindtest.db.common;
+package com.myssteriion.blindtest.db.exception;
 
 import com.myssteriion.blindtest.tools.Tool;
 
-public class SqlException extends Exception {
+public class DaoException extends Exception {
 
-	public SqlException(String message, Throwable cause) {
+	public DaoException(String message, Throwable cause) {
 		
 		super(message, cause);
 		
@@ -12,7 +12,7 @@ public class SqlException extends Exception {
 		Tool.verifyValue("cause", cause);
 	}
 
-	public SqlException(String message) {
+	public DaoException(String message) {
 		
 		super(message);
 		

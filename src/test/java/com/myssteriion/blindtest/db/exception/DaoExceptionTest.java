@@ -1,10 +1,11 @@
-package com.myssteriion.blindtest.db.common;
+package com.myssteriion.blindtest.db.exception;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SqlExceptionTest extends AbstractTest {
+public class DaoExceptionTest extends AbstractTest {
 
 	@Test
 	public void constructor() {
@@ -12,7 +13,7 @@ public class SqlExceptionTest extends AbstractTest {
 		String message = "failed";
 		
 		try {
-			new SqlException(null);
+			new DaoException(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -20,14 +21,14 @@ public class SqlExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new SqlException("");
+			new DaoException("");
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
 		}
 		
-		SqlException eme = new SqlException(message);
+		DaoException eme = new DaoException(message);
 		Assert.assertEquals( message, eme.getMessage() );
 		
 		
@@ -36,7 +37,7 @@ public class SqlExceptionTest extends AbstractTest {
 		NullPointerException npe = new NullPointerException("npe");
 		
 		try {
-			new SqlException(null, npe);
+			new DaoException(null, npe);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -44,7 +45,7 @@ public class SqlExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new SqlException("", npe);
+			new DaoException("", npe);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -52,14 +53,14 @@ public class SqlExceptionTest extends AbstractTest {
 		}
 		
 		try {
-			new SqlException(message, null);
+			new DaoException(message, null);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'cause' est obligatoire."), e);
 		}
 		
-		eme = new SqlException(message, npe);
+		eme = new DaoException(message, npe);
 		Assert.assertEquals( message, eme.getMessage() );
 		Assert.assertEquals( npe, eme.getCause() );
 	}

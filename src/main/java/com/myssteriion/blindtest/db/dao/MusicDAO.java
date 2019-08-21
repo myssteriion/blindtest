@@ -6,12 +6,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Tool;
@@ -30,7 +30,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 	
 	
 	@Override
-	public MusicDTO save(MusicDTO musicDto) throws SqlException {
+	public MusicDTO save(MusicDTO musicDto) throws DaoException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		
@@ -48,12 +48,12 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtotoSaved;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't save musicDto.", e);
+			throw new DaoException("Can't save musicDto.", e);
 		}
 	}
 	
 	@Override
-	public MusicDTO update(MusicDTO musicDto) throws SqlException {
+	public MusicDTO update(MusicDTO musicDto) throws DaoException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		Tool.verifyValue("musicDto -> id", musicDto.getId());
@@ -71,12 +71,12 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDto;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't update musicDto.", e);
+			throw new DaoException("Can't update musicDto.", e);
 		}
 	}
 	
 	@Override
-	public MusicDTO find(MusicDTO musicDto) throws SqlException {
+	public MusicDTO find(MusicDTO musicDto) throws DaoException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		
@@ -102,12 +102,12 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtoToReturn;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find musicDto.", e);
+			throw new DaoException("Can't find musicDto.", e);
 		}
 	}
 	
 	@Override
-	public List<MusicDTO> findAll() throws SqlException {
+	public List<MusicDTO> findAll() throws DaoException {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
@@ -127,7 +127,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			return musicDtoList;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find all musicDto.", e);
+			throw new DaoException("Can't find all musicDto.", e);
 		}
 	}
 	

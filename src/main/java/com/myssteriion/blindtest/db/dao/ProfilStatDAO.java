@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.db.dao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
@@ -33,7 +33,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 	
 	
 	@Override
-	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws SqlException {
+	public ProfilStatDTO save(ProfilStatDTO profilStatDto) throws DaoException {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		
@@ -51,12 +51,12 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			return profilStatDtoSaved;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't save profilStatDto.", e);
+			throw new DaoException("Can't save profilStatDto.", e);
 		}
 	}
 	
 	@Override
-	public ProfilStatDTO update(ProfilStatDTO profilStatDto) throws SqlException {
+	public ProfilStatDTO update(ProfilStatDTO profilStatDto) throws DaoException {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		Tool.verifyValue("profilStatDto -> id", profilStatDto.getId());
@@ -77,15 +77,15 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			return profilStatDto;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't update profilStatDto.", e);
+			throw new DaoException("Can't update profilStatDto.", e);
 		}
 		catch (JsonProcessingException e) {
-			throw new SqlException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
 		}
 	}
 	
 	@Override
-	public ProfilStatDTO find(ProfilStatDTO profilStatDto) throws SqlException {
+	public ProfilStatDTO find(ProfilStatDTO profilStatDto) throws DaoException {
 		
 		Tool.verifyValue("profilStatDto", profilStatDto);
 		
@@ -114,15 +114,15 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			return profilDtoToReturn;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find profilStatDto.", e);
+			throw new DaoException("Can't find profilStatDto.", e);
 		}
 		catch (IOException e) {
-			throw new SqlException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
 		}
     }
 	
 	@Override
-	public List<ProfilStatDTO> findAll() throws SqlException {
+	public List<ProfilStatDTO> findAll() throws DaoException {
 		
 		try ( Statement statement = em.createStatement() ) {
 			
@@ -145,10 +145,10 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			return profilDtoList;
 		}
 		catch (SQLException e) {
-			throw new SqlException("Can't find all profilStatDto.", e);
+			throw new DaoException("Can't find all profilStatDto.", e);
 		}
 		catch (IOException e) {
-			throw new SqlException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
 		}
 	}
 	

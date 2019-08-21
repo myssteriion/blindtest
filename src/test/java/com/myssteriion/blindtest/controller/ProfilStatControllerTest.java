@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import java.util.Arrays;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.service.ProfilStatService;
@@ -27,7 +27,7 @@ public class ProfilStatControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void findAll() throws SqlException {
+	public void findAll() throws DaoException {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
 		Mockito.when(profilStatService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilStatDTO(1) ) );

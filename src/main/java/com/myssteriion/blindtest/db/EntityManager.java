@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 import javax.annotation.PostConstruct;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.myssteriion.blindtest.db.common.SqlException;
 import com.myssteriion.blindtest.tools.Constant;
 
 @Component
@@ -26,7 +26,7 @@ public class EntityManager {
 	
 	
 	@PostConstruct
-	private void init() throws SqlException {
+	private void init() throws DaoException {
 		
 		try {
 			
@@ -37,11 +37,11 @@ public class EntityManager {
 			
 			String message = "Can't init DataBase.";
 			LOGGER.error(message, e);
-			throw new SqlException(message, e);
+			throw new DaoException(message, e);
 		}
 	}
 
-	private void initTableIfNeedIt() throws SqlException {
+	private void initTableIfNeedIt() throws DaoException {
 		
 		StringBuilder sb;
 		
@@ -107,13 +107,13 @@ public class EntityManager {
 			
 			String message = "Can't create tables.";
 			LOGGER.error(message, e);
-			throw new SqlException(message, e);
+			throw new DaoException(message, e);
 		}
 	}
 	
 	
 	
-	public Statement createStatement() throws SqlException {
+	public Statement createStatement() throws DaoException {
 		
 		try {
 			return connection.createStatement();
@@ -122,7 +122,7 @@ public class EntityManager {
 			
 			String message = "Can't create statement.";
 			LOGGER.error(message, e);
-			throw new SqlException(message, e);
+			throw new DaoException(message, e);
 		}
 	}
 	

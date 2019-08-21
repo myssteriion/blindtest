@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import java.util.Arrays;
 
-import com.myssteriion.blindtest.db.common.ConflictException;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.NotFoundException;
-import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.service.ProfilService;
@@ -29,7 +29,7 @@ public class ProfilControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void save() throws SqlException, NotFoundException, ConflictException {
+	public void save() throws DaoException, NotFoundException, ConflictException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
@@ -41,7 +41,7 @@ public class ProfilControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws SqlException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException, ConflictException {
 		
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
@@ -53,7 +53,7 @@ public class ProfilControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void findAll() throws SqlException {
+	public void findAll() throws DaoException {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
 		Mockito.when(profilService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilDTO("name", "avatar") ) );

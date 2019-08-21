@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.common.SqlException;
 
 public class ToolTest extends AbstractTest {
 
@@ -104,7 +104,7 @@ public class ToolTest extends AbstractTest {
 		}
 		
 		
-		SqlException sql = new SqlException("sql", iae);
+		DaoException sql = new DaoException("sql", iae);
 		expected = new ArrayList<>();
 		expected.add( sql.getMessage() );
 		expected.add( iae.getMessage() );

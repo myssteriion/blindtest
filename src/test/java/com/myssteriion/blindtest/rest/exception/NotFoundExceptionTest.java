@@ -1,11 +1,11 @@
-package com.myssteriion.blindtest.db.common;
+package com.myssteriion.blindtest.rest.exception;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ConflictExceptionTest extends AbstractTest {
-
+public class NotFoundExceptionTest extends AbstractTest {
 
     @Test
     public void constructor() {
@@ -13,7 +13,7 @@ public class ConflictExceptionTest extends AbstractTest {
         String message = "failed";
 
         try {
-            new ConflictException(null);
+            new NotFoundException(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -21,14 +21,14 @@ public class ConflictExceptionTest extends AbstractTest {
         }
 
         try {
-            new ConflictException("");
+            new NotFoundException("");
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
-        ConflictException eme = new ConflictException(message);
+        NotFoundException eme = new NotFoundException(message);
         Assert.assertEquals( message, eme.getMessage() );
     }
     
