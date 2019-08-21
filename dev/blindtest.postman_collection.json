@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "edb3867c-894f-4614-ad6e-719b78653fe9",
+		"_postman_id": "9281dc68-5a7c-485b-a84c-a7b15a6e2c3c",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,12 +14,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/musics/refresh",
+							"raw": "http://localhost:{{port}}/musics/refresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"musics",
 								"refresh"
@@ -34,12 +34,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/musics/random",
+							"raw": "http://localhost:{{port}}/musics/random",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"musics",
 								"random"
@@ -70,12 +70,12 @@
 							"raw": "{\n\t\"name\": \"name\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/profils",
+							"raw": "http://localhost:{{port}}/profils",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"profils"
 							]
@@ -100,12 +100,12 @@
 							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/profils/0",
+							"raw": "http://localhost:{{port}}/profils/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"profils",
 								"0"
@@ -120,12 +120,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/profils",
+							"raw": "http://localhost:{{port}}/profils",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"profils"
 							]
@@ -144,12 +144,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/profilstats",
+							"raw": "http://localhost:{{port}}/profilstats",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"profilstats"
 							]
@@ -160,7 +160,7 @@
 			]
 		},
 		{
-			"name": "gameresult",
+			"name": "game",
 			"item": [
 				{
 					"name": "new game",
@@ -176,15 +176,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n\t\"name\"\n]\n"
+							"raw": "{\n\t\"playersNames\": [ \"name\" ],\n\t\"duration\": \"NORMAL\"\n\t\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/game",
+							"raw": "http://localhost:{{port}}/game",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"game"
 							]
@@ -206,15 +206,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"numMusic\": \"NORMAL\",\n\t\"round\": \"CLASSIC\",\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"loosers\": [ \"name\" ]\n}"
+							"raw": "{\n\t\"gameId\": 1,\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"winnersBonus\": [ ],\n\t\"neutral\": [ ],\n\t\"loosers\": [ ],\n\t\"loosersMalus\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/game/apply",
+							"raw": "http://localhost:{{port}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"game",
 								"apply"
@@ -224,6 +224,36 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "173506a0-e80a-49ca-b2dc-f02efc2caa8e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5a068cd0-ef5a-4c51-a492-8840cf7fa666",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "df32fe93-d4ca-43b2-af28-693b0a293dca",
+			"key": "port",
+			"value": "9501",
+			"type": "string"
 		}
 	]
 }
