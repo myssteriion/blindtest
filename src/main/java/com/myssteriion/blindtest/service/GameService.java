@@ -82,7 +82,7 @@ public class GameService {
 				if (gameDto.getNbMusicsPlayed() == GameDTO.INIT)
 					profilStatDto.incrementPlayedGames();
 				else if ( gameDto.isLastNext() )
-					profilStatDto.setBestScoreIfBetter( playerDto.getScore() );
+					profilStatDto.addBestScoreIfBetter( gameDto.getDuration(), playerDto.getScore() );
 
 				profilStatService.update(profilStatDto);
 			}

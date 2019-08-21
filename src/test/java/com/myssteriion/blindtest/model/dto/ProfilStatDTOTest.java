@@ -1,5 +1,7 @@
 package com.myssteriion.blindtest.model.dto;
 
+import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,7 +23,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 		}
 		
 		try {
-			new ProfilStatDTO(null, 0, 0, 0, 0);
+			new ProfilStatDTO(null, 0, 0, 0, null);
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -32,19 +34,19 @@ public class ProfilStatDTOTest extends AbstractTest {
 		
 		
 		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId, 1, 2, 3, 4);
+		ProfilStatDTO profilStatDto = new ProfilStatDTO(profilId, 1, 2, 3, null);
 		Assert.assertEquals( profilId, profilStatDto.getProfilId() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );
-		Assert.assertEquals( 4, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 
-		profilStatDto = new ProfilStatDTO(profilId, -1, -2, -3, -4);
+		profilStatDto = new ProfilStatDTO(profilId, -1, -2, -3, null);
 		Assert.assertEquals( profilId, profilStatDto.getProfilId() );
 		Assert.assertEquals( 0, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 0, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 0, profilStatDto.getFoundMusics() );
-		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 	}
 	
 	@Test
@@ -58,7 +60,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 		Assert.assertEquals( 0, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 0, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 0, profilStatDto.getFoundMusics() );
-		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 
 		profilStatDto.setId(123);
 		Assert.assertEquals( new Integer(123), profilStatDto.getId() );
@@ -70,10 +72,10 @@ public class ProfilStatDTOTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 
-		profilStatDto.setBestScoreIfBetter(10);
-		Assert.assertEquals( 10, profilStatDto.getBestScore() );
-		profilStatDto.setBestScoreIfBetter(8);
-		Assert.assertEquals( 10, profilStatDto.getBestScore() );
+		profilStatDto.addBestScoreIfBetter(Duration.NORMAL, 10);
+		Assert.assertEquals( new Integer(10), profilStatDto.getBestScores().get(Duration.NORMAL) );
+		profilStatDto.addBestScoreIfBetter(Duration.NORMAL, 8);
+		Assert.assertEquals( new Integer(10), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 	
 	@Test
@@ -82,7 +84,7 @@ public class ProfilStatDTOTest extends AbstractTest {
 		Integer profilId = 1;
 		ProfilStatDTO profilStatDtoUn = new ProfilStatDTO(profilId);
 		
-		Assert.assertEquals( "id=null, profilId=1, playedGames=0, listenedMusics=0, foundMusics=0, bestScore=0", profilStatDtoUn.toString() );
+		Assert.assertEquals( "id=null, profilId=1, playedGames=0, listenedMusics=0, foundMusics=0, bestScores={}", profilStatDtoUn.toString() );
 		
 		ProfilStatDTO profilStatDtoUnIso = new ProfilStatDTO(1);
 		ProfilStatDTO profilStatDtoDeux = new ProfilStatDTO(2);

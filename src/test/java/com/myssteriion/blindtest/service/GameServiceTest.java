@@ -141,7 +141,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 1, musicDTO.getPlayed() );
-		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 		Assert.assertEquals( 1, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
@@ -153,7 +153,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 2, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 2, musicDTO.getPlayed() );
-		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
@@ -165,16 +165,17 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 3, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 3, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 3, musicDTO.getPlayed() );
-		Assert.assertEquals( 0, profilStatDto.getBestScore() );
+		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
 		Assert.assertEquals( 3, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 2, profilStatDto.getFoundMusics() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, null, null, null, null );
-		while (game.getRound() !=null)
+		while (game.getRound() != null)
 			game = gameService.apply(musicResultDto);
 
 		Assert.assertTrue( game.isFinished() );
+		Assert.assertEquals( new Integer(2700), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
 }

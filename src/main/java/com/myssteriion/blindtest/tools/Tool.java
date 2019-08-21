@@ -1,5 +1,7 @@
 package com.myssteriion.blindtest.tools;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.Random;
 public class Tool {
 
 	public static final Random RANDOM = new Random();
+
+	public static final ObjectMapper MAPPER = new ObjectMapper();
 	
-	
-	
+
+
 	public static boolean isNullOrEmpty(Object o) {
 		
 		if (o == null) {

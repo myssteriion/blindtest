@@ -1,9 +1,10 @@
 package com.myssteriion.blindtest.db.dao;
 
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.EntityManager;
+import com.myssteriion.blindtest.db.common.SqlException;
+import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,10 +13,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.common.SqlException;
-import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 
 
 public class ProfilStatDAOTest extends AbstractTest {
@@ -117,8 +117,8 @@ public class ProfilStatDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3, 4);
-		rs.addRow(2, 1, 1, 2, 3, 4);
+		rs.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -161,7 +161,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 	public void findAll() throws SqlException, SQLException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3, 4);
+		rs.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -183,7 +183,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
 		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );
-		Assert.assertEquals( 4, profilStatDto.getBestScore() );
+		Assert.assertEquals( new Integer(100), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 	
 	
@@ -196,7 +196,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		rs.addColumn("played_games", Types.INTEGER, 100, 0);
 		rs.addColumn("listened_musics", Types.INTEGER, 100, 0);
 		rs.addColumn("found_musics", Types.INTEGER, 100, 0);
-		rs.addColumn("best_score", Types.INTEGER, 100, 0);
+		rs.addColumn("best_scores", Types.VARCHAR, 100, 0);
 		return rs;
 	}
 	

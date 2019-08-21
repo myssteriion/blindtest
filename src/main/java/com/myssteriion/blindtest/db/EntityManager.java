@@ -98,7 +98,7 @@ public class EntityManager {
 			sb.append("played_games INT NOT NULL,");
 			sb.append("listened_musics INT NOT NULL,");
 			sb.append("found_musics INT NOT NULL,");
-			sb.append("best_score INT NOT NULL,");
+			sb.append("best_scores VARCHAR2 NOT NULL,");
 			sb.append("FOREIGN KEY (profil_id) REFERENCES profil(id)");
 			sb.append(")");
 			statement.execute( sb.toString() );

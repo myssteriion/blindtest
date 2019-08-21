@@ -1,9 +1,12 @@
 package com.myssteriion.blindtest.model.dto;
 
-import java.util.Objects;
-
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.tools.Tool;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class ProfilStatDTO extends AbstractDTO {
 
@@ -15,15 +18,15 @@ public class ProfilStatDTO extends AbstractDTO {
 	
 	private int foundMusics;
 
-	private int bestScore;
+	private Map<Duration, Integer> bestScores;
 
 	
 	
 	public ProfilStatDTO(Integer profilId) {
-		this(profilId, 0, 0, 0, 0);
+		this(profilId, 0, 0, 0, new HashMap<>());
 	}
 	
-	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics, int bestScore) {
+	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics, Map<Duration, Integer> bestScores) {
 		
 		Tool.verifyValue("profilId", profilId);
 		
@@ -31,7 +34,7 @@ public class ProfilStatDTO extends AbstractDTO {
 		this.playedGames = (playedGames < 0) ? 0 : playedGames;
 		this.listenedMusics = (listenedMusics < 0) ? 0 : listenedMusics;
 		this.foundMusics = (foundMusics < 0) ? 0 : foundMusics;
-		this.bestScore = (bestScore < 0) ? 0 : bestScore;
+		this.bestScores = (bestScores == null) ? new HashMap<>() : bestScores;
 	}
 	
 	
@@ -64,15 +67,18 @@ public class ProfilStatDTO extends AbstractDTO {
 		this.foundMusics++;
 	}
 
-	public int getBestScore() {
-		return bestScore;
+	public Map<Duration, Integer> getBestScores() {
+		return bestScores;
 	}
 
-	public void setBestScoreIfBetter(int bestScore) {
-		 if (bestScore > this.bestScore)
-		 	this.bestScore = bestScore;
-	}
+	public void addBestScoreIfBetter(Duration duration, int scores) {
 
+		if ( !bestScores.containsKey(duration) )
+			bestScores.put(duration, 0);
+
+		if ( scores > bestScores.get(duration) )
+			bestScores.put(duration, scores);
+	}
 
 
 	@Override
@@ -100,7 +106,7 @@ public class ProfilStatDTO extends AbstractDTO {
 				", playedGames=" + playedGames +
 				", listenedMusics=" + listenedMusics +
 				", foundMusics=" + foundMusics +
-				", bestScore=" + bestScore;
+				", bestScores=" + bestScores;
 	}
 	
 }

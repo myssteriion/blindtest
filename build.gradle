@@ -32,7 +32,8 @@ dependencies {
 	implementation "com.h2database:h2:1.4.199"
 	implementation "com.googlecode.junit-toolbox:junit-toolbox:2.4"
 	implementation "ch.qos.logback:logback-core:1.2.3"
-	
+	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.9"
+
 	testImplementation "org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE"
 }
 
