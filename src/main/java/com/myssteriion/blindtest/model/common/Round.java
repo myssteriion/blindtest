@@ -5,6 +5,8 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
+import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.tools.BeanFactory;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Arrays;
@@ -43,10 +45,29 @@ public enum Round {
         int nbPlayer = gameDto.getPlayers().size();
         double durationRatio = gameDto.getDuration().getRatio();
 
+        RoundContentProperties prop = BeanFactory.getBean(RoundContentProperties.class);
+
         switch (this) {
-            case CLASSIC:   return new ClassicContent( (int) (12 * durationRatio), 100 );
-            case CHOICE:    return new ChoiceContent( (int) ((4 * nbPlayer) * durationRatio), 100, 50, -50);
-            case THIEF:     return new ThiefContent( (int) (12 * durationRatio), 100, -100);
+            case CLASSIC:
+                int nbMusics = prop.getClassicNbMusics();
+                int nbPointWon = prop.getClassicNbPointWon();
+                return new ClassicContent((int) (nbMusics * durationRatio), nbPointWon);
+
+            case CHOICE:
+                nbMusics = prop.getChoiceNbMusics();
+                nbPointWon = prop.getChoiceNbPointWon();
+                int nbPointBonusWon = prop.getChoiceNbPointBonusWon();
+                int nbPointMalusLoose = prop.getChoicenNPointMalusLoose();
+                return new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
+
+
+            case THIEF:
+                nbMusics = prop.getThiefNbMusics();
+                nbPointWon = prop.getThiefNbPointWon();
+                int nbPointLoose = prop.getThiefNbPointLoose();
+                return new ThiefContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
+
+
             default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
     }
