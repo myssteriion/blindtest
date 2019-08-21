@@ -92,11 +92,11 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			else
 				sb.append("WHERE id = " + musicDto.getId());
 			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			if ( rs.next() ) {
-				
-				musicDtoToReturn = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				musicDtoToReturn.setId( rs.getInt("id") );
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				if ( rs.next() ) {
+					musicDtoToReturn = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
+					musicDtoToReturn.setId( rs.getInt("id") );
+				}
 			}
 
 			return musicDtoToReturn;
@@ -115,13 +115,13 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM " + tableName);
-			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			while ( rs.next() ) {
-				
-				MusicDTO musicDto = new MusicDTO( rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played") );
-				musicDto.setId( rs.getInt("id") );
-				musicDtoList.add(musicDto);
+
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				while ( rs.next() ) {
+					MusicDTO musicDto = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
+					musicDto.setId( rs.getInt("id") );
+					musicDtoList.add(musicDto);
+				}
 			}
 			
 			return musicDtoList;

@@ -90,12 +90,12 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 				sb.append("WHERE name = '" + escapeValue( profilDto.getName() ) + "'");
 			else
 				sb.append("WHERE id = " + profilDto.getId());
-			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			if ( rs.next() ) {
-				
-				profilDtoToReturn = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
-				profilDtoToReturn.setId( rs.getInt("id") );
+
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				if ( rs.next() ) {
+					profilDtoToReturn = new ProfilDTO(rs.getString("name"), rs.getString("avatar"));
+					profilDtoToReturn.setId( rs.getInt("id") );
+				}
 			}
 
 			return profilDtoToReturn;
@@ -114,13 +114,13 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM " + tableName);
-			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			while ( rs.next() ) {
 
-				ProfilDTO profilDto = new ProfilDTO( rs.getString("name"), rs.getString("avatar") );
-				profilDto.setId( rs.getInt("id") );
-				profilDtoList.add(profilDto);
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				while ( rs.next() ) {
+					ProfilDTO profilDto = new ProfilDTO(rs.getString("name"), rs.getString("avatar"));
+					profilDto.setId( rs.getInt("id") );
+					profilDtoList.add(profilDto);
+				}
 			}
 			
 			return profilDtoList;

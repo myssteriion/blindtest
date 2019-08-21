@@ -146,10 +146,13 @@ public class ProfilStatDAOTest extends AbstractTest {
 		rs2.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
 		rs2.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
 
+		SimpleResultSet rs3 = getResultSet();
+		rs3.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs3.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
 		
 		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs, rsEmpty, rs2);
+		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs, rsEmpty, rs2, rs3);
 		Mockito.when(em.createStatement()).thenReturn(statement);
 
 		JsonProcessingException jpe = new JsonGenerationException("jpe");

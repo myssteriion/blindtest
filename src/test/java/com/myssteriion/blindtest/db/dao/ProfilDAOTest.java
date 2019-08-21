@@ -119,11 +119,14 @@ public class ProfilDAOTest extends AbstractTest {
 		SimpleResultSet rs = getResultSet();
 		rs.addRow(1, "name", "avatar");
 		rs.addRow(2, "name", "avatar");
-		
+
+		SimpleResultSet rs2 = getResultSet();
+		rs2.addRow(1, "name", "avatar");
+		rs2.addRow(2, "name", "avatar");
 		
 		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs);
+		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
 		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		

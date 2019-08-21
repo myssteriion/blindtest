@@ -100,15 +100,14 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 				sb.append("WHERE profil_id = " + profilStatDto.getProfilId() );
 			else
 				sb.append("WHERE id = " + profilStatDto.getId());
-			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			if ( rs.next() ) {
 
-				HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue( rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {} );
-				profilDtoToReturn = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
-                                                      rs.getInt("listened_musics"), rs.getInt("found_musics"),
-													  bestScores );
-				profilDtoToReturn.setId( rs.getInt("id") );
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				if ( rs.next() ) {
+					HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue(rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {});
+					profilDtoToReturn = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
+														  rs.getInt("listened_musics"), rs.getInt("found_musics"), bestScores);
+					profilDtoToReturn.setId( rs.getInt("id") );
+				}
 			}
 
 			return profilDtoToReturn;
@@ -130,18 +129,17 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM " + tableName);
-			
-			ResultSet rs = statement.executeQuery( sb.toString() );
-			while ( rs.next() ) {
 
-				HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue( rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {} );
-                ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
-                                                                rs.getInt("listened_musics"), rs.getInt("found_musics"),
-																bestScores );
-				profilStatDto.setId( rs.getInt("id") );
-				profilDtoList.add(profilStatDto);
+			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
+				while ( rs.next() ) {
+					HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue(rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {});
+					ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
+																	rs.getInt("listened_musics"), rs.getInt("found_musics"), bestScores);
+					profilStatDto.setId( rs.getInt("id") );
+					profilDtoList.add(profilStatDto);
+				}
 			}
-			
+
 			return profilDtoList;
 		}
 		catch (SQLException e) {

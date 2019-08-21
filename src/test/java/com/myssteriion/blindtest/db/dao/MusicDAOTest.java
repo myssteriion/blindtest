@@ -120,11 +120,14 @@ public class MusicDAOTest extends AbstractTest {
 		SimpleResultSet rs = getResultSet();
 		rs.addRow(1, "name", "ANNEES_80", 1);
 		rs.addRow(2, "name", "ANNEES_80", 1);
-		
+
+		SimpleResultSet rs2 = getResultSet();
+		rs2.addRow(1, "name", "ANNEES_80", 1);
+		rs2.addRow(2, "name", "ANNEES_80", 1);
 		
 		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs);
+		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
 		Mockito.when(em.createStatement()).thenReturn(statement);
 		
 		
