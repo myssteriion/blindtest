@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractTest {
 
 	protected void verifyException(Throwable expected, Throwable actual) {
