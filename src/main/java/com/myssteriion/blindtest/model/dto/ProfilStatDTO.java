@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.HashMap;
@@ -14,26 +15,26 @@ public class ProfilStatDTO extends AbstractDTO {
 	
 	private int playedGames;
 	
-	private int listenedMusics;
+	private Map<Theme, Integer> listenedMusics;
 	
-	private int foundMusics;
+	private Map<Theme, Integer> foundMusics;
 
 	private Map<Duration, Integer> bestScores;
 
 	
 	
 	public ProfilStatDTO(Integer profilId) {
-		this(profilId, 0, 0, 0, new HashMap<>());
+		this(profilId, 0, new HashMap<>(), new HashMap<>(), new HashMap<>());
 	}
 	
-	public ProfilStatDTO(Integer profilId, int playedGames, int listenedMusics, int foundMusics, Map<Duration, Integer> bestScores) {
+	public ProfilStatDTO(Integer profilId, int playedGames, Map<Theme, Integer> listenedMusics, Map<Theme, Integer> foundMusics, Map<Duration, Integer> bestScores) {
 		
 		Tool.verifyValue("profilId", profilId);
 		
 		this.profilId = profilId;
 		this.playedGames = (playedGames < 0) ? 0 : playedGames;
-		this.listenedMusics = (listenedMusics < 0) ? 0 : listenedMusics;
-		this.foundMusics = (foundMusics < 0) ? 0 : foundMusics;
+		this.listenedMusics = (listenedMusics == null) ? new HashMap<>() : listenedMusics;
+		this.foundMusics = (foundMusics == null) ? new HashMap<>() : foundMusics;
 		this.bestScores = (bestScores == null) ? new HashMap<>() : bestScores;
 	}
 	
@@ -51,20 +52,32 @@ public class ProfilStatDTO extends AbstractDTO {
 		this.playedGames++;
 	}
 	
-	public int getListenedMusics() {
+	public Map<Theme, Integer> getListenedMusics() {
 		return listenedMusics;
 	}
 
-	public void incrementListenedMusics() {
-		this.listenedMusics++;
+	public void incrementListenedMusics(Theme theme) {
+
+		Tool.verifyValue("theme", theme);
+
+		if ( !listenedMusics.containsKey(theme) )
+			listenedMusics.put(theme, 0);
+
+		listenedMusics.put(theme, listenedMusics.get(theme) + 1);
 	}
 	
-	public int getFoundMusics() {
+	public Map<Theme, Integer> getFoundMusics() {
 		return foundMusics;
 	}
 	
-	public void incrementFoundMusics() {
-		this.foundMusics++;
+	public void incrementFoundMusics(Theme theme) {
+
+		Tool.verifyValue("theme", theme);
+
+		if ( !foundMusics.containsKey(theme) )
+			foundMusics.put(theme, 0);
+
+		foundMusics.put(theme, foundMusics.get(theme) + 1);
 	}
 
 	public Map<Duration, Integer> getBestScores() {
@@ -72,6 +85,8 @@ public class ProfilStatDTO extends AbstractDTO {
 	}
 
 	public void addBestScoreIfBetter(Duration duration, int scores) {
+
+		Tool.verifyValue("duration", duration);
 
 		if ( !bestScores.containsKey(duration) )
 			bestScores.put(duration, 0);

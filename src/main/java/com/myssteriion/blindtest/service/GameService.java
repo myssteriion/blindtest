@@ -74,10 +74,10 @@ public class GameService {
 
 				ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
 				ProfilStatDTO profilStatDto = profilStatService.findByProfil(profilDto);
-				profilStatDto.incrementListenedMusics();
+				profilStatDto.incrementListenedMusics( musicResultDto.getMusicDTO().getTheme() );
 
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) )
-					profilStatDto.incrementFoundMusics();
+					profilStatDto.incrementFoundMusics( musicResultDto.getMusicDTO().getTheme() );
 
 				if (gameDto.getNbMusicsPlayed() == GameDTO.INIT)
 					profilStatDto.incrementPlayedGames();

@@ -158,6 +158,9 @@ public class ProfilDAOTest extends AbstractTest {
 		profilDto.setId(1);
 		profilDto = profilDao.find(profilDto);
 		Assert.assertNotNull(profilDto);
+		Assert.assertEquals( new Integer(1), profilDto.getId() );
+		Assert.assertEquals( "name", profilDto.getName() );
+		Assert.assertEquals( "avatar", profilDto.getAvatar() );
 	}
 	
 	@Test

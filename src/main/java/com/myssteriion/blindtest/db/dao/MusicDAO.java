@@ -1,20 +1,19 @@
 package com.myssteriion.blindtest.db.dao;
 
+import com.myssteriion.blindtest.db.AbstractDAO;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.tools.Tool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.myssteriion.blindtest.db.exception.DaoException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.tools.Tool;
 
 @Component
 public class MusicDAO extends AbstractDAO<MusicDTO> {
@@ -93,10 +92,8 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 				sb.append("WHERE id = " + musicDto.getId());
 			
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				if ( rs.next() ) {
-					musicDtoToReturn = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
-					musicDtoToReturn.setId( rs.getInt("id") );
-				}
+				if ( rs.next() )
+					musicDtoToReturn = transformToDto(rs);
 			}
 
 			return musicDtoToReturn;
@@ -117,11 +114,8 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			sb.append("SELECT * FROM " + tableName);
 
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				while ( rs.next() ) {
-					MusicDTO musicDto = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
-					musicDto.setId( rs.getInt("id") );
-					musicDtoList.add(musicDto);
-				}
+				while ( rs.next() )
+					musicDtoList.add( transformToDto(rs) );
 			}
 			
 			return musicDtoList;
@@ -130,5 +124,16 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 			throw new DaoException("Can't find all musicDto.", e);
 		}
 	}
-	
+
+
+	private MusicDTO transformToDto(ResultSet rs) throws SQLException {
+
+		MusicDTO musicDtoToReturn;
+
+		musicDtoToReturn = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
+		musicDtoToReturn.setId( rs.getInt("id") );
+
+		return musicDtoToReturn;
+	}
+
 }

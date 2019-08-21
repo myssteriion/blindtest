@@ -159,6 +159,9 @@ public class MusicDAOTest extends AbstractTest {
 		musicDto.setId(1);
 		musicDto = musicDao.find(musicDto);
 		Assert.assertNotNull(musicDto);
+		Assert.assertEquals( new Integer(1), musicDto.getId() );
+		Assert.assertEquals( "name", musicDto.getName() );
+		Assert.assertEquals( Theme.ANNEES_80, musicDto.getTheme() );
 	}
 	
 	@Test

@@ -1,19 +1,18 @@
 package com.myssteriion.blindtest.db.dao;
 
+import com.myssteriion.blindtest.db.AbstractDAO;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.tools.Tool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.myssteriion.blindtest.db.exception.DaoException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
-import com.myssteriion.blindtest.tools.Tool;
 
 @Component
 public class ProfilDAO extends AbstractDAO<ProfilDTO> {
@@ -92,10 +91,8 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 				sb.append("WHERE id = " + profilDto.getId());
 
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				if ( rs.next() ) {
-					profilDtoToReturn = new ProfilDTO(rs.getString("name"), rs.getString("avatar"));
-					profilDtoToReturn.setId( rs.getInt("id") );
-				}
+				if ( rs.next() )
+					profilDtoToReturn = transformToDto(rs);
 			}
 
 			return profilDtoToReturn;
@@ -116,11 +113,8 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			sb.append("SELECT * FROM " + tableName);
 
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				while ( rs.next() ) {
-					ProfilDTO profilDto = new ProfilDTO(rs.getString("name"), rs.getString("avatar"));
-					profilDto.setId( rs.getInt("id") );
-					profilDtoList.add(profilDto);
-				}
+				while ( rs.next() )
+					profilDtoList.add( transformToDto(rs) );
 			}
 			
 			return profilDtoList;
@@ -129,5 +123,16 @@ public class ProfilDAO extends AbstractDAO<ProfilDTO> {
 			throw new DaoException("Can't find all profilDto.", e);
 		}
 	}
-	
+
+
+	private ProfilDTO transformToDto(ResultSet rs) throws SQLException {
+
+		ProfilDTO profilDtoToReturn;
+
+		profilDtoToReturn = new ProfilDTO(rs.getString("name"), rs.getString("avatar"));
+		profilDtoToReturn.setId( rs.getInt("id") );
+
+		return profilDtoToReturn;
+	}
+
 }

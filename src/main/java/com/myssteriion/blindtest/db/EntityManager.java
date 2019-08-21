@@ -96,8 +96,8 @@ public class EntityManager {
 			sb.append("id BIGINT DEFAULT profil_stat_seq.nextval PRIMARY KEY,");
 			sb.append("profil_id BIGINT NOT NULL UNIQUE,");
 			sb.append("played_games INT NOT NULL,");
-			sb.append("listened_musics INT NOT NULL,");
-			sb.append("found_musics INT NOT NULL,");
+			sb.append("listened_musics VARCHAR2 NOT NULL,");
+			sb.append("found_musics VARCHAR2 NOT NULL,");
 			sb.append("best_scores VARCHAR2 NOT NULL,");
 			sb.append("FOREIGN KEY (profil_id) REFERENCES profil(id)");
 			sb.append(")");

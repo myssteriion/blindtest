@@ -1,21 +1,20 @@
 package com.myssteriion.blindtest.service;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.dao.ProfilStatDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.db.dao.ProfilStatDAO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
-import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProfilStatServiceTest extends AbstractTest {
 
@@ -77,12 +76,10 @@ public class ProfilStatServiceTest extends AbstractTest {
 		Assert.assertEquals( new Integer(1), profilStatDtoSaved.getId() );
 		Assert.assertEquals( profilStatId, profilStatDtoSaved.getProfilId() );
 		Assert.assertEquals( 0, profilStatDtoSaved.getPlayedGames() );
-		Assert.assertEquals( 0, profilStatDtoSaved.getListenedMusics() );
-		Assert.assertEquals( 0, profilStatDtoSaved.getFoundMusics() );
 	}
 
 	@Test
-	public void update() throws DaoException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException {
 
 		Integer profilStatId = 1;
 

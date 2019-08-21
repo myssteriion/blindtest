@@ -142,8 +142,8 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 1, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 1, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
-		Assert.assertEquals( 1, profilStatDto.getListenedMusics() );
-		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( new Integer(1), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(1), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, null, null, null, playersName, playersName );
@@ -154,8 +154,8 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 2, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 2, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
-		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
-		Assert.assertEquals( 1, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( new Integer(2), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(1), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, playersName, null, null, null );
@@ -166,8 +166,8 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 3, game.getNbMusicsPlayedInRound() );
 		Assert.assertEquals( 3, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profilStatDto.getBestScores().size() );
-		Assert.assertEquals( 3, profilStatDto.getListenedMusics() );
-		Assert.assertEquals( 2, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( new Integer(3), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(2), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
 
 		musicResultDto = new MusicResultDTO( 0, musicDTO, playersName, null, null, null, null );

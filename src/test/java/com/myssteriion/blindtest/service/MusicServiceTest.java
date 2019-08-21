@@ -72,7 +72,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws DaoException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException {
 
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;

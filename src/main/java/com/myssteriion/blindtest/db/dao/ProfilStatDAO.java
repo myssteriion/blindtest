@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.myssteriion.blindtest.db.AbstractDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO " + tableName + "(profil_id, played_games, listened_musics, found_musics, best_scores) ");
-			sb.append("VALUES (" + profilStatDto.getProfilId() + ", 0, 0, 0, '{}')");
+			sb.append("VALUES (" + profilStatDto.getProfilId() + ", 0, '{}', '{}', '{}')");
 			
 			statement.execute( sb.toString() );
 			
@@ -80,7 +81,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			throw new DaoException("Can't update profilStatDto.", e);
 		}
 		catch (JsonProcessingException e) {
-			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse profilStatDto.", e);
 		}
 	}
 	
@@ -102,12 +103,8 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 				sb.append("WHERE id = " + profilStatDto.getId());
 
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				if ( rs.next() ) {
-					HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue(rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {});
-					profilDtoToReturn = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
-														  rs.getInt("listened_musics"), rs.getInt("found_musics"), bestScores);
-					profilDtoToReturn.setId( rs.getInt("id") );
-				}
+				if ( rs.next() )
+					profilDtoToReturn = transformToDto(rs);
 			}
 
 			return profilDtoToReturn;
@@ -116,7 +113,7 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			throw new DaoException("Can't find profilStatDto.", e);
 		}
 		catch (IOException e) {
-			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse profilStatDto.", e);
 		}
     }
 	
@@ -131,13 +128,8 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			sb.append("SELECT * FROM " + tableName);
 
 			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				while ( rs.next() ) {
-					HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue(rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {});
-					ProfilStatDTO profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),
-																	rs.getInt("listened_musics"), rs.getInt("found_musics"), bestScores);
-					profilStatDto.setId( rs.getInt("id") );
-					profilDtoList.add(profilStatDto);
-				}
+				while ( rs.next() )
+					profilDtoList.add( transformToDto(rs) );
 			}
 
 			return profilDtoList;
@@ -146,8 +138,23 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			throw new DaoException("Can't find all profilStatDto.", e);
 		}
 		catch (IOException e) {
-			throw new DaoException("Can't parse 'bestScores' profilStatDto.", e);
+			throw new DaoException("Can't parse profilStatDto.", e);
 		}
+	}
+
+
+	private ProfilStatDTO transformToDto(ResultSet rs) throws SQLException, IOException {
+
+		ProfilStatDTO profilStatDto;
+
+		HashMap<Theme, Integer> listenedMusics = Tool.MAPPER.readValue(rs.getString("listened_musics"), new TypeReference<HashMap<Theme, Integer>>() {});
+		HashMap<Theme, Integer> foundMusics = Tool.MAPPER.readValue(rs.getString("found_musics"), new TypeReference<HashMap<Theme, Integer>>() {});
+		HashMap<Duration, Integer> bestScores = Tool.MAPPER.readValue(rs.getString("best_scores"), new TypeReference<HashMap<Duration, Integer>>() {});
+
+		profilStatDto = new ProfilStatDTO(rs.getInt("profil_id"), rs.getInt("played_games"),listenedMusics, foundMusics, bestScores);
+		profilStatDto.setId( rs.getInt("id") );
+
+		return profilStatDto;
 	}
 	
 }

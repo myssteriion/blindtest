@@ -8,6 +8,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
@@ -116,7 +117,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse 'bestScores' profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
@@ -139,16 +140,16 @@ public class ProfilStatDAOTest extends AbstractTest {
 		SimpleResultSet rsEmpty = getResultSet();
 		
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
-		rs.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
+		rs.addRow(2, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 
 		SimpleResultSet rs2 = getResultSet();
-		rs2.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
-		rs2.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs2.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
+		rs2.addRow(2, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 
 		SimpleResultSet rs3 = getResultSet();
-		rs3.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
-		rs3.addRow(2, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs3.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
+		rs3.addRow(2, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 		
 		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
@@ -182,7 +183,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse 'bestScores' profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
@@ -196,6 +197,11 @@ public class ProfilStatDAOTest extends AbstractTest {
 		profilStatDto.setId(1);
 		profilStatDto = profilStatDao.find(profilStatDto);
 		Assert.assertNotNull(profilStatDto);
+		Assert.assertEquals( new Integer(1), profilStatDto.getId() );
+		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
+		Assert.assertEquals( new Integer(100), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(50), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(100), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
 	@SuppressWarnings("deprecation")
@@ -203,10 +209,10 @@ public class ProfilStatDAOTest extends AbstractTest {
 	public void findAll() throws DaoException, SQLException, IOException, NoSuchFieldException, IllegalAccessException {
 
 		SimpleResultSet rs = getResultSet();
-		rs.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 
 		SimpleResultSet rs2 = getResultSet();
-		rs2.addRow(1, 1, 1, 2, 3, "{\"NORMAL\":100}");
+		rs2.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 
 		SQLException sql = new SQLException("sql");
 		Statement statement = Mockito.mock(Statement.class);
@@ -230,7 +236,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse 'bestScores' profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
@@ -238,8 +244,8 @@ public class ProfilStatDAOTest extends AbstractTest {
 		ProfilStatDTO profilStatDto = profilStatDao.findAll().get(0);
 		Assert.assertEquals( new Integer(1), profilStatDto.getId() );
 		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
-		Assert.assertEquals( 2, profilStatDto.getListenedMusics() );
-		Assert.assertEquals( 3, profilStatDto.getFoundMusics() );
+		Assert.assertEquals( new Integer(100), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(50), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( new Integer(100), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 	
