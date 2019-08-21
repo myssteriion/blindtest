@@ -55,4 +55,9 @@ public class Tool {
 		list.addAll( transformToList(t.getCause()) );
 		return list;
 	}
+
+
+
+	private Tool() {}
+
 }

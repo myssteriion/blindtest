@@ -42,7 +42,7 @@ public class ProfilDTO extends AbstractDTO {
 	}
 
 	public void setAvatar(String avatar) {
-		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;;
+		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;
 	}
 	
 	

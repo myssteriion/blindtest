@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +96,7 @@ public class MusicService {
 
 
 		List<Double> coefs = calculateCoefList(allMusics);
-		double ratio = 100 / (coefs.stream().mapToDouble(f -> f.doubleValue()).sum());
+		double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
 		List<Double> cumulatifPercent = calculateCumulatifPercent(coefs, ratio);
 		Theme foundTheme = foundTheme(cumulatifPercent);
 		
@@ -114,7 +114,7 @@ public class MusicService {
 													.collect( Collectors.toList() );
 			
 			double nbMusics = allMusicsInTheme.size();
-			double nbPlayedSum = allMusicsInTheme.stream().mapToDouble( music -> music.getPlayed() ).sum();
+			double nbPlayedSum = allMusicsInTheme.stream().mapToDouble(MusicDTO::getPlayed).sum();
 			nbPlayedSum = (nbPlayedSum == 0) ? 1 : nbPlayedSum;
 			coefs.add(nbMusics / nbPlayedSum);
 		}
@@ -159,7 +159,7 @@ public class MusicService {
 												.collect( Collectors.toList() );
 		
 		int min = allMusicsTheme.stream()
-								.mapToInt(music -> music.getPlayed())
+								.mapToInt(MusicDTO::getPlayed)
 								.min()
 								.getAsInt();
 		

@@ -30,7 +30,7 @@ public class ResponseBuilder {
 		LOGGER.error("not found", e);
 		
 		ErrorMessage error = new ErrorMessage(HttpStatus.NOT_FOUND, e.getMessage(), e.getCause());
-		return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(ConflictException.class)
@@ -39,7 +39,7 @@ public class ResponseBuilder {
 		LOGGER.error("already exists", e);
 		
 		ErrorMessage error = new ErrorMessage(HttpStatus.CONFLICT, e.getMessage(), e.getCause());
-		return new ResponseEntity<ErrorMessage>(error, HttpStatus.CONFLICT);
+		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
 	
 	@ExceptionHandler(Exception.class)
@@ -48,7 +48,7 @@ public class ResponseBuilder {
 		LOGGER.error("technical error", e);
 		
 		ErrorMessage error = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e.getCause());
-		return new ResponseEntity<ErrorMessage>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	
@@ -56,23 +56,23 @@ public class ResponseBuilder {
 	public static <T extends AbstractDTO> ResponseEntity<T> create200(T dto) {
 		
 		Tool.verifyValue("dto", dto);
-		return new ResponseEntity<T>(dto, HttpStatus.OK);
+		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
 	public static <T extends AbstractDTO> ResponseEntity< ListDTO<T> > create200(List<T> dto) {
 		
 		ListDTO<T> list = new ListDTO<>(dto);
-		return new ResponseEntity< ListDTO<T> >(list, HttpStatus.OK);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
 	public static <T extends AbstractDTO> ResponseEntity<T> create201(T dto) {
 		
 		Tool.verifyValue("dto", dto);
-		return new ResponseEntity<T>(dto, HttpStatus.CREATED);
+		return new ResponseEntity<>(dto, HttpStatus.CREATED);
 	}
 	
 	public static ResponseEntity<Empty> create204() {
-		return new ResponseEntity<Empty>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 }
