@@ -24,14 +24,14 @@
         </rollingPolicy>
 
     </appender>
-    
-    
+
+
 	<logger name="com.myssteriion" level="DEBUG" additivity="false">
         <appender-ref ref="FILE-ROLLING"/>
 	</logger>
-	
+
 	<logger name="com.myssteriion.blindtest.BlindtestApplication" level="INFO" additivity="false">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-ROLLING"/>
 	</logger>
     
     
