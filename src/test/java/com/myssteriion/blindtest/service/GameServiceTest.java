@@ -60,7 +60,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une ConflictException car un param est KO.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("Player can be appear only one time"), e);
+			verifyException(new ConflictException("Player can appear only one time"), e);
 		}
 
 		try {
@@ -68,7 +68,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Player 'name' must had a profil"), e);
+			verifyException(new NotFoundException("Player 'name' must have a profil"), e);
 		}
 
 
