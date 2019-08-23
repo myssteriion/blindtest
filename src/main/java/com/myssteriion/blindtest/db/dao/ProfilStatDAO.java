@@ -67,8 +67,8 @@ public class ProfilStatDAO extends AbstractDAO<ProfilStatDTO> {
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE " + tableName + " ");
 			sb.append("SET played_games = " + profilStatDto.getPlayedGames() + ", ");
-			sb.append("listened_musics = " + profilStatDto.getListenedMusics() + ", ");
-			sb.append("found_musics = " + profilStatDto.getFoundMusics() + ", ");
+			sb.append("listened_musics = '" + Tool.MAPPER.writeValueAsString(profilStatDto.getListenedMusics()) + "', ");
+			sb.append("found_musics = '" + Tool.MAPPER.writeValueAsString(profilStatDto.getFoundMusics()) + "', ");
 			sb.append("best_scores = '" + Tool.MAPPER.writeValueAsString(profilStatDto.getBestScores()) + "' ");
 			sb.append("WHERE id = " + profilStatDto.getId());
 
