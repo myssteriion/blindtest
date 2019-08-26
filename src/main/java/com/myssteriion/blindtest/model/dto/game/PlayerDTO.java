@@ -2,9 +2,26 @@ package com.myssteriion.blindtest.model.dto.game;
 
 import com.myssteriion.blindtest.tools.Tool;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class PlayerDTO {
+
+	public static final Comparator<PlayerDTO> COMPARATOR = new Comparator<PlayerDTO>() {
+
+		@Override
+		public int compare(PlayerDTO o1, PlayerDTO o2) {
+
+			if (o1 != null && o2 == null)
+				return 1;
+			else if (o1 == null && o2 != null)
+				return -1;
+			else if (o1 == null && o2 == null)
+				return 0;
+			else
+				return String.CASE_INSENSITIVE_ORDER.compare(o1.name, o2.name);
+		}
+	};
 
 	private String name;
 
@@ -38,7 +55,7 @@ public class PlayerDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, score);
+		return Objects.hash(name);
 	}
 
 	@Override
@@ -51,7 +68,7 @@ public class PlayerDTO {
             return false; 
 		
 		PlayerDTO other = (PlayerDTO) obj;
-		return Objects.equals(this.name, other.name) && Objects.equals(this.score, other.score);
+		return Objects.equals(this.name, other.name);
 	}
 
 	@Override

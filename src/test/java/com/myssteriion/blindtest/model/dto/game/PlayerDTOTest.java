@@ -55,20 +55,34 @@ public class PlayerDTOTest extends AbstractTest {
 
         Assert.assertEquals( "name=name, score=0", playerDtoUn.toString() );
 
-        PlayerDTO musicDTOUnIso = new PlayerDTO(name);
-        PlayerDTO musicDTODeux = new PlayerDTO(name + "1");
+        PlayerDTO playerDTOUnIso = new PlayerDTO(name);
+        PlayerDTO playerDTODeux = new PlayerDTO(name + "1");
 
 
         Assert.assertNotEquals(playerDtoUn, null);
         Assert.assertNotEquals(playerDtoUn, "bad class");
         Assert.assertEquals(playerDtoUn, playerDtoUn);
-        Assert.assertEquals(playerDtoUn, musicDTOUnIso);
-        Assert.assertNotEquals(playerDtoUn, musicDTODeux);
+        Assert.assertEquals(playerDtoUn, playerDTOUnIso);
+        Assert.assertNotEquals(playerDtoUn, playerDTODeux);
 
 
         Assert.assertEquals(playerDtoUn.hashCode(), playerDtoUn.hashCode());
-        Assert.assertEquals(playerDtoUn.hashCode(), musicDTOUnIso.hashCode());
-        Assert.assertNotEquals(playerDtoUn.hashCode(), musicDTODeux.hashCode());
+        Assert.assertEquals(playerDtoUn.hashCode(), playerDTOUnIso.hashCode());
+        Assert.assertNotEquals(playerDtoUn.hashCode(), playerDTODeux.hashCode());
+    }
+
+    @Test
+    public void comparator() {
+
+        String name = "name";
+        PlayerDTO playerDtoUn = new PlayerDTO(name);
+        PlayerDTO playerDTOUnIso = new PlayerDTO(name);
+        PlayerDTO playerDTODeux = new PlayerDTO(name + "1");
+
+        Assert.assertEquals( 0, PlayerDTO.COMPARATOR.compare(playerDtoUn, playerDtoUn) );
+        Assert.assertEquals( 0, PlayerDTO.COMPARATOR.compare(playerDtoUn, playerDTOUnIso) );
+        Assert.assertEquals( -1, PlayerDTO.COMPARATOR.compare(playerDtoUn, playerDTODeux) );
+        Assert.assertEquals( 1, PlayerDTO.COMPARATOR.compare(playerDTODeux, playerDtoUn) );
     }
     
 }
