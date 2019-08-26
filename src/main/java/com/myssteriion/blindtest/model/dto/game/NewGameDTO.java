@@ -3,17 +3,17 @@ package com.myssteriion.blindtest.model.dto.game;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.tools.Tool;
 
-import java.util.List;
+import java.util.Set;
 
 public class NewGameDTO {
 
-    private List<String> playersNames;
+    private Set<String> playersNames;
 
     private Duration duration;
 
 
 
-    public NewGameDTO(List<String> playersNames, Duration duration) {
+    public NewGameDTO(Set<String> playersNames, Duration duration) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
@@ -24,7 +24,7 @@ public class NewGameDTO {
 
 
 
-    public List<String> getPlayersNames() {
+    public Set<String> getPlayersNames() {
         return playersNames;
     }
 

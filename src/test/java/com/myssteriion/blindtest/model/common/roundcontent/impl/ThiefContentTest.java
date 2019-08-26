@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class ThiefContentTest extends AbstractTest {
@@ -45,7 +46,7 @@ public class ThiefContentTest extends AbstractTest {
         ThiefContent thiefContent = new ThiefContent(20,  nbPointWon, nbPointLoose);
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
@@ -82,7 +83,7 @@ public class ThiefContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDTO = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         ThiefContent thiefContent = new ThiefContent(20,  100, -100);
 

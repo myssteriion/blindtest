@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class Tool {
 
@@ -26,6 +27,9 @@ public class Tool {
 		}
 		else if (o instanceof List) {
 			return ((List<?>) o).isEmpty();
+		}
+		else if (o instanceof Set) {
+			return ((Set<?>) o).isEmpty();
 		}
 		else if (o instanceof Map) {
 			return ((Map<?, ?>) o).isEmpty();

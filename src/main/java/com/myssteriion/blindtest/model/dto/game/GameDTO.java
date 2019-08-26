@@ -7,6 +7,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GameDTO extends AbstractDTO {
@@ -27,12 +28,12 @@ public class GameDTO extends AbstractDTO {
 
 
 
-    public GameDTO(List<String> playersNames, Duration duration) {
+    public GameDTO(Set<String> playersNames, Duration duration) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
 
-        this.players = playersNames.stream().map(PlayerDTO::new).collect(Collectors.toList());
+        this.players = playersNames.stream().map(PlayerDTO::new).sorted(PlayerDTO.COMPARATOR).collect(Collectors.toList());
         this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;

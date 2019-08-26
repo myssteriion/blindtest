@@ -1,9 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -13,6 +11,7 @@ import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,6 +20,7 @@ import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class GameServiceTest extends AbstractTest {
@@ -40,7 +40,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws DaoException, NotFoundException, ConflictException {
+	public void newGame() throws DaoException, NotFoundException {
 
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
 		Mockito.when(profilService.find(Mockito.any(ProfilDTO.class))).thenReturn(null, profilDto);
@@ -56,15 +56,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGameDTO(Arrays.asList("name", "name"), Duration.NORMAL) );
-			Assert.fail("Doit lever une ConflictException car un param est KO.");
-		}
-		catch (ConflictException e) {
-			verifyException(new ConflictException("Player can appear only one time"), e);
-		}
-
-		try {
-			gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
+			gameService.newGame( new NewGameDTO(new HashSet<>(playersNames), Duration.NORMAL) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -73,12 +65,15 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		GameDTO game = gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
+		GameDTO game = gameService.newGame( new NewGameDTO(new HashSet<>(playersNames), Duration.NORMAL) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
+
+		game = gameService.newGame( new NewGameDTO(new HashSet<>(Arrays.asList("name", "name")), Duration.NORMAL) );
+		Assert.assertEquals( 1, game.getPlayers().size() );
 	}
 
 	@Test
-	public void apply() throws DaoException, NotFoundException, ConflictException {
+	public void apply() throws DaoException, NotFoundException {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
 		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
@@ -109,7 +104,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame( new NewGameDTO(playersNames, Duration.NORMAL) );
+		gameService.newGame( new NewGameDTO(new HashSet<>(playersNames), Duration.NORMAL) );
 
 
 		try {

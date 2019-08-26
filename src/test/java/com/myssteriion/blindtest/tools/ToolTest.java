@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,10 @@ public class ToolTest extends AbstractTest {
 
 		Assert.assertFalse( Tool.isNullOrEmpty("test") );
 		Assert.assertFalse( Tool.isNullOrEmpty( Arrays.asList("test") ) );
-		
+
+		Assert.assertTrue( Tool.isNullOrEmpty( new HashSet<>() ) );
+		Assert.assertFalse( Tool.isNullOrEmpty( new HashSet<>(Arrays.asList("test")) ) );
+
 		Map<String, String> map = new HashMap<>();
 		map.put("key", "value");
 		Assert.assertFalse( Tool.isNullOrEmpty(map) );

@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class NewGameDTOTest extends AbstractTest {
@@ -26,14 +27,14 @@ public class NewGameDTOTest extends AbstractTest {
         }
 
         try {
-            new NewGameDTO(playersNames, null);
+            new NewGameDTO(new HashSet<>(playersNames), null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new NewGameDTO(playersNames, duration) );
+        Assert.assertNotNull( new NewGameDTO(new HashSet<>(playersNames), duration) );
     }
 
     @Test
@@ -42,8 +43,8 @@ public class NewGameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        NewGameDTO newGameDto = new NewGameDTO(playersNames, duration);
-        Assert.assertEquals( playersNames, newGameDto.getPlayersNames() );
+        NewGameDTO newGameDto = new NewGameDTO(new HashSet<>(playersNames), duration);
+        Assert.assertEquals( new HashSet<>(playersNames), newGameDto.getPlayersNames() );
         Assert.assertEquals( duration, newGameDto.getDuration() );
     }
 
@@ -53,7 +54,7 @@ public class NewGameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        NewGameDTO gameDtoUn = new NewGameDTO(playersNames, duration);
+        NewGameDTO gameDtoUn = new NewGameDTO(new HashSet<>(playersNames), duration);
         Assert.assertEquals( "playersNames=[name], duration=NORMAL", gameDtoUn.toString() );
     }
     

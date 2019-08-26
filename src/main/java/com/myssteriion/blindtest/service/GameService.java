@@ -1,8 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfilDTO;
 import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
@@ -10,13 +8,14 @@ import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class GameService {
@@ -34,7 +33,7 @@ public class GameService {
 	
 
 
-	public GameDTO newGame(NewGameDTO newGameDto) throws DaoException, NotFoundException, ConflictException {
+	public GameDTO newGame(NewGameDTO newGameDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("newGameDto", newGameDto);
 		checkPlayers( newGameDto.getPlayersNames() );
@@ -93,10 +92,7 @@ public class GameService {
 		return gameDto;
 	}
 
-	private void checkPlayers(List<String> playersNames) throws DaoException, NotFoundException, ConflictException {
-
-		if ( playersNames.size() != new HashSet<>(playersNames).size() )
-			throw new ConflictException("Player can appear only one time");
+	private void checkPlayers(Set<String> playersNames) throws DaoException, NotFoundException {
 
 		for (String playerName : playersNames) {
 

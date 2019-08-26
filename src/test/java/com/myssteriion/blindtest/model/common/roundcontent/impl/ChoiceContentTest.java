@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class ChoiceContentTest extends AbstractTest {
@@ -49,7 +50,7 @@ public class ChoiceContentTest extends AbstractTest {
         ChoiceContent choiceContent = new ChoiceContent(20,  nbPointWon, nbPointBonusWon, nbPointMalusLoose);
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
@@ -86,7 +87,7 @@ public class ChoiceContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDTO = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         ChoiceContent choiceContent = new ChoiceContent(20,  100, 50, -50);
 

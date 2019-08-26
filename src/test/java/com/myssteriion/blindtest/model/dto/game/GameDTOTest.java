@@ -7,9 +7,9 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class GameDTOTest extends AbstractTest {
@@ -18,6 +18,8 @@ public class GameDTOTest extends AbstractTest {
     public void constructor() {
 
         List<String> playersNames = Arrays.asList("name");
+        List<PlayerDTO> players = Arrays.asList(new PlayerDTO("name"));
+
         Duration duration = Duration.NORMAL;
 
 
@@ -30,7 +32,7 @@ public class GameDTOTest extends AbstractTest {
         }
 
         try {
-            new GameDTO(playersNames, null);
+            new GameDTO(new HashSet<>(playersNames), null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -38,31 +40,37 @@ public class GameDTOTest extends AbstractTest {
         }
 
         try {
-            new GameDTO(new ArrayList<>(), duration);
+            new GameDTO(new HashSet<>(), duration);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
         }
 
-        GameDTO gameDTO = new GameDTO(playersNames, duration);
-        Assert.assertNotNull(gameDTO);
-        Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
+        Assert.assertEquals( players, gameDTO.getPlayers() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
+
+
+        playersNames = Arrays.asList("name4", "name1", "name3", "name2");
+        players = Arrays.asList(new PlayerDTO("name1"), new PlayerDTO("name2"), new PlayerDTO("name3"), new PlayerDTO("name4"));
+
+        gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
+        Assert.assertEquals( players, gameDTO.getPlayers() );
     }
 
     @Test
     public void getterSetter() {
 
         List<String> playersNames = Arrays.asList("name");
+        List<PlayerDTO> players = Arrays.asList( new PlayerDTO("name") );
         Duration duration = Duration.NORMAL;
 
-        GameDTO gameDTO = new GameDTO(playersNames, duration);
-        Assert.assertNotNull(gameDTO);
-        Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
+        Assert.assertEquals( players, gameDTO.getPlayers() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
@@ -75,7 +83,7 @@ public class GameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        GameDTO gameDTO = new GameDTO(playersNames, duration);
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
         Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
@@ -108,7 +116,7 @@ public class GameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        GameDTO gameDTO = new GameDTO(playersNames, duration);
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
         int nbMusic = 0;
 
         gameDTO.next();
@@ -130,7 +138,7 @@ public class GameDTOTest extends AbstractTest {
         List<String> playersNames = Collections.singletonList("name");
         Duration duration = Duration.NORMAL;
 
-        GameDTO gameDtoUn = new GameDTO(playersNames, duration);
+        GameDTO gameDtoUn = new GameDTO(new HashSet<>(playersNames), duration);
         Assert.assertEquals( "players=[name=name, score=0], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=12, nbPointWon=100}", gameDtoUn.toString() );
     }
 

@@ -6,14 +6,12 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ClassicContentTest extends AbstractTest {
 
@@ -44,7 +42,7 @@ public class ClassicContentTest extends AbstractTest {
         ClassicContent classicContent = new ClassicContent(20,  nbPointWon);
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
@@ -76,7 +74,7 @@ public class ClassicContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDTO = new GameDTO(playersNames, Duration.NORMAL);
+        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         ClassicContent classicContent = new ClassicContent(20,  100);
 
