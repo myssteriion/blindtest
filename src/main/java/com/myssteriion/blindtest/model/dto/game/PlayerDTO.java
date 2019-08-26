@@ -27,6 +27,8 @@ public class PlayerDTO {
 
 	private int score;
 
+	private boolean turnToChoose;
+
 
 
 	public PlayerDTO(String name) {
@@ -35,6 +37,7 @@ public class PlayerDTO {
 
 		this.name = name.trim();
 		this.score = 0;
+		this.turnToChoose = false;
 	}
 
 
@@ -49,6 +52,14 @@ public class PlayerDTO {
 
 	public void addScore(int score) {
 		this.score += score;
+	}
+
+	public boolean isTurnToChoose() {
+		return turnToChoose;
+	}
+
+	public void setTurnToChoose(boolean turnToChoose) {
+		this.turnToChoose = turnToChoose;
 	}
 
 
@@ -74,7 +85,8 @@ public class PlayerDTO {
 	@Override
 	public String toString() {
 		return "name=" + name +
-				", score=" + score;
+				", score=" + score +
+				", turnToChoose=" + turnToChoose;
 	}
 	
 }

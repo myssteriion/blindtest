@@ -53,7 +53,7 @@ public class PlayerDTOTest extends AbstractTest {
         String name = "name";
         PlayerDTO playerDtoUn = new PlayerDTO(name);
 
-        Assert.assertEquals( "name=name, score=0", playerDtoUn.toString() );
+        Assert.assertEquals( "name=name, score=0, turnToChoose=false", playerDtoUn.toString() );
 
         PlayerDTO playerDTOUnIso = new PlayerDTO(name);
         PlayerDTO playerDTODeux = new PlayerDTO(name + "1");
