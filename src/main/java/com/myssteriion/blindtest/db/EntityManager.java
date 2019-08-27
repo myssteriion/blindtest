@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
 import org.slf4j.Logger;
@@ -40,6 +41,20 @@ public class EntityManager {
 			throw new DaoException(message, e);
 		}
 	}
+
+	@PreDestroy
+	private void destroy() {
+
+		try {
+			if ( connection != null && !connection.isClosed() )
+				connection.close();
+		}
+		catch (SQLException e) {
+			String message = "Can't close connection.";
+			LOGGER.warn(message, e);
+		}
+	}
+
 
 	private void initTableIfNeedIt() throws DaoException {
 		
