@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class GameDTO extends AbstractDTO {
 
-    public static final int INIT = 0;
+    private static final int INIT = 0;
 
     private List<PlayerDTO> players;
 
@@ -68,7 +68,7 @@ public class GameDTO extends AbstractDTO {
     }
 
 
-    public void next() {
+    public void nextStep() {
 
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
@@ -80,17 +80,12 @@ public class GameDTO extends AbstractDTO {
         }
     }
 
-    public boolean isLastNext() {
+    public boolean isFirstStep() {
+        return nbMusicsPlayed == INIT;
+    }
 
-        nbMusicsPlayed++;
-        nbMusicsPlayedInRound++;
-
-        boolean isLastNext = roundContent != null && roundContent.isFinished(this) && round.nextRound() == null;
-
-        nbMusicsPlayed--;
-        nbMusicsPlayedInRound--;
-
-        return isLastNext;
+    public boolean isLastStep() {
+        return round != null && roundContent != null && round.isLast() && roundContent.isLastMusic(this);
     }
 
     public boolean isFinished() {

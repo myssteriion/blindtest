@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
@@ -30,24 +31,23 @@ public class ClassicContentTest extends AbstractTest {
         Assert.assertEquals( 0, classicContent.getNbMusics() );
         Assert.assertEquals( 0, classicContent.getNbPointWon() );
 
-        classicContent = new ClassicContent(20,  100);
-        Assert.assertEquals( 20, classicContent.getNbMusics() );
+        classicContent = new ClassicContent(5,  100);
+        Assert.assertEquals( 5, classicContent.getNbMusics() );
         Assert.assertEquals( 100, classicContent.getNbPointWon() );
     }
 
     @Test
     public void apply() {
 
-        int nbPointWon = 100;
-        ClassicContent classicContent = new ClassicContent(20,  nbPointWon);
-
         List<String> playersNames = Arrays.asList("name");
         GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
-        MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDTO, playersNames, null, null, null, null);
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null, null, null, null);
 
+        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
+        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();
 
         try {
             classicContent.apply(null, musicResultDto);
@@ -67,16 +67,18 @@ public class ClassicContentTest extends AbstractTest {
 
 
         GameDTO actual = classicContent.apply(gameDto, musicResultDto);
-        Assert.assertEquals( nbPointWon, actual.getPlayers().get(0).getScore() );
+        gameDto.nextStep();
+        Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
     }
 
     @Test
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
-        ClassicContent classicContent = new ClassicContent(20,  100);
+        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
+        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();;
 
         try {
             classicContent.isFinished(null);
@@ -86,15 +88,46 @@ public class ClassicContentTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
         }
 
-        Assert.assertFalse( classicContent.isFinished(gameDTO) );
+        Assert.assertFalse( classicContent.isFinished(gameDto) );
 
+        for (int i = 0; i < 4; i++) {
+            gameDto.nextStep();
+            Assert.assertFalse( classicContent.isFinished(gameDto) );
+        }
+
+        // le isFinish ne peut etre testé à "true" car le nextStep remet à 0 le "nbMusicsPlayedInRound"
+        gameDto.nextStep();
+        Assert.assertEquals( 0, gameDto.getNbMusicsPlayedInRound() );
+    }
+
+    @Test
+    public void isLast() {
+
+        List<String> playersNames = Arrays.asList("name");
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+
+        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
+        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();
+
+        Assert.assertFalse( classicContent.isLastMusic(gameDto) );
+
+        for (int i = 0; i < 3; i++) {
+            gameDto.nextStep();
+            Assert.assertFalse( classicContent.isLastMusic(gameDto) );
+        }
+
+        gameDto.nextStep();
+        Assert.assertTrue( classicContent.isLastMusic(gameDto) );
+
+        gameDto.nextStep();
+        Assert.assertFalse( classicContent.isLastMusic(gameDto) );
     }
 
     @Test
     public void toStringAndEquals() {
 
-        ClassicContent classicContent = new ClassicContent(20,  100);
-        Assert.assertEquals( "nbMusics=20, nbPointWon=100", classicContent.toString() );
+        ClassicContent classicContent = new ClassicContent(5,  100);
+        Assert.assertEquals( "nbMusics=5, nbPointWon=100", classicContent.toString() );
     }
 
 }

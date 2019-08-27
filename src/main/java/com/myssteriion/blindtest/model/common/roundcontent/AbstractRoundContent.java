@@ -54,6 +54,13 @@ public abstract class AbstractRoundContent {
         return gameDto.getNbMusicsPlayedInRound() == nbMusics;
     }
 
+    public boolean isLastMusic(GameDTO gameDto) {
+
+        Tool.verifyValue("gameDto", gameDto);
+
+        return gameDto.getNbMusicsPlayedInRound() == nbMusics - 1;
+    }
+
 
     @Override
     public String toString() {

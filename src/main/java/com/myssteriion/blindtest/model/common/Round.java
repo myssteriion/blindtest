@@ -58,6 +58,9 @@ public enum Round {
                 nbPointWon = prop.getChoiceNbPointWon();
                 int nbPointBonusWon = prop.getChoiceNbPointBonusWon();
                 int nbPointMalusLoose = prop.getChoicenNPointMalusLoose();
+
+                gameDto.getPlayers().get(0).setTurnToChoose(true);
+
                 return new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
 
 
@@ -71,6 +74,11 @@ public enum Round {
             default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
     }
+
+    public boolean isLast() {
+        return Arrays.stream(Round.values()).noneMatch(round -> round.roundNumber == this.roundNumber+1);
+    }
+
 
     public static Round getFirst() {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == 0).findFirst().get();

@@ -83,6 +83,10 @@ public class PlayerDTOTest extends AbstractTest {
         Assert.assertEquals( 0, PlayerDTO.COMPARATOR.compare(playerDtoUn, playerDTOUnIso) );
         Assert.assertEquals( -1, PlayerDTO.COMPARATOR.compare(playerDtoUn, playerDTODeux) );
         Assert.assertEquals( 1, PlayerDTO.COMPARATOR.compare(playerDTODeux, playerDtoUn) );
+
+        Assert.assertEquals( 0, PlayerDTO.COMPARATOR.compare(null, null) );
+        Assert.assertEquals( 1, PlayerDTO.COMPARATOR.compare(playerDtoUn, null) );
+        Assert.assertEquals( -1, PlayerDTO.COMPARATOR.compare(null, playerDTODeux) );
     }
     
 }

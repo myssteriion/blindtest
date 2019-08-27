@@ -48,6 +48,15 @@ public class ChoiceContent extends AbstractRoundContent {
 
             if ( loosersMalus.stream().anyMatch(name -> name.equals(playerDto.getName())) )
                 playerDto.addScore(nbPointMalusLoose);
+
+            playerDto.setTurnToChoose(false);
+        }
+
+        if ( !isLastMusic(gameDto) ) {
+
+            // +1 car le gameDTO n'a pas encore subit le next
+            int numPlayer = (1 + gameDto.getNbMusicsPlayedInRound()) % gameDto.getPlayers().size();
+            players.get(numPlayer).setTurnToChoose(true);
         }
 
         return gameDto;

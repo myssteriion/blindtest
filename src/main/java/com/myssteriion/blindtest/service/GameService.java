@@ -78,15 +78,15 @@ public class GameService {
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) )
 					profilStatDto.incrementFoundMusics( musicResultDto.getMusicDTO().getTheme() );
 
-				if (gameDto.getNbMusicsPlayed() == GameDTO.INIT)
+				if ( gameDto.isFirstStep() )
 					profilStatDto.incrementPlayedGames();
-				else if ( gameDto.isLastNext() )
+				else if ( gameDto.isLastStep() )
 					profilStatDto.addBestScoreIfBetter( gameDto.getDuration(), playerDto.getScore() );
 
 				profilStatService.update(profilStatDto);
 			}
 
-			gameDto.next();
+			gameDto.nextStep();
 		}
 
 		return gameDto;

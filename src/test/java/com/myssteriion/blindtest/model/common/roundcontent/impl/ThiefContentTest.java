@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
@@ -32,8 +33,8 @@ public class ThiefContentTest extends AbstractTest {
         Assert.assertEquals( 0, thiefContent.getNbPointWon() );
         Assert.assertEquals( 0, thiefContent.getNbPointLoose() );
 
-        thiefContent = new ThiefContent(20,  100, -100);
-        Assert.assertEquals( 20, thiefContent.getNbMusics() );
+        thiefContent = new ThiefContent(5,  100, -100);
+        Assert.assertEquals( 5, thiefContent.getNbMusics() );
         Assert.assertEquals( 100, thiefContent.getNbPointWon() );
         Assert.assertEquals( -100, thiefContent.getNbPointLoose() );
     }
@@ -41,17 +42,18 @@ public class ThiefContentTest extends AbstractTest {
     @Test
     public void apply() {
 
-        int nbPointWon = 100;
-        int nbPointLoose = -100;
-        ThiefContent thiefContent = new ThiefContent(20,  nbPointWon, nbPointLoose);
-
         List<String> playersNames = Arrays.asList("name");
         GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
-        MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDTO, playersNames, null, null, null, null);
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null, null, null, null);
 
+        for (int i = 0; i < 10; i++)
+            gameDto.nextStep();
+
+        Assert.assertSame( Round.THIEF, gameDto.getRound() );
+        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
 
         try {
             thiefContent.apply(null, musicResultDto);
@@ -71,21 +73,26 @@ public class ThiefContentTest extends AbstractTest {
 
 
         GameDTO actual = thiefContent.apply(gameDto, musicResultDto);
-        Assert.assertEquals( nbPointWon, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
 
 
-        musicResultDto = new MusicResultDTO(gameId, musicDTO, null, null, null, playersNames, null);
+        musicResultDto = new MusicResultDTO(gameId, musicDto, null, null, null, playersNames, null);
         actual = thiefContent.apply(gameDto, musicResultDto);
-        Assert.assertEquals( nbPointWon + nbPointLoose, actual.getPlayers().get(0).getScore() );
+        gameDto.nextStep();
+        Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
     }
 
     @Test
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
-        ThiefContent thiefContent = new ThiefContent(20,  100, -100);
+        for (int i = 0; i < 10; i++)
+            gameDto.nextStep();
+
+        Assert.assertSame( Round.THIEF, gameDto.getRound() );
+        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
 
         try {
             thiefContent.isFinished(null);
@@ -95,14 +102,40 @@ public class ThiefContentTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
         }
 
-        Assert.assertFalse( thiefContent.isFinished(gameDTO) );
+        Assert.assertFalse( thiefContent.isFinished(gameDto) );
+    }
+
+    @Test
+    public void isLast() {
+
+        List<String> playersNames = Arrays.asList("name");
+        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+
+        for (int i = 0; i < 10; i++)
+            gameDto.nextStep();
+
+        Assert.assertSame( Round.THIEF, gameDto.getRound() );
+        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
+
+        Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
+
+        for (int i = 0; i < 3; i++) {
+            gameDto.nextStep();
+            Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
+        }
+
+        gameDto.nextStep();
+        Assert.assertTrue( thiefContent.isLastMusic(gameDto) );
+
+        gameDto.nextStep();
+        Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
     }
 
     @Test
     public void toStringAndEquals() {
 
-        ThiefContent thiefContent = new ThiefContent(20,  100, -100);
-        Assert.assertEquals( "nbMusics=20, nbPointWon=100, nbPointLoose=-100", thiefContent.toString() );
+        ThiefContent thiefContent = new ThiefContent(5,  100, -100);
+        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointLoose=-100", thiefContent.toString() );
     }
 
 }
