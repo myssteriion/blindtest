@@ -22,11 +22,11 @@ public class RoundContentProperties {
     @Value("${choice.nbPointWon}")
     private Integer choiceNbPointWon;
 
-    @Value("${choice.nbPointBonusWon}")
-    private Integer choiceNbPointBonusWon;
+    @Value("${choice.nbPointBonus}")
+    private Integer choiceNbPointBonus;
 
-    @Value("${choice.nbPointMalusLoose}")
-    private Integer choicenNPointMalusLoose;
+    @Value("${choice.nbPointMalus}")
+    private Integer choiceNbPointMalus;
 
 
 
@@ -57,12 +57,12 @@ public class RoundContentProperties {
         return choiceNbPointWon;
     }
 
-    public Integer getChoiceNbPointBonusWon() {
-        return choiceNbPointBonusWon;
+    public Integer getChoiceNbPointBonus() {
+        return choiceNbPointBonus;
     }
 
-    public Integer getChoicenNPointMalusLoose() {
-        return choicenNPointMalusLoose;
+    public Integer getChoiceNbPointMalus() {
+        return choiceNbPointMalus;
     }
 
     public Integer getThiefNbMusics() {

@@ -3,9 +3,6 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
-
-import java.util.List;
 
 public class ThiefContent extends AbstractRoundContent {
 
@@ -31,13 +28,9 @@ public class ThiefContent extends AbstractRoundContent {
 
         gameDto = super.apply(gameDto, musicResultDto);
 
-        List<PlayerDTO> players = gameDto.getPlayers();
-        List<String> loosers = musicResultDto.getLoosers();
-
-        for (PlayerDTO playerDto : players) {
-            if ( loosers.stream().anyMatch(name -> name.equals(playerDto.getName())) )
-                playerDto.addScore(nbPointLoose);
-        }
+        gameDto.getPlayers().stream()
+                .filter( playerDto -> musicResultDto.isLooser(playerDto.getName()) )
+                .forEach( playerDto -> playerDto.addScore(nbPointLoose) );
 
         return gameDto;
     }

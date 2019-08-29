@@ -5,31 +5,29 @@ import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
 
-import java.util.List;
-
 public class ChoiceContent extends AbstractRoundContent {
 
-    private int nbPointBonusWon;
+    private int nbPointBonus;
 
-    private int nbPointMalusLoose;
+    private int nbPointMalus;
 
 
 
-    public ChoiceContent(int nbMusics, int nbPointWon, int nbPointBonusWon, int nbPointMalusLoose) {
+    public ChoiceContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
 
         super(nbMusics, nbPointWon);
-        this.nbPointBonusWon = (nbPointBonusWon < 0) ? 0 : nbPointBonusWon;
-        this.nbPointMalusLoose = (nbPointMalusLoose > 0) ? 0 : nbPointMalusLoose;
+        this.nbPointBonus = (nbPointBonus < 0) ? 0 : nbPointBonus;
+        this.nbPointMalus = (nbPointMalus > 0) ? 0 : nbPointMalus;
     }
 
 
 
-    public int getNbPointBonusWon() {
-        return nbPointBonusWon;
+    public int getNbPointBonus() {
+        return nbPointBonus;
     }
 
-    public int getNbPointMalusLoose() {
-        return nbPointMalusLoose;
+    public int getNbPointMalus() {
+        return nbPointMalus;
     }
 
 
@@ -38,25 +36,19 @@ public class ChoiceContent extends AbstractRoundContent {
 
         gameDto = super.apply(gameDto, musicResultDto);
 
-        List<PlayerDTO> players = gameDto.getPlayers();
-        List<String> winnersBonus = musicResultDto.getWinnersBonus();
-        List<String> loosersMalus = musicResultDto.getLoosersMalus();
-
-        for (PlayerDTO playerDto : players) {
-            if ( winnersBonus.stream().anyMatch(name -> name.equals(playerDto.getName())) )
-                playerDto.addScore(nbPointBonusWon);
-
-            if ( loosersMalus.stream().anyMatch(name -> name.equals(playerDto.getName())) )
-                playerDto.addScore(nbPointMalusLoose);
-
-            playerDto.setTurnToChoose(false);
-        }
+        gameDto.getPlayers().stream()
+                .filter(PlayerDTO::isTurnToChoose)
+                .forEach( playerDto -> {
+                    int point = musicResultDto.isWinner(playerDto.getName()) ? nbPointBonus : nbPointMalus;
+                    playerDto.addScore(point);
+                    playerDto.setTurnToChoose(false);
+                });
 
         if ( !isLastMusic(gameDto) ) {
 
             // +1 car le gameDTO n'a pas encore subit le next
             int numPlayer = (1 + gameDto.getNbMusicsPlayedInRound()) % gameDto.getPlayers().size();
-            players.get(numPlayer).setTurnToChoose(true);
+            gameDto.getPlayers().get(numPlayer).setTurnToChoose(true);
         }
 
         return gameDto;
@@ -66,8 +58,8 @@ public class ChoiceContent extends AbstractRoundContent {
     @Override
     public String toString() {
         return super.toString() +
-                ", nbPointBonusWon=" + nbPointBonusWon +
-                ", nbPointMalusLoose=" + nbPointMalusLoose;
+                ", nbPointBonus=" + nbPointBonus +
+                ", nbPointMalus=" + nbPointMalus;
     }
 
 }

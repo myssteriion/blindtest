@@ -19,7 +19,7 @@ public class MusicResultDTOTest extends AbstractTest {
 
 
         try {
-            new MusicResultDTO(null, musicDTO, null, null, null, null, null);
+            new MusicResultDTO(null, musicDTO, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -27,30 +27,27 @@ public class MusicResultDTOTest extends AbstractTest {
         }
 
         try {
-            new MusicResultDTO(gameId, null, null, null, null, null, null);
+            new MusicResultDTO(gameId, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new MusicResultDTO(gameId, musicDTO, null, null, null, null, null) );
+        Assert.assertNotNull( new MusicResultDTO(gameId, musicDTO, null, null) );
     }
 
     @Test
     public void getterSetter() {
 
         Integer gameId = 1;
-        Round round = Round.CLASSIC;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
 
 
-        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null, null, null, null);
+        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null);
         Assert.assertEquals( gameId, musicResultDTO.getGameId() );
         Assert.assertEquals( musicDTO, musicResultDTO.getMusicDTO() );
         Assert.assertEquals( new ArrayList<>(), musicResultDTO.getWinners() );
-        Assert.assertEquals( new ArrayList<>(), musicResultDTO.getWinnersBonus() );
-        Assert.assertEquals( new ArrayList<>(), musicResultDTO.getNeutral() );
         Assert.assertEquals( new ArrayList<>(), musicResultDTO.getLoosers() );
     }
 
@@ -59,8 +56,8 @@ public class MusicResultDTOTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null, null, null, null);
-        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], winnersBonus=[], neutral=[], loosers=[], loosersMalus=[]", musicResultDTO.toString() );
+        MusicResultDTO musicResultDTO = new MusicResultDTO(gameId, musicDTO, null, null);
+        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], loosers=[]", musicResultDTO.toString() );
     }
 
 }

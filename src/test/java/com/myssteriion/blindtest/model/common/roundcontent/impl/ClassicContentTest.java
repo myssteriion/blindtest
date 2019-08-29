@@ -44,7 +44,7 @@ public class ClassicContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null, null, null, null);
+        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null);
 
         Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
         ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();

@@ -56,8 +56,8 @@ public enum Round {
             case CHOICE:
                 nbMusics = prop.getChoiceNbMusics();
                 nbPointWon = prop.getChoiceNbPointWon();
-                int nbPointBonusWon = prop.getChoiceNbPointBonusWon();
-                int nbPointMalusLoose = prop.getChoicenNPointMalusLoose();
+                int nbPointBonusWon = prop.getChoiceNbPointBonus();
+                int nbPointMalusLoose = prop.getChoiceNbPointMalus();
 
                 gameDto.getPlayers().get(0).setTurnToChoose(true);
 

@@ -22,8 +22,8 @@ public class ChoiceContentTest extends AbstractTest {
         ChoiceContent choiceContent = new ChoiceContent(-1,  -2, -2, 3);
         Assert.assertEquals( 0, choiceContent.getNbMusics() );
         Assert.assertEquals( 0, choiceContent.getNbPointWon() );
-        Assert.assertEquals( 0, choiceContent.getNbPointBonusWon() );
-        Assert.assertEquals( 0, choiceContent.getNbPointMalusLoose() );
+        Assert.assertEquals( 0, choiceContent.getNbPointBonus() );
+        Assert.assertEquals( 0, choiceContent.getNbPointMalus() );
     }
 
     @Test
@@ -32,14 +32,14 @@ public class ChoiceContentTest extends AbstractTest {
         ChoiceContent choiceContent = new ChoiceContent(-1,  -2, -2, 3);
         Assert.assertEquals( 0, choiceContent.getNbMusics() );
         Assert.assertEquals( 0, choiceContent.getNbPointWon() );
-        Assert.assertEquals( 0, choiceContent.getNbPointBonusWon() );
-        Assert.assertEquals( 0, choiceContent.getNbPointMalusLoose() );
+        Assert.assertEquals( 0, choiceContent.getNbPointBonus() );
+        Assert.assertEquals( 0, choiceContent.getNbPointMalus() );
 
         choiceContent = new ChoiceContent(5,  100, 50, -50);
         Assert.assertEquals( 5, choiceContent.getNbMusics() );
         Assert.assertEquals( 100, choiceContent.getNbPointWon() );
-        Assert.assertEquals( 50, choiceContent.getNbPointBonusWon() );
-        Assert.assertEquals( -50, choiceContent.getNbPointMalusLoose() );
+        Assert.assertEquals( 50, choiceContent.getNbPointBonus() );
+        Assert.assertEquals( -50, choiceContent.getNbPointMalus() );
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ChoiceContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, playersNames, null, null, null);
+        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null);
 
         for (int i = 0; i < 20; i++)
             gameDto.nextStep();
@@ -81,13 +81,15 @@ public class ChoiceContentTest extends AbstractTest {
 
         GameDTO actual = choiceContent.apply(gameDto, musicResultDto);
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 100, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
-
-        musicResultDto = new MusicResultDTO(gameId, musicDto, null, null, null, null, playersNames);
+        musicResultDto = new MusicResultDTO(gameId, musicDto, null, playersNames);
         actual = choiceContent.apply(gameDto, musicResultDto);
         gameDto.nextStep();
-        Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
-
+        Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 50, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
         for (int i = 2; i < 12; i++) {
 
@@ -165,7 +167,7 @@ public class ChoiceContentTest extends AbstractTest {
     public void toStringAndEquals() {
 
         ChoiceContent choiceContent = new ChoiceContent(5,  100, 50, -50);
-        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointBonusWon=50, nbPointMalusLoose=-50", choiceContent.toString() );
+        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointBonus=50, nbPointMalus=-50", choiceContent.toString() );
     }
 
 }

@@ -36,13 +36,9 @@ public abstract class AbstractRoundContent {
         Tool.verifyValue("gameDto", gameDto);
         Tool.verifyValue("musicResultDto", musicResultDto);
 
-        List<PlayerDTO> players = gameDto.getPlayers();
-        List<String> winners = musicResultDto.getWinners();
-
-        for (PlayerDTO playerDto : players) {
-            if ( winners.stream().anyMatch(name -> name.equals(playerDto.getName())) )
-                playerDto.addScore(nbPointWon);
-        }
+        gameDto.getPlayers().stream()
+                            .filter( playerDto -> musicResultDto.isWinner(playerDto.getName()) )
+                            .forEach( playerDto -> playerDto.addScore(nbPointWon) );
 
         return gameDto;
     }

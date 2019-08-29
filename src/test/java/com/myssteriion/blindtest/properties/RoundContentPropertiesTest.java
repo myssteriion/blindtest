@@ -20,8 +20,8 @@ public class RoundContentPropertiesTest extends AbstractTest {
 
         Assert.assertEquals( new Integer(4), props.getChoiceNbMusics() );
         Assert.assertEquals( new Integer(100), props.getChoiceNbPointWon() );
-        Assert.assertEquals( new Integer(50), props.getChoiceNbPointBonusWon() );
-        Assert.assertEquals( new Integer(-50), props.getChoicenNPointMalusLoose() );
+        Assert.assertEquals( new Integer(50), props.getChoiceNbPointBonus() );
+        Assert.assertEquals( new Integer(-50), props.getChoiceNbPointMalus() );
 
         Assert.assertEquals( new Integer(20), props.getThiefNbMusics() );
         Assert.assertEquals( new Integer(100), props.getThiefNbPointWon() );
