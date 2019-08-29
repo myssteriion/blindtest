@@ -104,7 +104,7 @@ public class GameDTOTest extends AbstractTest {
 
         Assert.assertEquals( playersNames.size(), gameDTO.getPlayers().size() );
         Assert.assertEquals( duration, gameDTO.getDuration() );
-        Assert.assertEquals( 15, gameDTO.getNbMusicsPlayed() );
+        Assert.assertEquals( 44, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
         Assert.assertNull( gameDTO.getRound() );
         Assert.assertNull( gameDTO.getRoundContent() );
@@ -136,7 +136,7 @@ public class GameDTOTest extends AbstractTest {
         GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
         Assert.assertFalse( gameDTO.isLastStep() );
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 42; i++) {
             gameDTO.nextStep();
             Assert.assertFalse( gameDTO.isLastStep() );
         }
@@ -177,7 +177,7 @@ public class GameDTOTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
 
         GameDTO gameDtoUn = new GameDTO(new HashSet<>(playersNames), duration);
-        Assert.assertEquals( "players=[name=name, score=0, turnToChoose=false], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=5, nbPointWon=100}", gameDtoUn.toString() );
+        Assert.assertEquals( "players=[name=name, score=0, turnToChoose=false], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}", gameDtoUn.toString() );
     }
 
 }

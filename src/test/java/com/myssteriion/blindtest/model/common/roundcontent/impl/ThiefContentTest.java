@@ -49,7 +49,7 @@ public class ThiefContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
         MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null, null, null, null);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 24; i++)
             gameDto.nextStep();
 
         Assert.assertSame( Round.THIEF, gameDto.getRound() );
@@ -88,7 +88,7 @@ public class ThiefContentTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 24; i++)
             gameDto.nextStep();
 
         Assert.assertSame( Round.THIEF, gameDto.getRound() );
@@ -111,7 +111,7 @@ public class ThiefContentTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 24; i++)
             gameDto.nextStep();
 
         Assert.assertSame( Round.THIEF, gameDto.getRound() );
@@ -119,7 +119,7 @@ public class ThiefContentTest extends AbstractTest {
 
         Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 18; i++) {
             gameDto.nextStep();
             Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
         }

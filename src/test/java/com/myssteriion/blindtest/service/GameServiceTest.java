@@ -170,7 +170,7 @@ public class GameServiceTest extends AbstractTest {
 			game = gameService.apply(musicResultDto);
 
 		Assert.assertTrue( game.isFinished() );
-		Assert.assertEquals( new Integer(1400), profilStatDto.getBestScores().get(Duration.NORMAL) );
+		Assert.assertEquals( new Integer(4300), profilStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
 }

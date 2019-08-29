@@ -90,7 +90,7 @@ public class ClassicContentTest extends AbstractTest {
 
         Assert.assertFalse( classicContent.isFinished(gameDto) );
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 19; i++) {
             gameDto.nextStep();
             Assert.assertFalse( classicContent.isFinished(gameDto) );
         }
@@ -111,7 +111,7 @@ public class ClassicContentTest extends AbstractTest {
 
         Assert.assertFalse( classicContent.isLastMusic(gameDto) );
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 18; i++) {
             gameDto.nextStep();
             Assert.assertFalse( classicContent.isLastMusic(gameDto) );
         }
