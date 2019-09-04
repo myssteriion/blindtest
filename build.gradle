@@ -89,7 +89,7 @@ build {
 		mkdir deliveryFolder + "/musiques/cinemas"
 		mkdir deliveryFolder + "/musiques/series"
 		mkdir deliveryFolder + "/musiques/disney"
-		mkdir deliveryFolder + "/musiques/francais"
+		mkdir deliveryFolder + "/musiques/classiques"
 	}
 }
 

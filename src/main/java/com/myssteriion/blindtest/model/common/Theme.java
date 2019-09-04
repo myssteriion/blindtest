@@ -13,7 +13,7 @@ public enum Theme {
 	CINEMAS("cinemas"), 
 	SERIES("series"), 
 	DISNEY("disney"), 
-	FRANCAIS("francais");
+	CLASSIQUES("classiques");
 	
 	
 	
@@ -33,7 +33,7 @@ public enum Theme {
 
 
 	public static List<Theme> getSortedTheme() {
-		return Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, CINEMAS, SERIES, DISNEY, FRANCAIS);
+		return Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, CINEMAS, SERIES, DISNEY, CLASSIQUES);
 	}
 	
 }
