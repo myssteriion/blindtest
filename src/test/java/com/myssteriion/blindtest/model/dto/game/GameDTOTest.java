@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.dto.game;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import org.junit.Assert;
@@ -53,6 +54,7 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
+        Assert.assertEquals( Effect.NONE, gameDTO.getNextEffect() );
 
 
         playersNames = Arrays.asList("name4", "name1", "name3", "name2");
@@ -75,6 +77,7 @@ public class GameDTOTest extends AbstractTest {
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayed() );
         Assert.assertEquals( 0, gameDTO.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, gameDTO.getRound() );
+        Assert.assertEquals( Effect.NONE, gameDTO.getNextEffect() );
     }
 
     @Test
@@ -177,7 +180,7 @@ public class GameDTOTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
 
         GameDTO gameDtoUn = new GameDTO(new HashSet<>(playersNames), duration);
-        Assert.assertEquals( "players=[name=name, score=0, turnToChoose=false], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}", gameDtoUn.toString() );
+        Assert.assertEquals( "players=[name=name, score=0, turnToChoose=false], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, nextEffect=NONE", gameDtoUn.toString() );
     }
 
 }

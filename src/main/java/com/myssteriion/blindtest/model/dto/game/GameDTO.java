@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.dto.game;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
@@ -26,6 +27,8 @@ public class GameDTO extends AbstractDTO {
 
     private AbstractRoundContent roundContent;
 
+    private Effect nextEffect;
+
 
 
     public GameDTO(Set<String> playersNames, Duration duration) {
@@ -39,6 +42,7 @@ public class GameDTO extends AbstractDTO {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
+        this.nextEffect = Effect.NONE;
     }
 
 
@@ -67,11 +71,16 @@ public class GameDTO extends AbstractDTO {
         return roundContent;
     }
 
+    public Effect getNextEffect() {
+        return nextEffect;
+    }
+
 
     public void nextStep() {
 
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
+        this.nextEffect = findNextEffect();
 
         if ( roundContent.isFinished(this) ) {
             round = round.nextRound();
@@ -93,6 +102,18 @@ public class GameDTO extends AbstractDTO {
     }
 
 
+    private Effect findNextEffect() {
+
+        int r = Tool.RANDOM.nextInt(100);
+
+        if (r >= 70 && r < 80) return Effect.SLOW;
+        if (r >= 80 && r < 90) return Effect.SPEED;
+        if (r >= 90 && r < 100) return Effect.REVERSE;
+
+        return Effect.NONE;
+    }
+
+
     @Override
     public String toString() {
         return "players=" + players +
@@ -100,7 +121,8 @@ public class GameDTO extends AbstractDTO {
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
                 ", round=" + round +
-                ", roundContent={" + roundContent + "}";
+                ", roundContent={" + roundContent + "}" +
+                ", nextEffect=" + nextEffect;
     }
 
 }
