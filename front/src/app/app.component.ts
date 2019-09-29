@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StartGameComponent } from './start-game/start-game.component'
-import { ResourceService } from './resources/resources'
+import { StartGameComponent } from './features/start-game/start-game.component'
+import { UserResourceService } from './resources/userResources'
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,8 @@ export class AppComponent {
   title = 'blindtest';
 
   constructor(private _modalService: NgbModal,
-    private _request: ResourceService) { }
-
+    private _request: UserResourceService) { }
+ 
   public ngOnInit() {
-    this._request.getAllUsers().subscribe(data => {
-      console.log("data", data)
-    })
-    this._modalService.open(StartGameComponent, { size: 'lg', keyboard: false, backdrop: 'static', centered: true });
   }
 } 
