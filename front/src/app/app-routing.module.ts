@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProfilesComponent } from './components/profiles/profiles.component'
+import { ProfileComponent } from './components/profile/profile.component'
 
 const routes: Routes = [
-  { path: 'profiles', component: ProfilesComponent },
+  { path: 'profiles', component: ProfileComponent },
   { path: '', redirectTo: 'profiles', pathMatch: 'full' },
   { path: '**', redirectTo: 'profiles' }
 ];

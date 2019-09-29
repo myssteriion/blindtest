@@ -3,26 +3,19 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { UserResourceService, UrlInterceptor } from './resources/userResources'
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
-import { AddUserComponent } from './features/users/add-user/add-user.component';
-import { StartGameComponent } from './features/start-game/start-game.component';
-import { ProfilesComponent } from './components/profiles/profiles.component'
+import { AppRoutingModule } from './app-routing.module';
+
+import { ProfileComponent } from './components/profile/profile.component'
+
+import { ProfileResource, UrlInterceptor } from './resources/profile.resource';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserCardComponent,
-    AddUserComponent,
-    StartGameComponent,
-    ProfilesComponent
+    ProfileComponent
   ],
-  entryComponents: [
-    StartGameComponent
-  ],
+  entryComponents: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +23,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component'
     HttpClientModule
   ],
   providers: [
-    UserResourceService,
+    ProfileResource,
     { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

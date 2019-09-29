@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StartGameComponent } from './features/start-game/start-game.component'
-import { UserResourceService } from './resources/userResources'
 
 @Component({
   selector: 'app-root',
@@ -11,8 +9,7 @@ import { UserResourceService } from './resources/userResources'
 export class AppComponent {
   title = 'blindtest';
 
-  constructor(private _modalService: NgbModal,
-    private _request: UserResourceService) { }
+  constructor(private _modalService: NgbModal) { }
  
   public ngOnInit() {
   }
