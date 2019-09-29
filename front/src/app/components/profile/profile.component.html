@@ -3,6 +3,8 @@
   <h1>Profils</h1>
 
 
-  <div *ngFor="let profile of profiles">{{ profile.name }} </div>
+  <profile-card *ngFor="let profile of profiles" [profile]=profile></profile-card>
+
+
 
 </div>

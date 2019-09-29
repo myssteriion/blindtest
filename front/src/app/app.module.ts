@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ProfileComponent } from './components/profile/profile.component'
+import { ProfileCardComponent } from './components/common/profile-card/profile-card.component';
 
 import { ProfileResource, UrlInterceptor } from './resources/profile.resource';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileCardComponent
   ],
   entryComponents: [],
   imports: [
