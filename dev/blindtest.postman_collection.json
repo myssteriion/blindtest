@@ -51,7 +51,7 @@
 			]
 		},
 		{
-			"name": "profil",
+			"name": "profile",
 			"item": [
 				{
 					"name": "save",
@@ -70,14 +70,14 @@
 							"raw": "{\n\t\"name\": \"name\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profils",
+							"raw": "http://localhost:{{port}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"profils"
+								"profiles"
 							]
 						}
 					},
@@ -100,14 +100,14 @@
 							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profils/0",
+							"raw": "http://localhost:{{port}}/profiles/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"profils",
+								"profiles",
 								"0"
 							]
 						}
@@ -120,14 +120,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profils",
+							"raw": "http://localhost:{{port}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"profils"
+								"profiles"
 							]
 						}
 					},
@@ -136,7 +136,7 @@
 			]
 		},
 		{
-			"name": "profilstat",
+			"name": "profilestat",
 			"item": [
 				{
 					"name": "find all",
@@ -144,14 +144,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profilstats",
+							"raw": "http://localhost:{{port}}/profilestats",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"profilstats"
+								"profilestats"
 							]
 						}
 					},
@@ -250,7 +250,7 @@
 	],
 	"variable": [
 		{
-			"id": "e83c5b87-3934-49ab-8e69-78a1b1d633ff",
+			"id": "97ed39fb-6c43-442f-8541-4da0b4b4dd49",
 			"key": "port",
 			"value": "9501",
 			"type": "string"

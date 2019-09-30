@@ -2,8 +2,8 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
-import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.model.dto.game.GameDTO;
 import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
 import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
@@ -24,10 +24,10 @@ public class GameService {
 	private MusicService musicService;
 
 	@Autowired
-	private ProfilService profilService;
+	private ProfileService profileService;
 
 	@Autowired
-	private ProfilStatService profilStatService;
+	private ProfileStatService profileStatService;
 
 	private List<GameDTO> games = new ArrayList<>();
 	
@@ -65,25 +65,25 @@ public class GameService {
 			// apply score
 			gameDto = gameDto.getRoundContent().apply(gameDto, musicResultDto);
 
-			// update profilStatDto
+			// update profileStatDto
 			List<PlayerDTO> players = gameDto.getPlayers();
 			List<String> winners = musicResultDto.getWinners();
 
 			for (PlayerDTO playerDto : players) {
 
-				ProfilDTO profilDto = new ProfilDTO(playerDto.getName());
-				ProfilStatDTO profilStatDto = profilStatService.findByProfil(profilDto);
-				profilStatDto.incrementListenedMusics( musicResultDto.getMusicDTO().getTheme() );
+				ProfileDTO profileDto = new ProfileDTO(playerDto.getName());
+				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
+				profileStatDto.incrementListenedMusics( musicResultDto.getMusicDTO().getTheme() );
 
-				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profilDto.getName())) )
-					profilStatDto.incrementFoundMusics( musicResultDto.getMusicDTO().getTheme() );
+				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profileDto.getName())) )
+					profileStatDto.incrementFoundMusics( musicResultDto.getMusicDTO().getTheme() );
 
 				if ( gameDto.isFirstStep() )
-					profilStatDto.incrementPlayedGames();
+					profileStatDto.incrementPlayedGames();
 				else if ( gameDto.isLastStep() )
-					profilStatDto.addBestScoreIfBetter( gameDto.getDuration(), playerDto.getScore() );
+					profileStatDto.addBestScoreIfBetter( gameDto.getDuration(), playerDto.getScore() );
 
-				profilStatService.update(profilStatDto);
+				profileStatService.update(profileStatDto);
 			}
 
 			gameDto.nextStep();
@@ -96,9 +96,9 @@ public class GameService {
 
 		for (String playerName : playersNames) {
 
-			ProfilDTO profilDto =  profilService.find( new ProfilDTO(playerName));
-			if (profilDto == null)
-				throw new NotFoundException("Player '" + playerName + "' must have a profil");
+			ProfileDTO profileDto =  profileService.find( new ProfileDTO(playerName));
+			if (profileDto == null)
+				throw new NotFoundException("Player '" + playerName + "' must have a profile");
 		}
 	}
 

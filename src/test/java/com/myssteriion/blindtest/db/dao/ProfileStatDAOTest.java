@@ -9,7 +9,7 @@ import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,13 +24,13 @@ import java.sql.Statement;
 import java.sql.Types;
 
 
-public class ProfilStatDAOTest extends AbstractTest {
+public class ProfileStatDAOTest extends AbstractTest {
 
 	@Mock
 	protected EntityManager em;
 	
 	@InjectMocks
-	private ProfilStatDAO profilStatDao;
+	private ProfileStatDAO profileStatDao;
 
 	@Mock
 	protected ObjectMapper mapperMock;
@@ -40,12 +40,12 @@ public class ProfilStatDAOTest extends AbstractTest {
 	@Test
 	public void save() throws DaoException, SQLException {
 
-		profilStatDao = Mockito.spy( new ProfilStatDAO() );
+		profileStatDao = Mockito.spy( new ProfileStatDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
-		profilStatDto.setId(1);
-		Mockito.doReturn(profilStatDto).when(profilStatDao).find(Mockito.any(ProfilStatDTO.class));
+		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
+		profileStatDto.setId(1);
+		Mockito.doReturn(profileStatDto).when(profileStatDao).find(Mockito.any(ProfileStatDTO.class));
 		
 		
 		SQLException sql = new SQLException("sql");
@@ -55,33 +55,33 @@ public class ProfilStatDAOTest extends AbstractTest {
 		
 		
 		try {
-			profilStatDao.save(null);
+			profileStatDao.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilStatDTO profilStatDtoToSave = new ProfilStatDTO(1);
+		ProfileStatDTO profileStatDtoToSave = new ProfileStatDTO(1);
 		try {
-			profilStatDao.save(profilStatDtoToSave);
+			profileStatDao.save(profileStatDtoToSave);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't save profilStatDto.", sql), e);
+			verifyException(new DaoException("Can't save profileStatDto.", sql), e);
 		}
 		
-		ProfilStatDTO profilStatDtoReturned = profilStatDao.save(profilStatDtoToSave);
-		Assert.assertEquals( new Integer(1), profilStatDtoReturned.getId() );
+		ProfileStatDTO profileStatDtoReturned = profileStatDao.save(profileStatDtoToSave);
+		Assert.assertEquals( new Integer(1), profileStatDtoReturned.getId() );
 	}
 
 	@SuppressWarnings("deprecation")
 	@Test
 	public void update() throws DaoException, SQLException, JsonProcessingException, NoSuchFieldException, IllegalAccessException {
 
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
-		profilStatDto.setId(1);
+		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
+		profileStatDto.setId(1);
 		
 
 		SQLException sql = new SQLException("sql");
@@ -93,44 +93,44 @@ public class ProfilStatDAOTest extends AbstractTest {
 		Mockito.when(mapperMock.writeValueAsString(Mockito.anyMap())).thenThrow(jpe).thenCallRealMethod();
 
 		try {
-			profilStatDao.update(null);
+			profileStatDao.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilStatDTO profilStatDtoToUpdate = new ProfilStatDTO(1);
+		ProfileStatDTO profileStatDtoToUpdate = new ProfileStatDTO(1);
 		try {
-			profilStatDao.update(profilStatDtoToUpdate);
+			profileStatDao.update(profileStatDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profileStatDto -> id' est obligatoire."), e);
 		}
 		
-		profilStatDtoToUpdate.setId(1);
+		profileStatDtoToUpdate.setId(1);
 		setMapper(mapperMock);
 		try {
-			profilStatDao.update(profilStatDtoToUpdate);
+			profileStatDao.update(profileStatDtoToUpdate);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
 		try {
-			profilStatDao.update(profilStatDtoToUpdate);
+			profileStatDao.update(profileStatDtoToUpdate);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't update profilStatDto.", sql), e);
+			verifyException(new DaoException("Can't update profileStatDto.", sql), e);
 		}
 
-		ProfilStatDTO profilStatDtoReturned = profilStatDao.update(profilStatDtoToUpdate);
-		Assert.assertEquals( new Integer(1), profilStatDtoReturned.getId() );
+		ProfileStatDTO profileStatDtoReturned = profileStatDao.update(profileStatDtoToUpdate);
+		Assert.assertEquals( new Integer(1), profileStatDtoReturned.getId() );
 	}
 
 	@SuppressWarnings("deprecation")
@@ -160,48 +160,48 @@ public class ProfilStatDAOTest extends AbstractTest {
 		Mockito.when(mapperMock.readValue(Mockito.anyString(), Mockito.any(TypeReference.class))).thenThrow(jpe).thenCallRealMethod();
 		
 		try {
-			profilStatDao.find(null);
+			profileStatDao.find(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profilStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
 		}
 		
 		
-		ProfilStatDTO profilStatDto = new ProfilStatDTO(1);
+		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
 		try {
-			profilStatDao.find(profilStatDto);
+			profileStatDao.find(profileStatDto);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find profilStatDto.", sql), e);
+			verifyException(new DaoException("Can't find profileStatDto.", sql), e);
 		}
 
 		setMapper(mapperMock);
 		try {
-			profilStatDao.find(profilStatDto);
+			profileStatDao.find(profileStatDto);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
-		profilStatDto = profilStatDao.find(profilStatDto);
-		Assert.assertNull(profilStatDto);
+		profileStatDto = profileStatDao.find(profileStatDto);
+		Assert.assertNull(profileStatDto);
 		
-		profilStatDto = new ProfilStatDTO(1);
-		profilStatDto = profilStatDao.find(profilStatDto);
-		Assert.assertNotNull(profilStatDto);
+		profileStatDto = new ProfileStatDTO(1);
+		profileStatDto = profileStatDao.find(profileStatDto);
+		Assert.assertNotNull(profileStatDto);
 		
-		profilStatDto.setId(1);
-		profilStatDto = profilStatDao.find(profilStatDto);
-		Assert.assertNotNull(profilStatDto);
-		Assert.assertEquals( new Integer(1), profilStatDto.getId() );
-		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
-		Assert.assertEquals( new Integer(100), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
-		Assert.assertEquals( new Integer(50), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
-		Assert.assertEquals( new Integer(100), profilStatDto.getBestScores().get(Duration.NORMAL) );
+		profileStatDto.setId(1);
+		profileStatDto = profileStatDao.find(profileStatDto);
+		Assert.assertNotNull(profileStatDto);
+		Assert.assertEquals( new Integer(1), profileStatDto.getId() );
+		Assert.assertEquals( 1, profileStatDto.getPlayedGames() );
+		Assert.assertEquals( new Integer(100), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(50), profileStatDto.getFoundMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(100), profileStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
 	@SuppressWarnings("deprecation")
@@ -223,30 +223,30 @@ public class ProfilStatDAOTest extends AbstractTest {
 		Mockito.when(mapperMock.readValue(Mockito.anyString(), Mockito.any(TypeReference.class))).thenThrow(jpe).thenCallRealMethod();
 		
 		try {
-			profilStatDao.findAll();
+			profileStatDao.findAll();
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find all profilStatDto.", sql), e);
+			verifyException(new DaoException("Can't find all profileStatDto.", sql), e);
 		}
 
 		setMapper(mapperMock);
 		try {
-			profilStatDao.findAll();
+			profileStatDao.findAll();
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profilStatDto.", jpe), e);
+			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
 
-		ProfilStatDTO profilStatDto = profilStatDao.findAll().get(0);
-		Assert.assertEquals( new Integer(1), profilStatDto.getId() );
-		Assert.assertEquals( 1, profilStatDto.getPlayedGames() );
-		Assert.assertEquals( new Integer(100), profilStatDto.getListenedMusics().get(Theme.ANNEES_60) );
-		Assert.assertEquals( new Integer(50), profilStatDto.getFoundMusics().get(Theme.ANNEES_60) );
-		Assert.assertEquals( new Integer(100), profilStatDto.getBestScores().get(Duration.NORMAL) );
+		ProfileStatDTO profileStatDto = profileStatDao.findAll().get(0);
+		Assert.assertEquals( new Integer(1), profileStatDto.getId() );
+		Assert.assertEquals( 1, profileStatDto.getPlayedGames() );
+		Assert.assertEquals( new Integer(100), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(50), profileStatDto.getFoundMusics().get(Theme.ANNEES_60) );
+		Assert.assertEquals( new Integer(100), profileStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 	
 	
@@ -255,7 +255,7 @@ public class ProfilStatDAOTest extends AbstractTest {
 		
 		SimpleResultSet rs = new SimpleResultSet();
 		rs.addColumn("id", Types.BIGINT, 100, 0);
-		rs.addColumn("profil_id", Types.BIGINT, 100, 0);
+		rs.addColumn("profile_id", Types.BIGINT, 100, 0);
 		rs.addColumn("played_games", Types.INTEGER, 100, 0);
 		rs.addColumn("listened_musics", Types.INTEGER, 100, 0);
 		rs.addColumn("found_musics", Types.INTEGER, 100, 0);

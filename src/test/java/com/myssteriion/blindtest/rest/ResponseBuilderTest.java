@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
 import com.myssteriion.blindtest.model.base.ListDTO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 
 public class ResponseBuilderTest extends AbstractTest {
 
@@ -18,14 +18,14 @@ public class ResponseBuilderTest extends AbstractTest {
 	public void create200() {
 		
 		try {
-			ResponseBuilder.create200( (ProfilDTO) null );
+			ResponseBuilder.create200( (ProfileDTO) null );
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
-		ResponseEntity<ProfilDTO> re = ResponseBuilder.create200( new ProfilDTO("name", "avatar") );
+		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", "avatar") );
 		Assert.assertEquals( HttpStatus.OK , re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
 	}
@@ -33,9 +33,9 @@ public class ResponseBuilderTest extends AbstractTest {
 	@Test
 	public void create200List() {
 		
-		ResponseEntity< ListDTO<ProfilDTO> > re = ResponseBuilder.create200( (List<ProfilDTO>) null );
+		ResponseEntity< ListDTO<ProfileDTO> > re = ResponseBuilder.create200( (List<ProfileDTO>) null );
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ListDTO<ProfilDTO> body = re.getBody();
+		ListDTO<ProfileDTO> body = re.getBody();
 		Assert.assertTrue( body.getItems().isEmpty() );
 	}
 	

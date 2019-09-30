@@ -2,9 +2,9 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.ListDTO;
-import com.myssteriion.blindtest.model.dto.ProfilStatDTO;
+import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.service.ProfilStatService;
+import com.myssteriion.blindtest.service.ProfileStatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,18 +16,18 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "profilstats")
-public class ProfilStatController {
+@RequestMapping(path = "profilestats")
+public class ProfileStatController {
 
 	@Autowired
-	private ProfilStatService profilStatService;
+	private ProfileStatService profileStatService;
 	
 	
 	
 	@GetMapping
-	public ResponseEntity< ListDTO<ProfilStatDTO> > findAll() throws DaoException {
+	public ResponseEntity< ListDTO<ProfileStatDTO> > findAll() throws DaoException {
 		
-		List<ProfilStatDTO> list = profilStatService.findAll();
+		List<ProfileStatDTO> list = profileStatService.findAll();
 		return ResponseBuilder.create200(list);
 	}
 	

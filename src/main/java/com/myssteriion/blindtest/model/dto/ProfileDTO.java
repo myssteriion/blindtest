@@ -6,7 +6,7 @@ import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Objects;
 
-public class ProfilDTO extends AbstractDTO {
+public class ProfileDTO extends AbstractDTO {
 
 	private String name;
 	
@@ -14,11 +14,11 @@ public class ProfilDTO extends AbstractDTO {
 
 
 
-	public ProfilDTO(String name) {
+	public ProfileDTO(String name) {
 		this(name, Constant.DEFAULT_AVATAR);
 	}
 
-	public ProfilDTO(String name, String avatar) {
+	public ProfileDTO(String name, String avatar) {
 
 		Tool.verifyValue("name", name);
 		
@@ -61,7 +61,7 @@ public class ProfilDTO extends AbstractDTO {
 		if(obj == null || obj.getClass()!= this.getClass()) 
             return false; 
 		
-		ProfilDTO other = (ProfilDTO) obj;
+		ProfileDTO other = (ProfileDTO) obj;
 		return Objects.equals(this.name, other.name);
 	}
 

@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ProfilStatDTO extends AbstractDTO {
+public class ProfileStatDTO extends AbstractDTO {
 
-	private Integer profilId;
+	private Integer profileId;
 	
 	private int playedGames;
 	
@@ -23,15 +23,15 @@ public class ProfilStatDTO extends AbstractDTO {
 
 	
 	
-	public ProfilStatDTO(Integer profilId) {
-		this(profilId, 0, new HashMap<>(), new HashMap<>(), new HashMap<>());
+	public ProfileStatDTO(Integer profileId) {
+		this(profileId, 0, new HashMap<>(), new HashMap<>(), new HashMap<>());
 	}
 	
-	public ProfilStatDTO(Integer profilId, int playedGames, Map<Theme, Integer> listenedMusics, Map<Theme, Integer> foundMusics, Map<Duration, Integer> bestScores) {
+	public ProfileStatDTO(Integer profileId, int playedGames, Map<Theme, Integer> listenedMusics, Map<Theme, Integer> foundMusics, Map<Duration, Integer> bestScores) {
 		
-		Tool.verifyValue("profilId", profilId);
+		Tool.verifyValue("profileId", profileId);
 		
-		this.profilId = profilId;
+		this.profileId = profileId;
 		this.playedGames = (playedGames < 0) ? 0 : playedGames;
 		this.listenedMusics = (listenedMusics == null) ? new HashMap<>() : listenedMusics;
 		this.foundMusics = (foundMusics == null) ? new HashMap<>() : foundMusics;
@@ -40,8 +40,8 @@ public class ProfilStatDTO extends AbstractDTO {
 	
 	
 	
-	public Integer getProfilId() {
-		return profilId;
+	public Integer getProfileId() {
+		return profileId;
 	}
 
 	public int getPlayedGames() {
@@ -98,7 +98,7 @@ public class ProfilStatDTO extends AbstractDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(profilId);
+		return Objects.hash(profileId);
 	}
 
 	@Override
@@ -110,14 +110,14 @@ public class ProfilStatDTO extends AbstractDTO {
 		if(obj == null || obj.getClass()!= this.getClass()) 
             return false; 
 		
-		ProfilStatDTO other = (ProfilStatDTO) obj;
-		return Objects.equals(this.profilId, other.profilId);
+		ProfileStatDTO other = (ProfileStatDTO) obj;
+		return Objects.equals(this.profileId, other.profileId);
 	}
 
 	@Override
 	public String toString() {
 		return super.toString() + 
-				", profilId=" + profilId +
+				", profileId=" + profileId +
 				", playedGames=" + playedGames +
 				", listenedMusics=" + listenedMusics +
 				", foundMusics=" + foundMusics +

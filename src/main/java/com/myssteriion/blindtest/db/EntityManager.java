@@ -83,38 +83,38 @@ public class EntityManager {
 			statement.execute( sb.toString() );
 			
 			
-			// profil
+			// profile
 			sb = new StringBuilder();
-			sb.append("CREATE SEQUENCE IF NOT EXISTS profil_seq ");
+			sb.append("CREATE SEQUENCE IF NOT EXISTS profile_seq ");
 			sb.append("START WITH 0 ");
 			sb.append("INCREMENT BY 1 ");
 			statement.execute( sb.toString() );
 			
 			sb = new StringBuilder();
-			sb.append("CREATE TABLE IF NOT EXISTS profil (");
-			sb.append("id BIGINT DEFAULT profil_seq.nextval PRIMARY KEY,");
+			sb.append("CREATE TABLE IF NOT EXISTS profile (");
+			sb.append("id BIGINT DEFAULT profile_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
 			sb.append("avatar VARCHAR2 NOT NULL");
 			sb.append(")");
 			statement.execute( sb.toString() );
 			
 			
-			// profil stat
+			// profile stat
 			sb = new StringBuilder();
-			sb.append("CREATE SEQUENCE IF NOT EXISTS profil_stat_seq ");
+			sb.append("CREATE SEQUENCE IF NOT EXISTS profile_stat_seq ");
 			sb.append("START WITH 0 ");
 			sb.append("INCREMENT BY 1 ");
 			statement.execute( sb.toString() );
 			
 			sb = new StringBuilder();
-			sb.append("CREATE TABLE IF NOT EXISTS profil_stat (");
-			sb.append("id BIGINT DEFAULT profil_stat_seq.nextval PRIMARY KEY,");
-			sb.append("profil_id BIGINT NOT NULL UNIQUE,");
+			sb.append("CREATE TABLE IF NOT EXISTS profile_stat (");
+			sb.append("id BIGINT DEFAULT profile_stat_seq.nextval PRIMARY KEY,");
+			sb.append("profile_id BIGINT NOT NULL UNIQUE,");
 			sb.append("played_games INT NOT NULL,");
 			sb.append("listened_musics VARCHAR2 NOT NULL,");
 			sb.append("found_musics VARCHAR2 NOT NULL,");
 			sb.append("best_scores VARCHAR2 NOT NULL,");
-			sb.append("FOREIGN KEY (profil_id) REFERENCES profil(id)");
+			sb.append("FOREIGN KEY (profile_id) REFERENCES profile(id)");
 			sb.append(")");
 			statement.execute( sb.toString() );
 		}

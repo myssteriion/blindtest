@@ -15,26 +15,26 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.ListDTO;
-import com.myssteriion.blindtest.model.dto.ProfilDTO;
-import com.myssteriion.blindtest.service.ProfilService;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.service.ProfileService;
 
-public class ProfilControllerTest extends AbstractTest {
+public class ProfileControllerTest extends AbstractTest {
 
 	@Mock
-	private ProfilService profilService;
+	private ProfileService profileService;
 	
 	@InjectMocks
-	private ProfilController profilController;
+	private ProfileController profileController;
 	
 	
 	
 	@Test
 	public void save() throws DaoException, NotFoundException, ConflictException {
 		
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		Mockito.when(profilService.save(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
+		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		Mockito.when(profileService.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
 		
-		ResponseEntity<ProfilDTO> actual = profilController.save(profilDto);
+		ResponseEntity<ProfileDTO> actual = profileController.save(profileDto);
 		Assert.assertEquals( HttpStatus.CREATED, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
 		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
@@ -43,10 +43,10 @@ public class ProfilControllerTest extends AbstractTest {
 	@Test
 	public void update() throws DaoException, NotFoundException, ConflictException {
 		
-		ProfilDTO profilDto = new ProfilDTO("name", "avatar");
-		Mockito.when(profilService.update(Mockito.any(ProfilDTO.class))).thenReturn(profilDto);
+		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		Mockito.when(profileService.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
 		
-		ResponseEntity<ProfilDTO> actual = profilController.update(1, profilDto);
+		ResponseEntity<ProfileDTO> actual = profileController.update(1, profileDto);
 		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
 		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
@@ -56,19 +56,19 @@ public class ProfilControllerTest extends AbstractTest {
 	public void findAll() throws DaoException {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Mockito.when(profilService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfilDTO("name", "avatar") ) );
+		Mockito.when(profileService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfileDTO("name", "avatar") ) );
 
 		try {
-			profilController.findAll();
+			profileController.findAll();
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(iae, e);
 		}
 		
-		ResponseEntity< ListDTO<ProfilDTO> > re = profilController.findAll();
+		ResponseEntity< ListDTO<ProfileDTO> > re = profileController.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ListDTO<ProfilDTO> actual = re.getBody();
+		ListDTO<ProfileDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getItems().size() );		
 	}
 
