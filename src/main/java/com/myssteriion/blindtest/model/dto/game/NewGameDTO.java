@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.dto.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -13,6 +14,7 @@ public class NewGameDTO {
 
 
 
+    @JsonCreator
     public NewGameDTO(Set<String> playersNames, Duration duration) {
 
         Tool.verifyValue("playersNames", playersNames);

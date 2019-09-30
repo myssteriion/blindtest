@@ -47,14 +47,6 @@ public class ProfileDTOTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
 		}
 
-		try {
-			new ProfileDTO(name, null);
-			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-		}
-		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
-		}
-		
 		Assert.assertNotNull( new ProfileDTO(name, avatar) );
 		
 		
@@ -62,6 +54,10 @@ public class ProfileDTOTest extends AbstractTest {
 		ProfileDTO profileDTO = new ProfileDTO(name + "'a'b'c''", new Avatar(avatar + "b"));
 		Assert.assertEquals( name + "'a'b'c''", profileDTO.getName() );
 		Assert.assertEquals( avatar + "b", profileDTO.getAvatar().getName() );
+
+		profileDTO = new ProfileDTO(name + "'a'b'c''", null);
+		Assert.assertEquals( name + "'a'b'c''", profileDTO.getName() );
+		Assert.assertEquals( "defaut.png", profileDTO.getAvatar().getName() );
 
 		profileDTO = new ProfileDTO(name, new Avatar(""));
 		Assert.assertEquals( name, profileDTO.getName() );

@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
@@ -27,6 +28,7 @@ public class Avatar {
 
 
 
+    @JsonCreator
     public Avatar(String name) {
         this.name = Tool.isNullOrEmpty(name) ? Constant.DEFAULT_AVATAR : name;
         createFlux();
