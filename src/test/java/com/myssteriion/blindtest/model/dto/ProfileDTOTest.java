@@ -54,14 +54,18 @@ public class ProfileDTOTest extends AbstractTest {
 		ProfileDTO profileDTO = new ProfileDTO(name + "'a'b'c''", avatar + "b");
 		Assert.assertEquals( name + "'a'b'c''", profileDTO.getName() );
 		Assert.assertEquals( avatar + "b", profileDTO.getAvatar() );
-		
+		Assert.assertFalse( profileDTO.isFileExists() );
+
 		profileDTO = new ProfileDTO(name, null);
 		Assert.assertEquals( name, profileDTO.getName() );
 		Assert.assertEquals( Constant.DEFAULT_AVATAR, profileDTO.getAvatar() );
-		
+		Assert.assertEquals( Constant.DEFAULT_AVATAR, profileDTO.getAvatar() );
+		Assert.assertFalse( profileDTO.isFileExists() );
+
 		profileDTO = new ProfileDTO(name, "");
 		Assert.assertEquals( name, profileDTO.getName() );
 		Assert.assertEquals( Constant.DEFAULT_AVATAR, profileDTO.getAvatar() );
+		Assert.assertFalse( profileDTO.isFileExists() );
 	}
 	
 	@Test
@@ -80,6 +84,7 @@ public class ProfileDTOTest extends AbstractTest {
 		Assert.assertEquals( new Integer(123), profileDTO.getId() );
 		Assert.assertEquals( "MonNom", profileDTO.getName() );
 		Assert.assertEquals( "MonAvatar", profileDTO.getAvatar() );
+		Assert.assertFalse( profileDTO.isFileExists() );
 	}
 	
 	@Test
@@ -89,7 +94,7 @@ public class ProfileDTOTest extends AbstractTest {
 		String avatar = "avatar";
 		ProfileDTO profileDTOUn = new ProfileDTO(name, avatar);
 		
-		Assert.assertEquals( "id=null, name=name, avatar=avatar", profileDTOUn.toString() );
+		Assert.assertEquals( "id=null, name=name, avatar=avatar, isFileExists=false", profileDTOUn.toString() );
 		
 		ProfileDTO profileDTOUnIso = new ProfileDTO(name, avatar);
 		ProfileDTO profileDTODeux = new ProfileDTO(name + "1", avatar);

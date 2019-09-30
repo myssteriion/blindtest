@@ -97,7 +97,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"name\",\n\t\"avatar\": \"avatar\"\n}"
+							"raw": "{\n\t\"name\": \"name\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/profiles/0",
@@ -250,7 +250,7 @@
 	],
 	"variable": [
 		{
-			"id": "97ed39fb-6c43-442f-8541-4da0b4b4dd49",
+			"id": "562198b9-32c7-4886-9d84-ed43351ceeb0",
 			"key": "port",
 			"value": "9501",
 			"type": "string"

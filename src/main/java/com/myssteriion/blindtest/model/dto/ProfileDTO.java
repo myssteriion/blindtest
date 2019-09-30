@@ -3,14 +3,27 @@ package com.myssteriion.blindtest.model.dto;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ProfileDTO extends AbstractDTO {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProfileDTO.class);
+
 	private String name;
-	
+
 	private String avatar;
+
+	private boolean isFileExists;
+
+	private byte[] avatarFlux;
 
 
 
@@ -24,10 +37,11 @@ public class ProfileDTO extends AbstractDTO {
 		
 		this.name = name.trim();
 		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;
+		createAvatarFlux();
 	}
-	
-	
-	
+
+
+
 	public String getName() {
 		return name;
 	}
@@ -43,10 +57,36 @@ public class ProfileDTO extends AbstractDTO {
 
 	public void setAvatar(String avatar) {
 		this.avatar = ( Tool.isNullOrEmpty(avatar) ) ? Constant.DEFAULT_AVATAR : avatar;
+		createAvatarFlux();
 	}
-	
-	
-	
+
+	public boolean isFileExists() {
+		return isFileExists;
+	}
+
+	public byte[] getAvatarFlux() {
+		return avatarFlux;
+	}
+
+
+	private void createAvatarFlux() {
+
+		try {
+
+			Path path = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER, this.avatar);
+			isFileExists = path.toFile().exists();
+
+			if (isFileExists)
+				avatarFlux = Files.readAllBytes(path);
+		}
+		catch (IOException e) {
+			String message = "can't read avatar file";
+			LOGGER.error(message, e);
+			throw new CustomRuntimeException(message, e);
+		}
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);
@@ -69,7 +109,8 @@ public class ProfileDTO extends AbstractDTO {
 	public String toString() {
 		return super.toString() + 
 				", name=" + name +
-				", avatar=" + avatar;
+				", avatar=" + avatar +
+				", isFileExists=" + isFileExists;
 	}
 	
 }
