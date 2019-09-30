@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import java.util.Arrays;
 
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,32 +32,32 @@ public class ProfileControllerTest extends AbstractTest {
 	@Test
 	public void save() throws DaoException, NotFoundException, ConflictException {
 		
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		Mockito.when(profileService.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
 		
 		ResponseEntity<ProfileDTO> actual = profileController.save(profileDto);
 		Assert.assertEquals( HttpStatus.CREATED, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
-		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
+		Assert.assertEquals( "avatar", actual.getBody().getAvatar().getName() );
 	}
 	
 	@Test
 	public void update() throws DaoException, NotFoundException, ConflictException {
 		
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		Mockito.when(profileService.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
 		
 		ResponseEntity<ProfileDTO> actual = profileController.update(1, profileDto);
 		Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
 		Assert.assertEquals( "name", actual.getBody().getName() );
-		Assert.assertEquals( "avatar", actual.getBody().getAvatar() );
+		Assert.assertEquals( "avatar", actual.getBody().getAvatar().getName() );
 	}
 	
 	@Test
 	public void findAll() throws DaoException {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Mockito.when(profileService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfileDTO("name", "avatar") ) );
+		Mockito.when(profileService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfileDTO("name", new Avatar("avatar")) ) );
 
 		try {
 			profileController.findAll();

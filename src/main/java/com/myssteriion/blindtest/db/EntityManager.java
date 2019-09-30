@@ -94,7 +94,7 @@ public class EntityManager {
 			sb.append("CREATE TABLE IF NOT EXISTS profile (");
 			sb.append("id BIGINT DEFAULT profile_seq.nextval PRIMARY KEY,");
 			sb.append("name VARCHAR2 NOT NULL UNIQUE,");
-			sb.append("avatar VARCHAR2 NOT NULL");
+			sb.append("avatar_name VARCHAR2 NOT NULL");
 			sb.append(")");
 			statement.execute( sb.toString() );
 			

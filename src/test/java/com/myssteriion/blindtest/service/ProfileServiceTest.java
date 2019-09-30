@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import java.util.Arrays;
 import java.util.List;
 
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.Assert;
@@ -48,12 +49,12 @@ public class ProfileServiceTest extends AbstractTest {
 		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
 		Mockito.when(profileStatService.save(Mockito.any(ProfileStatDTO.class))).thenReturn(profileStatDtoMock);
 		
-		ProfileDTO profileDtoMock = new ProfileDTO(name, avatar);
+		ProfileDTO profileDtoMock = new ProfileDTO(name, new Avatar(avatar));
 		profileDtoMock.setId(1);
 		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDtoMock, null);
 		Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDtoMock);
 		
-		ProfileDTO profileDto = new ProfileDTO(name, avatar);
+		ProfileDTO profileDto = new ProfileDTO(name, new Avatar(avatar));
 		Assert.assertSame( profileDtoMock, profileService.save(profileDto) );
 		
 		try {
@@ -85,7 +86,7 @@ public class ProfileServiceTest extends AbstractTest {
 		}
 		
 		
-		ProfileDTO profileDto = new ProfileDTO(name, avatar);
+		ProfileDTO profileDto = new ProfileDTO(name, new Avatar(avatar));
 		try {
 			profileService.update(profileDto);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -95,9 +96,9 @@ public class ProfileServiceTest extends AbstractTest {
 		}
 		
 
-		ProfileDTO profileStatDtoMockNotSame = new ProfileDTO(name, avatar);
+		ProfileDTO profileStatDtoMockNotSame = new ProfileDTO(name, new Avatar(avatar));
 		profileStatDtoMockNotSame.setId(2);
-		ProfileDTO profileStatDtoMockSame = new ProfileDTO(name, avatar);
+		ProfileDTO profileStatDtoMockSame = new ProfileDTO(name, new Avatar(avatar));
 		profileStatDtoMockSame.setId(1);
 		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileStatDtoMockNotSame, profileStatDtoMockNotSame, profileStatDtoMockSame);
 		Mockito.when(profileDao.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
@@ -122,17 +123,17 @@ public class ProfileServiceTest extends AbstractTest {
 		
 		profileDto.setId(1);
 		profileDto.setName("pouet");
-		profileDto.setAvatar("avapouet");
+		profileDto.setAvatar( new Avatar("avapouet") );
 		ProfileDTO profileDtoSaved = profileService.update(profileDto);
 		Assert.assertEquals( new Integer(1), profileDtoSaved.getId() );
 		Assert.assertEquals( "pouet", profileDtoSaved.getName() );
-		Assert.assertEquals( "avapouet", profileDtoSaved.getAvatar());
+		Assert.assertEquals( "avapouet", profileDtoSaved.getAvatar().getName() );
 	}
 
 	@Test
 	public void find() throws DaoException {
 
-		ProfileDTO profileDtoMock = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDtoMock = new ProfileDTO("name", new Avatar("avatar"));
 		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDtoMock);
 		
 		
@@ -144,7 +145,7 @@ public class ProfileServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
 		}
 		
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		Assert.assertNull( profileService.find(profileDto) );
 		Assert.assertNotNull( profileService.find(profileDto) );
 	}
@@ -152,7 +153,7 @@ public class ProfileServiceTest extends AbstractTest {
 	@Test
 	public void findAll() throws DaoException {
 
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		Mockito.when(profileDao.findAll()).thenReturn( Arrays.asList(profileDto) );
 		
 		List<ProfileDTO> list = profileService.findAll();

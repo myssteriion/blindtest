@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.db.dao;
 
 import com.myssteriion.blindtest.db.AbstractDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.tools.Tool;
 import org.slf4j.Logger;
@@ -35,8 +36,8 @@ public class ProfileDAO extends AbstractDAO<ProfileDTO> {
 		try ( Statement statement = em.createStatement() ) {
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO " + tableName + "(name, avatar) ");
-			sb.append("VALUES ('" + escapeValue( profileDto.getName() ) + "', '" + profileDto.getAvatar() + "')");
+			sb.append("INSERT INTO " + tableName + "(name, avatar_name) ");
+			sb.append("VALUES ('" + escapeValue( profileDto.getName() ) + "', '" + profileDto.getAvatar().getName() + "')");
 			
 			statement.execute( sb.toString() );
 			
@@ -60,7 +61,7 @@ public class ProfileDAO extends AbstractDAO<ProfileDTO> {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE " + tableName + " ");
-			sb.append("SET name = '" + escapeValue( profileDto.getName() ) + "', avatar = '" + profileDto.getAvatar() + "'" );
+			sb.append("SET name = '" + escapeValue( profileDto.getName() ) + "', avatar_name = '" + profileDto.getAvatar().getName() + "'" );
 			sb.append("WHERE id = " + profileDto.getId());
 			
 			statement.execute( sb.toString() );
@@ -129,7 +130,8 @@ public class ProfileDAO extends AbstractDAO<ProfileDTO> {
 
 		ProfileDTO profileDtoToReturn;
 
-		profileDtoToReturn = new ProfileDTO(rs.getString("name"), rs.getString("avatar"));
+		Avatar avatar = new Avatar(rs.getString("avatar_name"));
+		profileDtoToReturn = new ProfileDTO(rs.getString("name"), avatar);
 		profileDtoToReturn.setId( rs.getInt("id") );
 
 		return profileDtoToReturn;

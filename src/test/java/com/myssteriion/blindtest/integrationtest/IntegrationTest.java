@@ -38,7 +38,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
     @Test
     public void testVeryShortGame() throws NotFoundException, DaoException {
 
-        Set<String> playersNames = PROFILS_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
+        Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.VERY_SHORT;
 
         NewGameDTO newGameDto = new NewGameDTO(playersNames, duration);
@@ -219,19 +219,19 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Assert.assertEquals( scoreName2, gameDto.getPlayers().get(1).getScore() );
         Assert.assertEquals( scoreName3, gameDto.getPlayers().get(2).getScore() );
 
-        ProfileStatDTO profileStat = profileStatService.findByProfile( PROFILS_LIST.get(0) );
+        ProfileStatDTO profileStat = profileStatService.findByProfile( PROFILES_LIST.get(0) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
         Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName1), profileStat.getBestScores().get(duration) );
 
-        profileStat = profileStatService.findByProfile( PROFILS_LIST.get(1) );
+        profileStat = profileStatService.findByProfile( PROFILES_LIST.get(1) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
         Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName2), profileStat.getBestScores().get(duration) );
 
-        profileStat = profileStatService.findByProfile( PROFILS_LIST.get(2) );
+        profileStat = profileStatService.findByProfile( PROFILES_LIST.get(2) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
         Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80) );

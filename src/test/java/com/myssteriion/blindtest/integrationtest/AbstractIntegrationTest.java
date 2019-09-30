@@ -44,7 +44,7 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 			new MusicDTO("musicName00", Theme.ANNEES_2000)
 	);
 
-	protected static final List<ProfileDTO> PROFILS_LIST = Arrays.asList(
+	protected static final List<ProfileDTO> PROFILES_LIST = Arrays.asList(
 			new ProfileDTO("name1"),
 			new ProfileDTO("name2"),
 			new ProfileDTO("name3")
@@ -66,8 +66,8 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 		for (MusicDTO musicDto : MUSICS_LIST)
 			musicService.save(musicDto, false);
 
-		for (ProfileDTO profileeDTO : PROFILS_LIST)
-			profileService.save(profileeDTO);
+		for (ProfileDTO profileDTO : PROFILES_LIST)
+			profileService.save(profileDTO);
 	}
 
 }

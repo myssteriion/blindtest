@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.rest;
 
 import java.util.List;
 
+import com.myssteriion.blindtest.model.common.Avatar;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ResponseBuilderTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
-		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", "avatar") );
+		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", new Avatar("avatar")) );
 		Assert.assertEquals( HttpStatus.OK , re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
 	}

@@ -5,6 +5,7 @@ import java.sql.Statement;
 import java.sql.Types;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class ProfileDAOTest extends AbstractTest {
 		profileDao = Mockito.spy( new ProfileDAO() );
 		MockitoAnnotations.initMocks(this);
 
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		profileDto.setId(1);
 		Mockito.doReturn(profileDto).when(profileDao).find(Mockito.any(ProfileDTO.class));
 		
@@ -54,7 +55,7 @@ public class ProfileDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfileDTO profileDtoToSave = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDtoToSave = new ProfileDTO("name", new Avatar("avatar"));
 		try {
 			profileDao.save(profileDtoToSave);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
@@ -70,7 +71,7 @@ public class ProfileDAOTest extends AbstractTest {
 	@Test
 	public void update() throws DaoException, SQLException {
 
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		profileDto.setId(1);
 		
 
@@ -89,7 +90,7 @@ public class ProfileDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfileDTO profileDtoToUpdate = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDtoToUpdate = new ProfileDTO("name", new Avatar("avatar"));
 		try {
 			profileDao.update(profileDtoToUpdate);
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
@@ -139,7 +140,7 @@ public class ProfileDAOTest extends AbstractTest {
 		}
 		
 		
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		try {
 			profileDao.find(profileDto);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
@@ -151,7 +152,7 @@ public class ProfileDAOTest extends AbstractTest {
 		profileDto = profileDao.find(profileDto);
 		Assert.assertNull(profileDto);
 		
-		profileDto = new ProfileDTO("name", "avatar");
+		profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		profileDto = profileDao.find(profileDto);
 		Assert.assertNotNull(profileDto);
 		
@@ -160,7 +161,7 @@ public class ProfileDAOTest extends AbstractTest {
 		Assert.assertNotNull(profileDto);
 		Assert.assertEquals( new Integer(1), profileDto.getId() );
 		Assert.assertEquals( "name", profileDto.getName() );
-		Assert.assertEquals( "avatar", profileDto.getAvatar() );
+		Assert.assertEquals( "avatar", profileDto.getAvatar().getName() );
 	}
 	
 	@Test
@@ -187,7 +188,7 @@ public class ProfileDAOTest extends AbstractTest {
 		ProfileDTO profileDto = profileDao.findAll().get(0);
 		Assert.assertEquals( new Integer(1), profileDto.getId() );
 		Assert.assertEquals( "name", profileDto.getName() );
-		Assert.assertEquals( "avatar", profileDto.getAvatar() );
+		Assert.assertEquals( "avatar", profileDto.getAvatar().getName() );
 	}
 	
 	
@@ -197,7 +198,7 @@ public class ProfileDAOTest extends AbstractTest {
 		SimpleResultSet rs = new SimpleResultSet();
 		rs.addColumn("id", Types.BIGINT, 100, 0);
 		rs.addColumn("name", Types.VARCHAR, 255, 0);
-		rs.addColumn("avatar", Types.VARCHAR, 255, 0);
+		rs.addColumn("avatar_name", Types.VARCHAR, 255, 0);
 		return rs;
 	}
 	

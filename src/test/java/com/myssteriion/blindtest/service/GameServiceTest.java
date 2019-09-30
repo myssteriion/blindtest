@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -42,7 +43,7 @@ public class GameServiceTest extends AbstractTest {
 	@Test
 	public void newGame() throws DaoException, NotFoundException {
 
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		Mockito.when(profileService.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDto);
 
 		List<String> playersNames = Collections.singletonList("name");
@@ -76,7 +77,7 @@ public class GameServiceTest extends AbstractTest {
 	public void apply() throws DaoException, NotFoundException {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		profileDto.setId(1);
 		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
 
@@ -117,7 +118,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 		musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		profileDto = new ProfileDTO("name", "avatar");
+		profileDto = new ProfileDTO("name", new Avatar("avatar"));
 		profileDto.setId(1);
 		profileStatDto = new ProfileStatDTO(1);
 		List<String> playersName = Collections.singletonList(profileDto.getName());

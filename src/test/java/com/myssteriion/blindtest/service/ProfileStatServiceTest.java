@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -43,7 +44,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 		}
 		
 		
-		ProfileDTO profileDTOMock = new ProfileDTO("name", "avatar");
+		ProfileDTO profileDTOMock = new ProfileDTO("name", new Avatar("avatar"));
 		profileDTOMock.setId(1);
 		Mockito.when(profileService.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDTOMock);
 		
