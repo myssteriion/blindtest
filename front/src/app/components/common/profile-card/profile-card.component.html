@@ -1,2 +1,13 @@
-<div>{{ profile.name }}</div>
-<div>{{ profile.avatar }}</div>
+<div class="row profileCard">
+
+    <div class="col-sm-4 avatar">
+        <img src="{{ getImageSrc() }}" />
+    </div>
+
+    <div class="col-sm-5 name">{{profile.name}}</div>
+    
+    <div *ngIf="canUpdate" class="col-sm-1 action-button">
+        <div><fa-icon [icon]="faEdit" class="edit-button" (click)="edit()"></fa-icon></div>
+        <div><fa-icon [icon]="faTrashAlt" class="remove-button" (click)="remove()"></fa-icon></div>
+    </div>
+</div>

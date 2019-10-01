@@ -1,0 +1,31 @@
+.profileCard {
+    height: 8em;
+    border: 1px solid slategray;
+    border-radius: 30px;
+    background: url("/assets/images/avatar/background.png") center center no-repeat;
+}
+
+.avatar, .name, .action-button {
+    text-align: center;
+    margin: auto;
+}
+
+.avatar img {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+}
+
+.name {
+    font-family: Georgia, Times, serif;
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    color: cadetblue;
+}
+
+.edit-button:hover, .remove-button:hover {
+    cursor: pointer;
+    color: whitesmoke;
+}
+
