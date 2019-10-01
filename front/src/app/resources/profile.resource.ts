@@ -18,7 +18,7 @@ export class UrlInterceptor implements HttpInterceptor {
 @Injectable()
 export class ProfileResource {
 
-  private _profilePath = '/profils';
+  private _profilePath = '/profiles';
 
 
 
