@@ -52,7 +52,7 @@ public class AvatarTest extends AbstractTest {
         String name = "name";
         Avatar avatarUn = new Avatar(name);
 
-        Assert.assertEquals( "name=name, isFileExists=false, contentType=null", avatarUn.toString() );
+        Assert.assertEquals( "name=name, fileExists=false, contentType=null", avatarUn.toString() );
 
         Avatar avatarUnIso = new Avatar(name);
         Avatar avatarDeux = new Avatar(name + "1");

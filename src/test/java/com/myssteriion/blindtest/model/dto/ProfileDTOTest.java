@@ -89,7 +89,7 @@ public class ProfileDTOTest extends AbstractTest {
 		Avatar avatar = new Avatar("avatar");
 		ProfileDTO profileDTOUn = new ProfileDTO(name, avatar);
 		
-		Assert.assertEquals( "id=null, name=name, avatar={name=avatar, isFileExists=false, contentType=null}", profileDTOUn.toString() );
+		Assert.assertEquals( "id=null, name=name, avatar={name=avatar, fileExists=false, contentType=null}", profileDTOUn.toString() );
 		
 		ProfileDTO profileDTOUnIso = new ProfileDTO(name, avatar);
 		ProfileDTO profileDTODeux = new ProfileDTO(name + "1", avatar);

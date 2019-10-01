@@ -20,7 +20,7 @@ public class Avatar {
 
     private String name;
 
-    private boolean isFileExists;
+    private boolean fileExists;
 
     private String contentType;
 
@@ -46,7 +46,7 @@ public class Avatar {
     }
 
     public boolean isFileExists() {
-        return isFileExists;
+        return fileExists;
     }
 
     public String getContentType() {
@@ -63,9 +63,9 @@ public class Avatar {
         try {
 
             Path path = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER, name);
-            isFileExists = path.toFile().exists();
+            fileExists = path.toFile().exists();
 
-            if (isFileExists) {
+            if (fileExists) {
                 contentType = URLConnection.guessContentTypeFromName(name);
                 flux = Files.readAllBytes(path);
             }
@@ -99,7 +99,7 @@ public class Avatar {
     @Override
     public String toString() {
         return "name=" + name +
-                ", isFileExists=" + isFileExists +
+                ", fileExists=" + fileExists +
                 ", contentType=" + contentType;
 
     }
