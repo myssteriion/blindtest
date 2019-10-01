@@ -1,18 +1,19 @@
 package com.myssteriion.blindtest.model.common;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.Tool;
-import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 
 public class Avatar {
 

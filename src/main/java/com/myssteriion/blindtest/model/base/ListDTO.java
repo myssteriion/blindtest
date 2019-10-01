@@ -3,10 +3,9 @@ package com.myssteriion.blindtest.model.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.IModel;
 
-public class ListDTO<T extends AbstractDTO> implements IModel {
+public class ListDTO<T> implements IModel {
 
 	private List<T> items;
 	

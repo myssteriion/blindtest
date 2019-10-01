@@ -2,7 +2,6 @@ package com.myssteriion.blindtest.rest;
 
 import java.util.List;
 
-import com.myssteriion.blindtest.rest.exception.ConflictException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
 import com.myssteriion.blindtest.model.base.ListDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 
 @ControllerAdvice
@@ -53,19 +52,19 @@ public class ResponseBuilder {
 	
 	
 	
-	public static <T extends AbstractDTO> ResponseEntity<T> create200(T dto) {
+	public static <T> ResponseEntity<T> create200(T dto) {
 		
 		Tool.verifyValue("dto", dto);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
-	public static <T extends AbstractDTO> ResponseEntity< ListDTO<T> > create200(List<T> dto) {
+	public static <T> ResponseEntity< ListDTO<T> > create200(List<T> dto) {
 		
 		ListDTO<T> list = new ListDTO<>(dto);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	public static <T extends AbstractDTO> ResponseEntity<T> create201(T dto) {
+	public static <T> ResponseEntity<T> create201(T dto) {
 		
 		Tool.verifyValue("dto", dto);
 		return new ResponseEntity<>(dto, HttpStatus.CREATED);

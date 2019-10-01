@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9281dc68-5a7c-485b-a84c-a7b15a6e2c3c",
+		"_postman_id": "0656bee1-52cc-4d64-aa2c-90a4c34a3563",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,7 +48,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "profile",
@@ -97,7 +98,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"name\"\n}"
+							"raw": "{\n\t\"name\": \"Myssteriion\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/profiles/0",
@@ -133,7 +134,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "profilestat",
@@ -157,7 +159,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "game",
@@ -223,7 +226,53 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "avatar",
+			"item": [
+				{
+					"name": "refresh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/avatars/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"avatars",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/avatars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"avatars"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -250,10 +299,11 @@
 	],
 	"variable": [
 		{
-			"id": "562198b9-32c7-4886-9d84-ed43351ceeb0",
+			"id": "4c5e74f1-4cfa-42e6-b5ad-9ecc157f5c23",
 			"key": "port",
-			"value": "9501",
+			"value": "8080",
 			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
