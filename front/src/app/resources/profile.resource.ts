@@ -3,28 +3,22 @@ import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from
 import { Observable } from 'rxjs';
 import { Profile } from '../interfaces/profile.interface';
 import { List } from '../interfaces/list.interface';
-
-@Injectable()
-export class UrlInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = 'http://localhost:8080';
-    req = req.clone({
-      url: url + req.url
-    });
-    return next.handle(req);
-  }
-}
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ProfileResource {
 
-  private _profilePath = '/profiles';
+  private _profilePath = environment.baseBackendUrl + "/profiles";
 
 
 
   constructor(private _http: HttpClient) { }
 
 
+
+  public update(profile: Profile): Observable<Profile> {
+    return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
+  }
 
   public findAll(): Observable< List<Profile> > {
     return this._http.get< List<Profile> >(this._profilePath);

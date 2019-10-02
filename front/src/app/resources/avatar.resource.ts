@@ -3,22 +3,12 @@ import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from
 import { Observable } from 'rxjs';
 import { Avatar } from 'src/app/interfaces/avatar.interface';
 import { List } from 'src/app/interfaces/list.interface';
-
-@Injectable()
-export class UrlInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = 'http://localhost:8080';
-    req = req.clone({
-      url: url + req.url
-    });
-    return next.handle(req);
-  }
-}
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AvatarResource {
 
-  private _avatarPath = '/avatars';
+  private _avatarPath = environment.baseBackendUrl + "/avatars";
 
 
 

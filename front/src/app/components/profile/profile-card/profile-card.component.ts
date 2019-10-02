@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile.interface';
 import { AvatarResource } from 'src/app/resources/avatar.resource';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileEditComponent } from 'src/app/components/profile/profile-edit/profile-edit.component';
 
 @Component({
   selector: 'profile-card',
@@ -25,7 +27,8 @@ export class ProfileCardComponent {
 
 
 
-  constructor(private _avatarResource: AvatarResource) { }
+  constructor(private _avatarResource: AvatarResource,
+    private _modalService: NgbModal) { }
   
   
   
@@ -48,13 +51,21 @@ export class ProfileCardComponent {
   }
 
   public edit() {
-    this._avatarResource.getAll().subscribe(
-      response => { console.log("ok", response); },
-      error => { console.log("can't find all profiles", error); }
+
+    const modalRef = this._modalService.open(ProfileEditComponent, 
+      {
+        
+      }
     );
+    modalRef.componentInstance.profile = this.profile;
+
+    // this._avatarResource.getAll().subscribe(
+    //   response => { console.log("ok", response); },
+    //   error => { console.log("can't find all profiles", error); }
+    // );
   }
 
-  public remove() {
+  public delete() {
     this._avatarResource.getAll().subscribe(
       response => { console.log("ok", response); },
       error => { console.log("can't find all profiles", error); }

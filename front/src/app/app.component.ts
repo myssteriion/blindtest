@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent {
   title = 'blindtest';
 
-  constructor(private _modalService: NgbModal) { }
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('fr');
+    translate.use('fr');
+  }
  
   public ngOnInit() {
   }
