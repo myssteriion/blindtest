@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile.interface';
-import { ProfileResource } from '../../resources/profile.resource';
+import { ProfileResource } from 'src/app/resources/profile.resource';
 
 @Component({
-  selector: 'app-profiles',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'profile-view',
+  templateUrl: './profile-view.component.html',
+  styleUrls: ['./profile-view.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileViewComponent implements OnInit {
 
   public profiles: Profile[] = [];
   
@@ -20,10 +20,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
    
     this._profileResource.findAll().subscribe(
-      response => { console.log("resp", response); this.profiles = response.items; },
+      response => { this.profiles = response.items; },
       error => { console.log("can't find all profiles", error); }
     );
-    
   }
 
 }

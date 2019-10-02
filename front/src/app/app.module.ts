@@ -8,8 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { ProfileComponent } from './components/profile/profile.component'
-import { ProfileCardComponent } from './components/common/profile-card/profile-card.component';
+import { ProfileViewComponent } from './components/profile/profile-view/profile-view.component'
+import { ProfileCardComponent } from './components/profile/profile-card/profile-card.component';
 
 import { ProfileResource, UrlInterceptor } from './resources/profile.resource';
 import { AvatarResource } from './resources/avatar.resource';
@@ -18,7 +18,7 @@ import { AvatarResource } from './resources/avatar.resource';
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
+    ProfileViewComponent,
     ProfileCardComponent
   ],
   entryComponents: [],
