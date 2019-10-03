@@ -1,22 +1,31 @@
 package com.myssteriion.blindtest.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.model.common.Theme;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ MusicService.class, Tool.class })
 public class MusicServiceTest extends AbstractTest {
 
 	@Mock
@@ -29,6 +38,22 @@ public class MusicServiceTest extends AbstractTest {
 	
 	@Test
 	public void refresh() throws DaoException, ConflictException {
+
+
+		File mockFile = Mockito.mock(File.class);
+		Mockito.when(mockFile.isFile()).thenReturn(true);
+		Mockito.when(mockFile.getName()).thenReturn("file");
+
+		File mockDirectory = Mockito.mock(File.class);
+		Mockito.when(mockDirectory.isFile()).thenReturn(false);
+
+		PowerMockito.mockStatic(Tool.class);
+		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+
+		musicService = Mockito.spy( new MusicService() );
+		MockitoAnnotations.initMocks(musicService);
+		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class), Mockito.anyBoolean());
+
 		musicService.refresh();
 	}
 	

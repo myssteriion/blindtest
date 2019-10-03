@@ -25,7 +25,7 @@ public class MusicService {
 	@Autowired
 	private MusicDAO musicDao;
 	
-	
+
 	
 	@PostConstruct
 	private void init() throws DaoException, ConflictException {
@@ -34,13 +34,11 @@ public class MusicService {
 			
 			String themeFolder = theme.getFolderName();
 			Path path = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, themeFolder);
-			
-			File themeDirectory = path.toFile();
-			if ( !Tool.isNullOrEmpty(themeDirectory) && themeDirectory.isDirectory() ) {
 
-				for ( File music : themeDirectory.listFiles() ) {
+			File themeDirectory = path.toFile();
+			for ( File music : Tool.getChildren(themeDirectory) ) {
+				if ( music.isFile() )
 					save(new MusicDTO(music.getName(), theme), false);
-				}
 			}
 		}
 	}
