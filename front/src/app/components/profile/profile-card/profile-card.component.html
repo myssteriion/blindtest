@@ -5,14 +5,11 @@
     </div>
 
     <div class="col-8 name">{{profile.name}}</div>
-    
+
     <div *ngIf="canUpdate" class="col action-button">
         <div>
             <fa-icon [icon]="faEdit" class="edit-button" (click)="edit()" title="{{'PROFIL.CARD.EDIT_LABEL' | translate}}"></fa-icon>
         </div>
-        <div>
-            <fa-icon [icon]="faTrashAlt" class="remove-button" (click)="delete()" title="{{'PROFIL.CARD.DELETE_LABEL' | translate}}"></fa-icon>
-        </div>
     </div>
-    
+
 </div>

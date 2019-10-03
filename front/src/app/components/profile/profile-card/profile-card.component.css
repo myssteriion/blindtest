@@ -5,15 +5,9 @@
     background: url("/assets/images/avatar/background.png") center center no-repeat;
 }
 
-.avatar, .name, .action-button {
+.name, .action-button {
     text-align: center;
     margin: auto;
-}
-
-.avatar img {
-    height: 2.5em;
-    width: 2.5em;
-    border-radius: 50%;
 }
 
 .name {
