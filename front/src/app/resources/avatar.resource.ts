@@ -16,6 +16,10 @@ export class AvatarResource {
 
 
 
+	public refresh(): Observable<any> {
+		return this._http.get<Observable<any>>(this._avatarPath + "/refresh");
+	}
+
 	public getAll(): Observable<List<Avatar>> {
 		return this._http.get<List<Avatar>>(this._avatarPath);
 	}

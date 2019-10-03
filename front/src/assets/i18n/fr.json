@@ -1,8 +1,21 @@
 {
+    "COMMON": {
+        "SAVE": "Enregistrer",
+        "CANCEL": "Annuler"
+    },
     "PROFIL": {
         "CARD": {
-            "EDIT_LABEL": "Modifier le profil.",
-            "DELETE_LABEL": "Supprimer le profil."
+            "EDIT_TOOLTIP": "Modifier le profil."
+        },
+        "EDIT": {
+            "CREATION_TITLE": "Création du profil",
+            "UPDATE_TITLE": "Modification du profil",
+            "NAME_LABEL": "Pseudo :",
+            "NAME_PLACE_HOLDER": "Entrez votre pseudo",
+            "AVATAR_LABEL": "Avatar :",
+            "SHOW_TOOLTIP": "Afficher la liste des avatars.",
+            "HIDE_TOOLTIP": "Cacher la liste des avatars.",
+            "REFRESH_TOOLTIP": "Rafraichir la liste des avatars."
         }
     }
 }

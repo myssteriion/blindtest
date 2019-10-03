@@ -1,0 +1,44 @@
+.profil-edit-header, .profil-edit-body, .profil-edit-footer {
+	margin: 1em;
+}
+
+.profil-edit-header {
+	border-bottom: 1px solid silver;
+}
+
+.profil-edit-footer {
+	border-top: 1px solid silver;
+}
+
+.profil-edit-footer div {
+	text-align: right;
+}
+
+.profil-edit-footer button {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.profile-edit-avatar, .profile-edit-name {
+	margin-bottom: 1em;
+}
+
+.profile-edit-avatar div, .profile-edit-name div {
+	margin: auto;
+	text-align: center;
+}
+
+.profile-edit-avatar img, .profile-edit-avatars img {
+    height: 3em;
+    width: 3em;
+	border-radius: 50%;
+}
+
+.owl-carousel {
+	border: 2px solid silver;
+	border-radius: 20px;
+}
+
+.owl-carousel .profile-edit-avatars {
+	margin: 10px;
+}

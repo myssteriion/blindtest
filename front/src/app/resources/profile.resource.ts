@@ -16,8 +16,11 @@ export class ProfileResource {
 
 
 
+	public create(profile: Profile): Observable<Profile> {
+		return this._http.post<Profile>(this._profilePath , profile);
+	}
+
 	public update(profile: Profile): Observable<Profile> {
-		console.log("ici", profile);
 		return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
 	}
 

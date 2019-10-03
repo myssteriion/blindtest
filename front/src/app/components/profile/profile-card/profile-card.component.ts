@@ -4,7 +4,6 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileEditComponent } from 'src/app/components/profile/profile-edit/profile-edit.component';
 import { ToolsService } from "../../../tools/tools.service";
-import { ProfileResource } from 'src/app/resources/profile.resource';
 
 @Component({
     selector: 'profile-card',
@@ -24,8 +23,7 @@ export class ProfileCardComponent implements OnInit {
 
 
     constructor(private _ngbModal: NgbModal,
-        private _toolsService: ToolsService,
-        private _profileResource: ProfileResource) {
+                private _toolsService: ToolsService) {
 
     }
 
@@ -38,11 +36,11 @@ export class ProfileCardComponent implements OnInit {
 
 
 
-    public getAvatarFluxForImg() {
+    public getAvatarFluxForImg(): string {
         return this._toolsService.getAvatarFluxForImg(this.profile.avatar);
     }
 
-    public edit() {
+    public edit(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent,
             {
@@ -54,14 +52,7 @@ export class ProfileCardComponent implements OnInit {
 
         modalRef.result
             .then((result) => {
-                this._profileResource.update(result).subscribe(
-                    response => {
-                        this.profile = response;
-                    },
-                    error => {
-                        new Error("can't update profile : " + error);
-                    }
-                );
+                this.profile = result;
             });
     }
 

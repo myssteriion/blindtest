@@ -16,21 +16,21 @@ export class ToolsService {
 
 
 
-    public isNull(obj: any) {
+    public isNull(obj: any): boolean {
         return obj === undefined || obj === null;
     }
 
-    public isNullOrEmpty(str: string) {
+    public isNullOrEmpty(str: string): boolean {
         return this.isNull(str) || str === "";
     }
 
-    public verifyValue(key: string, value: any) {
+    public verifyValue(key: string, value: any): void {
 
         if ( !this.isNullOrEmpty(key) && this.isNull(value))
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
-    public getAvatarFluxForImg(avatar: Avatar) {
+    public getAvatarFluxForImg(avatar: Avatar): string {
 
         this.verifyValue("avatar", avatar);
 
