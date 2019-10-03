@@ -1,7 +1,10 @@
 package com.myssteriion.blindtest.controller;
 
-import java.util.List;
-
+import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.base.ListDTO;
+import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.rest.ResponseBuilder;
+import com.myssteriion.blindtest.service.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,12 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ListDTO;
-import com.myssteriion.blindtest.model.common.Avatar;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.service.AvatarService;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -34,7 +32,7 @@ public class AvatarController {
 	}
 	
 	@GetMapping
-	public ResponseEntity< ListDTO<Avatar> > getAll() throws DaoException {
+	public ResponseEntity< ListDTO<Avatar> > getAll() {
 		
 		List<Avatar> list = avatarService.getAll();
 		return ResponseBuilder.create200(list);

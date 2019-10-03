@@ -1,17 +1,16 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.blindtest.tools.Tool;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.stereotype.Service;
-
-import com.myssteriion.blindtest.model.common.Avatar;
-import com.myssteriion.blindtest.tools.Constant;
 
 @Service
 public class AvatarService {
@@ -26,8 +25,11 @@ public class AvatarService {
 	private void init() {
 		
 		avatars = new ArrayList<>();
-		for ( File file : AVATAR_FOLDER.toFile().listFiles() )
-			avatars.add( new Avatar(file.getName()) );
+
+		File avatarDirectory = AVATAR_FOLDER.toFile();
+		for ( File avatar : Tool.getChildren(avatarDirectory) )
+			if ( avatar.isFile() )
+				avatars.add( new Avatar(avatar.getName()) );
 	}
 	
 	public void refresh() {
@@ -35,6 +37,10 @@ public class AvatarService {
 	}
 
 	public List<Avatar> getAll() {
+
+		if (avatars == null)
+			avatars = new ArrayList<>();
+
 		return avatars;
 	}
 	
