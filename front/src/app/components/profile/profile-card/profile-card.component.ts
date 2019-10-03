@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Profile } from 'src/app/interfaces/profile.interface';
-import { AvatarResource } from 'src/app/resources/avatar.resource';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileEditComponent } from 'src/app/components/profile/profile-edit/profile-edit.component';
+import {Component, Input} from '@angular/core';
+import {Profile} from 'src/app/interfaces/profile.interface';
+import {AvatarResource} from 'src/app/resources/avatar.resource';
+import {faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ProfileEditComponent} from 'src/app/components/profile/profile-edit/profile-edit.component';
 
 @Component({
   selector: 'profile-card',
@@ -23,6 +23,7 @@ export class ProfileCardComponent {
   private static _AVATAR_NOT_FOUND = "assets/images/avatar/not-found.png";
   
   faEdit = faEdit;
+  
   faTrashAlt = faTrashAlt;
 
 
@@ -58,11 +59,7 @@ export class ProfileCardComponent {
       }
     );
     modalRef.componentInstance.profile = this.profile;
-
-    // this._avatarResource.getAll().subscribe(
-    //   response => { console.log("ok", response); },
-    //   error => { console.log("can't find all profiles", error); }
-    // );
+    modalRef.componentInstance.create = false;
   }
 
   public delete() {

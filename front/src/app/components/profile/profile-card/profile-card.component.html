@@ -1,12 +1,12 @@
 <div class="row profileCard">
 
-    <div class="col-sm-4 avatar">
+    <div class="col avatar">
         <img src="{{ getImageSrc() }}" />
     </div>
 
-    <div class="col-sm-5 name">{{profile.name}}</div>
+    <div class="col-8 name">{{profile.name}}</div>
     
-    <div *ngIf="canUpdate" class="col-sm-1 action-button">
+    <div *ngIf="canUpdate" class="col action-button">
         <div>
             <fa-icon [icon]="faEdit" class="edit-button" (click)="edit()" title="{{'PROFIL.CARD.EDIT_LABEL' | translate}}"></fa-icon>
         </div>

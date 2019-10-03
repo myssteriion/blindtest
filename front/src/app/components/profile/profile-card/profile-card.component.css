@@ -1,5 +1,5 @@
 .profileCard {
-    height: 8em;
+    min-height: 5em;
     border: 1px solid slategray;
     border-radius: 30px;
     background: url("/assets/images/avatar/background.png") center center no-repeat;
@@ -11,14 +11,14 @@
 }
 
 .avatar img {
-    height: 5em;
-    width: 5em;
+    height: 2.5em;
+    width: 2.5em;
     border-radius: 50%;
 }
 
 .name {
     font-family: Georgia, Times, serif;
-    font-size: 2em;
+    font-size: 1.3em;
     font-weight: bold;
     font-style: italic;
     color: cadetblue;
