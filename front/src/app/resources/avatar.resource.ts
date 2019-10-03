@@ -8,16 +8,16 @@ import {environment} from 'src/environments/environment';
 @Injectable()
 export class AvatarResource {
 
-  private _avatarPath = environment.baseBackendUrl + "/avatars";
+	private _avatarPath = environment.baseBackendUrl + "/avatars";
 
 
 
-  constructor(private _http: HttpClient) { }
+	constructor(private _http: HttpClient) { }
 
 
 
-  public getAll(): Observable< List<Avatar> > {
-    return this._http.get< List<Avatar> >(this._avatarPath);
-  }
+	public getAll(): Observable<List<Avatar>> {
+		return this._http.get<List<Avatar>>(this._avatarPath);
+	}
 
 }
