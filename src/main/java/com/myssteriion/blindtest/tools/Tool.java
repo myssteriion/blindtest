@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -60,6 +61,13 @@ public class Tool {
 		return list;
 	}
 
+	public static List<File> getChildren(File parent) {
+
+		if ( isNullOrEmpty(parent) || !parent.isDirectory() || parent.listFiles() == null)
+			return new ArrayList<>();
+
+		return Arrays.asList( parent.listFiles() );
+	}
 
 
 	private Tool() {}

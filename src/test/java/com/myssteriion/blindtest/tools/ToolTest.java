@@ -1,6 +1,17 @@
 package com.myssteriion.blindtest.tools;
 
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.exception.DaoException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,13 +19,33 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.myssteriion.blindtest.AbstractTest;
-
 public class ToolTest extends AbstractTest {
+
+	private static final File RESOURCE_DIR = new File( ToolTest.class.getClassLoader().getResource(".").getFile());
+
+	private static final Path FILE_EXISTS = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file.txt");
+
+	private static final Path DIRECTORY_EXISTS = Paths.get(RESOURCE_DIR.getAbsolutePath() , "exists-directory");
+
+	private static final Path FILE_IN_DIRECTORY_EXISTS = Paths.get(RESOURCE_DIR.getAbsolutePath() , "exists-directory", "exists-file.txt");
+
+
+	@Before
+	public void before() throws IOException {
+		Files.createFile(FILE_EXISTS);
+		Files.createDirectory(DIRECTORY_EXISTS);
+		Files.createFile(FILE_IN_DIRECTORY_EXISTS);
+	}
+
+
+	@After
+	public void after() throws IOException {
+		Files.deleteIfExists(FILE_EXISTS);
+		Files.deleteIfExists(FILE_IN_DIRECTORY_EXISTS);
+		Files.deleteIfExists(DIRECTORY_EXISTS);
+	}
+
+
 
 	@Test
 	public void isNullOrEmpty() {
@@ -118,5 +149,22 @@ public class ToolTest extends AbstractTest {
 			Assert.assertEquals( expected.get(i), actual.get(i) );
 		}
 	}
-	
+
+	@Test
+	public void getChildren() {
+
+		List<File> empty = new ArrayList<>();
+
+		Assert.assertEquals( empty, Tool.getChildren(null) );
+
+		File f = Paths.get(Constant.BASE_DIR , "existe-pas").toFile();
+		Assert.assertEquals( empty, Tool.getChildren(f) );
+
+		f = FILE_EXISTS.toFile();
+		Assert.assertEquals( empty, Tool.getChildren(f) );
+
+		f = DIRECTORY_EXISTS.toFile();
+		Assert.assertEquals( Arrays.asList(FILE_IN_DIRECTORY_EXISTS.toFile()), Tool.getChildren(f) );
+	}
+
 }
