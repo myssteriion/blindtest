@@ -1,27 +1,22 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from 'src/app/interfaces/profile.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
 import {faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditComponent} from 'src/app/components/profile/profile-edit/profile-edit.component';
+import {ToolsService} from "../../../tools/tools.service";
 
 @Component({
   selector: 'profile-card',
   templateUrl: './profile-card.component.html',
   styleUrls: ['./profile-card.component.css']
 })
-export class ProfileCardComponent {
+export class ProfileCardComponent implements OnInit {
 
   @Input() profile: Profile;
 
   @Input() canUpdate: boolean;
 
-  private static _DATA: string = "data:";
-
-  private static _BASE64: string = ";base64,";
-
-  private static _AVATAR_NOT_FOUND = "assets/images/avatar/not-found.png";
-  
   faEdit = faEdit;
   
   faTrashAlt = faTrashAlt;
@@ -29,26 +24,22 @@ export class ProfileCardComponent {
 
 
   constructor(private _avatarResource: AvatarResource,
-    private _modalService: NgbModal) { }
-  
-  
-  
-  public getImageSrc() {
-    
-    let imageSrc: string;
+              private _modalService: NgbModal,
+              private _toolsService: ToolsService) {
 
-    if (this.profile.avatar.fileExists) {
+  }
 
-      imageSrc = ProfileCardComponent._DATA;
-      imageSrc += this.profile.avatar.contentType;
-      imageSrc += ProfileCardComponent._BASE64;
-      imageSrc += this.profile.avatar.flux;
-    }
-    else {
-      imageSrc = ProfileCardComponent._AVATAR_NOT_FOUND;
-    }
+  ngOnInit() {
 
-    return imageSrc;
+    this._toolsService.verifyValue("profile", this.profile);
+    this._toolsService.verifyValue("profile.avatar", this.profile.avatar);
+    this._toolsService.verifyValue("canUpdate", this.canUpdate);
+  }
+
+
+
+  public getAvatarFluxForImg() {
+    return this._toolsService.getAvatarFluxForImg(this.profile.avatar);
   }
 
   public edit() {
@@ -63,10 +54,7 @@ export class ProfileCardComponent {
   }
 
   public delete() {
-    this._avatarResource.getAll().subscribe(
-      response => { console.log("ok", response); },
-      error => { console.log("can't find all profiles", error); }
-    );
+    //todo
   }
 
 }
