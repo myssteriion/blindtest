@@ -8,7 +8,8 @@
 
     <div *ngIf="canUpdate" class="col profile-card-action-button">
         <div>
-            <fa-icon [icon]="faEdit" class="profile-card-edit-button" (click)="edit()" title="{{'PROFIL.CARD.EDIT_LABEL' | translate}}"></fa-icon>
+            <fa-icon-custom [icon]="faEdit" [tooltip]="'PROFIL.CARD.EDIT_TOOLTIP'" (click)="edit()"
+            tooltipClass="fa-icon-custom-background"></fa-icon-custom>
         </div>
     </div>
 

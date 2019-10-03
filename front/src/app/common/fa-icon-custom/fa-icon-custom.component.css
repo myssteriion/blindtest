@@ -1,0 +1,13 @@
+.fa-icon-custom {
+	padding-right: 10px;
+}
+
+.fa-icon-custom:hover {
+    cursor: pointer;
+    color: slateblue;
+}
+
+.fa-icon-custom-background .tooltip-inner {
+    background-color: darkcyan;
+    color: whitesmoke;
+}

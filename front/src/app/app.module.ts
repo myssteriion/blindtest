@@ -13,6 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {ProfileCardComponent} from './components/profile/profile-card/profile-card.component';
 import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
 import {ProfileViewComponent} from './components/profile/profile-view/profile-view.component'
+import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
@@ -29,7 +30,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ProfileViewComponent,
     ProfileCardComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    FaIconCustomComponent
   ],
   entryComponents: [
     ProfileEditComponent
