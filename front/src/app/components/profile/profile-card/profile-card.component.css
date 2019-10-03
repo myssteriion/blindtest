@@ -1,24 +1,29 @@
-.profileCard {
+.profile-card-profile-frame {
     min-height: 5em;
     border: 1px solid slategray;
     border-radius: 30px;
     background: url("/assets/images/avatar/background.png") center center no-repeat;
 }
 
-.name, .action-button {
+.profile-card-name, .profile-card-avatar, .profile-card-action-button {
     text-align: center;
     margin: auto;
 }
 
-.name {
-    font-family: Georgia, Times, serif;
+.profile-card-avatar img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+}
+
+.profile-card-name {
     font-size: 1.3em;
     font-weight: bold;
     font-style: italic;
     color: cadetblue;
 }
 
-.edit-button:hover, .remove-button:hover {
+.profile-card-edit-button:hover {
     cursor: pointer;
     color: whitesmoke;
 }

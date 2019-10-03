@@ -1,14 +1,14 @@
-<div class="row profileCard">
+<div class="row profile-card-profile-frame">
 
-    <div class="col avatar">
+    <div class="col profile-card-avatar">
         <img src="{{ getAvatarFluxForImg() }}" />
     </div>
 
-    <div class="col-8 name">{{profile.name}}</div>
+    <div class="col-8 profile-card-name">{{profile.name}}</div>
 
-    <div *ngIf="canUpdate" class="col action-button">
+    <div *ngIf="canUpdate" class="col profile-card-action-button">
         <div>
-            <fa-icon [icon]="faEdit" class="edit-button" (click)="edit()" title="{{'PROFIL.CARD.EDIT_LABEL' | translate}}"></fa-icon>
+            <fa-icon [icon]="faEdit" class="profile-card-edit-button" (click)="edit()" title="{{'PROFIL.CARD.EDIT_LABEL' | translate}}"></fa-icon>
         </div>
     </div>
 
