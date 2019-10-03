@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http'
-import { Observable } from 'rxjs';
-import { Profile } from '../interfaces/profile.interface';
-import { List } from '../interfaces/list.interface';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http'
+import {Observable} from 'rxjs';
+import {Profile} from '../interfaces/profile.interface';
+import {List} from '../interfaces/list.interface';
+import {environment} from 'src/environments/environment';
 
 @Injectable()
 export class ProfileResource {

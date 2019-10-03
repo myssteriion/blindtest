@@ -1,4 +1,4 @@
-import {Avatar} from "./avatar.interface";
+import {Avatar} from './avatar.interface';
 
 export interface Profile {
   id: number
