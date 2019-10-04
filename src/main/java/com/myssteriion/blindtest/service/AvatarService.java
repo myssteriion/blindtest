@@ -12,11 +12,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service for Avatar.
+ */
 @Service
 public class AvatarService {
 
+	/**
+	 * The avatar folder path.
+	 */
 	private static final Path AVATAR_FOLDER = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER);
-	
+
+	/**
+	 * The avatars list (cache).
+	 */
 	private List<Avatar> avatars;
 	
 	
@@ -31,11 +40,19 @@ public class AvatarService {
 			if ( avatar.isFile() )
 				avatars.add( new Avatar(avatar.getName()) );
 	}
-	
+
+	/**
+	 * Refresh avatars list (cache).
+	 */
 	public void refresh() {
 		init();
 	}
 
+	/**
+	 * Gets all avatars.
+	 *
+	 * @return the avatars list
+	 */
 	public List<Avatar> getAll() {
 
 		if (avatars == null)

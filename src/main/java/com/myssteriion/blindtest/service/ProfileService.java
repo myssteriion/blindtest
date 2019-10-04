@@ -13,6 +13,9 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
+/**
+ * Service for ProfileDTO.
+ */
 @Service
 public class ProfileService {
 
@@ -21,9 +24,18 @@ public class ProfileService {
 	
 	@Autowired
 	private ProfileStatService profileStatService;
-	
-	
-	
+
+
+
+	/**
+	 * Save profile dto.
+	 *
+	 * @param profileDto the profile dto
+	 * @return the profile dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 * @throws ConflictException the conflict exception
+	 */
 	public ProfileDTO save(ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profileDto", profileDto);
@@ -41,7 +53,16 @@ public class ProfileService {
 		
 		return foundProfileDto;
 	}
-	
+
+	/**
+	 * Update profile dto.
+	 *
+	 * @param profileDto the profile dto
+	 * @return the profile dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 * @throws ConflictException the conflict exception
+	 */
 	public ProfileDTO update(ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profileDto", profileDto);
@@ -63,12 +84,25 @@ public class ProfileService {
 		return profileDao.update(profileDto);
 	}
 
+	/**
+	 * Find profile dto.
+	 *
+	 * @param profileDto the profile dto
+	 * @return the profile dto
+	 * @throws DaoException the dao exception
+	 */
 	public ProfileDTO find(ProfileDTO profileDto) throws DaoException {
 		
 		Tool.verifyValue("profileDto", profileDto);
 		return profileDao.find(profileDto);
 	}
-	
+
+	/**
+	 * Find all profiles.
+	 *
+	 * @return the profiles list
+	 * @throws DaoException DB exception
+	 */
 	public List<ProfileDTO> findAll() throws DaoException {
 		return profileDao.findAll();
 	}

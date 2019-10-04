@@ -26,7 +26,6 @@ public class ProfileController {
 	private ProfileService profileService;
 
 
-
 	/**
 	 * Save a new ProfileDTO.
 	 *

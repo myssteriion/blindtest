@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service for ProfileStatDTO.
+ */
 @Service
 public class ProfileStatService {
 
@@ -20,9 +23,18 @@ public class ProfileStatService {
 	
 	@Autowired
 	private ProfileService profileService;
-	
-	
-	
+
+
+
+	/**
+	 * Save profile stat dto.
+	 *
+	 * @param profileStatDto the profile stat dto
+	 * @return the profile stat dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 * @throws ConflictException the conflict exception
+	 */
 	public ProfileStatDTO save(ProfileStatDTO profileStatDto) throws DaoException, NotFoundException, ConflictException {
 		
 		Tool.verifyValue("profileStatDto", profileStatDto);
@@ -40,6 +52,14 @@ public class ProfileStatService {
 		return foundProfileDto;
 	}
 
+	/**
+	 * Update profile stat dto.
+	 *
+	 * @param profileStatDTO the profile stat dto
+	 * @return the profile stat dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public ProfileStatDTO update(ProfileStatDTO profileStatDTO) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("profileStatDTO", profileStatDTO);
@@ -52,12 +72,27 @@ public class ProfileStatService {
 		return profileStatDao.update(profileStatDTO);
 	}
 
+	/**
+	 * Find profile stat dto.
+	 *
+	 * @param profileStatDto the profile stat dto
+	 * @return the profile stat dto
+	 * @throws DaoException the dao exception
+	 */
 	public ProfileStatDTO find(ProfileStatDTO profileStatDto) throws DaoException {
 		
 		Tool.verifyValue("profileStatDto", profileStatDto);
 		return profileStatDao.find(profileStatDto);
 	}
 
+	/**
+	 * Find profile stat dto by profileId.
+	 *
+	 * @param profileDto the profile dto
+	 * @return the profile stat dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("profileDto", profileDto);
@@ -76,10 +111,23 @@ public class ProfileStatService {
 		return foundProfileStatDTO;
 	}
 
+	/**
+	 * Find all profileStat list.
+	 *
+	 * @return the profileStat list
+	 * @throws DaoException the dao exception
+	 */
 	public List<ProfileStatDTO> findAll() throws DaoException {
 		return profileStatDao.findAll();
 	}
 
+	/**
+	 * Check if the profile exists for profileStat.
+	 *
+	 * @param profileStatDto the profileStatDto
+	 * @throws DaoException	 	 the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	private void checkProfileDto(ProfileStatDTO profileStatDto) throws DaoException, NotFoundException {
 	
 		ProfileDTO profileDto = new ProfileDTO("ANY");

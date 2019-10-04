@@ -19,14 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service for MusicDTO.
+ */
 @Service
 public class MusicService {
 
 	@Autowired
 	private MusicDAO musicDao;
-	
 
-	
+
+
+	/**
+	 * Scan musics folder and insert musics in DB.
+	 *
+	 * @throws DaoException		 DB exception
+	 * @throws ConflictException Conflict exception
+	 */
 	@PostConstruct
 	private void init() throws DaoException, ConflictException {
 		
@@ -42,13 +51,27 @@ public class MusicService {
 			}
 		}
 	}
-	
+
+	/**
+	 * Scan music folder and refresh the DB.
+	 *
+	 * @throws DaoException      the dao exception
+	 * @throws ConflictException the conflict exception
+	 */
 	public void refresh() throws DaoException, ConflictException {
 		init();
 	}
-	
-	
-	
+
+
+	/**
+	 * Save music dto.
+	 *
+	 * @param musicDto      the music dto
+	 * @param throwIfExists the throw if exists
+	 * @return the music dto
+	 * @throws DaoException      the dao exception
+	 * @throws ConflictException the conflict exception
+	 */
 	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws DaoException, ConflictException {
 		
 		Tool.verifyValue("musicDto", musicDto);
@@ -66,6 +89,14 @@ public class MusicService {
 		return foundMusicDto;
 	}
 
+	/**
+	 * Update music dto.
+	 *
+	 * @param musicDto the music dto
+	 * @return the music dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public MusicDTO update(MusicDTO musicDto) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("musicDto", musicDto);
@@ -78,6 +109,13 @@ public class MusicService {
 		return musicDao.update(musicDto);
 	}
 
+	/**
+	 * Find music dto.
+	 *
+	 * @param musicDto the music dto
+	 * @return the music dto
+	 * @throws DaoException the dao exception
+	 */
 	public MusicDTO find(MusicDTO musicDto) throws DaoException {
 
 		Tool.verifyValue("musicDto", musicDto);
@@ -85,6 +123,13 @@ public class MusicService {
 	}
 
 
+	/**
+	 * Randomly choose a music.
+	 *
+	 * @return the music dto
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public MusicDTO random() throws DaoException, NotFoundException {
 	
 		List<MusicDTO> allMusics = musicDao.findAll();
@@ -95,7 +140,7 @@ public class MusicService {
 
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
-		List<Double> cumulatifPercent = calculateCumulatifPercent(coefs, ratio);
+		List<Double> cumulatifPercent = calculateCumulativePercent(coefs, ratio);
 		Theme foundTheme = foundTheme(cumulatifPercent);
 		
 		return foundMusic(allMusics, foundTheme);
@@ -120,18 +165,18 @@ public class MusicService {
 		return coefs;
 	}
 	
-	private List<Double> calculateCumulatifPercent(List<Double> coefs, double ratio) {
+	private List<Double> calculateCumulativePercent(List<Double> coefs, double ratio) {
 		
-		List<Double> cumulatifPercent = new ArrayList<>();
+		List<Double> cumulativePercent = new ArrayList<>();
 		
-		cumulatifPercent.add( coefs.get(0) * ratio );
+		cumulativePercent.add( coefs.get(0) * ratio );
 		for (int i = 1; i < coefs.size(); i++)
-			cumulatifPercent.add( cumulatifPercent.get(i-1) + (coefs.get(i) * ratio) );
+			cumulativePercent.add( cumulativePercent.get(i-1) + (coefs.get(i) * ratio) );
 		
-		return cumulatifPercent;
+		return cumulativePercent;
 	}
 	
-	private Theme foundTheme(List<Double> cumulatifPercent) {
+	private Theme foundTheme(List<Double> cumulativePercent) {
 		
 		Theme foundTheme = null;
 		
@@ -140,7 +185,7 @@ public class MusicService {
 		
 		while (foundTheme == null) {
 			
-			double cumul = cumulatifPercent.get(index);
+			double cumul = cumulativePercent.get(index);
 			if (random < cumul)
 				foundTheme = Theme.getSortedTheme().get(index);
 			else

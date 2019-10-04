@@ -28,7 +28,7 @@ public class MusicController {
 
 
 	/**
-	 * Scan music folder and refresh the bdd.
+	 * Scan music folder and refresh the DB.
 	 *
 	 * @return nothing
 	 * @throws DaoException      DB exception

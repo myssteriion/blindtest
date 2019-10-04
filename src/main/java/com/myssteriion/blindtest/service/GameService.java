@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service for game.
+ */
 @Service
 public class GameService {
 
@@ -29,10 +32,21 @@ public class GameService {
 	@Autowired
 	private ProfileStatService profileStatService;
 
+	/**
+	 * The game list.
+	 */
 	private List<Game> games = new ArrayList<>();
-	
 
 
+
+	/**
+	 * Create a game from new game.
+	 *
+	 * @param newGame the new game
+	 * @return the game
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public Game newGame(NewGame newGame) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("newGameDto", newGame);
@@ -44,6 +58,14 @@ public class GameService {
 		return game;
 	}
 
+	/**
+	 * Update the game from music result.
+	 *
+	 * @param musicResult the music result
+	 * @return the game
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
 	public Game apply(MusicResult musicResult) throws DaoException, NotFoundException {
 
 		Tool.verifyValue("musicResultDto", musicResult);
@@ -92,6 +114,13 @@ public class GameService {
 		return game;
 	}
 
+	/**
+	 * Test if all players have a profile.
+	 *
+	 * @param playersNames the players names
+	 * @throws DaoException 	 DB exception
+	 * @throws NotFoundException NotFound exception
+	 */
 	private void checkPlayers(Set<String> playersNames) throws DaoException, NotFoundException {
 
 		for (String playerName : playersNames) {
