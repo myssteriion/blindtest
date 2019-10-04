@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for MusicDTO.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path = "musics")
@@ -21,16 +24,28 @@ public class MusicController {
 
 	@Autowired
 	private MusicService musicService;
-	
-	
-	
+
+
+
+	/**
+	 * Scan music folder and refresh the bdd.
+	 *
+	 * @return nothing
+	 */
 	@GetMapping(path = "/refresh")
 	public ResponseEntity<Empty> refresh() throws DaoException, ConflictException {
 		
 		musicService.refresh();
 		return ResponseBuilder.create204();
 	}
-	
+
+	/**
+	 * Randomly choose a music.
+	 *
+	 * @return a MusicDTO
+	 * @throws DaoException
+	 * @throws NotFoundException
+	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random() throws DaoException, NotFoundException {
 		return ResponseBuilder.create200( musicService.random() );

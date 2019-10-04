@@ -9,6 +9,10 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 
+/**
+ * Abstract class for all DAO
+ * @param <T>
+ */
 public abstract class AbstractDAO<T extends AbstractDTO> {
 
 	@Autowired

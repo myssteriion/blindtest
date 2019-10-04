@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for Avatar
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path = "avatars")
@@ -21,16 +24,25 @@ public class AvatarController {
 
 	@Autowired
 	private AvatarService avatarService;
-	
-	
-	
+
+
+	/**
+	 * Scan avatar folder and refresh the cache.
+	 *
+	 * @return nothing
+	 */
 	@GetMapping(path = "/refresh")
 	public ResponseEntity<Empty> refresh() {
 		
 		avatarService.refresh();
 		return ResponseBuilder.create204();
 	}
-	
+
+	/**
+	 * Gets all Avatar in the cache.
+	 *
+	 * @return the Avatar list.
+	 */
 	@GetMapping
 	public ResponseEntity< ListDTO<Avatar> > getAll() {
 		

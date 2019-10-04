@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for ProfileStatDTO.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path = "profilestats")
@@ -21,9 +24,14 @@ public class ProfileStatController {
 
 	@Autowired
 	private ProfileStatService profileStatService;
-	
-	
-	
+
+
+	/**
+	 * Gets all ProfileStatDTO.
+	 *
+	 * @return the ProfileStatDTO list
+	 * @throws DaoException
+	 */
 	@GetMapping
 	public ResponseEntity< ListDTO<ProfileStatDTO> > findAll() throws DaoException {
 		

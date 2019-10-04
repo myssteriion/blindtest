@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 
 import com.myssteriion.blindtest.tools.Constant;
 
+/**
+ * The DB connection.
+ */
 @Component
 public class EntityManager {
 	
@@ -23,9 +26,13 @@ public class EntityManager {
 	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIR + "/data/blindtest";
 	
 	private Connection connection;
-	
-	
-	
+
+
+	/**
+	 * Initialize DB connection and create schema and table if need it.
+	 *
+	 * @throws DaoException
+	 */
 	@PostConstruct
 	private void init() throws DaoException {
 		
@@ -42,6 +49,9 @@ public class EntityManager {
 		}
 	}
 
+	/**
+	 * Disconnect DB connection.
+	 */
 	@PreDestroy
 	private void destroy() {
 
@@ -55,7 +65,11 @@ public class EntityManager {
 		}
 	}
 
-
+	/**
+	 * Create (if need it) DB entities (sequences and tables).
+	 *
+	 * @throws DaoException
+	 */
 	private void initTableIfNeedIt() throws DaoException {
 		
 		StringBuilder sb;
@@ -125,9 +139,15 @@ public class EntityManager {
 			throw new DaoException(message, e);
 		}
 	}
-	
-	
-	
+
+
+
+	/**
+	 * Create and returns a new Statement.
+	 *
+	 * @return a Statement
+	 * @throws DaoException
+	 */
 	public Statement createStatement() throws DaoException {
 		
 		try {

@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for GameDTO
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path = "game")
@@ -18,9 +21,16 @@ public class GameController {
 
 	@Autowired
 	private GameService gameService;
-	
-	
-	
+
+
+	/**
+	 * Initialize the new game.
+	 *
+	 * @param newGameDto the NewGameDTO
+	 * @return a GameDTO
+	 * @throws DaoException
+	 * @throws NotFoundException
+	 */
 	@PostMapping
 	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws DaoException, NotFoundException {
 
@@ -28,6 +38,14 @@ public class GameController {
 		return ResponseBuilder.create200(gameDto);
 	}
 
+	/**
+	 * Apply the result on the game.
+	 *
+	 * @param musicResultDto the MusicResultDTO
+	 * @return the GameDTO after apply
+	 * @throws DaoException
+	 * @throws NotFoundException
+	 */
 	@PostMapping(path = "/apply")
 	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws DaoException, NotFoundException {
 
