@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.db.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
@@ -17,6 +18,8 @@ import org.mockito.MockitoAnnotations;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
+
+import javax.naming.ldap.PagedResultsControl;
 
 
 public class ProfileDAOTest extends AbstractTest {
@@ -41,9 +44,9 @@ public class ProfileDAOTest extends AbstractTest {
 		
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -51,7 +54,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -61,7 +64,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't save profileDto.", sql), e);
+			verifyException(new DaoException("Can't save dto.", sql), e);
 		}
 		
 		ProfileDTO profileDtoReturned = profileDao.save(profileDtoToSave);
@@ -76,9 +79,9 @@ public class ProfileDAOTest extends AbstractTest {
 		
 
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -86,7 +89,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -96,7 +99,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
 		}
 		
 		profileDtoToUpdate.setId(1);
@@ -105,7 +108,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't update profileDto.", sql), e);
+			verifyException(new DaoException("Can't update dto.", sql), e);
 		}
 		
 		ProfileDTO profileDtoReturned = profileDao.update(profileDtoToUpdate);
@@ -126,9 +129,9 @@ public class ProfileDAOTest extends AbstractTest {
 		rs2.addRow(2, "name", "avatar");
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -136,7 +139,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -146,7 +149,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find profileDto.", sql), e);
+			verifyException(new DaoException("Can't find dto.", sql), e);
 		}
 		
 		profileDto = profileDao.find(profileDto);
@@ -172,9 +175,9 @@ public class ProfileDAOTest extends AbstractTest {
 		
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rs);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -182,7 +185,7 @@ public class ProfileDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find all profileDto.", sql), e);
+			verifyException(new DaoException("Can't findAll dto.", sql), e);
 		}
 		
 		ProfileDTO profileDto = profileDao.findAll().get(0);

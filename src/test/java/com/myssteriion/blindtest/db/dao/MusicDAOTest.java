@@ -1,10 +1,10 @@
 package com.myssteriion.blindtest.db.dao;
 
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,10 +13,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 
 
 public class MusicDAOTest extends AbstractTest {
@@ -41,9 +40,9 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -51,7 +50,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -61,7 +60,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't save musicDto.", sql), e);
+			verifyException(new DaoException("Can't save dto.", sql), e);
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.save(musidcDtoToSave);
@@ -76,9 +75,9 @@ public class MusicDAOTest extends AbstractTest {
 		
 
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -86,7 +85,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -96,7 +95,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
 		}
 		
 		musicDtoToUpdate.setId(1);
@@ -105,7 +104,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't update musicDto.", sql), e);
+			verifyException(new DaoException("Can't update dto.", sql), e);
 		}
 		
 		MusicDTO musicDtoReturned = musicDao.update(musicDtoToUpdate);
@@ -126,9 +125,9 @@ public class MusicDAOTest extends AbstractTest {
 		rs2.addRow(2, "name", "ANNEES_80", 1);
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rsEmpty, rs, rs2);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -136,7 +135,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -146,7 +145,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find musicDto.", sql), e);
+			verifyException(new DaoException("Can't find dto.", sql), e);
 		}
 		
 		musicDto = musicDao.find(musicDto);
@@ -172,9 +171,9 @@ public class MusicDAOTest extends AbstractTest {
 		
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rs);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -182,7 +181,7 @@ public class MusicDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find all musicDto.", sql), e);
+			verifyException(new DaoException("Can't findAll dto.", sql), e);
 		}
 		
 		MusicDTO musicDto = musicDao.findAll().get(0);

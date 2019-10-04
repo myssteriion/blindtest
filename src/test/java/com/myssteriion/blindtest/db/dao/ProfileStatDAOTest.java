@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
@@ -49,9 +50,9 @@ public class ProfileStatDAOTest extends AbstractTest {
 		
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 		
 		
 		try {
@@ -59,7 +60,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -69,7 +70,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't save profileStatDto.", sql), e);
+			verifyException(new DaoException("Can't save dto.", sql), e);
 		}
 		
 		ProfileStatDTO profileStatDtoReturned = profileStatDao.save(profileStatDtoToSave);
@@ -85,9 +86,9 @@ public class ProfileStatDAOTest extends AbstractTest {
 		
 
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.execute(Mockito.anyString())).thenThrow(sql).thenReturn(true);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 
 		JsonProcessingException jpe = new JsonGenerationException("jpe");
 		Mockito.when(mapperMock.writeValueAsString(Mockito.anyMap())).thenThrow(jpe).thenCallRealMethod();
@@ -97,7 +98,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -107,7 +108,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileStatDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
 		}
 		
 		profileStatDtoToUpdate.setId(1);
@@ -117,7 +118,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
+			verifyException(new DaoException("Can't fill update query.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
@@ -126,7 +127,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't update profileStatDto.", sql), e);
+			verifyException(new DaoException("Can't update dto.", sql), e);
 		}
 
 		ProfileStatDTO profileStatDtoReturned = profileStatDao.update(profileStatDtoToUpdate);
@@ -152,9 +153,9 @@ public class ProfileStatDAOTest extends AbstractTest {
 		rs3.addRow(2, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 		
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs, rsEmpty, rs2, rs3);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rs, rsEmpty, rs2, rs3);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 
 		JsonProcessingException jpe = new JsonGenerationException("jpe");
 		Mockito.when(mapperMock.readValue(Mockito.anyString(), Mockito.any(TypeReference.class))).thenThrow(jpe).thenCallRealMethod();
@@ -164,7 +165,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileStatDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -174,7 +175,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find profileStatDto.", sql), e);
+			verifyException(new DaoException("Can't find dto.", sql), e);
 		}
 
 		setMapper(mapperMock);
@@ -183,7 +184,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
+			verifyException(new DaoException("Can't transform dto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 
@@ -215,9 +216,9 @@ public class ProfileStatDAOTest extends AbstractTest {
 		rs2.addRow(1, 1, 1, "{\"ANNEES_60\":100}", "{\"ANNEES_60\":50}", "{\"NORMAL\":100}");
 
 		SQLException sql = new SQLException("sql");
-		Statement statement = Mockito.mock(Statement.class);
-		Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(sql).thenReturn(rs, rs2);
-		Mockito.when(em.createStatement()).thenReturn(statement);
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeQuery()).thenThrow(sql).thenReturn(rs, rs2);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
 
 		JsonProcessingException jpe = new JsonGenerationException("jpe");
 		Mockito.when(mapperMock.readValue(Mockito.anyString(), Mockito.any(TypeReference.class))).thenThrow(jpe).thenCallRealMethod();
@@ -227,7 +228,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't find all profileStatDto.", sql), e);
+			verifyException(new DaoException("Can't findAll dto.", sql), e);
 		}
 
 		setMapper(mapperMock);
@@ -236,7 +237,7 @@ public class ProfileStatDAOTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (DaoException e) {
-			verifyException(new DaoException("Can't parse profileStatDto.", jpe), e);
+			verifyException(new DaoException("Can't transform dto.", jpe), e);
 		}
 		setMapper( new ObjectMapper() );
 

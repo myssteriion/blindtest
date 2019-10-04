@@ -2,13 +2,16 @@ package com.myssteriion.blindtest.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.tools.Tool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -149,13 +152,34 @@ public class EntityManager {
 	 * @throws DaoException
 	 */
 	public Statement createStatement() throws DaoException {
-		
+
 		try {
 			return connection.createStatement();
 		}
 		catch (SQLException e) {
-			
+
 			String message = "Can't create statement.";
+			LOGGER.error(message, e);
+			throw new DaoException(message, e);
+		}
+	}
+
+	/**
+	 * Create and returns a new PreparedStatement.
+	 *
+	 * @return a PreparedStatement
+	 * @throws DaoException
+	 */
+	public PreparedStatement createPreparedStatement(String query) throws DaoException {
+
+		Tool.verifyValue("query", query);
+
+		try {
+			return connection.prepareStatement(query);
+		}
+		catch (SQLException e) {
+
+			String message = "Can't create prepareStatement.";
 			LOGGER.error(message, e);
 			throw new DaoException(message, e);
 		}

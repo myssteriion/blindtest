@@ -5,135 +5,117 @@ import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.tools.Tool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class MusicDAO extends AbstractDAO<MusicDTO> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(MusicDAO.class);
-	
-	
-	
-	public MusicDAO() {
-		super("music");
-	}
-	
-	
-	
+	private PreparedStatement findById;
+
+	private PreparedStatement findByNameAndTheme;
+
+
+
 	@Override
-	public MusicDTO save(MusicDTO musicDto) throws DaoException {
-		
-		Tool.verifyValue("musicDto", musicDto);
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO " + tableName + "(name, theme, played) ");
-			sb.append("VALUES ('" + escapeValue( musicDto.getName() ) + "', '" + musicDto.getTheme() + "', 0)");
-			
-			statement.execute( sb.toString() );
-			
-			MusicDTO musicDtotoSaved = find(musicDto);
-			LOGGER.info("musicDto inserted (" + musicDtotoSaved.toString() + ").");
-			
-			return musicDtotoSaved;
+	protected void initQueryIfNeedIt() throws DaoException {
+
+		if ( Tool.isNullOrEmpty(create) ) {
+
+			create = em.createPreparedStatement("INSERT INTO music (name, theme, played) VALUES (?, ?, 0)");
+			update = em.createPreparedStatement("UPDATE music SET played = ? WHERE id = ?");
+			findAll = em.createPreparedStatement("SELECT * FROM music");
+
+			findById = em.createPreparedStatement("SELECT * FROM music WHERE id = ?");
+			findByNameAndTheme = em.createPreparedStatement("SELECT * FROM music WHERE name = ? and theme = ?");
+		}
+	}
+
+
+
+	@Override
+	protected void fillSave(MusicDTO dto) throws DaoException {
+
+		try {
+
+			create.clearParameters();
+			create.setString( 1, dto.getName() );
+			create.setString( 2, dto.getTheme().toString() );
 		}
 		catch (SQLException e) {
-			throw new DaoException("Can't save musicDto.", e);
+
+			String message = "Can't fill save query.";
+			LOGGER.error(message, e);
+			throw new DaoException(message, e);
 		}
 	}
-	
+
 	@Override
-	public MusicDTO update(MusicDTO musicDto) throws DaoException {
-		
-		Tool.verifyValue("musicDto", musicDto);
-		Tool.verifyValue("musicDto -> id", musicDto.getId());
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE " + tableName + " ");
-			sb.append("SET played = " + musicDto.getPlayed() + " ");
-			sb.append("WHERE id = " + musicDto.getId());
-			
-			statement.execute( sb.toString() );
-			LOGGER.info("musicDto updated (" + musicDto.toString() + ").");
-			
-			return musicDto;
+	protected void fillUpdate(MusicDTO dto) throws DaoException {
+
+		try {
+
+			update.clearParameters();
+			update.setInt( 1, dto.getPlayed() );
+			update.setInt( 2, dto.getId() );
 		}
 		catch (SQLException e) {
-			throw new DaoException("Can't update musicDto.", e);
+
+			String message = "Can't fill update query.";
+			LOGGER.error(message, e);
+			throw new DaoException(message, e);
 		}
 	}
-	
+
 	@Override
-	public MusicDTO find(MusicDTO musicDto) throws DaoException {
-		
-		Tool.verifyValue("musicDto", musicDto);
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			MusicDTO musicDtoToReturn = null;
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM " + tableName + " ");
-			
-			if ( Tool.isNullOrEmpty(musicDto.getId()) )
-				sb.append("WHERE name = '" + escapeValue( musicDto.getName() ) + "' AND theme = '" + musicDto.getTheme() + "'");
-			else
-				sb.append("WHERE id = " + musicDto.getId());
-			
-			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				if ( rs.next() )
-					musicDtoToReturn = transformToDto(rs);
+	protected void fillFind(MusicDTO dto) throws DaoException {
+
+		try {
+
+			if ( Tool.isNullOrEmpty(dto.getId()) ) {
+
+				findByNameAndTheme.clearParameters();
+				findByNameAndTheme.setString( 1, dto.getName() );
+				findByNameAndTheme.setString( 2, dto.getTheme().toString() );
+				find = findByNameAndTheme;
 			}
+			else {
 
-			return musicDtoToReturn;
-		}
-		catch (SQLException e) {
-			throw new DaoException("Can't find musicDto.", e);
-		}
-	}
-	
-	@Override
-	public List<MusicDTO> findAll() throws DaoException {
-		
-		try ( Statement statement = em.createStatement() ) {
-			
-			List<MusicDTO> musicDtoList = new ArrayList<>();
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM " + tableName);
-
-			try ( ResultSet rs = statement.executeQuery(sb.toString()) ) {
-				while ( rs.next() )
-					musicDtoList.add( transformToDto(rs) );
+				findById.clearParameters();
+				findById.setInt( 1, dto.getId() );
+				find = findById;
 			}
-			
-			return musicDtoList;
 		}
 		catch (SQLException e) {
-			throw new DaoException("Can't find all musicDto.", e);
+
+			String message = "Can't fill find query.";
+			LOGGER.error(message, e);
+			throw new DaoException(message, e);
 		}
 	}
 
 
-	private MusicDTO transformToDto(ResultSet rs) throws SQLException {
+	@Override
+	protected MusicDTO transformToDto(ResultSet rs) throws DaoException {
 
-		MusicDTO musicDtoToReturn;
+		try {
 
-		musicDtoToReturn = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
-		musicDtoToReturn.setId( rs.getInt("id") );
+			MusicDTO dtoToReturn;
 
-		return musicDtoToReturn;
+			dtoToReturn = new MusicDTO(rs.getString("name"), Theme.valueOf(rs.getString("theme")), rs.getInt("played"));
+			dtoToReturn.setId( rs.getInt("id") );
+
+			return dtoToReturn;
+		}
+		catch (SQLException e) {
+
+			String message = "Can't transform dto.";
+			LOGGER.error(message, e);
+			throw new DaoException(message, e);
+		}
 	}
 
 }
