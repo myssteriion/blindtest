@@ -9,53 +9,108 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * The ProfileStatDTO.
+ */
 public class ProfileStatDTO extends AbstractDTO {
 
+	/**
+	 * The profileId.
+	 */
 	private Integer profileId;
-	
+
+	/**
+	 * The number of game played.
+	 */
 	private int playedGames;
-	
+
+	/**
+	 * The number of listened musics by themes.
+	 */
 	private Map<Theme, Integer> listenedMusics;
-	
+
+	/**
+	 * The number of found musics by themes.
+	 */
 	private Map<Theme, Integer> foundMusics;
 
+	/**
+	 * The bests scores by durations.
+	 */
 	private Map<Duration, Integer> bestScores;
 
 	
-	
+
+	/**
+	 * Instantiates a new ProfileStatDTO.
+	 *
+	 * @param profileId the profileId
+	 */
 	public ProfileStatDTO(Integer profileId) {
 		this(profileId, 0, new HashMap<>(), new HashMap<>(), new HashMap<>());
 	}
-	
+
+	/**
+	 * Instantiates a new ProfileStatDTO.
+	 *
+	 * @param profileId      the profileId
+	 * @param playedGames    the playedGames
+	 * @param listenedMusics the listenedMusics
+	 * @param foundMusics    the foundMusics
+	 * @param bestScores     the bestScores
+	 */
 	public ProfileStatDTO(Integer profileId, int playedGames, Map<Theme, Integer> listenedMusics, Map<Theme, Integer> foundMusics, Map<Duration, Integer> bestScores) {
 		
 		Tool.verifyValue("profileId", profileId);
 		
 		this.profileId = profileId;
-		this.playedGames = (playedGames < 0) ? 0 : playedGames;
+		this.playedGames = Math.max(playedGames, 0);
 		this.listenedMusics = (listenedMusics == null) ? new HashMap<>() : listenedMusics;
 		this.foundMusics = (foundMusics == null) ? new HashMap<>() : foundMusics;
 		this.bestScores = (bestScores == null) ? new HashMap<>() : bestScores;
 	}
-	
-	
-	
+
+
+
+	/**
+	 * Gets profileId.
+	 *
+	 * @return the profileId
+	 */
 	public Integer getProfileId() {
 		return profileId;
 	}
 
+	/**
+	 * Gets playedGames.
+	 *
+	 * @return the playedGames
+	 */
 	public int getPlayedGames() {
 		return playedGames;
 	}
 
+	/**
+	 * Increment playedGames.
+	 */
 	public void incrementPlayedGames() {
 		this.playedGames++;
 	}
-	
+
+	/**
+	 * Gets listenedMusics.
+	 *
+	 * @return the listenedMusics
+	 */
 	public Map<Theme, Integer> getListenedMusics() {
 		return listenedMusics;
 	}
 
+	/**
+	 * Increment listenedMusics.
+	 *
+	 * @param theme the theme
+	 */
 	public void incrementListenedMusics(Theme theme) {
 
 		Tool.verifyValue("theme", theme);
@@ -65,11 +120,21 @@ public class ProfileStatDTO extends AbstractDTO {
 
 		listenedMusics.put(theme, listenedMusics.get(theme) + 1);
 	}
-	
+
+	/**
+	 * Gets foundMusics.
+	 *
+	 * @return the foundMusics
+	 */
 	public Map<Theme, Integer> getFoundMusics() {
 		return foundMusics;
 	}
-	
+
+	/**
+	 * Increment foundMusics.
+	 *
+	 * @param theme the theme
+	 */
 	public void incrementFoundMusics(Theme theme) {
 
 		Tool.verifyValue("theme", theme);
@@ -80,10 +145,21 @@ public class ProfileStatDTO extends AbstractDTO {
 		foundMusics.put(theme, foundMusics.get(theme) + 1);
 	}
 
+	/**
+	 * Gets bestScores.
+	 *
+	 * @return the bestScores
+	 */
 	public Map<Duration, Integer> getBestScores() {
 		return bestScores;
 	}
 
+	/**
+	 * Add best score if its better.
+	 *
+	 * @param duration the duration
+	 * @param scores   the scores
+	 */
 	public void addBestScoreIfBetter(Duration duration, int scores) {
 
 		Tool.verifyValue("duration", duration);

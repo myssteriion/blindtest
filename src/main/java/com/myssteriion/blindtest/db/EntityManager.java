@@ -34,7 +34,7 @@ public class EntityManager {
 	/**
 	 * Initialize DB connection and create schema and table if need it.
 	 *
-	 * @throws DaoException
+	 * @throws DaoException DB exception
 	 */
 	@PostConstruct
 	private void init() throws DaoException {
@@ -149,7 +149,7 @@ public class EntityManager {
 	 * Create and returns a new Statement.
 	 *
 	 * @return a Statement
-	 * @throws DaoException
+	 * @throws DaoException DB exception
 	 */
 	public Statement createStatement() throws DaoException {
 
@@ -167,8 +167,9 @@ public class EntityManager {
 	/**
 	 * Create and returns a new PreparedStatement.
 	 *
+	 * @param query the query
 	 * @return a PreparedStatement
-	 * @throws DaoException
+	 * @throws DaoException DB exception
 	 */
 	public PreparedStatement createPreparedStatement(String query) throws DaoException {
 

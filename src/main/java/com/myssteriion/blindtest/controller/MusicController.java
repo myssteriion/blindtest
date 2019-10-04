@@ -31,6 +31,8 @@ public class MusicController {
 	 * Scan music folder and refresh the bdd.
 	 *
 	 * @return nothing
+	 * @throws DaoException      DB exception
+	 * @throws ConflictException Conflict exception
 	 */
 	@GetMapping(path = "/refresh")
 	public ResponseEntity<Empty> refresh() throws DaoException, ConflictException {
@@ -43,8 +45,8 @@ public class MusicController {
 	 * Randomly choose a music.
 	 *
 	 * @return a MusicDTO
-	 * @throws DaoException
-	 * @throws NotFoundException
+	 * @throws DaoException      DB exception
+	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random() throws DaoException, NotFoundException {

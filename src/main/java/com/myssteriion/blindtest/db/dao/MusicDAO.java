@@ -11,11 +11,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO for MusicDTO.
+ */
 @Component
 public class MusicDAO extends AbstractDAO<MusicDTO> {
 
+	/**
+	 * "Select one by id" PreparedStatement.
+	 */
 	private PreparedStatement findById;
 
+	/**
+	 * "Select one by name and theme" PreparedStatement.
+	 */
 	private PreparedStatement findByNameAndTheme;
 
 

@@ -28,8 +28,8 @@ public class GameController {
 	 *
 	 * @param newGameDto the NewGameDTO
 	 * @return a GameDTO
-	 * @throws DaoException
-	 * @throws NotFoundException
+	 * @throws DaoException      DB exception
+	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping
 	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws DaoException, NotFoundException {
@@ -43,8 +43,8 @@ public class GameController {
 	 *
 	 * @param musicResultDto the MusicResultDTO
 	 * @return the GameDTO after apply
-	 * @throws DaoException
-	 * @throws NotFoundException
+	 * @throws DaoException      DB exception
+	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping(path = "/apply")
 	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws DaoException, NotFoundException {

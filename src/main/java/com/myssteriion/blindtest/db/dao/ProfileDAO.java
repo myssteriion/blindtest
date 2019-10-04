@@ -11,11 +11,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO for ProfileDTO.
+ */
 @Component
 public class ProfileDAO extends AbstractDAO<ProfileDTO> {
 
+	/**
+	 * "Select one by id" PreparedStatement.
+	 */
 	private PreparedStatement findById;
 
+	/**
+	 * "Select one by name" PreparedStatement.
+	 */
 	private PreparedStatement findByName;
 
 

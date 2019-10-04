@@ -7,21 +7,46 @@ import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Objects;
 
+/**
+ * The MusicDTO.
+ */
 public class MusicDTO extends AbstractDTO {
 
+	/**
+	 * The name.
+	 */
 	private String name;
-	
+
+	/**
+	 * The theme.
+	 */
 	private Theme theme;
-	
+
+	/**
+	 * The number of played.
+	 */
 	private int played;
-	
 
 
+
+	/**
+	 * Instantiates a new MusicDto.
+	 *
+	 * @param name  the name
+	 * @param theme the theme
+	 */
 	@JsonCreator
 	public MusicDTO(String name, Theme theme) {
 		this(name, theme, 0);
 	}
 
+	/**
+	 * Instantiates a new MusicDto.
+	 *
+	 * @param name   the name
+	 * @param theme  the theme
+	 * @param played the played
+	 */
 	public MusicDTO(String name, Theme theme, int played) {
 
 		Tool.verifyValue("name", name);
@@ -29,23 +54,40 @@ public class MusicDTO extends AbstractDTO {
 
 		this.name = name;
 		this.theme = theme;
-		this.played = (played < 0) ? 0 : played;
+		this.played = Math.max(played, 0);
 	}
-	
-	
-	
+
+
+	/**
+	 * Gets name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets theme.
+	 *
+	 * @return the theme
+	 */
 	public Theme getTheme() {
 		return theme;
 	}
 
+	/**
+	 * Gets played.
+	 *
+	 * @return the played
+	 */
 	public int getPlayed() {
 		return played;
 	}
 
+	/**
+	 * Increment played.
+	 */
 	public void incrementPlayed() {
 		this.played++;
 	}

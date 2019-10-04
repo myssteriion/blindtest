@@ -30,7 +30,7 @@ public class ProfileStatController {
 	 * Gets all ProfileStatDTO.
 	 *
 	 * @return the ProfileStatDTO list
-	 * @throws DaoException
+	 * @throws DaoException DB exception
 	 */
 	@GetMapping
 	public ResponseEntity< ListDTO<ProfileStatDTO> > findAll() throws DaoException {

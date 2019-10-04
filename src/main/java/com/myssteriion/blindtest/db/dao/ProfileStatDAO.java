@@ -16,11 +16,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+/**
+ * DAO for ProfileStatDTO.
+ */
 @Component
 public class ProfileStatDAO extends AbstractDAO<ProfileStatDTO> {
 
+	/**
+	 * "Select one by id" PreparedStatement.
+	 */
 	private PreparedStatement findById;
 
+	/**
+	 * "Select one by ProfileId" PreparedStatement.
+	 */
 	private PreparedStatement findByProfileId;
 
 

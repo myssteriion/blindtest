@@ -14,31 +14,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Abstract class for all DAO (only for AbstractDTO class).
+ * Abstract class for all DAO.
  *
- * @param <T>
+ * @param <T> the AbstractDTO
  */
 public abstract class AbstractDAO<T extends AbstractDTO> {
 
+	/**
+	 * The constant LOGGER.
+	 */
 	protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractDAO.class);
 
+	/**
+	 * The EntityManager.
+	 */
 	@Autowired
 	protected EntityManager em;
-	
+
+	/**
+	 * "Insert" PreparedStatement.
+	 */
 	protected PreparedStatement create;
 
+	/**
+	 * "Update" PreparedStatement.
+	 */
 	protected PreparedStatement update;
 
+	/**
+	 * "Select one" PreparedStatement.
+	 */
 	protected PreparedStatement find;
 
+	/**
+	 * "Select all" PreparedStatement.
+	 */
 	protected PreparedStatement findAll;
 
 
 
+	/**
+	 * Initialize all PreparedStatement (if need it).
+	 *
+	 * @throws DaoException DB exception
+	 */
 	protected abstract void initQueryIfNeedIt() throws DaoException;
 
 
-
+	/**
+	 * Insert dto in DB.
+	 *
+	 * @param dto the dto
+	 * @return the dto saved
+	 * @throws DaoException DB exception
+	 * @see #create
+	 * @see #fillSave(AbstractDTO)
+	 */
 	public T save(T dto) throws DaoException {
 
 		Tool.verifyValue("dto", dto);
@@ -59,6 +90,15 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 		}
 	}
 
+	/**
+	 * Update dto in DB.
+	 *
+	 * @param dto the dto
+	 * @return the dto edited
+	 * @throws DaoException DB exception
+	 * @see #update
+	 * @see #fillUpdate(AbstractDTO)
+	 */
 	public T update(T dto) throws DaoException {
 
 		Tool.verifyValue("dto", dto);
@@ -79,6 +119,15 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 		}
 	}
 
+	/**
+	 * Select dto in DB.
+	 *
+	 * @param dto the dto
+	 * @return the dto or NULL if dto doesn't exist
+	 * @throws DaoException DB exception
+	 * @see #find
+	 * @see #fillFind(AbstractDTO)
+	 */
 	public T find(T dto) throws DaoException {
 
 		Tool.verifyValue("dto", dto);
@@ -101,6 +150,13 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 		}
 	}
 
+	/**
+	 * Select all dto in DB.
+	 *
+	 * @return a dto list
+	 * @throws DaoException DB exception
+	 * @see #findAll
+	 */
 	public List<T> findAll() throws DaoException {
 
 		try {
@@ -121,13 +177,41 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 	}
 
 
+	/**
+	 * Fill "create" PreparedStatement with dto.
+	 *
+	 * @param dto the dto
+	 * @throws DaoException DB exception
+	 * @see #save(AbstractDTO)
+	 */
 	protected abstract void fillSave(T dto) throws DaoException;
 
+	/**
+	 * Fill "update" PreparedStatement with dto.
+	 *
+	 * @param dto the dto
+	 * @throws DaoException DB exception
+	 * @see #update(AbstractDTO)
+	 */
 	protected abstract void fillUpdate(T dto) throws DaoException;
 
+	/**
+	 * Fill "find" PreparedStatement with dto.
+	 *
+	 * @param dto the dto
+	 * @throws DaoException DB exception
+	 * @see #find(AbstractDTO)
+	 */
 	protected abstract void fillFind(T dto) throws DaoException;
 
 
+	/**
+	 * Transform ResultSet to dto.
+	 *
+	 * @param rs the ResultSet
+	 * @return a dto
+	 * @throws DaoException DB exception
+	 */
 	protected abstract T transformToDto(ResultSet rs) throws DaoException;
 
 }

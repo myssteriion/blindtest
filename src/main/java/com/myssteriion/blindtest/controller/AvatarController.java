@@ -26,6 +26,7 @@ public class AvatarController {
 	private AvatarService avatarService;
 
 
+
 	/**
 	 * Scan avatar folder and refresh the cache.
 	 *
@@ -41,7 +42,7 @@ public class AvatarController {
 	/**
 	 * Gets all Avatar in the cache.
 	 *
-	 * @return the Avatar list.
+	 * @return the Avatar list
 	 */
 	@GetMapping
 	public ResponseEntity< ListDTO<Avatar> > getAll() {

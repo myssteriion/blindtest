@@ -26,14 +26,15 @@ public class ProfileController {
 	private ProfileService profileService;
 
 
+
 	/**
 	 * Save a new ProfileDTO.
 	 *
 	 * @param profileDto the ProfileDTO
 	 * @return the ProfileDTO saved
-	 * @throws DaoException
-	 * @throws NotFoundException
-	 * @throws ConflictException
+	 * @throws DaoException      DB exception
+	 * @throws NotFoundException NotFound exception
+	 * @throws ConflictException Conflict exception
 	 */
 	@PostMapping
 	public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
@@ -43,12 +44,12 @@ public class ProfileController {
 	/**
 	 * Update an existing ProfileDTO.
 	 *
-	 * @param id the ProfileDTO id
+	 * @param id         the ProfileDTO id
 	 * @param profileDto the 'new' ProfileDTO
 	 * @return the ProfileDTO modified
-	 * @throws DaoException
-	 * @throws NotFoundException
-	 * @throws ConflictException
+	 * @throws DaoException      DB exception
+	 * @throws NotFoundException NotFound exception
+	 * @throws ConflictException Conflict exception
 	 */
 	@PutMapping(path = Constant.ID_PATH_PARAM)
 	public ResponseEntity<ProfileDTO> update(@PathVariable("id") Integer id, @RequestBody ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
@@ -61,7 +62,7 @@ public class ProfileController {
 	 * Gets all ProfileDTO.
 	 *
 	 * @return the ProfileDTO list
-	 * @throws DaoException
+	 * @throws DaoException DB exception
 	 */
 	@GetMapping
 	public ResponseEntity< ListDTO<ProfileDTO> > findAll() throws DaoException {
