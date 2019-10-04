@@ -209,7 +209,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 1,\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"loosers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 1,\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",

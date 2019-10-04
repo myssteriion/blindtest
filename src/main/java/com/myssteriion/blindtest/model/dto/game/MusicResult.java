@@ -28,9 +28,9 @@ public class MusicResult {
 	private List<String> winners;
 
 	/**
-	 * The loosers list.
+	 * The losers list.
 	 */
-	private List<String> loosers;
+	private List<String> losers;
 
 
 	/**
@@ -39,10 +39,10 @@ public class MusicResult {
 	 * @param gameId   the game id
 	 * @param musicDTO the music dto
 	 * @param winners  the winners
-	 * @param loosers  the losers
+	 * @param losers  the losers
 	 */
 	@JsonCreator
-	public MusicResult(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> loosers) {
+	public MusicResult(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> losers) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("musicDto", musicDTO);
@@ -51,7 +51,7 @@ public class MusicResult {
 		this.musicDTO = musicDTO;
 		
 		this.winners = (winners == null) ? new ArrayList<>() : winners;
-		this.loosers = (loosers == null) ? new ArrayList<>() : loosers;
+		this.losers = (losers == null) ? new ArrayList<>() : losers;
 	}
 
 
@@ -83,12 +83,12 @@ public class MusicResult {
 	}
 
 	/**
-	 * Gets loosers.
+	 * Gets losers.
 	 *
-	 * @return the loosers
+	 * @return the losers
 	 */
-	public List<String> getLoosers() {
-		return loosers;
+	public List<String> getLosers() {
+		return losers;
 	}
 
 
@@ -115,7 +115,7 @@ public class MusicResult {
 
 		Tool.verifyValue("name", name);
 
-		return loosers.stream().anyMatch(winner -> winner.equals(name));
+		return losers.stream().anyMatch(winner -> winner.equals(name));
 	}
 
 
@@ -125,7 +125,7 @@ public class MusicResult {
 		return "gameId=" + gameId +
 				", musicDTO={" + musicDTO + "}" +
 				", winners=" + winners +
-				", loosers=" + loosers;
+				", losers=" + losers;
 	}
 
 }

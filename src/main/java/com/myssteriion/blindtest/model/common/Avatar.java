@@ -16,20 +16,43 @@ import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 
+/**
+ * The Avatar.
+ */
 public class Avatar implements IModel {
 
+    /**
+     * The constant LOGGER.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(Avatar.class);
 
+    /**
+     * The name.
+     */
     private String name;
 
+    /**
+     * If the file exists.
+     */
     private boolean fileExists;
 
+    /**
+     * The content type.
+     */
     private String contentType;
 
+    /**
+     * The byte array flux.
+     */
     private byte[] flux;
 
 
 
+    /**
+     * Instantiates a new Avatar.
+     *
+     * @param name the name
+     */
     @JsonCreator
     public Avatar(String name) {
         this.name = Tool.isNullOrEmpty(name) ? Constant.DEFAULT_AVATAR : name;
@@ -37,29 +60,57 @@ public class Avatar implements IModel {
     }
 
 
-
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         Tool.verifyValue("name", name);
         this.name = name.trim();
     }
 
+    /**
+     * Is file exists boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFileExists() {
         return fileExists;
     }
 
+    /**
+     * Gets content type.
+     *
+     * @return the content type
+     */
     public String getContentType() {
         return contentType;
     }
 
+    /**
+     * Get flux byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getFlux() {
         return flux;
     }
 
 
+
+    /**
+     * Create a byte array flux if the name match with a real file.
+     */
     private void createFlux() {
 
         try {

@@ -23,11 +23,20 @@ import com.myssteriion.blindtest.tools.Constant;
  */
 @Component
 public class EntityManager {
-	
+
+	/**
+	 * The constant LOGGER.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManager.class);
-	
+
+	/**
+	 * The URL string to the DB.
+	 */
 	private static final String URL = "jdbc:h2:file:" + Constant.BASE_DIR + "/data/blindtest";
-	
+
+	/**
+	 * The DB connection.
+	 */
 	private Connection connection;
 
 
@@ -142,7 +151,6 @@ public class EntityManager {
 			throw new DaoException(message, e);
 		}
 	}
-
 
 
 	/**

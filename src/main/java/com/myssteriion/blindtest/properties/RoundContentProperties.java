@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * The mapping with round-content.properties.
+ */
 @Configuration
 @PropertySource("classpath:round-content.properties")
 public class RoundContentProperties {
@@ -40,39 +43,83 @@ public class RoundContentProperties {
     private Integer thiefNbPointLoose;
 
 
-
+    /**
+     * Gets classic nb musics.
+     *
+     * @return the classic nb musics
+     */
     public Integer getClassicNbMusics() {
         return classicNbMusics;
     }
 
+    /**
+     * Gets classic nb point won.
+     *
+     * @return the classic nb point won
+     */
     public Integer getClassicNbPointWon() {
         return classicNbPointWon;
     }
 
+    /**
+     * Gets choice nb musics.
+     *
+     * @return the choice nb musics
+     */
     public Integer getChoiceNbMusics() {
         return choiceNbMusics;
     }
 
+    /**
+     * Gets choice nb point won.
+     *
+     * @return the choice nb point won
+     */
     public Integer getChoiceNbPointWon() {
         return choiceNbPointWon;
     }
 
+    /**
+     * Gets choice nb point bonus.
+     *
+     * @return the choice nb point bonus
+     */
     public Integer getChoiceNbPointBonus() {
         return choiceNbPointBonus;
     }
 
+    /**
+     * Gets choice nb point malus.
+     *
+     * @return the choice nb point malus
+     */
     public Integer getChoiceNbPointMalus() {
         return choiceNbPointMalus;
     }
 
+    /**
+     * Gets thief nb musics.
+     *
+     * @return the thief nb musics
+     */
     public Integer getThiefNbMusics() {
         return thiefNbMusics;
     }
 
+    /**
+     * Gets thief nb point won.
+     *
+     * @return the thief nb point won
+     */
     public Integer getThiefNbPointWon() {
         return thiefNbPointWon;
     }
 
+    /**
+     * Gets thief nb point loose.
+     *
+     * @return the thief nb point loose
+     */
     public Integer getThiefNbPointLoose() {
         return thiefNbPointLoose;
     }

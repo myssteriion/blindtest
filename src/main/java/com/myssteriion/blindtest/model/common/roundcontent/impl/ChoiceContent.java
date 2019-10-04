@@ -5,14 +5,30 @@ import com.myssteriion.blindtest.model.dto.game.Game;
 import com.myssteriion.blindtest.model.dto.game.MusicResult;
 import com.myssteriion.blindtest.model.dto.game.Player;
 
+/**
+ * The Choice round content.
+ */
 public class ChoiceContent extends AbstractRoundContent {
 
+    /**
+     * The number of bonus points.
+     */
     private int nbPointBonus;
 
+    /**
+     * The number of malus points.
+     */
     private int nbPointMalus;
 
 
-
+    /**
+     * Instantiates a new Choice content.
+     *
+     * @param nbMusics     the nb musics
+     * @param nbPointWon   the nb point won
+     * @param nbPointBonus the nb point bonus
+     * @param nbPointMalus the nb point malus
+     */
     public ChoiceContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
 
         super(nbMusics, nbPointWon);
@@ -21,11 +37,20 @@ public class ChoiceContent extends AbstractRoundContent {
     }
 
 
-
+    /**
+     * Gets nb point bonus.
+     *
+     * @return the nb point bonus
+     */
     public int getNbPointBonus() {
         return nbPointBonus;
     }
 
+    /**
+     * Gets nb point malus.
+     *
+     * @return the nb point malus
+     */
     public int getNbPointMalus() {
         return nbPointMalus;
     }

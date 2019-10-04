@@ -44,16 +44,16 @@ public class ErrorMessage implements IModel {
 	 *
 	 * @param status  the status
 	 * @param message the message
-	 * @param e       the e
+	 * @param cause   the cause
 	 */
-	public ErrorMessage(HttpStatus status, String message, Throwable e) {
+	public ErrorMessage(HttpStatus status, String message, Throwable cause) {
 		
 		Tool.verifyValue("status", status);
 		Tool.verifyValue("message", message);
 		
 		this.status = status;
 		this.message = message;
-		this.causes = (e == null) ? new ArrayList<>() : Tool.transformToList(e);
+		this.causes = (cause == null) ? new ArrayList<>() : Tool.transformToList(cause);
 	}
 
 

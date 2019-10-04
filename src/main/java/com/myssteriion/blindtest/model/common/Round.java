@@ -11,10 +11,24 @@ import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Arrays;
 
+/**
+ * The enum Round.
+ */
 public enum Round {
 
+    /**
+     * Classic round.
+     */
     CLASSIC(0),
+
+    /**
+     * Choice round.
+     */
     CHOICE(1),
+
+    /**
+     * Thief round.
+     */
     THIEF(2 );
 
 
@@ -28,16 +42,31 @@ public enum Round {
     }
 
 
-
+    /**
+     * Gets round number.
+     *
+     * @return the round number
+     */
     public int getRoundNumber() {
         return roundNumber;
     }
 
 
+    /**
+     * Gets next round.
+     *
+     * @return the next round, NULL if there isn't next
+     */
     public Round nextRound() {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
     }
 
+    /**
+     * Create round content from game.
+     *
+     * @param game the game
+     * @return the round content
+     */
     public AbstractRoundContent createRoundContent(Game game) {
 
         Tool.verifyValue("gameDto", game);
@@ -75,11 +104,21 @@ public enum Round {
         }
     }
 
+    /**
+     * Test if it's the last round.
+     *
+     * @return TRUE if it's the last round, FALSE otherwise
+     */
     public boolean isLast() {
         return Arrays.stream(Round.values()).noneMatch(round -> round.roundNumber == this.roundNumber+1);
     }
 
 
+    /**
+     * Gets first round.
+     *
+     * @return the first round
+     */
     public static Round getFirst() {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == 0).findFirst().get();
     }

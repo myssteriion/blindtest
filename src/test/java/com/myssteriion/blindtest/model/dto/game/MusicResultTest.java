@@ -47,7 +47,7 @@ public class MusicResultTest extends AbstractTest {
         Assert.assertEquals( gameId, musicResult.getGameId() );
         Assert.assertEquals( musicDTO, musicResult.getMusicDTO() );
         Assert.assertEquals( new ArrayList<>(), musicResult.getWinners() );
-        Assert.assertEquals( new ArrayList<>(), musicResult.getLoosers() );
+        Assert.assertEquals( new ArrayList<>(), musicResult.getLosers() );
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MusicResultTest extends AbstractTest {
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult(gameId, musicDTO, null, null);
-        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], loosers=[]", musicResult.toString() );
+        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], losers=[]", musicResult.toString() );
     }
 
 }
