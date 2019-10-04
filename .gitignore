@@ -5,6 +5,8 @@
 .settings/
 bin/
 
+*.iml
+
 .gradle/
 build/
 out/
