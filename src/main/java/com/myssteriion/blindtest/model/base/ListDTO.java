@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.myssteriion.blindtest.model.IModel;
 
-public class ListDTO<T> implements IModel {
+public class ListDTO<T extends IModel> implements IModel {
 
 	private List<T> items;
 	

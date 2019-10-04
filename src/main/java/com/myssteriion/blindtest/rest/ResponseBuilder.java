@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.rest;
 
 import java.util.List;
 
+import com.myssteriion.blindtest.model.IModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -52,22 +53,22 @@ public class ResponseBuilder {
 	
 	
 	
-	public static <T> ResponseEntity<T> create200(T dto) {
+	public static <T extends IModel> ResponseEntity<T> create200(T iModel) {
 		
-		Tool.verifyValue("dto", dto);
-		return new ResponseEntity<>(dto, HttpStatus.OK);
+		Tool.verifyValue("iModel", iModel);
+		return new ResponseEntity<>(iModel, HttpStatus.OK);
 	}
 	
-	public static <T> ResponseEntity< ListDTO<T> > create200(List<T> dto) {
+	public static <T extends IModel> ResponseEntity< ListDTO<T> > create200(List<T> iModels) {
 		
-		ListDTO<T> list = new ListDTO<>(dto);
+		ListDTO<T> list = new ListDTO<>(iModels);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	public static <T> ResponseEntity<T> create201(T dto) {
+	public static <T extends IModel> ResponseEntity<T> create201(T iModel) {
 		
-		Tool.verifyValue("dto", dto);
-		return new ResponseEntity<>(dto, HttpStatus.CREATED);
+		Tool.verifyValue("iModel", iModel);
+		return new ResponseEntity<>(iModel, HttpStatus.CREATED);
 	}
 	
 	public static ResponseEntity<Empty> create204() {

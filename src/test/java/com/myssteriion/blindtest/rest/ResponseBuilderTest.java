@@ -1,17 +1,16 @@
 package com.myssteriion.blindtest.rest;
 
-import java.util.List;
-
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.base.ErrorMessage;
+import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.base.ErrorMessage;
-import com.myssteriion.blindtest.model.base.ListDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import java.util.List;
 
 public class ResponseBuilderTest extends AbstractTest {
 
@@ -23,7 +22,7 @@ public class ResponseBuilderTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'iModel' est obligatoire."), e);
 		}
 		
 		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", new Avatar("avatar")) );
@@ -39,7 +38,23 @@ public class ResponseBuilderTest extends AbstractTest {
 		ListDTO<ProfileDTO> body = re.getBody();
 		Assert.assertTrue( body.getItems().isEmpty() );
 	}
-	
+
+	@Test
+	public void create201() {
+
+		try {
+			ResponseBuilder.create201( (ProfileDTO) null );
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'iModel' est obligatoire."), e);
+		}
+
+		ResponseEntity<ProfileDTO> re = ResponseBuilder.create201( new ProfileDTO("name", new Avatar("avatar")) );
+		Assert.assertEquals( HttpStatus.CREATED , re.getStatusCode() );
+		Assert.assertNotNull( re.getBody() );
+	}
+
 	@Test
 	public void create204() {
 		

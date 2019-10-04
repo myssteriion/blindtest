@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import com.myssteriion.blindtest.model.IModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,7 @@ import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 
-public class Avatar {
+public class Avatar implements IModel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Avatar.class);
 
