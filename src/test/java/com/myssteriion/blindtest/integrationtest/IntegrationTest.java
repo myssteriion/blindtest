@@ -10,9 +10,9 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
+import com.myssteriion.blindtest.model.dto.game.NewGame;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -41,17 +41,17 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.VERY_SHORT;
 
-        NewGameDTO newGameDto = new NewGameDTO(playersNames, duration);
-        GameDTO gameDto = gameService.newGame(newGameDto);
+        NewGame newGame = new NewGame(playersNames, duration);
+        Game game = gameService.newGame(newGame);
 
 
 
         /********** CLASSIC Round **********/
-        Assert.assertEquals( Round.CLASSIC, gameDto.getRound() );
-        Assert.assertEquals( 0, gameDto.getNbMusicsPlayed() );
-        Assert.assertEquals( 0, gameDto.getNbMusicsPlayedInRound() );
+        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
 
-        AbstractRoundContent roundContent = gameDto.getRoundContent();
+        AbstractRoundContent roundContent = game.getRoundContent();
         int nbMusicPlayed = 0;
         int nbPointWon = roundContent.getNbPointWon();
         int foundName1 = 0;
@@ -82,23 +82,23 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResultDTO musicResultDto = new MusicResultDTO(gameDto.getId(), MUSICS_LIST.get(0), winners, loosers);
-            gameDto = gameService.apply(musicResultDto);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, loosers);
+            game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
 
-        Assert.assertEquals( scoreName1, gameDto.getPlayers().get(0).getScore() );
-        Assert.assertEquals( scoreName2, gameDto.getPlayers().get(1).getScore() );
-        Assert.assertEquals( scoreName3, gameDto.getPlayers().get(2).getScore() );
+        Assert.assertEquals( scoreName1, game.getPlayers().get(0).getScore() );
+        Assert.assertEquals( scoreName2, game.getPlayers().get(1).getScore() );
+        Assert.assertEquals( scoreName3, game.getPlayers().get(2).getScore() );
 
 
 
         /********** CHOICE Round **********/
-        Assert.assertEquals( Round.CHOICE, gameDto.getRound() );
-        Assert.assertEquals( nbMusicPlayed, gameDto.getNbMusicsPlayed() );
-        Assert.assertEquals( 0, gameDto.getNbMusicsPlayedInRound() );
+        Assert.assertEquals( Round.CHOICE, game.getRound() );
+        Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
 
-        roundContent = gameDto.getRoundContent();
+        roundContent = game.getRoundContent();
         nbPointWon = roundContent.getNbPointWon();
         int nbPointBonus = ((ChoiceContent) roundContent).getNbPointBonus();
         int nbPointMalus = ((ChoiceContent) roundContent).getNbPointMalus();
@@ -119,21 +119,21 @@ public class IntegrationTest extends AbstractIntegrationTest {
                         case 1:
                             scoreName1 += nbPointWon;
                             foundName1++;
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName1 += nbPointBonus;
                             break;
 
                         case 2:
                             scoreName2 += nbPointWon;
                             foundName2++;
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName2 += nbPointBonus;
                             break;
 
                         case 3:
                             scoreName3 += nbPointWon;
                             foundName3++;
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName3 += nbPointBonus;
                             break;
 
@@ -143,17 +143,17 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 else {
                     switch (j) {
                         case 1:
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName1 += nbPointMalus;
                             break;
 
                         case 2:
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName2 += nbPointMalus;
                             break;
 
                         case 3:
-                            if ( gameDto.getPlayers().get(j-1).isTurnToChoose() )
+                            if ( game.getPlayers().get(j-1).isTurnToChoose() )
                                 scoreName3 += nbPointMalus;
                             break;
 
@@ -162,23 +162,23 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResultDTO musicResultDto = new MusicResultDTO(gameDto.getId(), MUSICS_LIST.get(0), winners, loosers);
-            gameDto = gameService.apply(musicResultDto);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, loosers);
+            game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
 
-        Assert.assertEquals( scoreName1, gameDto.getPlayers().get(0).getScore() );
-        Assert.assertEquals( scoreName2, gameDto.getPlayers().get(1).getScore() );
-        Assert.assertEquals( scoreName3, gameDto.getPlayers().get(2).getScore() );
+        Assert.assertEquals( scoreName1, game.getPlayers().get(0).getScore() );
+        Assert.assertEquals( scoreName2, game.getPlayers().get(1).getScore() );
+        Assert.assertEquals( scoreName3, game.getPlayers().get(2).getScore() );
 
 
 
         /********** THIEF Round **********/
-        Assert.assertEquals( Round.THIEF, gameDto.getRound() );
-        Assert.assertEquals( nbMusicPlayed, gameDto.getNbMusicsPlayed() );
-        Assert.assertEquals( 0, gameDto.getNbMusicsPlayedInRound() );
+        Assert.assertEquals( Round.THIEF, game.getRound() );
+        Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
 
-        roundContent = gameDto.getRoundContent();
+        roundContent = game.getRoundContent();
         nbPointWon = roundContent.getNbPointWon();
         int nbPointLoose = ((ThiefContent) roundContent).getNbPointLoose();
 
@@ -210,37 +210,37 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResultDTO musicResultDto = new MusicResultDTO(gameDto.getId(), MUSICS_LIST.get(0), winners, loosers);
-            gameDto = gameService.apply(musicResultDto);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, loosers);
+            game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
 
-        Assert.assertEquals( scoreName1, gameDto.getPlayers().get(0).getScore() );
-        Assert.assertEquals( scoreName2, gameDto.getPlayers().get(1).getScore() );
-        Assert.assertEquals( scoreName3, gameDto.getPlayers().get(2).getScore() );
+        Assert.assertEquals( scoreName1, game.getPlayers().get(0).getScore() );
+        Assert.assertEquals( scoreName2, game.getPlayers().get(1).getScore() );
+        Assert.assertEquals( scoreName3, game.getPlayers().get(2).getScore() );
 
         ProfileStatDTO profileStat = profileStatService.findByProfile( PROFILES_LIST.get(0) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
-        Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName1), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( PROFILES_LIST.get(1) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
-        Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName2), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( PROFILES_LIST.get(2) );
         Assert.assertEquals( 1, profileStat.getPlayedGames() );
-        Assert.assertEquals( new Integer(gameDto.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName3), profileStat.getBestScores().get(duration) );
 
         MusicDTO music = musicService.find( MUSICS_LIST.get(0) );
         Assert.assertEquals( nbMusicPlayed, music.getPlayed() );
 
-        Assert.assertTrue( gameDto.isFinished() );
+        Assert.assertTrue( game.isFinished() );
     }
 
 }

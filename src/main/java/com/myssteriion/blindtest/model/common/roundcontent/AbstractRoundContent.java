@@ -1,11 +1,8 @@
 package com.myssteriion.blindtest.model.common.roundcontent;
 
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
 import com.myssteriion.blindtest.tools.Tool;
-
-import java.util.List;
 
 public abstract class AbstractRoundContent {
 
@@ -31,30 +28,30 @@ public abstract class AbstractRoundContent {
     }
 
 
-    public GameDTO apply(GameDTO gameDto, MusicResultDTO musicResultDto) {
+    public Game apply(Game game, MusicResult musicResult) {
 
-        Tool.verifyValue("gameDto", gameDto);
-        Tool.verifyValue("musicResultDto", musicResultDto);
+        Tool.verifyValue("gameDto", game);
+        Tool.verifyValue("musicResultDto", musicResult);
 
-        gameDto.getPlayers().stream()
-                            .filter( playerDto -> musicResultDto.isWinner(playerDto.getName()) )
+        game.getPlayers().stream()
+                            .filter( playerDto -> musicResult.isWinner(playerDto.getName()) )
                             .forEach( playerDto -> playerDto.addScore(nbPointWon) );
 
-        return gameDto;
+        return game;
     }
 
-    public boolean isFinished(GameDTO gameDto) {
+    public boolean isFinished(Game game) {
 
-        Tool.verifyValue("gameDto", gameDto);
+        Tool.verifyValue("gameDto", game);
 
-        return gameDto.getNbMusicsPlayedInRound() == nbMusics;
+        return game.getNbMusicsPlayedInRound() == nbMusics;
     }
 
-    public boolean isLastMusic(GameDTO gameDto) {
+    public boolean isLastMusic(Game game) {
 
-        Tool.verifyValue("gameDto", gameDto);
+        Tool.verifyValue("gameDto", game);
 
-        return gameDto.getNbMusicsPlayedInRound() == nbMusics - 1;
+        return game.getNbMusicsPlayedInRound() == nbMusics - 1;
     }
 
 

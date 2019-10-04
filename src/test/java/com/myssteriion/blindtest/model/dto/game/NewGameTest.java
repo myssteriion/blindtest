@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class NewGameDTOTest extends AbstractTest {
+public class NewGameTest extends AbstractTest {
 
     @Test
     public void constructor() {
@@ -19,7 +19,7 @@ public class NewGameDTOTest extends AbstractTest {
 
 
         try {
-            new NewGameDTO(null, duration);
+            new NewGame(null, duration);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -27,14 +27,14 @@ public class NewGameDTOTest extends AbstractTest {
         }
 
         try {
-            new NewGameDTO(new HashSet<>(playersNames), null);
+            new NewGame(new HashSet<>(playersNames), null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new NewGameDTO(new HashSet<>(playersNames), duration) );
+        Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration) );
     }
 
     @Test
@@ -43,9 +43,9 @@ public class NewGameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        NewGameDTO newGameDto = new NewGameDTO(new HashSet<>(playersNames), duration);
-        Assert.assertEquals( new HashSet<>(playersNames), newGameDto.getPlayersNames() );
-        Assert.assertEquals( duration, newGameDto.getDuration() );
+        NewGame newGame = new NewGame(new HashSet<>(playersNames), duration);
+        Assert.assertEquals( new HashSet<>(playersNames), newGame.getPlayersNames() );
+        Assert.assertEquals( duration, newGame.getDuration() );
     }
 
     @Test
@@ -54,7 +54,7 @@ public class NewGameDTOTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name");
         Duration duration = Duration.NORMAL;
 
-        NewGameDTO gameDtoUn = new NewGameDTO(new HashSet<>(playersNames), duration);
+        NewGame gameDtoUn = new NewGame(new HashSet<>(playersNames), duration);
         Assert.assertEquals( "playersNames=[name], duration=NORMAL", gameDtoUn.toString() );
     }
     

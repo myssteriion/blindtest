@@ -4,10 +4,10 @@ import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
+import com.myssteriion.blindtest.model.dto.game.NewGame;
+import com.myssteriion.blindtest.model.dto.game.Player;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,33 +29,33 @@ public class GameService {
 	@Autowired
 	private ProfileStatService profileStatService;
 
-	private List<GameDTO> games = new ArrayList<>();
+	private List<Game> games = new ArrayList<>();
 	
 
 
-	public GameDTO newGame(NewGameDTO newGameDto) throws DaoException, NotFoundException {
+	public Game newGame(NewGame newGame) throws DaoException, NotFoundException {
 
-		Tool.verifyValue("newGameDto", newGameDto);
-		checkPlayers( newGameDto.getPlayersNames() );
+		Tool.verifyValue("newGameDto", newGame);
+		checkPlayers( newGame.getPlayersNames() );
 
-		GameDTO gameDto = new GameDTO( newGameDto.getPlayersNames(), newGameDto.getDuration() );
-		gameDto.setId( games.size() );
-		games.add(gameDto);
-		return gameDto;
+		Game game = new Game( newGame.getPlayersNames(), newGame.getDuration() );
+		game.setId( games.size() );
+		games.add(game);
+		return game;
 	}
 
-	public GameDTO apply(MusicResultDTO musicResultDto) throws DaoException, NotFoundException {
+	public Game apply(MusicResult musicResult) throws DaoException, NotFoundException {
 
-		Tool.verifyValue("musicResultDto", musicResultDto);
-		GameDTO gameDto = games.stream()
-							.filter( g -> g.getId().equals(musicResultDto.getGameId()) )
+		Tool.verifyValue("musicResultDto", musicResult);
+		Game game = games.stream()
+							.filter( g -> g.getId().equals(musicResult.getGameId()) )
 							.findFirst()
 							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
 
-		if ( !gameDto.isFinished() ) {
+		if ( !game.isFinished() ) {
 
 			// update musicDto
-			MusicDTO musicDto = musicService.find( musicResultDto.getMusicDTO() );
+			MusicDTO musicDto = musicService.find( musicResult.getMusicDTO() );
 			if (musicDto == null)
 				throw new NotFoundException("musicDto not found");
 
@@ -63,33 +63,33 @@ public class GameService {
 			musicService.update(musicDto);
 
 			// apply score
-			gameDto = gameDto.getRoundContent().apply(gameDto, musicResultDto);
+			game = game.getRoundContent().apply(game, musicResult);
 
 			// update profileStatDto
-			List<PlayerDTO> players = gameDto.getPlayers();
-			List<String> winners = musicResultDto.getWinners();
+			List<Player> players = game.getPlayers();
+			List<String> winners = musicResult.getWinners();
 
-			for (PlayerDTO playerDto : players) {
+			for (Player player : players) {
 
-				ProfileDTO profileDto = new ProfileDTO(playerDto.getName());
+				ProfileDTO profileDto = new ProfileDTO(player.getName());
 				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
-				profileStatDto.incrementListenedMusics( musicResultDto.getMusicDTO().getTheme() );
+				profileStatDto.incrementListenedMusics( musicResult.getMusicDTO().getTheme() );
 
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profileDto.getName())) )
-					profileStatDto.incrementFoundMusics( musicResultDto.getMusicDTO().getTheme() );
+					profileStatDto.incrementFoundMusics( musicResult.getMusicDTO().getTheme() );
 
-				if ( gameDto.isFirstStep() )
+				if ( game.isFirstStep() )
 					profileStatDto.incrementPlayedGames();
-				else if ( gameDto.isLastStep() )
-					profileStatDto.addBestScoreIfBetter( gameDto.getDuration(), playerDto.getScore() );
+				else if ( game.isLastStep() )
+					profileStatDto.addBestScoreIfBetter( game.getDuration(), player.getScore() );
 
 				profileStatService.update(profileStatDto);
 			}
 
-			gameDto.nextStep();
+			game.nextStep();
 		}
 
-		return gameDto;
+		return game;
 	}
 
 	private void checkPlayers(Set<String> playersNames) throws DaoException, NotFoundException {

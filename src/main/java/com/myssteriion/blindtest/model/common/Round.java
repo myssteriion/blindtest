@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.tools.BeanFactory;
 import com.myssteriion.blindtest.tools.Tool;
@@ -38,12 +38,12 @@ public enum Round {
         return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
     }
 
-    public AbstractRoundContent createRoundContent(GameDTO gameDto) {
+    public AbstractRoundContent createRoundContent(Game game) {
 
-        Tool.verifyValue("gameDto", gameDto);
+        Tool.verifyValue("gameDto", game);
 
-        int nbPlayer = gameDto.getPlayers().size();
-        double durationRatio = gameDto.getDuration().getRatio();
+        int nbPlayer = game.getPlayers().size();
+        double durationRatio = game.getDuration().getRatio();
 
         RoundContentProperties prop = BeanFactory.getBean(RoundContentProperties.class);
 
@@ -59,7 +59,7 @@ public enum Round {
                 int nbPointBonusWon = prop.getChoiceNbPointBonus();
                 int nbPointMalusLoose = prop.getChoiceNbPointMalus();
 
-                gameDto.getPlayers().get(0).setTurnToChoose(true);
+                game.getPlayers().get(0).setTurnToChoose(true);
 
                 return new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
 

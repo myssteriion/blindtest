@@ -6,12 +6,18 @@ import com.myssteriion.blindtest.tools.Tool;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class PlayerDTO {
+/**
+ * Represents a player.
+ */
+public class Player {
 
-	public static final Comparator<PlayerDTO> COMPARATOR = new Comparator<PlayerDTO>() {
+	/**
+	 * The constant COMPARATOR.
+	 */
+	public static final Comparator<Player> COMPARATOR = new Comparator<Player>() {
 
 		@Override
-		public int compare(PlayerDTO o1, PlayerDTO o2) {
+		public int compare(Player o1, Player o2) {
 
 			if (o1 != null && o2 == null)
 				return 1;
@@ -24,16 +30,29 @@ public class PlayerDTO {
 		}
 	};
 
+	/**
+	 * The name.
+	 */
 	private String name;
 
+	/**
+	 * The current score.
+	 */
 	private int score;
 
+	/**
+	 * If is his turn to play/choose.
+	 */
 	private boolean turnToChoose;
 
 
-
+	/**
+	 * Instantiates a new Player.
+	 *
+	 * @param name the name
+	 */
 	@JsonCreator
-	public PlayerDTO(String name) {
+	public Player(String name) {
 
 		Tool.verifyValue("name", name);
 
@@ -43,23 +62,47 @@ public class PlayerDTO {
 	}
 
 
-
+	/**
+	 * Gets name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets score.
+	 *
+	 * @return the score
+	 */
 	public int getScore() {
 		return score;
 	}
 
+	/**
+	 * Add score.
+	 *
+	 * @param score the score
+	 */
 	public void addScore(int score) {
 		this.score += score;
 	}
 
+	/**
+	 * Is turn to choose boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isTurnToChoose() {
 		return turnToChoose;
 	}
 
+	/**
+	 * Sets turn to choose.
+	 *
+	 * @param turnToChoose the turn to choose
+	 */
 	public void setTurnToChoose(boolean turnToChoose) {
 		this.turnToChoose = turnToChoose;
 	}
@@ -80,7 +123,7 @@ public class PlayerDTO {
 		if(obj == null || obj.getClass()!= this.getClass()) 
             return false; 
 		
-		PlayerDTO other = (PlayerDTO) obj;
+		Player other = (Player) obj;
 		return Objects.equals(this.name, other.name);
 	}
 

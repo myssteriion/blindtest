@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.PlayerDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
+import com.myssteriion.blindtest.model.dto.game.Player;
 
 public class ChoiceContent extends AbstractRoundContent {
 
@@ -32,26 +32,26 @@ public class ChoiceContent extends AbstractRoundContent {
 
 
     @Override
-    public GameDTO apply(GameDTO gameDto, MusicResultDTO musicResultDto) {
+    public Game apply(Game game, MusicResult musicResult) {
 
-        gameDto = super.apply(gameDto, musicResultDto);
+        game = super.apply(game, musicResult);
 
-        gameDto.getPlayers().stream()
-                .filter(PlayerDTO::isTurnToChoose)
+        game.getPlayers().stream()
+                .filter(Player::isTurnToChoose)
                 .forEach( playerDto -> {
-                    int point = musicResultDto.isWinner(playerDto.getName()) ? nbPointBonus : nbPointMalus;
+                    int point = musicResult.isWinner(playerDto.getName()) ? nbPointBonus : nbPointMalus;
                     playerDto.addScore(point);
                     playerDto.setTurnToChoose(false);
                 });
 
-        if ( !isLastMusic(gameDto) ) {
+        if ( !isLastMusic(game) ) {
 
             // +1 car le gameDTO n'a pas encore subit le next
-            int numPlayer = (1 + gameDto.getNbMusicsPlayedInRound()) % gameDto.getPlayers().size();
-            gameDto.getPlayers().get(numPlayer).setTurnToChoose(true);
+            int numPlayer = (1 + game.getNbMusicsPlayedInRound()) % game.getPlayers().size();
+            game.getPlayers().get(numPlayer).setTurnToChoose(true);
         }
 
-        return gameDto;
+        return game;
     }
 
 

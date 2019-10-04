@@ -39,7 +39,6 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	private Map<Duration, Integer> bestScores;
 
-	
 
 	/**
 	 * Instantiates a new ProfileStatDTO.
@@ -69,7 +68,6 @@ public class ProfileStatDTO extends AbstractDTO {
 		this.foundMusics = (foundMusics == null) ? new HashMap<>() : foundMusics;
 		this.bestScores = (bestScores == null) ? new HashMap<>() : bestScores;
 	}
-
 
 
 	/**

@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,25 +46,25 @@ public class ChoiceContentTest extends AbstractTest {
     public void apply() {
 
         List<String> playersNames = Arrays.asList("name", "name3", "name2");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
 
         for (int i = 0; i < 20; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.CHOICE, gameDto.getRound() );
-        ChoiceContent choiceContent = (ChoiceContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.CHOICE, game.getRound() );
+        ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
 
-        Assert.assertTrue( gameDto.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( gameDto.getPlayers().get(1).isTurnToChoose() );
-        Assert.assertFalse( gameDto.getPlayers().get(2).isTurnToChoose() );
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
 
 
         try {
-            choiceContent.apply(null, musicResultDto);
+            choiceContent.apply(null, musicResult);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -72,44 +72,44 @@ public class ChoiceContentTest extends AbstractTest {
         }
 
         try {
-            choiceContent.apply(gameDto, null);
+            choiceContent.apply(game, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
         }
 
-        GameDTO actual = choiceContent.apply(gameDto, musicResultDto);
+        Game actual = choiceContent.apply(game, musicResult);
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
-        musicResultDto = new MusicResultDTO(gameId, musicDto, null, playersNames);
-        actual = choiceContent.apply(gameDto, musicResultDto);
-        gameDto.nextStep();
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames);
+        actual = choiceContent.apply(game, musicResult);
+        game.nextStep();
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 50, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
         for (int i = 2; i < 12; i++) {
 
-            choiceContent.apply(gameDto, musicResultDto);
-            gameDto.nextStep();
+            choiceContent.apply(game, musicResult);
+            game.nextStep();
 
             if (i%3 == 0) {
-                Assert.assertTrue( gameDto.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( gameDto.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( gameDto.getPlayers().get(2).isTurnToChoose() );
+                Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
             }
             else if (i%3 == 1) {
-                Assert.assertFalse( gameDto.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertTrue( gameDto.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( gameDto.getPlayers().get(2).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
+                Assert.assertTrue( game.getPlayers().get(1).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
             }
             else {
-                Assert.assertFalse( gameDto.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( gameDto.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertTrue( gameDto.getPlayers().get(2).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
+                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+                Assert.assertTrue( game.getPlayers().get(2).isTurnToChoose() );
             }
         }
     }
@@ -118,13 +118,13 @@ public class ChoiceContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         for (int i = 0; i < 20; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.CHOICE, gameDto.getRound() );
-        ChoiceContent choiceContent = (ChoiceContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.CHOICE, game.getRound() );
+        ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
 
         try {
             choiceContent.isFinished(null);
@@ -134,33 +134,33 @@ public class ChoiceContentTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
         }
 
-        Assert.assertFalse( choiceContent.isFinished(gameDto) );
+        Assert.assertFalse( choiceContent.isFinished(game) );
     }
 
     @Test
     public void isLast() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         for (int i = 0; i < 20; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.CHOICE, gameDto.getRound() );
-        ChoiceContent choiceContent = (ChoiceContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.CHOICE, game.getRound() );
+        ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
 
-        Assert.assertFalse( choiceContent.isLastMusic(gameDto) );
+        Assert.assertFalse( choiceContent.isLastMusic(game) );
 
         for (int i = 0; i < 2; i++) {
-            gameDto.nextStep();
-            Assert.assertFalse( choiceContent.isLastMusic(gameDto) );
+            game.nextStep();
+            Assert.assertFalse( choiceContent.isLastMusic(game) );
         }
 
-        gameDto.nextStep();
-        Assert.assertTrue( choiceContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertTrue( choiceContent.isLastMusic(game) );
 
-        gameDto.nextStep();
-        Assert.assertFalse( choiceContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertFalse( choiceContent.isLastMusic(game) );
     }
 
     @Test

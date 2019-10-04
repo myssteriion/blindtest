@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
 
 public class ThiefContent extends AbstractRoundContent {
 
@@ -24,15 +24,15 @@ public class ThiefContent extends AbstractRoundContent {
 
 
     @Override
-    public GameDTO apply(GameDTO gameDto, MusicResultDTO musicResultDto) {
+    public Game apply(Game game, MusicResult musicResult) {
 
-        gameDto = super.apply(gameDto, musicResultDto);
+        game = super.apply(game, musicResult);
 
-        gameDto.getPlayers().stream()
-                .filter( playerDto -> musicResultDto.isLooser(playerDto.getName()) )
+        game.getPlayers().stream()
+                .filter( playerDto -> musicResult.isLooser(playerDto.getName()) )
                 .forEach( playerDto -> playerDto.addScore(nbPointLoose) );
 
-        return gameDto;
+        return game;
     }
 
 

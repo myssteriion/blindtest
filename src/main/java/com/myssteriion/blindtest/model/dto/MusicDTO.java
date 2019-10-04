@@ -28,7 +28,6 @@ public class MusicDTO extends AbstractDTO {
 	private int played;
 
 
-
 	/**
 	 * Instantiates a new MusicDto.
 	 *

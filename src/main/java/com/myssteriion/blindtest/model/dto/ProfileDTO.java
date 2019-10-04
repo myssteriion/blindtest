@@ -24,7 +24,6 @@ public class ProfileDTO extends AbstractDTO {
 	private Avatar avatar;
 
 
-
 	/**
 	 * Instantiates a new ProfileDto.
 	 *

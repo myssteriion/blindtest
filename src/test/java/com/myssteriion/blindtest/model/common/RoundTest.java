@@ -1,11 +1,10 @@
 package com.myssteriion.blindtest.model.common;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,20 +32,20 @@ public class RoundTest extends AbstractTest {
         List<String> playersNames = Arrays.asList("name", "name2");
         Duration duration = Duration.NORMAL;
 
-        GameDTO gameDTO = new GameDTO(new HashSet<>(playersNames), duration);
+        Game game = new Game(new HashSet<>(playersNames), duration);
 
 
-        Assert.assertTrue( Round.CLASSIC.createRoundContent(gameDTO) instanceof ClassicContent );
-        Assert.assertFalse( gameDTO.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( gameDTO.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertTrue( Round.CLASSIC.createRoundContent(game) instanceof ClassicContent );
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
-        Assert.assertTrue( Round.CHOICE.createRoundContent(gameDTO) instanceof ChoiceContent);
-        Assert.assertTrue( gameDTO.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( gameDTO.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertTrue( Round.CHOICE.createRoundContent(game) instanceof ChoiceContent);
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
-        Assert.assertTrue( Round.THIEF.createRoundContent(gameDTO) instanceof ThiefContent);
-        Assert.assertTrue( gameDTO.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( gameDTO.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertTrue( Round.THIEF.createRoundContent(game) instanceof ThiefContent);
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
     }
 
     @Test

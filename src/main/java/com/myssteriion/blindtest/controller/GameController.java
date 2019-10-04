@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
-import com.myssteriion.blindtest.model.dto.game.NewGameDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
+import com.myssteriion.blindtest.model.dto.game.NewGame;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
@@ -26,31 +26,31 @@ public class GameController {
 	/**
 	 * Initialize the new game.
 	 *
-	 * @param newGameDto the NewGameDTO
+	 * @param newGame the NewGameDTO
 	 * @return a GameDTO
 	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping
-	public ResponseEntity<GameDTO> newGame(@RequestBody NewGameDTO newGameDto) throws DaoException, NotFoundException {
+	public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws DaoException, NotFoundException {
 
-		GameDTO gameDto = gameService.newGame(newGameDto);
-		return ResponseBuilder.create200(gameDto);
+		Game game = gameService.newGame(newGame);
+		return ResponseBuilder.create200(game);
 	}
 
 	/**
 	 * Apply the result on the game.
 	 *
-	 * @param musicResultDto the MusicResultDTO
+	 * @param musicResult the MusicResultDTO
 	 * @return the GameDTO after apply
 	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping(path = "/apply")
-	public ResponseEntity<GameDTO> apply(@RequestBody MusicResultDTO musicResultDto) throws DaoException, NotFoundException {
+	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws DaoException, NotFoundException {
 
-		GameDTO gameDTO = gameService.apply(musicResultDto);
-		return ResponseBuilder.create200(gameDTO);
+		Game game = gameService.apply(musicResult);
+		return ResponseBuilder.create200(game);
 	}
 	
 }

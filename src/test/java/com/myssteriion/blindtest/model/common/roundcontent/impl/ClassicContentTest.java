@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,17 +40,17 @@ public class ClassicContentTest extends AbstractTest {
     public void apply() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
 
-        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
-        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.CLASSIC, game.getRound() );
+        ClassicContent classicContent = (ClassicContent) game.getRoundContent();
 
         try {
-            classicContent.apply(null, musicResultDto);
+            classicContent.apply(null, musicResult);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -58,7 +58,7 @@ public class ClassicContentTest extends AbstractTest {
         }
 
         try {
-            classicContent.apply(gameDto, null);
+            classicContent.apply(game, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -66,8 +66,8 @@ public class ClassicContentTest extends AbstractTest {
         }
 
 
-        GameDTO actual = classicContent.apply(gameDto, musicResultDto);
-        gameDto.nextStep();
+        Game actual = classicContent.apply(game, musicResult);
+        game.nextStep();
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
     }
 
@@ -75,10 +75,10 @@ public class ClassicContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
-        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
-        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();;
+        Assert.assertSame( Round.CLASSIC, game.getRound() );
+        ClassicContent classicContent = (ClassicContent) game.getRoundContent();;
 
         try {
             classicContent.isFinished(null);
@@ -88,39 +88,39 @@ public class ClassicContentTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
         }
 
-        Assert.assertFalse( classicContent.isFinished(gameDto) );
+        Assert.assertFalse( classicContent.isFinished(game) );
 
         for (int i = 0; i < 19; i++) {
-            gameDto.nextStep();
-            Assert.assertFalse( classicContent.isFinished(gameDto) );
+            game.nextStep();
+            Assert.assertFalse( classicContent.isFinished(game) );
         }
 
         // le isFinish ne peut etre testé à "true" car le nextStep remet à 0 le "nbMusicsPlayedInRound"
-        gameDto.nextStep();
-        Assert.assertEquals( 0, gameDto.getNbMusicsPlayedInRound() );
+        game.nextStep();
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
     }
 
     @Test
     public void isLast() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
-        Assert.assertSame( Round.CLASSIC, gameDto.getRound() );
-        ClassicContent classicContent = (ClassicContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.CLASSIC, game.getRound() );
+        ClassicContent classicContent = (ClassicContent) game.getRoundContent();
 
-        Assert.assertFalse( classicContent.isLastMusic(gameDto) );
+        Assert.assertFalse( classicContent.isLastMusic(game) );
 
         for (int i = 0; i < 18; i++) {
-            gameDto.nextStep();
-            Assert.assertFalse( classicContent.isLastMusic(gameDto) );
+            game.nextStep();
+            Assert.assertFalse( classicContent.isLastMusic(game) );
         }
 
-        gameDto.nextStep();
-        Assert.assertTrue( classicContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertTrue( classicContent.isLastMusic(game) );
 
-        gameDto.nextStep();
-        Assert.assertFalse( classicContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertFalse( classicContent.isLastMusic(game) );
     }
 
     @Test

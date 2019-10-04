@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.game.GameDTO;
-import com.myssteriion.blindtest.model.dto.game.MusicResultDTO;
+import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.dto.game.MusicResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -43,20 +43,20 @@ public class ThiefContentTest extends AbstractTest {
     public void apply() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResultDTO musicResultDto = new MusicResultDTO(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
 
         for (int i = 0; i < 24; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.THIEF, gameDto.getRound() );
-        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.THIEF, game.getRound() );
+        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
 
         try {
-            thiefContent.apply(null, musicResultDto);
+            thiefContent.apply(null, musicResult);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -64,7 +64,7 @@ public class ThiefContentTest extends AbstractTest {
         }
 
         try {
-            thiefContent.apply(gameDto, null);
+            thiefContent.apply(game, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -72,13 +72,13 @@ public class ThiefContentTest extends AbstractTest {
         }
 
 
-        GameDTO actual = thiefContent.apply(gameDto, musicResultDto);
+        Game actual = thiefContent.apply(game, musicResult);
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
 
 
-        musicResultDto = new MusicResultDTO(gameId, musicDto, null, playersNames);
-        actual = thiefContent.apply(gameDto, musicResultDto);
-        gameDto.nextStep();
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames);
+        actual = thiefContent.apply(game, musicResult);
+        game.nextStep();
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
     }
 
@@ -86,13 +86,13 @@ public class ThiefContentTest extends AbstractTest {
     public void isFinished() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         for (int i = 0; i < 24; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.THIEF, gameDto.getRound() );
-        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.THIEF, game.getRound() );
+        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
 
         try {
             thiefContent.isFinished(null);
@@ -102,33 +102,33 @@ public class ThiefContentTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
         }
 
-        Assert.assertFalse( thiefContent.isFinished(gameDto) );
+        Assert.assertFalse( thiefContent.isFinished(game) );
     }
 
     @Test
     public void isLast() {
 
         List<String> playersNames = Arrays.asList("name");
-        GameDTO gameDto = new GameDTO(new HashSet<>(playersNames), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
 
         for (int i = 0; i < 24; i++)
-            gameDto.nextStep();
+            game.nextStep();
 
-        Assert.assertSame( Round.THIEF, gameDto.getRound() );
-        ThiefContent thiefContent = (ThiefContent) gameDto.getRoundContent();
+        Assert.assertSame( Round.THIEF, game.getRound() );
+        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
 
-        Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
+        Assert.assertFalse( thiefContent.isLastMusic(game) );
 
         for (int i = 0; i < 18; i++) {
-            gameDto.nextStep();
-            Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
+            game.nextStep();
+            Assert.assertFalse( thiefContent.isLastMusic(game) );
         }
 
-        gameDto.nextStep();
-        Assert.assertTrue( thiefContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertTrue( thiefContent.isLastMusic(game) );
 
-        gameDto.nextStep();
-        Assert.assertFalse( thiefContent.isLastMusic(gameDto) );
+        game.nextStep();
+        Assert.assertFalse( thiefContent.isLastMusic(game) );
     }
 
     @Test
