@@ -24,7 +24,7 @@ export class ProfileEditComponent implements OnInit {
 
 	avatars: Avatar[];
 
-	showAvatars: boolean = false;
+	showAvatars: boolean;
 
 	faEye = faEye;
 	faEyeSlash = faEyeSlash;
@@ -40,6 +40,8 @@ export class ProfileEditComponent implements OnInit {
 	public ngOnInit() {
 
 		this._toolsService.verifyValue("create", this.create);
+
+		this.showAvatars = false;
 
 		if (this.create) {
 
@@ -84,7 +86,6 @@ export class ProfileEditComponent implements OnInit {
 		this._avatarResource.getAll().subscribe(
 			response => {
 				this.avatars = response.items;
-				this.initCarousel();
 			},
 			error => {
 				throw Error("can't find all avatars : " + error);
@@ -94,10 +95,10 @@ export class ProfileEditComponent implements OnInit {
 
 	public showHideAvatars(): void {
 
-		this.showAvatars = !this.showAvatars;
-		if (this.showAvatars) {
+		if (!this.showAvatars) {
 			this.initCarousel();
 		}
+		this.showAvatars = !this.showAvatars;
 	}
 
 	private initCarousel(): void {
