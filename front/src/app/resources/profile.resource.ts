@@ -24,6 +24,10 @@ export class ProfileResource {
 		return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
 	}
 
+	public delete(profile: Profile): Observable<List<Profile>> {
+		return this._http.delete<List<Profile>>(this._profilePath + "/" + profile.id);
+	}
+
 	public findAll(): Observable<List<Profile>> {
 		return this._http.get<List<Profile>>(this._profilePath);
 	}

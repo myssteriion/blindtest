@@ -1,0 +1,20 @@
+.modal-confirm-header, .modal-confirm-body, .modal-confirm-footer {
+    margin: 1em;
+}
+
+.modal-confirm-header {
+    border-bottom: 1px solid silver;
+}
+
+.modal-confirm-footer {
+    border-top: 1px solid silver;
+}
+
+.modal-confirm-footer div {
+    text-align: right;
+}
+
+.modal-confirm-footer button {
+    margin-top: 10px;
+    margin-left: 10px;
+}

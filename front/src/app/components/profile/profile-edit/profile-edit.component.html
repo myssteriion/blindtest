@@ -1,25 +1,26 @@
-<div class="row profil-edit-header">
-    <h3 *ngIf="create" class="col-sm-12">{{ 'PROFIL.EDIT.CREATION_TITLE' | translate }}</h3>
-    <h3 *ngIf="!create" class="col-sm-12">{{ 'PROFIL.EDIT.UPDATE_TITLE' | translate }}</h3>
+<!--suppress ALL -->
+<div class="row profile-edit-header">
+    <h3 *ngIf="create" class="col-sm-12">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</h3>
+    <h3 *ngIf="!create" class="col-sm-12">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</h3>
 </div>
 
-<div class="row profil-edit-body">
+<div class="row profile-edit-body">
     <div class="col-sm-12">
 
         <div class="row profile-edit-name">
-            <div class="col-3"><label>{{ 'PROFIL.EDIT.NAME_LABEL' | translate }}</label></div>
+            <div class="col-3"><label>{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</label></div>
             <div class="col-9">
-                <input class="form-control" [(ngModel)]="newProfile.name"  placeholder="{{ 'PROFIL.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
+                <input class="form-control" [(ngModel)]="newProfile.name"  placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
             </div>
         </div>
 
         <div class="row profile-edit-avatar">
-            <div class="col-3"><label>{{ 'PROFIL.EDIT.AVATAR_LABEL' | translate }}</label></div>
+            <div class="col-3"><label>{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</label></div>
             <div class="col-3"><img src="{{ getCurrentAvatarFluxForImg() }}" /></div>
             <div class="col-6">
-                <fa-icon-custom *ngIf="!showAvatars" [icon]="faEye" [tooltip]="'PROFIL.EDIT.SHOW_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
-                <fa-icon-custom *ngIf="showAvatars" [icon]="faEyeSlash" [tooltip]="'PROFIL.EDIT.HIDE_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
-                <fa-icon-custom [icon]="faSyncAlt" [tooltip]="'PROFIL.EDIT.REFRESH_TOOLTIP'" (click)="refreshAvatars()"></fa-icon-custom>
+                <fa-icon-custom *ngIf="!showAvatars" [icon]="faEye" [tooltip]="'PROFILE.EDIT.SHOW_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
+                <fa-icon-custom *ngIf="showAvatars" [icon]="faEyeSlash" [tooltip]="'PROFILE.EDIT.HIDE_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
+                <fa-icon-custom [icon]="faSyncAlt" [tooltip]="'PROFILE.EDIT.REFRESH_TOOLTIP'" (click)="refreshAvatars()"></fa-icon-custom>
             </div>
         </div>
 
@@ -35,7 +36,7 @@
     </div>
 </div>
 
-<div class="row profil-edit-footer">
+<div class="row profile-edit-footer">
     <div class="col-sm-12">
         <button class="btn btn-success" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
         <button class="btn btn-danger" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>  

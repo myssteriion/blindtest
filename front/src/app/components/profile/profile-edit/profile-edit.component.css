@@ -1,20 +1,20 @@
-.profil-edit-header, .profil-edit-body, .profil-edit-footer {
+.profile-edit-header, .profile-edit-body, .profile-edit-footer {
 	margin: 1em;
 }
 
-.profil-edit-header {
+.profile-edit-header {
 	border-bottom: 1px solid silver;
 }
 
-.profil-edit-footer {
+.profile-edit-footer {
 	border-top: 1px solid silver;
 }
 
-.profil-edit-footer div {
+.profile-edit-footer div {
 	text-align: right;
 }
 
-.profil-edit-footer button {
+.profile-edit-footer button {
 	margin-top: 10px;
 	margin-left: 10px;
 }

@@ -9,8 +9,8 @@
 
     <div *ngIf="canUpdate" class="col-3 profile-card-action-button">
         <div>
-            <fa-icon-custom [icon]="faEdit" [tooltip]="'PROFIL.CARD.EDIT_TOOLTIP'" (click)="edit()"
-            tooltipClass="fa-icon-custom-background"></fa-icon-custom>
+            <fa-icon-custom [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
+            <fa-icon-custom [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>
         </div>
     </div>
 

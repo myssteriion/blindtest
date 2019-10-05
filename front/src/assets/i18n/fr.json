@@ -1,11 +1,16 @@
 {
     "COMMON": {
         "SAVE": "Enregistrer",
-        "CANCEL": "Annuler"
+        "CANCEL": "Annuler",
+        "YES": "Oui",
+        "NO": "Non",
+        "WARNING": "Attention"
     },
-    "PROFIL": {
+    "PROFILE": {
         "CARD": {
-            "EDIT_TOOLTIP": "Modifier le profil."
+            "EDIT_TOOLTIP": "Modifier le profil.",
+            "DELETE_TOOLTIP": "Supprimer le profil.",
+            "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?"
         },
         "EDIT": {
             "CREATION_TITLE": "Création du profil",
