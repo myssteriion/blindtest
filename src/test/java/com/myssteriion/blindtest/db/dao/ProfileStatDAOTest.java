@@ -21,7 +21,6 @@ import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 
 
@@ -249,7 +248,53 @@ public class ProfileStatDAOTest extends AbstractTest {
 		Assert.assertEquals( new Integer(50), profileStatDto.getFoundMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( new Integer(100), profileStatDto.getBestScores().get(Duration.NORMAL) );
 	}
-	
+
+	@Test
+	public void delete() throws DaoException, SQLException {
+
+		profileStatDao = Mockito.spy( new ProfileStatDAO() );
+		MockitoAnnotations.initMocks(this);
+
+		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
+		profileStatDto.setId(1);
+		Mockito.doReturn(profileStatDto).when(profileStatDao).find(Mockito.any(ProfileStatDTO.class));
+
+
+		SQLException sql = new SQLException("sql");
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
+
+
+		try {
+			profileStatDao.delete(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+
+
+		ProfileStatDTO profileStatDtoToDelete = new ProfileStatDTO(1);
+		try {
+			profileStatDao.delete(profileStatDtoToDelete);
+			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+
+		profileStatDtoToDelete.setId(1);
+		try {
+			profileStatDao.delete(profileStatDtoToDelete);
+			Assert.fail("Doit lever une DaoException car le mock throw.");
+		}
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't delete dto.", sql), e);
+		}
+
+		profileStatDao.delete(profileStatDtoToDelete);
+	}
 	
 	
 	private SimpleResultSet getResultSet() {

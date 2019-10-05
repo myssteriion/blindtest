@@ -46,6 +46,7 @@ public class ProfileStatDAO extends AbstractDAO<ProfileStatDTO> {
 					"found_musics = ?, best_scores = ? WHERE id = ?");
 
 			findAll = em.createPreparedStatement("SELECT * FROM profile_stat");
+			delete = em.createPreparedStatement("DELETE FROM profile_stat WHERE id = ?");
 
 			findById = em.createPreparedStatement("SELECT * FROM profile_stat WHERE id = ?");
 			findByProfileId = em.createPreparedStatement("SELECT * FROM profile_stat WHERE profile_id = ?");

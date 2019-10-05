@@ -189,7 +189,54 @@ public class MusicDAOTest extends AbstractTest {
 		Assert.assertEquals( "name", musicDto.getName() );
 		Assert.assertEquals( Theme.ANNEES_80, musicDto.getTheme() );
 	}
-	
+
+	@Test
+	public void delete() throws DaoException, SQLException {
+
+        musicDao = Mockito.spy( new MusicDAO() );
+        MockitoAnnotations.initMocks(this);
+
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+        musicDto.setId(1);
+        Mockito.doReturn(musicDto).when(musicDao).find(Mockito.any(MusicDTO.class));
+
+
+		SQLException sql = new SQLException("sql");
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
+
+
+		try {
+			musicDao.delete(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+
+
+		MusicDTO musicDtoToDelete = new MusicDTO("name", Theme.ANNEES_80);
+		try {
+			musicDao.delete(musicDtoToDelete);
+			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+
+		musicDtoToDelete.setId(1);
+		try {
+			musicDao.delete(musicDtoToDelete);
+			Assert.fail("Doit lever une DaoException car le mock throw.");
+		}
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't delete dto.", sql), e);
+		}
+
+		musicDao.delete(musicDtoToDelete);
+	}
+
 	
 	
 	private SimpleResultSet getResultSet() {

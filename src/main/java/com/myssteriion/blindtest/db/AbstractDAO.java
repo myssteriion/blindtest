@@ -51,6 +51,11 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 	 */
 	protected PreparedStatement findAll;
 
+	/**
+	 * "Delete" PreparedStatement.
+	 */
+	protected PreparedStatement delete;
+
 
 
 	/**
@@ -175,6 +180,36 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 			throw new DaoException("Can't findAll dto.", e);
 		}
 	}
+
+	/**
+	 * Delete dto in DB.
+	 *
+	 * @return TRUE if the dto was deleted, FALSE otherwise
+	 * @throws DaoException DB exception
+	 * @see #delete
+	 */
+	public boolean delete(T dto) throws DaoException {
+
+		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("dto -> id", dto.getId());
+
+		try {
+
+			initQueryIfNeedIt();
+
+			delete.clearParameters();
+			delete.setInt( 1, dto.getId() );
+			delete.executeUpdate();
+
+			LOGGER.info("dto deleted (" + dto.toString() + ").");
+
+			return Tool.isNullOrEmpty( find(dto) );
+		}
+		catch (SQLException e) {
+			throw new DaoException("Can't delete dto.", e);
+		}
+	}
+
 
 
 	/**

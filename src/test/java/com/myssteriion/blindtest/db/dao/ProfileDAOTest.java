@@ -1,12 +1,10 @@
 package com.myssteriion.blindtest.db.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.EntityManager;
 import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.h2.tools.SimpleResultSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,11 +13,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-
-import javax.naming.ldap.PagedResultsControl;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 
 
 public class ProfileDAOTest extends AbstractTest {
@@ -193,7 +189,53 @@ public class ProfileDAOTest extends AbstractTest {
 		Assert.assertEquals( "name", profileDto.getName() );
 		Assert.assertEquals( "avatar", profileDto.getAvatar().getName() );
 	}
-	
+
+	@Test
+	public void delete() throws DaoException, SQLException {
+
+		profileDao = Mockito.spy( new ProfileDAO() );
+		MockitoAnnotations.initMocks(this);
+
+		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
+		profileDto.setId(1);
+		Mockito.doReturn(profileDto).when(profileDao).find(Mockito.any(ProfileDTO.class));
+
+
+		SQLException sql = new SQLException("sql");
+		PreparedStatement statement = Mockito.mock(PreparedStatement.class);
+		Mockito.when(statement.executeUpdate()).thenThrow(sql).thenReturn(1);
+		Mockito.when(em.createPreparedStatement(Mockito.anyString())).thenReturn(statement);
+
+
+		try {
+			profileDao.delete(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+		}
+
+
+		ProfileDTO profileDtoToDelete = new ProfileDTO("name", new Avatar("avatar"));
+		try {
+			profileDao.delete(profileDtoToDelete);
+			Assert.fail("Doit lever une IllegalArgumentException car il manque l'id.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+		}
+
+		profileDtoToDelete.setId(1);
+		try {
+			profileDao.delete(profileDtoToDelete);
+			Assert.fail("Doit lever une DaoException car le mock throw.");
+		}
+		catch (DaoException e) {
+			verifyException(new DaoException("Can't delete dto.", sql), e);
+		}
+
+		profileDao.delete(profileDtoToDelete);
+	}
 	
 	
 	private SimpleResultSet getResultSet() {
