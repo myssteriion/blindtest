@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0656bee1-52cc-4d64-aa2c-90a4c34a3563",
+		"_postman_id": "3d4192be-0565-4c72-ac5b-508b43f3f804",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -129,6 +129,26 @@
 							"port": "{{port}}",
 							"path": [
 								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles",
+								"3"
 							]
 						}
 					},
