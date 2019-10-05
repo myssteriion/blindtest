@@ -108,10 +108,11 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
         Tool.verifyValue("dto", dto);
         Tool.verifyValue("dto -> id", dto.getId());
 
-        if ( Tool.isNullOrEmpty( dao.find(dto) ) )
+        DTO dtoFound = dao.find(dto);
+        if ( Tool.isNullOrEmpty(dtoFound) )
             throw new NotFoundException("Dto not found.");
 
-        dao.delete(dto);
+        dao.delete(dtoFound);
     }
     
 }
