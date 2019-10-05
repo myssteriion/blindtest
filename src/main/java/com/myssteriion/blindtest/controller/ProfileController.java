@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.base.ListDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
@@ -69,5 +70,16 @@ public class ProfileController {
 		List<ProfileDTO> list = profileService.findAll();
 		return ResponseBuilder.create200(list);
 	}
-	
+
+	@DeleteMapping(path = Constant.ID_PATH_PARAM)
+	public ResponseEntity<Empty> delete(@PathVariable("id") Integer id) throws DaoException, NotFoundException, ConflictException {
+
+		ProfileDTO profileDto = new ProfileDTO("ANY");
+		profileDto.setId(id);
+
+		profileService.delete(profileDto);
+
+		return ResponseBuilder.create204();
+	}
+
 }

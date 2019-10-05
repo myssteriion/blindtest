@@ -184,11 +184,10 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 	/**
 	 * Delete dto in DB.
 	 *
-	 * @return TRUE if the dto was deleted, FALSE otherwise
 	 * @throws DaoException DB exception
 	 * @see #delete
 	 */
-	public boolean delete(T dto) throws DaoException {
+	public void delete(T dto) throws DaoException {
 
 		Tool.verifyValue("dto", dto);
 		Tool.verifyValue("dto -> id", dto.getId());
@@ -202,8 +201,6 @@ public abstract class AbstractDAO<T extends AbstractDTO> {
 			delete.executeUpdate();
 
 			LOGGER.info("dto deleted (" + dto.toString() + ").");
-
-			return Tool.isNullOrEmpty( find(dto) );
 		}
 		catch (SQLException e) {
 			throw new DaoException("Can't delete dto.", e);

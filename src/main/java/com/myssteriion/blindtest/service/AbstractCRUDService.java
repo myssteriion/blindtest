@@ -100,11 +100,10 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      * Delete dto.
      *
      * @param dto the dto
-     * @return TRUE if the dto was deleted, FALSE otherwise
      * @throws DaoException      the dao exception
      * @throws NotFoundException the not found exception
      */
-    public boolean delete(DTO dto) throws DaoException, NotFoundException {
+    public void delete(DTO dto) throws DaoException, NotFoundException {
 
         Tool.verifyValue("dto", dto);
         Tool.verifyValue("dto -> id", dto.getId());
@@ -112,7 +111,7 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
         if ( Tool.isNullOrEmpty( dao.find(dto) ) )
             throw new NotFoundException("Dto not found.");
 
-        return dao.delete(dto);
+        dao.delete(dto);
     }
     
 }
