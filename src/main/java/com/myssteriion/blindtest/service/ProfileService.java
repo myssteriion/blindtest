@@ -44,7 +44,7 @@ public class ProfileService {
 		ProfileDTO foundProfileDto = profileDao.find(profileDto);
 		
 		if ( !Tool.isNullOrEmpty(foundProfileDto) )
-			throw new ConflictException("The profileDto name is already used.");
+			throw new ConflictException("Profile name is already used.");
 		
 		
 		foundProfileDto = profileDao.save(profileDto);
@@ -70,7 +70,7 @@ public class ProfileService {
 		
 		ProfileDTO foundProfileDto = profileDao.find(profileDto);
 		if ( Tool.isNullOrEmpty(foundProfileDto) )
-			throw new NotFoundException("profileDto not found.");
+			throw new NotFoundException("Profile not found.");
 		
 		
 		Integer id = profileDto.getId();
@@ -78,7 +78,7 @@ public class ProfileService {
 		
 		foundProfileDto = profileDao.find(profileDto);
 		if ( foundProfileDto != null  && !foundProfileDto.getId().equals(id) )
-			throw new ConflictException("The profileDto name is already used.");
+			throw new ConflictException("Profile name is already used.");
 		
 		profileDto.setId(id);
 		return profileDao.update(profileDto);
@@ -106,5 +106,25 @@ public class ProfileService {
 	public List<ProfileDTO> findAll() throws DaoException {
 		return profileDao.findAll();
 	}
-	
+
+	/**
+	 * Delete profile dto.
+	 *
+	 * @param profileDto the profile dto
+	 * @return RUE if the was deleted, FALSE otherwise
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
+	public boolean delete(ProfileDTO profileDto) throws DaoException, NotFoundException {
+
+		Tool.verifyValue("profileDto", profileDto);
+		Tool.verifyValue("profileDto -> id", profileDto.getId());
+
+		ProfileDTO foundMusicDto = profileDao.find(profileDto);
+		if ( Tool.isNullOrEmpty(foundMusicDto) )
+			throw new NotFoundException("Profile not found.");
+
+		return profileDao.delete(profileDto);
+	}
+
 }

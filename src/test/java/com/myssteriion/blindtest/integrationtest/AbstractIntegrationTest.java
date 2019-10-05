@@ -64,7 +64,7 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 	protected void insertData() throws ConflictException, DaoException, NotFoundException {
 
 		for (MusicDTO musicDto : MUSICS_LIST)
-			musicService.save(musicDto, false);
+			musicService.save(musicDto);
 
 		for (ProfileDTO profileDTO : PROFILES_LIST)
 			profileService.save(profileDTO);

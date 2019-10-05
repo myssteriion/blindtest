@@ -61,7 +61,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Player 'name' must have a profile"), e);
+			verifyException(new NotFoundException("Player 'name' must have a profile."), e);
 		}
 
 
@@ -101,7 +101,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException le gameDto n'est pas retrouvée.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("gameDto not found."), e);
+			verifyException(new NotFoundException("Game not found."), e);
 		}
 
 
@@ -113,7 +113,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car le mock return null.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("musicDto not found"), e);
+			verifyException(new NotFoundException("Music not found."), e);
 		}
 
 

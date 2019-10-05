@@ -44,7 +44,7 @@ public class ProfileStatService {
 		ProfileStatDTO foundProfileDto = profileStatDao.find(profileStatDto);
 		
 		if ( !Tool.isNullOrEmpty(foundProfileDto) )
-			throw new ConflictException("profileStatDto already exists.");
+			throw new ConflictException("Profile stat already exists.");
 		
 		
 		foundProfileDto = profileStatDao.save(profileStatDto);
@@ -67,7 +67,7 @@ public class ProfileStatService {
 
 		ProfileStatDTO foundProfileStatDto = profileStatDao.find(profileStatDTO);
 		if ( Tool.isNullOrEmpty(foundProfileStatDto) )
-			throw new NotFoundException("profileStatDTO not found.");
+			throw new NotFoundException("Profile stat not found.");
 
 		return profileStatDao.update(profileStatDTO);
 	}
@@ -100,13 +100,13 @@ public class ProfileStatService {
 		ProfileDTO foundProfileDto = profileService.find(profileDto);
 
 		if ( Tool.isNullOrEmpty(foundProfileDto) )
-			throw new NotFoundException("profileDto not found.");
+			throw new NotFoundException("Profile not found.");
 
 		ProfileStatDTO profileStatDto = new ProfileStatDTO( foundProfileDto.getId() );
 		ProfileStatDTO foundProfileStatDTO = profileStatDao.find(profileStatDto);
 
 		if ( Tool.isNullOrEmpty(foundProfileStatDTO) )
-			throw new NotFoundException("profileStatDto not found.");
+			throw new NotFoundException("Profile stat not found.");
 
 		return foundProfileStatDTO;
 	}
@@ -122,6 +122,27 @@ public class ProfileStatService {
 	}
 
 	/**
+	 * Delete profileStat dto.
+	 *
+	 * @param profileStat the profile dto
+	 * @return RUE if the was deleted, FALSE otherwise
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
+	public boolean delete(ProfileStatDTO profileStat) throws DaoException, NotFoundException {
+
+		Tool.verifyValue("profileStat", profileStat);
+		Tool.verifyValue("profileStat -> id", profileStat.getId());
+
+		ProfileStatDTO foundMusicDto = profileStatDao.find(profileStat);
+		if ( Tool.isNullOrEmpty(foundMusicDto) )
+			throw new NotFoundException("Profile stat not found.");
+
+		return profileStatDao.delete(profileStat);
+	}
+
+
+	/**
 	 * Check if the profile exists for profileStat.
 	 *
 	 * @param profileStatDto the profileStatDto
@@ -134,7 +155,7 @@ public class ProfileStatService {
 		profileDto.setId( profileStatDto.getProfileId() );
 		profileDto = profileService.find(profileDto);
 		if ( Tool.isNullOrEmpty(profileDto) )
-			throw new NotFoundException("profileDto not found.");
+			throw new NotFoundException("Profile not found.");
 	}
 	
 }

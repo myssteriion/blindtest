@@ -72,14 +72,14 @@ public class GameService {
 		Game game = games.stream()
 							.filter( g -> g.getId().equals(musicResult.getGameId()) )
 							.findFirst()
-							.orElseThrow( () -> new NotFoundException("gameDto not found.") );
+							.orElseThrow( () -> new NotFoundException("Game not found.") );
 
 		if ( !game.isFinished() ) {
 
 			// update musicDto
 			MusicDTO musicDto = musicService.find( musicResult.getMusicDTO() );
 			if (musicDto == null)
-				throw new NotFoundException("musicDto not found");
+				throw new NotFoundException("Music not found.");
 
 			musicDto.incrementPlayed();
 			musicService.update(musicDto);
@@ -127,7 +127,7 @@ public class GameService {
 
 			ProfileDTO profileDto =  profileService.find( new ProfileDTO(playerName));
 			if (profileDto == null)
-				throw new NotFoundException("Player '" + playerName + "' must have a profile");
+				throw new NotFoundException("Player '" + playerName + "' must have a profile.");
 		}
 	}
 

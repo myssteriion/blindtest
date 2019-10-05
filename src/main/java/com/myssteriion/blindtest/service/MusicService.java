@@ -47,7 +47,7 @@ public class MusicService {
 			File themeDirectory = path.toFile();
 			for ( File music : Tool.getChildren(themeDirectory) ) {
 				if ( music.isFile() )
-					save(new MusicDTO(music.getName(), theme), false);
+					save( new MusicDTO(music.getName(), theme) );
 			}
 		}
 	}
@@ -67,24 +67,22 @@ public class MusicService {
 	 * Save music dto.
 	 *
 	 * @param musicDto      the music dto
-	 * @param throwIfExists the throw if exists
 	 * @return the music dto
 	 * @throws DaoException      the dao exception
 	 * @throws ConflictException the conflict exception
 	 */
-	public MusicDTO save(MusicDTO musicDto, boolean throwIfExists) throws DaoException, ConflictException {
+	public MusicDTO save(MusicDTO musicDto) throws DaoException, ConflictException {
 		
 		Tool.verifyValue("musicDto", musicDto);
 		
 		musicDto.setId(null);
 		MusicDTO foundMusicDto = musicDao.find(musicDto);
 		
-		if (!Tool.isNullOrEmpty(foundMusicDto) && throwIfExists)
-			throw new ConflictException("musicDto already exists.");
-		
-		
-		if ( Tool.isNullOrEmpty(foundMusicDto) )
-			foundMusicDto = musicDao.save(musicDto);
+		if ( !Tool.isNullOrEmpty(foundMusicDto) )
+			throw new ConflictException("Music already exists.");
+
+
+		foundMusicDto = musicDao.save(musicDto);
 		
 		return foundMusicDto;
 	}
@@ -104,7 +102,7 @@ public class MusicService {
 
 		MusicDTO foundMusicDto = musicDao.find(musicDto);
 		if ( Tool.isNullOrEmpty(foundMusicDto) )
-			throw new NotFoundException("musicDto not found.");
+			throw new NotFoundException("Music not found.");
 
 		return musicDao.update(musicDto);
 	}
@@ -120,6 +118,26 @@ public class MusicService {
 
 		Tool.verifyValue("musicDto", musicDto);
 		return musicDao.find(musicDto);
+	}
+
+	/**
+	 * Delete music dto.
+	 *
+	 * @param musicDto the music dto
+	 * @return RUE if the was deleted, FALSE otherwise
+	 * @throws DaoException      the dao exception
+	 * @throws NotFoundException the not found exception
+	 */
+	public boolean delete(MusicDTO musicDto) throws DaoException, NotFoundException {
+
+		Tool.verifyValue("musicDto", musicDto);
+		Tool.verifyValue("musicDto -> id", musicDto.getId());
+
+		MusicDTO foundMusicDto = musicDao.find(musicDto);
+		if ( Tool.isNullOrEmpty(foundMusicDto) )
+			throw new NotFoundException("Music not found.");
+
+		return musicDao.delete(musicDto);
 	}
 
 

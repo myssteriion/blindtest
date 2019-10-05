@@ -60,7 +60,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profileDto not found."), e);
+			verifyException(new NotFoundException("Profile not found."), e);
 		}
 		
 		Assert.assertSame( profileStatDtoMock, profileStatService.save(profileStatDto) );
@@ -70,7 +70,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("profileStatDto already exists."), e);
+			verifyException(new ConflictException("Profile stat already exists."), e);
 		}
 
 		ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
@@ -117,7 +117,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profileStatDTO not found."), e);
+			verifyException(new NotFoundException("Profile stat not found."), e);
 		}
 
 		profileStatDto.setId(1);
@@ -169,7 +169,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le stub (profileService) renvoi null.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profileDto not found."), e);
+			verifyException(new NotFoundException("Profile not found."), e);
 		}
 
 		try {
@@ -177,7 +177,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le stub (profileStatDao) renvoi null.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profileStatDto not found."), e);
+			verifyException(new NotFoundException("Profile stat not found."), e);
 		}
 
 

@@ -62,7 +62,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("The profileDto name is already used."), e);
+			verifyException(new ConflictException("Profile name is already used."), e);
 		}
 
 		ProfileDTO profileDtoSaved = profileService.save(profileDto);
@@ -109,7 +109,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("profileDto not found."), e);
+			verifyException(new NotFoundException("Profile not found."), e);
 		}
 		
 		try {
@@ -118,7 +118,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("The profileDto name is already used."), e);
+			verifyException(new ConflictException("Profile name is already used."), e);
 		}
 		
 		profileDto.setId(1);

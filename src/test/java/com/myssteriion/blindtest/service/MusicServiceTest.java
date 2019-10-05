@@ -52,7 +52,7 @@ public class MusicServiceTest extends AbstractTest {
 
 		musicService = Mockito.spy( new MusicService() );
 		MockitoAnnotations.initMocks(musicService);
-		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class), Mockito.anyBoolean());
+		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
 
 		musicService.refresh();
 	}
@@ -65,7 +65,7 @@ public class MusicServiceTest extends AbstractTest {
 		
 		
 		try {
-			musicService.save(null, false);
+			musicService.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -75,21 +75,21 @@ public class MusicServiceTest extends AbstractTest {
 		
 		MusicDTO musicDtoMock = new MusicDTO(name, theme);
 		musicDtoMock.setId(1);
-		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
+		Mockito.when(musicDao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock, null);
 		Mockito.when(musicDao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDtoMock);
 		
 		MusicDTO musicDto = new MusicDTO(name, theme);
-		Assert.assertSame( musicDtoMock, musicService.save(musicDto, false) );
-		
+		Assert.assertSame( musicDtoMock, musicService.save(musicDto) );
+
 		try {
-			musicService.save(musicDto, true);
+			musicService.save(musicDto);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("musicDto already exists."), e);
+			verifyException(new ConflictException("Music already exists."), e);
 		}
 
-		MusicDTO musicDtoSaved = musicService.save(musicDto, false);
+		MusicDTO musicDtoSaved = musicService.save(musicDto);
 		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( name, musicDtoSaved.getName() );
 		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
@@ -135,7 +135,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("musicDto not found."), e);
+			verifyException(new NotFoundException("Music not found."), e);
 		}
 
 		musicDto.setId(1);
