@@ -23,10 +23,12 @@ import java.util.stream.Collectors;
  * Service for MusicDTO.
  */
 @Service
-public class MusicService {
+public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 	@Autowired
-	private MusicDAO musicDao;
+	public MusicService(MusicDAO dao) {
+		super(dao);
+	}
 
 
 
@@ -64,84 +66,6 @@ public class MusicService {
 
 
 	/**
-	 * Save music dto.
-	 *
-	 * @param musicDto      the music dto
-	 * @return the music dto
-	 * @throws DaoException      the dao exception
-	 * @throws ConflictException the conflict exception
-	 */
-	public MusicDTO save(MusicDTO musicDto) throws DaoException, ConflictException {
-		
-		Tool.verifyValue("musicDto", musicDto);
-		
-		musicDto.setId(null);
-		MusicDTO foundMusicDto = musicDao.find(musicDto);
-		
-		if ( !Tool.isNullOrEmpty(foundMusicDto) )
-			throw new ConflictException("Music already exists.");
-
-
-		foundMusicDto = musicDao.save(musicDto);
-		
-		return foundMusicDto;
-	}
-
-	/**
-	 * Update music dto.
-	 *
-	 * @param musicDto the music dto
-	 * @return the music dto
-	 * @throws DaoException      the dao exception
-	 * @throws NotFoundException the not found exception
-	 */
-	public MusicDTO update(MusicDTO musicDto) throws DaoException, NotFoundException {
-
-		Tool.verifyValue("musicDto", musicDto);
-		Tool.verifyValue("musicDto -> id", musicDto.getId());
-
-		MusicDTO foundMusicDto = musicDao.find(musicDto);
-		if ( Tool.isNullOrEmpty(foundMusicDto) )
-			throw new NotFoundException("Music not found.");
-
-		return musicDao.update(musicDto);
-	}
-
-	/**
-	 * Find music dto.
-	 *
-	 * @param musicDto the music dto
-	 * @return the music dto
-	 * @throws DaoException the dao exception
-	 */
-	public MusicDTO find(MusicDTO musicDto) throws DaoException {
-
-		Tool.verifyValue("musicDto", musicDto);
-		return musicDao.find(musicDto);
-	}
-
-	/**
-	 * Delete music dto.
-	 *
-	 * @param musicDto the music dto
-	 * @return RUE if the was deleted, FALSE otherwise
-	 * @throws DaoException      the dao exception
-	 * @throws NotFoundException the not found exception
-	 */
-	public boolean delete(MusicDTO musicDto) throws DaoException, NotFoundException {
-
-		Tool.verifyValue("musicDto", musicDto);
-		Tool.verifyValue("musicDto -> id", musicDto.getId());
-
-		MusicDTO foundMusicDto = musicDao.find(musicDto);
-		if ( Tool.isNullOrEmpty(foundMusicDto) )
-			throw new NotFoundException("Music not found.");
-
-		return musicDao.delete(musicDto);
-	}
-
-
-	/**
 	 * Randomly choose a music.
 	 *
 	 * @return the music dto
@@ -150,7 +74,7 @@ public class MusicService {
 	 */
 	public MusicDTO random() throws DaoException, NotFoundException {
 	
-		List<MusicDTO> allMusics = musicDao.findAll();
+		List<MusicDTO> allMusics = dao.findAll();
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found.");

@@ -1,22 +1,22 @@
 package com.myssteriion.blindtest.service;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.myssteriion.blindtest.model.common.Avatar;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.dao.ProfileDAO;
 import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.db.dao.ProfileDAO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import java.util.Collections;
+import java.util.List;
 
 public class ProfileServiceTest extends AbstractTest {
 
@@ -28,11 +28,18 @@ public class ProfileServiceTest extends AbstractTest {
 	
 	@InjectMocks
 	private ProfileService profileService;
-	
-	
+
+
+
+	@Before
+	public void before() {
+		profileService = new ProfileService(profileDao, profileStatService);
+	}
+
+
 	
 	@Test
-	public void save() throws DaoException, NotFoundException, ConflictException {
+	public void save() throws DaoException, ConflictException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -43,7 +50,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 
 		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
@@ -62,7 +69,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("Profile name is already used."), e);
+			verifyException(new ConflictException("Dto already exists."), e);
 		}
 
 		ProfileDTO profileDtoSaved = profileService.save(profileDto);
@@ -71,7 +78,7 @@ public class ProfileServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws DaoException, NotFoundException, ConflictException {
+	public void update() throws DaoException, NotFoundException {
 		
 		String name = "name";
 		String avatar = "avatar";
@@ -82,7 +89,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		
@@ -92,7 +99,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
 		}
 		
 
@@ -109,16 +116,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Profile not found."), e);
-		}
-		
-		try {
-			profileDto.setId(1);
-			profileService.update(profileDto);
-			Assert.fail("Doit lever une DaoException car le mock throw.");
-		}
-		catch (ConflictException e) {
-			verifyException(new ConflictException("Profile name is already used."), e);
+			verifyException(new NotFoundException("Dto not found."), e);
 		}
 		
 		profileDto.setId(1);
@@ -142,7 +140,7 @@ public class ProfileServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 		
 		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
@@ -154,7 +152,7 @@ public class ProfileServiceTest extends AbstractTest {
 	public void findAll() throws DaoException {
 
 		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
-		Mockito.when(profileDao.findAll()).thenReturn( Arrays.asList(profileDto) );
+		Mockito.when(profileDao.findAll()).thenReturn( Collections.singletonList (profileDto));
 		
 		List<ProfileDTO> list = profileService.findAll();
 		Assert.assertEquals( 1, list.size() );

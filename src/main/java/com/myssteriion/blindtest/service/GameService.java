@@ -93,7 +93,7 @@ public class GameService {
 
 			for (Player player : players) {
 
-				ProfileDTO profileDto = new ProfileDTO(player.getName());
+				ProfileDTO profileDto = profileService.find( new ProfileDTO(player.getName()) );
 				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
 				profileStatDto.incrementListenedMusics( musicResult.getMusicDTO().getTheme() );
 
