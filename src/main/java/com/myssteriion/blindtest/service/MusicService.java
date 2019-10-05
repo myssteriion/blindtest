@@ -48,8 +48,14 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 			File themeDirectory = path.toFile();
 			for ( File music : Tool.getChildren(themeDirectory) ) {
-				if ( music.isFile() )
-					save( new MusicDTO(music.getName(), theme) );
+				if ( music.isFile() ) {
+					try {
+						save(new MusicDTO(music.getName(), theme));
+					}
+					catch (ConflictException e) {
+						// ignore if already exists
+					}
+				}
 			}
 		}
 	}
