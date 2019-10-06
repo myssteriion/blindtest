@@ -68,4 +68,22 @@ public class AvatarTest extends AbstractTest {
         Assert.assertNotEquals(avatarUn.hashCode(), avatarDeux.hashCode());
     }
 
+    @Test
+    public void comparator() {
+
+        String name = "name";
+        Avatar avatarUn = new Avatar(name);
+        Avatar avatarUnIso = new Avatar(name);
+        Avatar avatarDeux = new Avatar(name + "1");
+
+        Assert.assertEquals( 0, Avatar.COMPARATOR.compare(avatarUn, avatarUn) );
+        Assert.assertEquals( 0, Avatar.COMPARATOR.compare(avatarUn, avatarUnIso) );
+        Assert.assertEquals( -1, Avatar.COMPARATOR.compare(avatarUn, avatarDeux) );
+        Assert.assertEquals( 1, Avatar.COMPARATOR.compare(avatarDeux, avatarUn) );
+
+        Assert.assertEquals( 0, Avatar.COMPARATOR.compare(null, null) );
+        Assert.assertEquals( 1, Avatar.COMPARATOR.compare(avatarUn, null) );
+        Assert.assertEquals( -1, Avatar.COMPARATOR.compare(null, avatarDeux) );
+    }
+    
 }

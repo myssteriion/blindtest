@@ -36,9 +36,12 @@ public class AvatarService {
 		avatars = new ArrayList<>();
 
 		File avatarDirectory = AVATAR_FOLDER.toFile();
-		for ( File avatar : Tool.getChildren(avatarDirectory) )
+		for ( File avatar : Tool.getChildren(avatarDirectory) ) {
 			if ( avatar.isFile() )
 				avatars.add( new Avatar(avatar.getName()) );
+		}
+
+		avatars.sort(Avatar.COMPARATOR);
 	}
 
 	/**

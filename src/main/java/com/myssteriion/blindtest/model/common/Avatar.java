@@ -1,25 +1,44 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.myssteriion.blindtest.model.IModel;
+import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.Objects;
-
-import com.myssteriion.blindtest.model.IModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.Tool;
-import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 
 /**
  * The Avatar.
  */
 public class Avatar implements IModel {
+
+    /**
+     * The constant COMPARATOR.
+     */
+    public static final Comparator<Avatar> COMPARATOR = new Comparator<Avatar>() {
+
+        @Override
+        public int compare(Avatar o1, Avatar o2) {
+
+            if (o1 != null && o2 == null)
+                return 1;
+            else if (o1 == null && o2 != null)
+                return -1;
+            else if (o1 == null && o2 == null)
+                return 0;
+            else
+                return String.CASE_INSENSITIVE_ORDER.compare(o1.name, o2.name);
+        }
+    };
 
     /**
      * The constant LOGGER.
