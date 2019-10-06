@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ListDTO;
+import com.myssteriion.blindtest.model.base.ItemsList;
 import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.AvatarService;
@@ -45,7 +45,7 @@ public class AvatarController {
 	 * @return the Avatar list
 	 */
 	@GetMapping
-	public ResponseEntity< ListDTO<Avatar> > getAll() {
+	public ResponseEntity< ItemsList<Avatar> > getAll() {
 		
 		List<Avatar> list = avatarService.getAll();
 		return ResponseBuilder.create200(list);

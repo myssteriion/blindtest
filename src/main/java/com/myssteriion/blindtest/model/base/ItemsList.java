@@ -10,7 +10,7 @@ import com.myssteriion.blindtest.model.IModel;
  *
  * @param <T> a IModel
  */
-public class ListDTO<T extends IModel> implements IModel {
+public class ItemsList<T extends IModel> implements IModel {
 
 	/**
 	 * The list.
@@ -28,7 +28,7 @@ public class ListDTO<T extends IModel> implements IModel {
 	 *
 	 * @param items the items
 	 */
-	public ListDTO(List<T> items) {
+	public ItemsList(List<T> items) {
 		this.items = (items == null) ? new ArrayList<>() : items;
 		this.size = this.items.size();
 	}
