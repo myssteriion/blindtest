@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ItemsList;
+import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.service.AvatarService;
 import org.junit.Assert;
@@ -37,7 +37,7 @@ public class AvatarControllerTest extends AbstractTest {
     @Test
     public void getAll() {
 
-        ResponseEntity< ItemsList<Avatar> > re = avatarController.getAll();
+        ResponseEntity< ItemsPage<Avatar> > re = avatarController.getAll();
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals( new ArrayList<>(), re.getBody().getItems() );
     }

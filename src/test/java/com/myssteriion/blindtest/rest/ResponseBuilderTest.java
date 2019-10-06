@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.rest;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
-import com.myssteriion.blindtest.model.base.ItemsList;
+import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
@@ -33,9 +33,9 @@ public class ResponseBuilderTest extends AbstractTest {
 	@Test
 	public void create200List() {
 		
-		ResponseEntity< ItemsList<ProfileDTO> > re = ResponseBuilder.create200( (List<ProfileDTO>) null );
+		ResponseEntity< ItemsPage<ProfileDTO> > re = ResponseBuilder.create200( (List<ProfileDTO>) null );
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ItemsList<ProfileDTO> body = re.getBody();
+		ItemsPage<ProfileDTO> body = re.getBody();
 		Assert.assertTrue( body.getItems().isEmpty() );
 	}
 

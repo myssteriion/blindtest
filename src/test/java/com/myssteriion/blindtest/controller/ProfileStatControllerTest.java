@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.base.ItemsList;
+import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.service.ProfileStatService;
 
@@ -40,9 +40,9 @@ public class ProfileStatControllerTest extends AbstractTest {
 			verifyException(iae, e);
 		}
 		
-		ResponseEntity< ItemsList<ProfileStatDTO> > re = profileStatController.findAll();
+		ResponseEntity< ItemsPage<ProfileStatDTO> > re = profileStatController.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ItemsList<ProfileStatDTO> actual = re.getBody();
+		ItemsPage<ProfileStatDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getItems().size() );		
 	}
 

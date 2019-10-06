@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.model.base.ItemsList;
+import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.ProfileStatService;
@@ -33,7 +33,7 @@ public class ProfileStatController {
 	 * @throws DaoException DB exception
 	 */
 	@GetMapping
-	public ResponseEntity< ItemsList<ProfileStatDTO> > findAll() throws DaoException {
+	public ResponseEntity< ItemsPage<ProfileStatDTO> > findAll() throws DaoException {
 		
 		List<ProfileStatDTO> list = profileStatService.findAll();
 		return ResponseBuilder.create200(list);

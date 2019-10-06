@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
-import com.myssteriion.blindtest.model.base.ItemsList;
+import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -95,9 +95,9 @@ public class ResponseBuilder {
 	 * @param iModels the models
 	 * @return the 200 response
 	 */
-	public static <T extends IModel> ResponseEntity< ItemsList<T> > create200(List<T> iModels) {
-		
-		ItemsList<T> list = new ItemsList<>(iModels);
+	public static <T extends IModel> ResponseEntity< ItemsPage<T> > create200(List<T> iModels) {
+
+		ItemsPage<T> list = new ItemsPage<>(iModels);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
