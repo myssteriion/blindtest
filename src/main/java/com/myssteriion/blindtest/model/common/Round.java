@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.tools.BeanFactory;
 import com.myssteriion.blindtest.tools.Tool;

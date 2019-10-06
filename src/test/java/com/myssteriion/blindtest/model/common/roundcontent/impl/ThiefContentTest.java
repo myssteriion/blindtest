@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.game.Game;
-import com.myssteriion.blindtest.model.dto.game.MusicResult;
+import com.myssteriion.blindtest.model.game.Game;
+import com.myssteriion.blindtest.model.game.MusicResult;
 import org.junit.Assert;
 import org.junit.Test;
 

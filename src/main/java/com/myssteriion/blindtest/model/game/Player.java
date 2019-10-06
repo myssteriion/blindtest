@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.dto.game;
+package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.tools.Tool;

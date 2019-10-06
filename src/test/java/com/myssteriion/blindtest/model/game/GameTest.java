@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.dto.game;
+package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;

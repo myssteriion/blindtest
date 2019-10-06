@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.model.dto.game.Game;
-import com.myssteriion.blindtest.model.dto.game.MusicResult;
-import com.myssteriion.blindtest.model.dto.game.Player;
+import com.myssteriion.blindtest.model.game.Game;
+import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.game.Player;
 
 /**
  * The Choice round content.

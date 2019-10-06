@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.game.Game;
+import com.myssteriion.blindtest.model.game.Game;
 import org.junit.Assert;
 import org.junit.Test;
 
