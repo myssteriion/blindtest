@@ -36,7 +36,7 @@ public class MusicDAO extends AbstractDAO<MusicDTO> {
 
 			create = em.createPreparedStatement("INSERT INTO music (name, theme, played) VALUES (?, ?, 0)");
 			update = em.createPreparedStatement("UPDATE music SET played = ? WHERE id = ?");
-			findAll = em.createPreparedStatement("SELECT * FROM music");
+			findAll = em.createPreparedStatement("SELECT * FROM music ORDER BY theme ASC, name ASC");
 			delete = em.createPreparedStatement("DELETE FROM music WHERE id = ?");
 
 			findById = em.createPreparedStatement("SELECT * FROM music WHERE id = ?");

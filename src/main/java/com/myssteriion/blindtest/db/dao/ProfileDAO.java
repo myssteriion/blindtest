@@ -36,7 +36,7 @@ public class ProfileDAO extends AbstractDAO<ProfileDTO> {
 
 			create = em.createPreparedStatement("INSERT INTO profile (name, avatar_name) VALUES (?, ?)");
 			update = em.createPreparedStatement("UPDATE profile SET name = ?, avatar_name = ? WHERE id = ?");
-			findAll = em.createPreparedStatement("SELECT * FROM profile");
+			findAll = em.createPreparedStatement("SELECT * FROM profile ORDER BY name ASC");
 			delete = em.createPreparedStatement("DELETE FROM profile WHERE id = ?");
 
 			findById = em.createPreparedStatement("SELECT * FROM profile WHERE id = ?");
