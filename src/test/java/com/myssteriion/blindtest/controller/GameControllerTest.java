@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -18,6 +17,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +33,7 @@ public class GameControllerTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws DaoException, NotFoundException {
+	public void newGame() throws NotFoundException {
 
 		List<String> playersNames = Collections.singletonList("name");
 		Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(playersNames), Duration.NORMAL));
@@ -46,7 +46,7 @@ public class GameControllerTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws DaoException, NotFoundException {
+	public void apply() throws NotFoundException, IOException {
 
 		List<String> playersNames = Collections.singletonList("name");
 		Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(playersNames), Duration.NORMAL));

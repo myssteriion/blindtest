@@ -2,8 +2,6 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.ProfileDAO;
-import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -14,9 +12,11 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 public class ProfileServiceTest extends AbstractTest {
 
@@ -37,14 +37,14 @@ public class ProfileServiceTest extends AbstractTest {
 	}
 
 
-	
+
 	@Test
-	public void save() throws DaoException, ConflictException {
-		
+	public void save() throws ConflictException {
+
 		String name = "name";
-		String avatar = "avatar";
-		
-		
+		String avatarName = "avatarName";
+
+
 		try {
 			profileService.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -53,17 +53,20 @@ public class ProfileServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 
+		profileService = Mockito.spy( new ProfileService(profileDao, profileStatService) );
+		MockitoAnnotations.initMocks(profileService);
+
 		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
 		Mockito.when(profileStatService.save(Mockito.any(ProfileStatDTO.class))).thenReturn(profileStatDtoMock);
-		
-		ProfileDTO profileDtoMock = new ProfileDTO(name, new Avatar(avatar));
+
+		ProfileDTO profileDtoMock = new ProfileDTO(name, avatarName);
 		profileDtoMock.setId(1);
-		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDtoMock, null);
+		Mockito.doReturn(null).doReturn(profileDtoMock).doReturn(null).when(profileService).find(Mockito.any(ProfileDTO.class));
 		Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDtoMock);
-		
-		ProfileDTO profileDto = new ProfileDTO(name, new Avatar(avatar));
+
+		ProfileDTO profileDto = new ProfileDTO(name, avatarName);
 		Assert.assertSame( profileDtoMock, profileService.save(profileDto) );
-		
+
 		try {
 			profileService.save(profileDto);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
@@ -76,14 +79,14 @@ public class ProfileServiceTest extends AbstractTest {
 		Assert.assertEquals( new Integer(1), profileDtoSaved.getId() );
 		Assert.assertEquals( name, profileDtoSaved.getName() );
 	}
-	
+
 	@Test
-	public void update() throws DaoException, NotFoundException {
-		
+	public void update() throws NotFoundException {
+
 		String name = "name";
-		String avatar = "avatar";
-		
-		
+		String avatarName = "avatarName";
+
+
 		try {
 			profileService.update(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -91,9 +94,9 @@ public class ProfileServiceTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
-		
-		
-		ProfileDTO profileDto = new ProfileDTO(name, new Avatar(avatar));
+
+
+		ProfileDTO profileDto = new ProfileDTO(name, avatarName);
 		try {
 			profileService.update(profileDto);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -101,15 +104,16 @@ public class ProfileServiceTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
 		}
-		
 
-		ProfileDTO profileStatDtoMockNotSame = new ProfileDTO(name, new Avatar(avatar));
+
+		ProfileDTO profileStatDtoMockNotSame = new ProfileDTO(name, avatarName);
 		profileStatDtoMockNotSame.setId(2);
-		ProfileDTO profileStatDtoMockSame = new ProfileDTO(name, new Avatar(avatar));
+		ProfileDTO profileStatDtoMockSame = new ProfileDTO(name, avatarName);
 		profileStatDtoMockSame.setId(1);
-		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileStatDtoMockNotSame, profileStatDtoMockNotSame, profileStatDtoMockSame);
-		Mockito.when(profileDao.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
-		
+		Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileStatDtoMockNotSame),
+				Optional.of(profileStatDtoMockNotSame), Optional.of(profileStatDtoMockSame));
+		Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
+
 		try {
 			profileDto.setId(1);
 			profileService.update(profileDto);
@@ -118,10 +122,10 @@ public class ProfileServiceTest extends AbstractTest {
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("Dto not found."), e);
 		}
-		
+
 		profileDto.setId(1);
 		profileDto.setName("pouet");
-		profileDto.setAvatar( new Avatar("avapouet") );
+		profileDto.setAvatarName("avapouet");
 		ProfileDTO profileDtoSaved = profileService.update(profileDto);
 		Assert.assertEquals( new Integer(1), profileDtoSaved.getId() );
 		Assert.assertEquals( "pouet", profileDtoSaved.getName() );
@@ -129,12 +133,12 @@ public class ProfileServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void find() throws DaoException {
+	public void find() {
 
-		ProfileDTO profileDtoMock = new ProfileDTO("name", new Avatar("avatar"));
-		Mockito.when(profileDao.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDtoMock);
-		
-		
+		ProfileDTO profileDtoMock = new ProfileDTO("name", "avatarName");
+		Mockito.when(profileDao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(profileDtoMock));
+
+
 		try {
 			profileService.find(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -142,20 +146,60 @@ public class ProfileServiceTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
-		
-		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
+
+		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		Assert.assertNull( profileService.find(profileDto) );
 		Assert.assertNotNull( profileService.find(profileDto) );
 	}
-	
-	@Test
-	public void findAll() throws DaoException {
 
-		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
+	@Test
+	public void findAll() {
+
+		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		Mockito.when(profileDao.findAll()).thenReturn( Collections.singletonList (profileDto));
-		
-		List<ProfileDTO> list = profileService.findAll();
-		Assert.assertEquals( 1, list.size() );
+
+		Page<ProfileDTO> page = profileService.findAll();
+		Assert.assertEquals( 1, page.getSize() );
+	}
+
+	@Test
+	public void delete() throws NotFoundException {
+
+		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO();
+		Mockito.when(profileStatService.findByProfile(Mockito.any(ProfileDTO.class))).thenReturn(profileStatDtoMock);
+
+
+		try {
+			profileService.delete(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'profile' est obligatoire."), e);
+		}
+
+
+		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
+
+		try {
+			profileService.delete(profileDto);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'profile -> id' est obligatoire."), e);
+		}
+
+		Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileDto));
+		profileDto.setId(1);
+
+		try {
+			profileService.delete(profileDto);
+			Assert.fail("Doit lever une NotFoundException car le mock throw.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("Dto not found."), e);
+		}
+
+		profileService.delete(profileDto);
 	}
 
 }

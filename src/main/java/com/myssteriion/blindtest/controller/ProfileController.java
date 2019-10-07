@@ -1,8 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -10,10 +8,9 @@ import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Controller for ProfileDTO.
@@ -23,8 +20,13 @@ import java.util.List;
 @RequestMapping(path = "profiles")
 public class ProfileController {
 
+	private final ProfileService profileService;
+
 	@Autowired
-	private ProfileService profileService;
+	public ProfileController(ProfileService profileService) {
+		this.profileService = profileService;
+	}
+
 
 
 	/**
@@ -32,12 +34,10 @@ public class ProfileController {
 	 *
 	 * @param profileDto the ProfileDTO
 	 * @return the ProfileDTO saved
-	 * @throws DaoException      DB exception
-	 * @throws NotFoundException NotFound exception
 	 * @throws ConflictException Conflict exception
 	 */
 	@PostMapping
-	public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
+	public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws ConflictException {
 		return ResponseBuilder.create201( profileService.save(profileDto) );
 	}
 
@@ -47,12 +47,10 @@ public class ProfileController {
 	 * @param id         the ProfileDTO id
 	 * @param profileDto the 'new' ProfileDTO
 	 * @return the ProfileDTO modified
-	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
-	 * @throws ConflictException Conflict exception
 	 */
 	@PutMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<ProfileDTO> update(@PathVariable("id") Integer id, @RequestBody ProfileDTO profileDto) throws DaoException, NotFoundException, ConflictException {
+	public ResponseEntity<ProfileDTO> update(@PathVariable(Constant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException {
 		
 		profileDto.setId(id);
 		return ResponseBuilder.create200( profileService.update(profileDto) );
@@ -62,17 +60,14 @@ public class ProfileController {
 	 * Gets all ProfileDTO.
 	 *
 	 * @return the ProfileDTO list
-	 * @throws DaoException DB exception
 	 */
 	@GetMapping
-	public ResponseEntity< ItemsPage<ProfileDTO> > findAll() throws DaoException {
-		
-		List<ProfileDTO> list = profileService.findAll();
-		return ResponseBuilder.create200(list);
+	public ResponseEntity< Page<ProfileDTO> > findAll() {
+		return ResponseBuilder.create200( profileService.findAll() );
 	}
 
 	@DeleteMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<Empty> delete(@PathVariable("id") Integer id) throws DaoException, NotFoundException, ConflictException {
+	public ResponseEntity<Empty> delete(@PathVariable(Constant.ID) Integer id) throws NotFoundException {
 
 		ProfileDTO profileDto = new ProfileDTO("ANY");
 		profileDto.setId(id);

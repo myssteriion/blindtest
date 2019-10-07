@@ -8,61 +8,23 @@ import java.util.List;
  */
 public enum Theme {
 
-	/**
-	 * Annees 60 theme.
-	 */
 	ANNEES_60("annees_60"),
-
-	/**
-	 * Annees 70 theme.
-	 */
 	ANNEES_70("annees_70"),
-
-	/**
-	 * Annees 80 theme.
-	 */
 	ANNEES_80("annees_80"),
-
-	/**
-	 * Annees 90 theme.
-	 */
 	ANNEES_90("annees_90"),
-
-	/**
-	 * Annees 2000 theme.
-	 */
 	ANNEES_2000("annees_2000"),
-
-	/**
-	 * Cinemas theme.
-	 */
 	CINEMAS("cinemas"),
-
-	/**
-	 * Series theme.
-	 */
 	SERIES("series"),
-
-	/**
-	 * Disney theme.
-	 */
 	DISNEY("disney"),
-
-	/**
-	 * Classiques theme.
-	 */
 	CLASSIQUES("classiques");
 	
 	
 	
 	private String folderName;
 
-	
-	
-	private Theme(String folderName) {
+	Theme(String folderName) {
 		this.folderName = folderName;
 	}
-
 
 	/**
 	 * Gets folder name.
@@ -72,7 +34,6 @@ public enum Theme {
 	public String getFolderName() {
 		return folderName;
 	}
-
 
 	/**
 	 * Gets sorted theme.

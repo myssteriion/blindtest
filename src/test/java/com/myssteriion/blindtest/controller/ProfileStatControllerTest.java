@@ -1,20 +1,18 @@
 package com.myssteriion.blindtest.controller;
 
-import java.util.Arrays;
-
-import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.service.ProfileStatService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.base.ItemsPage;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.service.ProfileStatService;
+import java.util.Arrays;
 
 public class ProfileStatControllerTest extends AbstractTest {
 
@@ -27,10 +25,12 @@ public class ProfileStatControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void findAll() throws DaoException {
+	public void findAll() {
 
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Mockito.when(profileStatService.findAll()).thenThrow(iae).thenReturn( Arrays.asList( new ProfileStatDTO(1) ) );
+		Page<ProfileStatDTO> pageMock = Mockito.mock(Page.class);
+		Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileStatDTO(1)));
+		Mockito.when(profileStatService.findAll()).thenThrow(iae).thenReturn(pageMock);
 
 		try {
 			profileStatController.findAll();
@@ -40,10 +40,10 @@ public class ProfileStatControllerTest extends AbstractTest {
 			verifyException(iae, e);
 		}
 		
-		ResponseEntity< ItemsPage<ProfileStatDTO> > re = profileStatController.findAll();
+		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAll();
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ItemsPage<ProfileStatDTO> actual = re.getBody();
-		Assert.assertEquals( 1, actual.getItems().size() );		
+		Page<ProfileStatDTO> actual = re.getBody();
+		Assert.assertEquals( 1, actual.getContent().size() );
 	}
 
 }

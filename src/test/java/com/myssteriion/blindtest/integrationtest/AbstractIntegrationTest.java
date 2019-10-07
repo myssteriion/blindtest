@@ -1,8 +1,6 @@
 package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.EntityManager;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -14,15 +12,10 @@ import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractIntegrationTest extends AbstractTest {
-
-	@Autowired
-	protected EntityManager em;
 
 	@Autowired
 	protected MusicService musicService;
@@ -52,16 +45,24 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 
 
 
-	protected void clearDataBase() throws DaoException, SQLException {
+	protected void clearDataBase() throws NotFoundException {
 
-		try ( Statement statement = em.createStatement() ) {
-			statement.executeUpdate("DELETE FROM music");
-			statement.executeUpdate("DELETE FROM profile_stat");
-			statement.executeUpdate("DELETE FROM profile");
+		for (MusicDTO musicDto : MUSICS_LIST) {
+
+			MusicDTO m = musicService.find(musicDto);
+			if (m != null)
+				musicService.delete(m);
+		}
+
+		for (ProfileDTO profileDTO : PROFILES_LIST) {
+
+			ProfileDTO p = profileService.find(profileDTO);
+			if (p != null)
+				profileService.delete(p);
 		}
 	}
 
-	protected void insertData() throws ConflictException, DaoException, NotFoundException {
+	protected void insertData() throws ConflictException {
 
 		for (MusicDTO musicDto : MUSICS_LIST)
 			musicService.save(musicDto);

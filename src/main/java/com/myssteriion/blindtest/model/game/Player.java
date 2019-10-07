@@ -14,20 +14,16 @@ public class Player {
 	/**
 	 * The constant COMPARATOR.
 	 */
-	public static final Comparator<Player> COMPARATOR = new Comparator<Player>() {
+	public static final Comparator<Player> COMPARATOR = (o1, o2) -> {
 
-		@Override
-		public int compare(Player o1, Player o2) {
-
-			if (o1 != null && o2 == null)
-				return 1;
-			else if (o1 == null && o2 != null)
-				return -1;
-			else if (o1 == null && o2 == null)
-				return 0;
-			else
-				return String.CASE_INSENSITIVE_ORDER.compare(o1.name, o2.name);
-		}
+		if (o1 != null && o2 == null)
+			return 1;
+		else if (o1 == null && o2 != null)
+			return -1;
+		else if (o1 == null && o2 == null)
+			return 0;
+		else
+			return String.CASE_INSENSITIVE_ORDER.compare(o1.name, o2.name);
 	};
 
 	/**

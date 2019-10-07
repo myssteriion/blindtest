@@ -4,7 +4,10 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.tools.converter.DurationConverter;
+import com.myssteriion.blindtest.tools.converter.ThemeConverter;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -12,96 +15,194 @@ import java.util.Objects;
 /**
  * The ProfileStatDTO.
  */
+@Entity
+@Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_id_unique", columnNames={"profile_id"}) })
 public class ProfileStatDTO extends AbstractDTO {
+
+	/**
+	 * The DB id.
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_stat")
+	@SequenceGenerator(name = "profile_stat", sequenceName = "profile_stat_sequence", allocationSize = 1)
+	@Column(name = "id", nullable = false)
+	protected Integer id;
 
 	/**
 	 * The profileId.
 	 */
+	@Column(name = "profile_id", nullable = false)
 	private Integer profileId;
 
 	/**
 	 * The number of game played.
 	 */
+	@Column(name = "played_games", nullable = false)
 	private int playedGames;
 
 	/**
 	 * The number of listened musics by themes.
 	 */
+	@Column(name = "listened_musics", nullable = false)
+	@Convert(converter = ThemeConverter.class)
 	private Map<Theme, Integer> listenedMusics;
 
 	/**
 	 * The number of found musics by themes.
 	 */
+	@Column(name = "found_musics", nullable = false)
+	@Convert(converter = ThemeConverter.class)
 	private Map<Theme, Integer> foundMusics;
 
 	/**
 	 * The bests scores by durations.
 	 */
+	@Column(name = "best_scores", nullable = false)
+	@Convert(converter = DurationConverter.class)
 	private Map<Duration, Integer> bestScores;
 
 
+
 	/**
-	 * Instantiates a new ProfileStatDTO.
+	 * Instantiates a new Profile stat dto.
+	 */
+	public ProfileStatDTO() {
+		this(null);
+	}
+
+	/**
+	 * Instantiates a new Profile stat dto.
 	 *
-	 * @param profileId the profileId
+	 * @param profileId the profile id
 	 */
 	public ProfileStatDTO(Integer profileId) {
-		this(profileId, 0, new HashMap<>(), new HashMap<>(), new HashMap<>());
-	}
 
-	/**
-	 * Instantiates a new ProfileStatDTO.
-	 *
-	 * @param profileId      the profileId
-	 * @param playedGames    the playedGames
-	 * @param listenedMusics the listenedMusics
-	 * @param foundMusics    the foundMusics
-	 * @param bestScores     the bestScores
-	 */
-	public ProfileStatDTO(Integer profileId, int playedGames, Map<Theme, Integer> listenedMusics, Map<Theme, Integer> foundMusics, Map<Duration, Integer> bestScores) {
-		
-		Tool.verifyValue("profileId", profileId);
-		
 		this.profileId = profileId;
-		this.playedGames = Math.max(playedGames, 0);
-		this.listenedMusics = (listenedMusics == null) ? new HashMap<>() : listenedMusics;
-		this.foundMusics = (foundMusics == null) ? new HashMap<>() : foundMusics;
-		this.bestScores = (bestScores == null) ? new HashMap<>() : bestScores;
+		this.playedGames = 0;
+		this.listenedMusics = new HashMap<>();
+		this.foundMusics = new HashMap<>();
+		this.bestScores = new HashMap<>();
 	}
 
 
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public ProfileStatDTO setId(Integer id) {
+		this.id = id;
+		return this;
+	}
+
 	/**
-	 * Gets profileId.
+	 * Gets profile id.
 	 *
-	 * @return the profileId
+	 * @return the profile id
 	 */
 	public Integer getProfileId() {
 		return profileId;
 	}
 
 	/**
-	 * Gets playedGames.
+	 * Sets profile id.
 	 *
-	 * @return the playedGames
+	 * @param profileId the profile id
+	 * @return this
+	 */
+	public ProfileStatDTO setProfileId(Integer profileId) {
+		this.profileId = profileId;
+		return this;
+	}
+
+	/**
+	 * Gets played games.
+	 *
+	 * @return the played games
 	 */
 	public int getPlayedGames() {
 		return playedGames;
 	}
 
 	/**
+	 * Sets played games.
+	 *
+	 * @param playedGames the played games
+	 * @return this
+	 */
+	public ProfileStatDTO setPlayedGames(int playedGames) {
+		this.playedGames = playedGames;
+		return this;
+	}
+
+	/**
+	 * Gets listened musics.
+	 *
+	 * @return the listened musics
+	 */
+	public Map<Theme, Integer> getListenedMusics() {
+		return listenedMusics;
+	}
+
+	/**
+	 * Sets listened musics.
+	 *
+	 * @param listenedMusics the listened musics
+	 * @return this
+	 */
+	public ProfileStatDTO setListenedMusics(Map<Theme, Integer> listenedMusics) {
+		this.listenedMusics = listenedMusics;
+		return this;
+	}
+
+	/**
+	 * Gets found musics.
+	 *
+	 * @return the found musics
+	 */
+	public Map<Theme, Integer> getFoundMusics() {
+		return foundMusics;
+	}
+
+	/**
+	 * Sets found musics.
+	 *
+	 * @param foundMusics the found musics
+	 * @return this
+	 */
+	public ProfileStatDTO setFoundMusics(Map<Theme, Integer> foundMusics) {
+		this.foundMusics = foundMusics;
+		return this;
+	}
+
+	/**
+	 * Gets best scores.
+	 *
+	 * @return the best scores
+	 */
+	public Map<Duration, Integer> getBestScores() {
+		return bestScores;
+	}
+
+	/**
+	 * Sets best scores.
+	 *
+	 * @param bestScores the best scores
+	 * @return this
+	 */
+	public ProfileStatDTO setBestScores(Map<Duration, Integer> bestScores) {
+		this.bestScores = bestScores;
+		return this;
+	}
+
+
+	/**
 	 * Increment playedGames.
 	 */
 	public void incrementPlayedGames() {
 		this.playedGames++;
-	}
-
-	/**
-	 * Gets listenedMusics.
-	 *
-	 * @return the listenedMusics
-	 */
-	public Map<Theme, Integer> getListenedMusics() {
-		return listenedMusics;
 	}
 
 	/**
@@ -113,19 +214,13 @@ public class ProfileStatDTO extends AbstractDTO {
 
 		Tool.verifyValue("theme", theme);
 
+		if (listenedMusics == null)
+			listenedMusics = new HashMap<>();
+
 		if ( !listenedMusics.containsKey(theme) )
 			listenedMusics.put(theme, 0);
 
 		listenedMusics.put(theme, listenedMusics.get(theme) + 1);
-	}
-
-	/**
-	 * Gets foundMusics.
-	 *
-	 * @return the foundMusics
-	 */
-	public Map<Theme, Integer> getFoundMusics() {
-		return foundMusics;
 	}
 
 	/**
@@ -137,19 +232,13 @@ public class ProfileStatDTO extends AbstractDTO {
 
 		Tool.verifyValue("theme", theme);
 
+		if (foundMusics == null)
+			foundMusics = new HashMap<>();
+
 		if ( !foundMusics.containsKey(theme) )
 			foundMusics.put(theme, 0);
 
 		foundMusics.put(theme, foundMusics.get(theme) + 1);
-	}
-
-	/**
-	 * Gets bestScores.
-	 *
-	 * @return the bestScores
-	 */
-	public Map<Duration, Integer> getBestScores() {
-		return bestScores;
 	}
 
 	/**
@@ -161,6 +250,9 @@ public class ProfileStatDTO extends AbstractDTO {
 	public void addBestScoreIfBetter(Duration duration, int scores) {
 
 		Tool.verifyValue("duration", duration);
+
+		if (bestScores == null)
+			bestScores = new HashMap<>();
 
 		if ( !bestScores.containsKey(duration) )
 			bestScores.put(duration, 0);
@@ -190,7 +282,7 @@ public class ProfileStatDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return super.toString() + 
+		return "id=" + id +
 				", profileId=" + profileId +
 				", playedGames=" + playedGames +
 				", listenedMusics=" + listenedMusics +

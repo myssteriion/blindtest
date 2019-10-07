@@ -38,12 +38,6 @@ public class AvatarTest extends AbstractTest {
         Assert.assertEquals( name, avatar.getName() );
         Assert.assertFalse( avatar.isFileExists() );
         Assert.assertNull( avatar.getContentType() );
-
-        avatar.setName(newName);
-        Assert.assertEquals( newName, avatar.getName() );
-        Assert.assertFalse( avatar.isFileExists() );
-        Assert.assertNull( avatar.getContentType() );
-        Assert.assertNull( avatar.getFlux() );
     }
 
     @Test

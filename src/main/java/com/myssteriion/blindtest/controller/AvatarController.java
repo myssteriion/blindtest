@@ -1,18 +1,14 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ItemsPage;
 import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.AvatarService;
+import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller for Avatar
@@ -45,10 +41,10 @@ public class AvatarController {
 	 * @return the Avatar list
 	 */
 	@GetMapping
-	public ResponseEntity< ItemsPage<Avatar> > getAll() {
-		
-		List<Avatar> list = avatarService.getAll();
-		return ResponseBuilder.create200(list);
+	public ResponseEntity< Page<Avatar> > getAll(
+			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
+
+		return ResponseBuilder.create200( avatarService.getAll(page) );
 	}
 	
 }

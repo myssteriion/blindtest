@@ -6,33 +6,18 @@ package com.myssteriion.blindtest.model;
 public abstract class AbstractDTO implements IModel {
 
 	/**
-	 * The DB id.
+	 * Sets id.
+	 *
+	 * @param id the id
+	 * @return this
 	 */
-	private Integer id;
-
+	public abstract AbstractDTO setId(Integer id);
 
 	/**
 	 * Gets id.
 	 *
 	 * @return the id
 	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param id the id
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	@Override
-	public String toString() {
-		return "id=" + id;
-	}
+	public abstract Integer getId();
 	
 }

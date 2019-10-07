@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.dao.ProfileStatDAO;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -16,27 +15,37 @@ import org.springframework.stereotype.Service;
 public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, ProfileStatDAO>   {
 
 	@Autowired
-	public ProfileStatService(ProfileStatDAO dao) {
-		super(dao);
+	public ProfileStatService(ProfileStatDAO profileStatDao) {
+		super(profileStatDao);
 	}
 
 
+
+	@Override
+	public ProfileStatDTO find(ProfileStatDTO dto) {
+
+		Tool.verifyValue("dto", dto);
+
+		if ( Tool.isNullOrEmpty(dto.getId()) )
+			return dao.findByProfileId(dto.getProfileId()).orElse(null);
+		else
+			return super.find(dto);
+	}
 
 	/**
 	 * Find profile stat dto by profileId.
 	 *
 	 * @param profileDto the profile dto
 	 * @return the profile stat dto
-	 * @throws DaoException      the dao exception
 	 * @throws NotFoundException the not found exception
 	 */
-	public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws DaoException, NotFoundException {
+	public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws NotFoundException {
 
 		Tool.verifyValue("profileDto", profileDto);
 		Tool.verifyValue("profileDto -> id", profileDto.getId());
 
 		ProfileStatDTO profileStatDto = new ProfileStatDTO( profileDto.getId() );
-		ProfileStatDTO foundProfileStatDTO = dao.find(profileStatDto);
+		ProfileStatDTO foundProfileStatDTO = find(profileStatDto);
 
 		if ( Tool.isNullOrEmpty(foundProfileStatDTO) )
 			throw new NotFoundException("Profile stat not found.");

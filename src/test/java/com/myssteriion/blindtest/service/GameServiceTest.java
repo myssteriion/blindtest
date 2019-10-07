@@ -1,8 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.DaoException;
-import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -19,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -41,9 +40,9 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws DaoException, NotFoundException {
+	public void newGame() throws NotFoundException {
 
-		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
+		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		Mockito.when(profileService.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDto);
 
 		List<String> playersNames = Collections.singletonList("name");
@@ -74,10 +73,10 @@ public class GameServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws DaoException, NotFoundException {
+	public void apply() throws NotFoundException, IOException {
 		
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		ProfileDTO profileDto = new ProfileDTO("name", new Avatar("avatar"));
+		ProfileDTO profileDto = new ProfileDTO("name","avatarName");
 		profileDto.setId(1);
 		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
 
@@ -92,7 +91,7 @@ public class GameServiceTest extends AbstractTest {
 			gameService.apply(null);
 			Assert.fail("Doit lever une IllegalArgumentException le gameDto n'est pas retrouvée.");
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException | IOException e) {
 			verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
 		}
 
@@ -100,7 +99,7 @@ public class GameServiceTest extends AbstractTest {
 			gameService.apply(musicResult);
 			Assert.fail("Doit lever une NotFoundException le gameDto n'est pas retrouvée.");
 		}
-		catch (NotFoundException e) {
+		catch (NotFoundException | IOException e) {
 			verifyException(new NotFoundException("Game not found."), e);
 		}
 
@@ -118,7 +117,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 		musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		profileDto = new ProfileDTO("name", new Avatar("avatar"));
+		profileDto = new ProfileDTO("name", "avatarName");
 		profileDto.setId(1);
 		profileStatDto = new ProfileStatDTO(1);
 		List<String> playersName = Collections.singletonList(profileDto.getName());

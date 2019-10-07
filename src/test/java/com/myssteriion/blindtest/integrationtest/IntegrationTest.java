@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.integrationtest;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -20,7 +19,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,14 +28,14 @@ import java.util.stream.Collectors;
 public class IntegrationTest extends AbstractIntegrationTest {
 
     @Before
-    public void before() throws SQLException, DaoException, ConflictException, NotFoundException {
+    public void before() throws ConflictException, NotFoundException {
         clearDataBase();
         insertData();
     }
 
 
     @Test
-    public void testVeryShortGame() throws NotFoundException, DaoException {
+    public void testVeryShortGame() throws NotFoundException, IOException {
 
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.VERY_SHORT;

@@ -16,31 +16,17 @@ import java.util.Arrays;
  */
 public enum Round {
 
-    /**
-     * Classic round.
-     */
     CLASSIC(0),
-
-    /**
-     * Choice round.
-     */
     CHOICE(1),
-
-    /**
-     * Thief round.
-     */
     THIEF(2 );
 
 
 
     private int roundNumber;
 
-
-
     Round(int roundNumber) {
         this.roundNumber = roundNumber;
     }
-
 
     /**
      * Gets round number.
@@ -50,7 +36,6 @@ public enum Round {
     public int getRoundNumber() {
         return roundNumber;
     }
-
 
     /**
      * Gets next round.
@@ -113,14 +98,15 @@ public enum Round {
         return Arrays.stream(Round.values()).noneMatch(round -> round.roundNumber == this.roundNumber+1);
     }
 
-
     /**
      * Gets first round.
      *
      * @return the first round
      */
     public static Round getFirst() {
-        return Arrays.stream(Round.values()).filter(round -> round.roundNumber == 0).findFirst().get();
+        return Arrays.stream(Round.values()).filter(round -> round.roundNumber == 0)
+                .findFirst()
+                .orElseThrow( () -> new IllegalArgumentException("Round n°0 not found.") );
     }
 
 }

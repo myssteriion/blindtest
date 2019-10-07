@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
@@ -13,6 +12,7 @@ import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -44,10 +44,9 @@ public class GameService {
 	 *
 	 * @param newGame the new game
 	 * @return the game
-	 * @throws DaoException      the dao exception
 	 * @throws NotFoundException the not found exception
 	 */
-	public Game newGame(NewGame newGame) throws DaoException, NotFoundException {
+	public Game newGame(NewGame newGame) throws NotFoundException {
 
 		Tool.verifyValue("newGameDto", newGame);
 		checkPlayers( newGame.getPlayersNames() );
@@ -63,10 +62,9 @@ public class GameService {
 	 *
 	 * @param musicResult the music result
 	 * @return the game
-	 * @throws DaoException      the dao exception
 	 * @throws NotFoundException the not found exception
 	 */
-	public Game apply(MusicResult musicResult) throws DaoException, NotFoundException {
+	public Game apply(MusicResult musicResult) throws NotFoundException, IOException {
 
 		Tool.verifyValue("musicResultDto", musicResult);
 		Game game = games.stream()
@@ -118,10 +116,9 @@ public class GameService {
 	 * Test if all players have a profile.
 	 *
 	 * @param playersNames the players names
-	 * @throws DaoException 	 DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
-	private void checkPlayers(Set<String> playersNames) throws DaoException, NotFoundException {
+	private void checkPlayers(Set<String> playersNames) throws NotFoundException {
 
 		for (String playerName : playersNames) {
 

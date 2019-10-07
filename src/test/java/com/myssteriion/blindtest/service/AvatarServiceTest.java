@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,15 +41,15 @@ public class AvatarServiceTest extends AbstractTest {
         PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
 
-        Assert.assertEquals( new ArrayList<>(), avatarService.getAll() );
+        Assert.assertEquals( Page.empty(), avatarService.getAll(0) );
 
         avatarService.refresh();
-        Assert.assertEquals( Arrays.asList(new Avatar("file")), avatarService.getAll() );
+        Assert.assertEquals( new PageImpl<>(Arrays.asList(new Avatar("file"))), avatarService.getAll(0) );
     }
 
     @Test
     public void getAll() {
-        Assert.assertEquals( new ArrayList<>(), avatarService.getAll() );
+        Assert.assertEquals( new PageImpl<>(new ArrayList<>()), avatarService.getAll(0) );
     }
 
 }

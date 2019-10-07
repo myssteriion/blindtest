@@ -2,15 +2,12 @@ package com.myssteriion.blindtest.rest;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.ErrorMessage;
-import com.myssteriion.blindtest.model.base.ItemsPage;
-import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 public class ResponseBuilderTest extends AbstractTest {
 
@@ -25,7 +22,7 @@ public class ResponseBuilderTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'iModel' est obligatoire."), e);
 		}
 		
-		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", new Avatar("avatar")) );
+		ResponseEntity<ProfileDTO> re = ResponseBuilder.create200( new ProfileDTO("name", "avatarName") );
 		Assert.assertEquals( HttpStatus.OK , re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
 	}
@@ -33,10 +30,10 @@ public class ResponseBuilderTest extends AbstractTest {
 	@Test
 	public void create200List() {
 		
-		ResponseEntity< ItemsPage<ProfileDTO> > re = ResponseBuilder.create200( (List<ProfileDTO>) null );
+		ResponseEntity< Page<ProfileDTO> > re = ResponseBuilder.create200( (Page<ProfileDTO>) null );
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		ItemsPage<ProfileDTO> body = re.getBody();
-		Assert.assertTrue( body.getItems().isEmpty() );
+		Page<ProfileDTO> body = re.getBody();
+		Assert.assertTrue( body.getContent().isEmpty() );
 	}
 
 	@Test
@@ -50,7 +47,7 @@ public class ResponseBuilderTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'iModel' est obligatoire."), e);
 		}
 
-		ResponseEntity<ProfileDTO> re = ResponseBuilder.create201( new ProfileDTO("name", new Avatar("avatar")) );
+		ResponseEntity<ProfileDTO> re = ResponseBuilder.create201( new ProfileDTO("name", "avatarName") );
 		Assert.assertEquals( HttpStatus.CREATED , re.getStatusCode() );
 		Assert.assertNotNull( re.getBody() );
 	}

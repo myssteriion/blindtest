@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -28,7 +27,7 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void refresh() throws DaoException, ConflictException {
+	public void refresh() {
 
 		Mockito.doNothing().when(musicService).refresh();
 
@@ -37,7 +36,7 @@ public class MusicControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void random() throws DaoException, NotFoundException {
+	public void random() throws NotFoundException {
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		Mockito.when(musicService.random()).thenReturn(musicDto);

@@ -1,21 +1,18 @@
 package com.myssteriion.blindtest.rest;
 
-import java.util.List;
-
 import com.myssteriion.blindtest.model.IModel;
+import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.base.ErrorMessage;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.tools.Tool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.base.ErrorMessage;
-import com.myssteriion.blindtest.model.base.ItemsPage;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.tools.Tool;
 
 /**
  * The builder for create REST response.
@@ -91,14 +88,12 @@ public class ResponseBuilder {
 	/**
 	 * Create 200 response.
 	 *
-	 * @param <T>     the type parameter
-	 * @param iModels the models
+	 * @param <T>	the type parameter
+	 * @param page 	the page
 	 * @return the 200 response
 	 */
-	public static <T extends IModel> ResponseEntity< ItemsPage<T> > create200(List<T> iModels) {
-
-		ItemsPage<T> list = new ItemsPage<>(iModels);
-		return new ResponseEntity<>(list, HttpStatus.OK);
+	public static <T extends IModel> ResponseEntity< Page<T> > create200(Page<T> page) {
+		return new ResponseEntity<>(page, HttpStatus.OK);
 	}
 
 	/**

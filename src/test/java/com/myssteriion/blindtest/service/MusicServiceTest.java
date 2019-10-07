@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.db.exception.DaoException;
+import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -19,11 +19,14 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ MusicService.class, Tool.class })
@@ -31,7 +34,7 @@ public class MusicServiceTest extends AbstractTest {
 
 	@Mock
 	private MusicDAO dao;
-	
+
 	@InjectMocks
 	private MusicService musicService;
 
@@ -43,10 +46,9 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 
-	
-	@Test
-	public void refresh() throws DaoException, ConflictException {
 
+	@Test
+	public void refresh() throws ConflictException {
 
 		File mockFile = Mockito.mock(File.class);
 		Mockito.when(mockFile.isFile()).thenReturn(true);
@@ -58,20 +60,25 @@ public class MusicServiceTest extends AbstractTest {
 		PowerMockito.mockStatic(Tool.class);
 		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
+
+		MusicDTO musicMock = new MusicDTO();
 		musicService = Mockito.spy( new MusicService(dao) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
+		Mockito.doReturn(Page.empty()).doReturn(new PageImpl<>(Arrays.asList(musicMock))).when(musicService).findAll();
 
+		Assert.assertEquals( Page.empty(), musicService.findAll() );
 		musicService.refresh();
+		Assert.assertEquals( new PageImpl<>(Arrays.asList(musicMock)), musicService.findAll() );
 	}
-	
+
 	@Test
-	public void save() throws DaoException, ConflictException {
-		
+	public void save() throws ConflictException {
+
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
-		
-		
+
+
 		try {
 			musicService.save(null);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -79,13 +86,16 @@ public class MusicServiceTest extends AbstractTest {
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
-		
-		
+
+
+        musicService = Mockito.spy( new MusicService(dao) );
+		MockitoAnnotations.initMocks(musicService);
+
 		MusicDTO musicDtoMock = new MusicDTO(name, theme);
 		musicDtoMock.setId(1);
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock, null);
+		Mockito.doReturn(null).doReturn(musicDtoMock).doReturn(null).when(musicService).find(Mockito.any(MusicDTO.class));
 		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDtoMock);
-		
+
 		MusicDTO musicDto = new MusicDTO(name, theme);
 		Assert.assertSame( musicDtoMock, musicService.save(musicDto) );
 
@@ -105,7 +115,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws DaoException, NotFoundException {
+	public void update() throws NotFoundException {
 
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;
@@ -134,8 +144,9 @@ public class MusicServiceTest extends AbstractTest {
 		musicStatDtoMockNotSame.setId(2);
 		MusicDTO musicStatDtoMockSame = new MusicDTO(name, theme);
 		musicStatDtoMockSame.setId(1);
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicStatDtoMockNotSame, musicStatDtoMockNotSame, musicStatDtoMockSame);
-		Mockito.when(dao.update(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
+		Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(musicStatDtoMockNotSame),
+                Optional.of(musicStatDtoMockNotSame), Optional.of(musicStatDtoMockSame));
+		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
 
 		try {
 			musicDto.setId(1);
@@ -153,10 +164,10 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void find() throws DaoException {
+	public void find() {
 
 		MusicDTO musicDtoMock = new MusicDTO("name", Theme.ANNEES_80);
-		Mockito.when(dao.find(Mockito.any(MusicDTO.class))).thenReturn(null, musicDtoMock);
+		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicDtoMock));
 
 
 		try {
@@ -171,13 +182,13 @@ public class MusicServiceTest extends AbstractTest {
 		Assert.assertNull( musicService.find(musicDto) );
 		Assert.assertNotNull( musicService.find(musicDto) );
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Test
-	public void random() throws DaoException, NotFoundException {
-		
+	public void random() throws NotFoundException {
+
 		MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, 0);
-		
+
 		List<MusicDTO> allMusics = new ArrayList<>();
 		allMusics.add(expected);
 		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, 1000000000) );
@@ -194,17 +205,17 @@ public class MusicServiceTest extends AbstractTest {
 
 		MusicDTO musicDto = musicService.random();
 		Assert.assertEquals(expected, musicDto);
-		
+
 
 		expected = new MusicDTO("70_a", Theme.ANNEES_70, 0);
-		
+
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
 		Mockito.when(dao.findAll()).thenReturn(allMusics);
-		
+
 		musicDto = musicService.random();
 		Assert.assertEquals(expected, musicDto);
 	}
-	
+
 }

@@ -1,10 +1,8 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "musics")
 public class MusicController {
 
+	private final MusicService musicService;
+
 	@Autowired
-	private MusicService musicService;
+	public MusicController(MusicService musicService) {
+		this.musicService = musicService;
+	}
 
 
 
@@ -31,11 +33,9 @@ public class MusicController {
 	 * Scan music folder and refresh the DB.
 	 *
 	 * @return nothing
-	 * @throws DaoException      DB exception
-	 * @throws ConflictException Conflict exception
 	 */
 	@GetMapping(path = "/refresh")
-	public ResponseEntity<Empty> refresh() throws DaoException, ConflictException {
+	public ResponseEntity<Empty> refresh() {
 		
 		musicService.refresh();
 		return ResponseBuilder.create204();
@@ -45,11 +45,10 @@ public class MusicController {
 	 * Randomly choose a music.
 	 *
 	 * @return a MusicDTO
-	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random() throws DaoException, NotFoundException {
+	public ResponseEntity<MusicDTO> random() throws NotFoundException {
 		return ResponseBuilder.create200( musicService.random() );
 	}
 	

@@ -1,12 +1,15 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.AbstractDAO;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +18,7 @@ import java.util.List;
  * @param <DTO> the type parameter
  * @param <DAO> the type parameter
  */
-public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends AbstractDAO<DTO> > {
+public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends PagingAndSortingRepository<DTO, Integer> > {
 
     /**
      * The Dao.
@@ -35,20 +38,12 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
 
 
 
-    /**
-     * Save dto.
-     *
-     * @param dto the dto
-     * @return the dto
-     * @throws DaoException      the dao exception
-     * @throws ConflictException the conflict exception
-     */
-    public DTO save(DTO dto) throws DaoException, ConflictException {
+    public DTO save(DTO dto) throws ConflictException {
 
         Tool.verifyValue("dto", dto);
-
         dto.setId(null);
-        if ( !Tool.isNullOrEmpty( dao.find(dto) ) )
+
+        if (find(dto) != null)
             throw new ConflictException("Dto already exists.");
 
         return dao.save(dto);
@@ -59,18 +54,17 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      *
      * @param dto the dto
      * @return the dto
-     * @throws DaoException      the dao exception
      * @throws NotFoundException the not found exception
      */
-    public DTO update(DTO dto) throws DaoException, NotFoundException {
+    public DTO update(DTO dto) throws NotFoundException {
 
         Tool.verifyValue("dto", dto);
         Tool.verifyValue("dto -> id", dto.getId());
 
-        if ( Tool.isNullOrEmpty( dao.find(dto) ) )
+        if ( !dao.findById(dto.getId()).isPresent() )
             throw new NotFoundException("Dto not found.");
 
-        return dao.update(dto);
+        return dao.save(dto);
     }
 
     /**
@@ -78,41 +72,43 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      *
      * @param dto the dto
      * @return the dto
-     * @throws DaoException the dao exception
      */
-    public DTO find(DTO dto) throws DaoException {
+    public DTO find(DTO dto) {
 
         Tool.verifyValue("dto", dto);
-        return dao.find(dto);
+        Tool.verifyValue("dto -> id", dto.getId());
+
+        return dao.findById( dto.getId() ).orElse(null);
     }
 
     /**
      * Find all dto.
      *
      * @return the dto list
-     * @throws DaoException the dao exception
      */
-    public List<DTO> findAll() throws DaoException {
-        return dao.findAll();
+    public Page<DTO> findAll() {
+
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        PageRequest pageRequest = PageRequest.of(0, 1, sort);
+
+        return dao.findAll(pageRequest);
     }
 
     /**
      * Delete dto.
      *
      * @param dto the dto
-     * @throws DaoException      the dao exception
      * @throws NotFoundException the not found exception
      */
-    public void delete(DTO dto) throws DaoException, NotFoundException {
+    public void delete(DTO dto) throws NotFoundException {
 
         Tool.verifyValue("dto", dto);
         Tool.verifyValue("dto -> id", dto.getId());
 
-        DTO dtoFound = dao.find(dto);
-        if ( Tool.isNullOrEmpty(dtoFound) )
+        if ( !dao.findById(dto.getId()).isPresent() )
             throw new NotFoundException("Dto not found.");
 
-        dao.delete(dtoFound);
+        dao.deleteById(dto.getId());
     }
     
 }

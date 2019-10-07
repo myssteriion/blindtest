@@ -1,61 +1,93 @@
 package com.myssteriion.blindtest.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 /**
  * The MusicDTO.
  */
+@Entity
+@Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "name_theme_unique", columnNames={"name", "theme"}) })
 public class MusicDTO extends AbstractDTO {
+
+	/**
+	 * The DB id.
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "music_sequence")
+	@SequenceGenerator(name = "music_sequence", sequenceName = "music_sequence", allocationSize = 1)
+	@Column(name = "id", nullable = false)
+	protected Integer id;
 
 	/**
 	 * The name.
 	 */
+	@Column(name = "name", nullable = false)
+	@NotEmpty(message = "Name can't be empty.")
 	private String name;
 
 	/**
 	 * The theme.
 	 */
+	@Column(name = "theme", nullable = false)
 	private Theme theme;
 
 	/**
 	 * The number of played.
 	 */
+	@Column(name = "played", nullable = false)
 	private int played;
 
 
+
 	/**
-	 * Instantiates a new MusicDto.
+	 * Instantiates a new Music dto.
+	 */
+	public MusicDTO() {
+		this("", null);
+	}
+
+	/**
+	 * Instantiates a new Music dto.
 	 *
 	 * @param name  the name
 	 * @param theme the theme
 	 */
-	@JsonCreator
 	public MusicDTO(String name, Theme theme) {
 		this(name, theme, 0);
 	}
 
 	/**
-	 * Instantiates a new MusicDto.
+	 * Instantiates a new Music dto.
 	 *
-	 * @param name   the name
-	 * @param theme  the theme
-	 * @param played the played
+	 * @param name  the name
+	 * @param theme the theme
+	 * @param name  the played
 	 */
 	public MusicDTO(String name, Theme theme, int played) {
 
-		Tool.verifyValue("name", name);
-		Tool.verifyValue("theme", theme);
-
-		this.name = name;
+		this.name = Tool.isNullOrEmpty(name) ? "" : name;
 		this.theme = theme;
 		this.played = Math.max(played, 0);
 	}
 
+
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public MusicDTO setId(Integer id) {
+		this.id = id;
+		return this;
+	}
 
 	/**
 	 * Gets name.
@@ -64,6 +96,17 @@ public class MusicDTO extends AbstractDTO {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Sets name.
+	 *
+	 * @param name the name
+	 * @return this
+	 */
+	public MusicDTO setName(String name) {
+		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		return this;
 	}
 
 	/**
@@ -76,6 +119,17 @@ public class MusicDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Sets theme.
+	 *
+	 * @param theme the theme
+	 * @return this
+	 */
+	public MusicDTO setTheme(Theme theme) {
+		this.theme = theme;
+		return this;
+	}
+
+	/**
 	 * Gets played.
 	 *
 	 * @return the played
@@ -85,14 +139,25 @@ public class MusicDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Sets played.
+	 *
+	 * @param played the played
+	 * @return this
+	 */
+	public MusicDTO setPlayed(int played) {
+		this.played = played;
+		return this;
+	}
+
+
+	/**
 	 * Increment played.
 	 */
 	public void incrementPlayed() {
 		this.played++;
 	}
-	
-	
-	
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(name, theme);
@@ -114,7 +179,7 @@ public class MusicDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return super.toString() + 
+		return "id=" + id +
 				", name=" + name +
 				", theme=" + theme +
 				", played=" + played;

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.tools;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,12 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ToolTest extends AbstractTest {
 
@@ -139,12 +133,12 @@ public class ToolTest extends AbstractTest {
 		}
 		
 		
-		DaoException sql = new DaoException("sql", iae);
+		IllegalArgumentException iea2 = new IllegalArgumentException("iea2", iae);
 		expected = new ArrayList<>();
-		expected.add( sql.getMessage() );
+		expected.add( iea2.getMessage() );
 		expected.add( iae.getMessage() );
 		expected.add( npe.getMessage() );
-		actual = Tool.transformToList(sql);
+		actual = Tool.transformToList(iea2);
 		for (int i = 0; i < expected.size(); i++) {
 			Assert.assertEquals( expected.get(i), actual.get(i) );
 		}

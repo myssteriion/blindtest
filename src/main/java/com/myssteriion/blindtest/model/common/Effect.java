@@ -5,24 +5,6 @@ package com.myssteriion.blindtest.model.common;
  */
 public enum Effect {
 
-    /**
-     * None effect.
-     */
-    NONE,
-
-    /**
-     * Slow effect.
-     */
-    SLOW,
-
-    /**
-     * Speed effect.
-     */
-    SPEED,
-
-    /**
-     * Reverse effect.
-     */
-    REVERSE
+    NONE, SLOW, SPEED, REVERSE
 
 }

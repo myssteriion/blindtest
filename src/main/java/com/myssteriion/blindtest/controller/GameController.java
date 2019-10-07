@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 /**
  * Controller for GameDTO
  */
@@ -19,8 +20,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "game")
 public class GameController {
 
-	@Autowired
 	private GameService gameService;
+
+	@Autowired
+	public GameController(GameService gameService) {
+		this.gameService = gameService;
+	}
+
 
 
 	/**
@@ -28,11 +34,10 @@ public class GameController {
 	 *
 	 * @param newGame the NewGameDTO
 	 * @return a GameDTO
-	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping
-	public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws DaoException, NotFoundException {
+	public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException {
 
 		Game game = gameService.newGame(newGame);
 		return ResponseBuilder.create200(game);
@@ -43,11 +48,10 @@ public class GameController {
 	 *
 	 * @param musicResult the MusicResultDTO
 	 * @return the GameDTO after apply
-	 * @throws DaoException      DB exception
 	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping(path = "/apply")
-	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws DaoException, NotFoundException {
+	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException, IOException {
 
 		Game game = gameService.apply(musicResult);
 		return ResponseBuilder.create200(game);

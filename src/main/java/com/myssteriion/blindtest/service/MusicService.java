@@ -1,10 +1,8 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.db.exception.DaoException;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
@@ -26,20 +24,17 @@ import java.util.stream.Collectors;
 public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 	@Autowired
-	public MusicService(MusicDAO dao) {
-		super(dao);
+	public MusicService(MusicDAO musicDao) {
+		super(musicDao);
 	}
 
 
 
 	/**
 	 * Scan musics folder and insert musics in DB.
-	 *
-	 * @throws DaoException		 DB exception
-	 * @throws ConflictException Conflict exception
 	 */
 	@PostConstruct
-	private void init() throws DaoException, ConflictException {
+	private void init() {
 		
 		for ( Theme theme : Theme.values() ) {
 			
@@ -48,26 +43,31 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 			File themeDirectory = path.toFile();
 			for ( File music : Tool.getChildren(themeDirectory) ) {
-				if ( music.isFile() ) {
-					try {
-						save(new MusicDTO(music.getName(), theme));
-					}
-					catch (ConflictException e) {
-						// ignore if already exists
-					}
-				}
+
+				MusicDTO musicDto = new MusicDTO(music.getName(), theme);
+				if ( music.isFile() && !dao.findByNameAndTheme(musicDto.getName(), musicDto.getTheme()).isPresent() )
+					dao.save(musicDto);
 			}
 		}
 	}
 
 	/**
 	 * Scan music folder and refresh the DB.
-	 *
-	 * @throws DaoException      the dao exception
-	 * @throws ConflictException the conflict exception
 	 */
-	public void refresh() throws DaoException, ConflictException {
+	public void refresh() {
 		init();
+	}
+
+
+	@Override
+	public MusicDTO find(MusicDTO dto) {
+
+		Tool.verifyValue("dto", dto);
+
+		if ( Tool.isNullOrEmpty(dto.getId()) )
+			return dao.findByNameAndTheme(dto.getName(), dto.getTheme()).orElse(null);
+		else
+			return super.find(dto);
 	}
 
 
@@ -75,12 +75,12 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * Randomly choose a music.
 	 *
 	 * @return the music dto
-	 * @throws DaoException      the dao exception
 	 * @throws NotFoundException the not found exception
 	 */
-	public MusicDTO random() throws DaoException, NotFoundException {
+	public MusicDTO random() throws NotFoundException {
 	
-		List<MusicDTO> allMusics = dao.findAll();
+		List<MusicDTO> allMusics = new ArrayList<>();
+		dao.findAll().forEach(allMusics::add);
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found.");
