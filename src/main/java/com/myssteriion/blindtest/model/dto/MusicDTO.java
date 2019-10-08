@@ -1,10 +1,19 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
@@ -42,6 +51,13 @@ public class MusicDTO extends AbstractDTO {
 	 */
 	@Column(name = "played", nullable = false)
 	private int played;
+
+	/**
+	 * Audio flux.
+	 */
+	@Transient
+	private Flux flux;
+
 
 
 
@@ -149,6 +165,24 @@ public class MusicDTO extends AbstractDTO {
 		return this;
 	}
 
+	/**
+	 * Gets flux.
+	 *
+	 * @return The flux.
+	 */
+	public Flux getFlux() {
+		return flux;
+	}
+
+	/**
+	 * Set flux.
+	 *
+	 * @param flux The flux.
+	 */
+	public MusicDTO setFlux(Flux flux) {
+		this.flux = flux;
+		return this;
+	}
 
 	/**
 	 * Increment played.
