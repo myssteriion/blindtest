@@ -6,11 +6,9 @@ import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Abstract class for CRUD service.
@@ -24,6 +22,11 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      * The Dao.
      */
     protected DAO dao;
+
+    /**
+     * Number of elements per page.
+     */
+    protected static int ELEMENTS_PER_PAGE = 15;
 
 
 
@@ -86,12 +89,8 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      *
      * @return the dto list
      */
-    public Page<DTO> findAll() {
-
-        Sort sort = Sort.by(Sort.Direction.ASC, "name");
-        PageRequest pageRequest = PageRequest.of(0, 1, sort);
-
-        return dao.findAll(pageRequest);
+    public Page<DTO> findAll(int page) {
+        return dao.findAll( creatPageable(page) );
     }
 
     /**
@@ -110,5 +109,18 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
 
         dao.deleteById(dto.getId());
     }
-    
+
+
+    /**
+     * Create pageable for findAll.
+     *
+     * @param page the page
+     * @return the pageable
+     */
+    protected Pageable creatPageable(int page) {
+
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        return PageRequest.of(page, ELEMENTS_PER_PAGE, sort);
+    }
+
 }

@@ -65,11 +65,11 @@ public class MusicServiceTest extends AbstractTest {
 		musicService = Mockito.spy( new MusicService(dao) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
-		Mockito.doReturn(Page.empty()).doReturn(new PageImpl<>(Arrays.asList(musicMock))).when(musicService).findAll();
+		Mockito.doReturn(Page.empty()).doReturn(new PageImpl<>(Arrays.asList(musicMock))).when(musicService).findAll(Mockito.anyInt());
 
-		Assert.assertEquals( Page.empty(), musicService.findAll() );
+		Assert.assertEquals( Page.empty(), musicService.findAll(0) );
 		musicService.refresh();
-		Assert.assertEquals( new PageImpl<>(Arrays.asList(musicMock)), musicService.findAll() );
+		Assert.assertEquals( new PageImpl<>(Arrays.asList(musicMock)), musicService.findAll(0) );
 	}
 
 	@Test

@@ -56,7 +56,7 @@ public class MusicResultTest extends AbstractTest {
         Integer gameId = 1;
         MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult(gameId, musicDTO, null, null);
-        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0}, winners=[], losers=[]", musicResult.toString() );
+        Assert.assertEquals( "gameId=1, musicDTO={id=null, name=name, theme=ANNEES_80, played=0, flux={null}}, winners=[], losers=[]", musicResult.toString() );
     }
 
 }

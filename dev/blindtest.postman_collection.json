@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3d4192be-0565-4c72-ac5b-508b43f3f804",
+		"_postman_id": "81957301-322a-46bf-a109-94660e4ac770",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -101,7 +101,7 @@
 							"raw": "{\n\t\"name\": \"Myssteriion\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles/0",
+							"raw": "http://localhost:{{port}}/profiles/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -109,7 +109,7 @@
 							"port": "{{port}}",
 							"path": [
 								"profiles",
-								"0"
+								"1"
 							]
 						}
 					},
@@ -121,7 +121,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/profiles?page=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -129,6 +129,12 @@
 							"port": "{{port}}",
 							"path": [
 								"profiles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
 							]
 						}
 					},
@@ -140,7 +146,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles/3",
+							"raw": "http://localhost:{{port}}/profiles/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -148,7 +154,7 @@
 							"port": "{{port}}",
 							"path": [
 								"profiles",
-								"3"
+								"0"
 							]
 						}
 					},
@@ -273,12 +279,12 @@
 					"response": []
 				},
 				{
-					"name": "get all",
+					"name": "find all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/avatars",
+							"raw": "http://localhost:{{port}}/avatars?page=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -286,6 +292,12 @@
 							"port": "{{port}}",
 							"path": [
 								"avatars"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
 							]
 						}
 					},
@@ -319,9 +331,9 @@
 	],
 	"variable": [
 		{
-			"id": "4c5e74f1-4cfa-42e6-b5ad-9ecc157f5c23",
+			"id": "3b43273c-6cb6-4cfa-a2d0-2d4cf9f4d0d2",
 			"key": "port",
-			"value": "8080",
+			"value": "9501",
 			"type": "string"
 		}
 	],

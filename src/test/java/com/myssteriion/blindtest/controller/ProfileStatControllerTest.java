@@ -30,17 +30,17 @@ public class ProfileStatControllerTest extends AbstractTest {
 		IllegalArgumentException iae = new IllegalArgumentException("iae");
 		Page<ProfileStatDTO> pageMock = Mockito.mock(Page.class);
 		Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileStatDTO(1)));
-		Mockito.when(profileStatService.findAll()).thenThrow(iae).thenReturn(pageMock);
+		Mockito.when(profileStatService.findAll(Mockito.anyInt())).thenThrow(iae).thenReturn(pageMock);
 
 		try {
-			profileStatController.findAll();
+			profileStatController.findAll(0);
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(iae, e);
 		}
 		
-		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAll();
+		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAll(0);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Page<ProfileStatDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getContent().size() );

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
-import com.myssteriion.blindtest.model.common.Avatar;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -43,7 +42,7 @@ public class ProfileDTO extends AbstractDTO {
 	 * The avatar.
 	 */
 	@Transient
-	private Avatar avatar;
+	private AvatarDTO avatar;
 
 
 
@@ -73,7 +72,7 @@ public class ProfileDTO extends AbstractDTO {
 
 		this.name = Tool.isNullOrEmpty(name) ? "" : name;
 		this.avatarName = Tool.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
-		this.avatar = new Avatar(this.avatarName);
+		this.avatar = new AvatarDTO(this.avatarName);
 	}
 
 
@@ -126,7 +125,7 @@ public class ProfileDTO extends AbstractDTO {
 	 */
 	public ProfileDTO setAvatarName(String avatarName) {
 		this.avatarName = Tool.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
-		this.avatar = new Avatar(this.avatarName);
+		this.avatar = new AvatarDTO(this.avatarName);
 		return this;
 	}
 
@@ -135,20 +134,10 @@ public class ProfileDTO extends AbstractDTO {
 	 *
 	 * @return the avatar
 	 */
-	public Avatar getAvatar() {
+	public AvatarDTO getAvatar() {
 		return avatar;
 	}
 
-	/**
-	 * Create avatar.
-	 *
-	 * @return this
-	 */
-	public ProfileDTO createAvatar() {
-		this.avatarName = Tool.isNullOrEmpty(this.avatarName) ? Constant.DEFAULT_AVATAR : this.avatarName;
-		this.avatar = new Avatar(this.avatarName);
-		return this;
-	}
 
 	@Override
 	public int hashCode() {
@@ -172,7 +161,8 @@ public class ProfileDTO extends AbstractDTO {
 	public String toString() {
 		return "id=" + id +
 				", name=" + name +
-				", avatar={" + avatarName + "}";
+				", avatarName=" + avatarName +
+				", avatar={" + avatar + "}";
 	}
 
 }

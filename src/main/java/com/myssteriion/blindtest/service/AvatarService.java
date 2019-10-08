@@ -1,105 +1,143 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.db.dao.AvatarDAO;
+import com.myssteriion.blindtest.model.common.Flux;
+import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Service for Avatar.
  */
 @Service
-public class AvatarService {
+public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 
 	/**
 	 * The avatar folder path.
 	 */
-	private static final Path AVATAR_FOLDER = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER);
+	public static final String AVATAR_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER).toFile().getAbsolutePath();
+
+
 
 	/**
-	 * The Sort.
+	 * Instantiates a new Abstract service.
+	 *
+	 * @param avatarDAO the dao
 	 */
-	private static final Sort SORT = Sort.by(Sort.Direction.ASC, "name");
+	@Autowired
+	public AvatarService(AvatarDAO avatarDAO) {
+		super(avatarDAO);
+	}
 
-	/**
-	 * Number of elements per page.
-	 */
-	private static int ELEMENTS_PER_PAGE = 15;
 
-	/**
-	 * The avatars list (cache).
-	 */
-	private List<Avatar> avatars;
-	
-	
-	
+
 	@PostConstruct
 	private void init() {
-		
-		avatars = new ArrayList<>();
 
-		File avatarDirectory = AVATAR_FOLDER.toFile();
+		Path path = Paths.get(AVATAR_FOLDER_PATH);
+
+		File avatarDirectory = path.toFile();
 		for ( File avatar : Tool.getChildren(avatarDirectory) ) {
-			if ( avatar.isFile() )
-				avatars.add( new Avatar(avatar.getName()) );
+
+			AvatarDTO avatarDTO = new AvatarDTO( avatar.getName() );
+			if ( avatar.isFile() && !dao.findByName(avatar.getName()).isPresent() )
+				dao.save(avatarDTO);
 		}
 
-		avatars.sort(Avatar.COMPARATOR);
+		for ( AvatarDTO avatar : dao.findAll() ) {
+			if ( !avatarFileExists(avatar) )
+				dao.deleteById( avatar.getId() );
+		}
 	}
 
 	/**
-	 * Refresh avatars list (cache).
+	 * Refresh avatarDTOS list (cache).
 	 */
 	public void refresh() {
 		init();
 	}
 
+
+	@Override
+	public AvatarDTO save(AvatarDTO dto) throws ConflictException {
+
+		AvatarDTO avatar = super.save(dto);
+		createAvatarFlux(avatar);
+		return avatar;
+	}
+
+	@Override
+	public AvatarDTO update(AvatarDTO dto) throws NotFoundException {
+
+		AvatarDTO avatar = super.update(dto);
+		createAvatarFlux(avatar);
+		return avatar;
+	}
+
+	@Override
+	public AvatarDTO find(AvatarDTO dto) {
+
+		Tool.verifyValue("dto", dto);
+
+		AvatarDTO avatar;
+		if ( Tool.isNullOrEmpty(dto.getId()) )
+			avatar = dao.findByName(dto.getName()).orElse(null);
+		else
+			avatar = super.find(dto);
+
+		if (avatar != null)
+			createAvatarFlux(avatar);
+
+		return avatar;
+	}
+
+	@Override
+	public Page<AvatarDTO> findAll(int page) {
+
+		Page<AvatarDTO> pageable = super.findAll(page);
+		pageable.forEach(this::createAvatarFlux);
+
+		return pageable;
+	}
+
+
 	/**
-	 * Gets avatars page.
+	 * Test if the avatar match with an existing file.
 	 *
-	 * @return the avatars list
+	 * @param avatar the avatar
+	 * @return TRUE if the avatar match with an existing file, FALSE otherwise
 	 */
-	public Page<Avatar> getAll(int page) {
-
-		if ( Tool.isNullOrEmpty(avatars) )
-			return Page.empty();
-
-		page = Math.max(page, 0);
-		page = Math.min( page, calculateMaxPage()-1 );
-
-		int start = ELEMENTS_PER_PAGE * page;
-		int end = start + ELEMENTS_PER_PAGE;
-
-		end = Math.min( end, avatars.size() );
-
-		PageRequest pageRequest = PageRequest.of(page, ELEMENTS_PER_PAGE, SORT);
-		return new PageImpl<>(avatars.subList(start, end), pageRequest, avatars.size());
+	private boolean avatarFileExists(AvatarDTO avatar) {
+		return avatar != null && Paths.get(AVATAR_FOLDER_PATH, avatar.getName()).toFile().exists();
 	}
 
 	/**
-	 * Calculate the max page.
+	 * Create avatar flux on avatar.
 	 *
-	 * @return the max page
+	 * @param dto the dto
 	 */
-	private int calculateMaxPage() {
+	public void createAvatarFlux(AvatarDTO dto) {
 
-		int maxPage = avatars.size() / ELEMENTS_PER_PAGE;
+		try {
 
-		if ( (avatars.size() % ELEMENTS_PER_PAGE) > 0 )
-			maxPage++;
-
-		return maxPage;
+			Path path = Paths.get( AVATAR_FOLDER_PATH, dto.getName() );
+			dto.setFlux( new Flux(path.toFile()) );
+		}
+		catch (IOException e) {
+			throw new CustomRuntimeException("Can't create avatar flux.", e);
+		}
 	}
-	
+
 }

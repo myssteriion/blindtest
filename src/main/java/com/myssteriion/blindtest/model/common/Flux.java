@@ -1,12 +1,10 @@
 package com.myssteriion.blindtest.model.common;
 
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.tools.Tool;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.nio.file.Files;
+import java.util.Objects;
 
 /**
  * The type Flux.
@@ -17,6 +15,11 @@ public class Flux {
      * The name.
      */
     private String name;
+
+    /**
+     * File exists.
+     */
+    private boolean fileExists;
 
     /**
      * The contentFlux.
@@ -35,17 +38,20 @@ public class Flux {
      *
      * @param file the file
      */
-    public Flux(File file) throws NotFoundException, IOException {
+    public Flux(File file) throws IOException {
 
-        Tool.verifyValue("file", file);
-
-        if ( !file.isFile() )
-            throw new NotFoundException("Music file must be a file.");
+        if (file == null)
+            throw new IllegalArgumentException("Le champ 'file' est obligatoire.");
 
         this.name = file.getName();
-        this.contentFlux = Files.readAllBytes(file.toPath());
-        this.contentType = URLConnection.guessContentTypeFromName(file.getName());
+        fileExists = file.exists() && file.isFile();
+
+        if (fileExists) {
+            this.contentFlux = Files.readAllBytes(file.toPath());
+            this.contentType = URLConnection.guessContentTypeFromName(file.getName());
+        }
     }
+
 
 
     /**
@@ -56,6 +62,16 @@ public class Flux {
     public String getName() {
         return name;
     }
+
+    /**
+     * Gets fileExists.
+     *
+     * @return The fileExists.
+     */
+    public boolean isFileExists() {
+        return fileExists;
+    }
+
 
     /**
      * Gets contentFlux.
@@ -73,6 +89,27 @@ public class Flux {
      */
     public String getContentType() {
         return contentType;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flux flux = (Flux) o;
+        return Objects.equals(name, flux.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "name=" + name +
+                ", fileExists=" + fileExists +
+                ", contentType=" + contentType;
     }
 
 }

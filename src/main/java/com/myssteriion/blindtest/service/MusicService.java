@@ -25,6 +25,11 @@ import java.util.stream.Collectors;
 @Service
 public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
+	/**
+	 * The music folder path.
+	 */
+	private static final String MUSIC_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
+
 	private static final int NB_MUSICS_NOT_FOUND_LIMIT = 10;
 
 
@@ -45,7 +50,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		for ( Theme theme : Theme.values() ) {
 			
 			String themeFolder = theme.getFolderName();
-			Path path = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, themeFolder);
+			Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
 
 			File themeDirectory = path.toFile();
 			for ( File music : Tool.getChildren(themeDirectory) ) {
@@ -113,7 +118,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				throw new NotFoundException(NB_MUSICS_NOT_FOUND_LIMIT + " musics are not found, please refresh musics folder.");
 		}
 
-		Path path = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, music.getTheme().getFolderName(), music.getName());
+		Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 		music.setFlux( new Flux(path.toFile()) );
 
 		return music;
@@ -187,8 +192,14 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		return potentialMusics.get(random);
 	}
 
+	/**
+	 * Test if the music matching with an existing file.
+	 *
+	 * @param music the dto
+	 * @return TRUE if the music matching with an existing file, FALSE otherwise
+	 */
 	private boolean musicFileExists(MusicDTO music) {
-		return music != null && Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+		return music != null && Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
 	}
 
 }

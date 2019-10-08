@@ -22,11 +22,15 @@ public class ProfileController {
 
 	private final ProfileService profileService;
 
+	/**
+	 * Instantiates a new Profile controller.
+	 *
+	 * @param profileService the profile service
+	 */
 	@Autowired
 	public ProfileController(ProfileService profileService) {
 		this.profileService = profileService;
 	}
-
 
 
 	/**
@@ -57,15 +61,25 @@ public class ProfileController {
 	}
 
 	/**
-	 * Gets all ProfileDTO.
+	 * Find pageable of profile.
 	 *
-	 * @return the ProfileDTO list
+	 * @param page the page
+	 * @return the pageable of profile
 	 */
 	@GetMapping
-	public ResponseEntity< Page<ProfileDTO> > findAll() {
-		return ResponseBuilder.create200( profileService.findAll() );
+	public ResponseEntity< Page<ProfileDTO> > findAll(
+			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
+
+		return ResponseBuilder.create200( profileService.findAll(page) );
 	}
 
+	/**
+	 * Delete response entity.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 * @throws NotFoundException the not found exception
+	 */
 	@DeleteMapping(path = Constant.ID_PATH_PARAM)
 	public ResponseEntity<Empty> delete(@PathVariable(Constant.ID) Integer id) throws NotFoundException {
 

@@ -216,7 +216,8 @@ public class MusicDTO extends AbstractDTO {
 		return "id=" + id +
 				", name=" + name +
 				", theme=" + theme +
-				", played=" + played;
+				", played=" + played +
+				", flux={" + flux + "}";
 	}
 
 }

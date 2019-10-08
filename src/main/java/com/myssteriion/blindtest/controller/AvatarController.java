@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.base.Empty;
-import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.tools.Constant;
@@ -36,15 +36,16 @@ public class AvatarController {
 	}
 
 	/**
-	 * Gets all Avatar in the cache.
+	 * Find pageable of avatar.
 	 *
-	 * @return the Avatar list
+	 * @param page the page
+	 * @return the pageable of avatar
 	 */
 	@GetMapping
-	public ResponseEntity< Page<Avatar> > getAll(
+	public ResponseEntity< Page<AvatarDTO> > findAll(
 			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
 
-		return ResponseBuilder.create200( avatarService.getAll(page) );
+		return ResponseBuilder.create200( avatarService.findAll(page) );
 	}
 	
 }

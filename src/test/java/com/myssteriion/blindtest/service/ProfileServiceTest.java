@@ -26,7 +26,10 @@ public class ProfileServiceTest extends AbstractTest {
 	
 	@Mock
 	private ProfileStatService profileStatService;
-	
+
+	@Mock
+	private AvatarService avatarService;
+
 	@InjectMocks
 	private ProfileService profileService;
 
@@ -34,7 +37,7 @@ public class ProfileServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		profileService = new ProfileService(profileDao, profileStatService);
+		profileService = new ProfileService(profileDao, profileStatService, avatarService);
 	}
 
 
@@ -54,7 +57,7 @@ public class ProfileServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 
-		profileService = Mockito.spy( new ProfileService(profileDao, profileStatService) );
+		profileService = Mockito.spy( new ProfileService(profileDao, profileStatService, avatarService) );
 		MockitoAnnotations.initMocks(profileService);
 
 		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
@@ -159,7 +162,7 @@ public class ProfileServiceTest extends AbstractTest {
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		Mockito.when(profileDao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
 
-		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAll() );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAll(0) );
 	}
 
 	@Test

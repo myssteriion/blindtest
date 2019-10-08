@@ -186,7 +186,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
 		Mockito.when(profileStatDao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Arrays.asList(profileStatDto)) );
 
-		Assert.assertEquals( new PageImpl<>(Arrays.asList(profileStatDto)), profileStatService.findAll() );
+		Assert.assertEquals( new PageImpl<>(Arrays.asList(profileStatDto)), profileStatService.findAll(0) );
 	}
 
 }

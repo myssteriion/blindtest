@@ -6,6 +6,9 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,6 +35,7 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 			return super.find(dto);
 	}
 
+
 	/**
 	 * Find profile stat dto by profileId.
 	 *
@@ -51,6 +55,12 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 			throw new NotFoundException("Profile stat not found.");
 
 		return foundProfileStatDTO;
+	}
+
+
+	@Override
+	protected Pageable creatPageable(int page) {
+		return PageRequest.of(page, ELEMENTS_PER_PAGE, Sort.unsorted());
 	}
 
 }

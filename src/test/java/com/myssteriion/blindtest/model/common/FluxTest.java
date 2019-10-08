@@ -21,18 +21,21 @@ public class FluxTest extends AbstractTest {
 
     private static final Path FILE_EXISTS = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file.txt");
 
+    private static final Path FILE_EXISTS_2 = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file-2.txt");
+
 
 
     @Before
     public void before() throws IOException {
         Files.createFile(FILE_EXISTS);
+        Files.createFile(FILE_EXISTS_2);
     }
 
     @After
     public void after() throws IOException {
         Files.deleteIfExists(FILE_EXISTS);
+        Files.deleteIfExists(FILE_EXISTS_2);
     }
-
 
 
 
@@ -47,26 +50,38 @@ public class FluxTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'file' est obligatoire."), e);
         }
 
-        try {
-            new Flux( new File("existe pas") );
-            Assert.fail("Doit lever une NotFoundException car le file n'existe pas.");
-        }
-        catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'file' est obligatoire."), e);
-        }
+        Flux flux = new Flux( new File("existe pas") );
+        Assert.assertEquals( "existe pas", flux.getName() );
+        Assert.assertFalse( flux.isFileExists() );
+        Assert.assertNull( flux.getContentFlux() );
+        Assert.assertNull( flux.getContentType() );
 
-        try {
-            new Flux( RESOURCE_DIR );
-            Assert.fail("Doit lever une NotFoundException car le file n'est pas un file.");
-        }
-        catch (NotFoundException e) {
-            verifyException(new NotFoundException("Music file must be a file."), e);
-        }
-
-        Flux flux = new Flux( FILE_EXISTS.toFile() );
+        flux = new Flux( FILE_EXISTS.toFile() );
         Assert.assertEquals( FILE_EXISTS.toFile().getName(), flux.getName() );
+        Assert.assertTrue( flux.isFileExists() );
         Assert.assertEquals( Files.readAllBytes(FILE_EXISTS).length, flux.getContentFlux().length );
         Assert.assertEquals( URLConnection.guessContentTypeFromName(FILE_EXISTS.toFile().getName()), flux.getContentType() );
+    }
+
+    @Test
+    public void toStringAndEquals() throws NotFoundException, IOException {
+
+        Flux fluxOne = new Flux(FILE_EXISTS.toFile());
+        Flux fluxOneIso = new Flux(FILE_EXISTS.toFile());
+        Flux fluxTwo = new Flux(FILE_EXISTS_2.toFile());
+
+        Assert.assertEquals("name=exists-file.txt, fileExists=true, contentType=text/plain", fluxOne.toString());
+
+        Assert.assertNotEquals(fluxOne, null);
+        Assert.assertNotEquals(fluxOne, "bad class");
+        Assert.assertEquals(fluxOne, fluxOne);
+        Assert.assertEquals(fluxOne, fluxOneIso);
+        Assert.assertNotEquals(fluxOne, fluxTwo);
+
+        Assert.assertEquals(fluxOne.hashCode(), fluxOne.hashCode());
+        Assert.assertEquals(fluxOne.hashCode(), fluxOneIso.hashCode());
+        Assert.assertNotEquals(fluxOne.hashCode(), fluxTwo.hashCode());
+
     }
 
 }
