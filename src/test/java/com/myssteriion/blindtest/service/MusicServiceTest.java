@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.model.common.Avatar;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -185,7 +185,7 @@ public class MusicServiceTest extends AbstractTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void random() throws NotFoundException {
+	public void random() throws Exception {
 
 		MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, 0);
 
@@ -196,15 +196,20 @@ public class MusicServiceTest extends AbstractTest {
 
 		try {
 			musicService.random();
-			Assert.fail("Doit lever une v car le mock ne retrourne une liste vide.");
+			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("No music found."), e);
 		}
 
 
-		MusicDTO musicDto = musicService.random();
-		Assert.assertEquals(expected, musicDto);
+		try {
+			musicService.random();
+			Assert.fail("Doit lever une NotFoundException car il n'y a pas de musics.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("10 musics are not found, please refresh musics folder."), e);
+		}
 
 
 		expected = new MusicDTO("70_a", Theme.ANNEES_70, 0);
@@ -214,7 +219,14 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics.add(expected);
 		Mockito.when(dao.findAll()).thenReturn(allMusics);
 
-		musicDto = musicService.random();
+
+		musicService = PowerMockito.spy( new MusicService(dao) );
+		PowerMockito.doReturn(true).when(musicService, "musicFileExists", Mockito.any(MusicDTO.class));
+
+		Flux fluxMock = Mockito.mock(Flux.class);
+		PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
+
+		MusicDTO musicDto = musicService.random();
 		Assert.assertEquals(expected, musicDto);
 	}
 

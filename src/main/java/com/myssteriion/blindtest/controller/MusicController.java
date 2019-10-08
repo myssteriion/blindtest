@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 /**
  * Controller for MusicDTO.
  */
@@ -48,7 +50,7 @@ public class MusicController {
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random() throws NotFoundException {
+	public ResponseEntity<MusicDTO> random() throws NotFoundException, IOException {
 		return ResponseBuilder.create200( musicService.random() );
 	}
 	

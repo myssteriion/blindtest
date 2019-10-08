@@ -6,8 +6,11 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Arrays;
 
 public class ResponseBuilderTest extends AbstractTest {
 
@@ -29,11 +32,12 @@ public class ResponseBuilderTest extends AbstractTest {
 	
 	@Test
 	public void create200List() {
-		
-		ResponseEntity< Page<ProfileDTO> > re = ResponseBuilder.create200( (Page<ProfileDTO>) null );
+
+		ProfileDTO profileDTO = new ProfileDTO("name", "avatarName");
+
+		ResponseEntity< Page<ProfileDTO> > re = ResponseBuilder.create200( new PageImpl<>(Arrays.asList(profileDTO)) );
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		Page<ProfileDTO> body = re.getBody();
-		Assert.assertTrue( body.getContent().isEmpty() );
+		Assert.assertEquals( new PageImpl<>(Arrays.asList(profileDTO)), re.getBody() );
 	}
 
 	@Test

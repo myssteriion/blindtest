@@ -39,12 +39,12 @@ public class AvatarServiceTest extends AbstractTest {
 
         PowerMockito.mockStatic(Tool.class);
         PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-
+        PowerMockito.when(Tool.isNullOrEmpty(null)).thenReturn(true);
 
         Assert.assertEquals( Page.empty(), avatarService.getAll(0) );
 
         avatarService.refresh();
-        Assert.assertEquals( new PageImpl<>(Arrays.asList(new Avatar("file"))), avatarService.getAll(0) );
+        Assert.assertEquals( 1, avatarService.getAll(0).getNumberOfElements() );
     }
 
     @Test

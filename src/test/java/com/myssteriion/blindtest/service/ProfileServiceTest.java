@@ -13,7 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -156,10 +157,9 @@ public class ProfileServiceTest extends AbstractTest {
 	public void findAll() {
 
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
-		Mockito.when(profileDao.findAll()).thenReturn( Collections.singletonList (profileDto));
+		Mockito.when(profileDao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
 
-		Page<ProfileDTO> page = profileService.findAll();
-		Assert.assertEquals( 1, page.getSize() );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAll() );
 	}
 
 	@Test

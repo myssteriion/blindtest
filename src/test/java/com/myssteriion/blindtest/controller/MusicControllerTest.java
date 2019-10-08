@@ -16,6 +16,8 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.service.MusicService;
 
+import java.io.IOException;
+
 public class MusicControllerTest extends AbstractTest {
 
 	@Mock
@@ -36,7 +38,7 @@ public class MusicControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void random() throws NotFoundException {
+	public void random() throws NotFoundException, IOException {
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		Mockito.when(musicService.random()).thenReturn(musicDto);

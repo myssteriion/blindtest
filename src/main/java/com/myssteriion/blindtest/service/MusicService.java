@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,6 +24,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
+
+	private static final int NB_MUSICS_NOT_FOUND_LIMIT = 10;
+
+
 
 	@Autowired
 	public MusicService(MusicDAO musicDao) {
@@ -48,6 +54,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				if ( music.isFile() && !dao.findByNameAndTheme(musicDto.getName(), musicDto.getTheme()).isPresent() )
 					dao.save(musicDto);
 			}
+		}
+
+		for ( MusicDTO music : dao.findAll() ) {
+			if ( !musicFileExists(music) )
+				dao.deleteById( music.getId() );
 		}
 	}
 
@@ -77,7 +88,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * @return the music dto
 	 * @throws NotFoundException the not found exception
 	 */
-	public MusicDTO random() throws NotFoundException {
+	public MusicDTO random() throws NotFoundException, IOException {
 	
 		List<MusicDTO> allMusics = new ArrayList<>();
 		dao.findAll().forEach(allMusics::add);
@@ -88,10 +99,24 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
-		List<Double> cumulatifPercent = calculateCumulativePercent(coefs, ratio);
-		Theme foundTheme = foundTheme(cumulatifPercent);
-		
-		return foundMusic(allMusics, foundTheme);
+		List<Double> cumulativePercent = calculateCumulativePercent(coefs, ratio);
+
+		int cpt = 0;
+		MusicDTO music = null;
+		while ( !musicFileExists(music) ) {
+
+			Theme foundTheme = foundTheme(cumulativePercent);
+			music = foundMusic(allMusics, foundTheme);
+
+			cpt++;
+			if (cpt == NB_MUSICS_NOT_FOUND_LIMIT)
+				throw new NotFoundException(NB_MUSICS_NOT_FOUND_LIMIT + " musics are not found, please refresh musics folder.");
+		}
+
+		Path path = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, music.getTheme().getFolderName(), music.getName());
+		music.setFlux( new Flux(path.toFile()) );
+
+		return music;
 	}
 
 	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
@@ -161,5 +186,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
 		return potentialMusics.get(random);
 	}
-	
+
+	private boolean musicFileExists(MusicDTO music) {
+		return music != null && Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+	}
+
 }
