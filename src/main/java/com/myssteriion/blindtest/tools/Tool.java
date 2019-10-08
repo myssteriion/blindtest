@@ -62,7 +62,7 @@ public class Tool {
 	 *
 	 * @param key   the key
 	 * @param value the value
-	 * @see #isNullOrEmpty(Object) #isNullOrEmpty(Object)
+	 * @see #isNullOrEmpty(Object)
 	 */
 	public static void verifyValue(String key, Object value) {
 		
