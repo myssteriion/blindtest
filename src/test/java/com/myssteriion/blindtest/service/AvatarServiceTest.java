@@ -182,7 +182,7 @@ public class AvatarServiceTest extends AbstractTest {
     public void findAllByNameStartingWith() {
 
         AvatarDTO avatarDto = new AvatarDTO("name");
-        Mockito.when(dao.findAllByNameStartingWith(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
+        Mockito.when(dao.findAllByNameStartingWithIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
 
         Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0) );
         Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0) );

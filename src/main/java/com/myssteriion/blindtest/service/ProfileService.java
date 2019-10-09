@@ -77,7 +77,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 		if (namePrefix == null)
 			namePrefix = "";
 
-		Page<ProfileDTO> pageable = dao.findAllByNameStartingWith( namePrefix, creatPageable(page) );
+		Page<ProfileDTO> pageable = dao.findAllByNameStartingWithIgnoreCase( namePrefix, creatPageable(page) );
 		pageable.forEach(this::createProfileAvatarFlux);
 
 		return pageable;

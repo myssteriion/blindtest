@@ -115,7 +115,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		if (namePrefix == null)
 			namePrefix = "";
 
-		Page<AvatarDTO> pageable = dao.findAllByNameStartingWith( namePrefix, creatPageable(page) );
+		Page<AvatarDTO> pageable = dao.findAllByNameStartingWithIgnoreCase( namePrefix, creatPageable(page) );
 		pageable.forEach(this::createAvatarFlux);
 
 		return pageable;

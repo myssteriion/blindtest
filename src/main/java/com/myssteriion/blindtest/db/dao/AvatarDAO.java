@@ -29,6 +29,6 @@ public interface AvatarDAO extends PagingAndSortingRepository<AvatarDTO, Integer
      * @param pageable   the page
      * @return a page of Avatar filtered by prefix name
      */
-    Page<AvatarDTO> findAllByNameStartingWith(String prefixName, Pageable pageable);
+    Page<AvatarDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
 
 }
