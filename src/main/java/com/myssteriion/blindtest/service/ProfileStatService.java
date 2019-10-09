@@ -35,7 +35,6 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 			return super.find(dto);
 	}
 
-
 	/**
 	 * Find profile stat dto by profileId.
 	 *

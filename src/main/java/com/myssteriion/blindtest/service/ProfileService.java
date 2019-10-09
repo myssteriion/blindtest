@@ -65,10 +65,19 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 		return profile;
 	}
 
-	@Override
-	public Page<ProfileDTO> findAll(int page) {
+	/**
+	 * Find a page of Profile filtered by a prefix name.
+	 *
+	 * @param namePrefix the name prefix
+	 * @param page       the page
+	 * @return the page
+	 */
+	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int page) {
 
-		Page<ProfileDTO> pageable = super.findAll(page);
+		if (namePrefix == null)
+			namePrefix = "";
+
+		Page<ProfileDTO> pageable = dao.findAllByNameStartingWith( namePrefix, creatPageable(page) );
 		pageable.forEach(this::createProfileAvatarFlux);
 
 		return pageable;

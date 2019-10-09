@@ -1,8 +1,11 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.ProfileStatService;
+import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -25,22 +28,20 @@ public class ProfileStatControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void findAll() {
+	public void findAllByProfilesIds() throws NotFoundException {
 
-		IllegalArgumentException iae = new IllegalArgumentException("iae");
-		Page<ProfileStatDTO> pageMock = Mockito.mock(Page.class);
-		Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileStatDTO(1)));
-		Mockito.when(profileStatService.findAll(Mockito.anyInt())).thenThrow(iae).thenReturn(pageMock);
+		NotFoundException nfe = new NotFoundException("nfe");
+		Mockito.when(profileStatService.findByProfile(Mockito.any(ProfileDTO.class))).thenThrow(nfe).thenReturn(new ProfileStatDTO(0));
 
 		try {
-			profileStatController.findAll(0);
-			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
+			profileStatController.findAllByProfilesIds(Arrays.asList(0));
+			Assert.fail("Doit lever une CustomRuntimeException car le mock throw.");
 		}
-		catch (IllegalArgumentException e) {
-			verifyException(iae, e);
+		catch (CustomRuntimeException e) {
+			verifyException(new CustomRuntimeException("Can't find profile stat.", nfe), e);
 		}
 		
-		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAll(0);
+		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAllByProfilesIds(Arrays.asList(0));
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Page<ProfileStatDTO> actual = re.getBody();
 		Assert.assertEquals( 1, actual.getContent().size() );

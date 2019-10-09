@@ -103,10 +103,19 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		return avatar;
 	}
 
-	@Override
-	public Page<AvatarDTO> findAll(int page) {
+	/**
+	 * Find a page of Avatar filtered by a prefix name.
+	 *
+	 * @param namePrefix the name prefix
+	 * @param page       the page
+	 * @return the page
+	 */
+	public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int page) {
 
-		Page<AvatarDTO> pageable = super.findAll(page);
+		if (namePrefix == null)
+			namePrefix = "";
+
+		Page<AvatarDTO> pageable = dao.findAllByNameStartingWith( namePrefix, creatPageable(page) );
 		pageable.forEach(this::createAvatarFlux);
 
 		return pageable;

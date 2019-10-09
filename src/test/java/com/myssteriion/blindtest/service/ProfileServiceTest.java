@@ -157,12 +157,13 @@ public class ProfileServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void findAll() {
+	public void findAllByNameStartingWith() {
 
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
-		Mockito.when(profileDao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
+		Mockito.when(profileDao.findAllByNameStartingWith(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
 
-		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAll(0) );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith(null, 0) );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith("", 0) );
 	}
 
 	@Test

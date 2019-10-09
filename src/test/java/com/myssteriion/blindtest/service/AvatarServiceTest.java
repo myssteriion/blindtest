@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
-import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -18,7 +17,6 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -61,15 +59,15 @@ public class AvatarServiceTest extends AbstractTest {
         PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
 
-        AvatarDTO avatarMock = new AvatarDTO();
         avatarService = Mockito.spy( new AvatarService(dao) );
         MockitoAnnotations.initMocks(avatarService);
         Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarDTO.class));
-        Mockito.doReturn(Page.empty()).doReturn(new PageImpl<>(Arrays.asList(avatarMock))).when(avatarService).findAll(Mockito.anyInt());
 
-        Assert.assertEquals( Page.empty(), avatarService.findAll(0) );
+        AvatarDTO avatarMock = new AvatarDTO();
+        Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarMock));
+
         avatarService.refresh();
-        Assert.assertEquals( new PageImpl<>(Arrays.asList(avatarMock)), avatarService.findAll(0) );
+        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarDTO.class));
     }
 
     @Test
@@ -181,12 +179,13 @@ public class AvatarServiceTest extends AbstractTest {
     }
 
     @Test
-    public void findAll() {
+    public void findAllByNameStartingWith() {
 
         AvatarDTO avatarDto = new AvatarDTO("name");
-        Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
+        Mockito.when(dao.findAllByNameStartingWith(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
 
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)),  avatarService.findAll(0) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0) );
     }
     
 }

@@ -16,10 +16,14 @@ public class Constant {
 
 	public static final String EMPTY_JSON	 		= "{}";
 
-	public static final String ID					= "id";
-	public static final String ID_PATH_PARAM		= "/{" + ID + "}";
-	public static final String PAGE					= "page";
-	public static final String PAGE_DEFAULT_VALUE	= "0";
+	public static final String ID							= "id";
+	public static final String ID_PATH_PARAM				= "/{" + ID + "}";
+	public static final String PAGE							= "page";
+	public static final String PAGE_DEFAULT_VALUE			= "0";
+	public static final String PREFIX_NAME					= "prefixName";
+	public static final String PREFIX_NAME_DEFAULT_VALUE	= "";
+	public static final String PROFILES_IDS					= "profilesIds";
+	public static final String PROFILES_IDS_DEFAULT_VALUE	= "";
 
 	private Constant() {}
 

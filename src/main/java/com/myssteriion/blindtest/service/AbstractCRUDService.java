@@ -4,7 +4,6 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -26,7 +25,7 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
     /**
      * Number of elements per page.
      */
-    protected static int ELEMENTS_PER_PAGE = 15;
+    protected static final int ELEMENTS_PER_PAGE = 15;
 
 
 
@@ -82,15 +81,6 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
         Tool.verifyValue("dto -> id", dto.getId());
 
         return dao.findById( dto.getId() ).orElse(null);
-    }
-
-    /**
-     * Find all dto.
-     *
-     * @return the dto list
-     */
-    public Page<DTO> findAll(int page) {
-        return dao.findAll( creatPageable(page) );
     }
 
     /**

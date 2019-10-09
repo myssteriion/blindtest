@@ -13,11 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public class ProfileStatServiceTest extends AbstractTest {
@@ -178,15 +174,6 @@ public class ProfileStatServiceTest extends AbstractTest {
 		ProfileStatDTO actual = profileStatService.findByProfile(profileDto);
 		Assert.assertNotNull(actual);
 		Assert.assertSame(profileStatDtoMock, actual);
-	}
-
-	@Test
-	public void findAll() {
-
-		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
-		Mockito.when(profileStatDao.findAll(Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Arrays.asList(profileStatDto)) );
-
-		Assert.assertEquals( new PageImpl<>(Arrays.asList(profileStatDto)), profileStatService.findAll(0) );
 	}
 
 }

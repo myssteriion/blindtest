@@ -36,12 +36,12 @@ public class AvatarControllerTest extends AbstractTest {
     }
 
     @Test
-    public void getAll() {
+    public void findAllByNameStartingWith() {
 
         AvatarDTO avatar = new AvatarDTO("name");
-        Mockito.when(avatarService.findAll(Mockito.anyInt())).thenReturn( new PageImpl<>(Arrays.asList(avatar)) );
+        Mockito.when(avatarService.findAllByNameStartingWith(Mockito.anyString(), Mockito.anyInt())).thenReturn( new PageImpl<>(Arrays.asList(avatar)) );
 
-        ResponseEntity< Page<AvatarDTO> > re = avatarController.findAll(0);
+        ResponseEntity< Page<AvatarDTO> > re = avatarController.findAllByNameStartingWith("", 0);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals( new PageImpl<>(Arrays.asList(avatar)), re.getBody() );
     }

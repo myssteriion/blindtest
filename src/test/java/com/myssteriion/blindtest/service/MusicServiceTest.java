@@ -19,8 +19,6 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,15 +59,15 @@ public class MusicServiceTest extends AbstractTest {
 		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
 
-		MusicDTO musicMock = new MusicDTO();
 		musicService = Mockito.spy( new MusicService(dao) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
-		Mockito.doReturn(Page.empty()).doReturn(new PageImpl<>(Arrays.asList(musicMock))).when(musicService).findAll(Mockito.anyInt());
 
-		Assert.assertEquals( Page.empty(), musicService.findAll(0) );
+		MusicDTO musicMock = new MusicDTO();
+		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
+
 		musicService.refresh();
-		Assert.assertEquals( new PageImpl<>(Arrays.asList(musicMock)), musicService.findAll(0) );
+		Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicDTO.class));
 	}
 
 	@Test
