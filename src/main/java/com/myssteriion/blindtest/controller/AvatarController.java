@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.AvatarService;
@@ -24,18 +23,6 @@ public class AvatarController {
 
 
 	/**
-	 * Scan avatar folder and refresh the cache.
-	 *
-	 * @return nothing
-	 */
-	@GetMapping(path = "/refresh")
-	public ResponseEntity<Empty> refresh() {
-		
-		avatarService.refresh();
-		return ResponseBuilder.create204();
-	}
-
-	/**
 	 * Find pageable of avatar filtered by prefix name.
 	 *
 	 * @param page the page
@@ -46,7 +33,13 @@ public class AvatarController {
 			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
 			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
 
-		return ResponseBuilder.create200( avatarService.findAllByNameStartingWith(prefixName, page) );
+		Page<AvatarDTO> avatarPage = avatarService.findAllByNameStartingWith(prefixName, page);
+		if ( avatarPage.stream().anyMatch( avatar -> !avatar.getFlux().isFileExists() ) ) {
+			avatarService.refresh();
+			avatarPage = avatarService.findAllByNameStartingWith(prefixName, page);
+		}
+
+		return ResponseBuilder.create200(avatarPage);
 	}
 	
 }

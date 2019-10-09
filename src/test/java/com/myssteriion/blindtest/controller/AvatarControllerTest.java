@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.base.Empty;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.service.AvatarService;
 import org.junit.Assert;
@@ -27,21 +28,18 @@ public class AvatarControllerTest extends AbstractTest {
 
 
     @Test
-    public void refresh() {
-
-        Mockito.doNothing().when(avatarService).refresh();
-
-        ResponseEntity<Empty> re = avatarController.refresh();
-        Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
-    }
-
-    @Test
     public void findAllByNameStartingWith() {
 
-        AvatarDTO avatar = new AvatarDTO("name");
+        Flux fluxMock = Mockito.mock(Flux.class);
+        Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
+        AvatarDTO avatar = new AvatarDTO("name").setFlux(fluxMock);
         Mockito.when(avatarService.findAllByNameStartingWith(Mockito.anyString(), Mockito.anyInt())).thenReturn( new PageImpl<>(Arrays.asList(avatar)) );
 
         ResponseEntity< Page<AvatarDTO> > re = avatarController.findAllByNameStartingWith("", 0);
+        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assert.assertEquals( new PageImpl<>(Arrays.asList(avatar)), re.getBody() );
+
+        re = avatarController.findAllByNameStartingWith("", 0);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals( new PageImpl<>(Arrays.asList(avatar)), re.getBody() );
     }
