@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -32,18 +31,6 @@ public class MusicController {
 
 
 	/**
-	 * Scan music folder and refresh the DB.
-	 *
-	 * @return nothing
-	 */
-	@GetMapping(path = "/refresh")
-	public ResponseEntity<Empty> refresh() {
-		
-		musicService.refresh();
-		return ResponseBuilder.create204();
-	}
-
-	/**
 	 * Randomly choose a music.
 	 *
 	 * @return a MusicDTO
@@ -51,7 +38,14 @@ public class MusicController {
 	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random() throws NotFoundException, IOException {
-		return ResponseBuilder.create200( musicService.random() );
+
+		MusicDTO music = musicService.random();
+		if ( !music.getFlux().isFileExists() ) {
+			musicService.refresh();
+			music = musicService.random();
+		}
+
+		return ResponseBuilder.create200(music);
 	}
 	
 }

@@ -30,8 +30,6 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	private static final String MUSIC_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
 
-	private static final int NB_MUSICS_NOT_FOUND_LIMIT = 10;
-
 
 
 	@Autowired
@@ -105,18 +103,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
 		List<Double> cumulativePercent = calculateCumulativePercent(coefs, ratio);
-
-		int cpt = 0;
-		MusicDTO music = null;
-		while ( !musicFileExists(music) ) {
-
-			Theme foundTheme = foundTheme(cumulativePercent);
-			music = foundMusic(allMusics, foundTheme);
-
-			cpt++;
-			if (cpt == NB_MUSICS_NOT_FOUND_LIMIT)
-				throw new NotFoundException(NB_MUSICS_NOT_FOUND_LIMIT + " musics are not found, please refresh musics folder.");
-		}
+		Theme foundTheme = foundTheme(cumulativePercent);
+		MusicDTO music = foundMusic(allMusics, foundTheme);
 
 		Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 		music.setFlux( new Flux(path.toFile()) );

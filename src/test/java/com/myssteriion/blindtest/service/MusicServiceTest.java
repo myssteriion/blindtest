@@ -201,15 +201,6 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-		try {
-			musicService.random();
-			Assert.fail("Doit lever une NotFoundException car il n'y a pas de musics.");
-		}
-		catch (NotFoundException e) {
-			verifyException(new NotFoundException("10 musics are not found, please refresh musics folder."), e);
-		}
-
-
 		expected = new MusicDTO("70_a", Theme.ANNEES_70, 0);
 
 		allMusics = new ArrayList<>();
