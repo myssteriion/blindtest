@@ -1,6 +1,7 @@
+import {Flux} from './flux.interface';
+
 export interface Avatar {
-	name: string
-	fileExists: boolean
-	contentType: string
-	flux: string
+	id?: number,
+	name: string,
+	flux: Flux
 }

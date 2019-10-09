@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Avatar} from "src/app/interfaces/avatar.interface";
+import {Flux} from '../interfaces/flux.interface';
 
 @Injectable()
 export class ToolsService {
@@ -30,18 +30,18 @@ export class ToolsService {
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
-    public getAvatarFluxForImg(avatar: Avatar): string {
+    public getFluxForImg(flux: Flux): string {
 
-        this.verifyValue("avatar", avatar);
+        this.verifyValue("flux", flux);
 
         let imageSrc: string;
 
-        if (avatar.fileExists) {
+        if (flux.fileExists) {
 
             imageSrc = ToolsService._DATA;
-            imageSrc += avatar.contentType;
+            imageSrc += flux.contentType;
             imageSrc += ToolsService._BASE64;
-            imageSrc += avatar.flux;
+            imageSrc += flux.contentFlux;
         }
         else {
             imageSrc = ToolsService._AVATAR_NOT_FOUND;
