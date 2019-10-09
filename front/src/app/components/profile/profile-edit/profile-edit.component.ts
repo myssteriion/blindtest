@@ -46,9 +46,10 @@ export class ProfileEditComponent implements OnInit {
 		if (this.create) {
 
 			this.newProfile = {
-				id: -1,
+				id: null,
 				name: "",
-				avatar: { name: "", fileExists: false, contentType: "", flux: "" }
+				avatarName: "",
+				avatar: { id: null, name: "", flux: { name: "", fileExists: false, contentFlux: "", contentType: "" } }
 			};
 		}
 		else {
@@ -59,6 +60,7 @@ export class ProfileEditComponent implements OnInit {
 			this.newProfile = {
 				id: this.profile.id,
 				name: this.profile.name,
+				avatarName: this.profile.avatarName,
 				avatar: this.profile.avatar
 			};
 		}
@@ -83,9 +85,9 @@ export class ProfileEditComponent implements OnInit {
 
 	private _loadAvatars(): void {
 
-		this._avatarResource.getAll().subscribe(
+		this._avatarResource.findAllByNameStartingWith("", 0).subscribe(
 			response => {
-				this.avatars = response.items;
+				this.avatars = response.content;
 			},
 			error => {
 				throw Error("can't find all avatars : " + error);
@@ -113,15 +115,15 @@ export class ProfileEditComponent implements OnInit {
 		});
 	}
 
-	public getCurrentAvatarFluxForImg(): string {
-		return this._toolsService.getAvatarFluxForImg(this.newProfile.avatar);
+	public getCurrentFluxForImg(): string {
+		return this._toolsService.getFluxForImg(this.newProfile.avatar.flux);
 	}
 
-	public getAvatarFluxForImg(avatar: Avatar): string {
+	public getFluxForImg(avatar: Avatar): string {
 
 		this._toolsService.verifyValue("avatar", avatar);
 
-		return this._toolsService.getAvatarFluxForImg(avatar);
+		return this._toolsService.getFluxForImg(avatar.flux);
 	}
 
 	public selectAvatar(avatar: Avatar): void {
@@ -129,20 +131,29 @@ export class ProfileEditComponent implements OnInit {
 		this._toolsService.verifyValue("avatar", avatar);
 
 		this.newProfile.avatar = avatar;
+		this.newProfile.avatarName = avatar.name;
 	}
 
 	public disabledSave(): boolean {
 		return this._toolsService.isNullOrEmpty(this.newProfile.name) ||
-		this._toolsService.isNull(this.newProfile.avatar) || 
-		this._toolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
-		!this.newProfile.avatar.fileExists;
+			this._toolsService.isNull(this.newProfile.avatar) ||
+			this._toolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
+			this._toolsService.isNull(this.newProfile.avatar.flux) ||
+			!this.newProfile.avatar.flux.fileExists;
 	}
 
 	public save(): void {
-		
+
+		let profileTmp = {
+			id: this.newProfile.id,
+			name: this.newProfile.name,
+			avatarName: this.newProfile.avatarName,
+		};
+
+
 		if (this.create) {
 
-			this._profileResource.create(this.newProfile).subscribe(
+			this._profileResource.create(profileTmp).subscribe(
 				response => {
 					this.profile = response;
 					this._ngbActiveModal.close(this.profile);
@@ -154,7 +165,7 @@ export class ProfileEditComponent implements OnInit {
 		}
 		else {
 
-			this._profileResource.update(this.newProfile).subscribe(
+			this._profileResource.update(profileTmp).subscribe(
 				response => {
 					this.profile = response;
 					this._ngbActiveModal.close(this.profile);

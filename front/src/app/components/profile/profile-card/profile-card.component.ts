@@ -40,8 +40,8 @@ export class ProfileCardComponent implements OnInit {
 
 
 
-    public getAvatarFluxForImg(): string {
-        return this._toolsService.getAvatarFluxForImg(this.profile.avatar);
+    public getFluxForImg(): string {
+        return this._toolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
     public edit(): void {
