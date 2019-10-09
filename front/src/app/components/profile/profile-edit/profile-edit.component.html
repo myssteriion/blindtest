@@ -20,16 +20,17 @@
             <div class="col-6">
                 <fa-icon-custom *ngIf="!showAvatars" [icon]="faEye" [tooltip]="'PROFILE.EDIT.SHOW_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
                 <fa-icon-custom *ngIf="showAvatars" [icon]="faEyeSlash" [tooltip]="'PROFILE.EDIT.HIDE_TOOLTIP'" (click)="showHideAvatars()"></fa-icon-custom>
-                <fa-icon-custom [icon]="faSyncAlt" [tooltip]="'PROFILE.EDIT.REFRESH_TOOLTIP'" (click)="refreshAvatars()"></fa-icon-custom>
             </div>
         </div>
 
-        <div *ngIf="showAvatars" class="owl-carousel owl-theme owl-loaded">
-            <div class="owl-stage-outer">
-                <div class="owl-stage profile-edit-avatars">
-                    <img class="owl-item" *ngFor="let avatar of avatars" 
-                        src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
-                </div>
+        <div *ngIf="showAvatars">
+            <div class="profile-edit-avatars">
+                <img *ngFor="let avatar of page.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
+            </div>
+            <div class="profile-edit-pagination">
+                <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
+                    [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
+                </ngb-pagination>
             </div>
         </div>
 

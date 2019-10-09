@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Profile } from 'src/app/interfaces/profile.interface';
-import { Avatar } from 'src/app/interfaces/avatar.interface';
-import { AvatarResource } from 'src/app/resources/avatar.resource';
-import { ToolsService } from "../../../tools/tools.service";
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { faEye, faEyeSlash, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { ProfileResource } from 'src/app/resources/profile.resource';
+import {Component, Input, OnInit} from '@angular/core';
+import {Profile} from 'src/app/interfaces/profile.interface';
+import {Avatar} from 'src/app/interfaces/avatar.interface';
+import {AvatarResource} from 'src/app/resources/avatar.resource';
+import {ToolsService} from "../../../tools/tools.service";
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {ProfileResource} from 'src/app/resources/profile.resource';
+import {Page} from "../../../interfaces/page.interface";
 
 declare var $: any;
 
@@ -22,13 +23,12 @@ export class ProfileEditComponent implements OnInit {
 
 	newProfile: Profile;
 
-	avatars: Avatar[];
+	page: Page<Avatar>;
 
 	showAvatars: boolean;
 
 	faEye = faEye;
 	faEyeSlash = faEyeSlash;
-	faSyncAlt = faSyncAlt;
 
 
 
@@ -65,29 +65,16 @@ export class ProfileEditComponent implements OnInit {
 			};
 		}
 
-		this._loadAvatars();
+		this.loadAvatars(1);
 	}
 
 
 
-	public refreshAvatars(): void {
+	public loadAvatars(pageNumber): void {
 
-		this.showAvatars = false;
-		this._avatarResource.refresh().subscribe(
+		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
 			response => {
-				this._loadAvatars();
-			},
-			error => {
-				throw Error("can't refresh all avatars : " + error);
-			}
-		);
-	}
-
-	private _loadAvatars(): void {
-
-		this._avatarResource.findAllByNameStartingWith("", 0).subscribe(
-			response => {
-				this.avatars = response.content;
+				this.page = response;
 			},
 			error => {
 				throw Error("can't find all avatars : " + error);
@@ -96,23 +83,7 @@ export class ProfileEditComponent implements OnInit {
 	}
 
 	public showHideAvatars(): void {
-
-		if (!this.showAvatars) {
-			this.initCarousel();
-		}
 		this.showAvatars = !this.showAvatars;
-	}
-
-	private initCarousel(): void {
-		let options = {
-			dots: false,
-			margin: 20,
-			autoWidth: true
-		};
-
-		$(document).ready(function () {
-			$(".owl-carousel").owlCarousel(options);
-		});
 	}
 
 	public getCurrentFluxForImg(): string {

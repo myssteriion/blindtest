@@ -31,13 +31,15 @@
 .profile-edit-avatar img, .profile-edit-avatars img {
     height: 3em;
 	border-radius: 50%;
+	margin: 10px;
 }
 
-.owl-carousel {
+.profile-edit-avatars {
 	border: 2px solid silver;
 	border-radius: 20px;
+	margin-bottom: 10px;
 }
 
-.owl-carousel .profile-edit-avatars {
-	margin: 10px;
+.profile-edit-pagination {
+	text-align: center;
 }
