@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpParams} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {Avatar} from 'src/app/interfaces/avatar.interface';
-import {List} from 'src/app/interfaces/list.interface';
+import {Page} from 'src/app/interfaces/page.interface';
 import {environment} from 'src/environments/environment';
 
 @Injectable()
@@ -20,8 +20,13 @@ export class AvatarResource {
 		return this._http.get<Observable<any>>(this._avatarPath + "/refresh");
 	}
 
-	public getAll(): Observable<List<Avatar>> {
-		return this._http.get<List<Avatar>>(this._avatarPath);
+	public findAllByNameStartingWith(prefixName: string, page: number): Observable< Page<Avatar> > {
+
+		let params = new HttpParams();
+		params.append('prefixName', prefixName);
+		params.append('page', page.toString());
+
+		return this._http.get< Page<Avatar> >( this._avatarPath, { params: params } );
 	}
 
 }

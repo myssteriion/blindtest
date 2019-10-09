@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpParams} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {Profile} from '../interfaces/profile.interface';
-import {List} from '../interfaces/list.interface';
+import {Page} from '../interfaces/page.interface';
 import {environment} from 'src/environments/environment';
 
 @Injectable()
@@ -24,12 +24,17 @@ export class ProfileResource {
 		return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
 	}
 
-	public delete(profile: Profile): Observable<List<Profile>> {
-		return this._http.delete<List<Profile>>(this._profilePath + "/" + profile.id);
+	public findAllByNameStartingWith(prefixName: string, page: number): Observable< Page<Profile> > {
+
+		let params = new HttpParams();
+		params.append('prefixName', prefixName);
+		params.append('page', page.toString());
+
+		return this._http.get< Page<Profile> >(this._profilePath, { params: params } );
 	}
 
-	public findAll(): Observable<List<Profile>> {
-		return this._http.get<List<Profile>>(this._profilePath);
+	public delete(profile: Profile): Observable<Page<Profile>> {
+		return this._http.delete< Page<Profile> >(this._profilePath + "/" + profile.id);
 	}
 
 }
