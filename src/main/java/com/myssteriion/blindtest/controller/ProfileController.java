@@ -63,15 +63,15 @@ public class ProfileController {
 	/**
 	 * Find pageable of profile filtered by prefix name.
 	 *
-	 * @param page the page
-	 * @return the pageable of profile
+	 * @param pageNumber the page number
+	 * @return the pageable of profiles
 	 */
 	@GetMapping
 	public ResponseEntity< Page<ProfileDTO> > findAllByNameStartingWith(
 			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
+			@RequestParam(value = Constant.PAGE_NUMBER, required = false, defaultValue = Constant.PAGE_NUMBER_DEFAULT_VALUE) Integer pageNumber) {
 
-		return ResponseBuilder.create200( profileService.findAllByNameStartingWith(prefixName, page) );
+		return ResponseBuilder.create200( profileService.findAllByNameStartingWith(prefixName, pageNumber) );
 	}
 
 	/**

@@ -8,6 +8,9 @@ import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +22,11 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	private ProfileStatService profileStatService;
 
 	private AvatarService avatarService;
+
+	/**
+	 * Number of elements per page.
+	 */
+	protected static final int ELEMENTS_PER_PAGE = 15;
 
 
 
@@ -66,21 +74,24 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	}
 
 	/**
-	 * Find a page of Profile filtered by a prefix name.
+	 * Find a pageNumber of Profile filtered by a prefix name.
 	 *
 	 * @param namePrefix the name prefix
-	 * @param page       the page
-	 * @return the page
+	 * @param pageNumber the page number
+	 * @return the page of profiles
 	 */
-	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int page) {
+	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber) {
 
 		if (namePrefix == null)
 			namePrefix = "";
 
-		Page<ProfileDTO> pageable = dao.findAllByNameStartingWithIgnoreCase( namePrefix, creatPageable(page) );
-		pageable.forEach(this::createProfileAvatarFlux);
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
+		Pageable pageable = PageRequest.of(pageNumber, ELEMENTS_PER_PAGE, sort);
 
-		return pageable;
+		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix,pageable);
+		page.forEach(this::createProfileAvatarFlux);
+
+		return page;
 	}
 
 	@Override

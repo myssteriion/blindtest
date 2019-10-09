@@ -56,10 +56,4 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 		return foundProfileStatDTO;
 	}
 
-
-	@Override
-	protected Pageable creatPageable(int page) {
-		return PageRequest.of(page, ELEMENTS_PER_PAGE, Sort.unsorted());
-	}
-
 }

@@ -25,21 +25,21 @@ public class AvatarController {
 	/**
 	 * Find pageable of avatar filtered by prefix name.
 	 *
-	 * @param page the page
-	 * @return the pageable of avatar
+	 * @param pageNumber the page number
+	 * @return the pageable of avatars
 	 */
 	@GetMapping
 	public ResponseEntity< Page<AvatarDTO> > findAllByNameStartingWith(
 			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = Constant.PAGE, required = false, defaultValue = Constant.PAGE_DEFAULT_VALUE) Integer page) {
+			@RequestParam(value = Constant.PAGE_NUMBER, required = false, defaultValue = Constant.PAGE_NUMBER_DEFAULT_VALUE) Integer pageNumber) {
 
-		Page<AvatarDTO> avatarPage = avatarService.findAllByNameStartingWith(prefixName, page);
-		if ( avatarPage.stream().anyMatch( avatar -> !avatar.getFlux().isFileExists() ) ) {
+		Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber);
+		if ( page.stream().anyMatch(avatar -> !avatar.getFlux().isFileExists()) ) {
 			avatarService.refresh();
-			avatarPage = avatarService.findAllByNameStartingWith(prefixName, page);
+			page = avatarService.findAllByNameStartingWith(prefixName, pageNumber);
 		}
 
-		return ResponseBuilder.create200(avatarPage);
+		return ResponseBuilder.create200(page);
 	}
 	
 }

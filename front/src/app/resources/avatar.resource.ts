@@ -20,11 +20,11 @@ export class AvatarResource {
 		return this._http.get<Observable<any>>(this._avatarPath + "/refresh");
 	}
 
-	public findAllByNameStartingWith(prefixName: string, page: number): Observable< Page<Avatar> > {
+	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Avatar> > {
 
 		let params = new HttpParams();
 		params = params.set('prefixName', prefixName);
-		params = params.set('page', page.toString());
+		params = params.set('pageNumber', pageNumber.toString());
 
 		return this._http.get< Page<Avatar> >( this._avatarPath, { params: params } );
 	}

@@ -10,6 +10,9 @@ import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +31,11 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	 * The avatar folder path.
 	 */
 	public static final String AVATAR_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER).toFile().getAbsolutePath();
+
+	/**
+	 * Number of elements per page.
+	 */
+	protected static final int ELEMENTS_PER_PAGE = 6;
 
 
 
@@ -107,18 +115,21 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	 * Find a page of Avatar filtered by a prefix name.
 	 *
 	 * @param namePrefix the name prefix
-	 * @param page       the page
-	 * @return the page
+	 * @param pageNumber the page number
+	 * @return the page of avatars
 	 */
-	public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int page) {
+	public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int pageNumber) {
 
 		if (namePrefix == null)
 			namePrefix = "";
 
-		Page<AvatarDTO> pageable = dao.findAllByNameStartingWithIgnoreCase( namePrefix, creatPageable(page) );
-		pageable.forEach(this::createAvatarFlux);
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
+		Pageable pageable = PageRequest.of(pageNumber, ELEMENTS_PER_PAGE, sort);
 
-		return pageable;
+		Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
+		page.forEach(this::createAvatarFlux);
+
+		return page;
 	}
 
 
