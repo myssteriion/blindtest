@@ -66,6 +66,16 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	}
 
 	/**
+	 * Test if the music matching with an existing file.
+	 *
+	 * @param music the dto
+	 * @return TRUE if the music matching with an existing file, FALSE otherwise
+	 */
+	private boolean musicFileExists(MusicDTO music) {
+		return music != null && Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+	}
+
+	/**
 	 * Scan music folder and refresh the DB.
 	 */
 	public void refresh() {
@@ -178,16 +188,6 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		
 		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
 		return potentialMusics.get(random);
-	}
-
-	/**
-	 * Test if the music matching with an existing file.
-	 *
-	 * @param music the dto
-	 * @return TRUE if the music matching with an existing file, FALSE otherwise
-	 */
-	private boolean musicFileExists(MusicDTO music) {
-		return music != null && Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
 	}
 
 }

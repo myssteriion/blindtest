@@ -34,6 +34,7 @@ public class AvatarControllerTest extends AbstractTest {
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
         AvatarDTO avatar = new AvatarDTO("name").setFlux(fluxMock);
         Mockito.when(avatarService.findAllByNameStartingWith(Mockito.anyString(), Mockito.anyInt())).thenReturn( new PageImpl<>(Arrays.asList(avatar)) );
+        Mockito.when(avatarService.needRefresh()).thenReturn(true, false);
 
         ResponseEntity< Page<AvatarDTO> > re = avatarController.findAllByNameStartingWith("", 0);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );

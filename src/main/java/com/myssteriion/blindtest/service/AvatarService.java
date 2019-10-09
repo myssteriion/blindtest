@@ -35,7 +35,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	/**
 	 * Number of elements per page.
 	 */
-	protected static final int ELEMENTS_PER_PAGE = 6;
+	protected static final int ELEMENTS_PER_PAGE = 12;
 
 
 
@@ -71,10 +71,49 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	}
 
 	/**
+	 * Test if the avatar match with an existing file.
+	 *
+	 * @param avatar the avatar
+	 * @return TRUE if the avatar match with an existing file, FALSE otherwise
+	 */
+	private boolean avatarFileExists(AvatarDTO avatar) {
+		return avatar != null && Paths.get(AVATAR_FOLDER_PATH, avatar.getName()).toFile().exists();
+	}
+
+	/**
 	 * Refresh avatarDTOS list (cache).
 	 */
 	public void refresh() {
 		init();
+	}
+
+	/**
+	 * Test if the repo needs to be refresh.
+	 *
+	 * @return TRUE if the repo needs to be refresh, FALSE otherwise
+	 */
+	public boolean needRefresh() {
+
+		File avatarDirectory = Paths.get(AVATAR_FOLDER_PATH).toFile();
+		if ( Tool.getChildren(avatarDirectory).size() != dao.count() )
+			return true;
+
+
+		boolean needRefresh = false;
+
+		Page<AvatarDTO> page = dao.findAll(Pageable.unpaged());
+		int i = 0;
+		while (!needRefresh && i < page.getContent().size()) {
+
+			AvatarDTO avatar = page.getContent().get(i);
+			createAvatarFlux(avatar);
+			if (!avatar.getFlux().isFileExists())
+				needRefresh = true;
+
+			i++;
+		}
+
+		return needRefresh;
 	}
 
 
@@ -132,16 +171,6 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		return page;
 	}
 
-
-	/**
-	 * Test if the avatar match with an existing file.
-	 *
-	 * @param avatar the avatar
-	 * @return TRUE if the avatar match with an existing file, FALSE otherwise
-	 */
-	private boolean avatarFileExists(AvatarDTO avatar) {
-		return avatar != null && Paths.get(AVATAR_FOLDER_PATH, avatar.getName()).toFile().exists();
-	}
 
 	/**
 	 * Create avatar flux on avatar.

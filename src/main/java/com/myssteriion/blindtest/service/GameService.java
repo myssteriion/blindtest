@@ -12,7 +12,6 @@ import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,19 +22,25 @@ import java.util.Set;
 @Service
 public class GameService {
 
-	@Autowired
 	private MusicService musicService;
 
-	@Autowired
 	private ProfileService profileService;
 
-	@Autowired
 	private ProfileStatService profileStatService;
 
 	/**
 	 * The game list.
 	 */
 	private List<Game> games = new ArrayList<>();
+
+
+
+	@Autowired
+	public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService) {
+		this.musicService = musicService;
+		this.profileService = profileService;
+		this.profileStatService = profileStatService;
+	}
 
 
 
@@ -54,6 +59,9 @@ public class GameService {
 		Game game = new Game( newGame.getPlayersNames(), newGame.getDuration() );
 		game.setId( games.size() );
 		games.add(game);
+
+		musicService.refresh();
+
 		return game;
 	}
 
@@ -64,7 +72,7 @@ public class GameService {
 	 * @return the game
 	 * @throws NotFoundException the not found exception
 	 */
-	public Game apply(MusicResult musicResult) throws NotFoundException, IOException {
+	public Game apply(MusicResult musicResult) throws NotFoundException {
 
 		Tool.verifyValue("musicResultDto", musicResult);
 		Game game = games.stream()

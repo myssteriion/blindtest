@@ -8,9 +8,11 @@ import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller for GameDTO
@@ -51,7 +53,7 @@ public class GameController {
 	 * @throws NotFoundException NotFound exception
 	 */
 	@PostMapping(path = "/apply")
-	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException, IOException {
+	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException {
 
 		Game game = gameService.apply(musicResult);
 		return ResponseBuilder.create200(game);

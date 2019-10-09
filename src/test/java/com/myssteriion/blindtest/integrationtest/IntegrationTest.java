@@ -14,12 +14,14 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.service.GameService;
+import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,13 +31,19 @@ public class IntegrationTest extends AbstractIntegrationTest {
 
     @Before
     public void before() throws ConflictException, NotFoundException {
+
+        musicService = Mockito.spy( new MusicService(musicDAO) );
+        Mockito.doNothing().when(musicService).refresh();
+
+        gameService = new GameService(musicService, profileService, profileStatService);
+
         clearDataBase();
         insertData();
     }
 
 
     @Test
-    public void testVeryShortGame() throws NotFoundException, IOException {
+    public void testVeryShortGame() throws NotFoundException {
 
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.VERY_SHORT;

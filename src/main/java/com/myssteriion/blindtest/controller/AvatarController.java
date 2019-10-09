@@ -34,7 +34,7 @@ public class AvatarController {
 			@RequestParam(value = Constant.PAGE_NUMBER, required = false, defaultValue = Constant.PAGE_NUMBER_DEFAULT_VALUE) Integer pageNumber) {
 
 		Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber);
-		if ( page.stream().anyMatch(avatar -> !avatar.getFlux().isFileExists()) ) {
+		if ( avatarService.needRefresh() ) {
 			avatarService.refresh();
 			page = avatarService.findAllByNameStartingWith(prefixName, pageNumber);
 		}

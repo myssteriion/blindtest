@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -17,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -68,6 +70,32 @@ public class AvatarServiceTest extends AbstractTest {
 
         avatarService.refresh();
         Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarDTO.class));
+    }
+
+    @Test
+    public void needRefresh() {
+
+        File mockFile = Mockito.mock(File.class);
+
+        PowerMockito.mockStatic(Tool.class);
+        PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile));
+
+        Mockito.when(dao.count()).thenReturn(0l, 1l);
+
+        Flux fluxMock = Mockito.mock(Flux.class);
+        Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
+        AvatarDTO avatarMock = Mockito.mock(AvatarDTO.class);
+        Mockito.when(avatarMock.getFlux()).thenReturn(fluxMock);
+
+        Page<AvatarDTO> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
+        Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn(pageMock);
+
+        avatarService = Mockito.spy( new AvatarService(dao));
+        Mockito.doNothing().when(avatarService).createAvatarFlux(Mockito.any(AvatarDTO.class));
+
+        Assert.assertTrue( avatarService.needRefresh() );
+        Assert.assertTrue( avatarService.needRefresh() );
+        Assert.assertFalse( avatarService.needRefresh() );
     }
 
     @Test

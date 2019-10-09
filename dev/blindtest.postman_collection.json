@@ -1,33 +1,48 @@
 {
 	"info": {
-		"_postman_id": "81957301-322a-46bf-a109-94660e4ac770",
+		"_postman_id": "4b10886f-319e-4383-a692-7df469307a7b",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "music",
+			"name": "avatar",
 			"item": [
 				{
-					"name": "refresh",
+					"name": "find all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/refresh",
+							"raw": "http://localhost:{{port}}/avatars?prefixName&page=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"musics",
-								"refresh"
+								"avatars"
+							],
+							"query": [
+								{
+									"key": "prefixName",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "music",
+			"item": [
 				{
 					"name": "random",
 					"request": {
@@ -121,7 +136,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles?page=0",
+							"raw": "http://localhost:{{port}}/profiles?prefixName=&page=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -131,6 +146,10 @@
 								"profiles"
 							],
 							"query": [
+								{
+									"key": "prefixName",
+									"value": ""
+								},
 								{
 									"key": "page",
 									"value": "0"
@@ -247,57 +266,6 @@
 							"path": [
 								"game",
 								"apply"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "avatar",
-			"item": [
-				{
-					"name": "refresh",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{port}}/avatars/refresh",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"avatars",
-								"refresh"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "find all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{port}}/avatars?page=0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"avatars"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "0"
-								}
 							]
 						}
 					},

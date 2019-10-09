@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -10,6 +11,7 @@ import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -18,6 +20,9 @@ import java.util.List;
 public abstract class AbstractIntegrationTest extends AbstractTest {
 
 	@Autowired
+	protected MusicDAO musicDAO;
+
+	@Mock
 	protected MusicService musicService;
 
 	@Autowired
