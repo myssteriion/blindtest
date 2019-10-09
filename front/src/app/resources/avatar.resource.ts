@@ -23,8 +23,8 @@ export class AvatarResource {
 	public findAllByNameStartingWith(prefixName: string, page: number): Observable< Page<Avatar> > {
 
 		let params = new HttpParams();
-		params.append('prefixName', prefixName);
-		params.append('page', page.toString());
+		params = params.set('prefixName', prefixName);
+		params = params.set('page', page.toString());
 
 		return this._http.get< Page<Avatar> >( this._avatarPath, { params: params } );
 	}
