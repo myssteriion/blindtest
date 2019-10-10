@@ -1,7 +1,29 @@
 <div class="container">
 
-    <header [title]="'Profils des joueurs'"></header>
+    <header [title]="'PROFILE.VIEW.TITLE' | translate"></header>
 
-    <profile-card *ngFor="let profile of profiles" [profile]="profile" [canUpdate]="true"></profile-card>
+    <div *ngIf="showProfiles">
+        <div class="row profile-view-line-one">
+            <div class="col profile-view-button">
+                <button class="btn btn-info" (click)="createProfile()">{{ 'PROFILE.VIEW.CREATE' | translate }}</button>
+            </div>
+            <div class="col">
+                <input class="form-control" [(ngModel)]="prefixName" placeholder="{{ 'COMMON.PREFIX_PLACE_HOLDER' | translate }}"
+                       (ngModelChange)="loadProfiles(1)" maxlength="15">
+            </div>
+            <div class="col">
+                <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
+                                [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5"
+                                (pageChange)="loadProfiles($event)">
+                </ngb-pagination>
+            </div>
+        </div>
+
+        <div class="row">
+            <profile-card class="col-6 col-sm-4" *ngFor="let profile of page.content" [profile]="profile" [canUpdate]="true"
+                          (onEdit)="loadProfiles(1)">
+            </profile-card>
+        </div>
+    </div>
 
 </div>

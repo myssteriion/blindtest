@@ -6,7 +6,8 @@
         "NO": "Non",
         "WARNING": "Attention",
         "SHOW": "Afficher",
-        "HIDE": "Masquer"
+        "HIDE": "Masquer",
+        "PREFIX_PLACE_HOLDER": "Entrer un filtre"
     },
     "PROFILE": {
         "CARD": {
@@ -23,6 +24,10 @@
             "SHOW_TOOLTIP": "Afficher la liste des avatars.",
             "HIDE_TOOLTIP": "Cacher la liste des avatars.",
             "REFRESH_TOOLTIP": "Rafraichir la liste des avatars."
+        },
+        "VIEW": {
+            "TITLE": "Profils des joueurs",
+            "CREATE": "Nouveau profil"
         }
     }
 }
