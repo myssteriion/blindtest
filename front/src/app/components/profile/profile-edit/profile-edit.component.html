@@ -24,13 +24,13 @@
         </div>
 
         <div *ngIf="showAvatars">
-            <div class="profile-edit-avatars">
-                <img *ngFor="let avatar of page.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
-            </div>
             <div class="profile-edit-pagination">
                 <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
-                    [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
+                                [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
                 </ngb-pagination>
+            </div>
+            <div class="profile-edit-avatars">
+                <img *ngFor="let avatar of page.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
             </div>
         </div>
 

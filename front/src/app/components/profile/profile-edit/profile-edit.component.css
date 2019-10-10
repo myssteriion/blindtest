@@ -8,9 +8,6 @@
 
 .profile-edit-footer {
 	border-top: 1px solid silver;
-}
-
-.profile-edit-footer div {
 	text-align: right;
 }
 
@@ -40,6 +37,6 @@
 	margin-bottom: 10px;
 }
 
-.profile-edit-pagination {
-	text-align: center;
+.profile-edit-avatars img {
+	cursor: pointer;
 }
