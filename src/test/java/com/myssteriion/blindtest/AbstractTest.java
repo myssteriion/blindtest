@@ -24,7 +24,7 @@ public abstract class AbstractTest {
 
 	protected void stubProperties() {
 		Mockito.when(configProperties.getPaginationElementsPerPageAvatars()).thenReturn(12);
-		Mockito.when(configProperties.getPaginationElementsPerPageProfiles()).thenReturn(15);
+		Mockito.when(configProperties.getPaginationElementsPerPageProfiles()).thenReturn(12);
 	}
 
 

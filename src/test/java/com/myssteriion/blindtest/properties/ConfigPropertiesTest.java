@@ -16,7 +16,7 @@ public class ConfigPropertiesTest extends AbstractTest {
     public void getterSetter() {
 
         Assert.assertEquals( new Integer(12), props.getPaginationElementsPerPageAvatars() );
-        Assert.assertEquals( new Integer(15), props.getPaginationElementsPerPageProfiles() );
+        Assert.assertEquals( new Integer(12), props.getPaginationElementsPerPageProfiles() );
     }
 
 }
