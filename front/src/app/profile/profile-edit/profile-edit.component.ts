@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from 'src/app/interfaces/profile.interface';
 import {Avatar} from 'src/app/interfaces/avatar.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
-import {ToolsService} from "../../../tools/tools.service";
+import {ToolsService} from "../../tools/tools.service";
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {ProfileResource} from 'src/app/resources/profile.resource';
-import {Page} from "../../../interfaces/page.interface";
+import {Page} from "../../interfaces/page.interface";
 
 declare var $: any;
 

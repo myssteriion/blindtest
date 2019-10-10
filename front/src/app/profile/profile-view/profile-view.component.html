@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>Profils</h1>
+    <header [title]="'Profils des joueurs'"></header>
 
     <profile-card *ngFor="let profile of profiles" [profile]="profile" [canUpdate]="true"></profile-card>
 

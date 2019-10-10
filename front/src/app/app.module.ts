@@ -10,9 +10,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
-import {ProfileCardComponent} from './components/profile/profile-card/profile-card.component';
-import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
-import {ProfileViewComponent} from './components/profile/profile-view/profile-view.component'
+import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
+import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
 import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
 

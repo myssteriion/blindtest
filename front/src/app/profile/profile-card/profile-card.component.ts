@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile.interface';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileEditComponent } from 'src/app/components/profile/profile-edit/profile-edit.component';
-import { ToolsService } from "../../../tools/tools.service";
-import {ModalConfirmComponent} from "../../../common/modal/confirm/modal-confirm.component";
-import {ProfileResource} from "../../../resources/profile.resource";
+import { ProfileEditComponent } from 'src/app/profile/profile-edit/profile-edit.component';
+import { ToolsService } from "../../tools/tools.service";
+import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
+import {ProfileResource} from "../../resources/profile.resource";
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
