@@ -20,6 +20,7 @@ import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
 import {ToolsService} from "./tools/tools.service";
 import {GlobalErrorHandler} from "./tools/global-error-handler";
+import { HeaderComponent } from './common/header/header.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfileCardComponent,
     ProfileEditComponent,
     FaIconCustomComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    HeaderComponent
   ],
   entryComponents: [
     ProfileEditComponent,
