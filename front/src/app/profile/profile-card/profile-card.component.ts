@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile.interface';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,8 @@ export class ProfileCardComponent implements OnInit {
     @Input() profile: Profile;
 
     @Input() canUpdate: boolean;
+
+    @Output() onEdit = new EventEmitter();
 
     faEdit = faEdit;
     faTrashAlt = faTrashAlt;
@@ -51,7 +53,7 @@ export class ProfileCardComponent implements OnInit {
         modalRef.componentInstance.create = false;
 
         modalRef.result.then(
-            (result) => { this.profile = result; },
+            (result) => { this.profile = result; this.onEdit.emit(); },
             (reason) => { /* do nothing */ }
         );
     }
@@ -64,7 +66,7 @@ export class ProfileCardComponent implements OnInit {
                                     { profile_name: this.profile.name } );
 
         modalRef.result.then(
-            (result) => { this._profileResource.delete(this.profile).subscribe(); },
+            (result) => { this._profileResource.delete(this.profile).subscribe(); this.onEdit.emit(); },
             (reason) => { /* do nothing */ }
         );
     }
