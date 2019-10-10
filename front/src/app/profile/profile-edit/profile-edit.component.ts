@@ -66,15 +66,11 @@ export class ProfileEditComponent implements OnInit {
 
 
 
-	public loadAvatars(pageNumber): void {
+	public loadAvatars(pageNumber: number): void {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
-			response => {
-				this.page = response;
-			},
-			error => {
-				throw Error("can't find all avatars : " + error);
-			}
+			response => { this.page = response; },
+			error => { throw Error("can't find all avatars : " + error); }
 		);
 	}
 
