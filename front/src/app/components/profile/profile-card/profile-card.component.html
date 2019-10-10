@@ -4,8 +4,7 @@
         <img src="{{ getFluxForImg() }}" />
     </div>
 
-    <div class="profile-card-name"
-        [ngClass]="{'col-6': canUpdate, 'col-8': !canUpdate}">{{profile.name}}</div>
+    <div class="profile-card-name" [ngClass]="{'col-6': canUpdate, 'col-8': !canUpdate}">{{profile.name}}</div>
 
     <div *ngIf="canUpdate" class="col-3 profile-card-action-button">
         <div>

@@ -4,10 +4,5 @@
 
 .fa-icon-custom:hover {
     cursor: pointer;
-    color: slateblue;
-}
-
-.fa-icon-custom-background .tooltip-inner {
-    background-color: darkcyan;
-    color: whitesmoke;
+    color: white;
 }
