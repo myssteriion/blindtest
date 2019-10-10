@@ -159,8 +159,8 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 			namePrefix = "";
 
 
-		Sort sort = Sort.by(Sort.Direction.ASC, "name");
-		Pageable pageable = PageRequest.of(pageNumber, configProperties.getPaginationElementsPerPageAvatars(), sort);
+		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
+		Pageable pageable = PageRequest.of( pageNumber, configProperties.getPaginationElementsPerPageAvatars(), Sort.by(order) );
 
 		Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createAvatarFlux);

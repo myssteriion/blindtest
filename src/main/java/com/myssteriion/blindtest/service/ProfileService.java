@@ -81,10 +81,10 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 		if (namePrefix == null)
 			namePrefix = "";
 
-		Sort sort = Sort.by(Sort.Direction.ASC, "name");
-		Pageable pageable = PageRequest.of(pageNumber, configProperties.getPaginationElementsPerPageProfiles(), sort);
+		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
+		Pageable pageable = PageRequest.of( pageNumber, configProperties.getPaginationElementsPerPageProfiles(), Sort.by(order) );
 
-		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix,pageable);
+		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createProfileAvatarFlux);
 
 		return page;

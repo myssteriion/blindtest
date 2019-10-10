@@ -23,11 +23,11 @@ public interface ProfileDAO extends PagingAndSortingRepository<ProfileDTO, Integ
 	Optional<ProfileDTO> findByName(String name);
 
 	/**
-	 * Find a page of rofile filtered by prefix name.
+	 * Find a page of profile filtered by prefix name.
 	 *
 	 * @param prefixName the prefix name
 	 * @param pageable   the page
-	 * @return a page of rofile filtered by prefix name
+	 * @return a page of profile filtered by prefix name
 	 */
 	Page<ProfileDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
 
