@@ -20,11 +20,11 @@ export class ProfileEditComponent implements OnInit {
 
 	@Input() create: boolean;
 
-	newProfile: Profile;
+	public newProfile: Profile;
 
-	page: Page<Avatar>;
+	public page: Page<Avatar>;
 
-	showAvatars: boolean;
+	public showAvatars: boolean;
 
 
 

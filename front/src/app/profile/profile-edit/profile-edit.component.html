@@ -24,7 +24,7 @@
         </div>
 
         <div *ngIf="showAvatars">
-            <div class="profile-edit-pagination">
+            <div>
                 <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
                                 [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
                 </ngb-pagination>

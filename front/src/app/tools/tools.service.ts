@@ -8,7 +8,7 @@ export class ToolsService {
 
     private static _BASE64: string = ";base64,";
 
-    private static _AVATAR_NOT_FOUND = "assets/images/avatar/not-found.png";
+    private static _AVATAR_NOT_FOUND: string = "assets/images/avatar/not-found.png";
 
 
 
