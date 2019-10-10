@@ -3,6 +3,7 @@
     border: 2px solid black;
     border-radius: 30px;
     background: radial-gradient(yellow, orangered);
+    margin: 5px;
 }
 
 .profile-card-name, .profile-card-avatar, .profile-card-action-button {
@@ -21,5 +22,6 @@
     font-weight: bold;
     font-style: italic;
     color: black;
+    overflow: hidden;
 }
 
