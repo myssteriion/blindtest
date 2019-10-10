@@ -4,7 +4,9 @@
         "CANCEL": "Annuler",
         "YES": "Oui",
         "NO": "Non",
-        "WARNING": "Attention"
+        "WARNING": "Attention",
+        "SHOW": "Afficher",
+        "HIDE": "Masquer"
     },
     "PROFILE": {
         "CARD": {
