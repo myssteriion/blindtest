@@ -4,6 +4,8 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.properties.ConfigProperties;
+import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -18,6 +20,7 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +37,6 @@ public class AvatarServiceTest extends AbstractTest {
     @Mock
     private AvatarDAO dao;
 
-    
     @InjectMocks
     private AvatarService avatarService;
 
@@ -42,7 +44,8 @@ public class AvatarServiceTest extends AbstractTest {
 
     @Before
     public void before() {
-        avatarService = new AvatarService(dao);
+        avatarService = new AvatarService(dao, configProperties);
+        stubProperties();
     }
 
 
@@ -61,7 +64,7 @@ public class AvatarServiceTest extends AbstractTest {
         PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
 
-        avatarService = Mockito.spy( new AvatarService(dao) );
+        avatarService = Mockito.spy( new AvatarService(dao, configProperties) );
         MockitoAnnotations.initMocks(avatarService);
         Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarDTO.class));
 
@@ -90,7 +93,7 @@ public class AvatarServiceTest extends AbstractTest {
         Page<AvatarDTO> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
         Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn(pageMock);
 
-        avatarService = Mockito.spy( new AvatarService(dao));
+        avatarService = Mockito.spy( new AvatarService(dao, configProperties));
         Mockito.doNothing().when(avatarService).createAvatarFlux(Mockito.any(AvatarDTO.class));
 
         Assert.assertTrue( avatarService.needRefresh() );
@@ -112,7 +115,7 @@ public class AvatarServiceTest extends AbstractTest {
         }
 
 
-        avatarService = Mockito.spy( new AvatarService(dao) );
+        avatarService = Mockito.spy( new AvatarService(dao, configProperties) );
         MockitoAnnotations.initMocks(avatarService);
 
         AvatarDTO avatarDtoMock = new AvatarDTO(name);

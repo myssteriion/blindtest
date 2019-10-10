@@ -40,7 +40,7 @@ public class MusicServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		musicService = new MusicService(dao);
+		musicService = new MusicService(dao, configProperties);
 	}
 
 
@@ -59,7 +59,7 @@ public class MusicServiceTest extends AbstractTest {
 		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
 
 
-		musicService = Mockito.spy( new MusicService(dao) );
+		musicService = Mockito.spy( new MusicService(dao, configProperties) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
 
@@ -86,7 +86,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-        musicService = Mockito.spy( new MusicService(dao) );
+        musicService = Mockito.spy( new MusicService(dao, configProperties) );
 		MockitoAnnotations.initMocks(musicService);
 
 		MusicDTO musicDtoMock = new MusicDTO(name, theme);
@@ -209,7 +209,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findAll()).thenReturn(allMusics);
 
 
-		musicService = PowerMockito.spy( new MusicService(dao) );
+		musicService = PowerMockito.spy( new MusicService(dao, configProperties) );
 		PowerMockito.doReturn(true).when(musicService, "musicFileExists", Mockito.any(MusicDTO.class));
 
 		Flux fluxMock = Mockito.mock(Flux.class);

@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
@@ -33,8 +34,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 
 	@Autowired
-	public MusicService(MusicDAO musicDao) {
-		super(musicDao);
+	public MusicService(MusicDAO musicDao, ConfigProperties configProperties) {
+		super(musicDao, configProperties);
 	}
 
 

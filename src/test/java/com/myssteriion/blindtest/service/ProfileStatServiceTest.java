@@ -28,7 +28,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		profileStatService = new ProfileStatService(profileStatDao);
+		profileStatService = new ProfileStatService(profileStatDao, configProperties);
 	}
 
 
@@ -46,7 +46,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
 		}
 
-		profileStatService = Mockito.spy( profileStatService = new ProfileStatService(profileStatDao) );
+		profileStatService = Mockito.spy( profileStatService = new ProfileStatService(profileStatDao, configProperties) );
 		MockitoAnnotations.initMocks(profileStatService);
 
 		ProfileDTO profileDTOMock = new ProfileDTO("name", "avatarName");
