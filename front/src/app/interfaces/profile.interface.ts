@@ -1,5 +1,8 @@
 import {Avatar} from './avatar.interface';
 
+/**
+ * Profile.
+ */
 export interface Profile {
 	id: number,
 	background: number,

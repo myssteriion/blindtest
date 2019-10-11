@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * Custom Fa-Icon.
+ */
 @Component({
 	selector: 'fa-icon-custom',
 	templateUrl: './fa-icon-custom.component.html',
@@ -7,8 +10,14 @@ import { Component, Input } from '@angular/core';
 })
 export class FaIconCustomComponent {
 
+	/**
+	 * Icon name.
+	 */
 	@Input() icon: string;
 
+	/**
+	 * Icon tooltip.
+	 */
 	@Input() tooltip: string;
 
 

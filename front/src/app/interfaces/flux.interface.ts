@@ -1,3 +1,6 @@
+/**
+ * Flux.
+ */
 export interface Flux {
 	name: string,
 	fileExists: boolean,

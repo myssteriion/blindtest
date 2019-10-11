@@ -1,3 +1,6 @@
+/**
+ * Page.
+ */
 export interface Page<T> {
 
 	// content and size

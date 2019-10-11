@@ -1,4 +1,4 @@
-<!--suppress ALL -->
+<!-- modal header -->
 <div class="row profile-edit-header">
     <h3 *ngIf="create" class="col-sm-12">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</h3>
     <h3 *ngIf="!create" class="col-sm-12">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</h3>
@@ -7,6 +7,7 @@
 <div class="row profile-edit-body">
     <div class="col-sm-12">
 
+        <!-- name -->
         <div class="row profile-edit-name">
             <div class="col-3"><label>{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</label></div>
             <div class="col-9">
@@ -14,6 +15,7 @@
             </div>
         </div>
 
+        <!-- background -->
         <div class="row profile-edit-backgrounds">
             <div class="col-3"><label>{{ 'PROFILE.EDIT.BACKGROUND_LABEL' | translate }}</label></div>
             <div *ngFor="let backgroundId of backgroundIds; let i = index" class="col profile-edit-background" [ngClass]="getBackgroundClass(i)"
@@ -21,6 +23,7 @@
             </div>
         </div>
 
+        <!-- avatar -->
         <div class="row profile-edit-avatar">
             <div class="col-3"><label>{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</label></div>
             <div class="col-3"><img src="{{ getCurrentFluxForImg() }}" /></div>
@@ -30,6 +33,7 @@
             </div>
         </div>
 
+        <!-- avatars page -->
         <div *ngIf="showAvatars">
             <div>
                 <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
@@ -44,6 +48,7 @@
     </div>
 </div>
 
+<!-- modal footer -->
 <div class="row profile-edit-footer">
     <div class="col-sm-12">
         <button class="btn btn-success" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>

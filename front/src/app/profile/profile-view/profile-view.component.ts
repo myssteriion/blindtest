@@ -6,6 +6,9 @@ import {ToolsService} from "../../tools/tools.service";
 import {ProfileEditComponent} from "../profile-edit/profile-edit.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * The profiles view.
+ */
 @Component({
     selector: 'profile-view',
     templateUrl: './profile-view.component.html',
@@ -13,10 +16,19 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProfileViewComponent implements OnInit {
 
+    /**
+     * Profiles page.
+     */
     public page: Page<Profile>;
 
+    /**
+     * Show/hide profiles pages.
+     */
     public showProfiles: boolean;
 
+    /**
+     * The prefix name filter.
+     */
     public prefixName: string;
 
 
@@ -33,7 +45,11 @@ export class ProfileViewComponent implements OnInit {
     }
 
 
-
+    /**
+     * Load profiles page.
+     *
+     * @param pageNumber the page number
+     */
     public loadProfiles(pageNumber: number): void {
 
         this._profileResource.findAllByNameStartingWith(this.prefixName, pageNumber-1).subscribe(
@@ -42,6 +58,9 @@ export class ProfileViewComponent implements OnInit {
         );
     }
 
+    /**
+     * Open modal for create new profile.
+     */
     public createProfile(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );

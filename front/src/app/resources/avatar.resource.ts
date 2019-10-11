@@ -5,9 +5,15 @@ import {Avatar} from 'src/app/interfaces/avatar.interface';
 import {Page} from 'src/app/interfaces/page.interface';
 import {environment} from 'src/environments/environment';
 
+/**
+ * Avatar resource.
+ */
 @Injectable()
 export class AvatarResource {
 
+	/**
+	 * Rest path.
+	 */
 	private _avatarPath = environment.baseBackendUrl + "/avatars";
 
 
@@ -15,11 +21,12 @@ export class AvatarResource {
 	constructor(private _http: HttpClient) { }
 
 
-
-	public refresh(): Observable<any> {
-		return this._http.get<Observable<any>>(this._avatarPath + "/refresh");
-	}
-
+	/**
+	 * Gets avatars pageable filtered by prefix name.
+	 *
+	 * @param prefixName the prefix name filter
+	 * @param pageNumber the page number
+	 */
 	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Avatar> > {
 
 		let params = new HttpParams();

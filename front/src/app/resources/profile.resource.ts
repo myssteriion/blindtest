@@ -5,9 +5,15 @@ import {Profile} from '../interfaces/profile.interface';
 import {Page} from '../interfaces/page.interface';
 import {environment} from 'src/environments/environment';
 
+/**
+ * Profile resource.
+ */
 @Injectable()
 export class ProfileResource {
 
+	/**
+	 * Rest path.
+	 */
 	private _profilePath = environment.baseBackendUrl + "/profiles";
 
 
@@ -16,14 +22,30 @@ export class ProfileResource {
 
 
 
+	/**
+	 * Create profile.
+	 *
+	 * @param profile the profile.
+	 */
 	public create(profile: Profile): Observable<Profile> {
 		return this._http.post<Profile>(this._profilePath , profile);
 	}
 
+	/**
+	 * Update profile.
+	 *
+	 * @param profile the profile
+	 */
 	public update(profile: Profile): Observable<Profile> {
 		return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
 	}
 
+	/**
+	 * Gets profiles pageable filtered by prefix name.
+	 *
+	 * @param prefixName the prefix name filter
+	 * @param pageNumber the page number
+	 */
 	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Profile> > {
 
 		let params = new HttpParams();
@@ -33,6 +55,11 @@ export class ProfileResource {
 		return this._http.get< Page<Profile> >(this._profilePath, { params: params } );
 	}
 
+	/**
+	 * Delete profile.
+	 *
+	 * @param profile the profile
+	 */
 	public delete(profile: Profile): Observable<Page<Profile>> {
 		return this._http.delete< Page<Profile> >(this._profilePath + "/" + profile.id);
 	}

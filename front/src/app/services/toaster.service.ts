@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {ToolsService} from "../tools/tools.service";
 
+/**
+ * Custom toaster service.
+ */
 @Injectable()
 export class ToasterService {
 
@@ -9,6 +12,12 @@ export class ToasterService {
                 private _toolsService: ToolsService) { }
 
 
+
+    /**
+     * Launc a success toaster.
+     *
+     * @param message the message
+     */
     public success(message: string) {
 
         this._toolsService.verifyStringValue("message", message);

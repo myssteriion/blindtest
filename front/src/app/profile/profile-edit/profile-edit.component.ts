@@ -11,6 +11,9 @@ import {TranslateService} from '@ngx-translate/core';
 
 declare var $: any;
 
+/**
+ * Profile creation/edition modal.
+ */
 @Component({
 	selector: 'profile-edit',
 	templateUrl: './profile-edit.component.html',
@@ -18,16 +21,34 @@ declare var $: any;
 })
 export class ProfileEditComponent implements OnInit {
 
+	/**
+	 * The profile.
+	 */
 	@Input() profile: Profile;
 
+	/**
+	 * Creation or edition.
+	 */
 	@Input() create: boolean;
 
+	/**
+	 * The new profile.
+	 */
 	public newProfile: Profile;
 
+	/**
+	 * The avatars page.
+	 */
 	public page: Page<Avatar>;
 
+	/**
+	 * Show/hide avatars page.
+	 */
 	public showAvatars: boolean;
 
+	/**
+	 * Background ids.
+	 */
 	public backgroundIds = ["0", "1", "2", "3"];
 
 
@@ -73,7 +94,11 @@ export class ProfileEditComponent implements OnInit {
 	}
 
 
-
+	/**
+	 * Load avatars page.
+	 *
+	 * @param pageNumber the page number
+	 */
 	public loadAvatars(pageNumber: number): void {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
@@ -82,14 +107,25 @@ export class ProfileEditComponent implements OnInit {
 		);
 	}
 
+	/**
+	 * Show/hide avatars page.
+	 */
 	public showHideAvatars(): void {
 		this.showAvatars = !this.showAvatars;
 	}
 
+	/**
+	 * Gets the new avatar flux.
+	 */
 	public getCurrentFluxForImg(): string {
 		return this._toolsService.getFluxForImg(this.newProfile.avatar.flux);
 	}
 
+	/**
+	 * Gets the flux for avatar.
+	 *
+	 * @param avatar the avatar
+	 */
 	public getFluxForImg(avatar: Avatar): string {
 
 		this._toolsService.verifyValue("avatar", avatar);
@@ -97,6 +133,11 @@ export class ProfileEditComponent implements OnInit {
 		return this._toolsService.getFluxForImg(avatar.flux);
 	}
 
+	/**
+	 * Gets background dynamic class.
+	 *
+	 * @param index the background id
+	 */
 	public getBackgroundClass(index: number): string {
 
 		let cssClass = "profile-card-background-" + index;
@@ -107,6 +148,11 @@ export class ProfileEditComponent implements OnInit {
 		return cssClass;
 	}
 
+	/**
+	 * Select an avatar.
+	 *
+	 * @param avatar the avatar selected
+	 */
 	public selectAvatar(avatar: Avatar): void {
 
 		this._toolsService.verifyValue("avatar", avatar);
@@ -115,6 +161,9 @@ export class ProfileEditComponent implements OnInit {
 		this.newProfile.avatarName = avatar.name;
 	}
 
+	/**
+	 * Test if the save button is disabled.
+	 */
 	public disabledSave(): boolean {
 		return this._toolsService.isNullOrEmpty(this.newProfile.name) ||
 			this._toolsService.isNull(this.newProfile.avatar) ||
@@ -123,6 +172,9 @@ export class ProfileEditComponent implements OnInit {
 			!this.newProfile.avatar.flux.fileExists;
 	}
 
+	/**
+	 * Save/update profile.
+	 */
 	public save(): void {
 
 		let profileTmp = {
@@ -163,6 +215,9 @@ export class ProfileEditComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Cancel the modal.
+	 */
 	public cancel(): void {
 		this._ngbActiveModal.dismiss();
 	}

@@ -9,6 +9,9 @@ import {ProfileResource} from "../../resources/profile.resource";
 import { TranslateService } from '@ngx-translate/core';
 import {ToasterService} from 'src/app/services/toaster.service';
 
+/**
+ * Profile card.
+ */
 @Component({
     selector: 'profile-card',
     templateUrl: './profile-card.component.html',
@@ -16,10 +19,19 @@ import {ToasterService} from 'src/app/services/toaster.service';
 })
 export class ProfileCardComponent implements OnInit {
 
+    /**
+     * The profile.
+     */
     @Input() profile: Profile;
 
+    /**
+     * If can update/delete profile.
+     */
     @Input() canUpdate: boolean;
 
+    /**
+     * Event after update/delete profile.
+     */
     @Output() onEdit = new EventEmitter();
 
     faEdit = faEdit;
@@ -43,15 +55,23 @@ export class ProfileCardComponent implements OnInit {
     }
 
 
-
+    /**
+     * Gets the avatar flux.
+     */
     public getFluxForImg(): string {
         return this._toolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
+    /**
+     * Gets background class.
+     */
     public getBackgroundClass(): string {
         return "profile-card-background-" + this.profile.background;
     }
 
+    /**
+     * Open modal for edit profile.
+     */
     public edit(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );
@@ -64,6 +84,9 @@ export class ProfileCardComponent implements OnInit {
         );
     }
 
+    /**
+     * Open modal for delete profile.
+     */
     public delete(): void {
 
         const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static' } );
