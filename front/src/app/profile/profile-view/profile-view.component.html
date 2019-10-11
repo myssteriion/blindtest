@@ -3,8 +3,9 @@
     <header [title]="'PROFILE.VIEW.TITLE' | translate"></header>
 
     <div *ngIf="showProfiles">
+
         <div class="row profile-view-line-one">
-            <div class="col profile-view-button">
+            <div class="col">
                 <button class="btn btn-info" (click)="createProfile()">{{ 'PROFILE.VIEW.CREATE' | translate }}</button>
             </div>
             <div class="col">
@@ -19,10 +20,15 @@
             </div>
         </div>
 
-        <div class="row">
-            <profile-card class="col-6 col-sm-4" *ngFor="let profile of page.content" [profile]="profile" [canUpdate]="true"
+        <div *ngIf="!page.empty" class="row">
+            <profile-card  class="col-6 col-sm-4" *ngFor="let profile of page.content" [profile]="profile" [canUpdate]="true"
                           (onEdit)="loadProfiles(1)">
             </profile-card>
+        </div>
+        <div *ngIf="page.empty" class="row justify-content-center">
+            <div class="col-4 no-result-label">
+                <div>{{ 'COMMON.NO_RESULT' | translate }}</div>
+            </div>
         </div>
     </div>
 

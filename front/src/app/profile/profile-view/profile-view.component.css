@@ -1,7 +1,7 @@
 .profile-view-line-one {
     padding: 2em 0em;
 }
-.profile-view-button {
+
+.profile-view-line-one div {
     text-align: center;
-    padding-bottom: 1em;
 }

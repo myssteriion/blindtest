@@ -17,3 +17,8 @@
     color: #138496;
     border-color: #17a2b8;
 }
+
+.no-result-label {
+    text-align: center;
+    font-style: italic;
+}

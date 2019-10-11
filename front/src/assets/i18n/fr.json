@@ -7,7 +7,8 @@
         "WARNING": "Attention",
         "SHOW": "Afficher",
         "HIDE": "Masquer",
-        "PREFIX_PLACE_HOLDER": "Chercher un profil"
+        "PREFIX_PLACE_HOLDER": "Chercher un profil",
+        "NO_RESULT": "Pas de résultat."
     },
     "PROFILE": {
         "CARD": {
