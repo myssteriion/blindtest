@@ -2,3 +2,18 @@
 * {
     font-family: Georgia, serif
 }
+
+.pagination .page-item .page-link {
+    border-radius: 0 !important;
+}
+
+.pagination .active .page-link {
+    background-color: #138496;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.pagination .page-link {
+    color: #138496;
+    border-color: #17a2b8;
+}
