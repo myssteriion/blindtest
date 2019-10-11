@@ -17,8 +17,8 @@ export class ToasterService {
             closeButton: true,
             progressBar: true,
             positionClass: 'toast-bottom-right',
-            timeOut: 5000,
-            extendedTimeOut: 2000
+            timeOut: 3500,
+            extendedTimeOut: 1500
         });
     }
 
