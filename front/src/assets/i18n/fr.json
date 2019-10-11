@@ -13,7 +13,8 @@
         "CARD": {
             "EDIT_TOOLTIP": "Modifier le profil.",
             "DELETE_TOOLTIP": "Supprimer le profil.",
-            "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?"
+            "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?",
+            "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé."
         },
         "EDIT": {
             "CREATION_TITLE": "Création du profil",
@@ -23,7 +24,9 @@
             "AVATAR_LABEL": "Avatar :",
             "SHOW_TOOLTIP": "Afficher la liste des avatars.",
             "HIDE_TOOLTIP": "Cacher la liste des avatars.",
-            "REFRESH_TOOLTIP": "Rafraichir la liste des avatars."
+            "REFRESH_TOOLTIP": "Rafraichir la liste des avatars.",
+            "CREATED_TOASTER": "Profil '{{profile_name}}' créé.",
+            "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour."
         },
         "VIEW": {
             "TITLE": "Profils des joueurs",

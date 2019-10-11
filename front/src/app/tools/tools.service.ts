@@ -30,6 +30,12 @@ export class ToolsService {
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
+    public verifyStringValue(key: string, value: string): void {
+
+        if ( !this.isNullOrEmpty(key) && this.isNullOrEmpty(value))
+            throw new Error("Le champ '" + key + "' est obligatoire.");
+    }
+
     public getFluxForImg(flux: Flux): string {
 
         this.verifyValue("flux", flux);

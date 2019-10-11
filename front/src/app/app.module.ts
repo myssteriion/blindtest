@@ -24,6 +24,7 @@ import {AvatarResource} from './resources/avatar.resource';
 import {ToolsService} from "./tools/tools.service";
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {HeaderComponent} from './common/header/header.component';
+import {ToasterService} from "./services/toaster.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -64,7 +65,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
     ProfileResource,
     AvatarResource,
-    ToolsService
+    ToolsService,
+    ToasterService
   ],
   bootstrap: [AppComponent]
 })

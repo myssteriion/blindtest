@@ -6,6 +6,8 @@ import {ToolsService} from "../../tools/tools.service";
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from "../../interfaces/page.interface";
+import {ToasterService} from "../../services/toaster.service";
+import {TranslateService} from '@ngx-translate/core';
 
 declare var $: any;
 
@@ -31,7 +33,9 @@ export class ProfileEditComponent implements OnInit {
 	constructor(private _avatarResource: AvatarResource,
 				private _toolsService: ToolsService,
 				private _ngbActiveModal: NgbActiveModal,
-				private _profileResource: ProfileResource) { }
+				private _profileResource: ProfileResource,
+				private _toasterService: ToasterService,
+				private _translate: TranslateService) { }
 
 	public ngOnInit() {
 
@@ -118,7 +122,9 @@ export class ProfileEditComponent implements OnInit {
 
 			this._profileResource.create(profileTmp).subscribe(
 				response => {
+
 					this.profile = response;
+					this._toasterService.success( this._translate.instant("PROFILE.EDIT.CREATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
 				error => {
@@ -130,7 +136,9 @@ export class ProfileEditComponent implements OnInit {
 
 			this._profileResource.update(profileTmp).subscribe(
 				response => {
+
 					this.profile = response;
+					this._toasterService.success( this._translate.instant("PROFILE.EDIT.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
 				error => {

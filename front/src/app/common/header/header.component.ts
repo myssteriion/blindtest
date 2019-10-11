@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {ToolsService} from "../../tools/tools.service";
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
 	selector: 'header',
@@ -12,10 +11,8 @@ export class HeaderComponent implements OnInit {
 
 
 
-	constructor(private _toolsService: ToolsService) { }
+	constructor() { }
 
-	ngOnInit() {
-		this._toolsService.verifyValue("title", this.title);
-	}
+	ngOnInit() { }
 
 }

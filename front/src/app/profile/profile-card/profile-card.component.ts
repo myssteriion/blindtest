@@ -7,6 +7,7 @@ import { ToolsService } from "../../tools/tools.service";
 import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
 import {ProfileResource} from "../../resources/profile.resource";
 import { TranslateService } from '@ngx-translate/core';
+import {ToasterService} from 'src/app/services/toaster.service';
 
 @Component({
     selector: 'profile-card',
@@ -29,7 +30,8 @@ export class ProfileCardComponent implements OnInit {
     constructor(private _ngbModal: NgbModal,
                 private _toolsService: ToolsService,
                 private _profileResource: ProfileResource,
-                private _translate: TranslateService) {
+                private _translate: TranslateService,
+                private _toasterService: ToasterService) {
 
     }
 
@@ -62,11 +64,18 @@ export class ProfileCardComponent implements OnInit {
 
         const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static' } );
         modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
-        modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY",
-                                    { profile_name: this.profile.name } );
+        modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
 
         modalRef.result.then(
-            (result) => { this._profileResource.delete(this.profile).subscribe(); this.onEdit.emit(); },
+            (result) => {
+                this._profileResource.delete(this.profile).subscribe(
+                    response => {
+                        this._toasterService.success( this._translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
+                        this.onEdit.emit();
+                    },
+                    error => { throw Error("can't delete profile: " + error); }
+                );
+            },
             (reason) => { /* do nothing */ }
         );
     }
