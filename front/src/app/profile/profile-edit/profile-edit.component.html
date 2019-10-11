@@ -14,6 +14,13 @@
             </div>
         </div>
 
+        <div class="row profile-edit-backgrounds">
+            <div class="col-3"><label>{{ 'PROFILE.EDIT.BACKGROUND_LABEL' | translate }}</label></div>
+            <div *ngFor="let backgroundId of backgroundIds; let i = index" class="col profile-edit-background" [ngClass]="getBackgroundClass(i)"
+                    (click)="newProfile.background = i">
+            </div>
+        </div>
+
         <div class="row profile-edit-avatar">
             <div class="col-3"><label>{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</label></div>
             <div class="col-3"><img src="{{ getCurrentFluxForImg() }}" /></div>

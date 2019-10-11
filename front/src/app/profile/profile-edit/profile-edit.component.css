@@ -16,11 +16,11 @@
 	margin-left: 10px;
 }
 
-.profile-edit-avatar, .profile-edit-name {
+.profile-edit-avatar, .profile-edit-name, .profile-edit-backgrounds {
 	margin-bottom: 1em;
 }
 
-.profile-edit-avatar div, .profile-edit-name div {
+.profile-edit-avatar div, .profile-edit-name div, .profile-edit-backgrounds div {
 	margin: auto;
 	text-align: center;
 }
@@ -40,4 +40,21 @@
 
 .profile-edit-avatars img {
 	cursor: pointer;
+}
+
+.profile-edit-background {
+	border: 1px solid black;
+	border-radius: 30px;
+	margin: 10px 5px;
+	height: 2em;
+	opacity: 0.3;
+}
+
+.profile-edit-background:hover {
+	cursor: pointer;
+}
+
+.profile-edit-background-active {
+	border: 3px solid black;
+	opacity: 1 !important;
 }

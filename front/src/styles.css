@@ -22,3 +22,23 @@
     text-align: center;
     font-style: italic;
 }
+
+/*************** background ***************/
+
+.profile-card-background-0 {
+    background: radial-gradient(seashell, silver);
+}
+
+.profile-card-background-1 {
+    background: radial-gradient(skyblue, dodgerblue);
+}
+
+.profile-card-background-2 {
+    background: radial-gradient(pink, hotpink);
+}
+
+.profile-card-background-3 {
+    background: radial-gradient(yellow, orangered);
+}
+
+/*************** background ***************/

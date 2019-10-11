@@ -28,6 +28,8 @@ export class ProfileEditComponent implements OnInit {
 
 	public showAvatars: boolean;
 
+	public backgroundIds = ["0", "1", "2", "3"];
+
 
 
 	constructor(private _avatarResource: AvatarResource,
@@ -47,6 +49,7 @@ export class ProfileEditComponent implements OnInit {
 
 			this.newProfile = {
 				id: null,
+				background: 0,
 				name: "",
 				avatarName: "",
 				avatar: { id: null, name: "", flux: { name: "", fileExists: false, contentFlux: "", contentType: "" } }
@@ -59,6 +62,7 @@ export class ProfileEditComponent implements OnInit {
 
 			this.newProfile = {
 				id: this.profile.id,
+				background: this.profile.background,
 				name: this.profile.name,
 				avatarName: this.profile.avatarName,
 				avatar: this.profile.avatar
@@ -93,6 +97,16 @@ export class ProfileEditComponent implements OnInit {
 		return this._toolsService.getFluxForImg(avatar.flux);
 	}
 
+	public getBackgroundClass(index: number): string {
+
+		let cssClass = "profile-card-background-" + index;
+
+		if (index === this.newProfile.background)
+			cssClass += " profile-edit-background-active";
+
+		return cssClass;
+	}
+
 	public selectAvatar(avatar: Avatar): void {
 
 		this._toolsService.verifyValue("avatar", avatar);
@@ -113,6 +127,7 @@ export class ProfileEditComponent implements OnInit {
 
 		let profileTmp = {
 			id: this.newProfile.id,
+			background: this.newProfile.background,
 			name: this.newProfile.name,
 			avatarName: this.newProfile.avatarName,
 		};

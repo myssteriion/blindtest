@@ -48,6 +48,10 @@ export class ProfileCardComponent implements OnInit {
         return this._toolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
+    public getBackgroundClass(): string {
+        return "profile-card-background-" + this.profile.background;
+    }
+
     public edit(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );

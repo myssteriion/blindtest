@@ -32,6 +32,12 @@ public class ProfileDTO extends AbstractDTO {
 	private String name;
 
 	/**
+	 * The background (card color).
+	 */
+	@Column(name = "background", nullable = false)
+	private Integer background;
+
+	/**
 	 * The avatar name.
 	 */
 	@Column(name = "avatar_name", nullable = false)
@@ -69,8 +75,20 @@ public class ProfileDTO extends AbstractDTO {
 	 * @param avatarName the avatar name
 	 */
 	public ProfileDTO(String name, String avatarName) {
+		this(name, avatarName, 0);
+	}
+
+	/**
+	 * Instantiates a new Profile dto.
+	 *
+	 * @param name       the name
+	 * @param avatarName the avatar name
+	 * @param background the background
+	 */
+	public ProfileDTO(String name, String avatarName, Integer background) {
 
 		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		this.background = Math.max(background, 0);
 		this.avatarName = Tool.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
 		this.avatar = new AvatarDTO(this.avatarName);
 	}
@@ -85,6 +103,37 @@ public class ProfileDTO extends AbstractDTO {
 	@Override
 	public ProfileDTO setId(Integer id) {
 		this.id = id;
+		return this;
+	}
+
+	/**
+	 * Gets background.
+	 *
+	 * @return the background.
+	 */
+	public Integer getBackground() {
+		return background;
+	}
+
+	/**
+	 * Set background.
+	 *
+	 * @param background the background.
+	 * @return this
+	 */
+	public ProfileDTO setBackground(Integer background) {
+		this.background = background;
+		return this;
+	}
+
+	/**
+	 * Set avatar.
+	 *
+	 * @param avatar the avatar.
+	 * @return this
+	 */
+	public ProfileDTO setAvatar(AvatarDTO avatar) {
+		this.avatar = avatar;
 		return this;
 	}
 
@@ -160,6 +209,7 @@ public class ProfileDTO extends AbstractDTO {
 	@Override
 	public String toString() {
 		return "id=" + id +
+				", background=" + background +
 				", name=" + name +
 				", avatarName=" + avatarName +
 				", avatar={" + avatar + "}";

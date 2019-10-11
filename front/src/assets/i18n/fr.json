@@ -21,6 +21,7 @@
             "CREATION_TITLE": "Création du profil",
             "UPDATE_TITLE": "Modification du profil",
             "NAME_LABEL": "Pseudo :",
+            "BACKGROUND_LABEL": "Couleur :",
             "NAME_PLACE_HOLDER": "Entrez votre pseudo",
             "AVATAR_LABEL": "Avatar :",
             "SHOW_TOOLTIP": "Afficher la liste des avatars.",

@@ -1,4 +1,4 @@
-<div class="row profile-card-profile-frame">
+<div class="row profile-card-profile-frame" [ngClass]="getBackgroundClass()">
 
     <div class="profile-card-avatar" [ngClass]="{'col-3': canUpdate, 'col-2': !canUpdate}">
         <img src="{{ getFluxForImg() }}" />
