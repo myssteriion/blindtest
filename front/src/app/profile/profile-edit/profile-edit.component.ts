@@ -49,7 +49,7 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * Background ids.
 	 */
-	public backgroundIds = ["0", "1", "2", "3"];
+	public backgroundIds = ["0", "1", "2", "3", "4"];
 
 
 
