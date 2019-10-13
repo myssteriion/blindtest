@@ -30,49 +30,49 @@ import {GameNewViewComponent} from './game/game-new-view/game-new-view.component
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProfileViewComponent,
-    ProfileCardComponent,
-    ProfilePageComponent,
-    ProfileEditComponent,
-    FaIconCustomComponent,
-    ModalConfirmComponent,
-    HeaderComponent,
-    GameNewViewComponent
-  ],
-  entryComponents: [
-    ProfileEditComponent,
-    ModalConfirmComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
-    FormsModule,
-    FontAwesomeModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-  })  ],
-  providers: [
-    [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
-    ProfileResource,
-    AvatarResource,
-    ToolsService,
-    ToasterService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		ProfileViewComponent,
+		ProfileCardComponent,
+		ProfilePageComponent,
+		ProfileEditComponent,
+		FaIconCustomComponent,
+		ModalConfirmComponent,
+		HeaderComponent,
+		GameNewViewComponent
+	],
+	entryComponents: [
+		ProfileEditComponent,
+		ModalConfirmComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		NgbModule,
+		HttpClientModule,
+		FormsModule,
+		FontAwesomeModule,
+		BrowserAnimationsModule,
+		ToastrModule.forRoot(),
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient]
+			}
+		})  ],
+	providers: [
+		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
+		ProfileResource,
+		AvatarResource,
+		ToolsService,
+		ToasterService
+	],
+	bootstrap: [AppComponent]
 })
 
 export class AppModule { }
