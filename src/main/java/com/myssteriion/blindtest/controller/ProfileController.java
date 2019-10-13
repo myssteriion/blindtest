@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "profiles")
 public class ProfileController {
 
-	private final ProfileService profileService;
+	private ProfileService profileService;
 
 	/**
 	 * Instantiates a new Profile controller.

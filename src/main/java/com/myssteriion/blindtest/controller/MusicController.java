@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequestMapping(path = "musics")
 public class MusicController {
 
-	private final MusicService musicService;
+	private MusicService musicService;
 
 	@Autowired
 	public MusicController(MusicService musicService) {

@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
@@ -28,7 +29,11 @@ import java.util.List;
 @RequestMapping(path = "profilestats")
 public class ProfileStatController {
 
-	private final ProfileStatService profileStatService;
+	private ProfileStatService profileStatService;
+
+	private ProfileService profileService;
+
+
 
 	/**
 	 * Instantiates a new Profile stat controller.
@@ -36,8 +41,9 @@ public class ProfileStatController {
 	 * @param profileStatService the profile stat service
 	 */
 	@Autowired
-	public ProfileStatController(ProfileStatService profileStatService) {
+	public ProfileStatController(ProfileStatService profileStatService, ProfileService profileService) {
 		this.profileStatService = profileStatService;
+		this.profileService = profileService;
 	}
 
 
@@ -57,7 +63,12 @@ public class ProfileStatController {
 		profilesIds.forEach(id -> {
 
 			try {
+
 				ProfileDTO profile = new ProfileDTO().setId(id);
+				profile = profileService.find(profile);
+				if (profile == null)
+					throw new NotFoundException("Profile not found.");
+
 				profilesStats.add( profileStatService.findByProfile(profile));
 			}
 			catch (NotFoundException e) {
