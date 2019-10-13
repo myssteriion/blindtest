@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'blindtest';
 
-  constructor(translate: TranslateService) {
-    translate.setDefaultLang('fr');
-    translate.use('fr');
-  }
- 
-  public ngOnInit() {
-  }
+	title = 'blindtest';
+
+	constructor(translate: TranslateService) {
+		translate.setDefaultLang('fr');
+		translate.use('fr');
+	}
+
+	public ngOnInit() {
+	}
+
 } 
