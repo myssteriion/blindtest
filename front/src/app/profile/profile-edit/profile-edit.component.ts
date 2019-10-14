@@ -54,7 +54,6 @@ export class ProfileEditComponent implements OnInit {
 
 
 	constructor(private _avatarResource: AvatarResource,
-				private _toolsService: ToolsService,
 				private _ngbActiveModal: NgbActiveModal,
 				private _profileResource: ProfileResource,
 				private _toasterService: ToasterService,
@@ -62,7 +61,7 @@ export class ProfileEditComponent implements OnInit {
 
 	public ngOnInit() {
 
-		this._toolsService.verifyValue("create", this.create);
+		ToolsService.verifyValue("create", this.create);
 
 		this.showAvatars = false;
 
@@ -78,8 +77,8 @@ export class ProfileEditComponent implements OnInit {
 		}
 		else {
 
-			this._toolsService.verifyValue("profile", this.profile);
-			this._toolsService.verifyValue("profile.avatar", this.profile.avatar);
+			ToolsService.verifyValue("profile", this.profile);
+			ToolsService.verifyValue("profile.avatar", this.profile.avatar);
 
 			this.newProfile = {
 				id: this.profile.id,
@@ -119,7 +118,7 @@ export class ProfileEditComponent implements OnInit {
 	 * Gets the new avatar flux.
 	 */
 	public getCurrentFluxForImg(): string {
-		return this._toolsService.getFluxForImg(this.newProfile.avatar.flux);
+		return ToolsService.getFluxForImg(this.newProfile.avatar.flux);
 	}
 
 	/**
@@ -129,9 +128,9 @@ export class ProfileEditComponent implements OnInit {
 	 */
 	public getFluxForImg(avatar: Avatar): string {
 
-		this._toolsService.verifyValue("avatar", avatar);
+		ToolsService.verifyValue("avatar", avatar);
 
-		return this._toolsService.getFluxForImg(avatar.flux);
+		return ToolsService.getFluxForImg(avatar.flux);
 	}
 
 	/**
@@ -156,7 +155,7 @@ export class ProfileEditComponent implements OnInit {
 	 */
 	public selectAvatar(avatar: Avatar): void {
 
-		this._toolsService.verifyValue("avatar", avatar);
+		ToolsService.verifyValue("avatar", avatar);
 
 		this.newProfile.avatar = avatar;
 		this.newProfile.avatarName = avatar.name;
@@ -166,10 +165,10 @@ export class ProfileEditComponent implements OnInit {
 	 * Test if the save button is disabled.
 	 */
 	public disabledSave(): boolean {
-		return this._toolsService.isNullOrEmpty(this.newProfile.name) ||
-			this._toolsService.isNull(this.newProfile.avatar) ||
-			this._toolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
-			this._toolsService.isNull(this.newProfile.avatar.flux) ||
+		return ToolsService.isNullOrEmpty(this.newProfile.name) ||
+			ToolsService.isNull(this.newProfile.avatar) ||
+			ToolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
+			ToolsService.isNull(this.newProfile.avatar.flux) ||
 			!this.newProfile.avatar.flux.fileExists;
 	}
 

@@ -8,8 +8,7 @@ import {ToolsService} from "../tools/tools.service";
 @Injectable()
 export class ToasterService {
 
-    constructor(private _toastrService: ToastrService,
-                private _toolsService: ToolsService) { }
+    constructor(private _toastrService: ToastrService) { }
 
 
 
@@ -20,7 +19,7 @@ export class ToasterService {
      */
     public success(message: string) {
 
-        this._toolsService.verifyStringValue("message", message);
+        ToolsService.verifyStringValue("message", message);
 
         this._toastrService.success(message, "", {
             closeButton: true,

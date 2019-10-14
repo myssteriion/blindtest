@@ -1,12 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Profile } from 'src/app/interfaces/profile.interface';
-import { faEdit, faTrashAlt, faHandPointUp } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileEditComponent } from 'src/app/profile/profile-edit/profile-edit.component';
-import { ToolsService } from "../../tools/tools.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Profile} from 'src/app/interfaces/profile.interface';
+import {faEdit, faHandPointUp, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ProfileEditComponent} from 'src/app/profile/profile-edit/profile-edit.component';
+import {ToolsService} from "../../tools/tools.service";
 import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
 import {ProfileResource} from "../../resources/profile.resource";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from 'src/app/services/toaster.service';
 
 /**
@@ -51,7 +51,6 @@ export class ProfileCardComponent implements OnInit {
 
 
     constructor(private _ngbModal: NgbModal,
-                private _toolsService: ToolsService,
                 private _profileResource: ProfileResource,
                 private _translate: TranslateService,
                 private _toasterService: ToasterService) {
@@ -60,9 +59,9 @@ export class ProfileCardComponent implements OnInit {
 
     ngOnInit() {
 
-        this._toolsService.verifyValue("profile", this.profile);
-        this._toolsService.verifyValue("profile.avatar", this.profile.avatar);
-        this._toolsService.verifyValue("canEdit", this.canEdit);
+        ToolsService.verifyValue("profile", this.profile);
+        ToolsService.verifyValue("profile.avatar", this.profile.avatar);
+        ToolsService.verifyValue("canUpdate", this.canUpdate);
     }
 
 
@@ -71,7 +70,7 @@ export class ProfileCardComponent implements OnInit {
      * Gets the avatar flux.
      */
     public getFluxForImg(): string {
-        return this._toolsService.getFluxForImg(this.profile.avatar.flux);
+        return ToolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
     /**

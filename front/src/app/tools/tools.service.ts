@@ -33,7 +33,7 @@ export class ToolsService {
      * @param obj the object
      * @return TRUE if obj is undefined or null, FALSE otherwise
      */
-    public isNull(obj: any): boolean {
+    public static isNull(obj: any): boolean {
         return obj === undefined || obj === null;
     }
 
@@ -43,8 +43,8 @@ export class ToolsService {
      * @param str the str
      * @return TRUE if str is undefined, null or empty, FALSE otherwise
      */
-    public isNullOrEmpty(str: string): boolean {
-        return this.isNull(str) || str === "";
+    public static isNullOrEmpty(str: string): boolean {
+        return ToolsService.isNull(str) || str === "";
     }
 
     /**
@@ -53,9 +53,9 @@ export class ToolsService {
      * @param key   the key label
      * @param value the value
      */
-    public verifyValue(key: string, value: any): void {
+    public static verifyValue(key: string, value: any): void {
 
-        if ( !this.isNullOrEmpty(key) && this.isNull(value))
+        if ( !ToolsService.isNullOrEmpty(key) && ToolsService.isNull(value) )
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
@@ -65,9 +65,9 @@ export class ToolsService {
      * @param key   the key label
      * @param value the value
      */
-    public verifyStringValue(key: string, value: string): void {
+    public static verifyStringValue(key: string, value: string): void {
 
-        if ( !this.isNullOrEmpty(key) && this.isNullOrEmpty(value))
+        if ( !ToolsService.isNullOrEmpty(key) && ToolsService.isNullOrEmpty(value) )
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
@@ -76,7 +76,7 @@ export class ToolsService {
      *
      * @param flux the flux
      */
-    public getFluxForImg(flux: Flux): string {
+    public static getFluxForImg(flux: Flux): string {
 
         this.verifyValue("flux", flux);
 
