@@ -15,6 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
 import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ProfileViewComponent,
     ProfileCardComponent,
+    ProfilePageComponent,
     ProfileEditComponent,
     FaIconCustomComponent,
     ModalConfirmComponent,
