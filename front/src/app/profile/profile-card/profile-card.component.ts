@@ -61,7 +61,8 @@ export class ProfileCardComponent implements OnInit {
 
         ToolsService.verifyValue("profile", this.profile);
         ToolsService.verifyValue("profile.avatar", this.profile.avatar);
-        ToolsService.verifyValue("canUpdate", this.canUpdate);
+        ToolsService.verifyValue("canUpdate", this.canEdit);
+        ToolsService.verifyValue("canSelect", this.canSelect);
     }
 
 
@@ -128,7 +129,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Test if icons need to be show.
      */
-    public showIcon(): boolean {
+    public showIcons(): boolean {
         return this.canEdit || this.canSelect;
     }
 
