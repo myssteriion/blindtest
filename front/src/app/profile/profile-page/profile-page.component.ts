@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Profile} from 'src/app/interfaces/profile.interface';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/page.interface';
@@ -19,6 +19,18 @@ export class ProfilePageComponent implements OnInit {
      * If can create/update/delete profile.
      */
     @Input() canUpdate: boolean;
+
+    /**
+     * If can select profile card.
+     */
+    @Input() canSelect: boolean;
+
+    /**
+     * On select profile card.
+     */
+    @Output() onSelect = new EventEmitter();
+
+
 
     /**
      * Profiles page.
@@ -46,6 +58,7 @@ export class ProfilePageComponent implements OnInit {
         this.prefixName = "";
         this.loadProfiles(1)
     }
+
 
 
     /**
