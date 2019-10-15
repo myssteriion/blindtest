@@ -126,4 +126,11 @@ export class ProfileCardComponent implements OnInit {
         this.onSelect.emit(this.profile);
     }
 
+    /**
+     * Test if icons need to be show.
+     */
+    public showIcon(): boolean {
+        return this.canEdit || this.canSelect;
+    }
+
 }

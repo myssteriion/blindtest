@@ -1,15 +1,15 @@
 <div class="row profile-card-profile-frame" [ngClass]="getBackgroundClass()">
 
     <!-- image -->
-    <div class="profile-card-avatar" [ngClass]="{'col-3': canEdit, 'col-2': !canEdit}">
+    <div class="profile-card-avatar" [ngClass]="{'col-3': showIcon(), 'col-2': !showIcon()}">
         <img src="{{ getFluxForImg() }}" />
     </div>
 
     <!-- name -->
-    <div class="profile-card-name" [ngClass]="{'col-6': canEdit, 'col-8': !canEdit}">{{profile.name}}</div>
+    <div class="profile-card-name" [ngClass]="{'col-6': showIcon(), 'col-8': !showIcon()}">{{profile.name}}</div>
 
     <!-- update/delete/select icons -->
-    <div *ngIf="canEdit || canSelect" class="col-3 profile-card-action-button">
+    <div *ngIf="showIcon()" class="col-3 profile-card-action-button">
         <div>
             <fa-icon-custom *ngIf="canEdit" [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
             <fa-icon-custom *ngIf="canEdit" [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>

@@ -94,6 +94,7 @@ export class ProfileEditComponent implements OnInit {
 	}
 
 
+
 	/**
 	 * Load avatars page.
 	 *
