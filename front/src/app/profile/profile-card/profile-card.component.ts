@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile.interface';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faHandPointUp } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileEditComponent } from 'src/app/profile/profile-edit/profile-edit.component';
 import { ToolsService } from "../../tools/tools.service";
@@ -27,15 +27,26 @@ export class ProfileCardComponent implements OnInit {
     /**
      * If can update/delete profile.
      */
-    @Input() canUpdate: boolean;
+    @Input() canEdit: boolean;
 
     /**
      * Event after update/delete profile.
      */
     @Output() onEdit = new EventEmitter();
 
+    /**
+     * If can select profile.
+     */
+    @Input() canSelect: boolean;
+
+    /**
+     * On select.
+     */
+    @Output() onSelect = new EventEmitter();
+
     faEdit = faEdit;
     faTrashAlt = faTrashAlt;
+    faHandPointUp = faHandPointUp;
 
 
 
@@ -51,8 +62,9 @@ export class ProfileCardComponent implements OnInit {
 
         this._toolsService.verifyValue("profile", this.profile);
         this._toolsService.verifyValue("profile.avatar", this.profile.avatar);
-        this._toolsService.verifyValue("canUpdate", this.canUpdate);
+        this._toolsService.verifyValue("canEdit", this.canEdit);
     }
+
 
 
     /**
@@ -105,6 +117,13 @@ export class ProfileCardComponent implements OnInit {
             },
             (reason) => { /* do nothing */ }
         );
+    }
+
+    /**
+     * Emit the profile.
+     */
+    public select(): void {
+        this.onSelect.emit(this.profile);
     }
 
 }

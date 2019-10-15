@@ -1,18 +1,19 @@
 <div class="row profile-card-profile-frame" [ngClass]="getBackgroundClass()">
 
     <!-- image -->
-    <div class="profile-card-avatar" [ngClass]="{'col-3': canUpdate, 'col-2': !canUpdate}">
+    <div class="profile-card-avatar" [ngClass]="{'col-3': canEdit, 'col-2': !canEdit}">
         <img src="{{ getFluxForImg() }}" />
     </div>
 
     <!-- name -->
-    <div class="profile-card-name" [ngClass]="{'col-6': canUpdate, 'col-8': !canUpdate}">{{profile.name}}</div>
+    <div class="profile-card-name" [ngClass]="{'col-6': canEdit, 'col-8': !canEdit}">{{profile.name}}</div>
 
-    <!-- update/delete icons -->
-    <div *ngIf="canUpdate" class="col-3 profile-card-action-button">
+    <!-- update/delete/select icons -->
+    <div *ngIf="canEdit || canSelect" class="col-3 profile-card-action-button">
         <div>
-            <fa-icon-custom [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
-            <fa-icon-custom [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>
+            <fa-icon-custom *ngIf="canEdit" [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
+            <fa-icon-custom *ngIf="canEdit" [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>
+            <fa-icon-custom *ngIf="canSelect" [icon]="faHandPointUp" [tooltip]="'PROFILE.CARD.CHOSE_TOOLTIP'" (click)="select()"></fa-icon-custom>
         </div>
     </div>
 
