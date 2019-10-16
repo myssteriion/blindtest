@@ -23,6 +23,10 @@
     font-style: italic;
 }
 
+.font-size-normal { font-size: 1.3em; }
+.font-size-modal-title { font-size: 1.8em; }
+.font-size-title { font-size: 3em; }
+
 /*************** background ***************/
 
 .profile-card-background-0 {

@@ -1,7 +1,7 @@
 <!-- modal header -->
 <div class="row profile-edit-header">
-    <h3 *ngIf="create" class="col-sm-12">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</h3>
-    <h3 *ngIf="!create" class="col-sm-12">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</h3>
+    <div *ngIf="create" class="col-sm-12 font-size-modal-title">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</div>
+    <div *ngIf="!create" class="col-sm-12 font-size-modal-title">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</div>
 </div>
 
 <div class="row profile-edit-body">
@@ -9,15 +9,15 @@
 
         <!-- name -->
         <div class="row profile-edit-name">
-            <div class="col-3"><label>{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</label></div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</div>
             <div class="col-9">
-                <input class="form-control" [(ngModel)]="newProfile.name"  placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
+                <input class="form-control font-size-normal" [(ngModel)]="newProfile.name"  placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
             </div>
         </div>
 
         <!-- background -->
         <div class="row profile-edit-backgrounds">
-            <div class="col-3"><label>{{ 'PROFILE.EDIT.BACKGROUND_LABEL' | translate }}</label></div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.BACKGROUND_LABEL' | translate }}</div>
             <div *ngFor="let backgroundId of backgroundIds; let i = index" class="col profile-edit-background" [ngClass]="getBackgroundClass(i)"
                     (click)="newProfile.background = i">
             </div>
@@ -25,18 +25,18 @@
 
         <!-- avatar -->
         <div class="row profile-edit-avatar">
-            <div class="col-3"><label>{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</label></div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</div>
             <div class="col-3"><img src="{{ getCurrentFluxForImg() }}" /></div>
             <div class="col-6">
-                <button *ngIf="!showAvatars" class="btn btn-info" (click)="showHideAvatars()">{{ 'COMMON.SHOW' | translate }}</button>
-                <button *ngIf="showAvatars" class="btn btn-info" (click)="showHideAvatars()">{{ 'COMMON.HIDE' | translate }}</button>
+                <button *ngIf="!showAvatars" class="btn btn-info font-size-normal" (click)="showHideAvatars()">{{ 'COMMON.SHOW' | translate }}</button>
+                <button *ngIf="showAvatars" class="btn btn-info font-size-normal" (click)="showHideAvatars()">{{ 'COMMON.HIDE' | translate }}</button>
             </div>
         </div>
 
         <!-- avatars page -->
         <div *ngIf="showAvatars">
             <div>
-                <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
+                <ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
                                 [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
                 </ngb-pagination>
             </div>
@@ -51,7 +51,7 @@
 <!-- modal footer -->
 <div class="row profile-edit-footer">
     <div class="col-sm-12">
-        <button class="btn btn-success" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
-        <button class="btn btn-danger" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>  
+        <button class="btn btn-success font-size-normal" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
+        <button class="btn btn-danger font-size-normal" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
     </div>
 </div>

@@ -3,14 +3,14 @@
     <!-- 1st line -> create button ; filter input ; pagination -->
     <div class="row justify-content-center profile-view-line-one">
         <div class="col-3">
-            <button *ngIf="canUpdate" class="btn btn-info" (click)="createProfile()">{{ 'PROFILE.VIEW.CREATE' | translate }}</button>
+            <button *ngIf="canUpdate" class="btn btn-info font-size-normal" (click)="createProfile()">{{ 'PROFILE.VIEW.CREATE' | translate }}</button>
         </div>
         <div class="col-3">
-            <input class="form-control" [(ngModel)]="prefixName" placeholder="{{ 'COMMON.PREFIX_PLACE_HOLDER' | translate }}"
+            <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'COMMON.PREFIX_PLACE_HOLDER' | translate }}"
                    (ngModelChange)="loadProfiles(1)" maxlength="15">
         </div>
         <div class="col-3">
-            <ngb-pagination class="d-flex justify-content-center" [ellipses]="false" [rotate]="true"
+            <ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
                             [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5"
                             (pageChange)="loadProfiles($event)">
             </ngb-pagination>
@@ -19,7 +19,7 @@
 
     <!-- profiles page -->
     <div *ngIf="!page.empty" class="row">
-        <profile-card class="col-3" *ngFor="let profile of page.content" [profile]="profile"
+        <profile-card class="col-4" *ngFor="let profile of page.content" [profile]="profile"
                       [canEdit]="canUpdate" (onEdit)="loadProfiles(1)"
                       [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)">
         </profile-card>
@@ -27,7 +27,7 @@
 
     <!-- no result -->
     <div *ngIf="page.empty" class="row justify-content-center">
-        <div class="col-4 no-result-label">
+        <div class="col-4 no-result-label font-size-normal">
             <div>{{ 'COMMON.NO_RESULT' | translate }}</div>
         </div>
     </div>
