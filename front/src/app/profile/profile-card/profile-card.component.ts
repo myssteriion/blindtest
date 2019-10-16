@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/profile.interface';
-import {faEdit, faHandPointUp, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTrashAlt, faGamepad, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditComponent} from 'src/app/profile/profile-edit/profile-edit.component';
 import {ToolsService} from "../../tools/tools.service";
@@ -44,10 +44,20 @@ export class ProfileCardComponent implements OnInit {
      */
     @Output() onSelect = new EventEmitter();
 
+    /**
+     * If can deselect profile.
+     */
+    @Input() canDeselect: boolean;
+
+    /**
+     * On deselect.
+     */
+    @Output() onDeselect = new EventEmitter();
+
     faEdit = faEdit;
     faTrashAlt = faTrashAlt;
-    faHandPointUp = faHandPointUp;
-
+    faGamepad = faGamepad;
+    faTimes = faTimes;
 
 
     constructor(private _ngbModal: NgbModal,
@@ -63,6 +73,7 @@ export class ProfileCardComponent implements OnInit {
         ToolsService.verifyValue("profile.avatar", this.profile.avatar);
         ToolsService.verifyValue("canUpdate", this.canEdit);
         ToolsService.verifyValue("canSelect", this.canSelect);
+        ToolsService.verifyValue("canDeselect", this.canDeselect);
     }
 
 
@@ -82,7 +93,7 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
-     * Open modal for edit profile.
+     * Open modal for edit profile and emit it.
      */
     public edit(): void {
 
@@ -97,7 +108,7 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
-     * Open modal for delete profile.
+     * Open modal for delete profile and emit it.
      */
     public delete(): void {
 
@@ -120,17 +131,24 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
-     * Emit the profile.
+     * Emit the profile on select.
      */
     public select(): void {
         this.onSelect.emit(this.profile);
     }
 
     /**
+     * Emit the profile on deselect.
+     */
+    public deselect(): void {
+        this.onDeselect.emit(this.profile);
+    }
+
+    /**
      * Test if icons need to be show.
      */
     public showIcons(): boolean {
-        return this.canEdit || this.canSelect;
+        return this.canEdit || this.canSelect || this.canDeselect;
     }
 
 }
