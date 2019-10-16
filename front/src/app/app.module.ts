@@ -26,6 +26,7 @@ import {ToolsService} from "./tools/tools.service";
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {HeaderComponent} from './common/header/header.component';
 import {ToasterService} from "./services/toaster.service";
+import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfileEditComponent,
     FaIconCustomComponent,
     ModalConfirmComponent,
-    HeaderComponent
+    HeaderComponent,
+    GameNewViewComponent
   ],
   entryComponents: [
     ProfileEditComponent,

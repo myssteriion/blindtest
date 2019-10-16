@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+    <!-- header -->
+    <header [title]="'GAME.NEW.TITLE' | translate"></header>
+
+    <div class="row">
+
+        <!-- left panel -->
+        <div class="col-3 game-new-players">
+
+            <div *ngFor="let profile of playersProfiles">
+                <profile-card [profile]="profile" [canEdit]="false" [canSelect]="false"
+                              [canDeselect]="true" (onDeselect)="deselectProfile($event)">
+                </profile-card>
+            </div>
+
+            <div class="row game-new-empty-players" *ngFor="let emptyName of getEmptyNames()">
+                <div class="col game-new-empty-players-names font-size-normal">
+                    <div>{{ emptyName }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- right panel -->
+        <div class="col-9">
+            <!-- durations -->
+            <div class="row game-new-durations">
+                <div class="col-3 font-size-normal">{{ 'GAME.NEW.DURATIONS_LABEL' | translate }}</div>
+                <div class="col-9">
+                    <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
+                        <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}" name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
+                        <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW.' + duration | translate }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- profiles page -->
+            <profile-page [canUpdate]="false" [canSelect]="true" (onSelect)="selectProfile($event)"></profile-page>
+
+            <div class="row justify-content-center game-new-launch">
+                <div class="col-4">
+                    <button class="btn btn-info font-size-normal" (click)="launchGame()" [disabled]="launchGameIsDisabled()">
+                        {{ 'GAME.NEW.LAUNCH_GAME' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

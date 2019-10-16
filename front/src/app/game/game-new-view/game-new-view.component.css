@@ -1,0 +1,28 @@
+.game-new-players {
+    border-right: 2px solid black;
+}
+
+.game-new-durations {
+    padding-bottom: 2em;
+}
+
+.game-new-empty-players {
+    min-height: 5em;
+    border: 2px dashed darkgray;
+    border-radius: 30px;
+    margin: 10px 5px;
+}
+
+.game-new-empty-players-names {
+    text-align: center;
+    margin: auto;
+    color: darkgray;
+    font-style: italic;
+}
+
+.game-new-launch {
+    border-top: 2px solid black;
+    padding-top: 1em;
+    margin-top: 1em;
+    text-align: center;
+}

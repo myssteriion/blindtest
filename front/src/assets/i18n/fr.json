@@ -10,6 +10,22 @@
         "PREFIX_PLACE_HOLDER": "Chercher un profil",
         "NO_RESULT": "Pas de résultat."
     },
+    "GAME": {
+        "NEW": {
+            "TITLE": "Nouvelle partie",
+            "DURATIONS_LABEL": "Durée de la partie :",
+            "VERY_SHORT": "Très rapide",
+            "SHORT": "Rapide",
+            "NORMAL": "Normal",
+            "LONG": "Longue",
+            "VERY_LONG": "Très longue",
+            "PLAYERS_LABEL": "Rechercher les profiles :",
+            "PLAYER": "Joueur",
+            "MAX_PLAYERS_ERROR": "Le maximum de {{max_players}} joueurs est atteint.",
+            "DUPLICATE_PLAYERS_ERROR": "{{player_name}} est déjà dans la partie.",
+            "LAUNCH_GAME": "Lancer la partie !"
+        }
+    },
     "PROFILE": {
         "CARD": {
             "EDIT_TOOLTIP": "Modifier le profil.",
