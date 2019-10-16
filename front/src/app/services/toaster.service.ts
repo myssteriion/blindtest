@@ -8,12 +8,22 @@ import {ToolsService} from "../tools/tools.service";
 @Injectable()
 export class ToasterService {
 
+    private static _PARAMS = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-bottom-right',
+        timeOut: 3500,
+        extendedTimeOut: 1500
+    };
+
+
+
     constructor(private _toastrService: ToastrService) { }
 
 
 
     /**
-     * Launc a success toaster.
+     * Launch a success toaster.
      *
      * @param message the message
      */
@@ -21,13 +31,31 @@ export class ToasterService {
 
         ToolsService.verifyStringValue("message", message);
 
-        this._toastrService.success(message, "", {
-            closeButton: true,
-            progressBar: true,
-            positionClass: 'toast-bottom-right',
-            timeOut: 3500,
-            extendedTimeOut: 1500
-        });
+        this._toastrService.success(message, "", ToasterService._PARAMS);
+    }
+
+    /**
+     * Launch a warning toaster.
+     *
+     * @param message the message
+     */
+    public warning(message: string) {
+
+        ToolsService.verifyStringValue("message", message);
+
+        this._toastrService.warning(message, "", ToasterService._PARAMS);
+    }
+
+    /**
+     * Launch a error toaster.
+     *
+     * @param message the message
+     */
+    public error(message: string) {
+
+        ToolsService.verifyStringValue("message", message);
+
+        this._toastrService.error(message, "", ToasterService._PARAMS);
     }
 
 }
