@@ -30,12 +30,15 @@ export class ProfilePageComponent implements OnInit {
      */
     @Output() onSelect = new EventEmitter();
 
-
-
     /**
      * Profiles page.
      */
     public page: Page<Profile>;
+
+    /**
+     * The current page.
+     */
+    public currentPage: number;
 
     /**
      * Show/hide profiles pages.
@@ -56,7 +59,7 @@ export class ProfilePageComponent implements OnInit {
 
         this.showProfiles = false;
         this.prefixName = "";
-        this.loadProfiles(1)
+        this.loadProfiles(true);
     }
 
 
@@ -64,11 +67,14 @@ export class ProfilePageComponent implements OnInit {
     /**
      * Load profiles page.
      *
-     * @param pageNumber the page number
+     * @param initPageNumber TRUE for force page number to 1
      */
-    public loadProfiles(pageNumber: number): void {
+    public loadProfiles(initPageNumber: boolean): void {
 
-        this._profileResource.findAllByNameStartingWith(this.prefixName, pageNumber-1).subscribe(
+        if (initPageNumber)
+            this.currentPage = 1;
+
+        this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
             response => { this.page = response; this.showProfiles = true; },
             error => { console.log("can't find all profiles", error); }
         );
@@ -83,7 +89,7 @@ export class ProfilePageComponent implements OnInit {
         modalRef.componentInstance.create = true;
 
         modalRef.result.then(
-            (result) => { this.loadProfiles(1); },
+            (result) => { this.loadProfiles(true); },
             (reason) => { /* do nothing */ }
         );
     }
