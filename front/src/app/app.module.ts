@@ -14,6 +14,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
+import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
 import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AppComponent,
 		ProfileViewComponent,
 		ProfileCardComponent,
+		ProfileCardEmptyComponent,
 		ProfilePageComponent,
 		ProfileEditComponent,
 		FaIconCustomComponent,

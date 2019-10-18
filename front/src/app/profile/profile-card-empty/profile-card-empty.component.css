@@ -1,0 +1,14 @@
+.profile-card-empty-frame {
+    text-align: center;
+    min-height: 5em;
+    border: 2px dashed darkgray;
+    border-radius: 30px;
+    margin: 10px 0;
+}
+
+.profile-card-empty-name {
+    text-align: center;
+    margin: auto;
+    color: darkgray;
+    font-style: italic;
+}
