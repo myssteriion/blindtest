@@ -3,6 +3,10 @@
     font-family: Georgia, serif
 }
 
+body {
+    background-color: #F2F2F2;
+}
+
 .pagination .page-item .page-link {
     border-radius: 0 !important;
 }
