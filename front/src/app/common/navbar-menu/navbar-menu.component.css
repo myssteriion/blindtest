@@ -2,3 +2,8 @@
     height: 3em;
     padding-right: 1em;
 }
+
+.navbar-menu-icons {
+    background-color: #17a2b8;
+    border-radius: 50%;
+}

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Navbar menu.
@@ -16,11 +17,39 @@ export class NavbarMenuComponent implements OnInit {
 	 */
 	private static _LOGO: string = "assets/images/logo.png";
 
+	/**
+	 * Path to "ff12-main_theme" sound in assets folder.
+	 */
+	private static _FFXII_THEME: string = "assets/sounds/ff12-main_theme.mp3";
+
+	/**
+	 * Audio object.
+	 */
+	private audioObj;
+
+	/**
+	 * If the music must be played.
+	 */
+	private musicIsPlaying: boolean;
+
+	faMusic = faMusic;
+	faVolumeMute = faVolumeMute;
+
 
 
 	constructor(private _router: Router) { }
 
-	ngOnInit() { }
+	ngOnInit() {
+
+		this.musicIsPlaying = true;
+
+		this.audioObj = new Audio();
+		this.audioObj.src = NavbarMenuComponent._FFXII_THEME;
+		this.audioObj.loop = true;
+		this.audioObj.load();
+
+		this.playMusic();
+	}
 
 
 
@@ -44,6 +73,25 @@ export class NavbarMenuComponent implements OnInit {
 			customCss = 'active';
 
 		return customCss
+	}
+
+	/**
+	 * Play music.
+	 */
+	public playMusic() {
+
+		this.musicIsPlaying = true;
+		this.audioObj.play();
+	}
+
+	/**
+	 * Stop music.
+	 */
+	public stopMusic() {
+
+		this.musicIsPlaying = false;
+		this.audioObj.pause();
+		this.audioObj.currentTime = 0;
 	}
 
 }

@@ -22,14 +22,14 @@ import {ProfileViewComponent} from './profile/profile-view/profile-view.componen
 import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
+import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
+import {HeaderComponent} from './common/header/header.component';
 
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
 import {ToolsService} from "./tools/tools.service";
-import {GlobalErrorHandler} from "./tools/global-error-handler";
-import {HeaderComponent} from './common/header/header.component';
 import {ToasterService} from "./services/toaster.service";
-import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
+import {GlobalErrorHandler} from "./tools/global-error-handler";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -71,7 +71,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 				useFactory: HttpLoaderFactory,
 				deps: [HttpClient]
 			}
-		})  ],
+		})
+	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
