@@ -87,7 +87,7 @@ public class ProfileDTO extends AbstractDTO {
 	 */
 	public ProfileDTO(String name, String avatarName, Integer background) {
 
-		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		this.name = Tool.isNullOrEmpty(name) ? "" : name.trim();
 		this.background = Math.max(background, 0);
 		this.avatarName = Tool.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
 		this.avatar = new AvatarDTO(this.avatarName);
@@ -153,7 +153,7 @@ public class ProfileDTO extends AbstractDTO {
 	 * @return this
 	 */
 	public ProfileDTO setName(String name) {
-		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		this.name = Tool.isNullOrEmpty(name) ? "" : name.trim();
 		return this;
 	}
 
