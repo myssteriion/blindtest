@@ -131,20 +131,6 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
-     * Emit the profile on select.
-     */
-    public select(): void {
-        this.onSelect.emit(this.profile);
-    }
-
-    /**
-     * Emit the profile on deselect.
-     */
-    public deselect(): void {
-        this.onDeselect.emit(this.profile);
-    }
-
-    /**
      * Test if icons need to be show.
      */
     public showIcons(): boolean {
