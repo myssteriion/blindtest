@@ -21,6 +21,7 @@ import {ProfilePageModalComponent} from './profile/profile-page-modal/profile-pa
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
 import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
+import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FaIconCustomComponent,
 		ModalConfirmComponent,
 		HeaderComponent,
-		GameNewViewComponent
+		GameNewViewComponent,
+		NavbarMenuComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,

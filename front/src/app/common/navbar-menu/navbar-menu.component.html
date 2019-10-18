@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav">
+
+            <li class="nav-item navbar-menu-logo"> <img src="{{ getLogo() }}"> </li>
+
+            <li class="nav-item" [ngClass]="isActive('/game/new')">
+                <a class="nav-link" href="/game/new">{{ 'GAME.NEW.TITLE' | translate }}</a>
+            </li>
+
+            <li class="nav-item" [ngClass]="isActive('/profiles')">
+                <a class="nav-link" href="/profiles">{{ 'PROFILE.VIEW.TITLE' | translate }}</a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
