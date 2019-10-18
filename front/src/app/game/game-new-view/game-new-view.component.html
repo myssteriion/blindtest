@@ -1,48 +1,46 @@
-<div class="container-fluid">
+<div class="container">
 
     <!-- header -->
     <header [title]="'GAME.NEW.TITLE' | translate"></header>
 
-    <div class="container">
-        <!-- durations -->
-        <div class="row game-new-durations">
-            <div class="col-3 font-size-normal">{{ 'GAME.NEW.DURATIONS_LABEL' | translate }}</div>
-            <div class="col-9">
-                <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
-                    <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}" name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
-                    <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW.' + duration | translate }}</label>
-                </div>
+    <!-- durations -->
+    <div class="row game-new-durations">
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW.DURATIONS_LABEL' | translate }}</div>
+        <div class="col-9">
+            <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
+                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}" name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
+                <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW.' + duration | translate }}</label>
             </div>
         </div>
+    </div>
 
 
-        <!-- players label -->
-        <div class="row">
-            <div class="col-3 font-size-normal">{{ 'GAME.NEW.PLAYERS_LIST_LABEL' | translate }}</div>
+    <!-- players label -->
+    <div class="row">
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW.PLAYERS_LIST_LABEL' | translate }}</div>
+    </div>
+
+    <!-- players -->
+    <div class="row">
+
+        <div class="col-4" *ngFor="let profile of playersProfiles">
+            <profile-card [profile]="profile" [canEdit]="false" [canSelect]="false"
+                          [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
+            </profile-card>
         </div>
 
-        <!-- players -->
-        <div class="row">
-
-            <div class="col-4" *ngFor="let profile of playersProfiles">
-                <profile-card [profile]="profile" [canEdit]="false" [canSelect]="false"
-                              [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
-                </profile-card>
-            </div>
-
-            <div class="col-4" *ngFor="let emptyName of getEmptyNames()">
-                <profile-card-empty [name]="emptyName" (onClick)="select()"></profile-card-empty>
-            </div>
-
+        <div class="col-4" *ngFor="let emptyName of getEmptyNames()">
+            <profile-card-empty [name]="emptyName" (onClick)="select()"></profile-card-empty>
         </div>
 
-        <!-- button -->
-        <div class="row justify-content-center game-new-launch">
-            <div class="col-4">
-                <button class="btn btn-info font-size-normal" (click)="launchGame()" [disabled]="launchGameIsDisabled()">
-                    {{ 'GAME.NEW.LAUNCH_GAME' | translate }}
-                </button>
-            </div>
+    </div>
+
+    <!-- button -->
+    <div class="row justify-content-center game-new-launch">
+        <div class="col-4">
+            <button class="btn btn-info font-size-normal" (click)="launchGame()" [disabled]="launchGameIsDisabled()">
+                {{ 'GAME.NEW.LAUNCH_GAME' | translate }}
+            </button>
         </div>
     </div>
 
