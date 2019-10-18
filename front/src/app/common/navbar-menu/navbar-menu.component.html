@@ -6,11 +6,11 @@
             <li class="nav-item navbar-menu-logo"> <img src="{{ getLogo() }}"> </li>
 
             <li class="nav-item" [ngClass]="isActive('/game/new')">
-                <a class="nav-link" href="/game/new">{{ 'GAME.NEW.TITLE' | translate }}</a>
+                <a class="nav-link" [routerLink]="'/game/new'">{{ 'GAME.NEW.TITLE' | translate }}</a>
             </li>
 
             <li class="nav-item" [ngClass]="isActive('/profiles')">
-                <a class="nav-link" href="/profiles">{{ 'PROFILE.VIEW.TITLE' | translate }}</a>
+                <a class="nav-link" [routerLink]="'/profiles'">{{ 'PROFILE.VIEW.TITLE' | translate }}</a>
             </li>
 
         </ul>
