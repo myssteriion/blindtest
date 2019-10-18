@@ -14,6 +14,7 @@
         "NEW": {
             "TITLE": "Nouvelle partie",
             "DURATIONS_LABEL": "Durée de la partie :",
+            "PLAYERS_LIST_LABEL": "Liste des joueurs :",
             "VERY_SHORT": "Très rapide",
             "SHORT": "Rapide",
             "NORMAL": "Normal",

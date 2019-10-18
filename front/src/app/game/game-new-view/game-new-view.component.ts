@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ProfileResource} from "../../resources/profile.resource";
-import {Page} from "../../interfaces/page.interface";
 import {Profile} from "../../interfaces/profile.interface";
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {ToolsService} from "../../tools/tools.service";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from "../../services/toaster.service";
+import { ToolsService } from 'src/app/tools/tools.service';
 
 /**
  * The profiles view.
@@ -28,7 +24,10 @@ export class GameNewViewComponent implements OnInit {
      */
     public selectedDuration: string;
 
-    public playersProfiles: Profile[];
+	/**
+	 * Players profiles and empty names.
+	 */
+	public playersProfiles: Profile[];
 
     private static MAX_PLAYERS: number = 12;
 
@@ -53,60 +52,45 @@ export class GameNewViewComponent implements OnInit {
         this.selectedDuration = this.durations[index];
     }
 
-    /**
-     * Select profile.
-     *
-     * @param profile
-     */
-    public selectProfile(profile: Profile) {
+	/**
+	 * Gets empty players.
+	 */
+	public getEmptyNames(): string[] {
 
-        let index: number = this.playersProfiles.indexOf(profile);
+		let index = this.playersProfiles.length + 1;
+		var emptyNames = [];
 
-        if ( this.playersProfiles.length >= GameNewViewComponent.MAX_PLAYERS ) {
-            let message = this._translate.instant( "GAME.NEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
-            this._toasterService.error(message);
-        }
-        else if (index !== -1) {
-            let message = this._translate.instant( "GAME.NEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
-            this._toasterService.error(message);
-        }
-        else
-            this.playersProfiles.push(profile);
-    }
+		while (index <= GameNewViewComponent.MAX_PLAYERS) {
+			emptyNames.push( this._translate.instant("GAME.NEW.PLAYER") + " " + index );
+			index++;
+		}
 
-    /**
-     * Deselect profile.
-     *
-     * @param profile
-     */
-    public deselectProfile(profile: Profile) {
-        let index: number = this.playersProfiles.indexOf(profile);
-        if (index !== -1)
-            this.playersProfiles.splice(index, 1);
-    }
+		return emptyNames;
+	}
 
-    /**
-     * Gets empty players.
-     */
-    public getEmptyNames(): string[] {
+	/**
+	 * Deselect profile.
+	 *
+	 * @param profile
+	 */
+	public deselectProfile(profile: Profile) {
+		let index: number = this.playersProfiles.indexOf(profile);
+		if (index !== -1)
+			this.playersProfiles.splice(index, 1);
+	}
 
-        let index = this.playersProfiles.length + 1;
-        var emptyNames = [];
+	/**
+	 * Start game.
+	 */
+	public launchGame(): void {
+		console.log("launch !");
+	}
 
-        while (index <= GameNewViewComponent.MAX_PLAYERS) {
-            emptyNames.push( this._translate.instant("GAME.NEW.PLAYER") + " " + index );
-            index++;
-        }
-
-        return emptyNames;
-    }
-
-    public launchGame(): void {
-        console.log("launch !");
-    }
-
-    public launchGameIsDisabled(): boolean {
-        return ToolsService.isNullOrEmpty(this.selectedDuration) || this.playersProfiles.length < 2;
-    }
+	/**
+	 * Disabled lauch game button.
+	 */
+	public launchGameIsDisabled(): boolean {
+		return ToolsService.isNullOrEmpty(this.selectedDuration) || this.playersProfiles.length < 2;
+	}
 
 }
