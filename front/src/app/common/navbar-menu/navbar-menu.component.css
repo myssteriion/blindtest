@@ -7,3 +7,7 @@
     background-color: #17a2b8;
     border-radius: 50%;
 }
+
+.navbar-nav li {
+    margin: auto;
+}
