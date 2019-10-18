@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-4" *ngFor="let emptyName of getEmptyNames()">
-            <profile-card-empty [name]="emptyName"></profile-card-empty>
+            <profile-card-empty [name]="emptyName" (onClick)="select()"></profile-card-empty>
         </div>
 
     </div>

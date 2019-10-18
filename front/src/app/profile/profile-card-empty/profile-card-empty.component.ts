@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {ToolsService} from "../../tools/tools.service";
 
 @Component({
@@ -8,7 +8,15 @@ import {ToolsService} from "../../tools/tools.service";
 })
 export class ProfileCardEmptyComponent implements OnInit {
 
+	/**
+	 * Name.
+	 */
 	@Input() name: string;
+
+	/**
+	 * Event after click.
+	 */
+	@Output() onClick = new EventEmitter();
 
 
 

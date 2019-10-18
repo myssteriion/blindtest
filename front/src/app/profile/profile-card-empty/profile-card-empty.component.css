@@ -4,11 +4,17 @@
     border: 2px dashed darkgray;
     border-radius: 30px;
     margin: 10px 0;
+    color: darkgray;
+}
+
+.profile-card-empty-frame:hover {
+    border: 2px solid black;
+    color: black;
+    cursor: pointer;
 }
 
 .profile-card-empty-name {
     text-align: center;
     margin: auto;
-    color: darkgray;
     font-style: italic;
 }
