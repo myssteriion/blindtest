@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
     /**
      * If can create/update/delete profile.
      */
-    @Input() canUpdate: boolean;
+    @Input() canEdit: boolean;
 
     /**
      * If can select profile card.
