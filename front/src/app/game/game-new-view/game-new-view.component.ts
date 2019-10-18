@@ -5,6 +5,7 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
+import {SLIDE_ANIMATION} from "../../tools/constant";
 
 /**
  * The profiles view.
@@ -12,7 +13,10 @@ import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/prof
 @Component({
     selector: 'game-new-view',
     templateUrl: './game-new-view.component.html',
-    styleUrls: ['./game-new-view.component.css']
+    styleUrls: ['./game-new-view.component.css'],
+	animations: [
+		SLIDE_ANIMATION
+	]
 })
 export class GameNewViewComponent implements OnInit {
 
@@ -40,6 +44,7 @@ export class GameNewViewComponent implements OnInit {
 				private _ngbModal: NgbModal) {}
 
     ngOnInit() {
+
         this.playersProfiles = [];
         this.selectedDuration = this.durations[2];
     }

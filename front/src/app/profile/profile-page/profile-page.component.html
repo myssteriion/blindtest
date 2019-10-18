@@ -1,4 +1,4 @@
-<div *ngIf="showProfiles">
+<div *ngIf="isLoaded">
 
     <!-- 1st line -> create button ; filter input ; pagination -->
     <div class="row justify-content-center profile-page-line-one">
@@ -18,7 +18,7 @@
     </div>
 
     <!-- profiles page -->
-    <div *ngIf="!page.empty" class="row">
+    <div *ngIf="showProfiles && !page.empty" class="row" @opacityTrigger>
         <profile-card class="col-4" *ngFor="let profile of page.content" [profile]="profile"
                       [canEdit]="canEdit" (onEdit)="loadProfiles(true)"
                       [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)"
@@ -32,5 +32,4 @@
             <div>{{ 'COMMON.NO_RESULT' | translate }}</div>
         </div>
     </div>
-
 </div>

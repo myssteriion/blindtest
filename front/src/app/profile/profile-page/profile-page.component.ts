@@ -1,9 +1,10 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/profile.interface';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/page.interface';
 import {ProfileEditComponent} from "../profile-edit/profile-edit.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {OPACITY_ANIMATION} from "../../tools/constant";
 
 /**
  * The profiles view.
@@ -11,7 +12,10 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'profile-page',
     templateUrl: './profile-page.component.html',
-    styleUrls: ['./profile-page.component.css']
+    styleUrls: ['./profile-page.component.css'],
+    animations: [
+        OPACITY_ANIMATION
+    ]
 })
 export class ProfilePageComponent implements OnInit {
 
@@ -29,6 +33,11 @@ export class ProfilePageComponent implements OnInit {
      * On select profile card.
      */
     @Output() onSelect = new EventEmitter();
+
+    /**
+     * If view is loaded.
+     */
+    public isLoaded: boolean;
 
     /**
      * Profiles page.
@@ -57,6 +66,7 @@ export class ProfilePageComponent implements OnInit {
 
     ngOnInit() {
 
+        this.isLoaded = false;
         this.showProfiles = false;
         this.prefixName = "";
         this.loadProfiles(true);
@@ -71,11 +81,12 @@ export class ProfilePageComponent implements OnInit {
      */
     public loadProfiles(initPageNumber: boolean): void {
 
+        this.showProfiles = false;
         if (initPageNumber)
             this.currentPage = 1;
 
         this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
-            response => { this.page = response; this.showProfiles = true; },
+            response => { this.page = response; this.showProfiles = true; this.isLoaded = true; },
             error => { console.log("can't find all profiles", error); }
         );
     }
