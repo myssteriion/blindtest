@@ -1,12 +1,12 @@
 <!-- modal header -->
 <div class="row profile-edit-header">
-    <div *ngIf="create" class="col-12 font-size-modal-title">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</div>
-    <div *ngIf="!create" class="col-12 font-size-modal-title">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</div>
+    <div *ngIf="create" class="col font-size-modal-title">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</div>
+    <div *ngIf="!create" class="col font-size-modal-title">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</div>
 </div>
 
 <!-- modal body -->
 <div class="row profile-edit-body">
-    <div class="col-12">
+    <div class="col">
 
         <!-- name -->
         <div class="row profile-edit-name">
@@ -51,7 +51,7 @@
 
 <!-- modal footer -->
 <div class="row profile-edit-footer">
-    <div class="col-12">
+    <div class="col">
         <button class="btn btn-success font-size-normal" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
         <button class="btn btn-danger font-size-normal" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
     </div>
