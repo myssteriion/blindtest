@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Profile} from "../../interfaces/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from "../../services/toaster.service";
-import { ToolsService } from 'src/app/tools/tools.service';
+import {ToolsService} from 'src/app/tools/tools.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 
 /**
  * The profiles view.
@@ -34,7 +36,8 @@ export class GameNewViewComponent implements OnInit {
 
 
     constructor(private _translate : TranslateService,
-                private _toasterService: ToasterService) {}
+                private _toasterService: ToasterService,
+				private _ngbModal: NgbModal) {}
 
     ngOnInit() {
         this.playersProfiles = [];
@@ -74,9 +77,36 @@ export class GameNewViewComponent implements OnInit {
 	 * @param profile
 	 */
 	public deselectProfile(profile: Profile) {
-		let index: number = this.playersProfiles.indexOf(profile);
+		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 		if (index !== -1)
 			this.playersProfiles.splice(index, 1);
+	}
+
+	/**
+	 * Select profile.
+	 *
+	 * @param profile
+	 */
+	public selectProfile(profile: Profile) {
+
+		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
+		console.log("array", this.playersProfiles);
+		console.log("profile", profile);
+		console.log("index", index);
+
+		if ( this.playersProfiles.length >= GameNewViewComponent.MAX_PLAYERS ) {
+			let message = this._translate.instant( "GAME.NEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
+			this._toasterService.error(message);
+		}
+		else if (index !== -1) {
+			let message = this._translate.instant( "GAME.NEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
+			this._toasterService.error(message);
+		}
+		else {
+			this.playersProfiles.push(profile);
+			let message = this._translate.instant( "GAME.NEW.PLAYERS_ADDED", { player_name: profile.name } );
+			this._toasterService.success(message);
+		}
 	}
 
 	/**
@@ -91,6 +121,27 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	public launchGameIsDisabled(): boolean {
 		return ToolsService.isNullOrEmpty(this.selectedDuration) || this.playersProfiles.length < 2;
+	}
+
+	/**
+	 * Open modal for edit profile and emit it.
+	 */
+	public select(): void {
+
+		const modalRef = this._ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' } );
+		modalRef.componentInstance.canEdit = false;
+		modalRef.componentInstance.canSelect = true;
+		modalRef.componentInstance.canDeselect = false;
+		modalRef.componentInstance.onSelect.subscribe(
+			(profile) => {
+				this.selectProfile(profile);
+			}
+		);
+
+		modalRef.result.then(
+			(result) => { /* do nothing */ },
+			(reason) => { /* do nothing */ }
+		);
 	}
 
 }

@@ -25,7 +25,7 @@
 
         <div class="col-4" *ngFor="let profile of playersProfiles">
             <profile-card [profile]="profile" [canEdit]="false" [canSelect]="false"
-                          [canDeselect]="true" (onDeselect)="deselectProfile($event)">
+                          [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
             </profile-card>
         </div>
 
