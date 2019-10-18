@@ -17,6 +17,7 @@ import {ProfileCardComponent} from './profile/profile-card/profile-card.componen
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
 import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
+import {ProfilePageModalComponent} from './profile/profile-page-modal/profile-page-modal.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
 import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfileCardComponent,
 		ProfileCardEmptyComponent,
 		ProfilePageComponent,
+		ProfilePageModalComponent,
 		ProfileEditComponent,
 		FaIconCustomComponent,
 		ModalConfirmComponent,
@@ -49,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 	],
 	entryComponents: [
 		ProfileEditComponent,
-		ModalConfirmComponent
+		ModalConfirmComponent,
+		ProfilePageModalComponent
 	],
 	imports: [
 		BrowserModule,

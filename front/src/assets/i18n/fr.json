@@ -2,6 +2,7 @@
     "COMMON": {
         "SAVE": "Enregistrer",
         "CANCEL": "Annuler",
+        "CLOSE": "Fermer",
         "YES": "Oui",
         "NO": "Non",
         "WARNING": "Attention",
@@ -48,6 +49,12 @@
             "REFRESH_TOOLTIP": "Rafraichir la liste des avatars.",
             "CREATED_TOASTER": "Profil '{{profile_name}}' créé.",
             "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour."
+        },
+        "PAGE": {
+            "CREATE_BUTTON": "Nouveau profil"
+        },
+        "PAGE_MODAL": {
+            "TITLE": "Qui joue ?"
         },
         "VIEW": {
             "TITLE": "Profils des joueurs",
