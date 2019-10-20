@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/profile.interface';
+import {Profile} from 'src/app/interfaces/dto/profile.interface';
 import {ProfileResource} from 'src/app/resources/profile.resource';
-import {Page} from 'src/app/interfaces/page.interface';
+import {Page} from 'src/app/interfaces/base/page.interface';
 import {ProfileEditComponent} from "../profile-edit/profile-edit.component";
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 

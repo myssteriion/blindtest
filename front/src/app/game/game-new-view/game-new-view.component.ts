@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Profile} from "../../interfaces/profile.interface";
+import {Profile} from "../../interfaces/dto/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';

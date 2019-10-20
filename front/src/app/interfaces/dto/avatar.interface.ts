@@ -1,4 +1,4 @@
-import {Flux} from './flux.interface';
+import {Flux} from '../common/flux.interface';
 
 /**
  * Avatar.

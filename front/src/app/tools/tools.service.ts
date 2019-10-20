@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Flux} from '../interfaces/flux.interface';
+import {Flux} from '../interfaces/common/flux.interface';
 
 /**
  * Tools service.
