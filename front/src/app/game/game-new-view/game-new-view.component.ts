@@ -6,6 +6,8 @@ import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import {SLIDE_ANIMATION} from "../../tools/constant";
+import {GameResource} from 'src/app/resources/game.resource';
+import {NewGame} from "../../interfaces/game/newgame.interface";
 
 /**
  * The profiles view.
@@ -23,12 +25,12 @@ export class GameNewViewComponent implements OnInit {
     /**
      * Durations list.
      */
-    public durations: string[] = ["VERY_SHORT", "SHORT", "NORMAL", "LONG", "VERY_LONG"];
+    public durations = [Duration.VERY_SHORT, Duration.SHORT, Duration.NORMAL, Duration.LONG, Duration.VERY_LONG];
 
     /**
      * Selected duration.
      */
-    public selectedDuration: string;
+    public selectedDuration: Duration;
 
 	/**
 	 * Players profiles and empty names.
@@ -41,7 +43,8 @@ export class GameNewViewComponent implements OnInit {
 
     constructor(private _translate : TranslateService,
                 private _toasterService: ToasterService,
-				private _ngbModal: NgbModal) {}
+				private _ngbModal: NgbModal,
+				private _gameResource: GameResource) {}
 
     ngOnInit() {
 
@@ -95,9 +98,6 @@ export class GameNewViewComponent implements OnInit {
 	public selectProfile(profile: Profile) {
 
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
-		console.log("array", this.playersProfiles);
-		console.log("profile", profile);
-		console.log("index", index);
 
 		if ( this.playersProfiles.length >= GameNewViewComponent.MAX_PLAYERS ) {
 			let message = this._translate.instant( "GAME.NEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
@@ -118,14 +118,27 @@ export class GameNewViewComponent implements OnInit {
 	 * Start game.
 	 */
 	public launchGame(): void {
-		console.log("launch !");
+
+		let playersNames: string[] = [];
+		this.playersProfiles.forEach( function (profile) {
+			playersNames.push(profile.name);
+		});
+
+		let newGame: NewGame = {
+			duration: this.selectedDuration,
+			playersNames: playersNames
+		};
+		this._gameResource.newGame(newGame).subscribe(
+			response => { console.log("response", response); },
+			error => { throw Error("can't create new game : " + error); }
+		);
 	}
 
 	/**
-	 * Disabled lauch game button.
+	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNullOrEmpty(this.selectedDuration) || this.playersProfiles.length < 2;
+		return ToolsService.isNull(this.selectedDuration) || this.playersProfiles.length < 2;
 	}
 
 	/**
@@ -138,9 +151,7 @@ export class GameNewViewComponent implements OnInit {
 		modalRef.componentInstance.canSelect = true;
 		modalRef.componentInstance.canDeselect = false;
 		modalRef.componentInstance.onSelect.subscribe(
-			(profile) => {
-				this.selectProfile(profile);
-			}
+			profile => { this.selectProfile(profile); }
 		);
 
 		modalRef.result.then(

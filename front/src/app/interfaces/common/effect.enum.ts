@@ -1,7 +1,7 @@
 /**
  * Effect.
  */
-enum Effect {
+const enum Effect {
 	NONE,
 	SLOW,
 	SPEED,

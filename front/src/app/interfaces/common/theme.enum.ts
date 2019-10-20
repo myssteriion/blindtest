@@ -1,7 +1,7 @@
 /**
  * Theme.
  */
-enum Theme {
+const enum Theme {
 	ANNEES_60,
 	ANNEES_70,
 	ANNEES_80,

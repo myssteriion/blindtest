@@ -8,12 +8,12 @@
         <div class="col-3 font-size-normal">{{ 'GAME.NEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}" name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
+                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}"
+                       name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
                 <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW.' + duration | translate }}</label>
             </div>
         </div>
     </div>
-
 
     <!-- players label -->
     <div class="row">
