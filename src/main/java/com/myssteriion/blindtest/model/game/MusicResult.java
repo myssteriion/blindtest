@@ -20,7 +20,7 @@ public class MusicResult {
 	/**
 	 * The music.
 	 */
-	private MusicDTO musicDTO;
+	private MusicDTO music;
 
 	/**
 	 * The winners list.
@@ -48,7 +48,7 @@ public class MusicResult {
 		Tool.verifyValue("musicDto", musicDTO);
 
 		this.gameId = gameId;
-		this.musicDTO = musicDTO;
+		this.music = musicDTO;
 		
 		this.winners = (winners == null) ? new ArrayList<>() : winners;
 		this.losers = (losers == null) ? new ArrayList<>() : losers;
@@ -69,8 +69,8 @@ public class MusicResult {
 	 *
 	 * @return the music dto
 	 */
-	public MusicDTO getMusicDTO() {
-		return musicDTO;
+	public MusicDTO getMusic() {
+		return music;
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class MusicResult {
 	@Override
 	public String toString() {
 		return "gameId=" + gameId +
-				", musicDTO={" + musicDTO + "}" +
+				", music={" + music + "}" +
 				", winners=" + winners +
 				", losers=" + losers;
 	}

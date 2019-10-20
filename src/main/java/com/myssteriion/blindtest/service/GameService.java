@@ -83,7 +83,7 @@ public class GameService {
 		if ( !game.isFinished() ) {
 
 			// update musicDto
-			MusicDTO musicDto = musicService.find( musicResult.getMusicDTO() );
+			MusicDTO musicDto = musicService.find( musicResult.getMusic() );
 			if (musicDto == null)
 				throw new NotFoundException("Music not found.");
 
@@ -101,10 +101,10 @@ public class GameService {
 
 				ProfileDTO profileDto = profileService.find( new ProfileDTO(player.getName()) );
 				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
-				profileStatDto.incrementListenedMusics( musicResult.getMusicDTO().getTheme() );
+				profileStatDto.incrementListenedMusics( musicResult.getMusic().getTheme() );
 
 				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profileDto.getName())) )
-					profileStatDto.incrementFoundMusics( musicResult.getMusicDTO().getTheme() );
+					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme() );
 
 				if ( game.isFirstStep() )
 					profileStatDto.incrementPlayedGames();
