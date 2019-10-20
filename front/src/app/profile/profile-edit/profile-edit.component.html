@@ -12,7 +12,9 @@
         <div class="row profile-edit-name">
             <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</div>
             <div class="col-9">
-                <input class="form-control font-size-normal" [(ngModel)]="newProfile.name"  placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
+                <input class="form-control font-size-normal" [(ngModel)]="newProfile.name"
+                       (change)="newProfile.name = newProfile.name.trim()"
+                       placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
             </div>
         </div>
 
