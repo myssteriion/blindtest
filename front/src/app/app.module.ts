@@ -34,6 +34,7 @@ import {ToolsService} from "./tools/tools.service";
 import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
 import {GameService} from "./services/game.service";
+import {VersionViewComponent} from './common/version-view/version-view.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		HeaderComponent,
 		GameNewViewComponent,
 		NavbarMenuComponent,
-		HomeViewComponent
+		HomeViewComponent,
+		VersionViewComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,

@@ -4,6 +4,9 @@
             "START_MUSIC_TOOLTIP": "Couper la musique.",
             "STOP_MUSIC_TOOLTIP": "Allumer la musique."
         },
+        "VERSION-VIEW": {
+            "VERSION": "version"
+        },
         "SAVE": "Enregistrer",
         "CANCEL": "Annuler",
         "CLOSE": "Fermer",
