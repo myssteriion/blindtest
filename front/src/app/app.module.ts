@@ -28,6 +28,7 @@ import {HeaderComponent} from './common/header/header.component';
 import {HomeViewComponent} from './home-view/home-view.component';
 import {VersionViewComponent} from './common/version-view/version-view.component';
 import {GenericViewComponent} from "./generic-view/generic-view.component";
+import {GameCurrentViewComponent} from './game/game-current-view/game-current-view.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {ProfileResource} from './resources/profile.resource';
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NavbarMenuComponent,
 		HomeViewComponent,
 		VersionViewComponent,
-		GenericViewComponent
+		GenericViewComponent,
+		GameCurrentViewComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,
