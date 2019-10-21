@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.tools.exception;
 import com.myssteriion.blindtest.tools.Tool;
 
 /**
- * The type Custom runtime exception.
+ * The custom runtime exception.
  */
 public class CustomRuntimeException extends RuntimeException {
 

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Convert json to map (and reverse).
+ */
 @Converter()
 public class DurationConverter implements AttributeConverter<Map<Duration, Integer>, String> {
 
