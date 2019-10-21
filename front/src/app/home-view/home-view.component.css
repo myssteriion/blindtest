@@ -33,7 +33,7 @@
 
 .home-view-link {
     text-align: center;
-    border: 1px solid #ffb500;
+    border: 2px solid #ffb500;
     border-radius: 20px;
     margin: auto;
     padding: 1em;
@@ -41,7 +41,6 @@
 }
 
 .home-view-link:hover {
-    border: 1px solid black;
+    border: 2px solid black;
     cursor: pointer;
 }
-
