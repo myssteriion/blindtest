@@ -5,10 +5,10 @@ export const SLIDE_ANIMATION =
         state('in', style({transform: 'translateX(0)'})),
         transition('void => *', [
             style({transform: 'translateX(100%)'}),
-            animate(1000)
+            animate(750)
         ]),
         transition('* => void', [
-            animate(1000, style({transform: 'translateX(-100%)'}))
+            animate(750, style({transform: 'translateX(-100%)'}))
         ])
     ]);
 
