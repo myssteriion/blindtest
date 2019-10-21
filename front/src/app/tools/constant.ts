@@ -25,3 +25,5 @@ export const routesWithoutHome = [
     { path: '/game/new', name: 'GAME.NEW.TITLE' },
     { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
 ];
+
+export const routesWithHome = [ { path: '/home', name: 'HOME_VIEW.TITLE' } ].concat(routesWithoutHome);

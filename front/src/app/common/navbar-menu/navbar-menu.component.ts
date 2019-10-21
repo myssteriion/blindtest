@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
+import {routesWithHome} from "../../tools/constant";
 
 /**
  * Navbar menu.
@@ -31,6 +32,11 @@ export class NavbarMenuComponent implements OnInit {
 	 * If the music must be played.
 	 */
 	private musicIsPlaying: boolean;
+
+	/**
+	 * Route (with home).
+	 */
+	public routes = routesWithHome;
 
 	faMusic = faMusic;
 	faVolumeMute = faVolumeMute;
@@ -69,7 +75,7 @@ export class NavbarMenuComponent implements OnInit {
 
 		let customCss = "";
 
-		if (path === this._router.url)
+		if ( this._router.url.endsWith(path) )
 			customCss = 'active';
 
 		return customCss
