@@ -12,6 +12,7 @@ import {ToastrModule} from 'ngx-toastr';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {MatVideoModule} from 'mat-video';
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
@@ -24,6 +25,7 @@ import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.compon
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
 import {HeaderComponent} from './common/header/header.component';
+import {HomeViewComponent} from './home-view/home-view.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {ProfileResource} from './resources/profile.resource';
@@ -51,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ModalConfirmComponent,
 		HeaderComponent,
 		GameNewViewComponent,
-		NavbarMenuComponent
+		NavbarMenuComponent,
+		HomeViewComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,
@@ -66,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FormsModule,
 		FontAwesomeModule,
 		BrowserAnimationsModule,
+		MatVideoModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forRoot({
 			loader: {

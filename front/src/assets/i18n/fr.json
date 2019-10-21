@@ -15,6 +15,9 @@
         "PREFIX_PLACE_HOLDER": "Chercher un profil",
         "NO_RESULT": "Pas de résultat."
     },
+    "HOME_VIEW": {
+        "TITLE": "Menu principal"
+    },
     "GAME": {
         "NEW": {
             "TITLE": "Nouvelle partie",

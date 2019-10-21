@@ -1,3 +1,6 @@
+.navbar-menu-logo {
+    cursor: pointer;
+}
 .navbar-menu-logo img {
     height: 3em;
     padding-right: 1em;

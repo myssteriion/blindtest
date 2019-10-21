@@ -19,3 +19,9 @@ export const OPACITY_ANIMATION =
             animate('1s', style({ opacity: 1 })),
         ])
     ]);
+
+
+export const routesWithoutHome = [
+    { path: '/game/new', name: 'GAME.NEW.TITLE' },
+    { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
+];

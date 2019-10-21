@@ -3,7 +3,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
-            <li class="nav-item navbar-menu-logo"> <img src="{{ getLogo() }}"> </li>
+            <li class="nav-item navbar-menu-logo" [routerLink]="'/home'"> <img src="{{ getLogo() }}"> </li>
+
+            <li class="nav-item" [ngClass]="isActive('/home')">
+                <a class="nav-link" [routerLink]="'/home'">{{ 'HOME_VIEW.TITLE' | translate }}</a>
+            </li>
 
             <li class="nav-item" [ngClass]="isActive('/game/new')">
                 <a class="nav-link" [routerLink]="'/game/new'">{{ 'GAME.NEW.TITLE' | translate }}</a>

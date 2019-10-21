@@ -1,0 +1,37 @@
+<!-- video -->
+<div *ngIf="showGeneric()">
+
+    <mat-video #video src="{{ getGeneric() }}" [autoplay]="true" [preload]="true" [keyboard]="false" [overlay]="false"></mat-video>
+
+    <div class="home-view-skip">
+        <button class="btn btn-dark" (click)="stopGeneric()">Passer le générique</button>
+    </div>
+
+</div>
+
+<!-- view -->
+<div *ngIf="!showGeneric()" class="container" @flyInOut>
+
+    <!-- header -->
+    <header [title]="'HOME_VIEW.TITLE' | translate"></header>
+
+    <div class="row">
+
+        <!-- logo -->
+        <div class="col-5 home-view-logo">
+            <img src="{{ getLogo() }}">
+        </div>
+
+        <!-- links -->
+        <div class="col-7">
+            <div class="row justify-content-center">
+                <div class="col-5 home-view-link" *ngFor="let route of routes" [routerLink]="route.path">
+                    <button class="btn" >{{ route.name | translate }}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
