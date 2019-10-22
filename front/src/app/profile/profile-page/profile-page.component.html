@@ -6,7 +6,7 @@
             <button *ngIf="canEdit" class="btn btn-info font-size-normal" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
         </div>
         <div class="col-3">
-            <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'COMMON.PREFIX_PLACE_HOLDER' | translate }}"
+            <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
                    (ngModelChange)="loadProfiles(true)" maxlength="15">
         </div>
         <div class="col-3">

@@ -15,7 +15,6 @@
         "WARNING": "Attention",
         "SHOW": "Afficher",
         "HIDE": "Masquer",
-        "PREFIX_PLACE_HOLDER": "Chercher un profil",
         "NO_RESULT": "Pas de résultat."
     },
     "HOME_VIEW": {
@@ -62,7 +61,8 @@
             "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour."
         },
         "PAGE": {
-            "CREATE_BUTTON": "Nouveau profil"
+            "CREATE_BUTTON": "Nouveau profil",
+            "PREFIX_PLACE_HOLDER": "Chercher un profil"
         },
         "PAGE_MODAL": {
             "TITLE": "Qui joue ?"
