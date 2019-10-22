@@ -1,5 +1,8 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
+/**
+ * Translation animation.
+ */
 export const SLIDE_ANIMATION =
     trigger('flyInOut', [
         state('in', style({transform: 'translateX(0)'})),
@@ -12,6 +15,9 @@ export const SLIDE_ANIMATION =
         ])
     ]);
 
+/**
+ * Opacity animation.
+ */
 export const OPACITY_ANIMATION =
     trigger('opacityTrigger', [
         transition(':enter', [
@@ -21,9 +27,15 @@ export const OPACITY_ANIMATION =
     ]);
 
 
+/**
+ * Route for the menu (button in view).
+ */
 export const routesWithoutHome = [
     { path: '/game/new', name: 'GAME.NEW.TITLE' },
     { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
 ];
 
+/**
+ * Route for the nav-bar (link in view).
+ */
 export const routesWithHome = [ { path: '/home', name: 'HOME_VIEW.TITLE' } ].concat(routesWithoutHome);
