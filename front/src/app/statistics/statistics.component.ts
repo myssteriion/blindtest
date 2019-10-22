@@ -5,6 +5,20 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfilePageModalComponent } from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import { Profile } from "../interfaces/dto/profile.interface";
 
+export var single = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ];
 
 /**
  * The statistics view.
@@ -19,11 +33,33 @@ import { Profile } from "../interfaces/dto/profile.interface";
 })
 export class StatisticsComponent implements OnInit {
 
+    single: any[];
+    multi: any[];
+  
+    view: any[] = [700, 400];
+  
+    // options
+    showXAxis = true;
+    showYAxis = true;
+    gradient = false;
+    showLegend = true;
+    showXAxisLabel = true;
+    xAxisLabel = "Country";
+    showYAxisLabel = true;
+    yAxisLabel = "Population";
+    colorScheme = {
+      domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
+    };
+
+
+
     public selectedProfiles: Profile[];
-    public profileStats: {}
+    public profileStats: {};
 
     constructor(private _statisticsResource: StatisticsResource,
-        private _ngbModal: NgbModal) { }
+        private _ngbModal: NgbModal) { 
+            Object.assign(this, { single });
+        }
 
 
     ngOnInit() {
@@ -52,7 +88,7 @@ export class StatisticsComponent implements OnInit {
         );
 
         modalRef.result.then(
-            (result) => { /* do nothing */ },
+            (result) => { this.getPlayersStatistics(); },
             (reason) => { /* do nothing */ }
         );
     }
@@ -66,5 +102,9 @@ export class StatisticsComponent implements OnInit {
         this.selectedProfiles.push(profile);
     }
 
+
+    public onSelect(event) {
+        console.log(event);
+    }
 
 }
