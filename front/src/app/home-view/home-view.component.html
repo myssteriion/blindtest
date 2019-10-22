@@ -1,16 +1,4 @@
-<!-- video -->
-<div *ngIf="showGeneric()">
-
-    <mat-video #video src="{{ getGeneric() }}" [autoplay]="true" [preload]="true" [keyboard]="false" [overlay]="false"></mat-video>
-
-    <div class="home-view-skip">
-        <button class="btn btn-dark" (click)="stopGeneric()">Passer le générique</button>
-    </div>
-
-</div>
-
-<!-- view -->
-<div *ngIf="!showGeneric()" class="container" @flyInOut>
+<div class="container" @flyInOut>
 
     <!-- header -->
     <header [title]="'HOME_VIEW.TITLE' | translate"></header>

@@ -1,6 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {AppComponent} from '../app.component';
-import {SLIDE_ANIMATION, routesWithoutHome} from "../tools/constant";
+import {Component} from '@angular/core';
+import {routesWithoutHome, SLIDE_ANIMATION} from "../tools/constant";
 
 /**
  * HomeView.
@@ -16,20 +15,6 @@ import {SLIDE_ANIMATION, routesWithoutHome} from "../tools/constant";
 export class HomeViewComponent {
 
 	/**
-	 * Show generic.
-	 */
-	private static _SHOW_GENERIC = true;
-
-	/**
-	 * Path to "not-found" image in assets folder.
-	 */
-	private static _GENERIC: string = "assets/videos/generic.mp4";
-
-	@ViewChild('video', { static: false }) matVideo: any;
-
-	video: HTMLVideoElement;
-
-	/**
 	 * Path to "logo" image in assets folder.
 	 */
 	private static _LOGO: string = "assets/images/logo.png";
@@ -43,36 +28,9 @@ export class HomeViewComponent {
 
 	constructor() { }
 
-	ngAfterViewInit() {
-		if (HomeViewComponent._SHOW_GENERIC) {
-			this.video = this.matVideo.getVideoTag();
-			this.video.addEventListener( 'ended', () => this.stopGeneric() );
-		}
-	}
+	ngAfterViewInit() { }
 
 
-
-	/**
-	 * Gets generic.
-	 */
-	public getGeneric(): string {
-		return HomeViewComponent._GENERIC;
-	}
-
-	/**
-	 * If show generic.
-	 */
-	public showGeneric(): boolean {
-		return HomeViewComponent._SHOW_GENERIC;
-	}
-
-	/**
-	 * Stop generic.
-	 */
-	public stopGeneric() {
-		AppComponent.setShowNavbar(true);
-		HomeViewComponent._SHOW_GENERIC = false;
-	}
 
 	/**
 	 * Gets logo.
