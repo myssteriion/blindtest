@@ -26,6 +26,8 @@ import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
 import {HeaderComponent} from './common/header/header.component';
 import {HomeViewComponent} from './home-view/home-view.component';
+import {VersionViewComponent} from './common/version-view/version-view.component';
+import {GenericViewComponent} from "./generic-view/generic-view.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {ProfileResource} from './resources/profile.resource';
@@ -34,7 +36,6 @@ import {ToolsService} from "./tools/tools.service";
 import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
 import {GameService} from "./services/game.service";
-import {VersionViewComponent} from './common/version-view/version-view.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameNewViewComponent,
 		NavbarMenuComponent,
 		HomeViewComponent,
-		VersionViewComponent
+		VersionViewComponent,
+		GenericViewComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,

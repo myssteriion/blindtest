@@ -4,13 +4,15 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
 import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component";
 import {HomeViewComponent} from './home-view/home-view.component'
+import {GenericViewComponent} from "./generic-view/generic-view.component";
 
 
 const routes: Routes = [
+	{ path: 'generic', component: GenericViewComponent},
 	{ path: 'home', component: HomeViewComponent },
 	{ path: 'game/new', component: GameNewViewComponent },
 	{ path: 'profiles', component: ProfileViewComponent },
-	{ path: '', redirectTo: 'home', pathMatch: 'full' },
+	{ path: '', redirectTo: 'generic', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'home' }
 ];
 

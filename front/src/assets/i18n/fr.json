@@ -17,6 +17,9 @@
         "HIDE": "Masquer",
         "NO_RESULT": "Pas de résultat."
     },
+    "GENERIC_VIEW": {
+        "STOP_BUTTON": "Passer le générique"
+    },
     "HOME_VIEW": {
         "TITLE": "Menu principal"
     },
