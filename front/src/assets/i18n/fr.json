@@ -204,5 +204,20 @@
         "SLOW": "Musique au ralentis.",
         "SPEED": "Musique en accéléré.",
         "MIX": "Alternance entre ralentis et accéléré."
+    },
+    "STATISTICS": {
+        "TITLE": "Statistiques",
+        "SELECT_PLAYERS": "Sélectionner les joueurs à comparer"
+    },
+    "MUSIC_THEMES": {
+        "ANNEES_60": "Années 60",
+        "ANNEES_70": "Années 70",
+        "ANNEES_80": "Années 80",
+        "ANNEES_90": "Années 90",
+        "ANNEES_2000": "Années 2000",
+        "CINEMAS": "Cinéma",
+        "CLASSIQUES": "Classiques",
+        "DISNEY": "Disney",
+        "SERIES": "Séries"
     }
 }

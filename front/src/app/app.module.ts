@@ -17,6 +17,10 @@ import {NgHttpLoaderModule} from 'ng-http-loader';
 import {MatRadioModule} from '@angular/material/radio';
 
 import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {MatVideoModule} from 'mat-video';
+import {NgxChartsModule} from '@swimlane/ngx-charts'
+
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
 import {ProfileEditModalComponent} from './profile/profile-edit-modal/profile-edit-modal.component';
@@ -39,6 +43,7 @@ import {MusicResultModalComponent} from "./game/factoring-part/music-result-moda
 import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/round-info-modal.component';
 import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
+import {StatisticsComponent} from './statistics/statistics.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -47,6 +52,9 @@ import {ToasterService} from "./services/toaster.service";
 
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
+import {StatisticsResource} from './resources/statistics.resource';
+import {ToolsService} from "./tools/tools.service";
+import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
@@ -81,7 +89,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 		RoundInfoModalComponent,
 		ChoiceThemeModalComponent,
 		GameEndViewComponent,
-		ErrorAlertModalComponent
+		ErrorAlertModalComponent,
+		GameResumeViewComponent
+		StatisticsComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
@@ -100,6 +110,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FormsModule,
 		FontAwesomeModule,
 		BrowserAnimationsModule,
+		MatVideoModule,
+		NgxChartsModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forRoot({
 			loader: {
@@ -118,6 +130,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
 		AvatarResource,
+		StatisticsResource,
 		GameResource,
 		ToolsService,
 		ToasterService,

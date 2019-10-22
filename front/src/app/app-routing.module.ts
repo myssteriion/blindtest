@@ -8,6 +8,7 @@ import {GenericViewComponent} from "./generic-view/generic-view.component";
 import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
 import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.component';
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
+import {StatisticsComponent} from './statistics/statistics.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
 	{ path: 'game/:id', component: GameCurrentViewComponent },
 	{ path: 'game/end/:id', component: GameEndViewComponent },
 	{ path: 'profiles', component: ProfileViewComponent },
+	{ path: 'statistics', component: StatisticsComponent },
 	{ path: '', redirectTo: 'generic', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'home' }
 ];
