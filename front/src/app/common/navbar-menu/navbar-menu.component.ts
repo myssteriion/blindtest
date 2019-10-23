@@ -75,7 +75,7 @@ export class NavbarMenuComponent implements OnInit {
 
 		let customCss = "";
 
-		if ( this._router.url.endsWith(path) )
+		if (path === this._router.url)
 			customCss = 'active';
 
 		return customCss

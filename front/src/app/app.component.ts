@@ -1,45 +1,47 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {routesWithHome} from "./tools/constant";
+import {Router} from '@angular/router';
 
 /**
  * App root.
  */
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
-	/**
-	 * Show navbar.
-	 */
-	private static _SHOW_NAVBAR = false;
+    public routes = routesWithHome;
 
 
 
-	constructor(translate: TranslateService) {
-		translate.setDefaultLang('fr');
-		translate.use('fr');
-	}
+    constructor(private _translate: TranslateService,
+                private _router: Router) {
 
-	public ngOnInit() { }
+        _translate.setDefaultLang('fr');
+        _translate.use('fr');
+    }
+
+    public ngOnInit() { }
 
 
-	/**
-	 * Gets ShowNavbar.
-	 */
-	public showNavbar(): boolean {
-		return AppComponent._SHOW_NAVBAR;
-	}
+    /**
+     * Gets ShowNavbar.
+     */
+    public showNavbar(): boolean {
 
-	/**
-	 * Sets ShowNavbar.
-	 *
-	 * @param show
-	 */
-	public static setShowNavbar(show: boolean) {
-		AppComponent._SHOW_NAVBAR = show;
-	}
+        let i: number = 0;
+
+        let showNavbar: boolean = false;
+        while (!showNavbar && i < this.routes.length) {
+
+            showNavbar = this._router.url === this.routes[i].path;
+            i++;
+        }
+
+        return showNavbar;
+    }
 
 } 
