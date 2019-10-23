@@ -31,6 +31,8 @@ export class ProfilePageModalComponent implements OnInit {
 
     ngOnInit() { }
 
+
+
     /**
      * Close modal.
      */

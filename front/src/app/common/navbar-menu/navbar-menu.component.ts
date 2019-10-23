@@ -16,12 +16,12 @@ export class NavbarMenuComponent implements OnInit {
 	/**
 	 * Path to "logo" image in assets folder.
 	 */
-	private static _LOGO: string = "assets/images/logo.png";
+	private static LOGO: string = "assets/images/logo.png";
 
 	/**
 	 * Path to "ff12-main_theme" sound in assets folder.
 	 */
-	private static _FFXII_THEME: string = "assets/sounds/ff12-main_theme.mp3";
+	private static FFXII_THEME: string = "assets/sounds/ff12-main_theme.mp3";
 
 	/**
 	 * Audio object.
@@ -50,7 +50,7 @@ export class NavbarMenuComponent implements OnInit {
 		this.musicIsPlaying = true;
 
 		this.audioObj = new Audio();
-		this.audioObj.src = NavbarMenuComponent._FFXII_THEME;
+		this.audioObj.src = NavbarMenuComponent.FFXII_THEME;
 		this.audioObj.loop = true;
 		this.audioObj.load();
 
@@ -63,7 +63,7 @@ export class NavbarMenuComponent implements OnInit {
 	 * Gets logo.
 	 */
 	public getLogo() {
-		return NavbarMenuComponent._LOGO;
+		return NavbarMenuComponent.LOGO;
 	}
 
 	/**

@@ -13,12 +13,13 @@ export class GameService {
     /**
      * The game.
      */
-    private _game: Game;
+    private game: Game;
 
 
 
     constructor(private _gameResource: GameResource,
                 private _router: Router) { }
+
 
 
     /**
@@ -30,8 +31,8 @@ export class GameService {
 
         this._gameResource.newGame(newGame).subscribe(
             response => {
-                this._game = response;
-                this._router.navigateByUrl("/game/" + this._game.id);
+                this.game = response;
+                this._router.navigateByUrl("/game/" + this.game.id);
             },
             error => { throw Error("can't create new game : " + error); }
         );

@@ -14,7 +14,7 @@ export class GameResource {
 	/**
 	 * Rest path.
 	 */
-	private _gamePath = environment.baseBackendUrl + "/game";
+	private gamePath = environment.baseBackendUrl + "/game";
 
 
 
@@ -27,7 +27,7 @@ export class GameResource {
 	 * @param newGame
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
-		return this._http.post<Game>( this._gamePath, newGame );
+		return this._http.post<Game>( this.gamePath, newGame );
 	}
 
 }

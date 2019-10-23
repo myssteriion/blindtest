@@ -60,6 +60,7 @@ export class ProfileCardComponent implements OnInit {
     faTimes = faTimes;
 
 
+
     constructor(private _ngbModal: NgbModal,
                 private _profileResource: ProfileResource,
                 private _translate: TranslateService,

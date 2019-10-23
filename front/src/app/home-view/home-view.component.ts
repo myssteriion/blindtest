@@ -17,7 +17,7 @@ export class HomeViewComponent {
 	/**
 	 * Path to "logo" image in assets folder.
 	 */
-	private static _LOGO: string = "assets/images/logo.png";
+	private static LOGO: string = "assets/images/logo.png";
 
 	/**
 	 * Route (without home).
@@ -36,7 +36,7 @@ export class HomeViewComponent {
 	 * Gets logo.
 	 */
 	public getLogo() {
-		return HomeViewComponent._LOGO;
+		return HomeViewComponent.LOGO;
 	}
 
 }

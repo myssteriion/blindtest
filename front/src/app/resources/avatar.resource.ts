@@ -14,11 +14,12 @@ export class AvatarResource {
 	/**
 	 * Rest path.
 	 */
-	private _avatarPath = environment.baseBackendUrl + "/avatars";
+	private avatarPath = environment.baseBackendUrl + "/avatars";
 
 
 
 	constructor(private _http: HttpClient) { }
+
 
 
 	/**
@@ -33,7 +34,7 @@ export class AvatarResource {
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
 
-		return this._http.get< Page<Avatar> >( this._avatarPath, { params: params } );
+		return this._http.get< Page<Avatar> >( this.avatarPath, { params: params } );
 	}
 
 }

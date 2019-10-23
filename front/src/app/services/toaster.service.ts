@@ -8,7 +8,7 @@ import {ToolsService} from "../tools/tools.service";
 @Injectable()
 export class ToasterService {
 
-    private static _PARAMS = {
+    private static PARAMS = {
         closeButton: true,
         progressBar: true,
         positionClass: 'toast-bottom-right',
@@ -31,7 +31,7 @@ export class ToasterService {
 
         ToolsService.verifyStringValue("message", message);
 
-        this._toastrService.success(message, "", ToasterService._PARAMS);
+        this._toastrService.success(message, "", ToasterService.PARAMS);
     }
 
     /**
@@ -43,7 +43,7 @@ export class ToasterService {
 
         ToolsService.verifyStringValue("message", message);
 
-        this._toastrService.warning(message, "", ToasterService._PARAMS);
+        this._toastrService.warning(message, "", ToasterService.PARAMS);
     }
 
     /**
@@ -55,7 +55,7 @@ export class ToasterService {
 
         ToolsService.verifyStringValue("message", message);
 
-        this._toastrService.error(message, "", ToasterService._PARAMS);
+        this._toastrService.error(message, "", ToasterService.PARAMS);
     }
 
 }

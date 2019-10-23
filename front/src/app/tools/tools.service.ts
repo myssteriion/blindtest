@@ -10,21 +10,22 @@ export class ToolsService {
     /**
      * Data constant.
      */
-    private static _DATA: string = "data:";
+    private static DATA: string = "data:";
 
     /**
      * Base64 constant.
      */
-    private static _BASE64: string = ";base64,";
+    private static BASE64: string = ";base64,";
 
     /**
      * Path to "not-found" image in assets folder.
      */
-    private static _AVATAR_NOT_FOUND: string = "assets/images/avatar/not-found.png";
+    private static AVATAR_NOT_FOUND: string = "assets/images/avatar/not-found.png";
 
 
 
     constructor() { }
+
 
 
     /**
@@ -84,13 +85,13 @@ export class ToolsService {
 
         if (flux.fileExists) {
 
-            imageSrc = ToolsService._DATA;
+            imageSrc = ToolsService.DATA;
             imageSrc += flux.contentType;
-            imageSrc += ToolsService._BASE64;
+            imageSrc += ToolsService.BASE64;
             imageSrc += flux.contentFlux;
         }
         else {
-            imageSrc = ToolsService._AVATAR_NOT_FOUND;
+            imageSrc = ToolsService.AVATAR_NOT_FOUND;
         }
 
         return imageSrc;

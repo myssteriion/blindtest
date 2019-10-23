@@ -14,7 +14,7 @@ export class ProfileResource {
 	/**
 	 * Rest path.
 	 */
-	private _profilePath = environment.baseBackendUrl + "/profiles";
+	private profilePath = environment.baseBackendUrl + "/profiles";
 
 
 
@@ -28,7 +28,7 @@ export class ProfileResource {
 	 * @param profile the profile.
 	 */
 	public create(profile: Profile): Observable<Profile> {
-		return this._http.post<Profile>(this._profilePath , profile);
+		return this._http.post<Profile>(this.profilePath , profile);
 	}
 
 	/**
@@ -37,7 +37,7 @@ export class ProfileResource {
 	 * @param profile the profile
 	 */
 	public update(profile: Profile): Observable<Profile> {
-		return this._http.put<Profile>(this._profilePath + "/" + profile.id, profile);
+		return this._http.put<Profile>(this.profilePath + "/" + profile.id, profile);
 	}
 
 	/**
@@ -52,7 +52,7 @@ export class ProfileResource {
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
 
-		return this._http.get< Page<Profile> >(this._profilePath, { params: params } );
+		return this._http.get< Page<Profile> >(this.profilePath, { params: params } );
 	}
 
 	/**
@@ -61,7 +61,7 @@ export class ProfileResource {
 	 * @param profile the profile
 	 */
 	public delete(profile: Profile): Observable<Page<Profile>> {
-		return this._http.delete< Page<Profile> >(this._profilePath + "/" + profile.id);
+		return this._http.delete< Page<Profile> >(this.profilePath + "/" + profile.id);
 	}
 
 }

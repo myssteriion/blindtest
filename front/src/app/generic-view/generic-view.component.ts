@@ -14,13 +14,13 @@ import {ToolsService} from "../tools/tools.service";
 export class GenericViewComponent {
 
 	/**
-	 * Path to "not-found" image in assets folder.
+	 * Path to "generic" video in assets folder.
 	 */
-	private static _GENERIC: string = "assets/videos/generic.mp4";
+	private static GENERIC: string = "assets/videos/generic.mp4";
 
 	@ViewChild('video', { static: false }) matVideo: any;
 
-	video: HTMLVideoElement;
+	private video: HTMLVideoElement;
 
 
 
@@ -39,7 +39,7 @@ export class GenericViewComponent {
 	 * Gets generic.
 	 */
 	public getGeneric(): string {
-		return GenericViewComponent._GENERIC;
+		return GenericViewComponent.GENERIC;
 	}
 
 	/**
