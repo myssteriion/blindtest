@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Flux} from '../interfaces/common/flux.interface';
+import {AVATAR_NOT_FOUND} from "./constant";
 
 /**
  * Tools service.
@@ -16,11 +17,6 @@ export class ToolsService {
      * Base64 constant.
      */
     private static BASE64: string = ";base64,";
-
-    /**
-     * Path to "not-found" image in assets folder.
-     */
-    private static AVATAR_NOT_FOUND: string = "assets/images/avatar/not-found.png";
 
 
 
@@ -91,7 +87,7 @@ export class ToolsService {
             imageSrc += flux.contentFlux;
         }
         else {
-            imageSrc = ToolsService.AVATAR_NOT_FOUND;
+            imageSrc = AVATAR_NOT_FOUND;
         }
 
         return imageSrc;

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {routesWithHome} from "../tools/constant";
+import {GENERIC, routesWithHome} from "../tools/constant";
 import {Router} from '@angular/router';
 import {ToolsService} from "../tools/tools.service";
 
@@ -12,11 +12,6 @@ import {ToolsService} from "../tools/tools.service";
 	styleUrls: ['./generic-view.component.css']
 })
 export class GenericViewComponent {
-
-	/**
-	 * Path to "generic" video in assets folder.
-	 */
-	private static GENERIC: string = "assets/videos/generic.mp4";
 
 	/**
 	 * Mat video.
@@ -45,7 +40,7 @@ export class GenericViewComponent {
 	 * Gets generic.
 	 */
 	public getGeneric(): string {
-		return GenericViewComponent.GENERIC;
+		return GENERIC;
 	}
 
 	/**

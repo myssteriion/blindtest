@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {routesWithoutHome, SLIDE_ANIMATION} from "../tools/constant";
+import {LOGO, routesWithoutHome, SLIDE_ANIMATION} from "../tools/constant";
 
 /**
  * HomeView.
@@ -13,11 +13,6 @@ import {routesWithoutHome, SLIDE_ANIMATION} from "../tools/constant";
 	]
 })
 export class HomeViewComponent {
-
-	/**
-	 * Path to "logo" image in assets folder.
-	 */
-	private static LOGO: string = "assets/images/logo.png";
 
 	/**
 	 * Route (without home).
@@ -36,7 +31,7 @@ export class HomeViewComponent {
 	 * Gets logo.
 	 */
 	public getLogo() {
-		return HomeViewComponent.LOGO;
+		return LOGO;
 	}
 
 }

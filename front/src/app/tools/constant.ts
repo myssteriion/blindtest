@@ -1,6 +1,27 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
+ * Path to "logo" image in assets folder.
+ */
+export const LOGO = "assets/images/logo.png";
+
+/**
+ * Path to "not-found" image in assets folder.
+ */
+export const AVATAR_NOT_FOUND = "assets/images/avatar/not-found.png";
+
+/**
+ * Path to "ff12-main_theme" sound in assets folder.
+ */
+export const FFXII_THEME = "assets/sounds/ff12-main_theme.mp3";
+
+/**
+ * Path to "generic" video in assets folder.
+ */
+export const GENERIC = "assets/videos/generic.mp4";
+
+
+/**
  * Translation animation.
  */
 export const SLIDE_ANIMATION =
