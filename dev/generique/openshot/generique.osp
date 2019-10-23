@@ -5103,882 +5103,6 @@
             "display": 0,
             "duration": 86400.0,
             "effects": [],
-            "end": 5.0,
-            "gravity": 4,
-            "has_audio": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "has_video": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "id": "LHRMCSY2CS",
-            "layer": 3000000,
-            "location_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -0.5799999833106995
-                        },
-                        "interpolation": 2
-                    },
-                    {
-                        "co": {
-                            "X": 125,
-                            "Y": 0.7200000286102295
-                        },
-                        "interpolation": 1
-                    }
-                ]
-            },
-            "location_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "mixing": 0,
-            "perspective_c1_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c1_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "position": 64.0,
-            "reader": {
-                "acodec": "",
-                "audio_bit_rate": 0,
-                "audio_stream_index": -1,
-                "audio_timebase": {
-                    "den": 1,
-                    "num": 1
-                },
-                "channel_layout": 4,
-                "channels": 0,
-                "display_ratio": {
-                    "den": 1883,
-                    "num": 2515
-                },
-                "duration": 86400.0,
-                "file_size": "18942980",
-                "fps": {
-                    "den": 1,
-                    "num": 30
-                },
-                "has_audio": false,
-                "has_single_image": true,
-                "has_video": true,
-                "height": 1883,
-                "interlaced_frame": false,
-                "metadata": {},
-                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\t_delorean.png",
-                "pixel_format": -1,
-                "pixel_ratio": {
-                    "den": 1,
-                    "num": 1
-                },
-                "sample_rate": 0,
-                "top_field_first": true,
-                "type": "QtImageReader",
-                "vcodec": "",
-                "video_bit_rate": 0,
-                "video_length": "2592000",
-                "video_stream_index": -1,
-                "video_timebase": {
-                    "den": 30,
-                    "num": 1
-                },
-                "width": 2515
-            },
-            "rotation": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale": 1,
-            "scale_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "start": 0,
-            "time": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "volume": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "wave_color": {
-                "alpha": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "blue": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "green": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 123.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "red": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 0.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                }
-            },
-            "waveform": false,
-            "file_id": "YQPETRHUP8",
-            "title": "t_delorean.png",
-            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\YQPETRHUP8.png"
-        },
-        {
-            "alpha": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "anchor": 0,
-            "channel_filter": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "channel_mapping": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_height": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_width": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "display": 0,
-            "duration": 86400.0,
-            "effects": [],
-            "end": 4,
-            "gravity": 4,
-            "has_audio": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "has_video": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "id": "J5AG1KJNEI",
-            "layer": 4000000,
-            "location_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.7400000095367432
-                        },
-                        "interpolation": 2
-                    },
-                    {
-                        "co": {
-                            "X": 100,
-                            "Y": -0.5600000023841858
-                        },
-                        "interpolation": 1
-                    }
-                ]
-            },
-            "location_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "mixing": 0,
-            "perspective_c1_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c1_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "position": 72.0,
-            "reader": {
-                "acodec": "",
-                "audio_bit_rate": 0,
-                "audio_stream_index": -1,
-                "audio_timebase": {
-                    "den": 1,
-                    "num": 1
-                },
-                "channel_layout": 4,
-                "channels": 0,
-                "display_ratio": {
-                    "den": 1883,
-                    "num": 2515
-                },
-                "duration": 86400.0,
-                "file_size": "18942980",
-                "fps": {
-                    "den": 1,
-                    "num": 30
-                },
-                "has_audio": false,
-                "has_single_image": true,
-                "has_video": true,
-                "height": 1883,
-                "interlaced_frame": false,
-                "metadata": {},
-                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\t_delorean2.png",
-                "pixel_format": -1,
-                "pixel_ratio": {
-                    "den": 1,
-                    "num": 1
-                },
-                "sample_rate": 0,
-                "top_field_first": true,
-                "type": "QtImageReader",
-                "vcodec": "",
-                "video_bit_rate": 0,
-                "video_length": "2592000",
-                "video_stream_index": -1,
-                "video_timebase": {
-                    "den": 30,
-                    "num": 1
-                },
-                "width": 2515
-            },
-            "rotation": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale": 1,
-            "scale_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "start": 0,
-            "time": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "volume": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "wave_color": {
-                "alpha": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "blue": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "green": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 123.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "red": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 0.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                }
-            },
-            "waveform": false,
-            "file_id": "60GZ4DTJLY",
-            "title": "t_delorean2.png",
-            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\60GZ4DTJLY.png"
-        },
-        {
-            "alpha": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "anchor": 0,
-            "channel_filter": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "channel_mapping": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_height": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_width": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "display": 0,
-            "duration": 86400.0,
-            "effects": [],
             "end": 32.70000076293945,
             "gravity": 4,
             "has_audio": {
@@ -12347,7 +11471,7 @@
                     },
                     {
                         "co": {
-                            "X": 30,
+                            "X": 35,
                             "Y": 0.15000000596046448
                         },
                         "interpolation": 1
@@ -12820,7 +11944,7 @@
                     },
                     {
                         "co": {
-                            "X": 18,
+                            "X": 23,
                             "Y": 0.30000001192092896
                         },
                         "interpolation": 1
@@ -14559,516 +13683,6 @@
             "file_id": "492MXJNCCO",
             "title": "deloran_04.png",
             "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\492MXJNCCO.png"
-        },
-        {
-            "alpha": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "anchor": 0,
-            "channel_filter": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "channel_mapping": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_height": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_width": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "crop_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "display": 0,
-            "duration": 86400.0,
-            "effects": [
-                {
-                    "amplitude": {
-                        "Points": [
-                            {
-                                "co": {
-                                    "X": 1.0,
-                                    "Y": 0.300000011920929
-                                },
-                                "interpolation": 2
-                            }
-                        ]
-                    },
-                    "class_name": "Wave",
-                    "description": "Distort the frame's image into a wave pattern.",
-                    "duration": 0.0,
-                    "end": 0.0,
-                    "has_audio": false,
-                    "has_video": true,
-                    "id": "CZ7WHDSHVT",
-                    "layer": 0,
-                    "multiplier": {
-                        "Points": [
-                            {
-                                "co": {
-                                    "X": 1.0,
-                                    "Y": 0.2000000029802322
-                                },
-                                "interpolation": 2
-                            }
-                        ]
-                    },
-                    "name": "Wave",
-                    "order": 0,
-                    "position": 0.0,
-                    "shift_x": {
-                        "Points": [
-                            {
-                                "co": {
-                                    "X": 1.0,
-                                    "Y": 0.0
-                                },
-                                "interpolation": 2
-                            }
-                        ]
-                    },
-                    "short_name": "",
-                    "speed_y": {
-                        "Points": [
-                            {
-                                "co": {
-                                    "X": 1.0,
-                                    "Y": 0.2000000029802322
-                                },
-                                "interpolation": 2
-                            }
-                        ]
-                    },
-                    "start": 0.0,
-                    "type": "Wave",
-                    "wavelength": {
-                        "Points": [
-                            {
-                                "co": {
-                                    "X": 1.0,
-                                    "Y": 0.05999999865889549
-                                },
-                                "interpolation": 2
-                            }
-                        ]
-                    }
-                }
-            ],
-            "end": 4,
-            "gravity": 4,
-            "has_audio": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "has_video": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "id": "7Z6UE23ABN",
-            "layer": 3000000,
-            "location_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.5400000214576721
-                        },
-                        "interpolation": 2
-                    },
-                    {
-                        "co": {
-                            "X": 101,
-                            "Y": -0.6399999856948853
-                        },
-                        "interpolation": 1
-                    }
-                ]
-            },
-            "location_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "mixing": 0,
-            "perspective_c1_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c1_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c2_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c3_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "perspective_c4_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": -1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "position": 42.52000045776367,
-            "reader": {
-                "acodec": "",
-                "audio_bit_rate": 0,
-                "audio_stream_index": -1,
-                "audio_timebase": {
-                    "den": 1,
-                    "num": 1
-                },
-                "channel_layout": 4,
-                "channels": 0,
-                "display_ratio": {
-                    "den": 1883,
-                    "num": 2515
-                },
-                "duration": 86400.0,
-                "file_size": "18942980",
-                "fps": {
-                    "den": 1,
-                    "num": 30
-                },
-                "has_audio": false,
-                "has_single_image": true,
-                "has_video": true,
-                "height": 1883,
-                "interlaced_frame": false,
-                "metadata": {},
-                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol2.png",
-                "pixel_format": -1,
-                "pixel_ratio": {
-                    "den": 1,
-                    "num": 1
-                },
-                "sample_rate": 0,
-                "top_field_first": true,
-                "type": "QtImageReader",
-                "vcodec": "",
-                "video_bit_rate": 0,
-                "video_length": "2592000",
-                "video_stream_index": -1,
-                "video_timebase": {
-                    "den": 30,
-                    "num": 1
-                },
-                "width": 2515
-            },
-            "rotation": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale": 1,
-            "scale_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "scale_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_x": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "shear_y": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 0.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "start": 0,
-            "time": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "volume": {
-                "Points": [
-                    {
-                        "co": {
-                            "X": 1.0,
-                            "Y": 1.0
-                        },
-                        "interpolation": 2
-                    }
-                ]
-            },
-            "wave_color": {
-                "alpha": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "blue": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 255.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "green": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 123.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                },
-                "red": {
-                    "Points": [
-                        {
-                            "co": {
-                                "X": 1.0,
-                                "Y": 0.0
-                            },
-                            "handle_left": {
-                                "X": 0.5,
-                                "Y": 1.0
-                            },
-                            "handle_right": {
-                                "X": 0.5,
-                                "Y": 0.0
-                            },
-                            "handle_type": 0,
-                            "interpolation": 0
-                        }
-                    ]
-                }
-            },
-            "waveform": false,
-            "file_id": "9YP1Z5XY21",
-            "title": "banderol2.png",
-            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\9YP1Z5XY21.png"
         },
         {
             "alpha": {
@@ -17803,6 +16417,2419 @@
             "file_id": "JG0U9EUYX5",
             "title": "classiques.png",
             "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\JG0U9EUYX5.png"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 86400.0,
+            "effects": [],
+            "end": 4.0,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "layer": 4625000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -0.6000000238418579
+                        },
+                        "interpolation": 2
+                    },
+                    {
+                        "co": {
+                            "X": 125,
+                            "Y": 0.6000000238418579
+                        },
+                        "interpolation": 1
+                    },
+                    {
+                        "co": {
+                            "X": 100,
+                            "Y": 0.6000000238418579
+                        },
+                        "interpolation": 1
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 64.19999694824219,
+            "reader": {
+                "acodec": "",
+                "audio_bit_rate": 0,
+                "audio_stream_index": -1,
+                "audio_timebase": {
+                    "den": 1,
+                    "num": 1
+                },
+                "channel_layout": 4,
+                "channels": 0,
+                "display_ratio": {
+                    "den": 1883,
+                    "num": 2515
+                },
+                "duration": 86400.0,
+                "file_size": "18942980",
+                "fps": {
+                    "den": 1,
+                    "num": 30
+                },
+                "has_audio": false,
+                "has_single_image": true,
+                "has_video": true,
+                "height": 1883,
+                "interlaced_frame": false,
+                "metadata": {},
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\t_delorean3.png",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 0,
+                "top_field_first": true,
+                "type": "QtImageReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "2592000",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 30,
+                    "num": 1
+                },
+                "width": 2515
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "W6WOKARQJ5",
+            "title": "t_delorean3.png",
+            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\W6WOKARQJ5.png",
+            "id": "9SID8UO6ZQ"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 86400.0,
+            "effects": [
+                {
+                    "amplitude": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.300000011920929
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "class_name": "Wave",
+                    "description": "Distort the frame's image into a wave pattern.",
+                    "duration": 0.0,
+                    "end": 0.0,
+                    "has_audio": false,
+                    "has_video": true,
+                    "id": "GH29K0TO19",
+                    "layer": 0,
+                    "multiplier": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "name": "Wave",
+                    "order": 0,
+                    "position": 0.0,
+                    "shift_x": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.0
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "short_name": "",
+                    "speed_y": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "start": 0.0,
+                    "type": "Wave",
+                    "wavelength": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.05999999865889549
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    }
+                }
+            ],
+            "end": 4.0,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "layer": 4750000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -0.6000000238418579
+                        },
+                        "interpolation": 2
+                    },
+                    {
+                        "co": {
+                            "X": 100,
+                            "Y": 0.6000000238418579
+                        },
+                        "interpolation": 1
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 64.5999984741211,
+            "reader": {
+                "acodec": "",
+                "audio_bit_rate": 0,
+                "audio_stream_index": -1,
+                "audio_timebase": {
+                    "den": 1,
+                    "num": 1
+                },
+                "channel_layout": 4,
+                "channels": 0,
+                "display_ratio": {
+                    "den": 1883,
+                    "num": 2515
+                },
+                "duration": 86400.0,
+                "file_size": "18942980",
+                "fps": {
+                    "den": 1,
+                    "num": 30
+                },
+                "has_audio": false,
+                "has_single_image": true,
+                "has_video": true,
+                "height": 1883,
+                "interlaced_frame": false,
+                "metadata": {},
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol.png",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 0,
+                "top_field_first": true,
+                "type": "QtImageReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "2592000",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 30,
+                    "num": 1
+                },
+                "width": 2515
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "HG41QSQYQE",
+            "title": "banderol.png",
+            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\HG41QSQYQE.png",
+            "id": "QBRON2BOEN"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 86400.0,
+            "effects": [],
+            "end": 4,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "layer": 4625000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.6100000143051147
+                        },
+                        "interpolation": 2
+                    },
+                    {
+                        "co": {
+                            "X": 100,
+                            "Y": -0.5899999737739563
+                        },
+                        "interpolation": 1
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 71.8499984741211,
+            "reader": {
+                "acodec": "",
+                "audio_bit_rate": 0,
+                "audio_stream_index": -1,
+                "audio_timebase": {
+                    "den": 1,
+                    "num": 1
+                },
+                "channel_layout": 4,
+                "channels": 0,
+                "display_ratio": {
+                    "den": 1883,
+                    "num": 2515
+                },
+                "duration": 86400.0,
+                "file_size": "18942980",
+                "fps": {
+                    "den": 1,
+                    "num": 30
+                },
+                "has_audio": false,
+                "has_single_image": true,
+                "has_video": true,
+                "height": 1883,
+                "interlaced_frame": false,
+                "metadata": {},
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\deloran_04.png",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 0,
+                "top_field_first": true,
+                "type": "QtImageReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "2592000",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 30,
+                    "num": 1
+                },
+                "width": 2515
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "492MXJNCCO",
+            "title": "deloran_04.png",
+            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\492MXJNCCO.png",
+            "id": "KCV4O9GTNT"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 86400.0,
+            "effects": [
+                {
+                    "amplitude": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.300000011920929
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "class_name": "Wave",
+                    "description": "Distort the frame's image into a wave pattern.",
+                    "duration": 0.0,
+                    "end": 0.0,
+                    "has_audio": false,
+                    "has_video": true,
+                    "id": "CZ7WHDSHVT",
+                    "layer": 0,
+                    "multiplier": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "name": "Wave",
+                    "order": 0,
+                    "position": 0.0,
+                    "shift_x": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.0
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "short_name": "",
+                    "speed_y": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "start": 0.0,
+                    "type": "Wave",
+                    "wavelength": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.05999999865889549
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    }
+                }
+            ],
+            "end": 4,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "layer": 4750000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.6000000238418579
+                        },
+                        "interpolation": 2
+                    },
+                    {
+                        "co": {
+                            "X": 101,
+                            "Y": -0.6000000238418579
+                        },
+                        "interpolation": 1
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 72.19999694824219,
+            "reader": {
+                "acodec": "",
+                "audio_bit_rate": 0,
+                "audio_stream_index": -1,
+                "audio_timebase": {
+                    "den": 1,
+                    "num": 1
+                },
+                "channel_layout": 4,
+                "channels": 0,
+                "display_ratio": {
+                    "den": 1883,
+                    "num": 2515
+                },
+                "duration": 86400.0,
+                "file_size": "18942980",
+                "fps": {
+                    "den": 1,
+                    "num": 30
+                },
+                "has_audio": false,
+                "has_single_image": true,
+                "has_video": true,
+                "height": 1883,
+                "interlaced_frame": false,
+                "metadata": {},
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol2.png",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 0,
+                "top_field_first": true,
+                "type": "QtImageReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "2592000",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 30,
+                    "num": 1
+                },
+                "width": 2515
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "9YP1Z5XY21",
+            "title": "banderol2.png",
+            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\9YP1Z5XY21.png",
+            "id": "FOO7YG6XGF"
+        },
+        {
+            "alpha": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "anchor": 0,
+            "channel_filter": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "channel_mapping": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_height": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_width": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "crop_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "display": 0,
+            "duration": 86400.0,
+            "effects": [
+                {
+                    "amplitude": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.300000011920929
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "class_name": "Wave",
+                    "description": "Distort the frame's image into a wave pattern.",
+                    "duration": 0.0,
+                    "end": 0.0,
+                    "has_audio": false,
+                    "has_video": true,
+                    "id": "CZ7WHDSHVT",
+                    "layer": 0,
+                    "multiplier": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "name": "Wave",
+                    "order": 0,
+                    "position": 0.0,
+                    "shift_x": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.0
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "short_name": "",
+                    "speed_y": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.2000000029802322
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    },
+                    "start": 0.0,
+                    "type": "Wave",
+                    "wavelength": {
+                        "Points": [
+                            {
+                                "co": {
+                                    "X": 1.0,
+                                    "Y": 0.05999999865889549
+                                },
+                                "interpolation": 2
+                            }
+                        ]
+                    }
+                }
+            ],
+            "end": 4,
+            "gravity": 4,
+            "has_audio": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "has_video": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "layer": 3000000,
+            "location_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.6000000238418579
+                        },
+                        "interpolation": 2
+                    },
+                    {
+                        "co": {
+                            "X": 101,
+                            "Y": -0.6000000238418579
+                        },
+                        "interpolation": 1
+                    }
+                ]
+            },
+            "location_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "mixing": 0,
+            "perspective_c1_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c1_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c2_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c3_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "perspective_c4_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": -1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "position": 42.36000061035156,
+            "reader": {
+                "acodec": "",
+                "audio_bit_rate": 0,
+                "audio_stream_index": -1,
+                "audio_timebase": {
+                    "den": 1,
+                    "num": 1
+                },
+                "channel_layout": 4,
+                "channels": 0,
+                "display_ratio": {
+                    "den": 1883,
+                    "num": 2515
+                },
+                "duration": 86400.0,
+                "file_size": "18942980",
+                "fps": {
+                    "den": 1,
+                    "num": 30
+                },
+                "has_audio": false,
+                "has_single_image": true,
+                "has_video": true,
+                "height": 1883,
+                "interlaced_frame": false,
+                "metadata": {},
+                "path": "D:\\FYAC\\dev\\REPO\\blindtest\\dev\\generique\\images\\banderol2.png",
+                "pixel_format": -1,
+                "pixel_ratio": {
+                    "den": 1,
+                    "num": 1
+                },
+                "sample_rate": 0,
+                "top_field_first": true,
+                "type": "QtImageReader",
+                "vcodec": "",
+                "video_bit_rate": 0,
+                "video_length": "2592000",
+                "video_stream_index": -1,
+                "video_timebase": {
+                    "den": 30,
+                    "num": 1
+                },
+                "width": 2515
+            },
+            "rotation": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale": 1,
+            "scale_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "scale_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_x": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "shear_y": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 0.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "start": 0,
+            "time": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "volume": {
+                "Points": [
+                    {
+                        "co": {
+                            "X": 1.0,
+                            "Y": 1.0
+                        },
+                        "interpolation": 2
+                    }
+                ]
+            },
+            "wave_color": {
+                "alpha": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "blue": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 255.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "green": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 123.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                },
+                "red": {
+                    "Points": [
+                        {
+                            "co": {
+                                "X": 1.0,
+                                "Y": 0.0
+                            },
+                            "handle_left": {
+                                "X": 0.5,
+                                "Y": 1.0
+                            },
+                            "handle_right": {
+                                "X": 0.5,
+                                "Y": 0.0
+                            },
+                            "handle_type": 0,
+                            "interpolation": 0
+                        }
+                    ]
+                }
+            },
+            "waveform": false,
+            "file_id": "9YP1Z5XY21",
+            "title": "banderol2.png",
+            "image": "C:\\Users\\RetardMan\\.openshot_qt\\thumbnail\\9YP1Z5XY21.png",
+            "id": "ZTY9JFLGU0"
         }
     ],
     "effects": [
@@ -20763,7 +21790,7 @@
         }
     ],
     "duration": 300,
-    "scale": 3,
+    "scale": 5,
     "tick_pixels": 100,
     "playhead_position": 0,
     "profile": "HD 720p 25 fps",

@@ -1,6 +1,6 @@
 <div>
 
-    <mat-video #video src="{{ getGeneric() }}" [autoplay]="true" [preload]="true" [keyboard]="false" [overlay]="false"></mat-video>
+    <mat-video #video src="{{ getGeneric() }}" [autoplay]="true" [preload]="true" [keyboard]="false" [overlay]="true" [time]="0"></mat-video>
 
     <div class="home-view-skip">
         <button class="btn btn-dark" (click)="stopGeneric()">{{ 'GENERIC_VIEW.STOP_BUTTON' | translate }}</button>
