@@ -37,6 +37,9 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	public playersProfiles: Profile[];
 
+	/**
+	 * The max players number.
+	 */
     private static MAX_PLAYERS: number = 12;
 
 
@@ -140,9 +143,9 @@ export class GameNewViewComponent implements OnInit {
 	}
 
 	/**
-	 * Open modal for edit profile and emit it.
+	 * Open modal for select profiles.
 	 */
-	public select(): void {
+	public selectProfiles(): void {
 
 		const modalRef = this._ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' } );
 		modalRef.componentInstance.canEdit = false;

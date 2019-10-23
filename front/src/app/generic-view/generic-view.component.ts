@@ -18,8 +18,14 @@ export class GenericViewComponent {
 	 */
 	private static GENERIC: string = "assets/videos/generic.mp4";
 
-	@ViewChild('video', { static: false }) matVideo: any;
+	/**
+	 * Mat video.
+	 */
+	@ViewChild('matVideo', { static: false }) matVideo: any;
 
+	/**
+	 * The video from MatVideo
+	 */
 	private video: HTMLVideoElement;
 
 
