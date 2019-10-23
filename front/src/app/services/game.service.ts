@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Game} from "../interfaces/game/game.interface";
 import {NewGame} from "../interfaces/game/newgame.interface";
 import {GameResource} from "../resources/game.resource";
+import {Router} from '@angular/router';
 
 /**
  * GameService.
@@ -16,7 +17,8 @@ export class GameService {
 
 
 
-    constructor(private _gameResource: GameResource) { }
+    constructor(private _gameResource: GameResource,
+                private _router: Router) { }
 
 
     /**
@@ -27,7 +29,10 @@ export class GameService {
     public newGame(newGame: NewGame) {
 
         this._gameResource.newGame(newGame).subscribe(
-            response => { this._game = response; },
+            response => {
+                this._game = response;
+                this._router.navigateByUrl("/game/" + this._game.id);
+            },
             error => { throw Error("can't create new game : " + error); }
         );
     }
