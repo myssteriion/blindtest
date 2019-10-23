@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {routesWithHome} from "../tools/constant";
 import {Router} from '@angular/router';
+import {ToolsService} from "../tools/tools.service";
 
 /**
  * Generic View.
@@ -26,8 +27,10 @@ export class GenericViewComponent {
 	constructor(private _router: Router) { }
 
 	ngAfterViewInit() {
-		this.video = this.matVideo.getVideoTag();
-		this.video.addEventListener( 'ended', () => this.stopGeneric() );
+		if ( !ToolsService.isNull(this.matVideo) ) {
+			this.video = this.matVideo.getVideoTag();
+			this.video.addEventListener( 'ended', () => this.stopGeneric() );
+		}
 	}
 
 

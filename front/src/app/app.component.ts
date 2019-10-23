@@ -13,10 +13,6 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
 
-    public routes = routesWithHome;
-
-
-
     constructor(private _translate: TranslateService,
                 private _router: Router) {
 
@@ -27,6 +23,7 @@ export class AppComponent {
     public ngOnInit() { }
 
 
+
     /**
      * Gets ShowNavbar.
      */
@@ -35,9 +32,9 @@ export class AppComponent {
         let i: number = 0;
 
         let showNavbar: boolean = false;
-        while (!showNavbar && i < this.routes.length) {
+        while (!showNavbar && i < routesWithHome.length) {
 
-            showNavbar = this._router.url === this.routes[i].path;
+            showNavbar = this._router.url === routesWithHome[i].path;
             i++;
         }
 
