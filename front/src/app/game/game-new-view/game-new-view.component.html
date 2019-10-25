@@ -1,23 +1,23 @@
 <div class="container" @flyInOut>
 
     <!-- header -->
-    <header [title]="'GAME.NEW.TITLE' | translate"></header>
+    <header [title]="'GAME.NEW_VIEW.TITLE' | translate"></header>
 
     <!-- durations -->
     <div class="row game-new-durations">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW.DURATIONS_LABEL' | translate }}</div>
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
                 <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}"
                        name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
-                <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW.' + duration | translate }}</label>
+                <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
             </div>
         </div>
     </div>
 
     <!-- players label -->
     <div class="row">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW.PLAYERS_LIST_LABEL' | translate }}</div>
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.PLAYERS_LIST_LABEL' | translate }}</div>
     </div>
 
     <!-- players -->
@@ -39,7 +39,7 @@
     <div class="row justify-content-center game-new-launch">
         <div class="col-4">
             <button class="btn btn-info font-size-normal" (click)="launchGame()" [disabled]="launchGameIsDisabled()">
-                {{ 'GAME.NEW.LAUNCH_GAME' | translate }}
+                {{ 'GAME.NEW_VIEW.LAUNCH_GAME' | translate }}
             </button>
         </div>
     </div>

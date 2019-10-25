@@ -24,7 +24,7 @@
         "TITLE": "Menu principal"
     },
     "GAME": {
-        "NEW": {
+        "NEW_VIEW": {
             "TITLE": "Nouvelle partie",
             "DURATIONS_LABEL": "Durée de la partie :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs :",

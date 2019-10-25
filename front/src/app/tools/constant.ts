@@ -52,7 +52,7 @@ export const OPACITY_ANIMATION =
  * Route for the menu (button in view).
  */
 export const routesWithoutHome = [
-    { path: '/game/new', name: 'GAME.NEW.TITLE' },
+    { path: '/game/new', name: 'GAME.NEW_VIEW.TITLE' },
     { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
 ];
 

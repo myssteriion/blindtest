@@ -75,7 +75,7 @@ export class GameNewViewComponent implements OnInit {
 		var emptyNames = [];
 
 		while (index <= GameNewViewComponent.MAX_PLAYERS) {
-			emptyNames.push( this._translate.instant("GAME.NEW.PLAYER") + " " + index );
+			emptyNames.push( this._translate.instant("GAME.NEW_VIEW.PLAYER") + " " + index );
 			index++;
 		}
 
@@ -103,16 +103,16 @@ export class GameNewViewComponent implements OnInit {
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 
 		if ( this.playersProfiles.length >= GameNewViewComponent.MAX_PLAYERS ) {
-			let message = this._translate.instant( "GAME.NEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
+			let message = this._translate.instant( "GAME.NEW_VIEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
 			this._toasterService.error(message);
 		}
 		else if (index !== -1) {
-			let message = this._translate.instant( "GAME.NEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
+			let message = this._translate.instant( "GAME.NEW_VIEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
 			this._toasterService.error(message);
 		}
 		else {
 			this.playersProfiles.push(profile);
-			let message = this._translate.instant( "GAME.NEW.PLAYERS_ADDED", { player_name: profile.name } );
+			let message = this._translate.instant( "GAME.NEW_VIEW.PLAYERS_ADDED", { player_name: profile.name } );
 			this._toasterService.success(message);
 		}
 	}
