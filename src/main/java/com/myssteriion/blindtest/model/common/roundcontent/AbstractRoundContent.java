@@ -66,7 +66,7 @@ public abstract class AbstractRoundContent {
         Tool.verifyValue("musicResultDto", musicResult);
 
         game.getPlayers().stream()
-                            .filter( playerDto -> musicResult.isWinner(playerDto.getName()) )
+                            .filter( playerDto -> musicResult.isWinner(playerDto.getProfile().getName()) )
                             .forEach( playerDto -> playerDto.addScore(nbPointWon) );
 
         return game;

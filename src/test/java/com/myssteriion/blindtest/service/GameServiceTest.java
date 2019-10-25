@@ -42,9 +42,11 @@ public class GameServiceTest extends AbstractTest {
 	public void newGame() throws NotFoundException {
 
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
-		Mockito.when(profileService.find(Mockito.any(ProfileDTO.class))).thenReturn(null, profileDto);
+		ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
+		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(null, profileDto);
+		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 
-		List<String> playersNames = Collections.singletonList("name");
+		List<String> playersNames = Arrays.asList("name", "name1");
 
 		try {
 			gameService.newGame(null);
@@ -67,24 +69,28 @@ public class GameServiceTest extends AbstractTest {
 		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 
-		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name")), Duration.NORMAL) );
-		Assert.assertEquals( 1, game.getPlayers().size() );
+		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL) );
+		Assert.assertEquals( 2, game.getPlayers().size() );
 	}
 
 	@Test
 	public void apply() throws NotFoundException {
 
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		ProfileDTO profileDto = new ProfileDTO("name","avatarName");
-		profileDto.setId(1);
-		ProfileStatDTO profileStatDto = new ProfileStatDTO(1);
+		ProfileDTO profileDto = new ProfileDTO("name","avatarName").setId(1);
+		ProfileDTO profileDto1 = new ProfileDTO("name1","avatarName").setId(2);
+		ProfileStatDTO profileStatDto;
+		ProfileStatDTO profileStatDto1;
 
 		Mockito.doNothing().when(musicService).refresh();
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, musicDTO);
-		Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenReturn(profileDto);
+		Mockito.when(profileService.find( new ProfileDTO("name") )).thenReturn(profileDto);
+		Mockito.when(profileService.find( new ProfileDTO("name1") )).thenReturn(profileDto1);
 
-		List<String> playersNames = Collections.singletonList("name");
-		MusicResult musicResult = new MusicResult( 0, musicDTO, Arrays.asList(profileDto.getName()), Arrays.asList(profileDto.getName()) );
+		List<String> playersNames = Arrays.asList("name", "name1");
+		MusicResult musicResult = new MusicResult( 0, musicDTO,
+				Collections.singletonList(profileDto.getName()),
+				Collections.singletonList(profileDto.getName()));
 
 
 		try {
@@ -117,18 +123,20 @@ public class GameServiceTest extends AbstractTest {
 
 
 		musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
-		profileDto = new ProfileDTO("name", "avatarName");
-		profileDto.setId(1);
+		profileDto = new ProfileDTO("name", "avatarName").setId(1);
+		profileDto1 = new ProfileDTO("name1","avatarName").setId(2);
 		profileStatDto = new ProfileStatDTO(1);
+		profileStatDto1 = new ProfileStatDTO(2);
 		List<String> playersName = Collections.singletonList(profileDto.getName());
 		musicResult = new MusicResult( 0, musicDTO, playersName, null );
 
 		// refaire les when car les objets ont subit un new
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
 		Mockito.when(musicService.update( Mockito.any(MusicDTO.class) )).thenReturn(musicDTO);
-		Mockito.when(profileStatService.findByProfile( Mockito.any(ProfileDTO.class) )).thenReturn(profileStatDto);
-		Mockito.when(profileStatService.update( Mockito.any(ProfileStatDTO.class) )).thenReturn(profileStatDto);
-
+		Mockito.when(profileStatService.findByProfile( new ProfileDTO("name") )).thenReturn(profileStatDto);
+		Mockito.when(profileStatService.findByProfile( new ProfileDTO("name1") )).thenReturn(profileStatDto1);
+		Mockito.when(profileStatService.update( new ProfileStatDTO(1) )).thenReturn(profileStatDto);
+		Mockito.when(profileStatService.update( new ProfileStatDTO(2) )).thenReturn(profileStatDto1);
 
 		Game game = gameService.apply(musicResult);
 		Assert.assertEquals( Round.CLASSIC, game.getRound() );
@@ -170,7 +178,7 @@ public class GameServiceTest extends AbstractTest {
 			game = gameService.apply(musicResult);
 
 		Assert.assertTrue( game.isFinished() );
-		Assert.assertEquals( new Integer(4500), profileStatDto.getBestScores().get(Duration.NORMAL) );
+		Assert.assertEquals( new Integer(20*100 - 1*100 + 4*150 + 4*100 + 20*100), profileStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
 }

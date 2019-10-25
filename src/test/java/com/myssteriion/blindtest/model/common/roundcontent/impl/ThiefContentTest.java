@@ -5,12 +5,15 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -42,14 +45,17 @@ public class ThiefContentTest extends AbstractTest {
     @Test
     public void apply() {
 
-        List<String> playersNames = Arrays.asList("name");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<String> playersNames = Collections.singletonList("name");
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
 
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 28; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );
@@ -85,10 +91,12 @@ public class ThiefContentTest extends AbstractTest {
     @Test
     public void isFinished() {
 
-        List<String> playersNames = Arrays.asList("name");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 28; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );
@@ -108,10 +116,12 @@ public class ThiefContentTest extends AbstractTest {
     @Test
     public void isLast() {
 
-        List<String> playersNames = Arrays.asList("name");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 28; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );

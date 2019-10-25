@@ -5,8 +5,10 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,7 +48,11 @@ public class ChoiceContentTest extends AbstractTest {
     public void apply() {
 
         List<String> playersNames = Arrays.asList("name", "name3", "name2");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name3")),
+                new Player(new ProfileDTO("name2")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
@@ -117,8 +123,10 @@ public class ChoiceContentTest extends AbstractTest {
     @Test
     public void isFinished() {
 
-        List<String> playersNames = Arrays.asList("name");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
         for (int i = 0; i < 20; i++)
             game.nextStep();
@@ -140,8 +148,10 @@ public class ChoiceContentTest extends AbstractTest {
     @Test
     public void isLast() {
 
-        List<String> playersNames = Arrays.asList("name");
-        Game game = new Game(new HashSet<>(playersNames), Duration.NORMAL);
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
 
         for (int i = 0; i < 20; i++)
             game.nextStep();
@@ -151,7 +161,7 @@ public class ChoiceContentTest extends AbstractTest {
 
         Assert.assertFalse( choiceContent.isLastMusic(game) );
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < (4*players.size())-2; i++) {
             game.nextStep();
             Assert.assertFalse( choiceContent.isLastMusic(game) );
         }

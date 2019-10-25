@@ -4,7 +4,9 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
+import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -29,10 +31,12 @@ public class RoundTest extends AbstractTest {
     @Test
     public void createRoundContent(){
 
-        List<String> playersNames = Arrays.asList("name", "name2");
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name2")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(playersNames), duration);
+        Game game = new Game(new HashSet<>(players), duration);
 
 
         Assert.assertTrue( Round.CLASSIC.createRoundContent(game) instanceof ClassicContent );

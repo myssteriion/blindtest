@@ -62,15 +62,18 @@ public class Game implements IModel {
     /**
      * Instantiates a new Game.
      *
-     * @param playersNames the players names
-     * @param duration     the duration
+     * @param players   the players
+     * @param duration  the duration
      */
-    public Game(Set<String> playersNames, Duration duration) {
+    public Game(Set<Player> players, Duration duration) {
 
-        Tool.verifyValue("playersNames", playersNames);
+        Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
 
-        this.players = playersNames.stream().map(Player::new).sorted(Player.COMPARATOR).collect(Collectors.toList());
+        if (players.size() < 2)
+            throw new IllegalArgumentException("2 players at minimum");
+
+        this.players = players.stream().sorted(Player.COMPARATOR).collect(Collectors.toList());
         this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;

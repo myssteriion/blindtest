@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ public class PlayerTest extends AbstractTest {
     public void constructor() {
 
         String name = "name";
+        ProfileDTO profile = new ProfileDTO(name);
 
 
         try {
@@ -17,23 +19,12 @@ public class PlayerTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'profile' est obligatoire."), e);
         }
 
-        try {
-            new Player("");
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'name' est obligatoire."), e);
-        }
 
-        Assert.assertNotNull( new Player(name) );
-
-
-
-        Player player = new Player(name + "'a'b'c''");
-        Assert.assertEquals( name + "'a'b'c''", player.getName() );
+        Player player = new Player(profile);
+        Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
     }
 
@@ -41,9 +32,10 @@ public class PlayerTest extends AbstractTest {
     public void getterSetter() {
 
         String name = "name";
+        ProfileDTO profile = new ProfileDTO(name);
 
-        Player player = new Player(name);
-        Assert.assertEquals( name, player.getName() );
+        Player player = new Player(profile);
+        Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
     }
 
@@ -51,12 +43,13 @@ public class PlayerTest extends AbstractTest {
     public void toStringAndEquals() {
 
         String name = "name";
-        Player playerUn = new Player(name);
+        ProfileDTO profile = new ProfileDTO(name);
+        Player playerUn = new Player(profile);
 
-        Assert.assertEquals( "name=name, score=0, turnToChoose=false", playerUn.toString() );
+        Assert.assertEquals( "profile={" + profile + "}, score=0, turnToChoose=false", playerUn.toString() );
 
-        Player playerUnIso = new Player(name);
-        Player playerDeux = new Player(name + "1");
+        Player playerUnIso = new Player(profile);
+        Player playerDeux = new Player(new ProfileDTO(name + "1"));
 
 
         Assert.assertNotEquals(playerUn, null);
@@ -75,9 +68,10 @@ public class PlayerTest extends AbstractTest {
     public void comparator() {
 
         String name = "name";
-        Player playerUn = new Player(name);
-        Player playerUnIso = new Player(name);
-        Player playerDeux = new Player(name + "1");
+        ProfileDTO profile = new ProfileDTO(name);
+        Player playerUn = new Player(profile);
+        Player playerUnIso = new Player(profile);
+        Player playerDeux = new Player(new ProfileDTO(name + "1"));
 
         Assert.assertEquals( 0, Player.COMPARATOR.compare(playerUn, playerUn) );
         Assert.assertEquals( 0, Player.COMPARATOR.compare(playerUn, playerUnIso) );

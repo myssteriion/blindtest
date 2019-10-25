@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Comparator;
@@ -23,13 +24,13 @@ public class Player {
 		else if (o1 == null && o2 == null)
 			return 0;
 		else
-			return String.CASE_INSENSITIVE_ORDER.compare(o1.name, o2.name);
+			return String.CASE_INSENSITIVE_ORDER.compare(o1.profile.getName(), o2.profile.getName());
 	};
 
 	/**
-	 * The name.
+	 * The profile.
 	 */
-	private String name;
+	private ProfileDTO profile;
 
 	/**
 	 * The current score.
@@ -45,26 +46,26 @@ public class Player {
 	/**
 	 * Instantiates a new Player.
 	 *
-	 * @param name the name
+	 * @param profile the profile
 	 */
 	@JsonCreator
-	public Player(String name) {
+	public Player(ProfileDTO profile) {
 
-		Tool.verifyValue("name", name);
+		Tool.verifyValue("profile", profile);
 
-		this.name = name.trim();
+		this.profile = profile;
 		this.score = 0;
 		this.turnToChoose = false;
 	}
 
 
 	/**
-	 * Gets name.
+	 * Gets profile.
 	 *
-	 * @return the name
+	 * @return the profile
 	 */
-	public String getName() {
-		return name;
+	public ProfileDTO getProfile() {
+		return profile;
 	}
 
 	/**
@@ -107,7 +108,7 @@ public class Player {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name);
+		return Objects.hash(profile.getName());
 	}
 
 	@Override
@@ -120,12 +121,12 @@ public class Player {
             return false; 
 		
 		Player other = (Player) obj;
-		return Objects.equals(this.name, other.name);
+		return Objects.equals(this.profile.getName(), other.profile.getName());
 	}
 
 	@Override
 	public String toString() {
-		return "name=" + name +
+		return "profile={" + profile + "}" +
 				", score=" + score +
 				", turnToChoose=" + turnToChoose;
 	}

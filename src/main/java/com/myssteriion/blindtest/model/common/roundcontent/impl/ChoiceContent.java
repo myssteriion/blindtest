@@ -32,8 +32,8 @@ public class ChoiceContent extends AbstractRoundContent {
     public ChoiceContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
 
         super(nbMusics, nbPointWon);
-        this.nbPointBonus = (nbPointBonus < 0) ? 0 : nbPointBonus;
-        this.nbPointMalus = (nbPointMalus > 0) ? 0 : nbPointMalus;
+        this.nbPointBonus = Math.max(nbPointBonus, 0);
+        this.nbPointMalus = Math.min(nbPointMalus, 0);
     }
 
 
@@ -64,7 +64,7 @@ public class ChoiceContent extends AbstractRoundContent {
         game.getPlayers().stream()
                 .filter(Player::isTurnToChoose)
                 .forEach( playerDto -> {
-                    int point = musicResult.isWinner(playerDto.getName()) ? nbPointBonus : nbPointMalus;
+                    int point = musicResult.isWinner(playerDto.getProfile().getName()) ? nbPointBonus : nbPointMalus;
                     playerDto.addScore(point);
                     playerDto.setTurnToChoose(false);
                 });

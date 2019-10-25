@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,15 +55,36 @@ public class GameService {
 	public Game newGame(NewGame newGame) throws NotFoundException {
 
 		Tool.verifyValue("newGameDto", newGame);
-		checkPlayers( newGame.getPlayersNames() );
 
-		Game game = new Game( newGame.getPlayersNames(), newGame.getDuration() );
+		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration() );
 		game.setId( games.size() );
 		games.add(game);
 
 		musicService.refresh();
 
 		return game;
+	}
+
+	/**
+	 * Create players list.
+	 *
+	 * @param playersNames the players names list
+	 * @return the players list
+	 */
+	private Set<Player> cratePlayersList(Set<String> playersNames) throws NotFoundException {
+
+		Set<Player> players = new HashSet<>();
+
+		for (String playerName : playersNames) {
+
+			ProfileDTO profile = profileService.find(new ProfileDTO(playerName));
+			if (profile == null)
+				throw new NotFoundException("Player '" + playerName + "' must have a profile.");
+
+			players.add( new Player(profile) );
+		}
+
+		return players;
 	}
 
 	/**
@@ -99,7 +121,7 @@ public class GameService {
 
 			for (Player player : players) {
 
-				ProfileDTO profileDto = profileService.find( new ProfileDTO(player.getName()) );
+				ProfileDTO profileDto = player.getProfile();
 				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
 				profileStatDto.incrementListenedMusics( musicResult.getMusic().getTheme() );
 
@@ -118,22 +140,6 @@ public class GameService {
 		}
 
 		return game;
-	}
-
-	/**
-	 * Test if all players have a profile.
-	 *
-	 * @param playersNames the players names
-	 * @throws NotFoundException NotFound exception
-	 */
-	private void checkPlayers(Set<String> playersNames) throws NotFoundException {
-
-		for (String playerName : playersNames) {
-
-			ProfileDTO profileDto =  profileService.find( new ProfileDTO(playerName));
-			if (profileDto == null)
-				throw new NotFoundException("Player '" + playerName + "' must have a profile.");
-		}
 	}
 
 }
