@@ -191,7 +191,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profilestats",
+							"raw": "http://localhost:{{port}}/profilestats?profilesIds=1,2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -199,6 +199,12 @@
 							"port": "{{port}}",
 							"path": [
 								"profilestats"
+							],
+							"query": [
+								{
+									"key": "profilesIds",
+									"value": "1,2"
+								}
 							]
 						}
 					},
@@ -224,7 +230,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"name\" ],\n\t\"duration\": \"NORMAL\"\n\t\n}"
+							"raw": "{\n\t\"playersNames\": [ \"name\", \"name1\" ],\n\t\"duration\": \"NORMAL\"\n\t\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game",
