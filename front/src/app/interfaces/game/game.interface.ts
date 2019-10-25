@@ -12,5 +12,9 @@ export interface Game {
 	nbMusicsPlayedInRound: number,
 	round: Round,
 	roundContent: AbstractRoundContent;
-	nextEffect: Effect
+	nextEffect: Effect,
+
+	firstStep: boolean,
+	lastStep: boolean,
+	finished: boolean
 }
