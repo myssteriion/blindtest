@@ -1,8 +1,10 @@
 /**
  * Player.
  */
+import {Profile} from "../dto/profile.interface";
+
 export interface Player {
-	name: string,
+	profile: Profile,
 	score: number,
 	turnToChoose: boolean
 }
