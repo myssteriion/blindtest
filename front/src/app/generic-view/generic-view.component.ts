@@ -1,7 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {GENERIC, routesWithHome} from "../tools/constant";
 import {Router} from '@angular/router';
-import {ToolsService} from "../tools/tools.service";
 
 /**
  * Generic View.
@@ -13,26 +12,7 @@ import {ToolsService} from "../tools/tools.service";
 })
 export class GenericViewComponent {
 
-	/**
-	 * Mat video.
-	 */
-	@ViewChild('matVideo', { static: false }) matVideo: any;
-
-	/**
-	 * The video from MatVideo
-	 */
-	private video: HTMLVideoElement;
-
-
-
 	constructor(private _router: Router) { }
-
-	ngAfterViewInit() {
-		if ( !ToolsService.isNull(this.matVideo) ) {
-			this.video = this.matVideo.getVideoTag();
-			this.video.addEventListener( 'ended', () => this.stopGeneric() );
-		}
-	}
 
 
 

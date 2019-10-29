@@ -1,16 +1,24 @@
+.home-view-video {
+    text-align: center;
+    background-color: black;
+}
+
+.home-view-video video {
+    width: 83%
+}
+
 .home-view-skip {
     position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 20px;
+    bottom: 60px;
+    width: 10%;
+    right: 30px;
 }
 
 .home-view-skip button {
     width: 200px;
-    font-size: 18px;
     padding: 10px;
     border: none;
-    background: #111111;
+    background: #222;
     color: #fff;
     cursor: pointer;
     float: right;
@@ -19,6 +27,6 @@
 
 .home-view-skip button:hover {
     color: #fff;
-    background: #111111;
+    background: #222;
     opacity: 1;
 }
