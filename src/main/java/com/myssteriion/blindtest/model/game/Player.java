@@ -29,6 +29,21 @@ public class Player {
 	};
 
 	/**
+	 * The constant SCORE_COMPARATOR.
+	 */
+	public static final Comparator<Player> SCORE_COMPARATOR = (o1, o2) -> {
+
+		if (o1 != null && o2 == null)
+			return 1;
+		else if (o1 == null && o2 != null)
+			return -1;
+		else if (o1 == null && o2 == null)
+			return 0;
+		else
+			return Integer.compare(o1.score, o2.score);
+	};
+
+	/**
 	 * The profile.
 	 */
 	private ProfileDTO profile;
