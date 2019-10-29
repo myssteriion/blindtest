@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/dto/profile.interface';
-import {faEdit, faTrashAlt, faGamepad, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditComponent} from 'src/app/profile/profile-edit/profile-edit.component';
 import {ToolsService} from "../../tools/tools.service";
@@ -56,7 +56,6 @@ export class ProfileCardComponent implements OnInit {
 
     faEdit = faEdit;
     faTrashAlt = faTrashAlt;
-    faGamepad = faGamepad;
     faTimes = faTimes;
 
 
@@ -90,7 +89,13 @@ export class ProfileCardComponent implements OnInit {
      * Gets background class.
      */
     public getBackgroundClass(): string {
-        return "profile-card-background-" + this.profile.background;
+
+        let backgroundClass = "profile-card-background-" + this.profile.background;
+
+        if (this.canSelect)
+            backgroundClass += " profile-card-profile-frame-can-select";
+
+        return backgroundClass;
     }
 
     /**
@@ -132,10 +137,18 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
+     * On click on profile.
+     */
+    public select(): void {
+        if (this.canSelect)
+            this.onSelect.emit();
+    }
+
+    /**
      * Test if icons need to be show.
      */
     public showIcons(): boolean {
-        return this.canEdit || this.canSelect || this.canDeselect;
+        return this.canEdit || this.canDeselect;
     }
 
 }

@@ -5,6 +5,11 @@
     margin: 10px 5px;
 }
 
+.profile-card-profile-frame-can-select:hover {
+    cursor: pointer;
+    border: 4px solid black;
+}
+
 .profile-card-name, .profile-card-avatar, .profile-card-action-button {
     text-align: center;
     margin: auto;

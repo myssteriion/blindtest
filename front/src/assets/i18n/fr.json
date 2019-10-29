@@ -45,7 +45,6 @@
         "CARD": {
             "EDIT_TOOLTIP": "Modifier le profil.",
             "DELETE_TOOLTIP": "Supprimer le profil.",
-            "SELECT_TOOLTIP": "Sélectionner le profil.",
             "DESELECT_TOOLTIP": "Retirer le profil.",
             "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?",
             "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé."

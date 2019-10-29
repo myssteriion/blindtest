@@ -1,4 +1,4 @@
-<div class="row profile-card-profile-frame" [ngClass]="getBackgroundClass()">
+<div class="row profile-card-profile-frame" [ngClass]="getBackgroundClass()" (click)="select()">
 
     <!-- image -->
     <div class="profile-card-avatar" [ngClass]="{'col-3': showIcons(), 'col-2': !showIcons()}">
@@ -13,7 +13,6 @@
         <div>
             <fa-icon-custom *ngIf="canEdit" [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
             <fa-icon-custom *ngIf="canEdit" [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>
-            <fa-icon-custom *ngIf="canSelect" [icon]="faGamepad" [tooltip]="'PROFILE.CARD.SELECT_TOOLTIP'" (click)="onSelect.emit()"></fa-icon-custom>
             <fa-icon-custom *ngIf="canDeselect" [icon]="faTimes" [tooltip]="'PROFILE.CARD.DESELECT_TOOLTIP'" (click)="onDeselect.emit()"></fa-icon-custom>
         </div>
     </div>
