@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The enum Theme.
+ * The Theme enum.
  */
 public enum Theme {
 

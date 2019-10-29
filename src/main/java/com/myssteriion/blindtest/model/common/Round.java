@@ -12,7 +12,7 @@ import com.myssteriion.blindtest.tools.Tool;
 import java.util.Arrays;
 
 /**
- * The enum Round.
+ * The Round enum.
  */
 public enum Round {
 

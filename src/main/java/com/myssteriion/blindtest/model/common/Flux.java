@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.util.Objects;
 
 /**
- * The type Flux.
+ * The Flux type.
  */
 public class Flux {
 

@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.common;
 
 /**
- * The enum Duration.
+ * The Duration enum.
  */
 public enum Duration {
 

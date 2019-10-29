@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.common;
 
 /**
- * The enum Effect.
+ * The Effect enum.
  */
 public enum Effect {
 
