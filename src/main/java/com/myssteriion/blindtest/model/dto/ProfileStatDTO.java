@@ -2,12 +2,22 @@ package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.converter.DurationConverter;
+import com.myssteriion.blindtest.tools.converter.RankConverter;
 import com.myssteriion.blindtest.tools.converter.ThemeConverter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -39,6 +49,13 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	@Column(name = "played_games", nullable = false)
 	private int playedGames;
+
+	/**
+	 * The number of game won.
+	 */
+	@Column(name = "won_games", nullable = false)
+	@Convert(converter = RankConverter.class)
+	private Map<Rank, Integer> wonGames;
 
 	/**
 	 * The number of listened musics by themes.
@@ -79,6 +96,7 @@ public class ProfileStatDTO extends AbstractDTO {
 
 		this.profileId = profileId;
 		this.playedGames = 0;
+		this.wonGames = new HashMap<>();
 		this.listenedMusics = new HashMap<>();
 		this.foundMusics = new HashMap<>();
 		this.bestScores = new HashMap<>();
@@ -134,6 +152,25 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public ProfileStatDTO setPlayedGames(int playedGames) {
 		this.playedGames = playedGames;
+		return this;
+	}
+
+	/**
+	 * Gets wonGames.
+	 *
+	 * @return The wonGames
+	 */
+	public Map<Rank, Integer> getWonGames() {
+		return wonGames;
+	}
+
+	/**
+	 * Set wonGames.
+	 *
+	 * @param wonGames this
+	 */
+	public ProfileStatDTO setWonGames(Map<Rank, Integer> wonGames) {
+		this.wonGames = wonGames;
 		return this;
 	}
 
@@ -203,6 +240,24 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementPlayedGames() {
 		this.playedGames++;
+	}
+
+	/**
+	 * Increment wonGames.
+	 *
+	 * @param rank the rank
+	 */
+	public void incrementWonGames(Rank rank) {
+
+		Tool.verifyValue("rank", rank);
+
+		if (wonGames == null)
+			wonGames = new HashMap<>();
+
+		if ( !wonGames.containsKey(rank) )
+			wonGames.put(rank, 0);
+
+		wonGames.put(rank, listenedMusics.get(rank) + 1);
 	}
 
 	/**
@@ -285,6 +340,7 @@ public class ProfileStatDTO extends AbstractDTO {
 		return "id=" + id +
 				", profileId=" + profileId +
 				", playedGames=" + playedGames +
+				", wonGames=" + wonGames +
 				", listenedMusics=" + listenedMusics +
 				", foundMusics=" + foundMusics +
 				", bestScores=" + bestScores;
