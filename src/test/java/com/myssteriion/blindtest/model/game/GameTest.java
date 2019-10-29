@@ -75,7 +75,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name2")));
 
         game = new Game(new HashSet<>(players), duration);
-        Assert.assertEquals( players.stream().sorted(Player.COMPARATOR).collect(Collectors.toList()), game.getPlayers() );
+        Assert.assertEquals( players.stream().sorted(Player.NAME_COMPARATOR).collect(Collectors.toList()), game.getPlayers() );
     }
 
     @Test

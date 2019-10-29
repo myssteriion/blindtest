@@ -14,9 +14,9 @@ import java.util.Objects;
 public class Player {
 
 	/**
-	 * The constant COMPARATOR.
+	 * The constant NAME_COMPARATOR.
 	 */
-	public static final Comparator<Player> COMPARATOR = (o1, o2) -> {
+	public static final Comparator<Player> NAME_COMPARATOR = (o1, o2) -> {
 
 		if (o1 != null && o2 == null)
 			return 1;

@@ -73,7 +73,7 @@ public class Game implements IModel {
         if (players.size() < 2)
             throw new IllegalArgumentException("2 players at minimum");
 
-        this.players = players.stream().sorted(Player.COMPARATOR).collect(Collectors.toList());
+        this.players = players.stream().sorted(Player.NAME_COMPARATOR).collect(Collectors.toList());
         this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
