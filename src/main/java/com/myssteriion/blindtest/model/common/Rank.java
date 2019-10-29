@@ -5,6 +5,6 @@ package com.myssteriion.blindtest.model.common;
  */
 public enum Rank {
 
-	FIRST, SECOND, THIRD
+	UN_RANKED, FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH, EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH
 
 }

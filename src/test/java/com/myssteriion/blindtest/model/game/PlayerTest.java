@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
+        Assert.assertEquals( Rank.UN_RANKED, player.getRank() );
     }
 
     @Test
@@ -37,6 +39,10 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
+        Assert.assertEquals( Rank.UN_RANKED, player.getRank() );
+
+        player.setRank(Rank.FIRST);
+        Assert.assertEquals( Rank.FIRST, player.getRank() );
     }
 
     @Test
@@ -46,7 +52,7 @@ public class PlayerTest extends AbstractTest {
         ProfileDTO profile = new ProfileDTO(name);
         Player playerUn = new Player(profile);
 
-        Assert.assertEquals( "profile={" + profile + "}, score=0, turnToChoose=false", playerUn.toString() );
+        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=UN_RANKED, turnToChoose=false", playerUn.toString() );
 
         Player playerUnIso = new Player(profile);
         Player playerDeux = new Player(new ProfileDTO(name + "1"));

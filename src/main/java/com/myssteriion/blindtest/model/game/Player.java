@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -38,9 +39,15 @@ public class Player {
 	private int score;
 
 	/**
+	 * The rank.
+	 */
+	private Rank rank;
+
+	/**
 	 * If is his turn to play/choose.
 	 */
 	private boolean turnToChoose;
+
 
 
 	/**
@@ -55,8 +62,10 @@ public class Player {
 
 		this.profile = profile;
 		this.score = 0;
+		this.rank = Rank.UN_RANKED;
 		this.turnToChoose = false;
 	}
+
 
 
 	/**
@@ -84,6 +93,25 @@ public class Player {
 	 */
 	public void addScore(int score) {
 		this.score += score;
+	}
+
+	/**
+	 * Gets rank.
+	 *
+	 * @return The rank.
+	 */
+	public Rank getRank() {
+		return rank;
+	}
+
+	/**
+	 * Set rank.
+	 *
+	 * @param rank The rank.
+	 */
+	public Player setRank(Rank rank) {
+		this.rank = rank;
+		return this;
 	}
 
 	/**
@@ -128,6 +156,7 @@ public class Player {
 	public String toString() {
 		return "profile={" + profile + "}" +
 				", score=" + score +
+				", rank=" + rank +
 				", turnToChoose=" + turnToChoose;
 	}
 	
