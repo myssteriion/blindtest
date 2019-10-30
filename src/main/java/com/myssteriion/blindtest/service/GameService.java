@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
@@ -13,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Service for game.
@@ -119,6 +122,8 @@ public class GameService {
 			List<Player> players = game.getPlayers();
 			List<String> winners = musicResult.getWinners();
 
+			updatePlayersRanks(players);
+
 			for (Player player : players) {
 
 				ProfileDTO profileDto = player.getProfile();
@@ -130,8 +135,10 @@ public class GameService {
 
 				if ( game.isFirstStep() )
 					profileStatDto.incrementPlayedGames();
-				else if ( game.isLastStep() )
+				else if ( game.isLastStep() ) {
 					profileStatDto.addBestScoreIfBetter( game.getDuration(), player.getScore() );
+					profileStatDto.incrementWonGames( player.getRank() );
+				}
 
 				profileStatService.update(profileStatDto);
 			}
@@ -140,6 +147,37 @@ public class GameService {
 		}
 
 		return game;
+	}
+
+	/**
+	 * Update players ranks.
+	 *
+	 * @param players the players
+	 */
+	private void updatePlayersRanks(List<Player> players) {
+
+		List<Player> playersSorted = players.stream().sorted(Comparator.comparingInt(Player::getScore).reversed()).collect(Collectors.toList());
+
+		Rank currentRank = Rank.FIRST;
+		int jumpRank = 1;
+
+		playersSorted.get(0).setRank(currentRank);
+		int currentScore = playersSorted.get(0).getScore();
+
+		for (int i = 1; i < playersSorted.size(); i++) {
+
+			if (playersSorted.get(i).getScore() == currentScore) {
+				jumpRank++;
+			}
+			else {
+				for (int j = 0; j < jumpRank; j++)
+					currentRank = currentRank.getNext();
+				jumpRank = 1;
+			}
+
+			playersSorted.get(i).setRank(currentRank);
+			currentScore = playersSorted.get(i).getScore();
+		}
 	}
 
 }
