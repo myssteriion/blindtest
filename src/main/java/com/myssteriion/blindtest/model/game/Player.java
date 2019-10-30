@@ -5,43 +5,12 @@ import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.tools.Tool;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * Represents a player.
  */
 public class Player {
-
-	/**
-	 * The constant NAME_COMPARATOR.
-	 */
-	public static final Comparator<Player> NAME_COMPARATOR = (o1, o2) -> {
-
-		if (o1 != null && o2 == null)
-			return 1;
-		else if (o1 == null && o2 != null)
-			return -1;
-		else if (o1 == null && o2 == null)
-			return 0;
-		else
-			return String.CASE_INSENSITIVE_ORDER.compare(o1.profile.getName(), o2.profile.getName());
-	};
-
-	/**
-	 * The constant SCORE_COMPARATOR.
-	 */
-	public static final Comparator<Player> SCORE_COMPARATOR = (o1, o2) -> {
-
-		if (o1 != null && o2 == null)
-			return 1;
-		else if (o1 == null && o2 != null)
-			return -1;
-		else if (o1 == null && o2 == null)
-			return 0;
-		else
-			return Integer.compare(o1.score, o2.score);
-	};
 
 	/**
 	 * The profile.

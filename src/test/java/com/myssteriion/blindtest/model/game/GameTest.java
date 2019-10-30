@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GameTest extends AbstractTest {
 
@@ -75,7 +74,10 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name2")));
 
         game = new Game(new HashSet<>(players), duration);
-        Assert.assertEquals( players.stream().sorted(Player.NAME_COMPARATOR).collect(Collectors.toList()), game.getPlayers() );
+        Assert.assertEquals( players.get(1), game.getPlayers().get(0) );
+        Assert.assertEquals( players.get(3), game.getPlayers().get(1) );
+        Assert.assertEquals( players.get(2), game.getPlayers().get(2) );
+        Assert.assertEquals( players.get(0), game.getPlayers().get(3) );
     }
 
     @Test

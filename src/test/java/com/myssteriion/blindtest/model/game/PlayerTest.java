@@ -70,23 +70,4 @@ public class PlayerTest extends AbstractTest {
         Assert.assertNotEquals(playerUn.hashCode(), playerDeux.hashCode());
     }
 
-    @Test
-    public void comparator() {
-
-        String name = "name";
-        ProfileDTO profile = new ProfileDTO(name);
-        Player playerUn = new Player(profile);
-        Player playerUnIso = new Player(profile);
-        Player playerDeux = new Player(new ProfileDTO(name + "1"));
-
-        Assert.assertEquals( 0, Player.NAME_COMPARATOR.compare(playerUn, playerUn) );
-        Assert.assertEquals( 0, Player.NAME_COMPARATOR.compare(playerUn, playerUnIso) );
-        Assert.assertEquals( -1, Player.NAME_COMPARATOR.compare(playerUn, playerDeux) );
-        Assert.assertEquals( 1, Player.NAME_COMPARATOR.compare(playerDeux, playerUn) );
-
-        Assert.assertEquals( 0, Player.NAME_COMPARATOR.compare(null, null) );
-        Assert.assertEquals( 1, Player.NAME_COMPARATOR.compare(playerUn, null) );
-        Assert.assertEquals( -1, Player.NAME_COMPARATOR.compare(null, playerDeux) );
-    }
-    
 }

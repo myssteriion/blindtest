@@ -7,6 +7,7 @@ import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -73,7 +74,7 @@ public class Game implements IModel {
         if (players.size() < 2)
             throw new IllegalArgumentException("2 players at minimum");
 
-        this.players = players.stream().sorted(Player.NAME_COMPARATOR).collect(Collectors.toList());
+        this.players = players.stream().sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
         this.duration = duration;
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
