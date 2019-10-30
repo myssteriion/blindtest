@@ -46,7 +46,7 @@ public class Player {
 
 		this.profile = profile;
 		this.score = 0;
-		this.rank = Rank.UN_RANKED;
+		this.rank = Rank.FIRST;
 		this.turnToChoose = false;
 	}
 

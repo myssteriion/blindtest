@@ -27,7 +27,7 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
-        Assert.assertEquals( Rank.UN_RANKED, player.getRank() );
+        Assert.assertEquals( Rank.FIRST, player.getRank() );
     }
 
     @Test
@@ -39,10 +39,10 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
-        Assert.assertEquals( Rank.UN_RANKED, player.getRank() );
-
-        player.setRank(Rank.FIRST);
         Assert.assertEquals( Rank.FIRST, player.getRank() );
+
+        player.setRank(Rank.SEVENTH);
+        Assert.assertEquals( Rank.SEVENTH, player.getRank() );
     }
 
     @Test
@@ -52,7 +52,7 @@ public class PlayerTest extends AbstractTest {
         ProfileDTO profile = new ProfileDTO(name);
         Player playerUn = new Player(profile);
 
-        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=UN_RANKED, turnToChoose=false", playerUn.toString() );
+        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=FIRST, turnToChoose=false", playerUn.toString() );
 
         Player playerUnIso = new Player(profile);
         Player playerDeux = new Player(new ProfileDTO(name + "1"));
