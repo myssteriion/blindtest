@@ -257,7 +257,7 @@ public class ProfileStatDTO extends AbstractDTO {
 		if ( !wonGames.containsKey(rank) )
 			wonGames.put(rank, 0);
 
-		wonGames.put(rank, listenedMusics.get(rank) + 1);
+		wonGames.put(rank, wonGames.get(rank) + 1);
 	}
 
 	/**
