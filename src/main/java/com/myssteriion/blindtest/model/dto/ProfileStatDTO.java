@@ -158,7 +158,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	/**
 	 * Gets wonGames.
 	 *
-	 * @return The wonGames
+	 * @return the wonGames
 	 */
 	public Map<Rank, Integer> getWonGames() {
 		return wonGames;
@@ -167,7 +167,8 @@ public class ProfileStatDTO extends AbstractDTO {
 	/**
 	 * Set wonGames.
 	 *
-	 * @param wonGames this
+	 * @param wonGames the wonGames
+	 * @return this
 	 */
 	public ProfileStatDTO setWonGames(Map<Rank, Integer> wonGames) {
 		this.wonGames = wonGames;
