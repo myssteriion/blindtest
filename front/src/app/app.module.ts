@@ -12,7 +12,6 @@ import {ToastrModule} from 'ngx-toastr';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MatVideoModule} from 'mat-video';
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
@@ -75,7 +74,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FormsModule,
 		FontAwesomeModule,
 		BrowserAnimationsModule,
-		MatVideoModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forRoot({
 			loader: {
