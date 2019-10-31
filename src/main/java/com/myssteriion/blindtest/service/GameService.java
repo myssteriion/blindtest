@@ -73,6 +73,7 @@ public class GameService {
 	 *
 	 * @param playersNames the players names list
 	 * @return the players list
+	 * @throws NotFoundException the not found exception
 	 */
 	private Set<Player> cratePlayersList(Set<String> playersNames) throws NotFoundException {
 
@@ -178,6 +179,23 @@ public class GameService {
 			playersSorted.get(i).setRank(currentRank);
 			currentScore = playersSorted.get(i).getScore();
 		}
+	}
+
+	/**
+	 * Find the game by id.
+	 *
+	 * @param id the id
+	 * @return the game
+	 * @throws NotFoundException the not found exception
+	 */
+	public Game findGame(Integer id) throws NotFoundException {
+
+		Tool.verifyValue("id", id);
+
+		return games.stream()
+				.filter( game -> game.getId().equals(id) )
+				.findFirst()
+				.orElseThrow(() -> new NotFoundException("Game not found."));
 	}
 
 }

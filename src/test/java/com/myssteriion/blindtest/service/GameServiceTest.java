@@ -260,4 +260,37 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( new Integer(20*100 - 4*100 + 4*150 + 8*100 + 20*100), profileStatDto.getBestScores().get(Duration.NORMAL) );
 	}
 
+	@Test
+	public void findGame() throws NotFoundException {
+
+		try {
+			gameService.findGame(null);
+			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'id' est obligatoire."), e);
+		}
+
+
+		try {
+			gameService.findGame(10);
+			Assert.fail("Doit lever une NotFoundException car le dto n'existe pas.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("Game not found."), e);
+		}
+
+
+		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
+		ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
+		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
+		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
+
+		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL);
+		Game expected = gameService.newGame(ng);
+
+		Game actual = gameService.findGame(expected.getId());
+		Assert.assertSame(expected, actual);
+	}
+
 }

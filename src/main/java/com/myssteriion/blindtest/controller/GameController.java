@@ -6,12 +6,17 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
+import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -58,5 +63,19 @@ public class GameController {
 		Game game = gameService.apply(musicResult);
 		return ResponseBuilder.create200(game);
 	}
-	
+
+	/**
+	 * Gets the game by id.
+	 *
+	 * @param id the id
+	 * @return a GameDTO
+	 * @throws NotFoundException NotFound exception
+	 */
+	@GetMapping(path = Constant.ID_PATH_PARAM)
+	public ResponseEntity<Game> findById(@PathVariable(Constant.ID) Integer id) throws NotFoundException {
+
+		Game game = gameService.findGame(id);
+		return ResponseBuilder.create200(game);
+	}
+
 }

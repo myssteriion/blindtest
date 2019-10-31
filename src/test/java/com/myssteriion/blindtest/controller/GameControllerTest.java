@@ -67,4 +67,21 @@ public class GameControllerTest extends AbstractTest {
 		Assert.assertEquals( players.size(), re.getBody().getPlayers().size() );
 	}
 
+	@Test
+	public void findById() throws NotFoundException {
+
+		List<Player> players = Arrays.asList(
+				new Player(new ProfileDTO("name")),
+				new Player(new ProfileDTO("name1")));
+
+		Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+		game.setId(11);
+		Mockito.when(gameService.findGame( Mockito.anyInt())).thenReturn(game);
+
+		ResponseEntity<Game> re = gameController.findById(game.getId());
+		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+		Assert.assertNotNull( re.getBody() );
+		Assert.assertSame( game, re.getBody() );
+	}
+
 }
