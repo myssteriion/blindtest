@@ -7,7 +7,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import {SLIDE_ANIMATION} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
-import {GameService} from 'src/app/services/game.service';
+import {GameResource} from "../../resources/game.resource";
+import {Router} from '@angular/router';
 
 /**
  * The profiles view.
@@ -47,7 +48,8 @@ export class GameNewViewComponent implements OnInit {
     constructor(private _translate : TranslateService,
                 private _toasterService: ToasterService,
 				private _ngbModal: NgbModal,
-				private _gameService: GameService) {}
+				private _gameResource: GameResource,
+				private _router: Router) {}
 
     ngOnInit() {
 
@@ -132,7 +134,12 @@ export class GameNewViewComponent implements OnInit {
 			playersNames: playersNames
 		};
 
-		this._gameService.newGame(newGame);
+		this._gameResource.newGame(newGame).subscribe(
+			response => {
+				this._router.navigateByUrl("/game/" + response.id);
+			},
+			error => { throw Error("can't create new game : " + error); }
+		);
 	}
 
 	/**

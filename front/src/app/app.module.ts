@@ -35,7 +35,6 @@ import {AvatarResource} from './resources/avatar.resource';
 import {ToolsService} from "./tools/tools.service";
 import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
-import {GameService} from "./services/game.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -89,8 +88,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AvatarResource,
 		GameResource,
 		ToolsService,
-		ToasterService,
-		GameService
+		ToasterService
 	],
 	bootstrap: [AppComponent]
 })
