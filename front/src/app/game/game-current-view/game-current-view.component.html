@@ -1,3 +1,15 @@
-<p>game-current-view works!</p>
+<div *ngIf="isLoaded" class="container" @flyInOut>
 
-<li class="nav-item navbar-menu-logo" [routerLink]="'/profiles'">link</li>
+    <!-- header -->
+    <header [title]="getTitle()"></header>
+
+
+
+    <div class="row">
+        <div class="col">
+            <fa-icon [icon]="currentExitIcon" size="lg" (click)="exit()" (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
+                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+        </div>
+    </div>
+
+</div>
