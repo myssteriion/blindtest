@@ -12,7 +12,7 @@ const routes: Routes = [
 	{ path: 'generic', component: GenericViewComponent},
 	{ path: 'home', component: HomeViewComponent },
 	{ path: 'game/new', component: GameNewViewComponent },
-	{ path: 'game/:id}', component: GameCurrentViewComponent },
+	{ path: 'game/:id', component: GameCurrentViewComponent },
 	{ path: 'profiles', component: ProfileViewComponent },
 	{ path: '', redirectTo: 'generic', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'home' }
