@@ -207,7 +207,8 @@
     },
     "STATISTICS": {
         "TITLE": "Statistiques",
-        "SELECT_PLAYERS": "Sélectionner les joueurs à comparer"
+        "SELECT_PLAYERS": "Sélectionner les joueurs à comparer",
+        "MODAL_TITLE": "Quels joueurs comparer ?"
     },
     "MUSIC_THEMES": {
         "ANNEES_60": "Années 60",

@@ -80,6 +80,7 @@ export class StatisticsComponent implements OnInit {
 	 */
     public select(): void {
         const modalRef = this._ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' });
+        modalRef.componentInstance.title = this._translate.instant("STATISTICS.MODAL_TITLE");
         modalRef.componentInstance.canEdit = false;
         modalRef.componentInstance.canSelect = true;
         modalRef.componentInstance.canDeselect = false;
