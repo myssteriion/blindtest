@@ -282,6 +282,7 @@ export class GameNewViewComponent implements OnInit {
 	public selectProfiles(): void {
 
 		const modalRef = this._ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' } );
+		modalRef.componentInstance.title = this._translate.instant("PROFILE.PAGE_MODAL.TITLE");
 		modalRef.componentInstance.canEdit = false;
 		modalRef.componentInstance.canSelect = true;
 		modalRef.componentInstance.canDeselect = false;
