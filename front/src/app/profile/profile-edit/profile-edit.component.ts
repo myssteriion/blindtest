@@ -194,9 +194,7 @@ export class ProfileEditComponent implements OnInit {
 					this._toasterService.success( this._translate.instant("PROFILE.EDIT.CREATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
-				error => {
-					new Error("can't create profile : " + error);
-				}
+				error => { new Error("can't create profile : " + error); }
 			);
 		}
 		else {
@@ -208,9 +206,7 @@ export class ProfileEditComponent implements OnInit {
 					this._toasterService.success( this._translate.instant("PROFILE.EDIT.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
-				error => {
-					new Error("can't update profile : " + error);
-				}
+				error => { new Error("can't update profile : " + error); }
 			);
 		}
 	}
