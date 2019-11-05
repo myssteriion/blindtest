@@ -3,6 +3,8 @@ import {SLIDE_ANIMATION} from "../../tools/constant";
 import {ToolsService} from "../../tools/tools.service";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
+import {ToasterService} from "../../services/toaster.service";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * The resume game view.
@@ -25,7 +27,9 @@ export class GameResumeViewComponent implements OnInit {
 
 
 	constructor(private _gameResource: GameResource,
-				private _router: Router) { }
+				private _router: Router,
+				private _toasterService: ToasterService,
+				private _translate: TranslateService) { }
 
 	ngOnInit() {
 	}
@@ -40,7 +44,7 @@ export class GameResumeViewComponent implements OnInit {
 		if ( !this.gameNumIsNaN() ) {
 			this._gameResource.findById( Number(this.numGame) ).subscribe(
 				response => { this._router.navigateByUrl("game/" + response.id); },
-				error => { throw Error("can't find game : " + JSON.stringify(error)); }
+				error => { this._toasterService.error( this._translate.instant("GAME.RESUME_VIEW.GAME_NOT_FOUND") ); }
 			);
 		}
 	}
