@@ -40,7 +40,7 @@ export class GameResumeViewComponent implements OnInit {
 		if ( !this.gameNumIsNaN() ) {
 			this._gameResource.findById( Number(this.numGame) ).subscribe(
 				response => { this._router.navigateByUrl("game/" + response.id); },
-				error => { throw Error("can't find game : " + error); }
+				error => { throw Error("can't find game : " + JSON.stringify(error)); }
 			);
 		}
 	}

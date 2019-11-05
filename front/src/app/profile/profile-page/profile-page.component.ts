@@ -87,7 +87,7 @@ export class ProfilePageComponent implements OnInit {
 
         this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
             response => { this.page = response; this.showProfiles = true; this.isLoaded = true; },
-            error => { console.log("can't find all profiles", error); }
+            error => { throw Error("can't find all profiles : " + JSON.stringify(error)); }
         );
     }
 

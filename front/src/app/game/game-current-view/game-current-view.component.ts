@@ -68,10 +68,10 @@ export class GameCurrentViewComponent implements OnInit {
 			response => {
 				this._gameResource.findById( Number(response) ).subscribe(
 					response => { this.game = response; this.isLoaded = true; },
-					error => { new Error("can't find game : " + error); }
+					error => { throw Error("can't find game : " + JSON.stringify(error)); }
 				);
 			},
-			error => { new Error("can't find id param : " + error); }
+			error => { throw Error("can't find id param : " + JSON.stringify(error)); }
 		);
 	}
 

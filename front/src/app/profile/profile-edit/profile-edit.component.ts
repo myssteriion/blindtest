@@ -103,7 +103,7 @@ export class ProfileEditComponent implements OnInit {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
 			response => { this.page = response; },
-			error => { throw Error("can't find all avatars : " + error); }
+			error => { throw Error("can't find all avatars : " + JSON.stringify(error)); }
 		);
 	}
 
@@ -194,7 +194,7 @@ export class ProfileEditComponent implements OnInit {
 					this._toasterService.success( this._translate.instant("PROFILE.EDIT.CREATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
-				error => { new Error("can't create profile : " + error); }
+				error => { throw Error("can't create profile : " + JSON.stringify(error)); }
 			);
 		}
 		else {
@@ -206,7 +206,7 @@ export class ProfileEditComponent implements OnInit {
 					this._toasterService.success( this._translate.instant("PROFILE.EDIT.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
-				error => { new Error("can't update profile : " + error); }
+				error => { throw Error("can't update profile : " + JSON.stringify(error)); }
 			);
 		}
 	}

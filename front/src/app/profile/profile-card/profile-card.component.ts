@@ -129,7 +129,7 @@ export class ProfileCardComponent implements OnInit {
                         this._toasterService.success( this._translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
                         this.onEdit.emit();
                     },
-                    error => { throw Error("can't delete profile: " + error); }
+                    error => { throw Error("can't delete profile: " + JSON.stringify(error)); }
                 );
             },
             (reason) => { /* do nothing */ }

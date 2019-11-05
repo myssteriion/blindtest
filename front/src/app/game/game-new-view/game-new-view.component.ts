@@ -138,7 +138,7 @@ export class GameNewViewComponent implements OnInit {
 			response => {
 				this._router.navigateByUrl("/game/" + response.id);
 			},
-			error => { throw Error("can't create new game : " + error); }
+			error => { throw Error("can't create new game : " + JSON.stringify(error)); }
 		);
 	}
 
