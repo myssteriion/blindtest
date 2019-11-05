@@ -53,6 +53,7 @@ export const OPACITY_ANIMATION =
  */
 export const routesWithoutHome = [
     { path: '/game/new', name: 'GAME.NEW_VIEW.TITLE' },
+    { path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE' },
     { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
 ];
 
