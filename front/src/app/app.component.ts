@@ -48,7 +48,7 @@ export class AppComponent {
         let showNavbar: boolean = false;
         while (!showNavbar && i < routesWithHome.length) {
 
-            showNavbar = this._router.url === routesWithHome[i].path;
+            showNavbar = (this._router.url === routesWithHome[i].path);
             i++;
         }
 
