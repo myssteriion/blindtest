@@ -19,7 +19,6 @@ import {ProfileEditComponent} from './profile/profile-edit/profile-edit.componen
 import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
 import {ProfilePageModalComponent} from './profile/profile-page-modal/profile-page-modal.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
-import {FaIconCustomComponent} from './common/fa-icon-custom/fa-icon-custom.component';
 import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
@@ -50,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfilePageComponent,
 		ProfilePageModalComponent,
 		ProfileEditComponent,
-		FaIconCustomComponent,
 		ModalConfirmComponent,
 		HeaderComponent,
 		GameNewViewComponent,

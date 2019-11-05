@@ -37,6 +37,21 @@ body {
 .font-size-modal-title { font-size: 1.8em; }
 .font-size-title { font-size: 3em; }
 
+
+/****************** icon ******************/
+fa-icon {
+    padding: 5px;
+}
+
+fa-icon:hover {
+    cursor: pointer;
+}
+
+.fa-icon-custom-hover-1:hover {
+    color: #eeeeee;
+}
+/****************** icon ******************/
+
 /*************** background ***************/
 
 .profile-card-background-0 {

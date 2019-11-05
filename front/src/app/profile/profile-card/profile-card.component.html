@@ -11,9 +11,9 @@
     <!-- update/delete/select icons -->
     <div *ngIf="showIcons()" class="col-3 profile-card-action-button">
         <div>
-            <fa-icon-custom *ngIf="canEdit" [icon]="faEdit" [tooltip]="'PROFILE.CARD.EDIT_TOOLTIP'" (click)="edit()"></fa-icon-custom>
-            <fa-icon-custom *ngIf="canEdit" [icon]="faTrashAlt" [tooltip]="'PROFILE.CARD.DELETE_TOOLTIP'" (click)="delete()"></fa-icon-custom>
-            <fa-icon-custom *ngIf="canDeselect" [icon]="faTimes" [tooltip]="'PROFILE.CARD.DESELECT_TOOLTIP'" (click)="onDeselect.emit()"></fa-icon-custom>
+            <fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faEdit" (click)="edit()" ngbTooltip="{{ 'PROFILE.CARD.EDIT_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+            <fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faTrashAlt" (click)="delete()" ngbTooltip="{{ 'PROFILE.CARD.DELETE_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+            <fa-icon *ngIf="canDeselect" class="fa-icon-custom-hover-1" [icon]="faTimes" (click)="onDeselect.emit()" ngbTooltip="{{ 'PROFILE.CARD.DESELECT_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
         </div>
     </div>
 
