@@ -10,7 +10,7 @@
     text-align: center;
     border: 2px solid #ffb500;
     border-radius: 20px;
-    margin: auto;
+    margin: 0.5em auto;
     padding: 1em;
     background: radial-gradient(#ffe300, #ffb500);
 }
