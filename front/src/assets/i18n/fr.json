@@ -208,7 +208,12 @@
     "STATISTICS": {
         "TITLE": "Statistiques",
         "SELECT_PLAYERS": "Sélectionner les joueurs à comparer",
-        "MODAL_TITLE": "Quels joueurs comparer ?"
+        "MODAL": {
+            "TITLE": "Quels joueurs comparer ?",
+            "MAX_USERS_ERROR": "Le maximum de {{max_users}} joueurs à comparer est atteint.",
+            "DUPLICATE_USER_ERROR": "{{user_name}} est déjà ajouté.",
+            "USER_ADDED": "{{user_name}} a été ajouté au comparateur."
+        }
     },
     "MUSIC_THEMES": {
         "ANNEES_60": "Années 60",
