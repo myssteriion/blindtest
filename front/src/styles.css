@@ -37,6 +37,9 @@ body {
 .font-size-modal-title { font-size: 1.8em; }
 .font-size-title { font-size: 3em; }
 
+.padding-bottom-1em {
+    padding-bottom: 1em;
+}
 
 /****************** icon ******************/
 fa-icon {

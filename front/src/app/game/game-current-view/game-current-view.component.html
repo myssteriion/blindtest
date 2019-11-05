@@ -1,13 +1,12 @@
 <div *ngIf="isLoaded" class="container" @flyInOut>
 
-    <!-- header -->
-    <header [title]="getTitle()"></header>
-
-
-
+    <!-- header & exit -->
     <div class="row">
-        <div class="col">
-            <fa-icon [icon]="currentExitIcon" size="lg" (click)="exit()" (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
+        <div class="col-11">
+            <header [title]="getTitle()"></header>
+        </div>
+        <div class="col-1 game-current-view-exit">
+            <fa-icon [icon]="currentExitIcon" size="2x" (click)="exit()" (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
                      ngbTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
         </div>
     </div>

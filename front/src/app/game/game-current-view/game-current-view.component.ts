@@ -3,10 +3,12 @@ import {SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {GameResource} from "../../resources/game.resource";
+import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * The current game view.
@@ -44,7 +46,9 @@ export class GameCurrentViewComponent implements OnInit {
 
 	constructor(private _gameResource: GameResource,
 				private _translate: TranslateService,
-				private _activatedRoute: ActivatedRoute) { }
+				private _activatedRoute: ActivatedRoute,
+				private _router: Router,
+				private _ngbModal: NgbModal) { }
 
 	ngOnInit() {
 
@@ -95,8 +99,44 @@ export class GameCurrentViewComponent implements OnInit {
 		return this._translate.instant("GAME.CURRENT_VIEW.TITLE", params);
 	}
 
-	public exit() {
+	/**
+	 * Open modal for exit game.
+	 */
+	public exit(): void {
 
+		const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static', size: 'lg' } );
+		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
+		modalRef.componentInstance.body = this._getFormattedLabel();
+
+		modalRef.result.then(
+			(result) => { this._router.navigateByUrl("/home"); },
+			(reason) => { /* do nothing */ }
+		);
+	}
+
+	/**
+	 * Gets formatted text for the body modal.
+	 *
+	 * @private
+	 */
+	private _getFormattedLabel() {
+
+		let body: string =
+			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
+				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_1") +
+			"</div></div>";
+
+		body +=
+			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
+				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_2") +
+			"</div></div>";
+
+		body +=
+			"<div class='row font-size-normal'><div class='col alert alert-info'>" +
+				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_3", { game_id: this.game.id } ) +
+			"</div></div>";
+
+		return body;
 	}
 
 }
