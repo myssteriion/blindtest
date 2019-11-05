@@ -4,7 +4,7 @@
     <header [title]="'GAME.NEW_VIEW.TITLE' | translate"></header>
 
     <!-- durations -->
-    <div class="row game-new-durations">
+    <div class="row game-new-view-durations">
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
@@ -36,7 +36,7 @@
     </div>
 
     <!-- button -->
-    <div class="row justify-content-center game-new-launch">
+    <div class="row justify-content-center game-new-view-launch">
         <div class="col-4">
             <button class="btn btn-info font-size-normal" (click)="launchGame()" [disabled]="launchGameIsDisabled()">
                 {{ 'GAME.NEW_VIEW.LAUNCH_GAME' | translate }}
