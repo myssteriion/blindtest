@@ -11,7 +11,7 @@ import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
 
 /**
- * The profiles view.
+ * The new game view.
  */
 @Component({
     selector: 'game-new-view',
