@@ -24,10 +24,18 @@ export class GameResource {
 
 	/**
 	 * Create new game.
-	 * @param newGame
+	 * @param newGame the new game
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
 		return this._http.post<Game>( this.gamePath, newGame );
+	}
+
+	/**
+	 * Find game by id.
+	 * @param id the id
+	 */
+	public findById(id: number): Observable<Game> {
+		return this._http.get<Game>( this.gamePath + "/" + id);
 	}
 
 }
