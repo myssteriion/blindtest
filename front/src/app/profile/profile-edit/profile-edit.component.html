@@ -29,11 +29,7 @@
         <!-- avatar -->
         <div class="row profile-edit-avatar">
             <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</div>
-            <div class="col-3"><img src="{{ getCurrentFluxForImg() }}" /></div>
-            <div class="col-6">
-                <button *ngIf="!showAvatars" class="btn btn-info font-size-normal" (click)="showHideAvatars()">{{ 'COMMON.SHOW' | translate }}</button>
-                <button *ngIf="showAvatars" class="btn btn-info font-size-normal" (click)="showHideAvatars()">{{ 'COMMON.HIDE' | translate }}</button>
-            </div>
+            <div class="col-9"><img src="{{ getCurrentFluxForImg() }}" (click)="showHideAvatars()"/></div>
         </div>
 
         <!-- avatars page -->
