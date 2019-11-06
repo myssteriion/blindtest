@@ -1,0 +1,14 @@
+<div class="container" *ngIf="loaded">
+
+  <div *ngIf="userHasStats">
+
+    <ngx-charts-number-card class="chart-container" [view]="[350, 250]" (legendLabelClick)="onLegendLabelClick($event)"
+      [scheme]="colorScheme" cardColor="#232837" emptyColor="#1e222e" [results]="counter" [animations]="animations"
+      (select)="select($event)" (activate)="activate($event)" (deactivate)="deactivate($event)">
+    </ngx-charts-number-card>
+
+  </div>
+
+  <div *ngIf="!userHasStats">{{noStatsForUser()}}</div>
+
+</div>

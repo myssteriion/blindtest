@@ -44,6 +44,8 @@ import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/ro
 import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
 import {StatisticsComponent} from './statistics/statistics.component';
+import {GlobalProfileStatisticsComponent} from './statistics/global-statistics/global-profile-statistics.component';
+import {ProfileStatisticsComponent} from './statistics/profile-statistics/profile-statistics.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -52,7 +54,7 @@ import {ToasterService} from "./services/toaster.service";
 
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
-import {StatisticsResource} from './resources/statistics.resource';
+import {ProfileStatisticsResource} from './resources/profile-statistics.resource';
 import {ToolsService} from "./tools/tools.service";
 import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
@@ -91,7 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameEndViewComponent,
 		ErrorAlertModalComponent,
 		GameResumeViewComponent
-		StatisticsComponent
+		GlobalProfileStatisticsComponent,
+		ProfileStatisticsComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
@@ -130,7 +133,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
 		AvatarResource,
-		StatisticsResource,
+		ProfileStatisticsResource,
 		GameResource,
 		ToolsService,
 		ToasterService,

@@ -19,7 +19,7 @@ const routes: Routes = [
 	{ path: 'game/:id', component: GameCurrentViewComponent },
 	{ path: 'game/end/:id', component: GameEndViewComponent },
 	{ path: 'profiles', component: ProfileViewComponent },
-	{ path: 'statistics', component: StatisticsComponent },
+	{ path: 'statistics', component: GlobalProfileStatisticsComponent },
 	{ path: '', redirectTo: 'generic', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'home' }
 ];

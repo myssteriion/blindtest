@@ -1,0 +1,14 @@
+<div class="container" @flyInOut>
+
+    <!-- header -->
+    <header [title]="'STATISTICS.TITLE' | translate"></header>
+
+    <button class="btn btn-info font-size-normal"
+        (click)="select()">{{ 'STATISTICS.SELECT_PLAYERS' | translate }}</button>
+
+    <div class="row" *ngIf="isLoaded">
+        <profile-statistics-view [user]="profile" *ngFor="let profile of selectedProfiles" class="{{getActiveClass()}}">
+        </profile-statistics-view>
+    </div>
+
+</div>
