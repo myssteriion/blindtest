@@ -1,4 +1,5 @@
 import {Avatar} from './avatar.interface';
+import { ProfileStatistics } from '../common/profile-statistics';
 
 /**
  * Profile.
@@ -8,5 +9,6 @@ export interface Profile {
 	background: number,
 	name: string,
 	avatarName: string,
-	avatar?: Avatar
+	avatar?: Avatar,
+	statistics?: ProfileStatistics
 }
