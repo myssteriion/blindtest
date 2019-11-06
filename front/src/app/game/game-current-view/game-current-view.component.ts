@@ -43,7 +43,6 @@ export class GameCurrentViewComponent implements OnInit {
 
 
 
-
 	constructor(private _gameResource: GameResource,
 				private _translate: TranslateService,
 				private _activatedRoute: ActivatedRoute,
