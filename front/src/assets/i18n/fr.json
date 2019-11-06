@@ -213,6 +213,13 @@
             "MAX_USERS_ERROR": "Le maximum de {{max_users}} joueurs à comparer est atteint.",
             "DUPLICATE_USER_ERROR": "{{user_name}} est déjà ajouté.",
             "USER_ADDED": "{{user_name}} a été ajouté au comparateur."
+        },
+        "ERROR": {
+            "USER_STATISTICS_BINDING_KO" : "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
+        },
+        "CATEGORIES" : {
+            "PLAYED_GAMES" : "Nombre de parties jouées",
+            "BEST_SCORE": "Meilleur score"
         }
     },
     "MUSIC_THEMES": {
