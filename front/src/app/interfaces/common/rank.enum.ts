@@ -1,0 +1,17 @@
+/**
+ * Rank.
+ */
+const enum Rank {
+	TWELFTH,
+	ELEVENTH,
+	TENTH,
+	NINTH,
+	EIGHTH,
+	SEVENTH,
+	SIXTH,
+	FIFTH,
+	FOURTH,
+	THIRD,
+	SECOND,
+	FIRST
+}
