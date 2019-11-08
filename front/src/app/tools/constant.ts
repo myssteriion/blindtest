@@ -20,6 +20,27 @@ export const FFXII_THEME = "assets/sounds/ff12-main_theme.mp3";
  */
 export const GENERIC = "assets/videos/generic.mp4";
 
+/**
+ * Path to "themes" folder in assets folder.
+ */
+const THEMES_FOLDER = "assets/images/themes/";
+
+/**
+ * Path to "themes" in assets folder.
+ */
+export const THEMES = [THEMES_FOLDER + "60.png", THEMES_FOLDER + "70.png", THEMES_FOLDER + "80.png",
+                       THEMES_FOLDER + "90.png", THEMES_FOLDER + "2000.png", THEMES_FOLDER + "cinemas.png",
+                       THEMES_FOLDER + "classiques.png", THEMES_FOLDER + "disney.png", THEMES_FOLDER + "series.png"];
+
+/**
+ * Path to "effects" folder in assets folder.
+ */
+const EFFECTS_FOLDER = "assets/images/effects/";
+
+/**
+ * Path to "effects" in assets folder.
+ */
+export const EFFECTS = [EFFECTS_FOLDER + "cross.png", EFFECTS_FOLDER + "slow.png", EFFECTS_FOLDER + "speed.png", EFFECTS_FOLDER + "reverse.png"];
 
 /**
  * Translation animation.
