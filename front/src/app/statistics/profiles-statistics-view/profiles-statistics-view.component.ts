@@ -11,16 +11,16 @@ import { ToasterService } from "../../services/toaster.service";
  * The statistics view.
  */
 @Component({
-    selector: 'global-profile-statistics-view',
-    templateUrl: './global-profile-statistics.component.html',
-    styleUrls: ['./global-profile-statistics.component.css'],
+    selector: 'profiles-statistics-view',
+    templateUrl: './profiles-statistics-view.component.html',
+    styleUrls: ['./profiles-statistics-view.component.css'],
     animations: [
         SLIDE_ANIMATION
     ]
 })
-export class GlobalProfileStatisticsComponent implements OnInit {
+export class ProfilesStatisticsViewComponent implements OnInit {
 
-    private static MAX_PLAYERS: number = 4;
+    private static MAX_PLAYERS: number = 3;
     public selectedProfiles: Profile[];
     public isLoaded: boolean = false;
 
@@ -87,8 +87,8 @@ export class GlobalProfileStatisticsComponent implements OnInit {
     public selectProfile(profile: Profile) {
         let index: number = this.selectedProfiles.findIndex((p) => p.id === profile.id);
 
-        if (this.selectedProfiles.length >= GlobalProfileStatisticsComponent.MAX_PLAYERS) {
-            let message = this._translate.instant("STATISTICS.MODAL.MAX_USERS_ERROR", { max_users: GlobalProfileStatisticsComponent.MAX_PLAYERS });
+        if (this.selectedProfiles.length >= ProfilesStatisticsViewComponent.MAX_PLAYERS) {
+            let message = this._translate.instant("STATISTICS.MODAL.MAX_USERS_ERROR", { max_users: ProfilesStatisticsViewComponent.MAX_PLAYERS });
             this._toasterService.error(message);
         }
         else if (index !== -1) {

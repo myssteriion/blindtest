@@ -46,6 +46,8 @@ import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component
 import {StatisticsComponent} from './statistics/statistics.component';
 import {GlobalProfileStatisticsComponent} from './statistics/global-statistics/global-profile-statistics.component';
 import {ProfileStatisticsComponent} from './statistics/profile-statistics/profile-statistics.component';
+import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-view/profiles-statistics-view.component';
+import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-view/profile-statistics-view.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -93,8 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameEndViewComponent,
 		ErrorAlertModalComponent,
 		GameResumeViewComponent
-		GlobalProfileStatisticsComponent,
-		ProfileStatisticsComponent
+		ProfilesStatisticsViewComponent,
+		ProfileStatisticsViewComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
