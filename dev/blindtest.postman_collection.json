@@ -306,6 +306,402 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "insert profiles",
+			"item": [
+				{
+					"name": "save001",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jean\",\n    \"background\": \"0\",\n    \"avatarName\": \"deadpool.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save002",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Paul\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save003",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Kurby\",\n    \"background\": \"4\",\n    \"avatarName\": \"elephant.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save004",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Darkana\",\n    \"background\": \"3\",\n    \"avatarName\": \"harryPotter.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save005",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Myssteriion\",\n    \"background\": \"1\",\n    \"avatarName\": \"licorne.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save006",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tooms\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save007",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mouton\",\n    \"background\": \"3\",\n    \"avatarName\": \"ronflex.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save008",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Stanouch\",\n    \"background\": \"0\",\n    \"avatarName\": \"lapin.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save009",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Menencia\",\n    \"background\": \"1\",\n    \"avatarName\": \"sangoku.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save010",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"O2\",\n    \"background\": \"3\",\n    \"avatarName\": \"pinguin.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save011",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"LinC\",\n    \"background\": \"4\",\n    \"avatarName\": \"spiderman.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save012",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Despacito\",\n    \"background\": \"4\",\n    \"avatarName\": \"wolwerine.jpg\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save013",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ricard'o\",\n    \"background\": \"4\",\n    \"avatarName\": \"licorne.png\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -332,7 +728,7 @@
 	],
 	"variable": [
 		{
-			"id": "3b43273c-6cb6-4cfa-a2d0-2d4cf9f4d0d2",
+			"id": "0d4a2e59-3403-4ab6-a1a0-9771e27fcfb8",
 			"key": "port",
 			"value": "9501",
 			"type": "string"
