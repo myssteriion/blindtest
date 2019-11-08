@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SLIDE_ANIMATION} from "../../tools/constant";
+import {SLIDE_ANIMATION, THEMES, EFFECTS} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
@@ -38,6 +38,26 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	public currentExitIcon;
 
+	/**
+	 * All images themes.
+	 */
+	private THEMES = THEMES;
+
+	/**
+	 * All images effects.
+	 */
+	private EFFECTS = EFFECTS;
+
+	/**
+	 * Current theme.
+	 */
+	public currentTheme: string;
+
+	/**
+	 * Current effect.
+	 */
+	public currentEffect: string;
+
 	faDoorClosed = faDoorClosed;
 	faDoorOpen = faDoorOpen;
 
@@ -53,6 +73,8 @@ export class GameCurrentViewComponent implements OnInit {
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
+		this.currentTheme = THEMES[0];
+		this.currentEffect = EFFECTS[0];
 		this._getGame();
 	}
 

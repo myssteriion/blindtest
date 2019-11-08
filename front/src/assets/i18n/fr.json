@@ -51,7 +51,9 @@
             "EXIT": "Quitter le jeu",
             "EXIT_BODY_MODAL_1": "Etes-vous sur de vouloir quitter la partie ?",
             "EXIT_BODY_MODAL_2": "Tant que le jeu n'est pas arrêté, vous pouvez y revenir à tout moment, grâce à votre N° de partie précisée ci dessous.",
-            "EXIT_BODY_MODAL_3": "Votre N° de partie est le : {{game_id}}"
+            "EXIT_BODY_MODAL_3": "Votre N° de partie est le : {{game_id}}",
+            "THEME_LABEL": "* Thème *",
+            "EFFECT_LABEL": "* Effet *"
         }
     },
     "ROUND": {

@@ -1,3 +1,18 @@
 .game-current-view-exit {
     margin: auto auto 4em auto;
 }
+
+.game-current-view-current-theme-effect div {
+    margin: auto;
+    text-align: center;
+}
+
+.game-current-view-current-theme-effect img {
+    height: 8em;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    border: black 1px solid;
+    border-radius: 10px;
+    background-color: white;
+}
