@@ -11,7 +11,7 @@
     <!-- num game -->
     <div class="row justify-content-center game-resume-view-num-game">
         <div class="col-2">
-            <input class="form-control font-size-normal" [(ngModel)]="numGame" placeholder="{{ 'GAME.RESUME_VIEW.GAME_NUM_PLACE_HOLDER' | translate }}">
+            <input class="form-control font-size-normal" (keyup.enter)="search()" [(ngModel)]="numGame" placeholder="{{ 'GAME.RESUME_VIEW.GAME_NUM_PLACE_HOLDER' | translate }}">
         </div>
         <div class="col-2">
             <button class="btn btn-info font-size-normal" (click)="search()" [disabled]="gameNumIsNaN()">{{ 'GAME.RESUME_VIEW.SEARCH_BUTTON' | translate }}</button>
