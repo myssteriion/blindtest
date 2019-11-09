@@ -1,5 +1,7 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.myssteriion.blindtest.tools.Constant;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
@@ -48,10 +50,34 @@ public class Flux {
 
         if (fileExists) {
             this.contentFlux = Files.readAllBytes(file.toPath());
-            this.contentType = URLConnection.guessContentTypeFromName(file.getName());
+            this.contentType = determinateContentType(file);
         }
     }
 
+
+
+    /**
+     * Determinate the file content type.
+     *
+     * @param file the file
+     * @return the content type
+     */
+    private String determinateContentType(File file) {
+        return ( isAudioFile(file) ) ? Constant.WAV_CONTENT_TYPE : URLConnection.guessContentTypeFromName(file.getName());
+    }
+
+    /**
+     * Test if the file is an audio file.
+     *
+     * @param file the file
+     * @return TRUE if the file is an audio file, FALSE otherwise
+     */
+    private boolean isAudioFile(File file) {
+
+        String fileName = file.getName();
+        return fileName.endsWith(Constant.MP3_EXTENSION) || fileName.endsWith(Constant.WAV_EXTENSION)
+                || fileName.endsWith(Constant.AAC_EXTENSION) || fileName.endsWith(Constant.WMA_EXTENSION);
+    }
 
 
     /**

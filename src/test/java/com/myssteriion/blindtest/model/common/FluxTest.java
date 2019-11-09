@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.common;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.ToolTest;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,24 +23,27 @@ public class FluxTest extends AbstractTest {
 
     private static final Path FILE_EXISTS_2 = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file-2.txt");
 
+    private static final Path FILE_EXISTS_3 = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file-2.mp3");
 
 
     @Before
     public void before() throws IOException {
         Files.createFile(FILE_EXISTS);
         Files.createFile(FILE_EXISTS_2);
+        Files.createFile(FILE_EXISTS_3);
     }
 
     @After
     public void after() throws IOException {
         Files.deleteIfExists(FILE_EXISTS);
         Files.deleteIfExists(FILE_EXISTS_2);
+        Files.deleteIfExists(FILE_EXISTS_3);
     }
 
 
 
     @Test
-    public void constructor( ) throws NotFoundException, IOException {
+    public void constructor( ) throws IOException {
 
         try {
             new Flux(null);
@@ -61,10 +64,16 @@ public class FluxTest extends AbstractTest {
         Assert.assertTrue( flux.isFileExists() );
         Assert.assertEquals( Files.readAllBytes(FILE_EXISTS).length, flux.getContentFlux().length );
         Assert.assertEquals( URLConnection.guessContentTypeFromName(FILE_EXISTS.toFile().getName()), flux.getContentType() );
+
+        flux = new Flux( FILE_EXISTS_3.toFile() );
+        Assert.assertEquals( FILE_EXISTS_3.toFile().getName(), flux.getName() );
+        Assert.assertTrue( flux.isFileExists() );
+        Assert.assertEquals( Files.readAllBytes(FILE_EXISTS).length, flux.getContentFlux().length );
+        Assert.assertEquals( Constant.WAV_CONTENT_TYPE, flux.getContentType() );
     }
 
     @Test
-    public void toStringAndEquals() throws NotFoundException, IOException {
+    public void toStringAndEquals() throws IOException {
 
         Flux fluxOne = new Flux(FILE_EXISTS.toFile());
         Flux fluxOneIso = new Flux(FILE_EXISTS.toFile());
@@ -81,7 +90,6 @@ public class FluxTest extends AbstractTest {
         Assert.assertEquals(fluxOne.hashCode(), fluxOne.hashCode());
         Assert.assertEquals(fluxOne.hashCode(), fluxOneIso.hashCode());
         Assert.assertNotEquals(fluxOne.hashCode(), fluxTwo.hashCode());
-
     }
 
 }
