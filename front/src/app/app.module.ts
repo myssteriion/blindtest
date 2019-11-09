@@ -18,7 +18,6 @@ import {MatRadioModule} from '@angular/material/radio';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MatVideoModule} from 'mat-video';
 import {NgxChartsModule} from '@swimlane/ngx-charts'
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
@@ -95,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameEndViewComponent,
 		ErrorAlertModalComponent,
 		GameResumeViewComponent
+		GameResumeViewComponent,
 		ProfilesStatisticsViewComponent,
 		ProfileStatisticsViewComponent
 	],
@@ -115,7 +115,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FormsModule,
 		FontAwesomeModule,
 		BrowserAnimationsModule,
-		MatVideoModule,
 		NgxChartsModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forRoot({
