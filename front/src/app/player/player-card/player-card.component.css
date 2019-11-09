@@ -1,0 +1,35 @@
+.player-card-rank-score {
+    margin: auto;
+}
+
+.player-card-rank {
+    margin: auto;
+    text-align: center;
+}
+
+.player-card-rank-gold {
+    color: gold;
+}
+
+.player-card-rank-silver {
+    color: silver;
+}
+
+.player-card-rank-bronze {
+    color: #cd7f32;
+}
+
+.player-card-rank-chocolate {
+    color: chocolate;
+}
+
+.player-card-score {
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto;
+    color: orangered;
+    font-weight: bold;
+    font-style: italic;
+}

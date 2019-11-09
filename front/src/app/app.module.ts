@@ -12,6 +12,7 @@ import {ToastrModule} from 'ngx-toastr';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {Ng2OdometerModule} from 'ng2-odometer';
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
@@ -28,6 +29,7 @@ import {VersionViewComponent} from './common/version-view/version-view.component
 import {GenericViewComponent} from "./generic-view/generic-view.component";
 import {GameCurrentViewComponent} from './game/game-current-view/game-current-view.component';
 import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.component';
+import {PlayerCardComponent} from './player/player-card/player-card.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 import {ProfileResource} from './resources/profile.resource';
@@ -58,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		VersionViewComponent,
 		GenericViewComponent,
 		GameCurrentViewComponent,
-		GameResumeViewComponent
+		GameResumeViewComponent,
+		PlayerCardComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,
@@ -80,7 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 				useFactory: HttpLoaderFactory,
 				deps: [HttpClient]
 			}
-		})
+		}),
+		Ng2OdometerModule.forRoot()
 	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],

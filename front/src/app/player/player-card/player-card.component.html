@@ -1,0 +1,47 @@
+<div class="row player-card-frame">
+
+    <!-- rank and score -->
+    <div *ngIf="!rankOnRight" class="col-5 player-card-rank-score">
+
+        <!-- rank -->
+        <div *ngIf="showMedal()" class="row font-size-normal player-card-rank">
+            <div class="col">
+                <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
+            </div>
+        </div>
+
+        <!-- score -->
+        <div class="row font-size-normal player-card-score">
+            <div class="col">
+                <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- profile -->
+    <div class="col-7">
+        <profile-card [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
+    </div>
+
+    <!-- rank and score -->
+    <div *ngIf="rankOnRight" class="col-5 player-card-rank-score">
+
+        <!-- rank -->
+        <div *ngIf="showMedal()" class="row font-size-normal player-card-rank">
+            <div class="col">
+                <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
+            </div>
+        </div>
+
+        <!-- score -->
+        <div class="row font-size-normal player-card-score">
+            <div class="col">
+                <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
