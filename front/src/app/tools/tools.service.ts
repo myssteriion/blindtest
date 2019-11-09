@@ -93,4 +93,22 @@ export class ToolsService {
         return imageSrc;
     }
 
+    /**
+     * Transform the flux in value for a 'audio'.
+     *
+     * @param flux the flux
+     */
+    public static getFluxForAudio(flux: Flux): string {
+
+        this.verifyValue("flux", flux);
+
+        let audioSrc: string;
+        audioSrc = ToolsService.DATA;
+        audioSrc += flux.contentType;
+        audioSrc += ToolsService.BASE64;
+        audioSrc += flux.contentFlux;
+
+        return audioSrc;
+    }
+
 }

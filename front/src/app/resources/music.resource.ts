@@ -25,7 +25,7 @@ export class MusicResource {
 	 * Get random musics.
 	 */
 	public random(): Observable<Music> {
-		return this._http.get<Music>(this.musicsPath);
+		return this._http.get<Music>(this.musicsPath + "/random");
 	}
 
 }
