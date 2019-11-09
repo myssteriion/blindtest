@@ -52,7 +52,7 @@ export class ProfileResource {
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
 
-		return this._http.get< Page<Profile> >(this.profilePath, { params: params } );
+		return this._http.get< Page<Profile> >( this.profilePath, { params: params } );
 	}
 
 	/**

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {NewGame} from "../interfaces/game/newgame.interface";
 import {Game} from '../interfaces/game/game.interface';
+import {MusicResult} from '../interfaces/game/music.result.interface';
 
 /**
  * Game resource.
@@ -27,7 +28,15 @@ export class GameResource {
 	 * @param newGame the new game
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
-		return this._http.post<Game>( this.gamePath, newGame );
+		return this._http.post<Game>(this.gamePath, newGame);
+	}
+
+	/**
+	 * Apply music result.
+	 * @param musicResult the music result
+	 */
+	public apply(musicResult: MusicResult): Observable<Game> {
+		return this._http.post<Game>(this.gamePath + "/apply", musicResult);
 	}
 
 	/**
@@ -35,7 +44,7 @@ export class GameResource {
 	 * @param id the id
 	 */
 	public findById(id: number): Observable<Game> {
-		return this._http.get<Game>( this.gamePath + "/" + id);
+		return this._http.get<Game>(this.gamePath + "/" + id);
 	}
 
 }
