@@ -23,7 +23,7 @@ front/dist
 /out-tsc
 
 # dependencies
-front/node_modules
+front/node_modules/*
 
 # node / npm
 /libs/
