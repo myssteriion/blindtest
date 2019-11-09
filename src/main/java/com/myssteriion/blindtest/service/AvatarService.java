@@ -56,7 +56,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		for ( File avatar : Tool.getChildren(avatarDirectory) ) {
 
 			AvatarDTO avatarDTO = new AvatarDTO( avatar.getName() );
-			if ( avatar.isFile() && !dao.findByName(avatar.getName()).isPresent() )
+			if ( avatar.isFile() && Tool.hadImageExtension(avatar.getName()) && !dao.findByName(avatar.getName()).isPresent() )
 				dao.save(avatarDTO);
 		}
 

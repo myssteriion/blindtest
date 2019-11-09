@@ -50,13 +50,14 @@ public class MusicServiceTest extends AbstractTest {
 
 		File mockFile = Mockito.mock(File.class);
 		Mockito.when(mockFile.isFile()).thenReturn(true);
-		Mockito.when(mockFile.getName()).thenReturn("file");
+		Mockito.when(mockFile.getName()).thenReturn("file.mp3");
 
 		File mockDirectory = Mockito.mock(File.class);
 		Mockito.when(mockDirectory.isFile()).thenReturn(false);
 
 		PowerMockito.mockStatic(Tool.class);
 		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+		PowerMockito.when(Tool.hadAudioExtension(Mockito.anyString())).thenReturn(true);
 
 
 		musicService = Mockito.spy( new MusicService(dao, configProperties) );

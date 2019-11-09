@@ -11,7 +11,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class ToolTest extends AbstractTest {
 
@@ -159,6 +164,44 @@ public class ToolTest extends AbstractTest {
 
 		f = DIRECTORY_EXISTS.toFile();
 		Assert.assertEquals( Arrays.asList(FILE_IN_DIRECTORY_EXISTS.toFile()), Tool.getChildren(f) );
+	}
+
+	@Test
+	public void hadAudioExtension() {
+
+		Assert.assertFalse( Tool.hadAudioExtension(null) );
+		Assert.assertFalse( Tool.hadAudioExtension("") );
+		Assert.assertFalse( Tool.hadAudioExtension(" ") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName.txt") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName.docx") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName.png") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName.jpg") );
+		Assert.assertFalse( Tool.hadAudioExtension("fileName.jpeg") );
+
+		Assert.assertTrue( Tool.hadAudioExtension("fileName.mp3") );
+		Assert.assertTrue( Tool.hadAudioExtension("fileName.aac") );
+		Assert.assertTrue( Tool.hadAudioExtension("fileName.wma") );
+		Assert.assertTrue( Tool.hadAudioExtension("fileName.wav") );
+	}
+
+	@Test
+	public void hadImageExtension() {
+
+		Assert.assertFalse( Tool.hadImageExtension(null) );
+		Assert.assertFalse( Tool.hadImageExtension("") );
+		Assert.assertFalse( Tool.hadImageExtension(" ") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.txt") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.docx") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.mp3") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.aac") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.wma") );
+		Assert.assertFalse( Tool.hadImageExtension("fileName.wav") );
+
+		Assert.assertTrue( Tool.hadImageExtension("fileName.png") );
+		Assert.assertTrue( Tool.hadImageExtension("fileName.jpg") );
+		Assert.assertTrue( Tool.hadImageExtension("fileName.jpeg") );
 	}
 
 }

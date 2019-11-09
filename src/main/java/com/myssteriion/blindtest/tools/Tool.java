@@ -102,6 +102,34 @@ public class Tool {
 		return Arrays.asList( parent.listFiles() );
 	}
 
+	/**
+	 * Test if the fileName is an audio file.
+	 *
+	 * @param fileName the fileName
+	 * @return TRUE if the fileName is an audio file, FALSE otherwise
+	 */
+	public static boolean hadAudioExtension(String fileName) {
+
+		if ( isNullOrEmpty(fileName) )
+			return false;
+
+		return Constant.AUDIO_EXTENSIONS.stream().anyMatch(fileName::endsWith);
+	}
+
+	/**
+	 * Test if the fileName is an image file.
+	 *
+	 * @param fileName the fileName
+	 * @return TRUE if the fileName is an image file, FALSE otherwise
+	 */
+	public static boolean hadImageExtension(String fileName) {
+
+		if ( isNullOrEmpty(fileName) )
+			return false;
+
+		return Constant.IMAGE_EXTENSIONS.stream().anyMatch(fileName::endsWith);
+	}
+
 
 	private Tool() {}
 

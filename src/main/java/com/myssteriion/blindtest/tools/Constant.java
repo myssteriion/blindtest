@@ -1,6 +1,8 @@
 package com.myssteriion.blindtest.tools;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Constant class.
@@ -12,7 +14,8 @@ public class Constant {
 	public static final String AVATAR_FOLDER		= "avatar";
 
 	public static final String DEFAULT_AVATAR		= "defaut.png";
-	public static final String MP3_EXTENSION		= ".mp3";
+	public static final List<String> IMAGE_EXTENSIONS = Arrays.asList(".png", ".jpg", ".jpeg");
+	public static final List<String> AUDIO_EXTENSIONS = Arrays.asList(".mp3", ".wav", ".aac", ".wma");
 
 	public static final String EMPTY_JSON	 		= "{}";
 

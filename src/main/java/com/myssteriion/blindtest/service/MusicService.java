@@ -55,7 +55,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			for ( File music : Tool.getChildren(themeDirectory) ) {
 
 				MusicDTO musicDto = new MusicDTO(music.getName(), theme);
-				if ( music.isFile() && !dao.findByNameAndTheme(musicDto.getName(), musicDto.getTheme()).isPresent() )
+				if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !dao.findByNameAndTheme(musicDto.getName(), musicDto.getTheme()).isPresent() )
 					dao.save(musicDto);
 			}
 		}

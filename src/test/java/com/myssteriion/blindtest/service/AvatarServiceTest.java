@@ -55,13 +55,14 @@ public class AvatarServiceTest extends AbstractTest {
 
         File mockFile = Mockito.mock(File.class);
         Mockito.when(mockFile.isFile()).thenReturn(true);
-        Mockito.when(mockFile.getName()).thenReturn("file");
+        Mockito.when(mockFile.getName()).thenReturn("file.png");
 
         File mockDirectory = Mockito.mock(File.class);
         Mockito.when(mockDirectory.isFile()).thenReturn(false);
 
         PowerMockito.mockStatic(Tool.class);
         PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+        PowerMockito.when(Tool.hadImageExtension(Mockito.anyString())).thenReturn(true);
 
 
         avatarService = Mockito.spy( new AvatarService(dao, configProperties) );
