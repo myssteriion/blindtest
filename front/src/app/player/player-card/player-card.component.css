@@ -1,7 +1,3 @@
-.player-card-rank-score {
-    margin: auto;
-}
-
 .player-card-rank {
     margin: auto;
     text-align: center;
@@ -31,5 +27,4 @@
     margin: auto;
     color: orangered;
     font-weight: bold;
-    font-style: italic;
 }
