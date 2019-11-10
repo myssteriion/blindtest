@@ -23,12 +23,6 @@
         <div class="col-2 game-current-view-current-theme">
             <div class="row"><div class="col font-size-normal">{{ 'GAME.CURRENT_VIEW.THEME_LABEL' | translate }}</div></div>
             <div class="row"><div class="col"><img src="{{ currentTheme }}"/></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="getRandomMusic()">Lancer</button></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="stopMusic()">stop</button></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="speed()">speed</button></div></div>
-            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="reverse()">reverse</button></div></div>
         </div>
 
         <!-- effect -->
@@ -42,6 +36,15 @@
             <player-card *ngFor="let player of rightPlayers;" [player]="player" [rankOnRight]="false"></player-card>
         </div>
 
+    </div>
+
+    <div class="row">
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="getRandomMusic()">Lancer</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="stopMusic()">stop</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="speed()">speed</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="reverse()">reverse</button></div>
     </div>
 
 </div>
