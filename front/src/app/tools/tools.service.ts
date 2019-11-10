@@ -111,4 +111,28 @@ export class ToolsService {
         return audioSrc;
     }
 
+    /**
+     * Is a thread sleep.
+     *
+     * @param ms the sleep during (in ms)
+     */
+    public static sleep(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    /**
+     * Generate a random integer between min and max;
+     *
+     * @param min the min
+     * @param max the max
+     * @return a random integer
+     */
+    public static random(min: number, max: number): number {
+
+        if ( ToolsService.isNull(min) || ToolsService.isNull(max) || min >= max)
+            return 0;
+
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
 }
