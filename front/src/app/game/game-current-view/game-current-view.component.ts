@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES, EFFECTS} from "../../tools/constant";
+import {EFFECTS, EFFECTS_INDEX, MARIO_KART_SOUND, SLIDE_ANIMATION, THEMES, THEMES_INDEX} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,10 @@ import {map} from 'rxjs/operators';
 import {GameResource} from "../../resources/game.resource";
 import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Player} from 'src/app/interfaces/game/player.interface';
+import {MusicResource} from "../../resources/music.resource";
+import {Music} from "../../interfaces/dto/music.interface";
+import {ToolsService} from 'src/app/tools/tools.service';
 
 /**
  * The current game view.
@@ -29,6 +33,16 @@ export class GameCurrentViewComponent implements OnInit {
 	public game: Game;
 
 	/**
+	 * Players left.
+	 */
+	public leftPlayers: Player[];
+
+	/**
+	 * Players right.
+	 */
+	public rightPlayers: Player[];
+
+	/**
 	 * If view is loaded.
 	 */
 	public isLoaded: boolean;
@@ -37,16 +51,6 @@ export class GameCurrentViewComponent implements OnInit {
 	 * The current exit icon.
 	 */
 	public currentExitIcon;
-
-	/**
-	 * All images themes.
-	 */
-	private THEMES = THEMES;
-
-	/**
-	 * All images effects.
-	 */
-	private EFFECTS = EFFECTS;
 
 	/**
 	 * Current theme.
@@ -58,6 +62,16 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	public currentEffect: string;
 
+	/**
+	 * Current music.
+	 */
+	public currentMusic: Music;
+
+	/**
+	 * Audio object.
+	 */
+	private audioObj;
+
 	faDoorClosed = faDoorClosed;
 	faDoorOpen = faDoorOpen;
 
@@ -67,7 +81,8 @@ export class GameCurrentViewComponent implements OnInit {
 				private _translate: TranslateService,
 				private _activatedRoute: ActivatedRoute,
 				private _router: Router,
-				private _ngbModal: NgbModal) { }
+				private _ngbModal: NgbModal,
+				private _musicResource: MusicResource) { }
 
 	ngOnInit() {
 
@@ -88,7 +103,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this._getIdParam().subscribe(
 			response => {
 				this._gameResource.findById( Number(response) ).subscribe(
-					response => { this.game = response; this.isLoaded = true; },
+					response => { this.game = response; this._fillPlayers(); },
 					error => { throw Error("can't find game : " + JSON.stringify(error)); }
 				);
 			},
@@ -103,6 +118,27 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private _getIdParam(): Observable<string> {
 		return this._activatedRoute.params.pipe( map(param => param.id) );
+	}
+
+	/**
+	 * Fill left/right players.
+	 * @private
+	 */
+	private _fillPlayers() {
+
+		let allPlayers = this.game.players;
+
+		this.leftPlayers = [];
+		this.rightPlayers = [];
+
+		for (let i = 0; i < allPlayers.length; i++) {
+			if (i%2 === 0)
+				this.leftPlayers.push(allPlayers[i]);
+			else
+				this.rightPlayers.push(allPlayers[i]);
+		}
+
+		this.isLoaded = true;
 	}
 
 
@@ -158,6 +194,78 @@ export class GameCurrentViewComponent implements OnInit {
 			"</div></div>";
 
 		return body;
+	}
+
+	public getRandomMusic() {
+		this._musicResource.random().subscribe(
+			response => {
+
+				this.currentMusic = response;
+				this.audioObj = new Audio();
+				this.audioObj.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+
+				this.launchRoll();
+
+				console.log("mu", this.currentMusic);
+			},
+			error => { throw Error("can't find music : " + JSON.stringify(error)); }
+		);
+	}
+
+	/**
+	 * Launch theme and effect rolling.
+	 */
+	private async launchRoll() {
+
+		let themeIndex = THEMES_INDEX.findIndex(theme => theme === this.currentMusic.theme);
+		let effectIndex = EFFECTS_INDEX.findIndex(effect => effect === this.currentMusic.effect);
+
+		let audioObj = new Audio();
+		audioObj.src = MARIO_KART_SOUND;
+		audioObj.load();
+		audioObj.play();
+
+		while ( !audioObj.ended ) {
+			this.currentTheme = THEMES[ ToolsService.random(0, THEMES_INDEX.length-1) ];
+			this.currentEffect = EFFECTS[ ToolsService.random(0, EFFECTS_INDEX.length-1) ];
+			await ToolsService.sleep(50);
+		}
+
+		this.currentTheme = THEMES[themeIndex];
+		this.currentEffect = EFFECTS[effectIndex];
+	}
+
+	public stopMusic() {
+		this.audioObj.pause();
+	}
+
+	public slow() {
+		this.audioObj.defaultPlaybackRate = 0.5;
+		this.audioObj.load();
+		this.audioObj.currentTime = 50;
+		this.audioObj.play();
+	}
+
+	public normal() {
+		this.audioObj.defaultPlaybackRate = 1;
+		this.audioObj.load();
+		this.audioObj.currentTime = 50;
+		this.audioObj.play();
+	}
+
+	public speed() {
+		this.audioObj.defaultPlaybackRate = 2;
+		this.audioObj.load();
+		this.audioObj.currentTime = 50;
+		this.audioObj.play();
+	}
+
+	public reverse() {
+
+		this.audioObj.defaultPlaybackRate = -1;
+		this.audioObj.load();
+		this.audioObj.currentTime = 50;
+		this.audioObj.play();
 	}
 
 }

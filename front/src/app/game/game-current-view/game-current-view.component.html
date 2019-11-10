@@ -1,4 +1,4 @@
-<div *ngIf="isLoaded" class="container" @flyInOut>
+<div *ngIf="isLoaded" class="container-fluid" @flyInOut>
 
     <!-- header & exit -->
     <div class="row">
@@ -12,18 +12,34 @@
     </div>
 
     <!-- theme and effect -->
-    <div class="row">
+    <div class="row justify-content-center game-current-view-current-theme-effect">
+
+        <!-- left players -->
+        <div class="col-4">
+            <player-card *ngFor="let player of leftPlayers;" [player]="player" [rankOnRight]="true"></player-card>
+        </div>
 
         <!-- theme -->
-        <div class="col-3 game-current-view-current-theme-effect">
+        <div class="col-2 game-current-view-current-theme">
             <div class="row"><div class="col font-size-normal">{{ 'GAME.CURRENT_VIEW.THEME_LABEL' | translate }}</div></div>
             <div class="row"><div class="col"><img src="{{ currentTheme }}"/></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="getRandomMusic()">Lancer</button></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="stopMusic()">stop</button></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="speed()">speed</button></div></div>
+            <div class="row"><div class="col"><button class="btn btn-info font-size-normal" (click)="reverse()">reverse</button></div></div>
         </div>
 
         <!-- effect -->
-        <div class="col-3 game-current-view-current-theme-effect">
+        <div class="col-2 game-current-view-current-effect">
             <div class="row"><div class="col font-size-normal">{{ 'GAME.CURRENT_VIEW.EFFECT_LABEL' | translate }}</div></div>
             <div class="row"><div class="col"><img src="{{ currentEffect }}"/></div></div>
+        </div>
+
+        <!-- right players -->
+        <div class="col-4">
+            <player-card *ngFor="let player of rightPlayers;" [player]="player" [rankOnRight]="false"></player-card>
         </div>
 
     </div>

@@ -2,17 +2,23 @@
     margin: auto auto 2em auto;
 }
 
-.game-current-view-current-theme-effect div {
-    margin: auto;
-    text-align: center;
+.game-current-view-current-theme-effect {
+    padding-bottom: 2em;
 }
 
 .game-current-view-current-theme-effect img {
     height: 8em;
     margin: 10px;
-    padding: 10px;
-    text-align: center;
+    padding: 15px;
     border: black 1px solid;
     border-radius: 10px;
     background-color: white;
+}
+
+.game-current-view-current-theme {
+    text-align: right;
+}
+
+.game-current-view-current-effect {
+    text-align: left;
 }
