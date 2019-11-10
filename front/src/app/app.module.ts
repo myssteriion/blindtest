@@ -1,19 +1,19 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ToastrModule} from 'ngx-toastr';
-
-import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {Ng2OdometerModule} from 'ng2-odometer';
+import {CountdownModule} from 'ngx-countdown';
 
+import {AppComponent} from './app.component';
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
@@ -32,10 +32,12 @@ import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.
 import {PlayerCardComponent} from './player/player-card/player-card.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
-import {ProfileResource} from './resources/profile.resource';
-import {AvatarResource} from './resources/avatar.resource';
+
 import {ToolsService} from "./tools/tools.service";
 import {ToasterService} from "./services/toaster.service";
+
+import {ProfileResource} from './resources/profile.resource';
+import {AvatarResource} from './resources/avatar.resource';
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 
@@ -85,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 				deps: [HttpClient]
 			}
 		}),
-		Ng2OdometerModule.forRoot()
+		Ng2OdometerModule.forRoot(),
+		CountdownModule
 	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
