@@ -22,12 +22,14 @@ export class ProfileCardComponent implements OnInit {
     /**
      * The profile.
      */
-    @Input() profile: Profile;
+    @Input()
+    private profile: Profile;
 
     /**
      * If can update/delete profile.
      */
-    @Input() canEdit: boolean;
+    @Input()
+    private canEdit: boolean;
 
     /**
      * Event after update/delete profile.
@@ -37,26 +39,30 @@ export class ProfileCardComponent implements OnInit {
     /**
      * If can select profile.
      */
-    @Input() canSelect: boolean;
+    @Input()
+    private canSelect: boolean;
 
     /**
      * On select.
      */
-    @Output() onSelect = new EventEmitter();
+    @Output()
+    private onSelect = new EventEmitter();
 
     /**
      * If can deselect profile.
      */
-    @Input() canDeselect: boolean;
+    @Input()
+    private canDeselect: boolean;
 
     /**
      * On deselect.
      */
-    @Output() onDeselect = new EventEmitter();
+    @Output()
+    private onDeselect = new EventEmitter();
 
-    faEdit = faEdit;
-    faTrashAlt = faTrashAlt;
-    faTimes = faTimes;
+    private faEdit = faEdit;
+    private faTrashAlt = faTrashAlt;
+    private faTimes = faTimes;
 
 
 
@@ -81,14 +87,14 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Gets the avatar flux.
      */
-    public getFluxForImg(): string {
+    private getFluxForImg(): string {
         return ToolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
     /**
      * Gets background class.
      */
-    public getBackgroundClass(): string {
+    private getBackgroundClass(): string {
 
         let backgroundClass = "profile-card-background-" + this.profile.background;
 
@@ -101,7 +107,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Open modal for edit profile and emit it.
      */
-    public edit(): void {
+    private edit(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );
         modalRef.componentInstance.profile = this.profile;
@@ -116,7 +122,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Open modal for delete profile and emit it.
      */
-    public delete(): void {
+    private delete(): void {
 
         const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static' } );
         modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
@@ -139,7 +145,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * On click on profile.
      */
-    public select(): void {
+    private select(): void {
         if (this.canSelect)
             this.onSelect.emit();
     }
@@ -147,7 +153,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Test if icons need to be show.
      */
-    public showIcons(): boolean {
+    private showIcons(): boolean {
         return this.canEdit || this.canDeselect;
     }
 

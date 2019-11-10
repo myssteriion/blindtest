@@ -24,32 +24,34 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * The profile.
 	 */
-	@Input() profile: Profile;
+	@Input()
+	private profile: Profile;
 
 	/**
 	 * Creation or edition.
 	 */
-	@Input() create: boolean;
+	@Input()
+	private create: boolean;
 
 	/**
 	 * The new profile.
 	 */
-	public newProfile: Profile;
+	private newProfile: Profile;
 
 	/**
 	 * The avatars page.
 	 */
-	public page: Page<Avatar>;
+	private page: Page<Avatar>;
 
 	/**
 	 * Show/hide avatars page.
 	 */
-	public showAvatars: boolean;
+	private showAvatars: boolean;
 
 	/**
 	 * Background ids.
 	 */
-	public backgroundIds = ["0", "1", "2", "3", "4"];
+	private backgroundIds = ["0", "1", "2", "3", "4"];
 
 
 
@@ -99,7 +101,7 @@ export class ProfileEditComponent implements OnInit {
 	 *
 	 * @param pageNumber the page number
 	 */
-	public loadAvatars(pageNumber: number): void {
+	private loadAvatars(pageNumber: number): void {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
 			response => { this.page = response; },
@@ -110,14 +112,14 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * Show/hide avatars page.
 	 */
-	public showHideAvatars(): void {
+	private showHideAvatars(): void {
 		this.showAvatars = !this.showAvatars;
 	}
 
 	/**
 	 * Gets the new avatar flux.
 	 */
-	public getCurrentFluxForImg(): string {
+	private getCurrentFluxForImg(): string {
 		return ToolsService.getFluxForImg(this.newProfile.avatar.flux);
 	}
 
@@ -126,7 +128,7 @@ export class ProfileEditComponent implements OnInit {
 	 *
 	 * @param avatar the avatar
 	 */
-	public getFluxForImg(avatar: Avatar): string {
+	private getFluxForImg(avatar: Avatar): string {
 
 		ToolsService.verifyValue("avatar", avatar);
 
@@ -138,7 +140,7 @@ export class ProfileEditComponent implements OnInit {
 	 *
 	 * @param index the background id
 	 */
-	public getBackgroundClass(index: number): string {
+	private getBackgroundClass(index: number): string {
 
 		let cssClass = "profile-card-background-" + index;
 
@@ -153,7 +155,7 @@ export class ProfileEditComponent implements OnInit {
 	 *
 	 * @param avatar the avatar selected
 	 */
-	public selectAvatar(avatar: Avatar): void {
+	private selectAvatar(avatar: Avatar): void {
 
 		ToolsService.verifyValue("avatar", avatar);
 
@@ -164,7 +166,7 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * Test if the save button is disabled.
 	 */
-	public disabledSave(): boolean {
+	private disabledSave(): boolean {
 		return ToolsService.isNullOrEmpty(this.newProfile.name) ||
 			ToolsService.isNull(this.newProfile.avatar) ||
 			ToolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
@@ -175,7 +177,7 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * Save/update profile.
 	 */
-	public save(): void {
+	private save(): void {
 
 		let profileTmp = {
 			id: this.newProfile.id,
@@ -214,7 +216,7 @@ export class ProfileEditComponent implements OnInit {
 	/**
 	 * Cancel the modal.
 	 */
-	public cancel(): void {
+	private cancel(): void {
 		this._ngbActiveModal.dismiss();
 	}
 

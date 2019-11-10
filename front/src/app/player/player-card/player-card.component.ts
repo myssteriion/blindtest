@@ -16,13 +16,13 @@ export class PlayerCardComponent implements OnInit {
      * The player.
      */
     @Input()
-    public player: Player;
+    private player: Player;
 
     /**
      * True for show rank on right, false for left.
      */
     @Input()
-    public rankOnRight: boolean;
+    private rankOnRight: boolean;
 
     faMedal = faMedal;
 
@@ -39,7 +39,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * Test if the medal must be show.
      */
-    public showMedal() {
+    private showMedal() {
 
         let rank = this.player.rank;
         return rank === Rank.FIRST || rank === Rank.SECOND || rank === Rank.THIRD || rank === Rank.FOURTH;
@@ -48,7 +48,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * Get medal style.
      */
-    public getMedalStyle() {
+    private getMedalStyle() {
 
         let colorStyle = "";
 

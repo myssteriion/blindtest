@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/dto/profile.interface';
-import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/base/page.interface';
-import {ProfileEditComponent} from "../profile-edit/profile-edit.component";
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * The profiles view.
@@ -18,12 +16,14 @@ export class ProfilePageModalComponent implements OnInit {
     /**
      * Profiles page.
      */
-    @Input()  page: Page<Profile>;
+    @Input()
+    private page: Page<Profile>;
 
     /**
      * On select profile card.
      */
-    @Output() onSelect = new EventEmitter();
+    @Output()
+    private onSelect = new EventEmitter();
 
 
 
@@ -36,7 +36,7 @@ export class ProfilePageModalComponent implements OnInit {
     /**
      * Close modal.
      */
-    public close() {
+    private close() {
         this._ngbActiveModal.close();
     }
 

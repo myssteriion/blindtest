@@ -14,7 +14,7 @@ export class VersionViewComponent implements OnInit {
 	/**
 	 * The version.
 	 */
-	public version: string = environment.version;
+	private version: string = environment.version;
 
 
 

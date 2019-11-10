@@ -19,14 +19,14 @@ export class GenericViewComponent {
 	/**
 	 * Gets generic.
 	 */
-	public getGeneric(): string {
+	private getGeneric(): string {
 		return GENERIC;
 	}
 
 	/**
 	 * Stop generic.
 	 */
-	public stopGeneric() {
+	private stopGeneric() {
 		this._router.navigateByUrl( routesWithHome[0].path );
 	}
 

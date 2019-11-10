@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
 	/**
 	 * Title.
 	 */
-	@Input() title: string;
+	@Input()
+	private title: string;
 
 
 

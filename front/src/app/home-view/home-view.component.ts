@@ -17,7 +17,7 @@ export class HomeViewComponent {
 	/**
 	 * Route (without home).
 	 */
-	public routes = routesWithoutHome;
+	private routes = routesWithoutHome;
 
 
 
@@ -30,7 +30,7 @@ export class HomeViewComponent {
 	/**
 	 * Gets logo.
 	 */
-	public getLogo() {
+	private getLogo() {
 		return LOGO;
 	}
 

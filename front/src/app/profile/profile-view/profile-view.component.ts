@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { SLIDE_ANIMATION } from 'src/app/tools/constant';
+import {SLIDE_ANIMATION} from 'src/app/tools/constant';
 
 /**
  * The profiles view.

@@ -28,8 +28,8 @@ export class NavbarMenuComponent implements OnInit {
 	 */
 	public routes = routesWithHome;
 
-	faMusic = faMusic;
-	faVolumeMute = faVolumeMute;
+	private faMusic = faMusic;
+	private faVolumeMute = faVolumeMute;
 
 
 
@@ -52,7 +52,7 @@ export class NavbarMenuComponent implements OnInit {
 	/**
 	 * Gets logo.
 	 */
-	public getLogo() {
+	private getLogo() {
 		return LOGO;
 	}
 
@@ -61,7 +61,7 @@ export class NavbarMenuComponent implements OnInit {
 	 *
 	 * @param path
 	 */
-	public isActive(path: string): string {
+	private isActive(path: string): string {
 
 		let customCss = "";
 
@@ -74,7 +74,7 @@ export class NavbarMenuComponent implements OnInit {
 	/**
 	 * Play music.
 	 */
-	public playMusic() {
+	private playMusic() {
 
 		this.musicIsPlaying = true;
 		this.audioObj.play();

@@ -14,12 +14,14 @@ export class ModalConfirmComponent implements OnInit {
     /**
      * The modal title.
      */
-    @Input() title: string;
+    @Input()
+    private title: string;
 
     /**
      * The modal message.
      */
-    @Input() body: string;
+    @Input()
+    private body: string;
 
 
 
@@ -31,14 +33,14 @@ export class ModalConfirmComponent implements OnInit {
     /**
      * On yes.
      */
-    public yes(): void {
+    private yes(): void {
         this._ngbActiveModal.close();
     }
 
     /**
      * On no.
      */
-    public no(): void {
+    private no(): void {
         this._ngbActiveModal.dismiss();
     }
 

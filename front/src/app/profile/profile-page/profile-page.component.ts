@@ -22,42 +22,45 @@ export class ProfilePageComponent implements OnInit {
     /**
      * If can create/update/delete profile.
      */
-    @Input() canEdit: boolean;
+    @Input()
+    private canEdit: boolean;
 
     /**
      * If can select profile card.
      */
-    @Input() canSelect: boolean;
+    @Input()
+    private canSelect: boolean;
 
     /**
      * On select profile card.
      */
-    @Output() onSelect = new EventEmitter();
+    @Output()
+    private onSelect = new EventEmitter();
 
     /**
      * If view is loaded.
      */
-    public isLoaded: boolean;
+    private isLoaded: boolean;
 
     /**
      * Profiles page.
      */
-    public page: Page<Profile>;
+    private page: Page<Profile>;
 
     /**
      * The current page.
      */
-    public currentPage: number;
+    private currentPage: number;
 
     /**
      * Show/hide profiles pages.
      */
-    public showProfiles: boolean;
+    private showProfiles: boolean;
 
     /**
      * The prefix name filter.
      */
-    public prefixName: string;
+    private prefixName: string;
 
 
 
@@ -79,7 +82,7 @@ export class ProfilePageComponent implements OnInit {
      *
      * @param initPageNumber TRUE for force page number to 1
      */
-    public loadProfiles(initPageNumber: boolean): void {
+    private loadProfiles(initPageNumber: boolean): void {
 
         this.showProfiles = false;
         if (initPageNumber)
@@ -94,7 +97,7 @@ export class ProfilePageComponent implements OnInit {
     /**
      * Open modal for create new profile.
      */
-    public createProfile(): void {
+    private createProfile(): void {
 
         const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );
         modalRef.componentInstance.create = true;
