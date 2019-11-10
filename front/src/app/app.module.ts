@@ -30,6 +30,7 @@ import {GenericViewComponent} from "./generic-view/generic-view.component";
 import {GameCurrentViewComponent} from './game/game-current-view/game-current-view.component';
 import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.component';
 import {PlayerCardComponent} from './player/player-card/player-card.component';
+import {ThemeEffectComponent} from "./game/factoring-part/theme-effect/theme-effect.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -64,7 +65,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GenericViewComponent,
 		GameCurrentViewComponent,
 		GameResumeViewComponent,
-		PlayerCardComponent
+		PlayerCardComponent,
+		ThemeEffectComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,
