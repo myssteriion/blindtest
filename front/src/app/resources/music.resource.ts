@@ -13,7 +13,7 @@ export class MusicResource {
 	/**
 	 * Rest path.
 	 */
-	private musicsPath = environment.baseBackendUrl + "/musics";
+	private path = environment.baseBackendUrl + "/musics";
 
 
 
@@ -25,7 +25,7 @@ export class MusicResource {
 	 * Get random musics.
 	 */
 	public random(): Observable<Music> {
-		return this._http.get<Music>(this.musicsPath + "/random");
+		return this._http.get<Music>(this.path + "/random");
 	}
 
 }

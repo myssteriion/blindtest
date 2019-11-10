@@ -15,7 +15,7 @@ export class GameResource {
 	/**
 	 * Rest path.
 	 */
-	private gamePath = environment.baseBackendUrl + "/game";
+	private path = environment.baseBackendUrl + "/game";
 
 
 
@@ -28,7 +28,7 @@ export class GameResource {
 	 * @param newGame the new game
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
-		return this._http.post<Game>(this.gamePath, newGame);
+		return this._http.post<Game>(this.path, newGame);
 	}
 
 	/**
@@ -36,7 +36,7 @@ export class GameResource {
 	 * @param musicResult the music result
 	 */
 	public apply(musicResult: MusicResult): Observable<Game> {
-		return this._http.post<Game>(this.gamePath + "/apply", musicResult);
+		return this._http.post<Game>(this.path + "/apply", musicResult);
 	}
 
 	/**
@@ -44,7 +44,7 @@ export class GameResource {
 	 * @param id the id
 	 */
 	public findById(id: number): Observable<Game> {
-		return this._http.get<Game>(this.gamePath + "/" + id);
+		return this._http.get<Game>(this.path + "/" + id);
 	}
 
 }
