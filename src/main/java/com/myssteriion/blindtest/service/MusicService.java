@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -119,6 +120,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 		music.setFlux( new Flux(path.toFile()) );
+		music.setEffect( findNextEffect() );
 
 		return music;
 	}
@@ -189,6 +191,22 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		
 		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
 		return potentialMusics.get(random);
+	}
+
+	/**
+	 * Randomly choose an effect.
+	 *
+	 * @return an effect
+	 */
+	private Effect findNextEffect() {
+
+		int r = Tool.RANDOM.nextInt(100);
+
+		if (r >= 50 && r < 67) return Effect.SLOW;
+		if (r >= 68 && r < 84) return Effect.SPEED;
+		if (r >= 85 && r < 100) return Effect.REVERSE;
+
+		return Effect.NONE;
 	}
 
 }

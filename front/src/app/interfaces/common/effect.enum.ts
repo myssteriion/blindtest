@@ -2,8 +2,8 @@
  * Effect.
  */
 const enum Effect {
-	NONE,
-	SLOW,
-	SPEED,
-	REVERSE
+	NONE = "NONE",
+	SLOW = "SLOW",
+	SPEED = "SPEED",
+	REVERSE = "REVERSE"
 }

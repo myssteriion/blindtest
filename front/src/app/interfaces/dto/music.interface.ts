@@ -8,5 +8,6 @@ export interface Music {
 	name: string,
 	theme: Theme,
 	played: number,
-	flux : Flux
+	flux : Flux,
+	effect: Effect,
 }

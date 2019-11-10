@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
@@ -58,6 +59,11 @@ public class MusicDTO extends AbstractDTO {
 	@Transient
 	private Flux flux;
 
+	/**
+	 * The effect.
+	 */
+	@Transient
+	private Effect effect;
 
 
 
@@ -185,6 +191,25 @@ public class MusicDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Gets effect.
+	 *
+	 * @return The effect.
+	 */
+	public Effect getEffect() {
+		return effect;
+	}
+
+	/**
+	 * Set effect.
+	 *
+	 * @param effect The effect.
+	 */
+	public MusicDTO setEffect(Effect effect) {
+		this.effect = effect;
+		return this;
+	}
+
+	/**
 	 * Increment played.
 	 */
 	public void incrementPlayed() {
@@ -217,7 +242,8 @@ public class MusicDTO extends AbstractDTO {
 				", name=" + name +
 				", theme=" + theme +
 				", played=" + played +
-				", flux={" + flux + "}";
+				", flux={" + flux + "}" +
+				", effect=" + effect;
 	}
 
 }

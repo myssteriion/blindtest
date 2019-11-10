@@ -54,10 +54,6 @@ public class Game implements IModel {
      */
     private AbstractRoundContent roundContent;
 
-    /**
-     * The current effect.
-     */
-    private Effect nextEffect;
 
 
     /**
@@ -80,7 +76,6 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
-        this.nextEffect = Effect.NONE;
     }
 
 
@@ -156,15 +151,6 @@ public class Game implements IModel {
         return roundContent;
     }
 
-    /**
-     * Gets nextEffect.
-     *
-     * @return the nextEffect
-     */
-    public Effect getNextEffect() {
-        return nextEffect;
-    }
-
 
     /**
      * Pass to the next step.
@@ -173,7 +159,6 @@ public class Game implements IModel {
 
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
-        this.nextEffect = findNextEffect();
 
         if ( roundContent.isFinished(this) ) {
             round = round.nextRound();
@@ -210,23 +195,6 @@ public class Game implements IModel {
     }
 
 
-    /**
-     * Randomly choose an effect.
-     *
-     * @return an effect
-     */
-    private Effect findNextEffect() {
-
-        int r = Tool.RANDOM.nextInt(100);
-
-        if (r >= 70 && r < 80) return Effect.SLOW;
-        if (r >= 80 && r < 90) return Effect.SPEED;
-        if (r >= 90 && r < 100) return Effect.REVERSE;
-
-        return Effect.NONE;
-    }
-
-
     @Override
     public String toString() {
         return "players=" + players +
@@ -234,8 +202,7 @@ public class Game implements IModel {
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
                 ", round=" + round +
-                ", roundContent={" + roundContent + "}" +
-                ", nextEffect=" + nextEffect;
+                ", roundContent={" + roundContent + "}";
     }
 
 }

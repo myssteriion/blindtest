@@ -64,7 +64,6 @@ public class GameTest extends AbstractTest {
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
-        Assert.assertEquals( Effect.NONE, game.getNextEffect() );
 
 
         players = Arrays.asList(
@@ -94,7 +93,6 @@ public class GameTest extends AbstractTest {
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
-        Assert.assertEquals( Effect.NONE, game.getNextEffect() );
     }
 
     @Test
@@ -207,7 +205,7 @@ public class GameTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
 
         Game gameUn = new Game(new HashSet<>(players), duration);
-        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, nextEffect=NONE", gameUn.toString() );
+        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}", gameUn.toString() );
     }
 
 }
