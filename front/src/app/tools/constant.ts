@@ -16,6 +16,11 @@ export const AVATAR_NOT_FOUND = "assets/images/avatar/not-found.png";
 export const FFXII_THEME = "assets/sounds/ff12-main_theme.mp3";
 
 /**
+ * Path to "mario-kart-object.mp3" sound in assets folder.
+ */
+export const MARIO_KART_SOUND = "assets/sounds/mario-kart-object.mp3";
+
+/**
  * Path to "generic" video in assets folder.
  */
 export const GENERIC = "assets/videos/generic.mp4";
@@ -33,6 +38,11 @@ export const THEMES = [THEMES_FOLDER + "60.png", THEMES_FOLDER + "70.png", THEME
                        THEMES_FOLDER + "classiques.png", THEMES_FOLDER + "disney.png", THEMES_FOLDER + "series.png"];
 
 /**
+ * For get index from Theme.
+ */
+export const THEMES_INDEX = [Theme.ANNEES_60, Theme.ANNEES_70, Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000, Theme.CINEMAS, Theme.CLASSIQUES, Theme.DISNEY, Theme.SERIES];
+
+/**
  * Path to "effects" folder in assets folder.
  */
 const EFFECTS_FOLDER = "assets/images/effects/";
@@ -41,6 +51,12 @@ const EFFECTS_FOLDER = "assets/images/effects/";
  * Path to "effects" in assets folder.
  */
 export const EFFECTS = [EFFECTS_FOLDER + "cross.png", EFFECTS_FOLDER + "slow.png", EFFECTS_FOLDER + "speed.png", EFFECTS_FOLDER + "reverse.png"];
+
+/**
+ * For get index from Effect.
+ */
+export const EFFECTS_INDEX = [Effect.NONE, Effect.SLOW, Effect.SPEED, Effect.REVERSE];
+
 
 /**
  * Translation animation.
