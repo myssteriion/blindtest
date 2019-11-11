@@ -67,9 +67,6 @@ export const SLIDE_ANIMATION =
         transition('void => *', [
             style({transform: 'translateX(100%)'}),
             animate(750)
-        ]),
-        transition('* => void', [
-            animate(750, style({transform: 'translateX(-100%)'}))
         ])
     ]);
 
@@ -82,6 +79,16 @@ export const OPACITY_ANIMATION =
             style({ opacity: 0 }),
             animate('1s', style({ opacity: 1 })),
         ])
+    ]);
+
+/**
+ * Reduction animation.
+ */
+export const REDUCTION_ANIMATION =
+    trigger('reductionTrigger', [
+        state('big', style({ transform: 'scale(3)'} )),
+        state('normal', style({ transform: 'scale(1)'} )),
+        transition('big => normal', [ animate(250) ])
     ]);
 
 

@@ -1,0 +1,8 @@
+<div [hidden]="!show" class="row custom-countdown-frame">
+
+    <!-- countdown -->
+    <div class="col" [@reductionTrigger]="animationTriggerValue">
+        <countdown #countdown [config]="countdownConfig" (event)="countdownEvent($event)"></countdown>
+    </div>
+
+</div>
