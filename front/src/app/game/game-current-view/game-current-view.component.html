@@ -29,6 +29,9 @@
             <!-- pre countdown -->
             <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEnd)="onPreCountdownEnd()"></custom-countdown>
 
+            <!-- countdown -->
+            <custom-countdown #countdown [animation]="'reduction'" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
+
             <!-- next music -->
             <div *ngIf="showNextMusic" class="row">
                 <div class="col game-current-view-next-music">
@@ -50,7 +53,7 @@
 
     <div class="row">
         <div class="col"><button class="btn btn-info font-size-normal" (click)="nextMusic()">Lancer</button></div>
-        <div class="col"><button class="btn btn-info font-size-normal" (click)="stopMusic()">stop</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="stopCurrentMusic()">stop</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="speed()">speed</button></div>

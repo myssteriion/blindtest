@@ -73,6 +73,17 @@ export class GameCurrentViewComponent implements OnInit {
 	private preCountdownConfig: CountdownConfig;
 
 	/**
+	 * The countdown component.
+	 */
+	@ViewChild("countdown", { static: false })
+	private countdown: CustomCountdownComponent;
+
+	/**
+	 * The pre countdown config.
+	 */
+	private countdownConfig: CountdownConfig;
+
+	/**
 	 * Current music.
 	 */
 	private currentMusic: Music;
@@ -117,6 +128,13 @@ export class GameCurrentViewComponent implements OnInit {
 				};
 			}
 		);
+
+		this.countdownConfig = {
+			demand: true,
+			format: "ss",
+			leftTime: 25,
+			stopTime: 0
+		};
 
 		this._getGame();
 	}
@@ -233,6 +251,8 @@ export class GameCurrentViewComponent implements OnInit {
 	private nextMusic(): void {
 
 		this.showNextMusic = false;
+		this.preCountdown.setShow(false);
+		this.countdown.setShow(false);
 
 		this._musicResource.random().subscribe(
 			response => {
@@ -248,18 +268,18 @@ export class GameCurrentViewComponent implements OnInit {
 		);
 	}
 
+
 	/**
 	 * Roll theme and effect.
 	 */
 	private rollThemeEffect(): void {
-
-		this.preCountdown.setShow(false);
 
 		this.themeEffect.setShow(true);
 		this.themeEffect.setMusic(this.currentMusic);
 		this.themeEffect.roll()
 			.then( () => { this.startPreCountdown(); } );
 	}
+
 
 	/**
 	 * Start the pre countdown.
@@ -273,8 +293,26 @@ export class GameCurrentViewComponent implements OnInit {
 	 * When the pre countdown is ended.
 	 */
 	private onPreCountdownEnd(): void {
-		this.listenCurrentMusic();
+		this.startCountdown();
 	}
+
+
+	/**
+	 * Start the countdown.
+	 */
+	private startCountdown(): void {
+		this.countdown.setShow(true);
+		this.listenCurrentMusic();
+		this.countdown.start();
+	}
+
+	/**
+	 * When the countdown is ended.
+	 */
+	private onCountdownEnd(): void {
+		this.stopCurrentMusic();
+	}
+
 
 	/**
 	 * Listen current music.
@@ -289,35 +327,35 @@ export class GameCurrentViewComponent implements OnInit {
 
 		this.audio.defaultPlaybackRate = defaultPlaybackRate;
 		this.audio.load();
-		this.audio.currentTime = 0;
+		// this.audio.currentTime = 0;
 		this.audio.play();
 	}
 
-
-
-
-	public stopMusic() {
+	public stopCurrentMusic() {
 		this.audio.pause();
 	}
+
+
+
 
 	public slow() {
 		this.audio.defaultPlaybackRate = 0.5;
 		this.audio.load();
-		this.audio.currentTime = 50;
+		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
 	public normal() {
 		this.audio.defaultPlaybackRate = 1;
 		this.audio.load();
-		this.audio.currentTime = 50;
+		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
 	public speed() {
 		this.audio.defaultPlaybackRate = 2;
 		this.audio.load();
-		this.audio.currentTime = 50;
+		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
@@ -325,7 +363,7 @@ export class GameCurrentViewComponent implements OnInit {
 
 		this.audio.defaultPlaybackRate = -1;
 		this.audio.load();
-		this.audio.currentTime = 50;
+		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
