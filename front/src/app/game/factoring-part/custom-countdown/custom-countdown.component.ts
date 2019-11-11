@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {REDUCTION_ANIMATION} from "../../../tools/constant";
+import {COUNTDOWN_SOUND, REDUCTION_ANIMATION} from "../../../tools/constant";
 import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
 import {ToolsService} from "../../../tools/tools.service";
 
@@ -29,6 +29,12 @@ export class CustomCountdownComponent implements OnInit {
 	private animation: string;
 
 	/**
+	 * Play sound on countdown.
+	 */
+	@Input()
+	private sound: boolean;
+
+	/**
 	 * On end of the countdown.
 	 */
 	@Output()
@@ -50,12 +56,20 @@ export class CustomCountdownComponent implements OnInit {
 	 */
 	private show: boolean;
 
+	/**
+	 * Audio.
+	 */
+	private audio;
 
 
 	constructor() { }
 
 	ngOnInit() {
 		this.show = false;
+
+		this.audio = new Audio();
+		this.audio.src = COUNTDOWN_SOUND;
+		this.audio.load();
 	}
 
 
@@ -89,6 +103,14 @@ export class CustomCountdownComponent implements OnInit {
 
 			this.animationTriggerValue = "big";
 			await ToolsService.sleep(100);
+
+			this.audio = new Audio();
+			this.audio.src = COUNTDOWN_SOUND;
+			this.audio.load();
+
+			// if (this.sound)
+				this.audio.play();
+
 			this.animationTriggerValue = "normal";
 		}
 	}

@@ -21,6 +21,11 @@ export const FFXII_THEME = "assets/sounds/ff12-main_theme.mp3";
 export const MARIO_KART_SOUND = "assets/sounds/mario-kart-object.mp3";
 
 /**
+ * Path to "countdown.mp3" sound in assets folder.
+ */
+export const COUNTDOWN_SOUND = "assets/sounds/countdown.mp3";
+
+/**
  * Path to "generic" video in assets folder.
  */
 export const GENERIC = "assets/videos/generic.mp4";

@@ -33,6 +33,10 @@ export class ThemeEffectComponent implements OnInit {
 	 */
 	private effectImg: string;
 
+	/**
+	 * Audio.
+	 */
+	private audio;
 
 
 	constructor() { }
@@ -40,6 +44,10 @@ export class ThemeEffectComponent implements OnInit {
 	ngOnInit() {
 		this.themeImg = THEMES[0];
 		this.effectImg = EFFECTS[0];
+
+		this.audio = new Audio();
+		this.audio.src = MARIO_KART_SOUND;
+		this.audio.load();
 	}
 
 
@@ -77,12 +85,9 @@ export class ThemeEffectComponent implements OnInit {
 				let themeIndex = THEMES_INDEX.findIndex(theme => theme === this.music.theme);
 				let effectIndex = EFFECTS_INDEX.findIndex(effect => effect === this.music.effect);
 
-				let audioObj = new Audio();
-				audioObj.src = MARIO_KART_SOUND;
-				audioObj.load();
-				audioObj.play();
+				this.audio.play();
 
-				while (!audioObj.ended) {
+				while (!this.audio.ended) {
 					this.themeImg = THEMES[ToolsService.random(0, THEMES_INDEX.length - 1)];
 					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS_INDEX.length - 1)];
 					await ToolsService.sleep(100);
