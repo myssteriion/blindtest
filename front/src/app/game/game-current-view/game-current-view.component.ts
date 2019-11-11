@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {EFFECTS, EFFECTS_INDEX, MARIO_KART_SOUND, SLIDE_ANIMATION, THEMES, THEMES_INDEX} from "../../tools/constant";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {REDUCTION_ANIMATION, SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,9 @@ import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
 import {Music} from "../../interfaces/dto/music.interface";
 import {ToolsService} from 'src/app/tools/tools.service';
+import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
+import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
+import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
 
 /**
  * The current game view.
@@ -30,50 +33,69 @@ export class GameCurrentViewComponent implements OnInit {
 	/**
 	 * The game.
 	 */
-	public game: Game;
-
-	/**
-	 * Players left.
-	 */
-	public leftPlayers: Player[];
-
-	/**
-	 * Players right.
-	 */
-	public rightPlayers: Player[];
-
-	/**
-	 * If view is loaded.
-	 */
-	public isLoaded: boolean;
+	private game: Game;
 
 	/**
 	 * The current exit icon.
 	 */
-	public currentExitIcon;
+	private currentExitIcon;
 
 	/**
-	 * Current theme.
+	 * Players left.
 	 */
-	public currentTheme: string;
+	private leftPlayers: Player[];
 
 	/**
-	 * Current effect.
+	 * Players right.
 	 */
-	public currentEffect: string;
+	private rightPlayers: Player[];
+
+	/**
+	 * If view is loaded.
+	 */
+	private isLoaded: boolean;
+
+	/**
+	 * The theme-effect component.
+	 */
+	@ViewChild("themeEffect", { static: false })
+	private themeEffect: ThemeEffectComponent;
+
+	/**
+	 * The preCountdown component.
+	 */
+	@ViewChild("preCountdown", { static: false })
+	private preCountdown: CustomCountdownComponent;
+
+	/**
+	 * The pre countdown config.
+	 */
+	private preCountdownConfig: CountdownConfig = {
+		demand: true,
+		format: "s",
+		leftTime: 5,
+		stopTime: 0,
+		notify: [4, 3, 2, 1],
+		prettyText: text => function() { return (text === "0") ? "Ecoutez !" : text; }()
+	};
 
 	/**
 	 * Current music.
 	 */
-	public currentMusic: Music;
+	private currentMusic: Music;
+
+	/**
+	 * Show next music button.
+	 */
+	private showNextMusic: boolean;
 
 	/**
 	 * Audio object.
 	 */
 	private audioObj;
 
-	faDoorClosed = faDoorClosed;
-	faDoorOpen = faDoorOpen;
+	private faDoorClosed = faDoorClosed;
+	private faDoorOpen = faDoorOpen;
 
 
 
@@ -88,8 +110,8 @@ export class GameCurrentViewComponent implements OnInit {
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
-		this.currentTheme = THEMES[0];
-		this.currentEffect = EFFECTS[0];
+		this.showNextMusic = true;
+
 		this._getGame();
 	}
 
@@ -142,10 +164,11 @@ export class GameCurrentViewComponent implements OnInit {
 	}
 
 
+
 	/**
 	 * Get the view title.
 	 */
-	public getTitle(): string {
+	private getTitle(): string {
 
 		let params = {
 			name_round: this._translate.instant("ROUND." + this.game.round),
@@ -159,7 +182,7 @@ export class GameCurrentViewComponent implements OnInit {
 	/**
 	 * Open modal for exit game.
 	 */
-	public exit(): void {
+	private exit(): void {
 
 		const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static', size: 'lg' } );
 		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
@@ -176,7 +199,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 *
 	 * @private
 	 */
-	private _getFormattedLabel() {
+	private _getFormattedLabel(): string {
 
 		let body: string =
 			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
@@ -196,44 +219,76 @@ export class GameCurrentViewComponent implements OnInit {
 		return body;
 	}
 
-	public getRandomMusic() {
+
+
+	/**
+	 * Gets next music.
+	 */
+	private nextMusic(): void {
+
+		this.showNextMusic = false;
+
 		this._musicResource.random().subscribe(
 			response => {
 
 				this.currentMusic = response;
+
 				this.audioObj = new Audio();
 				this.audioObj.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
 
-				this.launchRoll();
-
-				console.log("mu", this.currentMusic);
+				this.rollThemeEffect();
 			},
 			error => { throw Error("can't find music : " + JSON.stringify(error)); }
 		);
 	}
 
 	/**
-	 * Launch theme and effect rolling.
+	 * Roll theme and effect.
 	 */
-	private async launchRoll() {
+	private rollThemeEffect(): void {
 
-		let themeIndex = THEMES_INDEX.findIndex(theme => theme === this.currentMusic.theme);
-		let effectIndex = EFFECTS_INDEX.findIndex(effect => effect === this.currentMusic.effect);
+		this.preCountdown.setShow(false);
 
-		let audioObj = new Audio();
-		audioObj.src = MARIO_KART_SOUND;
-		audioObj.load();
-		audioObj.play();
-
-		while ( !audioObj.ended ) {
-			this.currentTheme = THEMES[ ToolsService.random(0, THEMES_INDEX.length-1) ];
-			this.currentEffect = EFFECTS[ ToolsService.random(0, EFFECTS_INDEX.length-1) ];
-			await ToolsService.sleep(50);
-		}
-
-		this.currentTheme = THEMES[themeIndex];
-		this.currentEffect = EFFECTS[effectIndex];
+		this.themeEffect.setShow(true);
+		this.themeEffect.setMusic(this.currentMusic);
+		this.themeEffect.roll()
+			.then( () => { this.startPreCountdown(); } );
 	}
+
+	/**
+	 * Start the pre countdown.
+	 */
+	private startPreCountdown(): void {
+		this.preCountdown.setShow(true);
+		this.preCountdown.start();
+	}
+
+	/**
+	 * When the pre countdown is ended.
+	 */
+	private onPreCountdownEnd(): void {
+		this.listenCurrentMusic();
+	}
+
+	/**
+	 * Listen current music.
+	 */
+	private listenCurrentMusic(): void {
+
+		let defaultPlaybackRate = 1;
+		if (this.currentMusic.effect === Effect.SLOW)
+			defaultPlaybackRate = 0.5;
+		else if (this.currentMusic.effect === Effect.SPEED)
+			defaultPlaybackRate = 2;
+
+		this.audioObj.defaultPlaybackRate = defaultPlaybackRate;
+		this.audioObj.load();
+		this.audioObj.currentTime = 0;
+		this.audioObj.play();
+	}
+
+
+
 
 	public stopMusic() {
 		this.audioObj.pause();

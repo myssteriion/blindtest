@@ -19,17 +19,27 @@
             <player-card *ngFor="let player of leftPlayers;" [player]="player" [rankOnRight]="true"></player-card>
         </div>
 
-        <!-- theme -->
-        <div class="col-2 game-current-view-current-theme">
-            <div class="row"><div class="col font-size-normal">{{ 'GAME.CURRENT_VIEW.THEME_LABEL' | translate }}</div></div>
-            <div class="row"><div class="col"><img src="{{ currentTheme }}"/></div></div>
+
+        <!-- middle -->
+        <div class="col-4">
+
+            <!-- theme and effect -->
+            <theme-effect #themeEffect ></theme-effect>
+
+            <!-- pre countdown -->
+            <custom-countdown #preCountdown [animation]="'reduction'" [countdownConfig]="preCountdownConfig" (onEnd)="onPreCountdownEnd()"></custom-countdown>
+
+            <!-- next music -->
+            <div *ngIf="showNextMusic" class="row">
+                <div class="col game-current-view-next-music">
+                    <button class="btn btn-info font-size-normal" (click)="nextMusic()">Musique suivante</button>
+                </div>
+            </div>
+
         </div>
 
-        <!-- effect -->
-        <div class="col-2 game-current-view-current-effect">
-            <div class="row"><div class="col font-size-normal">{{ 'GAME.CURRENT_VIEW.EFFECT_LABEL' | translate }}</div></div>
-            <div class="row"><div class="col"><img src="{{ currentEffect }}"/></div></div>
-        </div>
+
+
 
         <!-- right players -->
         <div class="col-4">
@@ -39,7 +49,7 @@
     </div>
 
     <div class="row">
-        <div class="col"><button class="btn btn-info font-size-normal" (click)="getRandomMusic()">Lancer</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="nextMusic()">Lancer</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="stopMusic()">stop</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div>
