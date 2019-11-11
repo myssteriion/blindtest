@@ -202,9 +202,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		int r = Tool.RANDOM.nextInt(100);
 
-		if (r >= 50 && r < 67) return Effect.SLOW;
-		if (r >= 68 && r < 84) return Effect.SPEED;
-		if (r >= 85 && r < 100) return Effect.REVERSE;
+		if (r >= 40 && r < 60) return Effect.SLOW;
+		if (r >= 60 && r < 80) return Effect.SPEED;
+		if (r >= 80 && r < 100) return Effect.REVERSE;
 
 		return Effect.NONE;
 	}
