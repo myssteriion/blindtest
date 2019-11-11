@@ -3,6 +3,7 @@
     border: 2px solid black;
     border-radius: 30px;
     margin: 10px 5px;
+    box-shadow: 8px 8px 4px silver;
 }
 
 .profile-card-profile-frame-can-select:hover {
