@@ -56,20 +56,12 @@ export class CustomCountdownComponent implements OnInit {
 	 */
 	private show: boolean;
 
-	/**
-	 * Audio.
-	 */
-	private audio;
 
 
 	constructor() { }
 
 	ngOnInit() {
 		this.show = false;
-
-		this.audio = new Audio();
-		this.audio.src = COUNTDOWN_SOUND;
-		this.audio.load();
 	}
 
 
@@ -99,17 +91,19 @@ export class CustomCountdownComponent implements OnInit {
 		if (event.action === "done") {
 			this.onEnd.emit();
 		}
-		else if (this.animation === "reduction") {
+		else if (event.action !== "restart") {
 
-			this.animationTriggerValue = "big";
-			await ToolsService.sleep(100);
+			if (this.animation === "reduction") {
+				this.animationTriggerValue = "big";
+				await ToolsService.sleep(100);
+			}
 
-			this.audio = new Audio();
-			this.audio.src = COUNTDOWN_SOUND;
-			this.audio.load();
-
-			// if (this.sound)
-				this.audio.play();
+			if (this.sound) {
+				let audio = new Audio();
+				audio.src = COUNTDOWN_SOUND;
+				audio.load();
+				audio.play();
+			}
 
 			this.animationTriggerValue = "normal";
 		}

@@ -30,7 +30,7 @@
             <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEnd)="onPreCountdownEnd()"></custom-countdown>
 
             <!-- countdown -->
-            <custom-countdown #countdown [animation]="'reduction'" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
+            <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
 
             <!-- next music -->
             <div *ngIf="showNextMusic" class="row">

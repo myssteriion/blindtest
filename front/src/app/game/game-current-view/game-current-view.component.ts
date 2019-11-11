@@ -133,7 +133,8 @@ export class GameCurrentViewComponent implements OnInit {
 			demand: true,
 			format: "ss",
 			leftTime: 25,
-			stopTime: 0
+			stopTime: 0,
+			notify: []
 		};
 
 		this._getGame();
