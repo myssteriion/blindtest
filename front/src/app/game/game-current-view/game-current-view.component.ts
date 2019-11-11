@@ -70,14 +70,7 @@ export class GameCurrentViewComponent implements OnInit {
 	/**
 	 * The pre countdown config.
 	 */
-	private preCountdownConfig: CountdownConfig = {
-		demand: true,
-		format: "s",
-		leftTime: 5,
-		stopTime: 0,
-		notify: [4, 3, 2, 1],
-		prettyText: text => function() { return (text === "0") ? "Ecoutez !" : text; }()
-	};
+	private preCountdownConfig: CountdownConfig;
 
 	/**
 	 * Current music.
@@ -111,6 +104,19 @@ export class GameCurrentViewComponent implements OnInit {
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
 		this.showNextMusic = true;
+
+		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
+			value => {
+				this.preCountdownConfig = {
+					demand: true,
+					format: "s",
+					leftTime: 5,
+					stopTime: 0,
+					notify: [4, 3, 2, 1],
+					prettyText: text => function() { return (text === "0") ? value : text; }()
+				};
+			}
+		);
 
 		this._getGame();
 	}
