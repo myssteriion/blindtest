@@ -94,6 +94,11 @@ export class GameCurrentViewComponent implements OnInit {
 	private showNextMusic: boolean;
 
 	/**
+	 * Show fill result button.
+	 */
+	private showFillResult: boolean;
+
+	/**
 	 * Audio.
 	 */
 	private audio;
@@ -115,6 +120,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
 		this.showNextMusic = true;
+		this.showFillResult = false;
 
 		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
 			value => {
@@ -262,6 +268,15 @@ export class GameCurrentViewComponent implements OnInit {
 
 				this.audio = new Audio();
 				this.audio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+				this.audio.currentTime = 0;
+
+				let defaultPlaybackRate = 1;
+				if (this.currentMusic.effect === Effect.SLOW)
+					defaultPlaybackRate = 0.5;
+				else if (this.currentMusic.effect === Effect.SPEED)
+					defaultPlaybackRate = 2;
+				this.audio.defaultPlaybackRate = defaultPlaybackRate;
+				this.audio.load();
 
 				this.rollThemeEffect();
 			},
@@ -303,41 +318,34 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private startCountdown(): void {
 		this.countdown.setShow(true);
-		this.listenCurrentMusic();
 		this.countdown.start();
+		this.audio.play();
 	}
 
 	/**
 	 * When the countdown is ended.
 	 */
 	private onCountdownEnd(): void {
-		this.stopCurrentMusic();
+		this.audio.pause();
+		this.preCountdown.setShow(false);
+		this.countdown.setShow(false);
+		this.showFillResult = true;
 	}
 
 
 	/**
-	 * Listen current music.
+	 * Open modal for fill result.
 	 */
-	private listenCurrentMusic(): void {
-
-		let defaultPlaybackRate = 1;
-		if (this.currentMusic.effect === Effect.SLOW)
-			defaultPlaybackRate = 0.5;
-		else if (this.currentMusic.effect === Effect.SPEED)
-			defaultPlaybackRate = 2;
-
-		this.audio.defaultPlaybackRate = defaultPlaybackRate;
-		this.audio.load();
-		// this.audio.currentTime = 0;
-		this.audio.play();
+	private fillResult() {
+		console.log("fillResult");
 	}
 
-	public stopCurrentMusic() {
+
+
+
+	public stop() {
 		this.audio.pause();
 	}
-
-
-
 
 	public slow() {
 		this.audio.defaultPlaybackRate = 0.5;

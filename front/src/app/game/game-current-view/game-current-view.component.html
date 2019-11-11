@@ -23,13 +23,8 @@
         <!-- middle -->
         <div class="col-4">
 
-            <!-- theme and effect -->
             <theme-effect #themeEffect ></theme-effect>
-
-            <!-- pre countdown -->
             <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEnd)="onPreCountdownEnd()"></custom-countdown>
-
-            <!-- countdown -->
             <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
 
             <!-- next music -->
@@ -39,9 +34,14 @@
                 </div>
             </div>
 
+            <!-- fill result -->
+            <div *ngIf="showFillResult" class="row">
+                <div class="col game-current-view-fill-result">
+                    <button class="btn btn-info font-size-normal" (click)="fillResult()">Suite</button>
+                </div>
+            </div>
+
         </div>
-
-
 
 
         <!-- right players -->
@@ -52,8 +52,7 @@
     </div>
 
     <div class="row">
-        <div class="col"><button class="btn btn-info font-size-normal" (click)="nextMusic()">Lancer</button></div>
-        <div class="col"><button class="btn btn-info font-size-normal" (click)="stopCurrentMusic()">stop</button></div>
+        <div class="col"><button class="btn btn-info font-size-normal" (click)="stop()">stop</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="slow()">slow</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="normal()">normal</button></div>
         <div class="col"><button class="btn btn-info font-size-normal" (click)="speed()">speed</button></div>

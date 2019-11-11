@@ -2,10 +2,6 @@
     margin: auto auto 2em auto;
 }
 
-.game-current-view-current-effect {
-    text-align: left;
-}
-
-.game-current-view-next-music {
+.game-current-view-next-music, .game-current-view-fill-result {
     text-align: center;
 }
