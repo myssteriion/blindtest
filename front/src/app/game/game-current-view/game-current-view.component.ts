@@ -90,9 +90,9 @@ export class GameCurrentViewComponent implements OnInit {
 	private showNextMusic: boolean;
 
 	/**
-	 * Audio object.
+	 * Audio.
 	 */
-	private audioObj;
+	private audio;
 
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
@@ -233,8 +233,8 @@ export class GameCurrentViewComponent implements OnInit {
 
 				this.currentMusic = response;
 
-				this.audioObj = new Audio();
-				this.audioObj.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+				this.audio = new Audio();
+				this.audio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
 
 				this.rollThemeEffect();
 			},
@@ -281,46 +281,46 @@ export class GameCurrentViewComponent implements OnInit {
 		else if (this.currentMusic.effect === Effect.SPEED)
 			defaultPlaybackRate = 2;
 
-		this.audioObj.defaultPlaybackRate = defaultPlaybackRate;
-		this.audioObj.load();
-		this.audioObj.currentTime = 0;
-		this.audioObj.play();
+		this.audio.defaultPlaybackRate = defaultPlaybackRate;
+		this.audio.load();
+		this.audio.currentTime = 0;
+		this.audio.play();
 	}
 
 
 
 
 	public stopMusic() {
-		this.audioObj.pause();
+		this.audio.pause();
 	}
 
 	public slow() {
-		this.audioObj.defaultPlaybackRate = 0.5;
-		this.audioObj.load();
-		this.audioObj.currentTime = 50;
-		this.audioObj.play();
+		this.audio.defaultPlaybackRate = 0.5;
+		this.audio.load();
+		this.audio.currentTime = 50;
+		this.audio.play();
 	}
 
 	public normal() {
-		this.audioObj.defaultPlaybackRate = 1;
-		this.audioObj.load();
-		this.audioObj.currentTime = 50;
-		this.audioObj.play();
+		this.audio.defaultPlaybackRate = 1;
+		this.audio.load();
+		this.audio.currentTime = 50;
+		this.audio.play();
 	}
 
 	public speed() {
-		this.audioObj.defaultPlaybackRate = 2;
-		this.audioObj.load();
-		this.audioObj.currentTime = 50;
-		this.audioObj.play();
+		this.audio.defaultPlaybackRate = 2;
+		this.audio.load();
+		this.audio.currentTime = 50;
+		this.audio.play();
 	}
 
 	public reverse() {
 
-		this.audioObj.defaultPlaybackRate = -1;
-		this.audioObj.load();
-		this.audioObj.currentTime = 50;
-		this.audioObj.play();
+		this.audio.defaultPlaybackRate = -1;
+		this.audio.load();
+		this.audio.currentTime = 50;
+		this.audio.play();
 	}
 
 }

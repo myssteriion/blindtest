@@ -14,9 +14,9 @@ import {FFXII_THEME, LOGO, routesWithHome} from "../../tools/constant";
 export class NavbarMenuComponent implements OnInit {
 
 	/**
-	 * Audio object.
+	 * Audio.
 	 */
-	private audioObj;
+	private audio;
 
 	/**
 	 * If the music must be played.
@@ -39,10 +39,10 @@ export class NavbarMenuComponent implements OnInit {
 
 		this.musicIsPlaying = true;
 
-		this.audioObj = new Audio();
-		this.audioObj.src = FFXII_THEME;
-		this.audioObj.loop = true;
-		this.audioObj.load();
+		this.audio = new Audio();
+		this.audio.src = FFXII_THEME;
+		this.audio.loop = true;
+		this.audio.load();
 
 		this.playMusic();
 	}
@@ -77,7 +77,7 @@ export class NavbarMenuComponent implements OnInit {
 	private playMusic() {
 
 		this.musicIsPlaying = true;
-		this.audioObj.play();
+		this.audio.play();
 	}
 
 	/**
@@ -86,8 +86,8 @@ export class NavbarMenuComponent implements OnInit {
 	public stopMusic() {
 
 		this.musicIsPlaying = false;
-		this.audioObj.pause();
-		this.audioObj.currentTime = 0;
+		this.audio.pause();
+		this.audio.currentTime = 0;
 	}
 
 }
