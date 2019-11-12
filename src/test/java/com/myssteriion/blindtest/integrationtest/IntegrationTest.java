@@ -227,19 +227,19 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Assert.assertEquals( scoreName3, game.getPlayers().get(2).getScore() );
 
         ProfileStatDTO profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(0)) );
-        Assert.assertEquals( 1, profileStat.getPlayedGames() );
+        Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get( game.getDuration() ) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName1), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(1)) );
-        Assert.assertEquals( 1, profileStat.getPlayedGames() );
+        Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName2), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(2)) );
-        Assert.assertEquals( 1, profileStat.getPlayedGames() );
+        Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(scoreName3), profileStat.getBestScores().get(duration) );

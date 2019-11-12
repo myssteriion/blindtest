@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 public class ProfileStatServiceTest extends AbstractTest {
@@ -71,7 +72,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 		ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
 		Assert.assertEquals( new Integer(1), profileStatDtoSaved.getId() );
 		Assert.assertEquals( profileStatId, profileStatDtoSaved.getProfileId() );
-		Assert.assertEquals( 0, profileStatDtoSaved.getPlayedGames() );
+		Assert.assertEquals( new HashMap<>(), profileStatDtoSaved.getPlayedGames() );
 	}
 
 	@Test

@@ -135,7 +135,7 @@ public class GameService {
 					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme() );
 
 				if ( game.isFirstStep() )
-					profileStatDto.incrementPlayedGames();
+					profileStatDto.incrementPlayedGames( game.getDuration() );
 				else if ( game.isLastStep() ) {
 					profileStatDto.addBestScoreIfBetter( game.getDuration(), player.getScore() );
 					profileStatDto.incrementWonGames( player.getRank() );

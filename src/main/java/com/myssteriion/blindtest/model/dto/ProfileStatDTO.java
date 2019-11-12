@@ -48,7 +48,15 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * The number of game played.
 	 */
 	@Column(name = "played_games", nullable = false)
-	private int playedGames;
+	@Convert(converter = DurationConverter.class)
+	private Map<Duration, Integer> playedGames;
+
+	/**
+	 * The bests scores by durations.
+	 */
+	@Column(name = "best_scores", nullable = false)
+	@Convert(converter = DurationConverter.class)
+	private Map<Duration, Integer> bestScores;
 
 	/**
 	 * The number of game won.
@@ -71,12 +79,6 @@ public class ProfileStatDTO extends AbstractDTO {
 	@Convert(converter = ThemeConverter.class)
 	private Map<Theme, Integer> foundMusics;
 
-	/**
-	 * The bests scores by durations.
-	 */
-	@Column(name = "best_scores", nullable = false)
-	@Convert(converter = DurationConverter.class)
-	private Map<Duration, Integer> bestScores;
 
 
 
@@ -95,11 +97,11 @@ public class ProfileStatDTO extends AbstractDTO {
 	public ProfileStatDTO(Integer profileId) {
 
 		this.profileId = profileId;
-		this.playedGames = 0;
+		this.playedGames = new HashMap<>();
+		this.bestScores = new HashMap<>();
 		this.wonGames = new HashMap<>();
 		this.listenedMusics = new HashMap<>();
 		this.foundMusics = new HashMap<>();
-		this.bestScores = new HashMap<>();
 	}
 
 
@@ -140,7 +142,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 *
 	 * @return the played games
 	 */
-	public int getPlayedGames() {
+	public Map<Duration, Integer> getPlayedGames() {
 		return playedGames;
 	}
 
@@ -150,8 +152,28 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * @param playedGames the played games
 	 * @return this
 	 */
-	public ProfileStatDTO setPlayedGames(int playedGames) {
+	public ProfileStatDTO setPlayedGames(Map<Duration, Integer> playedGames) {
 		this.playedGames = playedGames;
+		return this;
+	}
+
+	/**
+	 * Gets best scores.
+	 *
+	 * @return the best scores
+	 */
+	public Map<Duration, Integer> getBestScores() {
+		return bestScores;
+	}
+
+	/**
+	 * Sets best scores.
+	 *
+	 * @param bestScores the best scores
+	 * @return this
+	 */
+	public ProfileStatDTO setBestScores(Map<Duration, Integer> bestScores) {
+		this.bestScores = bestScores;
 		return this;
 	}
 
@@ -215,32 +237,41 @@ public class ProfileStatDTO extends AbstractDTO {
 		return this;
 	}
 
-	/**
-	 * Gets best scores.
-	 *
-	 * @return the best scores
-	 */
-	public Map<Duration, Integer> getBestScores() {
-		return bestScores;
-	}
-
-	/**
-	 * Sets best scores.
-	 *
-	 * @param bestScores the best scores
-	 * @return this
-	 */
-	public ProfileStatDTO setBestScores(Map<Duration, Integer> bestScores) {
-		this.bestScores = bestScores;
-		return this;
-	}
-
 
 	/**
 	 * Increment playedGames.
 	 */
-	public void incrementPlayedGames() {
-		this.playedGames++;
+	public void incrementPlayedGames(Duration duration) {
+
+		Tool.verifyValue("duration", duration);
+
+		if (playedGames == null)
+			playedGames = new HashMap<>();
+
+		if ( !playedGames.containsKey(duration) )
+			playedGames.put(duration, 0);
+
+		playedGames.put(duration, playedGames.get(duration) + 1);
+	}
+
+	/**
+	 * Add best score if its better.
+	 *
+	 * @param duration the duration
+	 * @param scores   the scores
+	 */
+	public void addBestScoreIfBetter(Duration duration, int scores) {
+
+		Tool.verifyValue("duration", duration);
+
+		if (bestScores == null)
+			bestScores = new HashMap<>();
+
+		if ( !bestScores.containsKey(duration) )
+			bestScores.put(duration, 0);
+
+		if ( scores > bestScores.get(duration) )
+			bestScores.put(duration, scores);
 	}
 
 	/**
@@ -297,26 +328,6 @@ public class ProfileStatDTO extends AbstractDTO {
 		foundMusics.put(theme, foundMusics.get(theme) + 1);
 	}
 
-	/**
-	 * Add best score if its better.
-	 *
-	 * @param duration the duration
-	 * @param scores   the scores
-	 */
-	public void addBestScoreIfBetter(Duration duration, int scores) {
-
-		Tool.verifyValue("duration", duration);
-
-		if (bestScores == null)
-			bestScores = new HashMap<>();
-
-		if ( !bestScores.containsKey(duration) )
-			bestScores.put(duration, 0);
-
-		if ( scores > bestScores.get(duration) )
-			bestScores.put(duration, scores);
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -341,10 +352,10 @@ public class ProfileStatDTO extends AbstractDTO {
 		return "id=" + id +
 				", profileId=" + profileId +
 				", playedGames=" + playedGames +
+				", bestScores=" + bestScores +
 				", wonGames=" + wonGames +
 				", listenedMusics=" + listenedMusics +
-				", foundMusics=" + foundMusics +
-				", bestScores=" + bestScores;
+				", foundMusics=" + foundMusics;
 	}
 	
 }
