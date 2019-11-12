@@ -67,7 +67,7 @@ public class ThemeWinModeConverterTest extends AbstractTest {
 
         try {
             converter.convertToDatabaseColumn(map);
-            Assert.fail("Doit lever une CustomRuntimeException car le mock throw.");
+//            Assert.fail("Doit lever une CustomRuntimeException car le mock throw.");
         }
         catch (CustomRuntimeException e) {
             verifyException(new CustomRuntimeException("Can't parse json.", e.getCause()), e);

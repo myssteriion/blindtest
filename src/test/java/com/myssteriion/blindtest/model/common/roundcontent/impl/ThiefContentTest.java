@@ -53,7 +53,7 @@ public class ThiefContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();
@@ -82,7 +82,7 @@ public class ThiefContentTest extends AbstractTest {
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
 
 
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );

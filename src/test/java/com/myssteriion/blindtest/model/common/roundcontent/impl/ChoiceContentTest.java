@@ -56,7 +56,7 @@ public class ChoiceContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
         for (int i = 0; i < 20; i++)
             game.nextStep();
@@ -86,18 +86,40 @@ public class ChoiceContentTest extends AbstractTest {
         }
 
         Game actual = choiceContent.apply(game, musicResult);
+        game.nextStep();
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 50, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 100-50, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
 
-        for (int i = 2; i < 12; i++) {
+        musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        actual = choiceContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 150+100, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 50+100, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 100+100+50, actual.getPlayers().get(2).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
+        actual = choiceContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 250+150, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 150+100, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 250+100, actual.getPlayers().get(2).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
+        actual = choiceContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 400+200, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 250+300, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 350+200, actual.getPlayers().get(2).getScore() );
+
+        for (int i = 6; i < 12; i++) {
 
             choiceContent.apply(game, musicResult);
             game.nextStep();

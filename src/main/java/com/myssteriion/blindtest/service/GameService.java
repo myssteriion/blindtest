@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.model.common.Rank;
+import com.myssteriion.blindtest.model.common.WinMode;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
@@ -121,7 +122,6 @@ public class GameService {
 
 			// update profileStatDto
 			List<Player> players = game.getPlayers();
-			List<String> winners = musicResult.getWinners();
 
 			updatePlayersRanks(players);
 
@@ -131,8 +131,13 @@ public class GameService {
 				ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
 				profileStatDto.incrementListenedMusics( musicResult.getMusic().getTheme() );
 
-				if ( winners.stream().anyMatch(winnerName -> winnerName.equals(profileDto.getName())) )
-					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme() );
+				if ( musicResult.isAuthorAndTitleWinner(profileDto.getName()) )
+					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), WinMode.BOTH );
+				else if ( musicResult.isAuthorWinner(profileDto.getName()) )
+					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), WinMode.AUTHOR );
+				else if ( musicResult.isTitleWinner(profileDto.getName()) )
+					profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), WinMode.TITLE );
+
 
 				if ( game.isFirstStep() )
 					profileStatDto.incrementPlayedGames( game.getDuration() );

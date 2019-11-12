@@ -50,7 +50,7 @@ public class ClassicContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();
@@ -75,6 +75,21 @@ public class ClassicContentTest extends AbstractTest {
         Game actual = classicContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
+        actual = classicContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 200, actual.getPlayers().get(0).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
+        actual = classicContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 400, actual.getPlayers().get(0).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        actual = classicContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 400, actual.getPlayers().get(0).getScore() );
     }
 
     @Test

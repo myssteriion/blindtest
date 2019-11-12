@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.integrationtest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.WinMode;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
@@ -89,7 +90,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -169,7 +170,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -217,7 +218,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -229,19 +230,19 @@ public class IntegrationTest extends AbstractIntegrationTest {
         ProfileStatDTO profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(0)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get( game.getDuration() ) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
-        Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(WinMode.AUTHOR) );
         Assert.assertEquals( new Integer(scoreName1), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(1)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
-        Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(WinMode.AUTHOR) );
         Assert.assertEquals( new Integer(scoreName2), profileStat.getBestScores().get(duration) );
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(2)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
-        Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80) );
+        Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(WinMode.AUTHOR) );
         Assert.assertEquals( new Integer(scoreName3), profileStat.getBestScores().get(duration) );
 
         MusicDTO music = musicService.find( MUSICS_LIST.get(0) );
