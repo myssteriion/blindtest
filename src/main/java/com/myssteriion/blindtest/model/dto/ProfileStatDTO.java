@@ -4,10 +4,12 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.WinMode;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.converter.DurationConverter;
 import com.myssteriion.blindtest.tools.converter.RankConverter;
 import com.myssteriion.blindtest.tools.converter.ThemeConverter;
+import com.myssteriion.blindtest.tools.converter.ThemeWinModeConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -73,11 +75,11 @@ public class ProfileStatDTO extends AbstractDTO {
 	private Map<Theme, Integer> listenedMusics;
 
 	/**
-	 * The number of found musics by themes.
+	 * The number of found musics by themes by WinMode.
 	 */
 	@Column(name = "found_musics", nullable = false)
-	@Convert(converter = ThemeConverter.class)
-	private Map<Theme, Integer> foundMusics;
+	@Convert(converter = ThemeWinModeConverter.class)
+	private Map< Theme, Map<WinMode, Integer> > foundMusics;
 
 
 
@@ -222,7 +224,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 *
 	 * @return the found musics
 	 */
-	public Map<Theme, Integer> getFoundMusics() {
+	public Map< Theme, Map<WinMode, Integer> > getFoundMusics() {
 		return foundMusics;
 	}
 
@@ -232,7 +234,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * @param foundMusics the found musics
 	 * @return this
 	 */
-	public ProfileStatDTO setFoundMusics(Map<Theme, Integer> foundMusics) {
+	public ProfileStatDTO setFoundMusics(Map< Theme, Map<WinMode, Integer> > foundMusics) {
 		this.foundMusics = foundMusics;
 		return this;
 	}
@@ -313,19 +315,24 @@ public class ProfileStatDTO extends AbstractDTO {
 	/**
 	 * Increment foundMusics.
 	 *
-	 * @param theme the theme
+	 * @param theme 	the theme
+	 * @param winMode 	the winMode
 	 */
-	public void incrementFoundMusics(Theme theme) {
+	public void incrementFoundMusics(Theme theme, WinMode winMode) {
 
 		Tool.verifyValue("theme", theme);
+		Tool.verifyValue("winMode", winMode);
 
 		if (foundMusics == null)
 			foundMusics = new HashMap<>();
 
 		if ( !foundMusics.containsKey(theme) )
-			foundMusics.put(theme, 0);
+			foundMusics.put(theme, new HashMap<>());
 
-		foundMusics.put(theme, foundMusics.get(theme) + 1);
+		if ( !foundMusics.get(theme).containsKey(winMode) )
+			foundMusics.get(theme).put(winMode, 0);
+
+		foundMusics.get(theme).put(winMode, foundMusics.get(theme).get(winMode) + 1);
 	}
 
 
