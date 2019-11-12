@@ -45,7 +45,7 @@ public class ThiefContent extends AbstractRoundContent {
         game = super.apply(game, musicResult);
 
         game.getPlayers().stream()
-                .filter( playerDto -> musicResult.isLooser(playerDto.getProfile().getName()) )
+                .filter( playerDto -> musicResult.isLoser(playerDto.getProfile().getName()) )
                 .forEach( playerDto -> playerDto.addScore(nbPointLoose) );
 
         return game;

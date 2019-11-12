@@ -23,9 +23,14 @@ public class MusicResult {
 	private MusicDTO music;
 
 	/**
-	 * The winners list.
+	 * The author winners list.
 	 */
-	private List<String> winners;
+	private List<String> authorWinners;
+
+	/**
+	 * The title winners list.
+	 */
+	private List<String> titleWinners;
 
 	/**
 	 * The losers list.
@@ -33,16 +38,18 @@ public class MusicResult {
 	private List<String> losers;
 
 
+
 	/**
 	 * Instantiates a new Music result.
 	 *
-	 * @param gameId   the game id
-	 * @param musicDTO the music dto
-	 * @param winners  the winners
-	 * @param losers  the losers
+	 * @param gameId   		the game id
+	 * @param musicDTO 		the music dto
+	 * @param authorWinners	the author winners
+	 * @param titleWinners	the title winners
+	 * @param losers  		the losers
 	 */
 	@JsonCreator
-	public MusicResult(Integer gameId, MusicDTO musicDTO, List<String> winners, List<String> losers) {
+	public MusicResult(Integer gameId, MusicDTO musicDTO, List<String> authorWinners, List<String> titleWinners, List<String> losers) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("musicDto", musicDTO);
@@ -50,9 +57,11 @@ public class MusicResult {
 		this.gameId = gameId;
 		this.music = musicDTO;
 		
-		this.winners = (winners == null) ? new ArrayList<>() : winners;
+		this.authorWinners = (authorWinners == null) ? new ArrayList<>() : authorWinners;
+		this.titleWinners = (titleWinners == null) ? new ArrayList<>() : titleWinners;
 		this.losers = (losers == null) ? new ArrayList<>() : losers;
 	}
+
 
 
 	/**
@@ -74,12 +83,21 @@ public class MusicResult {
 	}
 
 	/**
-	 * Gets winners.
+	 * Gets author winners.
 	 *
 	 * @return the winners
 	 */
-	public List<String> getWinners() {
-		return winners;
+	public List<String> getAuthorWinners() {
+		return authorWinners;
+	}
+
+	/**
+	 * Gets title winners.
+	 *
+	 * @return the winners
+	 */
+	public List<String> getTitleWinners() {
+		return titleWinners;
 	}
 
 	/**
@@ -93,16 +111,42 @@ public class MusicResult {
 
 
 	/**
-	 * Test if "name" is a winner.
+	 * Test if "name" is a author winner.
 	 *
 	 * @param name the name
-	 * @return TRUE if "name" is a winner, FALSE otherwise
+	 * @return TRUE if "name" is a author winner, FALSE otherwise
 	 */
-	public boolean isWinner(String name) {
+	public boolean isAuthorWinner(String name) {
 
 		Tool.verifyValue("name", name);
 
-		return winners.stream().anyMatch(winner -> winner.equals(name));
+		return authorWinners.stream().anyMatch(authorWinner -> authorWinner.equals(name));
+	}
+
+	/**
+	 * Test if "name" is a title winner.
+	 *
+	 * @param name the name
+	 * @return TRUE if "name" is a title winner, FALSE otherwise
+	 */
+	public boolean isTitleWinner(String name) {
+
+		Tool.verifyValue("name", name);
+
+		return titleWinners.stream().anyMatch(titleWinner -> titleWinner.equals(name));
+	}
+
+	/**
+	 * Test if "name" is a author and title winner.
+	 *
+	 * @param name the name
+	 * @return TRUE if "name" is a author and title winner, FALSE otherwise
+	 */
+	public boolean isAuthorAndTitleWinner(String name) {
+
+		Tool.verifyValue("name", name);
+
+		return isAuthorWinner(name) && isTitleWinner(name);
 	}
 
 	/**
@@ -111,7 +155,7 @@ public class MusicResult {
 	 * @param name the name
 	 * @return TRUE if "name" is a looser, FALSE otherwise
 	 */
-	public boolean isLooser(String name) {
+	public boolean isLoser(String name) {
 
 		Tool.verifyValue("name", name);
 
@@ -124,7 +168,8 @@ public class MusicResult {
 	public String toString() {
 		return "gameId=" + gameId +
 				", music={" + music + "}" +
-				", winners=" + winners +
+				", authorWinners=" + authorWinners +
+				", titleWinners=" + titleWinners +
 				", losers=" + losers;
 	}
 

@@ -18,7 +18,7 @@ public class MusicResultTest extends AbstractTest {
 
 
         try {
-            new MusicResult(null, music, null, null);
+            new MusicResult(null, music, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -26,14 +26,14 @@ public class MusicResultTest extends AbstractTest {
         }
 
         try {
-            new MusicResult(gameId, null, null, null);
+            new MusicResult(gameId, null, null, null, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new MusicResult(gameId, music, null, null) );
+        Assert.assertNotNull( new MusicResult(gameId, music, null, null, null) );
     }
 
     @Test
@@ -43,10 +43,11 @@ public class MusicResultTest extends AbstractTest {
         MusicDTO music = new MusicDTO("name", Theme.ANNEES_80);
 
 
-        MusicResult musicResult = new MusicResult(gameId, music, null, null);
+        MusicResult musicResult = new MusicResult(gameId, music, null, null, null);
         Assert.assertEquals( gameId, musicResult.getGameId() );
         Assert.assertEquals( music, musicResult.getMusic() );
-        Assert.assertEquals( new ArrayList<>(), musicResult.getWinners() );
+        Assert.assertEquals( new ArrayList<>(), musicResult.getAuthorWinners() );
+        Assert.assertEquals( new ArrayList<>(), musicResult.getTitleWinners() );
         Assert.assertEquals( new ArrayList<>(), musicResult.getLosers() );
     }
 
@@ -55,8 +56,8 @@ public class MusicResultTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO music = new MusicDTO("name", Theme.ANNEES_80);
-        MusicResult musicResult = new MusicResult(gameId, music, null, null);
-        Assert.assertEquals( "gameId=1, music={id=null, name=name, theme=ANNEES_80, played=0, flux={null}, effect=null}, winners=[], losers=[]", musicResult.toString() );
+        MusicResult musicResult = new MusicResult(gameId, music, null, null, null);
+        Assert.assertEquals( "gameId=1, music={id=null, name=name, theme=ANNEES_80, played=0, flux={null}, effect=null}, authorWinners=[], titleWinners=[], losers=[]", musicResult.toString() );
     }
 
 }
