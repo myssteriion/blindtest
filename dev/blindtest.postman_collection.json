@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6985fc8c-cc74-4a80-99a3-1638c740c7f1",
+		"_postman_id": "266a8462-f693-4fa4-9735-d85921def6b9",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -260,7 +260,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 1,\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"winners\": [ \"name\" ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 1,\n\t\"musicDTO\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"authorWinners\": [ \"name\" ],\n\t\"titleWinners\": [ \"name\" ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
