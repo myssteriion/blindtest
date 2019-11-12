@@ -1,11 +1,15 @@
 package com.myssteriion.blindtest.tools.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.WinMode;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +17,12 @@ import java.util.Map;
 /**
  * Convert json to map (and reverse).
  */
-public abstract class AbstractConverter<T> implements AttributeConverter<Map<T, Integer>, String> {
+@Converter()
+public class ThemeWinModeConverter implements AttributeConverter< Map<Theme, Map<WinMode, Integer>>, String> {
+
 
     @Override
-    public String convertToDatabaseColumn(Map<T, Integer> map) {
+    public String convertToDatabaseColumn(Map<Theme, Map<WinMode, Integer>> map) {
 
         try {
 
@@ -28,29 +34,22 @@ public abstract class AbstractConverter<T> implements AttributeConverter<Map<T, 
         catch (final JsonProcessingException e) {
             throw new CustomRuntimeException("Can't parse json.", e);
         }
+
     }
 
     @Override
-    public Map<T, Integer> convertToEntityAttribute(String json) {
+    public Map<Theme, Map<WinMode, Integer>> convertToEntityAttribute(String json) {
 
         try {
 
             if ( Tool.isNullOrEmpty(json) )
                 return new HashMap<>();
 
-            return convertToMap(json);
+            return Tool.MAPPER.readValue(json, new TypeReference<HashMap<Theme, HashMap<WinMode, Integer>>>() {});
         }
         catch (IOException e) {
             throw new CustomRuntimeException("Can't parse json.", e);
         }
     }
-
-    /**
-     * Convert json to map (T type doesn't work for read value).
-     *
-     * @param json the json
-     * @return map
-     */
-    protected abstract Map<T, Integer> convertToMap(String json) throws IOException;
 
 }
