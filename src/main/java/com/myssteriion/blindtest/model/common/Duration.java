@@ -5,11 +5,9 @@ package com.myssteriion.blindtest.model.common;
  */
 public enum Duration {
 
-    VERY_SHORT(0.5),
-    SHORT(0.75),
+    SHORT(0.5),
     NORMAL(1),
-    LONG(1.25),
-    VERY_LONG(1.5);
+    LONG(2);
 
 
 

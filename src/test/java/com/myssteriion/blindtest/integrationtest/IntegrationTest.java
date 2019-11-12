@@ -43,10 +43,10 @@ public class IntegrationTest extends AbstractIntegrationTest {
 
 
     @Test
-    public void testVeryShortGame() throws NotFoundException {
+    public void testShortGame() throws NotFoundException {
 
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
-        Duration duration = Duration.VERY_SHORT;
+        Duration duration = Duration.SHORT;
 
         NewGame newGame = new NewGame(playersNames, duration);
         Game game = gameService.newGame(newGame);
