@@ -26,7 +26,7 @@ export class GameNewViewComponent implements OnInit {
     /**
      * Durations list.
      */
-    public durations = [Duration.VERY_SHORT, Duration.SHORT, Duration.NORMAL, Duration.LONG, Duration.VERY_LONG];
+    public durations = [Duration.SHORT, Duration.NORMAL, Duration.LONG];
 
     /**
      * Selected duration.
@@ -54,7 +54,7 @@ export class GameNewViewComponent implements OnInit {
     ngOnInit() {
 
         this.playersProfiles = [];
-        this.selectedDuration = this.durations[2];
+        this.selectedDuration = Duration.NORMAL;
     }
 
 
