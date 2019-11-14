@@ -127,9 +127,9 @@ export class GameCurrentViewComponent implements OnInit {
 				this.preCountdownConfig = {
 					demand: true,
 					format: "s",
-					leftTime: 5,
+					leftTime: 3,
 					stopTime: 0,
-					notify: [4, 3, 2, 1],
+					notify: [2, 1],
 					prettyText: text => function() { return (text === "0") ? value : text; }()
 				};
 			}
