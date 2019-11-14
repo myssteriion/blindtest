@@ -7,7 +7,7 @@ import {MusicResult} from "../../../interfaces/game/music.result.interface";
 import {Music} from "../../../interfaces/dto/music.interface";
 
 /**
- * The profiles view.
+ * The music result modal.
  */
 @Component({
     selector: 'music-result-modal',

@@ -2,6 +2,7 @@
     margin: auto auto 2em auto;
 }
 
-.game-current-view-next-music, .game-current-view-fill-result {
+.game-current-view-next-music {
+    padding-top: 2em;
     text-align: center;
 }

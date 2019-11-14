@@ -28,8 +28,8 @@
             <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
 
             <!-- next music -->
-            <div *ngIf="showNextMusic" class="row">
-                <div class="col game-current-view-next-music">
+            <div *ngIf="showNextMusic" class="row game-current-view-next-music">
+                <div class="col">
                     <button class="btn btn-info font-size-normal" (click)="nextMusic()">{{ 'GAME.CURRENT_VIEW.NEXT_MUSIC' | translate }}</button>
                 </div>
             </div>
