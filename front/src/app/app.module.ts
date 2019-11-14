@@ -32,6 +32,7 @@ import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.
 import {PlayerCardComponent} from './player/player-card/player-card.component';
 import {ThemeEffectComponent} from "./game/factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from './game/factoring-part/custom-countdown/custom-countdown.component';
+import {MusicResultModalComponent} from "./game/factoring-part/music-result-modal/music-result-modal.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -68,12 +69,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameResumeViewComponent,
 		PlayerCardComponent,
 		ThemeEffectComponent,
-		CustomCountdownComponent
+		CustomCountdownComponent,
+		MusicResultModalComponent
 	],
 	entryComponents: [
 		ProfileEditComponent,
 		ModalConfirmComponent,
-		ProfilePageModalComponent
+		ProfilePageModalComponent,
+		MusicResultModalComponent
 	],
 	imports: [
 		BrowserModule,

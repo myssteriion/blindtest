@@ -30,14 +30,7 @@
             <!-- next music -->
             <div *ngIf="showNextMusic" class="row">
                 <div class="col game-current-view-next-music">
-                    <button class="btn btn-info font-size-normal" (click)="nextMusic()">Musique suivante</button>
-                </div>
-            </div>
-
-            <!-- fill result -->
-            <div *ngIf="showFillResult" class="row">
-                <div class="col game-current-view-fill-result">
-                    <button class="btn btn-info font-size-normal" (click)="fillResult()">Suite</button>
+                    <button class="btn btn-info font-size-normal" (click)="nextMusic()">{{ 'GAME.CURRENT_VIEW.NEXT_MUSIC' | translate }}</button>
                 </div>
             </div>
 

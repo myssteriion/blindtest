@@ -1,0 +1,50 @@
+<!-- modal header -->
+<div class="row music-result-modal-header">
+    <div class="col font-size-modal-title">{{ 'GAME.MUSIC_RESULT_MODAL.TITLE' | translate }}</div>
+</div>
+
+
+<!-- modal body -->
+<div class="row music-result-modal-body">
+    <div class="col">
+        
+        <table class="music-result-modal-table">
+            <thead>
+                <tr>
+                    <th>{{ headers[0] | translate }}</th>
+                    <th>{{ headers[1] | translate }}</th>
+                    <th>{{ headers[2] | translate }}</th>
+                    <th>{{ headers[3] | translate }}</th>
+                    <th *ngIf="showLoserColumn">{{ headers[4] | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'music-result-modal-table-odd': odd }">
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.score }}</td>
+                    <td>
+                        <fa-icon [icon]="getIcon(line.authorWinner)" [ngClass]="getIconClass(line.authorWinner)"
+                                 (click)="line.authorWinner = !line.authorWinner"></fa-icon>
+                    </td>
+                    <td>
+                        <fa-icon [icon]="getIcon(line.titleWinner)" [ngClass]="getIconClass(line.titleWinner)"
+                                 (click)="line.titleWinner = !line.titleWinner"></fa-icon>
+                    </td>
+                    <td *ngIf="showLoserColumn">
+                        <fa-icon [icon]="getIcon(line.faCross)" [ngClass]="getIconClass(line.faCross)"
+                                 (click)="line.faCross = !line.faCross"></fa-icon>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<!-- modal footer -->
+<div class="row justify-content-center music-result-modal-footer">
+    <div class="col">
+        <button class="btn btn-success font-size-normal" (click)="save()">{{ 'COMMON.SAVE' | translate }}</button>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {REDUCTION_ANIMATION, SLIDE_ANIMATION} from "../../tools/constant";
+import {SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
@@ -13,9 +13,10 @@ import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
 import {Music} from "../../interfaces/dto/music.interface";
 import {ToolsService} from 'src/app/tools/tools.service';
-import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
+import {CountdownConfig} from 'ngx-countdown';
 import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
+import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
 
 /**
  * The current game view.
@@ -94,11 +95,6 @@ export class GameCurrentViewComponent implements OnInit {
 	private showNextMusic: boolean;
 
 	/**
-	 * Show fill result button.
-	 */
-	private showFillResult: boolean;
-
-	/**
 	 * Audio.
 	 */
 	private audio;
@@ -120,7 +116,6 @@ export class GameCurrentViewComponent implements OnInit {
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
 		this.showNextMusic = true;
-		this.showFillResult = false;
 
 		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
 			value => {
@@ -143,7 +138,7 @@ export class GameCurrentViewComponent implements OnInit {
 			notify: []
 		};
 
-		this._getGame();
+		this.getGame();
 	}
 
 
@@ -151,12 +146,12 @@ export class GameCurrentViewComponent implements OnInit {
 	/**
 	 * Gets game.
 	 */
-	private _getGame(): void {
+	private getGame(): void {
 
-		this._getIdParam().subscribe(
+		this.getIdParam().subscribe(
 			response => {
 				this._gameResource.findById( Number(response) ).subscribe(
-					response => { this.game = response; this._fillPlayers(); },
+					response => { this.game = response; this.fillPlayers(); },
 					error => { throw Error("can't find game : " + JSON.stringify(error)); }
 				);
 			},
@@ -169,7 +164,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 *
 	 * @return the observable
 	 */
-	private _getIdParam(): Observable<string> {
+	private getIdParam(): Observable<string> {
 		return this._activatedRoute.params.pipe( map(param => param.id) );
 	}
 
@@ -177,7 +172,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 * Fill left/right players.
 	 * @private
 	 */
-	private _fillPlayers() {
+	private fillPlayers() {
 
 		let allPlayers = this.game.players;
 
@@ -217,7 +212,7 @@ export class GameCurrentViewComponent implements OnInit {
 
 		const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static', size: 'lg' } );
 		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
-		modalRef.componentInstance.body = this._getFormattedLabel();
+		modalRef.componentInstance.body = this.getFormattedLabel();
 
 		modalRef.result.then(
 			(result) => { this._router.navigateByUrl("/home"); },
@@ -230,7 +225,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 *
 	 * @private
 	 */
-	private _getFormattedLabel(): string {
+	private getFormattedLabel(): string {
 
 		let body: string =
 			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
@@ -329,7 +324,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.audio.pause();
 		this.preCountdown.setShow(false);
 		this.countdown.setShow(false);
-		this.showFillResult = true;
+		this.fillResult();
 	}
 
 
@@ -337,7 +332,45 @@ export class GameCurrentViewComponent implements OnInit {
 	 * Open modal for fill result.
 	 */
 	private fillResult() {
-		console.log("fillResult");
+
+		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg' } );
+		modalRef.componentInstance.gameId = this.game.id;
+		modalRef.componentInstance.round = this.game.round;
+		modalRef.componentInstance.players = this.game.players;
+		modalRef.componentInstance.music = this.currentMusic;
+
+		modalRef.result.then(
+			(result) => { this.game = result; this.updatePlayers(); this.showNextMusic = true; },
+			(reason) => { /* do nothing */ }
+		);
+	}
+
+	/**
+	 * Update left/right players.
+	 * @private
+	 */
+	private updatePlayers() {
+
+		let allPlayers = this.game.players;
+
+		for (let i = 0; i < allPlayers.length; i++) {
+
+			let player = allPlayers[i];
+			let playerName = player.profile.name;
+
+			let foundPlayer = this.leftPlayers.find(value => value.profile.name === playerName);
+			if ( ToolsService.isNull(foundPlayer) )
+				foundPlayer = this.rightPlayers.find(value => value.profile.name === playerName);
+
+			if ( !ToolsService.isNull(foundPlayer) ) {
+
+				foundPlayer.rank = player.rank;
+				foundPlayer.turnToChoose = player.turnToChoose;
+
+				if (foundPlayer.score !== player.score)
+					foundPlayer.score = player.score;
+			}
+		}
 	}
 
 
