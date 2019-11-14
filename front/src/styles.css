@@ -39,6 +39,12 @@ body {
     font-style: italic;
 }
 
+.inner-html-special-text {
+    color: orangered;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .font-size-small { font-size: 0.9em; }
 .font-size-normal { font-size: 1.3em; }
 .font-size-large { font-size: 1.4em; }
@@ -61,6 +67,11 @@ fa-icon:hover {
 .fa-icon-custom-hover-1:hover {
     color: #eeeeee;
 }
+
+.fa-icon-custom-hover-2:hover {
+    color: orangered;
+}
+
 /****************** icon ******************/
 
 /*************** background ***************/

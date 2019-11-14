@@ -2,12 +2,17 @@
 
     <!-- header & exit -->
     <div class="row">
-        <div class="col-11">
+        <div class="offset-2 col-8">
             <header [title]="getTitle()"></header>
         </div>
-        <div class="col-1 game-current-view-exit">
-            <fa-icon [icon]="currentExitIcon" size="2x" (click)="exit()" (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
-                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+        <div class="col-2 game-current-view-exit">
+            <fa-icon [icon]="faQuestionCircle" [class]="'fa-icon-custom-hover-2'" size="2x" (click)="openRoundInfoModal()"
+                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.ROUND_INFO' | translate }}" placement="bottom auto" [openDelay]="500">
+            </fa-icon>
+            <fa-icon [icon]="currentExitIcon" [class]="'fa-icon-custom-hover-2'" size="2x" (click)="exit()"
+                     (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
+                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" placement="bottom auto" [openDelay]="500">
+            </fa-icon>
         </div>
     </div>
 

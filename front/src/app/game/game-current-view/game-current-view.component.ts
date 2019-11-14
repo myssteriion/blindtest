@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
+import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,6 +17,7 @@ import {CountdownConfig} from 'ngx-countdown';
 import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
 import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
+import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
 
 /**
  * The current game view.
@@ -101,6 +102,7 @@ export class GameCurrentViewComponent implements OnInit {
 
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
+	private faQuestionCircle = faQuestionCircle;
 
 
 
@@ -133,7 +135,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.countdownConfig = {
 			demand: true,
 			format: "ss",
-			leftTime: 25,
+			leftTime: 1,
 			stopTime: 0,
 			notify: []
 		};
@@ -197,7 +199,7 @@ export class GameCurrentViewComponent implements OnInit {
 	private getTitle(): string {
 
 		let params = {
-			name_round: this._translate.instant("ROUND." + this.game.round),
+			name_round: this._translate.instant("ROUND." + this.game.round + ".NAME"),
 			current_music: this.game.nbMusicsPlayedInRound + 1,
 			total_musics:  this.game.roundContent.nbMusics
 		};
@@ -340,7 +342,11 @@ export class GameCurrentViewComponent implements OnInit {
 		modalRef.componentInstance.music = this.currentMusic;
 
 		modalRef.result.then(
-			(result) => { this.game = result; this.updatePlayers(); this.showNextMusic = true; },
+			(result) => {
+				this.game = result;
+				this.updatePlayers();
+				this.showNextMusic = true;
+			},
 			(reason) => { /* do nothing */ }
 		);
 	}
@@ -373,6 +379,20 @@ export class GameCurrentViewComponent implements OnInit {
 		}
 	}
 
+
+	/**
+	 * Open round info modal.
+	 */
+	private openRoundInfoModal(): void {
+
+		const modalRef = this._ngbModal.open(RoundInfoModalComponent, { backdrop: 'static', size: 'lg' } );
+		modalRef.componentInstance.game = this.game;
+
+		modalRef.result.then(
+			(result) => { /* do nothing */ },
+			(reason) => { /* do nothing */ }
+		);
+	}
 
 
 

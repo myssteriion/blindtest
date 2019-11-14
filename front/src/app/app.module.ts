@@ -33,6 +33,7 @@ import {PlayerCardComponent} from './player/player-card/player-card.component';
 import {ThemeEffectComponent} from "./game/factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from './game/factoring-part/custom-countdown/custom-countdown.component';
 import {MusicResultModalComponent} from "./game/factoring-part/music-result-modal/music-result-modal.component";
+import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/round-info-modal.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -70,13 +71,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 		PlayerCardComponent,
 		ThemeEffectComponent,
 		CustomCountdownComponent,
-		MusicResultModalComponent
+		MusicResultModalComponent,
+		RoundInfoModalComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
 		ModalConfirmComponent,
 		ProfilePageModalComponent,
-		MusicResultModalComponent
+		MusicResultModalComponent,
+		RoundInfoModalComponent
 	],
 	imports: [
 		BrowserModule,

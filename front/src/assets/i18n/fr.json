@@ -49,6 +49,7 @@
         "CURRENT_VIEW": {
             "TITLE": "Manche \"{{name_round}}\" ({{current_music}}/{{total_musics}})",
             "EXIT": "Quitter le jeu",
+            "ROUND_INFO": "Info manche",
             "EXIT_BODY_MODAL_1": "Etes-vous sur de vouloir quitter la partie ?",
             "EXIT_BODY_MODAL_2": "Tant que le jeu n'est pas arrêté, vous pouvez y revenir à tout moment, grâce à votre N° de partie précisée ci dessous.",
             "EXIT_BODY_MODAL_3": "Votre N° de partie est le : {{game_id}}",
@@ -66,10 +67,19 @@
             "AUTHOR_WINNER_HEADER": "Artiste trouvé",
             "TITLE_WINNER_HEADER": "Titre trouvée",
             "LOSER_HEADER": "Réponse fausse"
+        },
+        "ROUND_INFO_MODAL": {
+            "TITLE": "Info manche",
+            "NB_POINT_WON": "Points par bonne réponse :"
         }
     },
     "ROUND": {
-        "CLASSIC": "Classique"
+        "CLASSIC": {
+            "NAME": "Classique",
+            "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien est à perdre, à vos cordes vocales !"
+        },
+        "CHOICE": "Choix",
+        "THIEF": "Voleur"
     },
     "PROFILE": {
         "CARD": {

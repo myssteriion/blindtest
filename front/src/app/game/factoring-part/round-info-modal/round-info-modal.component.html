@@ -1,0 +1,29 @@
+<!-- modal header -->
+<div class="row round-info-modal-header">
+    <div class="col font-size-modal-title">{{ 'GAME.ROUND_INFO_MODAL.TITLE' | translate }}</div>
+</div>
+
+
+<!-- modal body -->
+<div class="row round-info-modal-body">
+    <div class="col">
+
+        <div class="row round-info-modal-round-description">
+            <div class="col font-size-normal" [innerHTML]="getDescription()"></div>
+        </div>
+
+        <div class="row alert alert-success">
+            <div class="col-5 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINT_WON' | translate }}</div>
+            <div class="col-7 font-size-normal">{{ game.roundContent.nbPointWon }}</div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- modal footer -->
+<div class="row justify-content-center round-info-modal-footer">
+    <div class="col">
+        <button class="btn btn-info font-size-normal" (click)="close()">{{ 'COMMON.CLOSE' | translate }}</button>
+    </div>
+</div>
