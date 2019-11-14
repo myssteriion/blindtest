@@ -12,11 +12,11 @@
 }
 
 .player-card-rank-bronze {
-    color: #cd7f32;
+    color: #ff9529;
 }
 
 .player-card-rank-chocolate {
-    color: chocolate;
+    color: #c1611e;
 }
 
 .player-card-score {
@@ -24,7 +24,7 @@
     background-color: white;
     border-radius: 20px;
     text-align: center;
-    margin: auto;
+    margin: auto 0;
     color: orangered;
     font-weight: bold;
     box-shadow: 8px 8px 4px silver;
