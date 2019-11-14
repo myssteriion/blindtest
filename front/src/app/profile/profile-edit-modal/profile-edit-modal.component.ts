@@ -15,11 +15,11 @@ declare var $: any;
  * Profile creation/edition modal.
  */
 @Component({
-	selector: 'profile-edit',
-	templateUrl: './profile-edit.component.html',
-	styleUrls: ['./profile-edit.component.css']
+	selector: 'profile-edit-modal',
+	templateUrl: './profile-edit-modal.component.html',
+	styleUrls: ['./profile-edit-modal.component.css']
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditModalComponent implements OnInit {
 
 	/**
 	 * The profile.
@@ -193,7 +193,7 @@ export class ProfileEditComponent implements OnInit {
 				response => {
 
 					this.profile = response;
-					this._toasterService.success( this._translate.instant("PROFILE.EDIT.CREATED_TOASTER", { profile_name: this.profile.name } ) );
+					this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.CREATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
 				error => { throw Error("can't create profile : " + JSON.stringify(error)); }
@@ -205,7 +205,7 @@ export class ProfileEditComponent implements OnInit {
 				response => {
 
 					this.profile = response;
-					this._toasterService.success( this._translate.instant("PROFILE.EDIT.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
+					this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
 					this._ngbActiveModal.close(this.profile);
 				},
 				error => { throw Error("can't update profile : " + JSON.stringify(error)); }

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/dto/profile.interface';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/base/page.interface';
-import {ProfileEditComponent} from "../profile-edit/profile-edit.component";
+import {ProfileEditModalComponent} from "../profile-edit-modal/profile-edit-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {OPACITY_ANIMATION} from "../../tools/constant";
 
@@ -99,7 +99,7 @@ export class ProfilePageComponent implements OnInit {
      */
     private createProfile(): void {
 
-        const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );
+        const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static' } );
         modalRef.componentInstance.create = true;
 
         modalRef.result.then(

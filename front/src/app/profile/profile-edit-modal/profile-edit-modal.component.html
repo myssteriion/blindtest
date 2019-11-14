@@ -1,7 +1,7 @@
 <!-- modal header -->
 <div class="row profile-edit-header">
-    <div *ngIf="create" class="col font-size-modal-title">{{ 'PROFILE.EDIT.CREATION_TITLE' | translate }}</div>
-    <div *ngIf="!create" class="col font-size-modal-title">{{ 'PROFILE.EDIT.UPDATE_TITLE' | translate }}</div>
+    <div *ngIf="create" class="col font-size-modal-title">{{ 'PROFILE.EDIT_MODAL.CREATION_TITLE' | translate }}</div>
+    <div *ngIf="!create" class="col font-size-modal-title">{{ 'PROFILE.EDIT_MODAL.UPDATE_TITLE' | translate }}</div>
 </div>
 
 <!-- modal body -->
@@ -10,17 +10,17 @@
 
         <!-- name -->
         <div class="row profile-edit-name">
-            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.NAME_LABEL' | translate }}</div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT_MODAL.NAME_LABEL' | translate }}</div>
             <div class="col-9">
-                <input class="form-control font-size-normal" [(ngModel)]="newProfile.name"
+                <input class="form-control font-size-normal no-shadow" [(ngModel)]="newProfile.name"
                        (change)="newProfile.name = newProfile.name.trim()"
-                       placeholder="{{ 'PROFILE.EDIT.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
+                       placeholder="{{ 'PROFILE.EDIT_MODAL.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
             </div>
         </div>
 
         <!-- background -->
         <div class="row profile-edit-backgrounds">
-            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.BACKGROUND_LABEL' | translate }}</div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT_MODAL.BACKGROUND_LABEL' | translate }}</div>
             <div *ngFor="let backgroundId of backgroundIds; let i = index" class="col profile-edit-background" [ngClass]="getBackgroundClass(i)"
                     (click)="newProfile.background = i">
             </div>
@@ -28,7 +28,7 @@
 
         <!-- avatar -->
         <div class="row profile-edit-avatar">
-            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT.AVATAR_LABEL' | translate }}</div>
+            <div class="col-3 font-size-normal">{{ 'PROFILE.EDIT_MODAL.AVATAR_LABEL' | translate }}</div>
             <div class="col-9"><img src="{{ getCurrentFluxForImg() }}" (click)="showHideAvatars()"/></div>
         </div>
 

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/dto/profile.interface';
 import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProfileEditComponent} from 'src/app/profile/profile-edit/profile-edit.component';
+import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
 import {ToolsService} from "../../tools/tools.service";
 import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
 import {ProfileResource} from "../../resources/profile.resource";
@@ -109,7 +109,7 @@ export class ProfileCardComponent implements OnInit {
      */
     private edit(): void {
 
-        const modalRef = this._ngbModal.open(ProfileEditComponent, { backdrop: 'static' } );
+        const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static' } );
         modalRef.componentInstance.profile = this.profile;
         modalRef.componentInstance.create = false;
 

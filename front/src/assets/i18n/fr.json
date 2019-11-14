@@ -79,16 +79,13 @@
             "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?",
             "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé."
         },
-        "EDIT": {
+        "EDIT_MODAL": {
             "CREATION_TITLE": "Création du profil",
             "UPDATE_TITLE": "Modification du profil",
             "NAME_LABEL": "Pseudo :",
             "BACKGROUND_LABEL": "Couleur :",
             "NAME_PLACE_HOLDER": "Entrez votre pseudo",
             "AVATAR_LABEL": "Avatar :",
-            "SHOW_TOOLTIP": "Afficher la liste des avatars.",
-            "HIDE_TOOLTIP": "Cacher la liste des avatars.",
-            "REFRESH_TOOLTIP": "Rafraichir la liste des avatars.",
             "CREATED_TOASTER": "Profil '{{profile_name}}' créé.",
             "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour."
         },

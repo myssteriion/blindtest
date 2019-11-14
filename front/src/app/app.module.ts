@@ -16,7 +16,7 @@ import {CountdownModule} from 'ngx-countdown';
 import {AppComponent} from './app.component';
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
 import {ProfileCardEmptyComponent} from './profile/profile-card-empty/profile-card-empty.component';
-import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfileEditModalComponent} from './profile/profile-edit-modal/profile-edit-modal.component';
 import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
 import {ProfilePageModalComponent} from './profile/profile-page-modal/profile-page-modal.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
@@ -57,7 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfileCardEmptyComponent,
 		ProfilePageComponent,
 		ProfilePageModalComponent,
-		ProfileEditComponent,
+		ProfileEditModalComponent,
 		ModalConfirmComponent,
 		HeaderComponent,
 		GameNewViewComponent,
@@ -73,7 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MusicResultModalComponent
 	],
 	entryComponents: [
-		ProfileEditComponent,
+		ProfileEditModalComponent,
 		ModalConfirmComponent,
 		ProfilePageModalComponent,
 		MusicResultModalComponent
