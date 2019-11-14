@@ -2,7 +2,7 @@
  * Round.
  */
 const enum Round {
-	CLASSIC,
-	CHOICE,
-	THIEF
+	CLASSIC = "CLASSIC",
+	CHOICE = "CHOICE",
+	THIEF = "THIEF"
 }
