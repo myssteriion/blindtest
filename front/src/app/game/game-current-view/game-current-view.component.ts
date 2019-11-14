@@ -198,7 +198,7 @@ export class GameCurrentViewComponent implements OnInit {
 
 		let params = {
 			name_round: this._translate.instant("ROUND." + this.game.round),
-			current_music: this.game.nbMusicsPlayedInRound,
+			current_music: this.game.nbMusicsPlayedInRound + 1,
 			total_musics:  this.game.roundContent.nbMusics
 		};
 
