@@ -43,19 +43,19 @@ public class MusicResult {
 	 * Instantiates a new Music result.
 	 *
 	 * @param gameId   		the game id
-	 * @param musicDTO 		the music dto
+	 * @param music 		the music
 	 * @param authorWinners	the author winners
 	 * @param titleWinners	the title winners
 	 * @param losers  		the losers
 	 */
 	@JsonCreator
-	public MusicResult(Integer gameId, MusicDTO musicDTO, List<String> authorWinners, List<String> titleWinners, List<String> losers) {
+	public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers) {
 
 		Tool.verifyValue("gameId", gameId);
-		Tool.verifyValue("musicDto", musicDTO);
+		Tool.verifyValue("music", music);
 
 		this.gameId = gameId;
-		this.music = musicDTO;
+		this.music = music;
 		
 		this.authorWinners = (authorWinners == null) ? new ArrayList<>() : authorWinners;
 		this.titleWinners = (titleWinners == null) ? new ArrayList<>() : titleWinners;
@@ -74,9 +74,9 @@ public class MusicResult {
 	}
 
 	/**
-	 * Gets music dto.
+	 * Gets music.
 	 *
-	 * @return the music dto
+	 * @return the music
 	 */
 	public MusicDTO getMusic() {
 		return music;

@@ -5,7 +5,8 @@ import {Music} from "../dto/music.interface";
  */
 export interface MusicResult {
 	gameId: number,
-	musicDTO: Music,
-	winners: string[],
+	music: Music,
+	authorWinners: string[],
+	titleWinners: string[],
 	losers: string[]
 }

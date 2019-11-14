@@ -101,7 +101,7 @@ public class GameService {
 	 */
 	public Game apply(MusicResult musicResult) throws NotFoundException {
 
-		Tool.verifyValue("musicResultDto", musicResult);
+		Tool.verifyValue("musicResult", musicResult);
 		Game game = games.stream()
 							.filter( g -> g.getId().equals(musicResult.getGameId()) )
 							.findFirst()
