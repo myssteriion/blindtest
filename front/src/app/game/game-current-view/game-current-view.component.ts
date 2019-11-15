@@ -135,7 +135,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.countdownConfig = {
 			demand: true,
 			format: "ss",
-			leftTime: 1,
+			leftTime: 25,
 			stopTime: 0,
 			notify: []
 		};
