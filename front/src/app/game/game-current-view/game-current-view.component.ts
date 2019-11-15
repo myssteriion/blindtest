@@ -64,7 +64,7 @@ export class GameCurrentViewComponent implements OnInit {
 	private themeEffect: ThemeEffectComponent;
 
 	/**
-	 * The preCountdown component.
+	 * The pre countdown component.
 	 */
 	@ViewChild("preCountdown", { static: false })
 	private preCountdown: CustomCountdownComponent;
@@ -81,9 +81,20 @@ export class GameCurrentViewComponent implements OnInit {
 	private countdown: CustomCountdownComponent;
 
 	/**
-	 * The pre countdown config.
+	 * The countdown config.
 	 */
 	private countdownConfig: CountdownConfig;
+
+	/**
+	 * The post countdown component.
+	 */
+	@ViewChild("postCountdown", { static: false })
+	private postCountdown: CustomCountdownComponent;
+
+	/**
+	 * The post countdown config.
+	 */
+	private postCountdownConfig: CountdownConfig;
 
 	/**
 	 * Current music.
@@ -132,10 +143,23 @@ export class GameCurrentViewComponent implements OnInit {
 			}
 		);
 
-		this.countdownConfig = {
+		this._translate.get("GAME.CURRENT_VIEW.FINISH").subscribe(
+			value => {
+				this.countdownConfig = {
+					demand: true,
+					format: "ss",
+					leftTime: 25,
+					stopTime: 0,
+					notify: [],
+					prettyText: text => function() { return (text === "0") ? value : text; }()
+				};
+			}
+		);
+
+		this.postCountdownConfig = {
 			demand: true,
-			format: "ss",
-			leftTime: 25,
+			format: "s",
+			leftTime: 5,
 			stopTime: 0,
 			notify: []
 		};
@@ -220,7 +244,15 @@ export class GameCurrentViewComponent implements OnInit {
 		modalRef.componentInstance.body = this.getFormattedLabel();
 
 		modalRef.result.then(
-			(result) => { this._router.navigateByUrl("/home"); },
+			(result) => {
+
+				if ( !ToolsService.isNull(this.audio) ) {
+					this.audio.pause();
+					this.audio = undefined;
+				}
+
+				this._router.navigateByUrl("/home");
+			},
 			(reason) => { /* do nothing */ }
 		);
 	}
@@ -260,6 +292,9 @@ export class GameCurrentViewComponent implements OnInit {
 		this.showNextMusic = false;
 		this.preCountdown.setShow(false);
 		this.countdown.setShow(false);
+
+		if ( !ToolsService.isNull(this.audio) )
+			this.audio.pause();
 
 		this._musicResource.random().subscribe(
 			response => {
@@ -327,8 +362,35 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private onCountdownEnd(): void {
 		this.audio.pause();
+		this.startPostCountdown();
+	}
+
+
+	/**
+	 * Start the post countdown.
+	 */
+	private startPostCountdown(): void {
+
 		this.preCountdown.setShow(false);
+		this.postCountdown.setShow(true);
+		this.postCountdown.start();
+	}
+
+	/**
+	 * When the post countdown is ended.
+	 */
+	private onPostCountdownEnd(): void {
+
 		this.countdown.setShow(false);
+		this.postCountdown.setShow(false);
+
+		let currentTime = this.audio.currentTime;
+		this.audio.pause();
+		this.audio.defaultPlaybackRate = 1;
+		this.audio.load();
+		this.audio.currentTime = currentTime;
+		this.audio.play();
+
 		this.fillResult();
 	}
 
@@ -338,7 +400,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private fillResult() {
 
-		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
 		modalRef.componentInstance.gameId = this.game.id;
 		modalRef.componentInstance.round = this.game.round;
 		modalRef.componentInstance.players = this.game.players;
@@ -346,8 +408,10 @@ export class GameCurrentViewComponent implements OnInit {
 
 		modalRef.result.then(
 			(result) => {
+
 				this.game = result;
 				this.updatePlayers();
+
 				this.showNextMusic = true;
 				if (this.game.nbMusicsPlayedInRound === 0)
 					this.openRoundInfoModal();
