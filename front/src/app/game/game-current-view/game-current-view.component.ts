@@ -189,6 +189,9 @@ export class GameCurrentViewComponent implements OnInit {
 		}
 
 		this.isLoaded = true;
+
+		if (this.game.nbMusicsPlayedInRound === 0)
+			this.openRoundInfoModal();
 	}
 
 
@@ -346,6 +349,8 @@ export class GameCurrentViewComponent implements OnInit {
 				this.game = result;
 				this.updatePlayers();
 				this.showNextMusic = true;
+				if (this.game.nbMusicsPlayedInRound === 0)
+					this.openRoundInfoModal();
 			},
 			(reason) => { /* do nothing */ }
 		);
