@@ -106,6 +106,15 @@ export class MusicResultModalComponent implements OnInit {
     }
 
     /**
+     * Gets music name.
+     */
+    private getMusicName(): string {
+
+        let lastPoint = this.music.name.lastIndexOf(".");
+        return this.music.name.substring(0, lastPoint);
+    }
+
+    /**
      * Save music result and close modal.
      */
     private save() {

@@ -42,3 +42,8 @@
 .music-result-modal-table-odd {
     background-color: #e6e6e6;
 }
+
+.music-result-modal-music-name {
+    text-align: center;
+    font-weight: bold;
+}
