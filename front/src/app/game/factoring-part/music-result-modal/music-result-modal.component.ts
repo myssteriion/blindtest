@@ -41,11 +41,6 @@ export class MusicResultModalComponent implements OnInit {
     private music: Music;
 
     /**
-     * If the loser column is showed.
-     */
-    private showLoserColumn;
-
-    /**
      * The table headers.
      */
     private headers: string[];
@@ -64,8 +59,6 @@ export class MusicResultModalComponent implements OnInit {
 
         this.fillHeaders();
         this.fillRows();
-
-        this.showLoserColumn = (this.round === Round.CHOICE);
     }
 
 
@@ -75,7 +68,7 @@ export class MusicResultModalComponent implements OnInit {
      */
     private fillHeaders(): void {
         let prefix: string = "GAME.MUSIC_RESULT_MODAL.";
-        this.headers = [prefix + "NAME_HEADER", prefix + "SCORE_HEADER", prefix + "AUTHOR_WINNER_HEADER", prefix + "TITLE_WINNER_HEADER", prefix + "LOSER_HEADER"];
+        this.headers = [prefix + "NAME_HEADER", prefix + "SCORE_HEADER", prefix + "AUTHOR_WINNER_HEADER", prefix + "TITLE_WINNER_HEADER", prefix + "STEAL_HEADER"];
     }
 
     /**
@@ -103,6 +96,13 @@ export class MusicResultModalComponent implements OnInit {
      */
     private getIconClass(bool: boolean): string {
         return (bool) ? "music-result-modal-check-icon" : "music-result-modal-cross-icon";
+    }
+
+    /**
+     * If thr loser column is showed.
+     */
+    private showLoserColumn(): boolean {
+        return this.round === Round.THIEF;
     }
 
     /**

@@ -66,11 +66,14 @@
             "SCORE_HEADER": "Score",
             "AUTHOR_WINNER_HEADER": "Artiste trouvé",
             "TITLE_WINNER_HEADER": "Titre trouvée",
-            "LOSER_HEADER": "Réponse fausse"
+            "STEAL_HEADER": "Victime du vol"
         },
         "ROUND_INFO_MODAL": {
             "TITLE": "Info manche",
-            "NB_POINT_WON": "Points par bonne réponse :"
+            "NB_POINTS_WON": "Points par bonne réponse :",
+            "NB_POINTS_BONUS": "Points bonus :",
+            "NB_POINTS_MALUS": "Points malus :",
+            "NB_POINTS_LOSE": "Victime d'un vol :"
         }
     },
     "ROUND": {
@@ -78,8 +81,14 @@
             "NAME": "Classique",
             "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien est à perdre, à vos cordes vocales !"
         },
-        "CHOICE": "Choix",
-        "THIEF": "Voleur"
+        "CHOICE": {
+            "NAME": "Choix",
+            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème (<span class=\"inner-html-special-text\">{{nbMusics}} fois chacun</span>). Pour celui qui choisie, c'est des points bonus s'il trouve, sinon c'est des points en moins."
+        },
+        "THIEF": {
+            "NAME": "Voleur ou Volé",
+            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemies ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en faisant en perdre à ses adversaires. Que les cris de déception commencent !"
+        }
     },
     "PROFILE": {
         "CARD": {

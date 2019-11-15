@@ -28,7 +28,9 @@ export class RoundInfoModalComponent implements OnInit {
     }
 
 
-
+    /**
+     * Gets the round description.
+     */
     private getDescription(): string {
 
         let params = {
@@ -36,7 +38,31 @@ export class RoundInfoModalComponent implements OnInit {
             nbMusics: this.game.roundContent.nbMusics
         };
 
+        if (this.game.round === Round.CHOICE)
+            params.nbMusics = params.nbMusics / this.game.players.length;
+
         return this._translate.instant("ROUND." + this.game.round + ".DESCRIPTION", params);
+    }
+
+    /**
+     * If lose point part is showed.
+     */
+    private showNpPointLose(): boolean {
+        return this.game.round === Round.THIEF;
+    }
+
+    /**
+     * If bonus point part is showed.
+     */
+    private showNpPointBonus(): boolean {
+        return this.game.round === Round.CHOICE;
+    }
+
+    /**
+     * If malus point part is showed.
+     */
+    private showNpPointMalus(): boolean {
+        return this.game.round === Round.CHOICE;
     }
 
     /**
