@@ -159,7 +159,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.postCountdownConfig = {
 			demand: true,
 			format: "s",
-			leftTime: 5,
+			leftTime: 3,
 			stopTime: 0,
 			notify: []
 		};
