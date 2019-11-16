@@ -67,8 +67,20 @@ export class MusicResultModalComponent implements OnInit {
      * Fill headers.
      */
     private fillHeaders(): void {
+
         let prefix: string = "GAME.MUSIC_RESULT_MODAL.";
-        this.headers = [prefix + "NAME_HEADER", prefix + "SCORE_HEADER", prefix + "AUTHOR_WINNER_HEADER", prefix + "TITLE_WINNER_HEADER", prefix + "STEAL_HEADER"];
+
+        this.headers = [];
+        this.headers.push(prefix + "NAME_HEADER");
+        this.headers.push(prefix + "SCORE_HEADER");
+
+        if (this.music.theme === Theme.DISNEY)
+            this.headers.push(prefix + "DISNEY_TITLE_HEADER");
+        else
+            this.headers.push(prefix + "AUTHOR_WINNER_HEADER");
+
+        this.headers.push(prefix + "TITLE_WINNER_HEADER");
+        this.headers.push(prefix + "STEAL_HEADER");
     }
 
     /**
@@ -103,6 +115,13 @@ export class MusicResultModalComponent implements OnInit {
      */
     private showLoserColumn(): boolean {
         return this.round === Round.THIEF;
+    }
+
+    /**
+     * If thr author column is showed.
+     */
+    private showAuthorColumn(): boolean {
+        return this.music.theme !== Theme.CINEMAS && this.music.theme !== Theme.SERIES
     }
 
     /**

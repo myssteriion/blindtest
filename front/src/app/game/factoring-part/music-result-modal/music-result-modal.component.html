@@ -17,7 +17,7 @@
                 <tr>
                     <th>{{ headers[0] | translate }}</th>
                     <th>{{ headers[1] | translate }}</th>
-                    <th>{{ headers[2] | translate }}</th>
+                    <th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
                     <th>{{ headers[3] | translate }}</th>
                     <th *ngIf="showLoserColumn()">{{ headers[4] | translate }}</th>
                 </tr>
@@ -26,7 +26,7 @@
                 <tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'music-result-modal-table-odd': odd }">
                     <td>{{ line.name }}</td>
                     <td>{{ line.score }}</td>
-                    <td>
+                    <td *ngIf="showAuthorColumn()">
                         <fa-icon [icon]="getIcon(line.authorWinner)" [ngClass]="getIconClass(line.authorWinner)"
                                  (click)="line.authorWinner = !line.authorWinner"></fa-icon>
                     </td>

@@ -66,8 +66,9 @@
             "TITLE": "Résultat",
             "NAME_HEADER": "Joueur",
             "SCORE_HEADER": "Score",
-            "AUTHOR_WINNER_HEADER": "Artiste trouvé",
-            "TITLE_WINNER_HEADER": "Titre trouvée",
+            "AUTHOR_WINNER_HEADER": "Artiste(s)",
+            "DISNEY_TITLE_HEADER": "Titre film trouvé",
+            "TITLE_WINNER_HEADER": "Titre musique",
             "STEAL_HEADER": "Victime du vol"
         },
         "ROUND_INFO_MODAL": {
