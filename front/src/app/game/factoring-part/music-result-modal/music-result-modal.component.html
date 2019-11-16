@@ -35,8 +35,8 @@
                                  (click)="line.titleWinner = !line.titleWinner"></fa-icon>
                     </td>
                     <td *ngIf="showLoserColumn()">
-                        <fa-icon [icon]="getIcon(line.faCross)" [ngClass]="getIconClass(line.faCross)"
-                                 (click)="line.faCross = !line.faCross"></fa-icon>
+                        <fa-icon [icon]="getIcon(line.loser)" [ngClass]="getIconClass(line.loser)"
+                                 (click)="line.loser = !line.loser"></fa-icon>
                     </td>
                 </tr>
             </tbody>
