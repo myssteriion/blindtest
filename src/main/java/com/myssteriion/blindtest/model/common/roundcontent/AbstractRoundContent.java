@@ -62,8 +62,8 @@ public abstract class AbstractRoundContent {
      */
     public Game apply(Game game, MusicResult musicResult) {
 
-        Tool.verifyValue("gameDto", game);
-        Tool.verifyValue("musicResultDto", musicResult);
+        Tool.verifyValue("game", game);
+        Tool.verifyValue("musicResult", musicResult);
 
         game.getPlayers().stream()
                 .filter( playerDto -> musicResult.isAuthorWinner(playerDto.getProfile().getName()) )
@@ -84,7 +84,7 @@ public abstract class AbstractRoundContent {
      */
     public boolean isFinished(Game game) {
 
-        Tool.verifyValue("gameDto", game);
+        Tool.verifyValue("game", game);
 
         return game.getNbMusicsPlayedInRound() == nbMusics;
     }
@@ -97,7 +97,7 @@ public abstract class AbstractRoundContent {
      */
     public boolean isLastMusic(Game game) {
 
-        Tool.verifyValue("gameDto", game);
+        Tool.verifyValue("game", game);
 
         return game.getNbMusicsPlayedInRound() == nbMusics - 1;
     }

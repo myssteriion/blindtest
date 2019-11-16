@@ -66,7 +66,7 @@ public class ThiefContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
         }
 
         try {
@@ -74,7 +74,7 @@ public class ThiefContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
         }
 
 
@@ -107,7 +107,7 @@ public class ThiefContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
         }
 
         Assert.assertFalse( thiefContent.isFinished(game) );

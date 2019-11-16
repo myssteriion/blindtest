@@ -55,7 +55,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'newGameDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'newGame' est obligatoire."), e);
 		}
 
 		try {
@@ -103,7 +103,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException le gameDto n'est pas retrouvée.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
 		}
 
 		try {

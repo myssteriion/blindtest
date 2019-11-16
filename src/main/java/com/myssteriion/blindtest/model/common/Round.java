@@ -54,7 +54,7 @@ public enum Round {
      */
     public AbstractRoundContent createRoundContent(Game game) {
 
-        Tool.verifyValue("gameDto", game);
+        Tool.verifyValue("game", game);
 
         int nbPlayer = game.getPlayers().size();
         double durationRatio = game.getDuration().getRatio();

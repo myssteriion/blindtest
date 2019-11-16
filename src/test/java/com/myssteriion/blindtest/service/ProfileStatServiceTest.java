@@ -161,7 +161,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'profileDto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'profile' est obligatoire."), e);
 		}
 
 		try {

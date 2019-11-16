@@ -58,7 +58,7 @@ public class GameService {
 	 */
 	public Game newGame(NewGame newGame) throws NotFoundException {
 
-		Tool.verifyValue("newGameDto", newGame);
+		Tool.verifyValue("newGame", newGame);
 
 		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration() );
 		game.setId( games.size() );

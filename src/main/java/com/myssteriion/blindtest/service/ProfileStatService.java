@@ -42,8 +42,8 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 	 */
 	public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws NotFoundException {
 
-		Tool.verifyValue("profileDto", profileDto);
-		Tool.verifyValue("profileDto -> id", profileDto.getId());
+		Tool.verifyValue("profile", profileDto);
+		Tool.verifyValue("profile -> id", profileDto.getId());
 
 		ProfileStatDTO profileStatDto = new ProfileStatDTO( profileDto.getId() );
 		ProfileStatDTO foundProfileStatDTO = find(profileStatDto);

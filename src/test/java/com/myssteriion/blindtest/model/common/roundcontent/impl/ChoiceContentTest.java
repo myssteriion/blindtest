@@ -74,7 +74,7 @@ public class ChoiceContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
         }
 
         try {
@@ -82,7 +82,7 @@ public class ChoiceContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'musicResultDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
         }
 
         Game actual = choiceContent.apply(game, musicResult);
@@ -161,7 +161,7 @@ public class ChoiceContentTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'gameDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
         }
 
         Assert.assertFalse( choiceContent.isFinished(game) );

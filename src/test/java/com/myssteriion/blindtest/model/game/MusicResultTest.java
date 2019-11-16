@@ -30,7 +30,7 @@ public class MusicResultTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'musicDto' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
         }
 
         Assert.assertNotNull( new MusicResult(gameId, music, null, null, null) );
