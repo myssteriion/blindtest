@@ -464,6 +464,14 @@ export class GameCurrentViewComponent implements OnInit {
 	}
 
 
+	/**
+	 * Stop the music.
+	 */
+	private stopMusic(): void {
+		if ( !ToolsService.isNull(this.audio) )
+			this.audio.pause();
+	}
+
 
 	public stop() {
 		this.audio.pause();

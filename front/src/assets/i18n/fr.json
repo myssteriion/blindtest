@@ -55,7 +55,8 @@
             "EXIT_BODY_MODAL_3": "Votre N° de partie est le : {{game_id}}",
             "LISTEN": "Ecoutez !",
             "FINISH": "C'est finis !",
-            "NEXT_MUSIC": "Musique suivante !"
+            "NEXT_MUSIC": "Musique suivante !",
+            "STOP_MUSIC": "Arrêter la musique"
         },
         "THEME_EFFECT": {
             "THEME_LABEL": "* Thème *",
