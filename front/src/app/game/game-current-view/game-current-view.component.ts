@@ -151,7 +151,7 @@ export class GameCurrentViewComponent implements OnInit {
 					leftTime: 25,
 					stopTime: 0,
 					notify: [],
-					prettyText: text => function() { return (text === "0") ? value : text; }()
+					prettyText: text => function() { return (text === "00") ? value : text; }()
 				};
 			}
 		);
