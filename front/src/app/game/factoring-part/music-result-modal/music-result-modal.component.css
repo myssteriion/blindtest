@@ -36,7 +36,7 @@
 
 .music-result-modal-table td {
     text-align: center;
-    height: 2.5em;
+    height: 2.8em;
 }
 
 .music-result-modal-table-odd {
@@ -46,4 +46,10 @@
 .music-result-modal-music-name {
     text-align: center;
     font-weight: bold;
+}
+
+.music-result-modal-select {
+    margin-left: 25%;
+    width: 50%;
+    height: 75%;
 }

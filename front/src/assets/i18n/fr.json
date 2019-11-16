@@ -13,7 +13,8 @@
         "YES": "Oui",
         "NO": "Non",
         "WARNING": "Attention",
-        "NO_RESULT": "Pas de résultat."
+        "NO_RESULT": "Pas de résultat.",
+        "MANY_TIMES": " fois"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"

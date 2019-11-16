@@ -5,6 +5,7 @@ import {faCheckCircle, faTimesCircle, IconDefinition} from '@fortawesome/free-so
 import {GameResource} from "../../../resources/game.resource";
 import {MusicResult} from "../../../interfaces/game/music.result.interface";
 import {Music} from "../../../interfaces/dto/music.interface";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * The music result modal.
@@ -50,12 +51,26 @@ export class MusicResultModalComponent implements OnInit {
      */
     private lines: PLayerLine[];
 
+    /**
+     * Drop down choice list.
+     */
+    private nbLoseChoices: PLayerLoserItem[];
+
 
 
     constructor(private _ngbActiveModal: NgbActiveModal,
-                private _gameResource: GameResource) {}
+                private _gameResource: GameResource,
+                private _translate: TranslateService) {}
 
     ngOnInit() {
+
+        this.nbLoseChoices = [];
+        this._translate.get("COMMON.MANY_TIMES").subscribe(
+            value => {
+                for (let i = 0; i < 7; i++)
+                    this.nbLoseChoices.push( { id: i, label: i + " " + value } );
+            }
+        );
 
         this.fillHeaders();
         this.fillRows();
@@ -88,26 +103,8 @@ export class MusicResultModalComponent implements OnInit {
      */
     private fillRows(): void {
         this.lines = [];
-        for (var player of this.players)
-            this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: false } );
-    }
-
-    /**
-     * Gets icons.
-     *
-     * @param bool the value
-     */
-    private getIcon(bool: boolean): IconDefinition {
-        return (bool) ? faCheckCircle : faTimesCircle;
-    }
-
-    /**
-     * Gets icon class.
-     *
-     * @param bool the value
-     */
-    private getIconClass(bool: boolean): string {
-        return (bool) ? "music-result-modal-check-icon" : "music-result-modal-cross-icon";
+        for (let player of this.players)
+            this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0 } );
     }
 
     /**
@@ -145,7 +142,8 @@ export class MusicResultModalComponent implements OnInit {
         for (let playerLine of this.lines) {
             if (playerLine.authorWinner)    authorWinners.push(playerLine.name);
             if (playerLine.titleWinner)     titleWinners.push(playerLine.name);
-            if (playerLine.loser)           losers.push(playerLine.name);
+            for (let i = 0; i < playerLine.loser; i++)
+                losers.push(playerLine.name);
         }
 
         let copyMusic: Music = {
@@ -177,5 +175,13 @@ interface PLayerLine {
     score: number;
     authorWinner: boolean;
     titleWinner: boolean;
-    loser: boolean;
+    loser: number;
+}
+
+/**
+ * The loser item.
+ */
+interface PLayerLoserItem {
+    id: number;
+    label: string;
 }
