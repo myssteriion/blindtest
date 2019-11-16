@@ -86,6 +86,12 @@ public class ThiefContentTest extends AbstractTest {
         actual = thiefContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
+
+        playersNames = Arrays.asList("name", "name", "name");
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        actual = thiefContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( -300, actual.getPlayers().get(0).getScore() );
     }
 
     @Test

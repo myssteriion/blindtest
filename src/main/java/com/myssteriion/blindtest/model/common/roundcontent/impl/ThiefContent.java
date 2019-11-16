@@ -46,7 +46,14 @@ public class ThiefContent extends AbstractRoundContent {
 
         game.getPlayers().stream()
                 .filter( playerDto -> musicResult.isLoser(playerDto.getProfile().getName()) )
-                .forEach( playerDto -> playerDto.addScore(nbPointLoose) );
+                .forEach( playerDto -> {
+
+                    Long nbLose = musicResult.getLosers().stream()
+                                    .filter(name -> name.equals(playerDto.getProfile().getName()))
+                                    .count();
+
+                    playerDto.addScore(nbLose.intValue() * nbPointLoose);
+                });
 
         return game;
     }
