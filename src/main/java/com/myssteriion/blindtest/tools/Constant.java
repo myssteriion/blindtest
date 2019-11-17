@@ -22,6 +22,7 @@ public class Constant {
 
 	public static final String ID							= "id";
 	public static final String ID_PATH_PARAM				= "/{" + ID + "}";
+	public static final String THEME						= "theme";
 	public static final String PAGE_NUMBER 					= "pageNumber";
 	public static final String PAGE_NUMBER_DEFAULT_VALUE 	= "0";
 	public static final String PREFIX_NAME					= "prefixName";

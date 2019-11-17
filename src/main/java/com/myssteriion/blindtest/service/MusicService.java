@@ -100,10 +100,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	/**
 	 * Randomly choose a music.
 	 *
+	 * @param theme the theme (optional)
 	 * @return the music dto
 	 * @throws NotFoundException the not found exception
 	 */
-	public MusicDTO random() throws NotFoundException, IOException {
+	public MusicDTO random(Theme theme) throws NotFoundException, IOException {
 	
 		List<MusicDTO> allMusics = new ArrayList<>();
 		dao.findAll().forEach(allMusics::add);
@@ -115,7 +116,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		List<Double> coefs = calculateCoefList(allMusics);
 		double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
 		List<Double> cumulativePercent = calculateCumulativePercent(coefs, ratio);
-		Theme foundTheme = foundTheme(cumulativePercent);
+		Theme foundTheme = ( Tool.isNullOrEmpty(theme) ) ? foundTheme(cumulativePercent) : theme;
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
 		Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());

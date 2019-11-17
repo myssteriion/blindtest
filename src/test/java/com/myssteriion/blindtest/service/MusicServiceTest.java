@@ -106,11 +106,11 @@ public class MusicServiceTest extends AbstractTest {
 			verifyException(new ConflictException("Dto already exists."), e);
 		}
 
-		MusicDTO musicDtoSaved = musicService.save(musicDto);
-		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
-		Assert.assertEquals( name, musicDtoSaved.getName() );
-		Assert.assertEquals( theme, musicDtoSaved.getTheme() );
-		Assert.assertEquals( 0, musicDtoSaved.getPlayed() );
+		MusicDTO musicSaved = musicService.save(musicDto);
+		Assert.assertEquals( new Integer(1), musicSaved.getId() );
+		Assert.assertEquals( name, musicSaved.getName() );
+		Assert.assertEquals( theme, musicSaved.getTheme() );
+		Assert.assertEquals( 0, musicSaved.getPlayed() );
 	}
 
 	@Test
@@ -129,9 +129,9 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-		MusicDTO musicDto = new MusicDTO(name, theme);
+		MusicDTO music = new MusicDTO(name, theme);
 		try {
-			musicService.update(musicDto);
+			musicService.update(music);
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
@@ -139,25 +139,25 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-		MusicDTO musicStatDtoMockNotSame = new MusicDTO(name, theme);
-		musicStatDtoMockNotSame.setId(2);
-		MusicDTO musicStatDtoMockSame = new MusicDTO(name, theme);
-		musicStatDtoMockSame.setId(1);
-		Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(musicStatDtoMockNotSame),
-                Optional.of(musicStatDtoMockNotSame), Optional.of(musicStatDtoMockSame));
-		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDto);
+		MusicDTO musicStatMockNotSame = new MusicDTO(name, theme);
+		musicStatMockNotSame.setId(2);
+		MusicDTO musicStatMockSame = new MusicDTO(name, theme);
+		musicStatMockSame.setId(1);
+		Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(musicStatMockNotSame),
+                Optional.of(musicStatMockNotSame), Optional.of(musicStatMockSame));
+		Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(music);
 
 		try {
-			musicDto.setId(1);
-			musicService.update(musicDto);
+			music.setId(1);
+			musicService.update(music);
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("Dto not found."), e);
 		}
 
-		musicDto.setId(1);
-		MusicDTO musicDtoSaved = musicService.update(musicDto);
+		music.setId(1);
+		MusicDTO musicDtoSaved = musicService.update(music);
 		Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
 		Assert.assertEquals( "name", musicDtoSaved.getName() );
 	}
@@ -165,8 +165,8 @@ public class MusicServiceTest extends AbstractTest {
 	@Test
 	public void find() {
 
-		MusicDTO musicDtoMock = new MusicDTO("name", Theme.ANNEES_80);
-		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicDtoMock));
+		MusicDTO musicMock = new MusicDTO("name", Theme.ANNEES_80);
+		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
 
 
 		try {
@@ -194,7 +194,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), allMusics);
 
 		try {
-			musicService.random();
+			musicService.random(null);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -216,8 +216,11 @@ public class MusicServiceTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
 
-		MusicDTO musicDto = musicService.random();
-		Assert.assertEquals(expected, musicDto);
+		MusicDTO music = musicService.random(null);
+		Assert.assertEquals(expected, music);
+
+		music = musicService.random(Theme.ANNEES_70);
+		Assert.assertEquals(expected, music);
 	}
 
 }

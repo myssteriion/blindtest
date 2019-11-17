@@ -32,13 +32,18 @@ public class MusicControllerTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60).setFlux(fluxMock);
-		Mockito.when(musicService.random()).thenReturn(musicDto);
-		
-		ResponseEntity<MusicDTO> re = musicController.random();
+		Mockito.when(musicService.random(null)).thenReturn(musicDto);
+		Mockito.when(musicService.random(Theme.ANNEES_60)).thenReturn(musicDto);
+
+		ResponseEntity<MusicDTO> re = musicController.random(null);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random();
+		re = musicController.random(null);
+		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+		Assert.assertEquals( musicDto, re.getBody() );
+
+		re = musicController.random(Theme.ANNEES_60);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}

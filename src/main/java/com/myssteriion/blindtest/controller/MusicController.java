@@ -1,14 +1,17 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
+import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -37,12 +40,12 @@ public class MusicController {
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random() throws NotFoundException, IOException {
+	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEME, required = false) Theme theme) throws NotFoundException, IOException {
 
-		MusicDTO music = musicService.random();
+		MusicDTO music = musicService.random(theme);
 		if ( !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random();
+			music = musicService.random(theme);
 		}
 
 		return ResponseBuilder.create200(music);

@@ -49,7 +49,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/random",
+							"raw": "http://localhost:{{port}}/musics/random?theme=ANNEES_60",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -58,6 +58,13 @@
 							"path": [
 								"musics",
 								"random"
+							],
+							"query": [
+								{
+									"key": "theme",
+									"value": "ANNEES_60",
+									"description": "ANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nCINEMAS\nSERIES\nDISNEY\nCLASSIQUES"
+								}
 							]
 						}
 					},
@@ -260,7 +267,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 1,\n\t\"music\": {\n\t\t\"name\": \"60.png\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"authorWinners\": [ \"name\" ],\n\t\"titleWinners\": [ \"name\" ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ \"Jean\", \"Jean\", \"Jean\" ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
