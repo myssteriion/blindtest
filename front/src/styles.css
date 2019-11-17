@@ -45,11 +45,11 @@ body {
     font-weight: bold;
 }
 
-.font-size-small { font-size: 0.9em; }
-.font-size-normal { font-size: 1.3em; }
-.font-size-large { font-size: 1.4em; }
-.font-size-modal-title { font-size: 1.8em; }
-.font-size-title { font-size: 3em; }
+.font-size-small { font-size: 1.1em; }
+.font-size-normal { font-size: 1.5em; }
+.font-size-large { font-size: 1.6em; }
+.font-size-modal-title { font-size: 2.0em; }
+.font-size-title { font-size: 3.2em; }
 
 .padding-bottom-1em {
     padding-bottom: 1em;
