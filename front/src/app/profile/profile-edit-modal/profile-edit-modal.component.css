@@ -51,9 +51,9 @@
 
 .profile-edit-background:hover {
 	cursor: pointer;
+	opacity: 1;
 }
 
 .profile-edit-background-active {
-	border: 3px solid black;
-	opacity: 1 !important;
+	opacity: 1;
 }
