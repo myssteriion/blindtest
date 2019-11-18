@@ -1,13 +1,13 @@
 <!--suppress ALL -->
-<div class="row modal-confirm-header">
+<div class="row confirm-modal-header">
     <h3 class="col">{{ title }}</h3>
 </div>
 
-<div class="row modal-confirm-body">
+<div class="row confirm-modal-body">
     <div class="col" [innerHTML]="body"></div>
 </div>
 
-<div class="row modal-confirm-footer">
+<div class="row confirm-modal-footer">
     <div class="col">
         <button class="btn btn-success" (click)="yes()">{{ 'COMMON.YES' | translate }}</button>
         <button class="btn btn-danger" (click)="no()">{{ 'COMMON.NO' | translate }}</button>

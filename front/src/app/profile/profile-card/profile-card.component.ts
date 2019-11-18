@@ -4,7 +4,7 @@ import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
 import {ToolsService} from "../../tools/tools.service";
-import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
+import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from 'src/app/services/toaster.service';
@@ -124,7 +124,7 @@ export class ProfileCardComponent implements OnInit {
      */
     private delete(): void {
 
-        const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static' } );
+        const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static' } );
         modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
         modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
 

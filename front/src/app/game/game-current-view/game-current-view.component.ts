@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {GameResource} from "../../resources/game.resource";
-import {ModalConfirmComponent} from "../../common/modal/confirm/modal-confirm.component";
+import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
@@ -240,7 +240,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private exit(): void {
 
-		const modalRef = this._ngbModal.open( ModalConfirmComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'lg' } );
 		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
 		modalRef.componentInstance.body = this.getFormattedLabel();
 

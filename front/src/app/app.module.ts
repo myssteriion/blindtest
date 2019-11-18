@@ -21,7 +21,7 @@ import {ProfileEditModalComponent} from './profile/profile-edit-modal/profile-ed
 import {ProfilePageComponent} from './profile/profile-page/profile-page.component';
 import {ProfilePageModalComponent} from './profile/profile-page-modal/profile-page-modal.component';
 import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
-import {ModalConfirmComponent} from './common/modal/confirm/modal-confirm.component';
+import {ConfirmModalComponent} from './common/modal/confirm/confirm-modal.component';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from './game/game-new-view/game-new-view.component';
 import {HeaderComponent} from './common/header/header.component';
@@ -61,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfilePageComponent,
 		ProfilePageModalComponent,
 		ProfileEditModalComponent,
-		ModalConfirmComponent,
+		ConfirmModalComponent,
 		HeaderComponent,
 		GameNewViewComponent,
 		NavbarMenuComponent,
@@ -79,7 +79,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
-		ModalConfirmComponent,
+		ConfirmModalComponent,
 		ProfilePageModalComponent,
 		MusicResultModalComponent,
 		RoundInfoModalComponent,
