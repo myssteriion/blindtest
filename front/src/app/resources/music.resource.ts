@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Music} from "../interfaces/dto/music.interface";
+import {ToolsService} from "../tools/tools.service";
 
 /**
  * Music resource.
@@ -23,9 +24,16 @@ export class MusicResource {
 
 	/**
 	 * Get random musics.
+	 *
+	 * @param theme the theme
 	 */
-	public random(): Observable<Music> {
-		return this._http.get<Music>(this.path + "/random");
+	public random(theme: Theme): Observable<Music> {
+
+		let queryParam = "";
+		if ( !ToolsService.isNull(theme) )
+			queryParam = "?theme=" + theme;
+
+		return this._http.get<Music>(this.path + "/random" + queryParam);
 	}
 
 }
