@@ -1,0 +1,22 @@
+<!-- modal header -->
+<div class="row music-result-modal-header">
+    <div class="col font-size-modal-title">{{ 'GAME.CHOICE_THEME_MODAL.TITLE' | translate }}</div>
+</div>
+
+
+<!-- modal body -->
+<div class="row music-result-modal-body">
+    <div class="col" *ngFor="let theme of themes; let i = index">
+
+        <img src="{{ theme }}" class="music-result-modal-img" [ngClass]="getImgClass(i)" (click)="selectCurrentTheme(i)">
+
+    </div>
+</div>
+
+
+<!-- modal footer -->
+<div class="row justify-content-center music-result-modal-footer">
+    <div class="col">
+        <button class="btn btn-success font-size-normal" [disabled]="closeIsDisabled()" (click)="close()">{{ 'COMMON.VALID' | translate }}</button>
+    </div>
+</div>

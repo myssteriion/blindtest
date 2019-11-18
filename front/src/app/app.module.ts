@@ -35,6 +35,7 @@ import {ThemeEffectComponent} from "./game/factoring-part/theme-effect/theme-eff
 import {CustomCountdownComponent} from './game/factoring-part/custom-countdown/custom-countdown.component';
 import {MusicResultModalComponent} from "./game/factoring-part/music-result-modal/music-result-modal.component";
 import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/round-info-modal.component';
+import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -73,14 +74,16 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ThemeEffectComponent,
 		CustomCountdownComponent,
 		MusicResultModalComponent,
-		RoundInfoModalComponent
+		RoundInfoModalComponent,
+		ChoiceThemeModalComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
 		ModalConfirmComponent,
 		ProfilePageModalComponent,
 		MusicResultModalComponent,
-		RoundInfoModalComponent
+		RoundInfoModalComponent,
+		ChoiceThemeModalComponent
 	],
 	imports: [
 		BrowserModule,

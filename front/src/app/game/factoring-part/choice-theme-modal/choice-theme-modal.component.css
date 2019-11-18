@@ -1,0 +1,37 @@
+.music-result-modal-header, .music-result-modal-body, .music-result-modal-footer {
+    margin: 1em;
+}
+
+.music-result-modal-header {
+    border-bottom: 1px solid silver;
+}
+
+.music-result-modal-footer {
+    border-top: 1px solid silver;
+    text-align: center;
+}
+
+.music-result-modal-footer button {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.music-result-modal-img {
+    height: 8em;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 8px 8px 4px silver;
+    opacity: 0.3;
+}
+
+.music-result-modal-img:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.music-result-modal-img-active {
+    opacity: 1;
+}

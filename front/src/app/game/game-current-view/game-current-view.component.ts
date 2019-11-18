@@ -18,6 +18,7 @@ import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.
 import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
 import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
 import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
+import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
 
 /**
  * The current game view.
@@ -296,7 +297,27 @@ export class GameCurrentViewComponent implements OnInit {
 		if ( !ToolsService.isNull(this.audio) )
 			this.audio.pause();
 
-		this._musicResource.random().subscribe(
+		if (this.game.round === Round.CHOICE) {
+
+			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
+
+			modalRef.result.then(
+				(result) => { this.callNextMusic(result); },
+				(reason) => { /* do nothing */ }
+			);
+		}
+		else
+			this.callNextMusic(null);
+	}
+
+	/**
+	 * Call web service.
+	 *
+	 * @param theme the theme (optional)
+	 */
+	private callNextMusic(theme: Theme) {
+
+		this._musicResource.random(theme).subscribe(
 			response => {
 
 				this.currentMusic = response;
@@ -313,21 +334,25 @@ export class GameCurrentViewComponent implements OnInit {
 				this.audio.defaultPlaybackRate = defaultPlaybackRate;
 				this.audio.load();
 
-				this.rollThemeEffect();
+				this.rollThemeEffect( ToolsService.isNull(theme) );
 			},
-			error => { throw Error("can't find music : " + JSON.stringify(error)); }
+			error => {
+				throw Error("can't find music : " + JSON.stringify(error));
+			}
 		);
 	}
 
 
 	/**
 	 * Roll theme and effect.
+	 *
+	 * @param rollTheme if the theme must be roll
 	 */
-	private rollThemeEffect(): void {
+	private rollThemeEffect(rollTheme: boolean): void {
 
 		this.themeEffect.setShow(true);
 		this.themeEffect.setMusic(this.currentMusic);
-		this.themeEffect.roll()
+		this.themeEffect.roll(rollTheme)
 			.then( () => { this.startPreCountdown(); } );
 	}
 

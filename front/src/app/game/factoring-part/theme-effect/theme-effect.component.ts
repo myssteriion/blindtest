@@ -74,9 +74,10 @@ export class ThemeEffectComponent implements OnInit {
 	/**
 	 * Roll theme and effect.
 	 *
+	 * @param rollTheme if the theme must be roll
 	 * @return (Promise<void>)
 	 */
-	public roll(): Promise<void> {
+	public roll(rollTheme: boolean): Promise<void> {
 
 		return new Promise(async (resolve) => {
 
@@ -85,11 +86,18 @@ export class ThemeEffectComponent implements OnInit {
 				let themeIndex = THEMES_INDEX.findIndex(theme => theme === this.music.theme);
 				let effectIndex = EFFECTS_INDEX.findIndex(effect => effect === this.music.effect);
 
+				this.themeImg = THEMES[themeIndex];
+				this.effectImg = EFFECTS[effectIndex];
+
 				this.audio.play();
 
 				while (!this.audio.ended) {
-					this.themeImg = THEMES[ToolsService.random(0, THEMES_INDEX.length - 1)];
+
+					if (rollTheme)
+						this.themeImg = THEMES[ToolsService.random(0, THEMES_INDEX.length - 1)];
+
 					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS_INDEX.length - 1)];
+
 					await ToolsService.sleep(100);
 				}
 

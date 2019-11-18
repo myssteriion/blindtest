@@ -8,6 +8,7 @@
             "VERSION": "version"
         },
         "SAVE": "Enregistrer",
+        "VALID": "Valider",
         "CANCEL": "Annuler",
         "CLOSE": "Fermer",
         "YES": "Oui",
@@ -78,6 +79,9 @@
             "NB_POINTS_BONUS": "Points bonus :",
             "NB_POINTS_MALUS": "Points malus :",
             "NB_POINTS_LOSE": "Victime d'un vol :"
+        },
+        "CHOICE_THEME_MODAL" : {
+            "TITLE" : "Choisir un thème"
         }
     },
     "ROUND": {
