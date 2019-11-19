@@ -49,35 +49,35 @@ public class ProfileStatDTO extends AbstractDTO {
 	/**
 	 * The number of game played.
 	 */
-	@Column(name = "played_games", nullable = false)
+	@Column(name = "played_games", nullable = false, length = 500)
 	@Convert(converter = DurationConverter.class)
 	private Map<Duration, Integer> playedGames;
 
 	/**
 	 * The bests scores by durations.
 	 */
-	@Column(name = "best_scores", nullable = false)
+	@Column(name = "best_scores", nullable = false, length = 500)
 	@Convert(converter = DurationConverter.class)
 	private Map<Duration, Integer> bestScores;
 
 	/**
 	 * The number of game won.
 	 */
-	@Column(name = "won_games", nullable = false)
+	@Column(name = "won_games", nullable = false, length = 500)
 	@Convert(converter = RankConverter.class)
 	private Map<Rank, Integer> wonGames;
 
 	/**
 	 * The number of listened musics by themes.
 	 */
-	@Column(name = "listened_musics", nullable = false)
+	@Column(name = "listened_musics", nullable = false, length = 500)
 	@Convert(converter = ThemeConverter.class)
 	private Map<Theme, Integer> listenedMusics;
 
 	/**
 	 * The number of found musics by themes by WinMode.
 	 */
-	@Column(name = "found_musics", nullable = false)
+	@Column(name = "found_musics", nullable = false, length = 1000)
 	@Convert(converter = ThemeWinModeConverter.class)
 	private Map< Theme, Map<WinMode, Integer> > foundMusics;
 
