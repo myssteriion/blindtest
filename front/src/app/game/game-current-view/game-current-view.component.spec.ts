@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameCurrentViewComponent } from './game-current-view.component';
 
-describe('CustomCountdownComponent', () => {
+describe('GameCurrentViewComponent', () => {
 	let component: GameCurrentViewComponent;
 	let fixture: ComponentFixture<GameCurrentViewComponent>;
 
