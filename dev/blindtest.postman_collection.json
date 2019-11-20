@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e84c5010-53f0-4434-b3da-9ac0b55b8544",
+		"_postman_id": "8e811346-a6a1-4af9-a2fa-997530899941",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -237,7 +237,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"name001\", \"name002\" ],\n\t\"duration\": \"NORMAL\"\n\t\n}"
+							"raw": "{\n\t\"playersNames\": [ \"name001\", \"name002\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": []\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game",
@@ -267,7 +267,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ \"Jean\", \"Jean\", \"Jean\" ]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",

@@ -49,7 +49,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
@@ -100,7 +100,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();
@@ -125,7 +125,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();

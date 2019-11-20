@@ -60,7 +60,7 @@ public class GameService {
 
 		Tool.verifyValue("newGame", newGame);
 
-		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration() );
+		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes() );
 		game.setId( games.size() );
 		games.add(game);
 

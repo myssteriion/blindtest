@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -54,6 +55,11 @@ public class Game implements IModel {
      */
     private AbstractRoundContent roundContent;
 
+    /**
+     * The themes.
+     */
+    private List<Theme> themes;
+
 
 
     /**
@@ -62,7 +68,7 @@ public class Game implements IModel {
      * @param players   the players
      * @param duration  the duration
      */
-    public Game(Set<Player> players, Duration duration) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes) {
 
         Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
@@ -76,6 +82,7 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
+        this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
     }
 
 
@@ -151,6 +158,15 @@ public class Game implements IModel {
         return roundContent;
     }
 
+    /**
+     * Gets themes.
+     *
+     * @return The themes.
+     */
+    public List<Theme> getThemes() {
+        return themes;
+    }
+
 
     /**
      * Pass to the next step.
@@ -202,7 +218,8 @@ public class Game implements IModel {
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
                 ", round=" + round +
-                ", roundContent={" + roundContent + "}";
+                ", roundContent={" + roundContent + "}" +
+                ", themes=" + themes;
     }
 
 }

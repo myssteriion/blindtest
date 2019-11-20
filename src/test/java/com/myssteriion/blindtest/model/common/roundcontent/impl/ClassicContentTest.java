@@ -46,7 +46,7 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
@@ -98,7 +98,7 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();
@@ -129,7 +129,7 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
 
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();
