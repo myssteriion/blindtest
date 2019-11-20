@@ -23,6 +23,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -191,14 +192,22 @@ public class MusicServiceTest extends AbstractTest {
 		List<MusicDTO> allMusics = new ArrayList<>();
 		allMusics.add(expected);
 		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, 1000000000) );
-		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), allMusics);
+		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), new ArrayList<>(), allMusics);
 
 		try {
 			musicService.random(null);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("No music found."), e);
+			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, CINEMAS, SERIES, DISNEY, CLASSIQUES])."), e);
+		}
+
+		try {
+			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70));
+			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70])."), e);
 		}
 
 
@@ -207,7 +216,7 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
-		Mockito.when(dao.findAll()).thenReturn(allMusics);
+		Mockito.when(dao.findByThemeIn(Mockito.anyList())).thenReturn(allMusics);
 
 
 		musicService = PowerMockito.spy( new MusicService(dao, configProperties) );
@@ -219,7 +228,7 @@ public class MusicServiceTest extends AbstractTest {
 		MusicDTO music = musicService.random(null);
 		Assert.assertEquals(expected, music);
 
-		music = musicService.random(Theme.ANNEES_70);
+		music = musicService.random(Collections.singletonList(Theme.ANNEES_70));
 		Assert.assertEquals(expected, music);
 	}
 

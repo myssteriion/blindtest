@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,5 +22,13 @@ public interface MusicDAO extends PagingAndSortingRepository<MusicDTO, Integer> 
      * @return the optional
      */
     Optional<MusicDTO> findByNameAndTheme(String name, Theme theme);
+
+    /**
+     * Find by themes.
+     *
+     * @param themes the themes
+     * @return the musics list
+     */
+    List<MusicDTO> findByThemeIn(List<Theme> themes);
 
 }

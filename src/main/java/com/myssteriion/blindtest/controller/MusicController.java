@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Controller for MusicDTO.
@@ -36,16 +37,17 @@ public class MusicController {
 	/**
 	 * Randomly choose a music.
 	 *
+	 * @param themes themes filter (optional)
 	 * @return a MusicDTO
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEME, required = false) Theme theme) throws NotFoundException, IOException {
+	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes) throws NotFoundException, IOException {
 
-		MusicDTO music = musicService.random(theme);
+		MusicDTO music = musicService.random(themes);
 		if ( !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random(theme);
+			music = musicService.random(themes);
 		}
 
 		return ResponseBuilder.create200(music);

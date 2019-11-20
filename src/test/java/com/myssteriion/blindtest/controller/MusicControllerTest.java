@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class MusicControllerTest extends AbstractTest {
 
@@ -33,7 +34,7 @@ public class MusicControllerTest extends AbstractTest {
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60).setFlux(fluxMock);
 		Mockito.when(musicService.random(null)).thenReturn(musicDto);
-		Mockito.when(musicService.random(Theme.ANNEES_60)).thenReturn(musicDto);
+		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60))).thenReturn(musicDto);
 
 		ResponseEntity<MusicDTO> re = musicController.random(null);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
@@ -43,7 +44,7 @@ public class MusicControllerTest extends AbstractTest {
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(Theme.ANNEES_60);
+		re = musicController.random(Collections.singletonList(Theme.ANNEES_60));
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}
