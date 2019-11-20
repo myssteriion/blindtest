@@ -12,6 +12,7 @@ export interface Game {
 	nbMusicsPlayedInRound: number,
 	round: Round,
 	roundContent: AbstractRoundContent,
+	themes: Theme[],
 
 	firstStep: boolean,
 	lastStep: boolean,
