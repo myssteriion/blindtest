@@ -9,9 +9,18 @@
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
                 <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}"
-                       name="inlineDefaultRadiosExample" (change)="selectDuration(i)">
+                       name="inlineDefaultRadiosExample" (change)="selectedDuration = durations">
                 <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
             </div>
+        </div>
+    </div>
+
+
+    <!-- themes -->
+    <div class="row game-new-view-themes">
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
+        <div class="col-1" *ngFor="let theme of themes">
+            <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }" (click)="selectDeselectTheme(theme.enumVal)">
         </div>
     </div>
 

@@ -5,7 +5,7 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {SLIDE_ANIMATION} from "../../tools/constant";
+import {SLIDE_ANIMATION, THEMES} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
@@ -34,6 +34,16 @@ export class GameNewViewComponent implements OnInit {
     public selectedDuration: Duration;
 
 	/**
+	 * Themes list.
+	 */
+	private themes = THEMES;
+
+	/**
+	 * Selected themes.
+	 */
+	public selectedThemes: Theme[];
+
+	/**
 	 * Players profiles and empty names.
 	 */
 	public playersProfiles: Profile[];
@@ -55,18 +65,34 @@ export class GameNewViewComponent implements OnInit {
 
         this.playersProfiles = [];
         this.selectedDuration = Duration.NORMAL;
+		this.selectedThemes = [];
+		THEMES.forEach(theme => { this.selectedThemes.push(theme.enumVal); } );
     }
 
 
 
-    /**
-     * Select duration.
-     *
-     * @param index
-     */
-    public selectDuration(index: number) {
-        this.selectedDuration = this.durations[index];
-    }
+	/**
+	 * Select/deselect duration.
+	 *
+	 * @param theme: Theme
+	 */
+	public selectDeselectTheme(theme: Theme) {
+
+		let index = this.selectedThemes.findIndex(thm => thm === theme);
+		if (index !== -1)
+			this.selectedThemes.splice(index, 1);
+		else
+			this.selectedThemes.push(theme);
+	}
+
+	/**
+	 * Tests if the theme is selected.
+	 *
+	 * @param theme: Theme
+	 */
+	public themeIsSelected(theme: Theme) {
+		return (this.selectedThemes.findIndex(thm => thm === theme)) !== -1;
+	}
 
 	/**
 	 * Gets empty players.
@@ -131,7 +157,8 @@ export class GameNewViewComponent implements OnInit {
 
 		let newGame: NewGame = {
 			duration: this.selectedDuration,
-			playersNames: playersNames
+			playersNames: playersNames,
+			themes: this.selectedThemes
 		};
 
 		this._gameResource.newGame(newGame).subscribe(

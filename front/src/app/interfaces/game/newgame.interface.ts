@@ -3,5 +3,6 @@
  */
 export interface NewGame {
 	playersNames: string[],
-	duration: Duration
+	duration: Duration,
+	themes: Theme[]
 }

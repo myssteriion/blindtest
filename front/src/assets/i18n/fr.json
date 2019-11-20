@@ -27,6 +27,7 @@
         "NEW_VIEW": {
             "TITLE": "Nouvelle partie",
             "DURATIONS_LABEL": "Durée de la partie :",
+            "THEMES_LABEL": "Choix des thèmes :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs :",
             "VERY_SHORT": "Très rapide",
             "SHORT": "Rapide",
