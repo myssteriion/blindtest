@@ -1,31 +1,31 @@
 <div class="row player-card-frame" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight}">
 
     <!-- rank -->
-    <div *ngIf="!rankOnRight && showMedal()" class="col-2 font-size-normal player-card-rank">
+    <div *ngIf="!rankOnRight && showMedal()" class="col-2 p-0 font-size-normal player-card-rank">
         <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
     </div>
 
     <!-- score -->
-    <div *ngIf="!rankOnRight" class="col-3 font-size-normal player-card-score">
+    <div *ngIf="!rankOnRight" class="col-3 p-0 font-size-normal player-card-score">
         <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
     </div>
 
 
 
     <!-- profile -->
-    <div class="col-7">
+    <div class="col-7 p-0">
         <profile-card [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
     </div>
 
 
 
     <!-- score -->
-    <div *ngIf="rankOnRight" class="col-3 font-size-normal player-card-score">
+    <div *ngIf="rankOnRight" class="col-3 p-0 font-size-normal player-card-score">
         <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
     </div>
 
     <!-- rank -->
-    <div *ngIf="rankOnRight && showMedal()" class="col-2 font-size-normal player-card-rank">
+    <div *ngIf="rankOnRight && showMedal()" class="col-2 p-0 font-size-normal player-card-rank">
         <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
     </div>
 
