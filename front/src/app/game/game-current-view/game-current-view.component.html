@@ -21,7 +21,7 @@
 
         <!-- left players -->
         <div class="col-4">
-            <player-card *ngFor="let player of leftPlayers;" [player]="player" [rankOnRight]="true"></player-card>
+            <player-card *ngFor="let player of leftPlayers;" [player]="player" [rankOnRight]="true" [displayMedal]="true"></player-card>
         </div>
 
 
@@ -46,7 +46,7 @@
 
         <!-- right players -->
         <div class="col-4">
-            <player-card *ngFor="let player of rightPlayers;" [player]="player" [rankOnRight]="false"></player-card>
+            <player-card *ngFor="let player of rightPlayers;" [player]="player" [rankOnRight]="false" [displayMedal]="true"></player-card>
         </div>
 
     </div>

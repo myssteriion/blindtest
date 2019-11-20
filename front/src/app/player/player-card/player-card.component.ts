@@ -24,6 +24,12 @@ export class PlayerCardComponent implements OnInit {
     @Input()
     private rankOnRight: boolean;
 
+    /**
+     * True to display medal, false to force to hide.
+     */
+    @Input()
+    private displayMedal: boolean;
+
     faMedal = faMedal;
 
 
@@ -42,7 +48,7 @@ export class PlayerCardComponent implements OnInit {
     private showMedal() {
 
         let rank = this.player.rank;
-        return rank === Rank.FIRST || rank === Rank.SECOND || rank === Rank.THIRD || rank === Rank.FOURTH;
+        return this.displayMedal && (rank === Rank.FIRST || rank === Rank.SECOND || rank === Rank.THIRD || rank === Rank.FOURTH);
     }
 
     /**
