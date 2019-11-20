@@ -1,22 +1,22 @@
-.music-result-modal-header, .music-result-modal-body, .music-result-modal-footer {
+.choice-theme-modal-header, .choice-theme-modal-body, .choice-theme-modal-footer {
     margin: 1em;
 }
 
-.music-result-modal-header {
+.choice-theme-modal-header {
     border-bottom: 1px solid silver;
 }
 
-.music-result-modal-footer {
+.choice-theme-modal-footer {
     border-top: 1px solid silver;
     text-align: center;
 }
 
-.music-result-modal-footer button {
+.choice-theme-modal-footer button {
     margin-top: 10px;
     margin-left: 10px;
 }
 
-.music-result-modal-img {
+.choice-theme-modal-img {
     height: 8em;
     margin: 10px;
     padding: 10px;
@@ -27,11 +27,11 @@
     opacity: 0.3;
 }
 
-.music-result-modal-img:hover {
+.choice-theme-modal-img:hover {
     cursor: pointer;
     opacity: 1;
 }
 
-.music-result-modal-img-active {
+.choice-theme-modal-img-active {
     opacity: 1;
 }
