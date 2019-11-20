@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {THEMES} from "../../../tools/constant";
 import {ToolsService} from "../../../tools/tools.service";
+import {THEMES} from 'src/app/tools/constant';
 
 /**
  * The choice theme modal.
@@ -16,7 +16,13 @@ export class ChoiceThemeModalComponent implements OnInit {
     /**
      * Themes list.
      */
-    private themes = THEMES;
+    @Input()
+    private filteredThemes: Theme[];
+
+    /**
+     * Themes list.
+     */
+    private themes: {}[];
 
     /**
      * Selected theme.
@@ -28,6 +34,15 @@ export class ChoiceThemeModalComponent implements OnInit {
     constructor(private _ngbActiveModal: NgbActiveModal) {}
 
     ngOnInit() {
+
+        this.themes = [];
+        THEMES.forEach(theme => {
+
+            let index = this.filteredThemes.findIndex(thm => thm === theme.enumVal);
+            if (index !== -1) {
+                this.themes.push(theme);
+            }
+        });
     }
 
 
@@ -35,14 +50,14 @@ export class ChoiceThemeModalComponent implements OnInit {
     /**
      * If the button is disabled.
      */
-    private closeIsDisabled() {
+    private closeIsDisabled(): boolean {
         return ToolsService.isNull(this.selectedTheme);
     }
 
     /**
      * Close modal.
      */
-    private close() {
+    private close(): void {
         this._ngbActiveModal.close(this.selectedTheme);
     }
 
