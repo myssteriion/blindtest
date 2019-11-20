@@ -2,8 +2,10 @@ package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,6 +23,12 @@ public class NewGame {
      */
     private Duration duration;
 
+    /**
+     * The themes.
+     */
+    private List<Theme> themes;
+
+
 
     /**
      * Instantiates a new New game.
@@ -29,14 +37,16 @@ public class NewGame {
      * @param duration     the duration
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration) {
+    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
 
         this.playersNames = playersNames;
         this.duration = duration;
+        this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
     }
+
 
 
     /**
@@ -57,12 +67,22 @@ public class NewGame {
         return duration;
     }
 
+    /**
+     * Gets themes.
+     *
+     * @return The themes.
+     */
+    public List<Theme> getThemes() {
+        return themes;
+    }
+
 
 
     @Override
     public String toString() {
         return "playersNames=" + playersNames +
-                ", duration=" + duration;
+                ", duration=" + duration +
+                ", themes=" + themes;
     }
 
 }

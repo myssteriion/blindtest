@@ -59,7 +59,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL) );
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -68,10 +68,10 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL) );
+		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 
-		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL) );
+		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null) );
 		Assert.assertEquals( 2, game.getPlayers().size() );
 	}
 
@@ -115,7 +115,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL) );
+		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
 
 
 		try {
@@ -331,7 +331,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 
-		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL);
+		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null);
 		Game expected = gameService.newGame(ng);
 
 		Game actual = gameService.findGame(expected.getId());

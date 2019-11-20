@@ -45,12 +45,12 @@ const THEMES_FOLDER = "assets/images/themes/";
  */
 export const THEMES = [THEMES_FOLDER + "60.png", THEMES_FOLDER + "70.png", THEMES_FOLDER + "80.png",
                        THEMES_FOLDER + "90.png", THEMES_FOLDER + "2000.png", THEMES_FOLDER + "cinemas.png",
-                       THEMES_FOLDER + "classiques.png", THEMES_FOLDER + "disney.png", THEMES_FOLDER + "series.png"];
+                       THEMES_FOLDER + "series.png", THEMES_FOLDER + "disney.png", THEMES_FOLDER + "classiques.png"];
 
 /**
  * For get index from Theme.
  */
-export const THEMES_INDEX = [Theme.ANNEES_60, Theme.ANNEES_70, Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000, Theme.CINEMAS, Theme.CLASSIQUES, Theme.DISNEY, Theme.SERIES];
+export const THEMES_INDEX = [Theme.ANNEES_60, Theme.ANNEES_70, Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000, Theme.CINEMAS, Theme.SERIES, Theme.DISNEY, Theme.CLASSIQUES];
 
 /**
  * Path to "effects" folder in assets folder.

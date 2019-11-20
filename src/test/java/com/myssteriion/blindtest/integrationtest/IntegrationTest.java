@@ -49,7 +49,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
 
-        NewGame newGame = new NewGame(playersNames, duration);
+        NewGame newGame = new NewGame(playersNames, duration, null);
         Game game = gameService.newGame(newGame);
 
 

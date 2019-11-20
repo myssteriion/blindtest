@@ -43,7 +43,7 @@ public class GameControllerTest extends AbstractTest {
 				new Player(new ProfileDTO("name1")));
 		Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL));
 
-		NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL);
+		NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, null);
 
 		ResponseEntity<Game> re = gameController.newGame(newGame);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
