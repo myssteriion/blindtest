@@ -82,6 +82,11 @@
         },
         "CHOICE_THEME_MODAL" : {
             "TITLE" : "Choisir un thème"
+        },
+        "END_VIEW": {
+            "TITLE": "Fin de la partie",
+            "BACK_TO_HOME": "Retourner au menu principal",
+            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principale ?"
         }
     },
     "ROUND": {

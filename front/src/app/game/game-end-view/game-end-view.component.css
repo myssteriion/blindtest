@@ -1,0 +1,18 @@
+.game-end-view-exit {
+    margin: auto auto 2em auto;
+}
+
+.game-end-view-first-second-third {
+    text-align: center;
+}
+
+.game-end-view-first-second-third img {
+    height: 7em;
+    width: 7em;
+}
+
+.game-end-view-other-ranks {
+    border-top: 2px solid black;
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+}

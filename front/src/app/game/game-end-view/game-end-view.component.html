@@ -1,0 +1,34 @@
+<div *ngIf="isLoaded" class="container" @flyInOut>
+
+    <!-- header & exit -->
+    <div class="row">
+        <div class="offset-2 col-8">
+            <header [title]="'GAME.END_VIEW.TITLE' | translate"></header>
+        </div>
+        <div class="col-2 game-end-view-exit">
+            <fa-icon [icon]="currentExitIcon" [class]="'fa-icon-custom-hover-2'" size="2x" (click)="exit()"
+                     (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
+                     ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto" [openDelay]="500">
+            </fa-icon>
+        </div>
+    </div>
+
+
+    <!-- 1st 2nd 3rd -->
+    <div *ngFor="let rank of podiumRank" class="row justify-content-center game-end-view-first-second-third">
+        <div class="col-2">
+            <img src="{{ getXXXImg(rank) }}">
+        </div>
+        <div class="col-4" *ngFor="let player of getPlayersByRank(rank);">
+            <player-card [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
+        </div>
+    </div>
+
+    <!-- other ranks -->
+    <div class="row game-end-view-other-ranks">
+        <div class="col-4" *ngFor="let player of getNoPodiumPlayers();">
+            <player-card [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
+        </div>
+    </div>
+
+</div>
