@@ -300,24 +300,25 @@ export class GameCurrentViewComponent implements OnInit {
 		if (this.game.round === Round.CHOICE) {
 
 			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
+			modalRef.componentInstance.filteredThemes = this.game.themes;
 
 			modalRef.result.then(
-				(result) => { this.callNextMusic(result); },
+				(result) => { let choiceTheme: Theme[] = []; choiceTheme.push(result); this.callNextMusic(choiceTheme); },
 				(reason) => { /* do nothing */ }
 			);
 		}
 		else
-			this.callNextMusic(null);
+			this.callNextMusic(this.game.themes);
 	}
 
 	/**
 	 * Call web service.
 	 *
-	 * @param theme the theme (optional)
+	 * @param themes the themes (optional)
 	 */
-	private callNextMusic(theme: Theme) {
+	private callNextMusic(themes: Theme[]) {
 
-		this._musicResource.random(theme).subscribe(
+		this._musicResource.random(themes).subscribe(
 			response => {
 
 				this.currentMusic = response;
@@ -334,7 +335,7 @@ export class GameCurrentViewComponent implements OnInit {
 				this.audio.defaultPlaybackRate = defaultPlaybackRate;
 				this.audio.load();
 
-				this.rollThemeEffect( ToolsService.isNull(theme) );
+				this.rollThemeEffect( ToolsService.isNull(themes) );
 			},
 			error => {
 				throw Error("can't find music : " + JSON.stringify(error));

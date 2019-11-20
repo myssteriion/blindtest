@@ -9,7 +9,7 @@
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
                 <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}"
-                       name="inlineDefaultRadiosExample" (change)="selectedDuration = durations">
+                       name="inlineDefaultRadiosExample" (change)="selectedDuration = duration">
                 <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
             </div>
         </div>

@@ -79,8 +79,10 @@ export class GameNewViewComponent implements OnInit {
 	public selectDeselectTheme(theme: Theme) {
 
 		let index = this.selectedThemes.findIndex(thm => thm === theme);
-		if (index !== -1)
-			this.selectedThemes.splice(index, 1);
+		if (index !== -1) {
+			if (this.selectedThemes.length > 1)
+				this.selectedThemes.splice(index, 1);
+		}
 		else
 			this.selectedThemes.push(theme);
 	}
