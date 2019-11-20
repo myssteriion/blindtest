@@ -6,9 +6,9 @@
 
 <!-- modal body -->
 <div class="row music-result-modal-body">
-    <div class="col" *ngFor="let theme of themes; let i = index">
+    <div class="col" *ngFor="let theme of themes">
 
-        <img src="{{ theme }}" class="music-result-modal-img" [ngClass]="getImgClass(i)" (click)="selectCurrentTheme(i)">
+        <img src="{{ theme.srcImg }}" class="music-result-modal-img" [ngClass]="{ 'music-result-modal-img-active': (selectedTheme == theme.enumVal) }" (click)="selectedTheme = theme.enumVal">
 
     </div>
 </div>

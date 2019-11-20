@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {THEMES, THEMES_INDEX} from "../../../tools/constant";
+import {THEMES} from "../../../tools/constant";
 import {ToolsService} from "../../../tools/tools.service";
 
 /**
@@ -31,30 +31,6 @@ export class ChoiceThemeModalComponent implements OnInit {
     }
 
 
-
-    /**
-     * Select current theme.
-     *
-     * @param index the theme index
-     */
-    private selectCurrentTheme(index: number) {
-        this.selectedTheme = THEMES_INDEX[index];
-    }
-
-    /**
-     * Gets image class.
-     *
-     * @param index the theme index
-     */
-    private getImgClass(index: number) {
-
-        let css = "";
-
-        if ( !ToolsService.isNull(this.selectedTheme) && this.selectedTheme === THEMES_INDEX[index] )
-            css = "music-result-modal-img-active";
-
-        return css;
-    }
 
     /**
      * If the button is disabled.

@@ -36,36 +36,29 @@ export const OLYMPIA_ANTHEM_SOUND = "assets/sounds/olympia_anthem.mp3";
 export const GENERIC = "assets/videos/generic.mp4";
 
 /**
- * Path to "themes" folder in assets folder.
- */
-const THEMES_FOLDER = "assets/images/themes/";
-
-/**
  * Path to "themes" in assets folder.
  */
-export const THEMES = [THEMES_FOLDER + "60.png", THEMES_FOLDER + "70.png", THEMES_FOLDER + "80.png",
-                       THEMES_FOLDER + "90.png", THEMES_FOLDER + "2000.png", THEMES_FOLDER + "cinemas.png",
-                       THEMES_FOLDER + "series.png", THEMES_FOLDER + "disney.png", THEMES_FOLDER + "classiques.png"];
+export const THEMES = [
+    { srcImg: "assets/images/themes/60.png", enumVal: Theme.ANNEES_60 },
+    { srcImg: "assets/images/themes/70.png", enumVal: Theme.ANNEES_70 },
+    { srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80 },
+    { srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90 },
+    { srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000 },
+    { srcImg: "assets/images/themes/cinemas.png", enumVal: Theme.CINEMAS },
+    { srcImg: "assets/images/themes/series.png", enumVal: Theme.SERIES },
+    { srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY },
+    { srcImg: "assets/images/themes/classiques.png", enumVal: Theme.CLASSIQUES }
+];
 
 /**
- * For get index from Theme.
+ * Path to "effect" in assets folder.
  */
-export const THEMES_INDEX = [Theme.ANNEES_60, Theme.ANNEES_70, Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000, Theme.CINEMAS, Theme.SERIES, Theme.DISNEY, Theme.CLASSIQUES];
-
-/**
- * Path to "effects" folder in assets folder.
- */
-const EFFECTS_FOLDER = "assets/images/effects/";
-
-/**
- * Path to "effects" in assets folder.
- */
-export const EFFECTS = [EFFECTS_FOLDER + "cross.png", EFFECTS_FOLDER + "slow.png", EFFECTS_FOLDER + "speed.png", EFFECTS_FOLDER + "reverse.png"];
-
-/**
- * For get index from Effect.
- */
-export const EFFECTS_INDEX = [Effect.NONE, Effect.SLOW, Effect.SPEED, Effect.REVERSE];
+export const EFFECTS = [
+    { srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE },
+    { srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW },
+    { srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED },
+    { srcImg: "assets/images/effects/reverse.png", enumVal: Effect.REVERSE }
+];
 
 /**
  * Path to "first.png" in assets folder.

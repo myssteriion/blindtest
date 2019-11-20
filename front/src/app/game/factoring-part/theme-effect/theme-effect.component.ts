@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EFFECTS, EFFECTS_INDEX, MARIO_KART_SOUND, THEMES, THEMES_INDEX} from "../../../tools/constant";
+import {EFFECTS, MARIO_KART_SOUND, THEMES} from "../../../tools/constant";
 import {ToolsService} from "../../../tools/tools.service";
 import {Music} from "../../../interfaces/dto/music.interface";
 
@@ -39,11 +39,12 @@ export class ThemeEffectComponent implements OnInit {
 	private audio;
 
 
+
 	constructor() { }
 
 	ngOnInit() {
-		this.themeImg = THEMES[0];
-		this.effectImg = EFFECTS[0];
+		this.themeImg = THEMES[0].srcImg;
+		this.effectImg = EFFECTS[0].srcImg;
 
 		this.audio = new Audio();
 		this.audio.src = MARIO_KART_SOUND;
@@ -83,26 +84,26 @@ export class ThemeEffectComponent implements OnInit {
 
 			if ( !ToolsService.isNull(this.music) ) {
 
-				let themeIndex = THEMES_INDEX.findIndex(theme => theme === this.music.theme);
-				let effectIndex = EFFECTS_INDEX.findIndex(effect => effect === this.music.effect);
+				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
+				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
 
-				this.themeImg = THEMES[themeIndex];
-				this.effectImg = EFFECTS[effectIndex];
+				this.themeImg = THEMES[themeIndex].srcImg;
+				this.effectImg = EFFECTS[effectIndex].srcImg;
 
 				this.audio.play();
 
 				while (!this.audio.ended) {
 
 					if (rollTheme)
-						this.themeImg = THEMES[ToolsService.random(0, THEMES_INDEX.length - 1)];
+						this.themeImg = THEMES[ToolsService.random(0, THEMES.length - 1)].srcImg;
 
-					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS_INDEX.length - 1)];
+					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)].srcImg;
 
 					await ToolsService.sleep(100);
 				}
 
-				this.themeImg = THEMES[themeIndex];
-				this.effectImg = EFFECTS[effectIndex];
+				this.themeImg = THEMES[themeIndex].srcImg;
+				this.effectImg = EFFECTS[effectIndex].srcImg;
 			}
 
 			resolve();
