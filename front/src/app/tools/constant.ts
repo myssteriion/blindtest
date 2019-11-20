@@ -62,6 +62,20 @@ export const EFFECTS = [EFFECTS_FOLDER + "cross.png", EFFECTS_FOLDER + "slow.png
  */
 export const EFFECTS_INDEX = [Effect.NONE, Effect.SLOW, Effect.SPEED, Effect.REVERSE];
 
+/**
+ * Path to "first.png" in assets folder.
+ */
+export const RANKS_FIRST = "assets/images/ranks/first.png";
+
+/**
+ * Path to "second.png" in assets folder.
+ */
+export const RANKS_SECOND = "assets/images/ranks/second.png";
+
+/**
+ * Path to "third.png" in assets folder.
+ */
+export const RANKS_THIRD = "assets/images/ranks/third.png";
 
 /**
  * Translation animation.
@@ -95,7 +109,6 @@ export const REDUCTION_ANIMATION =
         state('normal', style({ transform: 'scale(1)'} )),
         transition('big => normal', [ animate(250) ])
     ]);
-
 
 /**
  * Route for the menu (button in view).
