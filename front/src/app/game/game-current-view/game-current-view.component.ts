@@ -335,7 +335,7 @@ export class GameCurrentViewComponent implements OnInit {
 				this.audio.defaultPlaybackRate = defaultPlaybackRate;
 				this.audio.load();
 
-				this.rollThemeEffect( ToolsService.isNull(themes) );
+				this.rollThemeEffect( !(!ToolsService.isNull(themes) && themes.length === 1) );
 			},
 			error => {
 				throw Error("can't find music : " + JSON.stringify(error));
