@@ -37,10 +37,27 @@
             <div *ngIf="showNextMusic" class="row game-current-view-next-music">
                 <div class="col">
                     <button class="btn btn-info font-size-normal" (click)="nextMusic()">{{ 'GAME.CURRENT_VIEW.NEXT_MUSIC' | translate }}</button>
-                    <button class="btn btn-info font-size-normal m-2" (click)="stopMusic()">{{ 'GAME.CURRENT_VIEW.STOP_MUSIC' | translate }}</button>
+                    <button *ngIf="showStopMusicButton" class="btn btn-info font-size-normal m-2" (click)="stopMusic()">{{ 'GAME.CURRENT_VIEW.STOP_MUSIC' | translate }}</button>
                 </div>
             </div>
 
+            <!-- online mode - extract music-->
+            <div *ngIf="showExtractOnlineMusic" class="row">
+                <div class="col">
+                    <iframe [src]="extractOnlineMusic" width="0" height="0" frameborder="0"
+                            allowtransparency="true" allow="encrypted-media">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- online mode - music-->
+            <div *ngIf="showOnlineMusic" class="row game-current-view-spotify-music">
+                <div class="col">
+                    <iframe [src]="onlineMusic" width="300" height="380" frameborder="0"
+                            allowtransparency="true" allow="encrypted-media">
+                    </iframe>
+                </div>
+            </div>
         </div>
 
 

@@ -19,6 +19,7 @@ import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custo
 import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
 import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
 import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 /**
  * The current game view.
@@ -112,6 +113,31 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private audio;
 
+	/**
+	 * In online mode, listen extract music.
+	 */
+	private showExtractOnlineMusic: boolean;
+
+	/**
+	 * In online mode, extract music url.
+	 */
+	private extractOnlineMusic: SafeResourceUrl;
+
+	/**
+	 * In online mode, show music.
+	 */
+	private showOnlineMusic: boolean;
+
+	/**
+	 * In online mode, music url.
+	 */
+	private onlineMusic: SafeResourceUrl;
+
+	/**
+	 * In offline mode, show stop button.
+	 */
+	private showStopMusicButton: boolean;
+
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
 	private faQuestionCircle = faQuestionCircle;
@@ -123,13 +149,17 @@ export class GameCurrentViewComponent implements OnInit {
 				private _activatedRoute: ActivatedRoute,
 				private _router: Router,
 				private _ngbModal: NgbModal,
-				private _musicResource: MusicResource) { }
+				private _musicResource: MusicResource,
+				private _sanitizer: DomSanitizer) { }
 
 	ngOnInit() {
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
 		this.showNextMusic = true;
+		this.showExtractOnlineMusic = false;
+		this.showOnlineMusic = false;
+		this.showStopMusicButton = false;
 
 		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
 			value => {
@@ -149,7 +179,7 @@ export class GameCurrentViewComponent implements OnInit {
 				this.countdownConfig = {
 					demand: true,
 					format: "ss",
-					leftTime: 25,
+					leftTime: 30,
 					stopTime: 0,
 					notify: [],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
@@ -290,6 +320,8 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private nextMusic(): void {
 
+		this.showExtractOnlineMusic = false;
+		this.showOnlineMusic = false;
 		this.showNextMusic = false;
 		this.preCountdown.setShow(false);
 		this.countdown.setShow(false);
@@ -318,24 +350,33 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private callNextMusic(themes: Theme[]) {
 
-		this._musicResource.random(themes).subscribe(
+		this._musicResource.random(themes, this.game.onlineMode).subscribe(
 			response => {
 
 				this.currentMusic = response;
 
-				this.audio = new Audio();
-				this.audio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
-				this.audio.currentTime = 0;
+				if (this.currentMusic.onlineMode) {
 
-				let defaultPlaybackRate = 1;
-				if (this.currentMusic.effect === Effect.SLOW)
-					defaultPlaybackRate = 0.5;
-				else if (this.currentMusic.effect === Effect.SPEED)
-					defaultPlaybackRate = 2;
-				this.audio.defaultPlaybackRate = defaultPlaybackRate;
-				this.audio.load();
+					this.extractOnlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyPreviewUrl);
+					this.onlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyTrackUrl);
+				}
+				else {
 
-				this.rollThemeEffect( !(!ToolsService.isNull(themes) && themes.length === 1) );
+					this.audio = new Audio();
+					this.audio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+					this.audio.currentTime = 0;
+
+					let defaultPlaybackRate = 1;
+					if (this.currentMusic.effect === Effect.SLOW)
+						defaultPlaybackRate = 0.5;
+					else if (this.currentMusic.effect === Effect.SPEED)
+						defaultPlaybackRate = 2;
+					this.audio.defaultPlaybackRate = defaultPlaybackRate;
+					this.audio.load();
+				}
+
+
+				this.rollThemeEffect();
 			},
 			error => {
 				throw Error("can't find music : " + JSON.stringify(error));
@@ -346,10 +387,10 @@ export class GameCurrentViewComponent implements OnInit {
 
 	/**
 	 * Roll theme and effect.
-	 *
-	 * @param rollTheme if the theme must be roll
 	 */
-	private rollThemeEffect(rollTheme: boolean): void {
+	private rollThemeEffect(): void {
+
+		let rollTheme: boolean = !(this.game.round === Round.CHOICE || this.game.themes.length === 1);
 
 		this.themeEffect.setShow(true);
 		this.themeEffect.setMusic(this.currentMusic);
@@ -380,14 +421,23 @@ export class GameCurrentViewComponent implements OnInit {
 	private startCountdown(): void {
 		this.countdown.setShow(true);
 		this.countdown.start();
-		this.audio.play();
+
+		if (this.currentMusic.onlineMode)
+			this.showExtractOnlineMusic = true;
+		else
+			this.audio.play();
 	}
 
 	/**
 	 * When the countdown is ended.
 	 */
 	private onCountdownEnd(): void {
-		this.audio.pause();
+
+		if (this.currentMusic.onlineMode)
+			this.showExtractOnlineMusic = false;
+		else
+			this.audio.pause();
+
 		this.startPostCountdown();
 	}
 
@@ -410,12 +460,21 @@ export class GameCurrentViewComponent implements OnInit {
 		this.countdown.setShow(false);
 		this.postCountdown.setShow(false);
 
-		let currentTime = this.audio.currentTime;
-		this.audio.pause();
-		this.audio.defaultPlaybackRate = 1;
-		this.audio.load();
-		this.audio.currentTime = currentTime;
-		this.audio.play();
+		if (this.currentMusic.onlineMode) {
+
+			this.showOnlineMusic = true;
+			this.showStopMusicButton = false;
+		}
+		else {
+
+			let currentTime = this.audio.currentTime;
+			this.audio.pause();
+			this.audio.defaultPlaybackRate = 1;
+			this.audio.load();
+			this.audio.currentTime = currentTime;
+			this.audio.play();
+			this.showStopMusicButton = true;
+		}
 
 		this.fillResult();
 	}
