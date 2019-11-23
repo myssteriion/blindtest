@@ -11,6 +11,7 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -35,15 +36,15 @@ public class GameControllerTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws NotFoundException {
+	public void newGame() throws NotFoundException, SpotifyException {
 
 		String playerName = "name";
 		List<Player> players = Arrays.asList(
 				new Player(new ProfileDTO("name")),
 				new Player(new ProfileDTO("name1")));
-		Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null));
+		Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null, false));
 
-		NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, null);
+		NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, null, false);
 
 		ResponseEntity<Game> re = gameController.newGame(newGame);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
@@ -56,7 +57,7 @@ public class GameControllerTest extends AbstractTest {
 		List<Player> players = Arrays.asList(
 				new Player(new ProfileDTO("name")),
 				new Player(new ProfileDTO("name1")));
-		Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null));
+		Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null, false));
 		
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
 		MusicResult musicResult = new MusicResult(0, musicDto, null, null, null);
@@ -74,7 +75,7 @@ public class GameControllerTest extends AbstractTest {
 				new Player(new ProfileDTO("name")),
 				new Player(new ProfileDTO("name1")));
 
-		Game game = new Game(new HashSet<>(players), Duration.NORMAL, null);
+		Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, false);
 		game.setId(11);
 		Mockito.when(gameService.findGame( Mockito.anyInt())).thenReturn(game);
 
