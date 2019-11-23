@@ -11,6 +11,7 @@ import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
+import com.myssteriion.blindtest.spotify.SpotifyService;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +25,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 
 	@Mock
 	protected MusicService musicService;
+
+	@Mock
+	protected SpotifyService spotifyService;
 
 	@Autowired
 	protected ProfileService profileService;
