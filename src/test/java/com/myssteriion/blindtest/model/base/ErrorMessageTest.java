@@ -12,7 +12,7 @@ import com.myssteriion.blindtest.model.base.ErrorMessage;
 public class ErrorMessageTest extends AbstractTest {
 
 	@Test
-	public void contructor() {
+	public void constructor() {
 
 		HttpStatus status = HttpStatus.OK;
 		String message = "message";
