@@ -201,7 +201,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * @throws NotFoundException the not found exception
 	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes, boolean onlineMode) throws NotFoundException, IOException {
+	public MusicDTO random(List<Theme> themes, boolean onlineMode) throws NotFoundException, IOException, SpotifyException {
 	
 		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 
@@ -218,7 +218,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Theme foundTheme = foundTheme(cumulativePercent);
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
-		if ( !music.isOnlineMode() ) {
+		if ( music.isOnlineMode() ) {
+			spotifyService.testConnection();
+		}
+		else {
 
 			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 			music.setFlux( new Flux(path.toFile()) );

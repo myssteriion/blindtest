@@ -36,7 +36,7 @@ public class RoundTest extends AbstractTest {
                 new Player(new ProfileDTO("name2")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
 
 
         Assert.assertTrue( Round.CLASSIC.createRoundContent(game) instanceof ClassicContent );
