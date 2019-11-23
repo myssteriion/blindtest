@@ -28,8 +28,8 @@ public class NotFoundExceptionTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
-        NotFoundException eme = new NotFoundException(message);
-        Assert.assertEquals( message, eme.getMessage() );
+        NotFoundException nfe = new NotFoundException(message);
+        Assert.assertEquals( message, nfe.getMessage() );
     }
     
 }

@@ -29,8 +29,8 @@ public class ConflictExceptionTest extends AbstractTest {
             verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
-        ConflictException eme = new ConflictException(message);
-        Assert.assertEquals( message, eme.getMessage() );
+        ConflictException ce = new ConflictException(message);
+        Assert.assertEquals( message, ce.getMessage() );
     }
     
 }

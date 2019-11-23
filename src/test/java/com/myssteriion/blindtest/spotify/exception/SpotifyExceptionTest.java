@@ -1,19 +1,18 @@
-package com.myssteriion.blindtest.tools.exception;
+package com.myssteriion.blindtest.spotify.exception;
 
 import com.myssteriion.blindtest.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CustomRuntimeExceptionTest extends AbstractTest {
+public class SpotifyExceptionTest extends AbstractTest {
 
     @Test
     public void constructor() {
 
         String message = "failed";
-        NullPointerException npe = new NullPointerException("null");
 
         try {
-            new CustomRuntimeException(null, npe);
+            new SpotifyException(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -21,23 +20,32 @@ public class CustomRuntimeExceptionTest extends AbstractTest {
         }
 
         try {
-            new CustomRuntimeException("", npe);
+            new SpotifyException("");
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
+        SpotifyException se = new SpotifyException(message);
+        Assert.assertEquals( message, se.getMessage() );
+
+
+
+
         try {
-            new CustomRuntimeException(message, null);
+            new SpotifyException(message, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'throwable' est obligatoire."), e);
+            verifyException(new IllegalArgumentException("Le champ 'cause' est obligatoire."), e);
         }
 
-        CustomRuntimeException cre = new CustomRuntimeException(message, npe);
-        Assert.assertEquals( message, cre.getMessage() );
+        IllegalArgumentException iae = new IllegalArgumentException("iae");
+
+        se = new SpotifyException(message, iae);
+        Assert.assertEquals( message, se.getMessage() );
+        Assert.assertEquals( iae, se.getCause() );
     }
     
 }
