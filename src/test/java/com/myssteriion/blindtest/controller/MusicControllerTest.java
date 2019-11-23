@@ -6,6 +6,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -28,23 +29,23 @@ public class MusicControllerTest extends AbstractTest {
 	
 	
 	@Test
-	public void random() throws NotFoundException, IOException {
+	public void random() throws NotFoundException, IOException, SpotifyException {
 
 		Flux fluxMock = Mockito.mock(Flux.class);
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60).setFlux(fluxMock);
-		Mockito.when(musicService.random(null)).thenReturn(musicDto);
-		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60))).thenReturn(musicDto);
+		Mockito.when(musicService.random(null, false)).thenReturn(musicDto);
+		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), false)).thenReturn(musicDto);
 
-		ResponseEntity<MusicDTO> re = musicController.random(null);
+		ResponseEntity<MusicDTO> re = musicController.random(null, false);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(null);
+		re = musicController.random(null, false);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(Collections.singletonList(Theme.ANNEES_60));
+		re = musicController.random(Collections.singletonList(Theme.ANNEES_60), false);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}

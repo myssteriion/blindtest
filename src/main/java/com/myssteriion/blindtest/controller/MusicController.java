@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,8 @@ public class MusicController {
 
 	private MusicService musicService;
 
+
+
 	@Autowired
 	public MusicController(MusicService musicService) {
 		this.musicService = musicService;
@@ -42,12 +45,14 @@ public class MusicController {
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes) throws NotFoundException, IOException {
+	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
+										   @RequestParam(value = Constant.ONLINE_MODE, defaultValue = Constant.ONLINE_MODE_DEFAULT_VALUE) boolean onlineMode)
+			throws NotFoundException, IOException, SpotifyException {
 
-		MusicDTO music = musicService.random(themes);
-		if ( !music.getFlux().isFileExists() ) {
+		MusicDTO music = musicService.random(themes, onlineMode);
+		if ( !onlineMode && !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random(themes);
+			music = musicService.random(themes, onlineMode);
 		}
 
 		return ResponseBuilder.create200(music);
