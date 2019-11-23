@@ -1,5 +1,9 @@
-.game-new-view-durations, .game-new-view-themes {
+.game-new-view-durations, .game-new-view-themes, .game-new-view-online-mode {
     padding-bottom: 2em;
+}
+
+.custom-control-input:hover, .custom-control-label:hover {
+    cursor: pointer;
 }
 
 .game-new-view-themes div {

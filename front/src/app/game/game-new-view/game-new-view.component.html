@@ -8,9 +8,26 @@
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
             <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'defaultInline' + i }}"
-                       name="inlineDefaultRadiosExample" (change)="selectedDuration = duration">
-                <label class="custom-control-label" for="{{ 'defaultInline' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
+                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'duration_' + i }}"
+                       name="durationsRadios" (change)="selectedDuration = duration">
+                <label class="custom-control-label" for="{{ 'duration_' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- offline/online mode -->
+    <div class="row game-new-view-online-mode">
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
+        <div class="col-9">
+            <div class="custom-control custom-radio custom-control-inline font-size-normal">
+                <input [defaultChecked]="selectedOnlineMode" type="radio" class="custom-control-input" id="onlineModeTrue"
+                       name="onlineModeRadios" (change)="selectedOnlineMode = true">
+                <label class="custom-control-label" for="onlineModeTrue">{{ 'GAME.NEW_VIEW.ONLINE_MODE' | translate }}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline font-size-normal">
+                <input [defaultChecked]="!selectedOnlineMode" type="radio" class="custom-control-input" id="onlineModeFalse"
+                       name="onlineModeRadios" (change)="selectedOnlineMode = false">
+                <label class="custom-control-label" for="onlineModeFalse">{{ 'GAME.NEW_VIEW.OFFLINE_MODE' | translate }}</label>
             </div>
         </div>
     </div>
