@@ -17,18 +17,20 @@ public interface MusicDAO extends PagingAndSortingRepository<MusicDTO, Integer> 
     /**
      * Find by name and theme.
      *
-     * @param name  the name
-     * @param theme the theme
+     * @param name       the name
+     * @param theme      the theme
+     * @param onlineMode the onlineMode
      * @return the optional
      */
-    Optional<MusicDTO> findByNameAndTheme(String name, Theme theme);
+    Optional<MusicDTO> findByNameAndThemeAndOnlineMode(String name, Theme theme, boolean onlineMode);
 
     /**
      * Find by themes.
      *
      * @param themes the themes
+     * @param onlineMode the onlineMode
      * @return the musics list
      */
-    List<MusicDTO> findByThemeIn(List<Theme> themes);
+    List<MusicDTO> findByThemeInAndOnlineMode(List<Theme> themes, boolean onlineMode);
 
 }
