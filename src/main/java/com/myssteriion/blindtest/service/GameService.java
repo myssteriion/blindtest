@@ -10,6 +10,8 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,8 @@ public class GameService {
 
 	private ProfileStatService profileStatService;
 
+	private SpotifyService spotifyService;
+
 	/**
 	 * The game list.
 	 */
@@ -41,10 +45,11 @@ public class GameService {
 
 
 	@Autowired
-	public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService) {
+	public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService) {
 		this.musicService = musicService;
 		this.profileService = profileService;
 		this.profileStatService = profileStatService;
+		this.spotifyService = spotifyService;
 	}
 
 
@@ -55,12 +60,16 @@ public class GameService {
 	 * @param newGame the new game
 	 * @return the game
 	 * @throws NotFoundException the not found exception
+	 * @throws SpotifyException  the spotify exception
 	 */
-	public Game newGame(NewGame newGame) throws NotFoundException {
+	public Game newGame(NewGame newGame) throws NotFoundException, SpotifyException {
 
 		Tool.verifyValue("newGame", newGame);
 
-		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes() );
+		if ( newGame.isOnlineMode() )
+			spotifyService.testConnection();
+
+		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes(), newGame.isOnlineMode() );
 		game.setId( games.size() );
 		games.add(game);
 

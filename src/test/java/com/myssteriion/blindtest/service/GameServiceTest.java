@@ -13,6 +13,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -41,7 +42,7 @@ public class GameServiceTest extends AbstractTest {
 
 
 	@Test
-	public void newGame() throws NotFoundException {
+	public void newGame() throws NotFoundException, SpotifyException {
 
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
@@ -59,7 +60,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -68,15 +69,23 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
+		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 
-		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null) );
+		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false) );
 		Assert.assertEquals( 2, game.getPlayers().size() );
+
+		try {
+			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false) );
+			Assert.fail("Doit lever une car la connection spotify est KO.");
+		}
+		catch (SpotifyException e) {
+			Assert.assertEquals("Can't create spotify connection.", e.getMessage());
+		}
 	}
 
 	@Test
-	public void apply() throws NotFoundException {
+	public void apply() throws NotFoundException, SpotifyException {
 
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
 		ProfileDTO profileDto = new ProfileDTO("name","avatarName").setId(1);
@@ -115,7 +124,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null) );
+		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
 
 
 		try {
@@ -306,7 +315,7 @@ public class GameServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void findGame() throws NotFoundException {
+	public void findGame() throws NotFoundException, SpotifyException {
 
 		try {
 			gameService.findGame(null);
@@ -331,7 +340,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 
-		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null);
+		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false);
 		Game expected = gameService.newGame(ng);
 
 		Game actual = gameService.findGame(expected.getId());
