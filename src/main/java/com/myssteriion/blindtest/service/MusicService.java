@@ -129,6 +129,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				LOGGER.warn("Can't load online musics.", e);
 			}
 		}
+		else
+			LOGGER.warn("Can't load online musics.");
 	}
 
 
@@ -162,9 +164,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				LOGGER.warn("Can't test if the track exists.", e);
 			}
 		}
-		else
+		else {
+			LOGGER.warn("Can't tests if the online musics exists.");
 			exists = true;
-
+		}
 
 		return exists;
 	}

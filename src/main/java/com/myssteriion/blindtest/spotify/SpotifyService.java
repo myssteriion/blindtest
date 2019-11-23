@@ -70,6 +70,7 @@ public class SpotifyService {
             return spotifyApi;
         }
         catch (IOException | SpotifyWebApiException e) {
+            LOGGER.warn("Can't create spotify connection.");
             throw new SpotifyException("Can't create spotify connection.", e);
         }
     }
@@ -82,7 +83,7 @@ public class SpotifyService {
     public boolean isConnected() {
 
         try {
-            return Tool.isNullOrEmpty( getSpotifyApi() );
+            return !Tool.isNullOrEmpty( getSpotifyApi() );
         }
         catch (SpotifyException e) {
             return false;
