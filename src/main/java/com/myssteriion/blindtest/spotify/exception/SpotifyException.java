@@ -27,7 +27,7 @@ public class SpotifyException extends Exception {
 	public SpotifyException(String message, Throwable cause) {
 		super(message, cause);
 		Tool.verifyValue("message", message);
-		Tool.verifyValue("throwable", cause);
+		Tool.verifyValue("cause", cause);
 	}
 
 }

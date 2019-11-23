@@ -13,6 +13,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +36,10 @@ public class GameServiceTest extends AbstractTest {
 	
 	@Mock
 	private ProfileStatService profileStatService;
-	
+
+	@Mock
+	private SpotifyService spotifyService;
+
 	@InjectMocks
 	private GameService gameService;
 
@@ -48,6 +52,7 @@ public class GameServiceTest extends AbstractTest {
 		ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(null, profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
+		Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
 
 		List<String> playersNames = Arrays.asList("name", "name1");
 
@@ -76,11 +81,11 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( 2, game.getPlayers().size() );
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false) );
+			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, true) );
 			Assert.fail("Doit lever une car la connection spotify est KO.");
 		}
 		catch (SpotifyException e) {
-			Assert.assertEquals("Can't create spotify connection.", e.getMessage());
+			verifyException( new SpotifyException("se"), e);
 		}
 	}
 
