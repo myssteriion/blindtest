@@ -28,6 +28,11 @@ public class NewGame {
      */
     private List<Theme> themes;
 
+    /**
+     * If online mode is active.
+     */
+    private boolean onlineMode;
+
 
 
     /**
@@ -35,9 +40,11 @@ public class NewGame {
      *
      * @param playersNames the players names
      * @param duration     the duration
+     * @param themes       the themes
+     * @param onlineMode   the online mode
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes) {
+    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, boolean onlineMode) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
@@ -45,6 +52,7 @@ public class NewGame {
         this.playersNames = playersNames;
         this.duration = duration;
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.onlineMode = onlineMode;
     }
 
 
@@ -76,13 +84,22 @@ public class NewGame {
         return themes;
     }
 
+    /**
+     * Is online mode.
+     *
+     * @return the online mode
+     */
+    public boolean isOnlineMode() {
+        return onlineMode;
+    }
 
 
     @Override
     public String toString() {
         return "playersNames=" + playersNames +
                 ", duration=" + duration +
-                ", themes=" + themes;
+                ", themes=" + themes +
+                ", onlineMode=" + onlineMode;
     }
 
 }

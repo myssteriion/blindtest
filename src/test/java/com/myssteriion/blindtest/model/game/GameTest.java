@@ -29,7 +29,7 @@ public class GameTest extends AbstractTest {
 
 
         try {
-            new Game(null, duration, null);
+            new Game(null, duration, null, false);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -37,7 +37,7 @@ public class GameTest extends AbstractTest {
         }
 
         try {
-            new Game(new HashSet<>(players), null, null);
+            new Game(new HashSet<>(players), null, null, false);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -45,7 +45,7 @@ public class GameTest extends AbstractTest {
         }
 
         try {
-            new Game(new HashSet<>(), duration, null);
+            new Game(new HashSet<>(), duration, null, false);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -53,19 +53,20 @@ public class GameTest extends AbstractTest {
         }
 
         try {
-            new Game(new HashSet<>(Collections.singletonList(new Player(new ProfileDTO("name")))), duration, null);
+            new Game(new HashSet<>(Collections.singletonList(new Player(new ProfileDTO("name")))), duration, null, false);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("2 players at minimum"), e);
         }
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertFalse( game.isOnlineMode() );
 
 
         players = Arrays.asList(
@@ -74,7 +75,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name3")),
                 new Player(new ProfileDTO("name2")));
 
-        game = new Game(new HashSet<>(players), duration, themes);
+        game = new Game(new HashSet<>(players), duration, themes, false);
         Assert.assertEquals( players.get(1), game.getPlayers().get(0) );
         Assert.assertEquals( players.get(3), game.getPlayers().get(1) );
         Assert.assertEquals( players.get(2), game.getPlayers().get(2) );
@@ -90,21 +91,23 @@ public class GameTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
         Assert.assertEquals( Theme.getSortedTheme(), game.getThemes() );
+        Assert.assertFalse( game.isOnlineMode() );
 
-        game = new Game(new HashSet<>(players), duration, themes);
+        game = new Game(new HashSet<>(players), duration, themes, true);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
         Assert.assertEquals( themes, game.getThemes() );
+        Assert.assertTrue( game.isOnlineMode() );
     }
 
     @Test
@@ -115,7 +118,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         Assert.assertEquals( players.size(), game.getPlayers().size() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
@@ -150,7 +153,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         Assert.assertTrue( game.isFirstStep() );
 
         while ( !game.isFinished() ) {
@@ -169,7 +172,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         Assert.assertFalse( game.isLastStep() );
 
         for (int i = 0; i < 46; i++) {
@@ -192,7 +195,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
 
-        Game game = new Game(new HashSet<>(players), duration, null);
+        Game game = new Game(new HashSet<>(players), duration, null, false);
         int nbMusic = 0;
 
         game.nextStep();
@@ -217,9 +220,9 @@ public class GameTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
 
-        Game gameUn = new Game(new HashSet<>(players), duration, themes);
-        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, " +
-                "nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70]", gameUn.toString() );
+        Game gameUn = new Game(new HashSet<>(players), duration, themes, false);
+        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, " +
+                "round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70], onlineMode=false", gameUn.toString() );
     }
 
 }

@@ -60,15 +60,22 @@ public class Game implements IModel {
      */
     private List<Theme> themes;
 
+    /**
+     * If online mode is active.
+     */
+    private boolean onlineMode;
+
 
 
     /**
      * Instantiates a new Game.
      *
-     * @param players   the players
-     * @param duration  the duration
+     * @param players    the players
+     * @param duration   the duration
+     * @param themes     the themes
+     * @param onlineMode the online mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes, boolean onlineMode) {
 
         Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
@@ -83,7 +90,9 @@ public class Game implements IModel {
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.onlineMode = onlineMode;
     }
+
 
 
     /**
@@ -167,6 +176,15 @@ public class Game implements IModel {
         return themes;
     }
 
+    /**
+     * Is online mode.
+     *
+     * @return the online mode
+     */
+    public boolean isOnlineMode() {
+        return onlineMode;
+    }
+
 
     /**
      * Pass to the next step.
@@ -219,7 +237,8 @@ public class Game implements IModel {
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
                 ", round=" + round +
                 ", roundContent={" + roundContent + "}" +
-                ", themes=" + themes;
+                ", themes=" + themes +
+                ", onlineMode=" + onlineMode;
     }
 
 }
