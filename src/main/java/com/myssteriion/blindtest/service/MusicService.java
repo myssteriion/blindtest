@@ -70,15 +70,21 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	@PostConstruct
 	private void init() {
-		
+
+		boolean onlineMode = spotifyService.isConnected();
+		if (!onlineMode)
+			LOGGER.warn("Can't load online musics.");
+
 		for ( Theme theme : Theme.values() ) {
+
 			offlineInit(theme);
-			onlineInit(theme);
+			if (onlineMode)
+				onlineInit(theme);
 		}
 
 		for ( MusicDTO music : dao.findAll() ) {
 
-			if ( (music.isOnlineMode() && !onlineMusicExists(music))
+			if ( (onlineMode && music.isOnlineMode() && !onlineMusicExists(music))
 				|| (!music.isOnlineMode() && !offlineMusicExists(music)) ) {
 
 				dao.deleteById( music.getId() );
@@ -107,34 +113,6 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	}
 
 	/**
-	 * Scan online musics and insert musics in DB.
-	 *
-	 * @param theme the theme
-	 */
-	private void onlineInit(Theme theme) {
-
-		if ( spotifyService.isConnected() ) {
-
-			try {
-				List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
-				for (SpotifyMusic spotifyMusic : spotifyMusics) {
-
-					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
-					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), true);
-					if (!optionalMusic.isPresent())
-						dao.save(musicDto);
-				}
-			}
-			catch (SpotifyException e) {
-				LOGGER.warn("Can't load online musics.", e);
-			}
-		}
-		else
-			LOGGER.warn("Can't load online musics.");
-	}
-
-
-	/**
 	 * Test if the music match with an existing file.
 	 *
 	 * @param music the music
@@ -142,6 +120,29 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	private boolean offlineMusicExists(MusicDTO music) {
 		return Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+	}
+
+
+	/**
+	 * Scan online musics and insert musics in DB.
+	 *
+	 * @param theme the theme
+	 */
+	private void onlineInit(Theme theme) {
+
+		try {
+			List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
+			for (SpotifyMusic spotifyMusic : spotifyMusics) {
+
+					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
+					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), true);
+					if (!optionalMusic.isPresent())
+						dao.save(musicDto);
+				}
+		}
+		catch (SpotifyException e) {
+			LOGGER.warn("Can't load online musics.", e);
+		}
 	}
 
 	/**
@@ -154,19 +155,12 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		boolean exists;
 
-		if ( spotifyService.isConnected() ) {
-
-			try {
-				exists = spotifyService.trackExists( music.getSpotifyTrackId() );
-			}
-			catch (SpotifyException e) {
-				exists = true;
-				LOGGER.warn("Can't test if the track exists.", e);
-			}
+		try {
+			exists = spotifyService.trackExists( music.getSpotifyTrackId() );
 		}
-		else {
-			LOGGER.warn("Can't tests if the online musics exists.");
+		catch (SpotifyException e) {
 			exists = true;
+			LOGGER.warn("Can't test if the track exists.", e);
 		}
 
 		return exists;
