@@ -4,5 +4,6 @@
 export interface NewGame {
 	playersNames: string[],
 	duration: Duration,
-	themes: Theme[]
+	themes: Theme[],
+	onlineMode: boolean
 }
