@@ -9,16 +9,19 @@ import java.util.List;
  */
 public class Constant {
 
-	public static final String BASE_DIR				    = new File(".").getAbsolutePath();
-	public static final String MUSICS_FOLDER		    = "musiques";
-	public static final String AVATAR_FOLDER		    = "avatar";
+	public static final String BASE_DIR				= new File(".").getAbsolutePath();
+	public static final String MUSICS_FOLDER		= "musiques";
+	public static final String AVATAR_FOLDER		= "avatar";
+
+	public static final String FEAT 				= " feat ";
+	public static final Integer LIMIT 				= 100;
 
 	public static final String DEFAULT_AVATAR		    = "defaut.png";
 	public static final List<String> IMAGE_EXTENSIONS   = Arrays.asList(".png", ".jpg", ".jpeg");
 	public static final List<String> AUDIO_EXTENSIONS   = Arrays.asList(".mp3", ".wav", ".aac", ".wma");
     public static final String WAV_CONTENT_TYPE		    = "audio/wav";
 
-	public static final String EMPTY_JSON	 		    = "{}";
+	public static final String EMPTY_JSON	 		    	= "{}";
 
 	public static final String ID							= "id";
 	public static final String ID_PATH_PARAM				= "/{" + ID + "}";
