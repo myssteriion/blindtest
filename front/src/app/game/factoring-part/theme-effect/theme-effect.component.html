@@ -7,7 +7,7 @@
     </div>
 
     <!-- effect -->
-    <div class="col">
+    <div *ngIf="showEffect" class="col">
         <div class="row"><div class="col font-size-normal">{{ 'GAME.THEME_EFFECT.EFFECT_LABEL' | translate }}</div></div>
         <div class="row"><div class="col"><img src="{{ effectImg }}"/></div></div>
     </div>

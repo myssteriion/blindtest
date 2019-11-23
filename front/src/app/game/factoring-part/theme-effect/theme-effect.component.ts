@@ -38,6 +38,11 @@ export class ThemeEffectComponent implements OnInit {
 	 */
 	private audio;
 
+	/**
+	 * If show effect.
+	 */
+	private showEffect: boolean;
+
 
 
 	constructor() { }
@@ -69,6 +74,7 @@ export class ThemeEffectComponent implements OnInit {
 	 */
 	public setMusic(music: Music): void {
 		this.music = music;
+		this.showEffect = !this.music.onlineMode;
 	}
 
 
@@ -82,7 +88,25 @@ export class ThemeEffectComponent implements OnInit {
 
 		return new Promise(async (resolve) => {
 
-			if ( !ToolsService.isNull(this.music) ) {
+			if (this.music.onlineMode && rollTheme) {
+
+				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
+				this.themeImg = THEMES[themeIndex].srcImg;
+				this.audio.play();
+
+				while (!this.audio.ended) {
+					this.themeImg = THEMES[ToolsService.random(0, THEMES.length - 1)].srcImg;
+					await ToolsService.sleep(100);
+				}
+
+				this.themeImg = THEMES[themeIndex].srcImg;
+			}
+			else if (this.music.onlineMode && !rollTheme) {
+
+				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
+				this.themeImg = THEMES[themeIndex].srcImg;
+			}
+			else if ( !this.music.onlineMode ) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
@@ -93,7 +117,6 @@ export class ThemeEffectComponent implements OnInit {
 				this.audio.play();
 
 				while (!this.audio.ended) {
-
 					if (rollTheme)
 						this.themeImg = THEMES[ToolsService.random(0, THEMES.length - 1)].srcImg;
 
