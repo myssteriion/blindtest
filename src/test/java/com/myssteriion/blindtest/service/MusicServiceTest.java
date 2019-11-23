@@ -7,6 +7,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,6 +35,9 @@ public class MusicServiceTest extends AbstractTest {
 	@Mock
 	private MusicDAO dao;
 
+	@Mock
+	private SpotifyService spotifyService;
+
 	@InjectMocks
 	private MusicService musicService;
 
@@ -41,7 +45,7 @@ public class MusicServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		musicService = new MusicService(dao, configProperties);
+		musicService = new MusicService(dao, configProperties, spotifyService);
 	}
 
 
@@ -61,12 +65,12 @@ public class MusicServiceTest extends AbstractTest {
 		PowerMockito.when(Tool.hadAudioExtension(Mockito.anyString())).thenReturn(true);
 
 
-		musicService = Mockito.spy( new MusicService(dao, configProperties) );
+		musicService = Mockito.spy( new MusicService(dao, configProperties, spotifyService) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
 
 		MusicDTO musicMock = new MusicDTO();
-		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
+		Mockito.when(dao.findByNameAndThemeAndOnlineMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.anyBoolean())).thenReturn(Optional.empty(), Optional.of(musicMock));
 
 		musicService.refresh();
 		Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicDTO.class));
@@ -88,7 +92,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-        musicService = Mockito.spy( new MusicService(dao, configProperties) );
+        musicService = Mockito.spy( new MusicService(dao, configProperties, spotifyService) );
 		MockitoAnnotations.initMocks(musicService);
 
 		MusicDTO musicDtoMock = new MusicDTO(name, theme);
@@ -167,7 +171,7 @@ public class MusicServiceTest extends AbstractTest {
 	public void find() {
 
 		MusicDTO musicMock = new MusicDTO("name", Theme.ANNEES_80);
-		Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
+		Mockito.when(dao.findByNameAndThemeAndOnlineMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.anyBoolean())).thenReturn(Optional.empty(), Optional.of(musicMock));
 
 
 		try {
@@ -195,7 +199,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), new ArrayList<>(), allMusics);
 
 		try {
-			musicService.random(null);
+			musicService.random(null, false);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -203,7 +207,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 		try {
-			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70));
+			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), false);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -216,19 +220,20 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
-		Mockito.when(dao.findByThemeIn(Mockito.anyList())).thenReturn(allMusics);
+		Mockito.when(dao.findByThemeInAndOnlineMode(Mockito.anyList(), Mockito.anyBoolean())).thenReturn(allMusics);
 
 
-		musicService = PowerMockito.spy( new MusicService(dao, configProperties) );
-		PowerMockito.doReturn(true).when(musicService, "musicFileExists", Mockito.any(MusicDTO.class));
+		musicService = PowerMockito.spy( new MusicService(dao, configProperties, spotifyService) );
+		PowerMockito.doReturn(true).when(musicService, "offlineMusicExists", Mockito.any(MusicDTO.class));
+		PowerMockito.doReturn(true).when(musicService, "onlineMusicExists", Mockito.any(MusicDTO.class));
 
 		Flux fluxMock = Mockito.mock(Flux.class);
 		PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
 
-		MusicDTO music = musicService.random(null);
+		MusicDTO music = musicService.random(null, false);
 		Assert.assertEquals(expected, music);
 
-		music = musicService.random(Collections.singletonList(Theme.ANNEES_70));
+		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), false);
 		Assert.assertEquals(expected, music);
 	}
 

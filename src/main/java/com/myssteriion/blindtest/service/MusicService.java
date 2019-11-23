@@ -7,8 +7,13 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
+import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -28,54 +34,141 @@ import java.util.stream.Collectors;
 public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 	/**
+	 * The constant LOGGER.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(MusicService.class);
+
+	/**
 	 * The music folder path.
 	 */
 	private static final String MUSIC_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
 
+	/**
+	 * The spotify service.
+	 */
+	private SpotifyService spotifyService;
 
 
+
+	/**
+	 * Instantiates a new Music service.
+	 *
+	 * @param musicDao         the music dao
+	 * @param configProperties the config properties
+	 * @param spotifyService   the spotify service
+	 */
 	@Autowired
-	public MusicService(MusicDAO musicDao, ConfigProperties configProperties) {
+	public MusicService(MusicDAO musicDao, ConfigProperties configProperties, SpotifyService spotifyService) {
 		super(musicDao, configProperties);
+		this.spotifyService = spotifyService;
 	}
 
 
 
 	/**
-	 * Scan musics folder and insert musics in DB.
+	 * Scan offline and online musics and insert musics in DB.
 	 */
 	@PostConstruct
 	private void init() {
 		
 		for ( Theme theme : Theme.values() ) {
-			
-			String themeFolder = theme.getFolderName();
-			Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
-
-			File themeDirectory = path.toFile();
-			for ( File music : Tool.getChildren(themeDirectory) ) {
-
-				MusicDTO musicDto = new MusicDTO(music.getName(), theme);
-				if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !dao.findByNameAndTheme(musicDto.getName(), musicDto.getTheme()).isPresent() )
-					dao.save(musicDto);
-			}
+			offlineInit(theme);
+			onlineInit(theme);
 		}
 
 		for ( MusicDTO music : dao.findAll() ) {
-			if ( !musicFileExists(music) )
+
+			if ( (music.isOnlineMode() && !onlineMusicExists(music))
+				|| (!music.isOnlineMode() && !offlineMusicExists(music)) ) {
+
 				dao.deleteById( music.getId() );
+			}
 		}
 	}
 
 	/**
-	 * Test if the music matching with an existing file.
+	 * Scan offline musics and insert musics in DB.
 	 *
-	 * @param music the dto
-	 * @return TRUE if the music matching with an existing file, FALSE otherwise
+	 * @param theme the theme
 	 */
-	private boolean musicFileExists(MusicDTO music) {
-		return music != null && Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+	private void offlineInit(Theme theme) {
+
+		String themeFolder = theme.getFolderName();
+		Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
+
+		File themeDirectory = path.toFile();
+		for ( File music : Tool.getChildren(themeDirectory) ) {
+
+			MusicDTO musicDto = new MusicDTO(music.getName(), theme);
+			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), false);
+			if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !optionalMusic.isPresent() )
+				dao.save(musicDto);
+		}
 	}
+
+	/**
+	 * Scan online musics and insert musics in DB.
+	 *
+	 * @param theme the theme
+	 */
+	private void onlineInit(Theme theme) {
+
+		if ( spotifyService.isConnected() ) {
+
+			try {
+				List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
+				for (SpotifyMusic spotifyMusic : spotifyMusics) {
+
+					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
+					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), true);
+					if (!optionalMusic.isPresent())
+						dao.save(musicDto);
+				}
+			}
+			catch (SpotifyException e) {
+				LOGGER.warn("Can't load online musics.", e);
+			}
+		}
+	}
+
+
+	/**
+	 * Test if the music match with an existing file.
+	 *
+	 * @param music the music
+	 * @return TRUE if the music match with an existing file, FALSE otherwise
+	 */
+	private boolean offlineMusicExists(MusicDTO music) {
+		return Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+	}
+
+	/**
+	 * Test if the music match with an online track.
+	 *
+	 * @param music the music
+	 * @return TRUE if the music match with an existing file OR the connection is KO, OR the test is KO, FALSE otherwise
+	 */
+	private boolean onlineMusicExists(MusicDTO music) {
+
+		boolean exists;
+
+		if ( spotifyService.isConnected() ) {
+
+			try {
+				exists = spotifyService.trackExists( music.getSpotifyTrackId() );
+			}
+			catch (SpotifyException e) {
+				exists = true;
+				LOGGER.warn("Can't test if the track exists.", e);
+			}
+		}
+		else
+			exists = true;
+
+
+		return exists;
+	}
+
 
 	/**
 	 * Scan music folder and refresh the DB.
@@ -85,31 +178,35 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	}
 
 
+
 	@Override
 	public MusicDTO find(MusicDTO dto) {
 
 		Tool.verifyValue("dto", dto);
 
 		if ( Tool.isNullOrEmpty(dto.getId()) )
-			return dao.findByNameAndTheme(dto.getName(), dto.getTheme()).orElse(null);
+			return dao.findByNameAndThemeAndOnlineMode(dto.getName(), dto.getTheme(), dto.isOnlineMode()).orElse(null);
 		else
 			return super.find(dto);
 	}
 
 
+
 	/**
 	 * Randomly choose a music.
 	 *
-	 * @param themes the themes filter (optional)
+	 * @param themes     the themes filter (optional)
+	 * @param onlineMode the online mode
 	 * @return the music dto
 	 * @throws NotFoundException the not found exception
+	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes) throws NotFoundException, IOException {
+	public MusicDTO random(List<Theme> themes, boolean onlineMode) throws NotFoundException, IOException {
 	
 		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 
 		List<MusicDTO> allMusics = new ArrayList<>();
-		dao.findByThemeIn(searchThemes).forEach(allMusics::add);
+		dao.findByThemeInAndOnlineMode(searchThemes, onlineMode).forEach(allMusics::add);
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
@@ -121,9 +218,12 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Theme foundTheme = foundTheme(cumulativePercent);
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
-		Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
-		music.setFlux( new Flux(path.toFile()) );
-		music.setEffect( findNextEffect() );
+		if ( !music.isOnlineMode() ) {
+
+			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
+			music.setFlux( new Flux(path.toFile()) );
+			music.setEffect( findNextEffect() );
+		}
 
 		return music;
 	}
