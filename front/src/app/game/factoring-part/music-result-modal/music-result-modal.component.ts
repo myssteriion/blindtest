@@ -126,8 +126,10 @@ export class MusicResultModalComponent implements OnInit {
      */
     private getMusicName(): string {
 
-        let lastPoint = this.music.name.lastIndexOf(".");
-        return this.music.name.substring(0, lastPoint);
+        if ( this.music.name.endsWith(".mp3") )
+            return this.music.name.substring(0, this.music.name.length-4);
+        else
+            return this.music.name;
     }
 
     /**
@@ -148,7 +150,8 @@ export class MusicResultModalComponent implements OnInit {
 
         let copyMusic: Music = {
             name: this.music.name,
-            theme: this.music.theme
+            theme: this.music.theme,
+            onlineMode: this.music.onlineMode
         };
 
         let musicResult: MusicResult = {
