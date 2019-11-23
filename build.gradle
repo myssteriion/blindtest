@@ -24,6 +24,7 @@ sourceCompatibility = "1.8"
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -34,6 +35,8 @@ dependencies {
 	implementation "ch.qos.logback:logback-core:1.2.3"
 	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.9"
 
+	compile "se.michaelthelin.spotify:spotify-web-api-java:4.2.0"
+	
 	testImplementation "org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE"
 	testImplementation "com.googlecode.junit-toolbox:junit-toolbox:2.4"
 	testImplementation "org.powermock:powermock-module-junit4:2.0.2"
