@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
-public enum WinMode {
+public enum GoodAnswer {
 
     TITLE, AUTHOR, BOTH
 

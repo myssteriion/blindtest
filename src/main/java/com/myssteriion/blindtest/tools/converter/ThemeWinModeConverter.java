@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.tools.converter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.WinMode;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
@@ -18,11 +18,11 @@ import java.util.Map;
  * Convert json to map (and reverse).
  */
 @Converter()
-public class ThemeWinModeConverter implements AttributeConverter< Map<Theme, Map<WinMode, Integer>>, String> {
+public class ThemeWinModeConverter implements AttributeConverter< Map<Theme, Map<GoodAnswer, Integer>>, String> {
 
 
     @Override
-    public String convertToDatabaseColumn(Map<Theme, Map<WinMode, Integer>> map) {
+    public String convertToDatabaseColumn(Map<Theme, Map<GoodAnswer, Integer>> map) {
 
         try {
 
@@ -38,14 +38,14 @@ public class ThemeWinModeConverter implements AttributeConverter< Map<Theme, Map
     }
 
     @Override
-    public Map<Theme, Map<WinMode, Integer>> convertToEntityAttribute(String json) {
+    public Map<Theme, Map<GoodAnswer, Integer>> convertToEntityAttribute(String json) {
 
         try {
 
             if ( Tool.isNullOrEmpty(json) )
                 return new HashMap<>();
 
-            return Tool.MAPPER.readValue(json, new TypeReference<HashMap<Theme, HashMap<WinMode, Integer>>>() {});
+            return Tool.MAPPER.readValue(json, new TypeReference<HashMap<Theme, HashMap<GoodAnswer, Integer>>>() {});
         }
         catch (IOException e) {
             throw new CustomRuntimeException("Can't parse json.", e);

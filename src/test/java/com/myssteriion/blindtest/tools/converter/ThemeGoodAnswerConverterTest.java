@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.WinMode;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
 import org.junit.Assert;
@@ -15,9 +15,7 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
-public class ThemeWinModeConverterTest extends AbstractTest {
+public class ThemeGoodAnswerConverterTest extends AbstractTest {
 
     @Test
     public void convertToDatabaseColumn() throws JsonProcessingException, NoSuchFieldException, IllegalAccessException {
@@ -28,14 +26,14 @@ public class ThemeWinModeConverterTest extends AbstractTest {
         Assert.assertEquals( Constant.EMPTY_JSON, converter.convertToDatabaseColumn(new HashMap<>()) );
 
 
-        Map<Theme, Map<WinMode, Integer>> map = new HashMap<>();
+        Map<Theme, Map<GoodAnswer, Integer>> map = new HashMap<>();
 
-        Map<WinMode, Integer> tmp = new HashMap<>();
-        tmp.put(WinMode.BOTH, 5);
+        Map<GoodAnswer, Integer> tmp = new HashMap<>();
+        tmp.put(GoodAnswer.BOTH, 5);
         map.put(Theme.ANNEES_60, tmp);
 
         tmp = new HashMap<>();
-        tmp.put(WinMode.TITLE, 10);
+        tmp.put(GoodAnswer.TITLE, 10);
         map.put(Theme.ANNEES_70, tmp);
 
         String expected1 = "{\"ANNEES_60\":{\"BOTH\":5},\"ANNEES_70\":{\"TITLE\":10}}";
@@ -50,7 +48,7 @@ public class ThemeWinModeConverterTest extends AbstractTest {
         map.put(Theme.ANNEES_90, new HashMap<>());
 
         tmp = new HashMap<>();
-        tmp.put(WinMode.BOTH, 5);
+        tmp.put(GoodAnswer.BOTH, 5);
         map.put(Theme.ANNEES_80, tmp);
 
         expected1 = "{\"ANNEES_90\":{},\"ANNEES_80\":{\"BOTH\":5}}";
@@ -87,13 +85,13 @@ public class ThemeWinModeConverterTest extends AbstractTest {
 
         String json = "{\"ANNEES_90\":{},\"ANNEES_80\":{\"BOTH\":5,\"TITLE\":10},\"ANNEES_60\":{\"AUTHOR\":0,\"BOTH\":15,\"TITLE\":100}}";
 
-        Map<Theme, Map<WinMode, Integer>> actual = converter.convertToEntityAttribute(json);
+        Map<Theme, Map<GoodAnswer, Integer>> actual = converter.convertToEntityAttribute(json);
         Assert.assertEquals( new HashMap<>(), actual.get(Theme.ANNEES_90) );
-        Assert.assertEquals( new Integer(5), actual.get(Theme.ANNEES_80).get(WinMode.BOTH) );
-        Assert.assertEquals( new Integer(10), actual.get(Theme.ANNEES_80).get(WinMode.TITLE) );
-        Assert.assertEquals( new Integer(15), actual.get(Theme.ANNEES_60).get(WinMode.BOTH) );
-        Assert.assertEquals( new Integer(100), actual.get(Theme.ANNEES_60).get(WinMode.TITLE) );
-        Assert.assertEquals( new Integer(0), actual.get(Theme.ANNEES_60).get(WinMode.AUTHOR) );
+        Assert.assertEquals( new Integer(5), actual.get(Theme.ANNEES_80).get(GoodAnswer.BOTH) );
+        Assert.assertEquals( new Integer(10), actual.get(Theme.ANNEES_80).get(GoodAnswer.TITLE) );
+        Assert.assertEquals( new Integer(15), actual.get(Theme.ANNEES_60).get(GoodAnswer.BOTH) );
+        Assert.assertEquals( new Integer(100), actual.get(Theme.ANNEES_60).get(GoodAnswer.TITLE) );
+        Assert.assertEquals( new Integer(0), actual.get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
 
 
         try {

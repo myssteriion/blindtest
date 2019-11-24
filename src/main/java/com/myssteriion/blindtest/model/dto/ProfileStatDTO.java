@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.WinMode;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.converter.DurationConverter;
 import com.myssteriion.blindtest.tools.converter.RankConverter;
@@ -79,7 +79,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	@Column(name = "found_musics", nullable = false, length = 1000)
 	@Convert(converter = ThemeWinModeConverter.class)
-	private Map< Theme, Map<WinMode, Integer> > foundMusics;
+	private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
 
 
 
@@ -224,7 +224,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 *
 	 * @return the found musics
 	 */
-	public Map< Theme, Map<WinMode, Integer> > getFoundMusics() {
+	public Map< Theme, Map<GoodAnswer, Integer> > getFoundMusics() {
 		return foundMusics;
 	}
 
@@ -234,7 +234,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * @param foundMusics the found musics
 	 * @return this
 	 */
-	public ProfileStatDTO setFoundMusics(Map< Theme, Map<WinMode, Integer> > foundMusics) {
+	public ProfileStatDTO setFoundMusics(Map< Theme, Map<GoodAnswer, Integer> > foundMusics) {
 		this.foundMusics = foundMusics;
 		return this;
 	}
@@ -316,12 +316,12 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * Increment foundMusics.
 	 *
 	 * @param theme 	the theme
-	 * @param winMode 	the winMode
+	 * @param goodAnswer 	the winMode
 	 */
-	public void incrementFoundMusics(Theme theme, WinMode winMode) {
+	public void incrementFoundMusics(Theme theme, GoodAnswer goodAnswer) {
 
 		Tool.verifyValue("theme", theme);
-		Tool.verifyValue("winMode", winMode);
+		Tool.verifyValue("winMode", goodAnswer);
 
 		if (foundMusics == null)
 			foundMusics = new HashMap<>();
@@ -329,10 +329,10 @@ public class ProfileStatDTO extends AbstractDTO {
 		if ( !foundMusics.containsKey(theme) )
 			foundMusics.put(theme, new HashMap<>());
 
-		if ( !foundMusics.get(theme).containsKey(winMode) )
-			foundMusics.get(theme).put(winMode, 0);
+		if ( !foundMusics.get(theme).containsKey(goodAnswer) )
+			foundMusics.get(theme).put(goodAnswer, 0);
 
-		foundMusics.get(theme).put(winMode, foundMusics.get(theme).get(winMode) + 1);
+		foundMusics.get(theme).put(goodAnswer, foundMusics.get(theme).get(goodAnswer) + 1);
 	}
 
 
