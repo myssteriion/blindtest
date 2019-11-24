@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class NewGameTest extends AbstractTest {
 
 
         try {
-            new NewGame(null, duration, null, false);
+            new NewGame(null, duration, null, GameMode.OFFLINE);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -30,15 +31,15 @@ public class NewGameTest extends AbstractTest {
         }
 
         try {
-            new NewGame(new HashSet<>(playersNames), null, null, false);
+            new NewGame(new HashSet<>(playersNames), null, null, GameMode.OFFLINE);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
         }
 
-        Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration, null, false) );
-        Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration, themes, false) );
+        Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration, null, GameMode.OFFLINE) );
+        Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration, themes, GameMode.OFFLINE) );
     }
 
     @Test
@@ -49,17 +50,17 @@ public class NewGameTest extends AbstractTest {
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
 
 
-        NewGame newGame = new NewGame(new HashSet<>(playersNames), duration, null, false);
+        NewGame newGame = new NewGame(new HashSet<>(playersNames), duration, null, GameMode.OFFLINE);
         Assert.assertEquals( new HashSet<>(playersNames), newGame.getPlayersNames() );
         Assert.assertEquals( duration, newGame.getDuration() );
         Assert.assertEquals( Theme.getSortedTheme(), newGame.getThemes() );
-        Assert.assertFalse( newGame.isOnlineMode() );
+        Assert.assertEquals( GameMode.OFFLINE, newGame.getGameMode() );
 
-        newGame = new NewGame(new HashSet<>(playersNames), duration, themes, true);
+        newGame = new NewGame(new HashSet<>(playersNames), duration, themes, GameMode.ONLINE);
         Assert.assertEquals( new HashSet<>(playersNames), newGame.getPlayersNames() );
         Assert.assertEquals( duration, newGame.getDuration() );
         Assert.assertEquals( themes, newGame.getThemes() );
-        Assert.assertTrue( newGame.isOnlineMode() );
+        Assert.assertEquals( GameMode.ONLINE, newGame.getGameMode() );
     }
 
     @Test
@@ -69,8 +70,8 @@ public class NewGameTest extends AbstractTest {
         Duration duration = Duration.NORMAL;
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
 
-        NewGame gameDtoUn = new NewGame(new HashSet<>(playersNames), duration, themes, false);
-        Assert.assertEquals( "playersNames=[name], duration=NORMAL, themes=[ANNEES_60, ANNEES_70], onlineMode=false", gameDtoUn.toString() );
+        NewGame gameDtoUn = new NewGame(new HashSet<>(playersNames), duration, themes, GameMode.OFFLINE);
+        Assert.assertEquals( "playersNames=[name], duration=NORMAL, themes=[ANNEES_60, ANNEES_70], gameMode=OFFLINE", gameDtoUn.toString() );
     }
     
 }

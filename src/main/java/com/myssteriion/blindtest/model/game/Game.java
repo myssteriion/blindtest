@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.Effect;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
@@ -61,24 +61,25 @@ public class Game implements IModel {
     private List<Theme> themes;
 
     /**
-     * If online mode is active.
+     * Game mode.
      */
-    private boolean onlineMode;
+    private GameMode gameMode;
 
 
 
     /**
      * Instantiates a new Game.
      *
-     * @param players    the players
-     * @param duration   the duration
-     * @param themes     the themes
-     * @param onlineMode the online mode
+     * @param players  the players
+     * @param duration the duration
+     * @param themes   the themes
+     * @param gameMode the game mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes, boolean onlineMode) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes, GameMode gameMode) {
 
         Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
+        Tool.verifyValue("gameMode", gameMode);
 
         if (players.size() < 2)
             throw new IllegalArgumentException("2 players at minimum");
@@ -90,7 +91,7 @@ public class Game implements IModel {
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.onlineMode = onlineMode;
+        this.gameMode = gameMode;
     }
 
 
@@ -177,12 +178,12 @@ public class Game implements IModel {
     }
 
     /**
-     * Is online mode.
+     * Gets the game mode.
      *
-     * @return the online mode
+     * @return the game mode
      */
-    public boolean isOnlineMode() {
-        return onlineMode;
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
 
@@ -238,7 +239,7 @@ public class Game implements IModel {
                 ", round=" + round +
                 ", roundContent={" + roundContent + "}" +
                 ", themes=" + themes +
-                ", onlineMode=" + onlineMode;
+                ", gameMode=" + gameMode;
     }
 
 }

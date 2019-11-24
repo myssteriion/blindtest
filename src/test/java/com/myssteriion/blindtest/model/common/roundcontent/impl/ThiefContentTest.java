@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -49,7 +50,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, false);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, GameMode.OFFLINE);
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
@@ -100,7 +101,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, false);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, GameMode.OFFLINE);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();
@@ -125,7 +126,7 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, false);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, GameMode.OFFLINE);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();

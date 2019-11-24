@@ -2,10 +2,11 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
@@ -65,7 +66,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, GameMode.OFFLINE) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -74,14 +75,14 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
+		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, GameMode.OFFLINE) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 
-		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false) );
+		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, GameMode.OFFLINE) );
 		Assert.assertEquals( 2, game.getPlayers().size() );
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, true) );
+			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, GameMode.ONLINE) );
 			Assert.fail("Doit lever une car la connection spotify est KO.");
 		}
 		catch (SpotifyException e) {
@@ -129,7 +130,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, false) );
+		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, GameMode.OFFLINE) );
 
 
 		try {
@@ -345,7 +346,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 
-		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, false);
+		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, GameMode.OFFLINE);
 		Game expected = gameService.newGame(ng);
 
 		Game actual = gameService.findGame(expected.getId());

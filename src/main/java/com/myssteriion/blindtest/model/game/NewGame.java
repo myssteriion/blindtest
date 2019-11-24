@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -29,9 +30,9 @@ public class NewGame {
     private List<Theme> themes;
 
     /**
-     * If online mode is active.
+     * Game mode.
      */
-    private boolean onlineMode;
+    private GameMode gameMode;
 
 
 
@@ -41,18 +42,19 @@ public class NewGame {
      * @param playersNames the players names
      * @param duration     the duration
      * @param themes       the themes
-     * @param onlineMode   the online mode
+     * @param gameMode     the game mode
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, boolean onlineMode) {
+    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, GameMode gameMode) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
+        Tool.verifyValue("gameMode", gameMode);
 
         this.playersNames = playersNames;
         this.duration = duration;
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.onlineMode = onlineMode;
+        this.gameMode = gameMode;
     }
 
 
@@ -85,12 +87,12 @@ public class NewGame {
     }
 
     /**
-     * Is online mode.
+     * Gets game mode.
      *
-     * @return the online mode
+     * @return the game mode
      */
-    public boolean isOnlineMode() {
-        return onlineMode;
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
 
@@ -99,7 +101,7 @@ public class NewGame {
         return "playersNames=" + playersNames +
                 ", duration=" + duration +
                 ", themes=" + themes +
-                ", onlineMode=" + onlineMode;
+                ", gameMode=" + gameMode;
     }
 
 }
