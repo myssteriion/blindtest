@@ -71,9 +71,9 @@
             "NAME_HEADER": "Joueur",
             "SCORE_HEADER": "Score",
             "AUTHOR_WINNER_HEADER": "Artiste(s)",
-            "DISNEY_TITLE_HEADER": "Titre film trouvé",
-            "TITLE_WINNER_HEADER": "Titre musique",
-            "STEAL_HEADER": "Victime du vol"
+            "MOVIE_TITLE_HEADER": "Titre film",
+            "TITLE_WINNER_HEADER": "Titre",
+            "VICTIM_HEADER": "Victime"
         },
         "ROUND_INFO_MODAL": {
             "TITLE": "Info manche",

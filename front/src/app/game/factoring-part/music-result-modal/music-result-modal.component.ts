@@ -89,13 +89,20 @@ export class MusicResultModalComponent implements OnInit {
         this.headers.push(prefix + "NAME_HEADER");
         this.headers.push(prefix + "SCORE_HEADER");
 
-        if (this.music.theme === Theme.DISNEY)
-            this.headers.push(prefix + "DISNEY_TITLE_HEADER");
+        if ( this.useMovieTitle() )
+            this.headers.push(prefix + "MOVIE_TITLE_HEADER");
         else
             this.headers.push(prefix + "AUTHOR_WINNER_HEADER");
 
         this.headers.push(prefix + "TITLE_WINNER_HEADER");
-        this.headers.push(prefix + "STEAL_HEADER");
+        this.headers.push(prefix + "VICTIM_HEADER");
+    }
+
+    /**
+     * Test if the movie title must be use.
+     */
+    private useMovieTitle(): boolean {
+        return this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY;
     }
 
     /**
@@ -108,17 +115,28 @@ export class MusicResultModalComponent implements OnInit {
     }
 
     /**
-     * If thr loser column is showed.
+     * If th author column is showed.
      */
-    private showLoserColumn(): boolean {
-        return this.round === Round.THIEF;
+    private showAuthorColumn(): boolean {
+        return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
+                || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
+                || this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY || this.music.theme === Theme.CLASSIQUES;
     }
 
     /**
-     * If thr author column is showed.
+     * If th author column is showed.
      */
-    private showAuthorColumn(): boolean {
-        return this.music.theme !== Theme.CINEMAS && this.music.theme !== Theme.SERIES
+    private showTitleColumn(): boolean {
+        return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
+                || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
+                || this.music.theme === Theme.DISNEY || this.music.theme === Theme.JEUX || this.music.theme === Theme.CLASSIQUES;
+    }
+
+    /**
+     * If th loser column is showed.
+     */
+    private showLoserColumn(): boolean {
+        return this.round === Round.THIEF;
     }
 
     /**

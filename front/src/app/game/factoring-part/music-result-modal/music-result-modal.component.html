@@ -18,7 +18,7 @@
                     <th>{{ headers[0] | translate }}</th>
                     <th>{{ headers[1] | translate }}</th>
                     <th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
-                    <th>{{ headers[3] | translate }}</th>
+                    <th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
                     <th *ngIf="showLoserColumn()">{{ headers[4] | translate }}</th>
                 </tr>
             </thead>
@@ -29,7 +29,7 @@
                     <td *ngIf="showAuthorColumn()">
                         <mat-checkbox color="warn" [(ngModel)]="line.authorWinner"></mat-checkbox>
                     </td>
-                    <td>
+                    <td *ngIf="showTitleColumn()">
                         <mat-checkbox color="warn" [(ngModel)]="line.titleWinner"></mat-checkbox>
                     </td>
                     <td *ngIf="showLoserColumn()">

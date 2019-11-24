@@ -44,9 +44,10 @@ export const THEMES = [
     { srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80 },
     { srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90 },
     { srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000 },
-    { srcImg: "assets/images/themes/cinemas.png", enumVal: Theme.CINEMAS },
-    { srcImg: "assets/images/themes/series.png", enumVal: Theme.SERIES },
+    { srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010 },
     { srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY },
+    { srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS },
+    { srcImg: "assets/images/themes/jeux.png", enumVal: Theme.JEUX },
     { srcImg: "assets/images/themes/classiques.png", enumVal: Theme.CLASSIQUES }
 ];
 
