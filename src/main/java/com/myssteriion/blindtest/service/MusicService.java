@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -84,8 +85,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		for ( MusicDTO music : dao.findAll() ) {
 
-			if ( (onlineMode && music.isOnlineMode() && !onlineMusicExists(music))
-				|| (!music.isOnlineMode() && !offlineMusicExists(music)) ) {
+			if ( (onlineMode && music.getGameMode() == GameMode.ONLINE && !onlineMusicExists(music))
+				|| (music.getGameMode() == GameMode.OFFLINE && !offlineMusicExists(music)) ) {
 
 				dao.deleteById( music.getId() );
 			}
@@ -106,7 +107,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		for ( File music : Tool.getChildren(themeDirectory) ) {
 
 			MusicDTO musicDto = new MusicDTO(music.getName(), theme);
-			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), false);
+			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndGameMode(musicDto.getName(), musicDto.getTheme(), GameMode.OFFLINE);
 			if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
@@ -135,7 +136,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			for (SpotifyMusic spotifyMusic : spotifyMusics) {
 
 					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
-					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndOnlineMode(musicDto.getName(), musicDto.getTheme(), true);
+					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndGameMode(musicDto.getName(), musicDto.getTheme(), GameMode.ONLINE);
 					if (!optionalMusic.isPresent())
 						dao.save(musicDto);
 				}
@@ -182,7 +183,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Tool.verifyValue("dto", dto);
 
 		if ( Tool.isNullOrEmpty(dto.getId()) )
-			return dao.findByNameAndThemeAndOnlineMode(dto.getName(), dto.getTheme(), dto.isOnlineMode()).orElse(null);
+			return dao.findByNameAndThemeAndGameMode(dto.getName(), dto.getTheme(), dto.getGameMode()).orElse(null);
 		else
 			return super.find(dto);
 	}
@@ -193,17 +194,17 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * Randomly choose a music.
 	 *
 	 * @param themes     the themes filter (optional)
-	 * @param onlineMode the online mode
+	 * @param gameMode the online mode
 	 * @return the music dto
 	 * @throws NotFoundException the not found exception
 	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes, boolean onlineMode) throws NotFoundException, IOException, SpotifyException {
+	public MusicDTO random(List<Theme> themes, GameMode gameMode) throws NotFoundException, IOException, SpotifyException {
 	
 		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 
 		List<MusicDTO> allMusics = new ArrayList<>();
-		dao.findByThemeInAndOnlineMode(searchThemes, onlineMode).forEach(allMusics::add);
+		dao.findByThemeInAndGameMode(searchThemes, gameMode).forEach(allMusics::add);
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
@@ -215,7 +216,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Theme foundTheme = foundTheme(cumulativePercent);
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
-		if ( music.isOnlineMode() ) {
+		if ( music.getGameMode().isNeedConnection() ) {
 			spotifyService.testConnection();
 		}
 		else {

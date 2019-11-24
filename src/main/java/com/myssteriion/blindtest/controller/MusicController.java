@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
@@ -46,13 +47,13 @@ public class MusicController {
 	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-										   @RequestParam(value = Constant.ONLINE_MODE, defaultValue = Constant.ONLINE_MODE_DEFAULT_VALUE) boolean onlineMode)
+										   @RequestParam(value = Constant.GAME_MODE) GameMode gameMode)
 			throws NotFoundException, IOException, SpotifyException {
 
-		MusicDTO music = musicService.random(themes, onlineMode);
-		if ( !onlineMode && !music.getFlux().isFileExists() ) {
+		MusicDTO music = musicService.random(themes, gameMode);
+		if ( gameMode == GameMode.OFFLINE && !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random(themes, onlineMode);
+			music = musicService.random(themes, gameMode);
 		}
 
 		return ResponseBuilder.create200(music);

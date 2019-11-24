@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Flux;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -70,7 +71,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
 
 		MusicDTO musicMock = new MusicDTO();
-		Mockito.when(dao.findByNameAndThemeAndOnlineMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.anyBoolean())).thenReturn(Optional.empty(), Optional.of(musicMock));
+		Mockito.when(dao.findByNameAndThemeAndGameMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.any(GameMode.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
 
 		musicService.refresh();
 		Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicDTO.class));
@@ -171,7 +172,7 @@ public class MusicServiceTest extends AbstractTest {
 	public void find() {
 
 		MusicDTO musicMock = new MusicDTO("name", Theme.ANNEES_80);
-		Mockito.when(dao.findByNameAndThemeAndOnlineMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.anyBoolean())).thenReturn(Optional.empty(), Optional.of(musicMock));
+		Mockito.when(dao.findByNameAndThemeAndGameMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.any(GameMode.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
 
 
 		try {
@@ -199,7 +200,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), new ArrayList<>(), allMusics);
 
 		try {
-			musicService.random(null, false);
+			musicService.random(null, GameMode.OFFLINE);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -207,7 +208,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 		try {
-			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), false);
+			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), GameMode.OFFLINE);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -220,7 +221,7 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
-		Mockito.when(dao.findByThemeInAndOnlineMode(Mockito.anyList(), Mockito.anyBoolean())).thenReturn(allMusics);
+		Mockito.when(dao.findByThemeInAndGameMode(Mockito.anyList(), Mockito.any(GameMode.class))).thenReturn(allMusics);
 
 
 		musicService = PowerMockito.spy( new MusicService(dao, configProperties, spotifyService) );
@@ -230,10 +231,10 @@ public class MusicServiceTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
 
-		MusicDTO music = musicService.random(null, false);
+		MusicDTO music = musicService.random(null, GameMode.OFFLINE);
 		Assert.assertEquals(expected, music);
 
-		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), false);
+		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), GameMode.OFFLINE);
 		Assert.assertEquals(expected, music);
 	}
 

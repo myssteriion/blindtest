@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Flux;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -34,18 +35,18 @@ public class MusicControllerTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60).setFlux(fluxMock);
-		Mockito.when(musicService.random(null, false)).thenReturn(musicDto);
-		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), false)).thenReturn(musicDto);
+		Mockito.when(musicService.random(null, GameMode.OFFLINE)).thenReturn(musicDto);
+		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), GameMode.OFFLINE)).thenReturn(musicDto);
 
-		ResponseEntity<MusicDTO> re = musicController.random(null, false);
+		ResponseEntity<MusicDTO> re = musicController.random(null, GameMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(null, false);
+		re = musicController.random(null, GameMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(Collections.singletonList(Theme.ANNEES_60), false);
+		re = musicController.random(Collections.singletonList(Theme.ANNEES_60), GameMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}

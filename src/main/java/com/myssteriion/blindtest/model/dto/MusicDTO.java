@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.dto;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
+import com.myssteriion.blindtest.model.common.GameMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
 import com.myssteriion.blindtest.tools.Tool;
@@ -55,10 +56,10 @@ public class MusicDTO extends AbstractDTO {
 	private int played;
 
 	/**
-	 * If online mode.
+	 * Game mode.
 	 */
-	@Column(name = "online_mode", nullable = false)
-	private boolean onlineMode;
+	@Column(name = "game_mode", nullable = false)
+	private GameMode gameMode;
 
 	/**
 	 * The spotify track id.
@@ -120,7 +121,7 @@ public class MusicDTO extends AbstractDTO {
 		this.name = Tool.isNullOrEmpty(name) ? "" : name;
 		this.theme = theme;
 		this.played = Math.max(played, 0);
-		this.onlineMode = false;
+		this.gameMode = GameMode.OFFLINE;
 	}
 
 	/**
@@ -148,7 +149,7 @@ public class MusicDTO extends AbstractDTO {
 		this.name = spotifyMusic.getArtists() + " - " + spotifyMusic.getName();
 		this.theme = theme;
 		this.played = Math.max(played, 0);
-		this.onlineMode = true;
+		this.gameMode = GameMode.ONLINE;
 		this.spotifyTrackId = spotifyMusic.getTrackId();
 		this.spotifyPreviewUrl = spotifyMusic.getPreviewUrl();
 		this.spotifyTrackUrl = spotifyMusic.getTrackUrl();
@@ -227,22 +228,22 @@ public class MusicDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Is online mode boolean.
+	 * Gets the game mode.
 	 *
-	 * @return the boolean
+	 * @return the game mode
 	 */
-	public boolean isOnlineMode() {
-		return onlineMode;
+	public GameMode getGameMode() {
+		return gameMode;
 	}
 
 	/**
-	 * Sets online mode.
+	 * Sets the game mode.
 	 *
-	 * @param onlineMode the online mode
+	 * @param gameMode the game mode
 	 * @return this
 	 */
-	public MusicDTO setOnlineMode(boolean onlineMode) {
-		this.onlineMode = onlineMode;
+	public MusicDTO setGameMode(GameMode gameMode) {
+		this.gameMode = gameMode;
 		return this;
 	}
 
@@ -356,7 +357,7 @@ public class MusicDTO extends AbstractDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, theme, onlineMode);
+		return Objects.hash(name, theme, gameMode);
 	}
 
 	@Override
@@ -371,7 +372,7 @@ public class MusicDTO extends AbstractDTO {
 		MusicDTO other = (MusicDTO) obj;
 		return Objects.equals(this.name, other.name) && 
 				Objects.equals(this.theme, other.theme) &&
-				Objects.equals(this.onlineMode, other.onlineMode);
+				Objects.equals(this.gameMode, other.gameMode);
 	}
 
 	@Override
@@ -380,7 +381,7 @@ public class MusicDTO extends AbstractDTO {
 				", name=" + name +
 				", theme=" + theme +
 				", played=" + played +
-				", onlineMode=" + onlineMode +
+				", gameMode=" + gameMode +
 				", spotifyTrackId=" + spotifyTrackId +
 				", spotifyPreviewUrl=" + spotifyPreviewUrl +
 				", spotifyTrackUrl=" + spotifyTrackUrl +
