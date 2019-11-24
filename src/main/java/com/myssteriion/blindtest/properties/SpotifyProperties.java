@@ -33,14 +33,17 @@ public class SpotifyProperties {
     @Value("${playlistId.annees_2000}")
     private String playlistIdAnnees2000;
 
-    @Value("${playlistId.cinemas}")
-    private String playlistIdCinemas;
+    @Value("${playlistId.annees_2010}")
+    private String playlistIdAnnees2010;
 
-    @Value("${playlistId.series}")
-    private String playlistIdSeries;
+    @Value("${playlistId.series-cinemas}")
+    private String playlistIdSeriesCinemas;
 
     @Value("${playlistId.disney}")
     private String playlistIdDisney;
+
+    @Value("${playlistId.jeux}")
+    private String playlistIdJeux;
 
     @Value("${playlistId.classiques}")
     private String playlistIdClassiques;
@@ -75,17 +78,18 @@ public class SpotifyProperties {
 
         switch (theme) {
 
-            case ANNEES_60:     return playlistIdAnnees60;
-            case ANNEES_70:     return playlistIdAnnees70;
-            case ANNEES_80:     return playlistIdAnnees80;
-            case ANNEES_90:     return playlistIdAnnees90;
-            case ANNEES_2000:   return playlistIdAnnees2000;
-            case CINEMAS:       return playlistIdCinemas;
-            case SERIES:        return playlistIdSeries;
-            case DISNEY:        return playlistIdDisney;
-            case CLASSIQUES:    return playlistIdClassiques;
+            case ANNEES_60:         return playlistIdAnnees60;
+            case ANNEES_70:         return playlistIdAnnees70;
+            case ANNEES_80:         return playlistIdAnnees80;
+            case ANNEES_90:         return playlistIdAnnees90;
+            case ANNEES_2000:       return playlistIdAnnees2000;
+            case ANNEES_2010:       return playlistIdAnnees2010;
+            case SERIES_CINEMAS:    return playlistIdSeriesCinemas;
+            case DISNEY:            return playlistIdDisney;
+            case JEUX:              return playlistIdJeux;
+            case CLASSIQUES:        return playlistIdClassiques;
 
-            default:            throw new IllegalArgumentException("Il manque un case.");
+            default:                throw new IllegalArgumentException("Il manque un case.");
         }
     }
 

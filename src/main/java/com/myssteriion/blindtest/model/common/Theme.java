@@ -13,9 +13,10 @@ public enum Theme {
 	ANNEES_80("annees_80"),
 	ANNEES_90("annees_90"),
 	ANNEES_2000("annees_2000"),
-	CINEMAS("cinemas"),
-	SERIES("series"),
+	ANNEES_2010("annees_2010"),
+	SERIES_CINEMAS("series-cinemas"),
 	DISNEY("disney"),
+	JEUX("jeux"),
 	CLASSIQUES("classiques");
 	
 	
@@ -41,7 +42,7 @@ public enum Theme {
 	 * @return the sorted theme
 	 */
 	public static List<Theme> getSortedTheme() {
-		return Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, CINEMAS, SERIES, DISNEY, CLASSIQUES);
+		return Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY, JEUX, CLASSIQUES);
 	}
 	
 }
