@@ -25,12 +25,12 @@ export class MusicResource {
 	/**
 	 * Get random musics.
 	 *
-	 * @param themes 	 	the themes
-	 * @param onlineMode	the onlineMode
+	 * @param themes 	 	 the themes
+	 * @param connectionMode the connectionMode
 	 */
-	public random(themes: Theme[], onlineMode: boolean): Observable<Music> {
+	public random(themes: Theme[], connectionMode: ConnectionMode): Observable<Music> {
 
-		let queryParam = "?onlineMode=" + onlineMode;
+		let queryParam = "?connectionMode=" + connectionMode;
 		if ( !ToolsService.isNull(themes) )
 			queryParam += "&themes=" + themes;
 

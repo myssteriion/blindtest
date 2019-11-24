@@ -350,12 +350,12 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private callNextMusic(themes: Theme[]) {
 
-		this._musicResource.random(themes, this.game.onlineMode).subscribe(
+		this._musicResource.random(themes, this.game.connectionMode).subscribe(
 			response => {
 
 				this.currentMusic = response;
 
-				if (this.currentMusic.onlineMode) {
+				if (this.currentMusic.connectionMode === ConnectionMode.ONLINE) {
 
 					this.extractOnlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyPreviewUrl);
 					this.onlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyTrackUrl);
@@ -422,7 +422,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.countdown.setShow(true);
 		this.countdown.start();
 
-		if (this.currentMusic.onlineMode)
+		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showExtractOnlineMusic = true;
 		else
 			this.audio.play();
@@ -433,7 +433,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 */
 	private onCountdownEnd(): void {
 
-		if (this.currentMusic.onlineMode)
+		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showExtractOnlineMusic = false;
 		else
 			this.audio.pause();
@@ -460,7 +460,7 @@ export class GameCurrentViewComponent implements OnInit {
 		this.countdown.setShow(false);
 		this.postCountdown.setShow(false);
 
-		if (this.currentMusic.onlineMode) {
+		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE) {
 
 			this.showOnlineMusic = true;
 			this.showStopMusicButton = false;

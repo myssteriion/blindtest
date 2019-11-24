@@ -7,7 +7,7 @@ export interface Music {
 	id?: number,
 	name: string,
 	theme: Theme,
-	onlineMode: boolean,
+	connectionMode: ConnectionMode,
 
 	spotifyTrackId?: string,
 	spotifyPreviewUrl?: string,

@@ -47,7 +47,7 @@ public class MusicController {
 	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-										   @RequestParam(value = Constant.GAME_MODE) ConnectionMode connectionMode)
+										   @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
 			throws NotFoundException, IOException, SpotifyException {
 
 		MusicDTO music = musicService.random(themes, connectionMode);

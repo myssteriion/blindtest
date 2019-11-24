@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
-import {faCheckCircle, faTimesCircle, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {GameResource} from "../../../resources/game.resource";
 import {MusicResult} from "../../../interfaces/game/music.result.interface";
 import {Music} from "../../../interfaces/dto/music.interface";
@@ -169,7 +168,7 @@ export class MusicResultModalComponent implements OnInit {
         let copyMusic: Music = {
             name: this.music.name,
             theme: this.music.theme,
-            onlineMode: this.music.onlineMode
+            connectionMode: this.music.connectionMode
         };
 
         let musicResult: MusicResult = {

@@ -74,7 +74,7 @@ export class ThemeEffectComponent implements OnInit {
 	 */
 	public setMusic(music: Music): void {
 		this.music = music;
-		this.showEffect = !this.music.onlineMode;
+		this.showEffect = this.music.connectionMode === ConnectionMode.OFFLINE;
 	}
 
 
@@ -88,7 +88,7 @@ export class ThemeEffectComponent implements OnInit {
 
 		return new Promise(async (resolve) => {
 
-			if (this.music.onlineMode && rollTheme) {
+			if ( this.music.connectionMode === ConnectionMode.ONLINE && rollTheme) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				this.themeImg = THEMES[themeIndex].srcImg;
@@ -101,12 +101,12 @@ export class ThemeEffectComponent implements OnInit {
 
 				this.themeImg = THEMES[themeIndex].srcImg;
 			}
-			else if (this.music.onlineMode && !rollTheme) {
+			else if (this.music.connectionMode === ConnectionMode.ONLINE && !rollTheme) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				this.themeImg = THEMES[themeIndex].srcImg;
 			}
-			else if ( !this.music.onlineMode ) {
+			else if ( this.music.connectionMode === ConnectionMode.OFFLINE ) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);

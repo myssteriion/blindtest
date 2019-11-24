@@ -13,7 +13,7 @@ export interface Game {
 	round: Round,
 	roundContent: AbstractRoundContent,
 	themes: Theme[],
-	onlineMode: boolean
+	connectionMode: ConnectionMode,
 
 	firstStep: boolean,
 	lastStep: boolean,

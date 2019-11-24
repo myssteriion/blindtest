@@ -26,7 +26,7 @@ public class Constant {
 	public static final String ID							= "id";
 	public static final String ID_PATH_PARAM				= "/{" + ID + "}";
 	public static final String THEMES 						= "themes";
-	public static final String GAME_MODE 					= "gameMode";
+	public static final String CONNECTION_MODE 				= "connectionMode";
 	public static final String PAGE_NUMBER 					= "pageNumber";
 	public static final String PAGE_NUMBER_DEFAULT_VALUE 	= "0";
 	public static final String PREFIX_NAME					= "prefixName";

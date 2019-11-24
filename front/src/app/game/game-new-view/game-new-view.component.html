@@ -15,19 +15,14 @@
         </div>
     </div>
 
-    <!-- offline/online mode -->
+    <!-- connection mode -->
     <div class="row game-new-view-online-mode">
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
         <div class="col-9">
-            <div class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="selectedOnlineMode" type="radio" class="custom-control-input" id="onlineModeTrue"
-                       name="onlineModeRadios" (change)="selectedOnlineMode = true">
-                <label class="custom-control-label" for="onlineModeTrue">{{ 'GAME.NEW_VIEW.ONLINE_MODE' | translate }}</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="!selectedOnlineMode" type="radio" class="custom-control-input" id="onlineModeFalse"
-                       name="onlineModeRadios" (change)="selectedOnlineMode = false">
-                <label class="custom-control-label" for="onlineModeFalse">{{ 'GAME.NEW_VIEW.OFFLINE_MODE' | translate }}</label>
+            <div *ngFor="let connectionMode of connectionModes; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
+                <input [defaultChecked]="connectionMode === selectedConnectionMode" type="radio" class="custom-control-input" id="{{ 'connectionMode_' + i }}"
+                       name="connectionModesRadios" (change)="selectedConnectionMode = connectionMode">
+                <label class="custom-control-label" for="{{ 'connectionMode_' + i }}">{{ 'GAME.NEW_VIEW.' + connectionMode + '_MODE' | translate }}</label>
             </div>
         </div>
     </div>

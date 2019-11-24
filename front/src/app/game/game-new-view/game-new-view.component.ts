@@ -34,9 +34,14 @@ export class GameNewViewComponent implements OnInit {
     public selectedDuration: Duration;
 
 	/**
-	 * Selected online mode.
+	 * ConnectionModes list.
 	 */
-	public selectedOnlineMode: boolean;
+	public connectionModes = [ConnectionMode.OFFLINE, ConnectionMode.ONLINE, ConnectionMode.BOTH];
+
+	/**
+	 * Selected connection mode.
+	 */
+	public selectedConnectionMode: ConnectionMode;
 
 	/**
 	 * Themes list.
@@ -72,7 +77,7 @@ export class GameNewViewComponent implements OnInit {
         this.selectedDuration = Duration.NORMAL;
 		this.selectedThemes = [];
 		THEMES.forEach(theme => { this.selectedThemes.push(theme.enumVal); } );
-		this.selectedOnlineMode = false;
+		this.selectedConnectionMode = ConnectionMode.OFFLINE;
     }
 
 
@@ -167,7 +172,7 @@ export class GameNewViewComponent implements OnInit {
 			duration: this.selectedDuration,
 			playersNames: playersNames,
 			themes: this.selectedThemes,
-			onlineMode: this.selectedOnlineMode
+			connectionMode: this.selectedConnectionMode
 		};
 
 		this._gameResource.newGame(newGame).subscribe(
@@ -182,7 +187,7 @@ export class GameNewViewComponent implements OnInit {
 	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedDuration) || ToolsService.isNull(this.selectedOnlineMode) || this.playersProfiles.length < 2;
+		return ToolsService.isNull(this.selectedDuration) || ToolsService.isNull(this.selectedConnectionMode) || this.playersProfiles.length < 2;
 	}
 
 	/**
