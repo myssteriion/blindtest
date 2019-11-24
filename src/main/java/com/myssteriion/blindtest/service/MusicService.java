@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -85,8 +85,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		for ( MusicDTO music : dao.findAll() ) {
 
-			if ( (onlineMode && music.getGameMode() == GameMode.ONLINE && !onlineMusicExists(music))
-				|| (music.getGameMode() == GameMode.OFFLINE && !offlineMusicExists(music)) ) {
+			if ( (onlineMode && music.getConnectionMode() == ConnectionMode.ONLINE && !onlineMusicExists(music))
+				|| (music.getConnectionMode() == ConnectionMode.OFFLINE && !offlineMusicExists(music)) ) {
 
 				dao.deleteById( music.getId() );
 			}
@@ -107,7 +107,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		for ( File music : Tool.getChildren(themeDirectory) ) {
 
 			MusicDTO musicDto = new MusicDTO(music.getName(), theme);
-			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndGameMode(musicDto.getName(), musicDto.getTheme(), GameMode.OFFLINE);
+			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.OFFLINE);
 			if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
@@ -136,7 +136,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			for (SpotifyMusic spotifyMusic : spotifyMusics) {
 
 					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
-					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndGameMode(musicDto.getName(), musicDto.getTheme(), GameMode.ONLINE);
+					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.ONLINE);
 					if (!optionalMusic.isPresent())
 						dao.save(musicDto);
 				}
@@ -183,7 +183,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Tool.verifyValue("dto", dto);
 
 		if ( Tool.isNullOrEmpty(dto.getId()) )
-			return dao.findByNameAndThemeAndGameMode(dto.getName(), dto.getTheme(), dto.getGameMode()).orElse(null);
+			return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
 		else
 			return super.find(dto);
 	}
@@ -194,17 +194,17 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * Randomly choose a music.
 	 *
 	 * @param themes     the themes filter (optional)
-	 * @param gameMode the online mode
+	 * @param connectionMode the online mode
 	 * @return the music dto
 	 * @throws NotFoundException the not found exception
 	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes, GameMode gameMode) throws NotFoundException, IOException, SpotifyException {
+	public MusicDTO random(List<Theme> themes, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
 	
 		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 
 		List<MusicDTO> allMusics = new ArrayList<>();
-		dao.findByThemeInAndGameMode(searchThemes, gameMode).forEach(allMusics::add);
+		dao.findByThemeInAndConnectionMode(searchThemes, connectionMode).forEach(allMusics::add);
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
@@ -216,7 +216,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Theme foundTheme = foundTheme(cumulativePercent);
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
-		if ( music.getGameMode().isNeedConnection() ) {
+		if ( music.getConnectionMode().isNeedConnection() ) {
 			spotifyService.testConnection();
 		}
 		else {

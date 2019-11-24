@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
@@ -61,9 +61,9 @@ public class Game implements IModel {
     private List<Theme> themes;
 
     /**
-     * Game mode.
+     * The connection mode.
      */
-    private GameMode gameMode;
+    private ConnectionMode connectionMode;
 
 
 
@@ -73,13 +73,13 @@ public class Game implements IModel {
      * @param players  the players
      * @param duration the duration
      * @param themes   the themes
-     * @param gameMode the game mode
+     * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes, GameMode gameMode) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes, ConnectionMode connectionMode) {
 
         Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
-        Tool.verifyValue("gameMode", gameMode);
+        Tool.verifyValue("gameMode", connectionMode);
 
         if (players.size() < 2)
             throw new IllegalArgumentException("2 players at minimum");
@@ -91,7 +91,7 @@ public class Game implements IModel {
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.gameMode = gameMode;
+        this.connectionMode = connectionMode;
     }
 
 
@@ -182,8 +182,8 @@ public class Game implements IModel {
      *
      * @return the game mode
      */
-    public GameMode getGameMode() {
-        return gameMode;
+    public ConnectionMode getConnectionMode() {
+        return connectionMode;
     }
 
 
@@ -239,7 +239,7 @@ public class Game implements IModel {
                 ", round=" + round +
                 ", roundContent={" + roundContent + "}" +
                 ", themes=" + themes +
-                ", gameMode=" + gameMode;
+                ", connectionMode=" + connectionMode;
     }
 
 }

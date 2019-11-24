@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.model.dto;
 import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
 import com.myssteriion.blindtest.tools.Tool;
@@ -56,10 +56,10 @@ public class MusicDTO extends AbstractDTO {
 	private int played;
 
 	/**
-	 * Game mode.
+	 * The connection mode.
 	 */
-	@Column(name = "game_mode", nullable = false)
-	private GameMode gameMode;
+	@Column(name = "connection_mode", nullable = false)
+	private ConnectionMode connectionMode;
 
 	/**
 	 * The spotify track id.
@@ -121,7 +121,7 @@ public class MusicDTO extends AbstractDTO {
 		this.name = Tool.isNullOrEmpty(name) ? "" : name;
 		this.theme = theme;
 		this.played = Math.max(played, 0);
-		this.gameMode = GameMode.OFFLINE;
+		this.connectionMode = ConnectionMode.OFFLINE;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class MusicDTO extends AbstractDTO {
 		this.name = spotifyMusic.getArtists() + " - " + spotifyMusic.getName();
 		this.theme = theme;
 		this.played = Math.max(played, 0);
-		this.gameMode = GameMode.ONLINE;
+		this.connectionMode = ConnectionMode.ONLINE;
 		this.spotifyTrackId = spotifyMusic.getTrackId();
 		this.spotifyPreviewUrl = spotifyMusic.getPreviewUrl();
 		this.spotifyTrackUrl = spotifyMusic.getTrackUrl();
@@ -232,18 +232,18 @@ public class MusicDTO extends AbstractDTO {
 	 *
 	 * @return the game mode
 	 */
-	public GameMode getGameMode() {
-		return gameMode;
+	public ConnectionMode getConnectionMode() {
+		return connectionMode;
 	}
 
 	/**
 	 * Sets the game mode.
 	 *
-	 * @param gameMode the game mode
+	 * @param connectionMode the game mode
 	 * @return this
 	 */
-	public MusicDTO setGameMode(GameMode gameMode) {
-		this.gameMode = gameMode;
+	public MusicDTO setConnectionMode(ConnectionMode connectionMode) {
+		this.connectionMode = connectionMode;
 		return this;
 	}
 
@@ -357,7 +357,7 @@ public class MusicDTO extends AbstractDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, theme, gameMode);
+		return Objects.hash(name, theme, connectionMode);
 	}
 
 	@Override
@@ -372,7 +372,7 @@ public class MusicDTO extends AbstractDTO {
 		MusicDTO other = (MusicDTO) obj;
 		return Objects.equals(this.name, other.name) && 
 				Objects.equals(this.theme, other.theme) &&
-				Objects.equals(this.gameMode, other.gameMode);
+				Objects.equals(this.connectionMode, other.connectionMode);
 	}
 
 	@Override
@@ -381,7 +381,7 @@ public class MusicDTO extends AbstractDTO {
 				", name=" + name +
 				", theme=" + theme +
 				", played=" + played +
-				", gameMode=" + gameMode +
+				", connectionMode=" + connectionMode +
 				", spotifyTrackId=" + spotifyTrackId +
 				", spotifyPreviewUrl=" + spotifyPreviewUrl +
 				", spotifyTrackUrl=" + spotifyTrackUrl +

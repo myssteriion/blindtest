@@ -66,10 +66,10 @@ public class GameService {
 
 		Tool.verifyValue("newGame", newGame);
 
-		if ( newGame.getGameMode().isNeedConnection() )
+		if ( newGame.getConnectionMode().isNeedConnection() )
 			spotifyService.testConnection();
 
-		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes(), newGame.getGameMode() );
+		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes(), newGame.getConnectionMode() );
 		game.setId( games.size() );
 		games.add(game);
 

@@ -49,7 +49,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, CINEMAS&onlineMode=true",
+							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, CINEMAS&connectionMode=OFFLINE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -66,8 +66,9 @@
 									"description": "c'est une liste, valeurs possibles :\nANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nCINEMAS\nSERIES\nDISNEY\nCLASSIQUES"
 								},
 								{
-									"key": "onlineMode",
-									"value": "true"
+									"key": "connectionMode",
+									"value": "OFFLINE",
+									"description": "OFFLINE, ONLINE, BOTH"
 								}
 							]
 						}
@@ -241,7 +242,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"name001\", \"name002\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"onlineMode\": false\n}"
+							"raw": "{\n\t\"playersNames\": [ \"name001\", \"name002\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"OFFLINE\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game",

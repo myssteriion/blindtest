@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -30,31 +30,31 @@ public class NewGame {
     private List<Theme> themes;
 
     /**
-     * Game mode.
+     * The connection mode.
      */
-    private GameMode gameMode;
+    private ConnectionMode connectionMode;
 
 
 
     /**
      * Instantiates a new New game.
      *
-     * @param playersNames the players names
-     * @param duration     the duration
-     * @param themes       the themes
-     * @param gameMode     the game mode
+     * @param playersNames   the players names
+     * @param duration       the duration
+     * @param themes         the themes
+     * @param connectionMode the connectionMode mode
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, GameMode gameMode) {
+    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, ConnectionMode connectionMode) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
-        Tool.verifyValue("gameMode", gameMode);
+        Tool.verifyValue("gameMode", connectionMode);
 
         this.playersNames = playersNames;
         this.duration = duration;
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.gameMode = gameMode;
+        this.connectionMode = connectionMode;
     }
 
 
@@ -91,8 +91,8 @@ public class NewGame {
      *
      * @return the game mode
      */
-    public GameMode getGameMode() {
-        return gameMode;
+    public ConnectionMode getConnectionMode() {
+        return connectionMode;
     }
 
 
@@ -101,7 +101,7 @@ public class NewGame {
         return "playersNames=" + playersNames +
                 ", duration=" + duration +
                 ", themes=" + themes +
-                ", gameMode=" + gameMode;
+                ", connectionMode=" + connectionMode;
     }
 
 }

@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.model.common;
 
 /**
- * The enum Game mode.
+ * The enum connection mode.
  */
-public enum GameMode {
+public enum ConnectionMode {
 
     OFFLINE (false),
     ONLINE(true),
@@ -13,7 +13,7 @@ public enum GameMode {
 
     private boolean needConnection;
 
-    GameMode(boolean needConnection) {
+    ConnectionMode(boolean needConnection) {
         this.needConnection = needConnection;
     }
 

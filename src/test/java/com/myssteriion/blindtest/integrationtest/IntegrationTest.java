@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.GameMode;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -51,7 +51,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
 
-        NewGame newGame = new NewGame(playersNames, duration, null, GameMode.OFFLINE);
+        NewGame newGame = new NewGame(playersNames, duration, null, ConnectionMode.OFFLINE);
         Game game = gameService.newGame(newGame);
 
 
