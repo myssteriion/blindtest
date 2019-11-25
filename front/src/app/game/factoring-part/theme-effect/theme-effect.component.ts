@@ -59,6 +59,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.audio.pause();
 		this.audio.currentTime = 0;
+		this.audio = undefined;
 	}
 
 

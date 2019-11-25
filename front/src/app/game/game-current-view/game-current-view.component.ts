@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
@@ -32,7 +32,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 		SLIDE_ANIMATION
 	]
 })
-export class GameCurrentViewComponent implements OnInit {
+export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 	/**
 	 * The game.
@@ -198,6 +198,13 @@ export class GameCurrentViewComponent implements OnInit {
 		this.getGame();
 	}
 
+	ngOnDestroy(): void {
+		if ( !ToolsService.isNull(this.audio) ) {
+			this.audio.pause();
+			this.audio = undefined;
+		}
+	}
+	
 
 
 	/**
