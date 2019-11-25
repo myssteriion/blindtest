@@ -109,34 +109,34 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private showNextMusic: boolean;
 
 	/**
+	 * In offline mode, show stop button.
+	 */
+	private showStopMusicButton: boolean;
+
+	/**
 	 * Audio.
 	 */
 	private audio;
 
 	/**
-	 * In online mode, listen extract music.
+	 * In online mode, show preview audio.
 	 */
-	private showExtractOnlineMusic: boolean;
+	private showOnlinePreviewAudio: boolean;
 
 	/**
-	 * In online mode, extract music url.
+	 * In online mode, preview audio url.
 	 */
-	private extractOnlineMusic: SafeResourceUrl;
+	private onlinePreviewAudio: SafeResourceUrl;
 
 	/**
-	 * In online mode, show music.
+	 * In online mode, show audio.
 	 */
-	private showOnlineMusic: boolean;
+	private showOnlineAudio: boolean;
 
 	/**
-	 * In online mode, music url.
+	 * In online mode, audio url.
 	 */
-	private onlineMusic: SafeResourceUrl;
-
-	/**
-	 * In offline mode, show stop button.
-	 */
-	private showStopMusicButton: boolean;
+	private onlineAudio: SafeResourceUrl;
 
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
@@ -157,9 +157,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
 		this.showNextMusic = true;
-		this.showExtractOnlineMusic = false;
-		this.showOnlineMusic = false;
 		this.showStopMusicButton = false;
+		this.showOnlinePreviewAudio = false;
+		this.showOnlineAudio = false;
 
 		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
 			value => {
@@ -327,11 +327,15 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private nextMusic(): void {
 
-		this.showExtractOnlineMusic = false;
-		this.showOnlineMusic = false;
+		this.showOnlinePreviewAudio = false;
+		this.showOnlineAudio = false;
+
 		this.showNextMusic = false;
+		this.showStopMusicButton = false;
+
 		this.preCountdown.setShow(false);
 		this.countdown.setShow(false);
+		this.postCountdown.setShow(false);
 
 		if ( !ToolsService.isNull(this.audio) )
 			this.audio.pause();
@@ -364,8 +368,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 				if (this.currentMusic.connectionMode === ConnectionMode.ONLINE) {
 
-					this.extractOnlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyPreviewUrl);
-					this.onlineMusic = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyTrackUrl);
+					this.onlinePreviewAudio = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyPreviewUrl);
+					this.onlineAudio = this._sanitizer.bypassSecurityTrustResourceUrl(this.currentMusic.spotifyTrackUrl);
 				}
 				else {
 
@@ -430,7 +434,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.countdown.start();
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
-			this.showExtractOnlineMusic = true;
+			this.showOnlinePreviewAudio = true;
 		else
 			this.audio.play();
 	}
@@ -441,7 +445,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private onCountdownEnd(): void {
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
-			this.showExtractOnlineMusic = false;
+			this.showOnlinePreviewAudio = false;
 		else
 			this.audio.pause();
 
@@ -469,7 +473,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE) {
 
-			this.showOnlineMusic = true;
+			this.showOnlineAudio = true;
 			this.showStopMusicButton = false;
 		}
 		else {

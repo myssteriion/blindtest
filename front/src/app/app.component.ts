@@ -17,7 +17,8 @@ export class AppComponent {
     /**
      * Navbar menu.
      */
-    @ViewChild('navbarMenu', { static: false }) navbarMenu: NavbarMenuComponent;
+    @ViewChild('navbarMenu', { static: false })
+    private navbarMenu: NavbarMenuComponent;
 
 
 

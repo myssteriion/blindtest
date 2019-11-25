@@ -41,23 +41,24 @@
                 </div>
             </div>
 
-            <!-- online mode - extract music-->
-            <div *ngIf="showExtractOnlineMusic" class="row">
+            <!-- online mode - preview audio -->
+            <div *ngIf="showOnlinePreviewAudio" class="row">
                 <div class="col">
-                    <iframe [src]="extractOnlineMusic" width="0" height="0" frameborder="0"
+                    <iframe [src]="onlinePreviewAudio" width="0" height="0" frameborder="0"
                             allowtransparency="true" allow="encrypted-media">
                     </iframe>
                 </div>
             </div>
 
-            <!-- online mode - music-->
-            <div *ngIf="showOnlineMusic" class="row game-current-view-spotify-music">
+            <!-- online mode - audio -->
+            <div *ngIf="showOnlineAudio" class="row game-current-view-spotify-music">
                 <div class="col">
-                    <iframe [src]="onlineMusic" width="300" height="380" frameborder="0"
+                    <iframe [src]="onlineAudio" width="300" height="380" frameborder="0"
                             allowtransparency="true" allow="encrypted-media">
                     </iframe>
                 </div>
             </div>
+
         </div>
 
 
