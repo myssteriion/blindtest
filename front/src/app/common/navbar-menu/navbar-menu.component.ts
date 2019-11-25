@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
 import {FFXII_THEME, LOGO, routesWithHome} from "../../tools/constant";
+import {ToolsService} from "../../tools/tools.service";
 
 /**
  * Navbar menu.
@@ -11,7 +12,7 @@ import {FFXII_THEME, LOGO, routesWithHome} from "../../tools/constant";
 	templateUrl: './navbar-menu.component.html',
 	styleUrls: ['./navbar-menu.component.css']
 })
-export class NavbarMenuComponent implements OnInit {
+export class NavbarMenuComponent implements OnInit, OnDestroy {
 
 	/**
 	 * Audio.
@@ -45,6 +46,10 @@ export class NavbarMenuComponent implements OnInit {
 		this.audio.load();
 
 		this.playMusic();
+	}
+
+	ngOnDestroy() {
+		this.stopMusic();
 	}
 
 
