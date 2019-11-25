@@ -563,40 +563,4 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		);
 	}
 
-
-
-
-	public stop(): void {
-		this.offlinePreviewAudio.pause();
-	}
-
-	public slow(): void {
-		this.offlinePreviewAudio.defaultPlaybackRate = 0.5;
-		this.offlinePreviewAudio.load();
-		// this.audio.currentTime = 50;
-		this.offlinePreviewAudio.play();
-	}
-
-	public normal(): void {
-		this.offlinePreviewAudio.defaultPlaybackRate = 1;
-		this.offlinePreviewAudio.load();
-		// this.audio.currentTime = 50;
-		this.offlinePreviewAudio.play();
-	}
-
-	public speed(): void {
-		this.offlinePreviewAudio.defaultPlaybackRate = 2;
-		this.offlinePreviewAudio.load();
-		// this.audio.currentTime = 50;
-		this.offlinePreviewAudio.play();
-	}
-
-	public reverse(): void {
-
-		this.offlinePreviewAudio.defaultPlaybackRate = -1;
-		this.offlinePreviewAudio.load();
-		// this.audio.currentTime = 50;
-		this.offlinePreviewAudio.play();
-	}
-
 }
