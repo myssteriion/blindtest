@@ -28,10 +28,10 @@ public interface MusicDAO extends PagingAndSortingRepository<MusicDTO, Integer> 
     /**
      * Find by themes.
      *
-     * @param themes         the themes
-     * @param connectionMode the connection mode
+     * @param themes          the themes
+     * @param connectionModes the connection modes
      * @return the musics list
      */
-    List<MusicDTO> findByThemeInAndConnectionMode(List<Theme> themes, ConnectionMode connectionMode);
+    List<MusicDTO> findByThemeInAndConnectionModeIn(List<Theme> themes, List<ConnectionMode> connectionModes);
 
 }

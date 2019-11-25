@@ -1,5 +1,9 @@
 package com.myssteriion.blindtest.model.common;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * The enum connection mode.
  */
@@ -26,4 +30,14 @@ public enum ConnectionMode {
         return needConnection;
     }
 
+    /**
+     * Transform connection mode for search music.
+     *
+     * @return the connection modes list
+     */
+    public List<ConnectionMode> transformForSearchMusic() {
+        return (this == ConnectionMode.BOTH)
+                ? Arrays.asList(ConnectionMode.OFFLINE, ConnectionMode.ONLINE)
+                : Collections.singletonList(this);
+    }
 }

@@ -221,7 +221,7 @@ public class MusicServiceTest extends AbstractTest {
 		allMusics = new ArrayList<>();
 		allMusics.add( new MusicDTO("60_a", Theme.ANNEES_60, 1000000000) );
 		allMusics.add(expected);
-		Mockito.when(dao.findByThemeInAndConnectionMode(Mockito.anyList(), Mockito.any(ConnectionMode.class))).thenReturn(allMusics);
+		Mockito.when(dao.findByThemeInAndConnectionModeIn(Mockito.anyList(), Mockito.anyList())).thenReturn(allMusics);
 
 
 		musicService = PowerMockito.spy( new MusicService(dao, configProperties, spotifyService) );

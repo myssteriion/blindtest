@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -200,11 +200,14 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * @throws IOException       the io exception
 	 */
 	public MusicDTO random(List<Theme> themes, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
-	
+
+		Tool.verifyValue("connectionMode", connectionMode);
+
 		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
+		List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
 
 		List<MusicDTO> allMusics = new ArrayList<>();
-		dao.findByThemeInAndConnectionMode(searchThemes, connectionMode).forEach(allMusics::add);
+		dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes).forEach(allMusics::add);
 
 		if ( Tool.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
