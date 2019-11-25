@@ -109,14 +109,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private showNextMusic: boolean;
 
 	/**
-	 * In offline mode, show stop button.
+	 * In offline mode, preview audio.
 	 */
-	private showStopMusicButton: boolean;
+	private offlinePreviewAudio;
 
 	/**
-	 * Audio.
+	 * In offline mode, show audio.
 	 */
-	private audio;
+	private showOfflineAudio: boolean;
+
+	/**
+	 * In offline mode, audio.
+	 */
+	@ViewChild("offlineAudio", { static: false })
+	private offlineAudio;
 
 	/**
 	 * In online mode, show preview audio.
@@ -156,8 +162,10 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
+
 		this.showNextMusic = true;
-		this.showStopMusicButton = false;
+
+		this.showOfflineAudio = false;
 		this.showOnlinePreviewAudio = false;
 		this.showOnlineAudio = false;
 
@@ -179,7 +187,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.countdownConfig = {
 					demand: true,
 					format: "ss",
-					leftTime: 30,
+					leftTime: 3,
 					stopTime: 0,
 					notify: [],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
@@ -199,10 +207,14 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		if ( !ToolsService.isNull(this.audio) ) {
-			this.audio.pause();
-			this.audio = undefined;
+		if ( !ToolsService.isNull(this.offlinePreviewAudio) ) {
+			this.offlinePreviewAudio.pause();
+			this.offlinePreviewAudio = undefined;
 		}
+
+		this.offlineAudio.nativeElement.pause();
+		this.offlineAudio.nativeElement = undefined;
+		this.offlineAudio = undefined;
 	}
 	
 
@@ -282,15 +294,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.body = this.getFormattedLabel();
 
 		modalRef.result.then(
-			(result) => {
-
-				if ( !ToolsService.isNull(this.audio) ) {
-					this.audio.pause();
-					this.audio = undefined;
-				}
-
-				this._router.navigateByUrl("/home");
-			},
+			(result) => { this._router.navigateByUrl("/home"); },
 			(reason) => { /* do nothing */ }
 		);
 	}
@@ -327,18 +331,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private nextMusic(): void {
 
+		this.showNextMusic = false;
+
+		this.offlineAudio.nativeElement.pause();
+
+		this.showOfflineAudio = false;
 		this.showOnlinePreviewAudio = false;
 		this.showOnlineAudio = false;
-
-		this.showNextMusic = false;
-		this.showStopMusicButton = false;
 
 		this.preCountdown.setShow(false);
 		this.countdown.setShow(false);
 		this.postCountdown.setShow(false);
-
-		if ( !ToolsService.isNull(this.audio) )
-			this.audio.pause();
 
 		if (this.game.round === Round.CHOICE) {
 
@@ -373,17 +376,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				}
 				else {
 
-					this.audio = new Audio();
-					this.audio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
-					this.audio.currentTime = 0;
+					this.offlinePreviewAudio = new Audio();
+					this.offlinePreviewAudio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+					this.offlinePreviewAudio.currentTime = 0;
 
 					let defaultPlaybackRate = 1;
 					if (this.currentMusic.effect === Effect.SLOW)
 						defaultPlaybackRate = 0.5;
 					else if (this.currentMusic.effect === Effect.SPEED)
 						defaultPlaybackRate = 2;
-					this.audio.defaultPlaybackRate = defaultPlaybackRate;
-					this.audio.load();
+					this.offlinePreviewAudio.defaultPlaybackRate = defaultPlaybackRate;
+					this.offlinePreviewAudio.load();
 				}
 
 
@@ -436,7 +439,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showOnlinePreviewAudio = true;
 		else
-			this.audio.play();
+			this.offlinePreviewAudio.play();
 	}
 
 	/**
@@ -447,7 +450,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showOnlinePreviewAudio = false;
 		else
-			this.audio.pause();
+			this.offlinePreviewAudio.pause();
 
 		this.startPostCountdown();
 	}
@@ -472,19 +475,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.postCountdown.setShow(false);
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE) {
-
 			this.showOnlineAudio = true;
-			this.showStopMusicButton = false;
 		}
 		else {
 
-			let currentTime = this.audio.currentTime;
-			this.audio.pause();
-			this.audio.defaultPlaybackRate = 1;
-			this.audio.load();
-			this.audio.currentTime = currentTime;
-			this.audio.play();
-			this.showStopMusicButton = true;
+			let currentTime = this.offlinePreviewAudio.currentTime;
+			this.offlinePreviewAudio = undefined;
+
+			this.offlineAudio.nativeElement.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
+			this.offlineAudio.nativeElement.controls = true;
+			this.offlineAudio.nativeElement.load();
+			this.offlineAudio.nativeElement.currentTime = currentTime;
+			this.offlineAudio.nativeElement.play();
+
+			this.showOfflineAudio = true;
 		}
 
 		this.fillResult();
@@ -560,46 +564,39 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 
 
-	/**
-	 * Stop the music.
-	 */
-	private stopMusic(): void {
-		if ( !ToolsService.isNull(this.audio) )
-			this.audio.pause();
-	}
 
 
 	public stop(): void {
-		this.audio.pause();
+		this.offlinePreviewAudio.pause();
 	}
 
 	public slow(): void {
-		this.audio.defaultPlaybackRate = 0.5;
-		this.audio.load();
+		this.offlinePreviewAudio.defaultPlaybackRate = 0.5;
+		this.offlinePreviewAudio.load();
 		// this.audio.currentTime = 50;
-		this.audio.play();
+		this.offlinePreviewAudio.play();
 	}
 
 	public normal(): void {
-		this.audio.defaultPlaybackRate = 1;
-		this.audio.load();
+		this.offlinePreviewAudio.defaultPlaybackRate = 1;
+		this.offlinePreviewAudio.load();
 		// this.audio.currentTime = 50;
-		this.audio.play();
+		this.offlinePreviewAudio.play();
 	}
 
 	public speed(): void {
-		this.audio.defaultPlaybackRate = 2;
-		this.audio.load();
+		this.offlinePreviewAudio.defaultPlaybackRate = 2;
+		this.offlinePreviewAudio.load();
 		// this.audio.currentTime = 50;
-		this.audio.play();
+		this.offlinePreviewAudio.play();
 	}
 
 	public reverse(): void {
 
-		this.audio.defaultPlaybackRate = -1;
-		this.audio.load();
+		this.offlinePreviewAudio.defaultPlaybackRate = -1;
+		this.offlinePreviewAudio.load();
 		// this.audio.currentTime = 50;
-		this.audio.play();
+		this.offlinePreviewAudio.play();
 	}
 
 }

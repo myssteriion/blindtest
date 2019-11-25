@@ -2,7 +2,7 @@
     margin: auto auto 2em auto;
 }
 
-.game-current-view-next-music, .game-current-view-spotify-music {
+.game-current-view-next-music, .game-current-view-offline-audio, .game-current-view-online-audio {
     padding-top: 2em;
     text-align: center;
 }

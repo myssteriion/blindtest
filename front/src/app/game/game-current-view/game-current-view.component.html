@@ -37,7 +37,13 @@
             <div *ngIf="showNextMusic" class="row game-current-view-next-music">
                 <div class="col">
                     <button class="btn btn-info font-size-normal" (click)="nextMusic()">{{ 'GAME.CURRENT_VIEW.NEXT_MUSIC' | translate }}</button>
-                    <button *ngIf="showStopMusicButton" class="btn btn-info font-size-normal m-2" (click)="stopMusic()">{{ 'GAME.CURRENT_VIEW.STOP_MUSIC' | translate }}</button>
+                </div>
+            </div>
+
+            <!-- offline mode - audio -->
+            <div [hidden]="!showOfflineAudio" class="row game-current-view-offline-audio">
+                <div class="col">
+                    <audio #offlineAudio></audio>
                 </div>
             </div>
 
@@ -51,7 +57,7 @@
             </div>
 
             <!-- online mode - audio -->
-            <div *ngIf="showOnlineAudio" class="row game-current-view-spotify-music">
+            <div *ngIf="showOnlineAudio" class="row game-current-view-online-audio">
                 <div class="col">
                     <iframe [src]="onlineAudio" width="300" height="380" frameborder="0"
                             allowtransparency="true" allow="encrypted-media">
