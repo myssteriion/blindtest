@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {EFFECTS, MARIO_KART_SOUND, THEMES} from "../../../tools/constant";
 import {ToolsService} from "../../../tools/tools.service";
 import {Music} from "../../../interfaces/dto/music.interface";
@@ -11,7 +11,7 @@ import {Music} from "../../../interfaces/dto/music.interface";
 	templateUrl: './theme-effect.component.html',
 	styleUrls: ['./theme-effect.component.css']
 })
-export class ThemeEffectComponent implements OnInit {
+export class ThemeEffectComponent implements OnInit, OnDestroy {
 
 	/**
 	 * Show view.
@@ -54,6 +54,11 @@ export class ThemeEffectComponent implements OnInit {
 		this.audio = new Audio();
 		this.audio.src = MARIO_KART_SOUND;
 		this.audio.load();
+	}
+
+	ngOnDestroy(): void {
+		this.audio.pause();
+		this.audio.currentTime = 0;
 	}
 
 
