@@ -37,7 +37,7 @@ export class PlayerCardComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
 
@@ -45,7 +45,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * Test if the medal must be show.
      */
-    private showMedal() {
+    private showMedal(): boolean {
 
         let rank = this.player.rank;
         return this.displayMedal && (rank === Rank.FIRST || rank === Rank.SECOND || rank === Rank.THIRD || rank === Rank.FOURTH);
@@ -54,7 +54,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * Get medal style.
      */
-    private getMedalStyle() {
+    private getMedalStyle(): string {
 
         let colorStyle = "";
 

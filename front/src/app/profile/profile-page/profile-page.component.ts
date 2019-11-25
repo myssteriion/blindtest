@@ -67,7 +67,7 @@ export class ProfilePageComponent implements OnInit {
     constructor(private _profileResource: ProfileResource,
                 private _ngbModal: NgbModal) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.isLoaded = false;
         this.showProfiles = false;

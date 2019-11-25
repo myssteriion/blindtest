@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './confirm-modal.component.html',
     styleUrls: ['./confirm-modal.component.css']
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
 
     /**
      * The modal title.
@@ -26,8 +26,6 @@ export class ConfirmModalComponent implements OnInit {
 
 
     constructor(private _ngbActiveModal: NgbActiveModal) { }
-
-    ngOnInit() { }
 
 
 

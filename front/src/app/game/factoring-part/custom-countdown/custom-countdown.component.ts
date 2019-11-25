@@ -60,7 +60,7 @@ export class CustomCountdownComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.show = false;
 	}
 

@@ -24,7 +24,7 @@ export class ProfileCardEmptyComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		ToolsService.verifyStringValue("name", this.name);
 	}
 

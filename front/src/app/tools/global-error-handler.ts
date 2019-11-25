@@ -12,7 +12,7 @@ export class GlobalErrorHandler implements ErrorHandler {
      *
      * @param error the error
      */
-    handleError(error: any) {
+    handleError(error: any): void {
         console.log("myError", error);
     }
 

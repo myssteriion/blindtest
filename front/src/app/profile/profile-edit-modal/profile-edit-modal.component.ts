@@ -61,7 +61,7 @@ export class ProfileEditModalComponent implements OnInit {
 				private _toasterService: ToasterService,
 				private _translate: TranslateService) { }
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 
 		ToolsService.verifyValue("create", this.create);
 

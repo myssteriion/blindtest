@@ -36,7 +36,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 
 	constructor(private _router: Router) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 
 		this.musicIsPlaying = true;
 
@@ -48,7 +48,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 		this.playMusic();
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		this.stopMusic();
 	}
 
@@ -57,7 +57,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * Gets logo.
 	 */
-	private getLogo() {
+	private getLogo(): string {
 		return LOGO;
 	}
 
@@ -79,7 +79,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * Play music.
 	 */
-	private playMusic() {
+	private playMusic(): void {
 
 		this.musicIsPlaying = true;
 		this.audio.play();
@@ -88,7 +88,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * Stop music.
 	 */
-	public stopMusic() {
+	public stopMusic(): void {
 
 		this.musicIsPlaying = false;
 		this.audio.pause();

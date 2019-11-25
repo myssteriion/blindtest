@@ -23,14 +23,12 @@ export class HomeViewComponent {
 
 	constructor() { }
 
-	ngAfterViewInit() { }
-
 
 
 	/**
 	 * Gets logo.
 	 */
-	private getLogo() {
+	private getLogo(): string {
 		return LOGO;
 	}
 

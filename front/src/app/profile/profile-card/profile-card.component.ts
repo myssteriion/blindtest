@@ -73,7 +73,7 @@ export class ProfileCardComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         ToolsService.verifyValue("profile", this.profile);
         ToolsService.verifyValue("profile.avatar", this.profile.avatar);

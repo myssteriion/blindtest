@@ -26,7 +26,7 @@ export class GenericViewComponent {
 	/**
 	 * Stop generic.
 	 */
-	private stopGeneric() {
+	private stopGeneric(): void {
 		this._router.navigateByUrl( routesWithHome[0].path );
 	}
 

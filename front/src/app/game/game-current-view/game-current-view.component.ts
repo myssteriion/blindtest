@@ -152,7 +152,7 @@ export class GameCurrentViewComponent implements OnInit {
 				private _musicResource: MusicResource,
 				private _sanitizer: DomSanitizer) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.isLoaded = false;
@@ -229,7 +229,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 * Fill left/right players.
 	 * @private
 	 */
-	private fillPlayers() {
+	private fillPlayers(): void {
 
 		let allPlayers = this.game.players;
 
@@ -348,7 +348,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 *
 	 * @param themes the themes (optional)
 	 */
-	private callNextMusic(themes: Theme[]) {
+	private callNextMusic(themes: Theme[]): void {
 
 		this._musicResource.random(themes, this.game.connectionMode).subscribe(
 			response => {
@@ -483,7 +483,7 @@ export class GameCurrentViewComponent implements OnInit {
 	/**
 	 * Open modal for fill result.
 	 */
-	private fillResult() {
+	private fillResult(): void {
 
 		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
 		modalRef.componentInstance.gameId = this.game.id;
@@ -509,7 +509,7 @@ export class GameCurrentViewComponent implements OnInit {
 	 * Update left/right players.
 	 * @private
 	 */
-	private updatePlayers() {
+	private updatePlayers(): void {
 
 		let allPlayers = this.game.players;
 
@@ -558,32 +558,32 @@ export class GameCurrentViewComponent implements OnInit {
 	}
 
 
-	public stop() {
+	public stop(): void {
 		this.audio.pause();
 	}
 
-	public slow() {
+	public slow(): void {
 		this.audio.defaultPlaybackRate = 0.5;
 		this.audio.load();
 		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
-	public normal() {
+	public normal(): void {
 		this.audio.defaultPlaybackRate = 1;
 		this.audio.load();
 		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
-	public speed() {
+	public speed(): void {
 		this.audio.defaultPlaybackRate = 2;
 		this.audio.load();
 		// this.audio.currentTime = 50;
 		this.audio.play();
 	}
 
-	public reverse() {
+	public reverse(): void {
 
 		this.audio.defaultPlaybackRate = -1;
 		this.audio.load();

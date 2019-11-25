@@ -31,7 +31,7 @@ export class GameResumeViewComponent implements OnInit {
 				private _toasterService: ToasterService,
 				private _translate: TranslateService) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 	}
 
 

@@ -71,7 +71,7 @@ export class GameNewViewComponent implements OnInit {
 				private _gameResource: GameResource,
 				private _router: Router) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.playersProfiles = [];
         this.selectedDuration = Duration.NORMAL;
@@ -87,7 +87,7 @@ export class GameNewViewComponent implements OnInit {
 	 *
 	 * @param theme: Theme
 	 */
-	public selectDeselectTheme(theme: Theme) {
+	public selectDeselectTheme(theme: Theme): void {
 
 		let index = this.selectedThemes.findIndex(thm => thm === theme);
 		if (index !== -1) {
@@ -103,7 +103,7 @@ export class GameNewViewComponent implements OnInit {
 	 *
 	 * @param theme: Theme
 	 */
-	public themeIsSelected(theme: Theme) {
+	public themeIsSelected(theme: Theme): boolean {
 		return (this.selectedThemes.findIndex(thm => thm === theme)) !== -1;
 	}
 
@@ -128,7 +128,7 @@ export class GameNewViewComponent implements OnInit {
 	 *
 	 * @param profile
 	 */
-	public deselectProfile(profile: Profile) {
+	public deselectProfile(profile: Profile): void {
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 		if (index !== -1)
 			this.playersProfiles.splice(index, 1);
@@ -139,7 +139,7 @@ export class GameNewViewComponent implements OnInit {
 	 *
 	 * @param profile
 	 */
-	public selectProfile(profile: Profile) {
+	public selectProfile(profile: Profile): void {
 
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 

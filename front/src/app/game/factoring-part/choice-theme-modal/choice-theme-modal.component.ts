@@ -33,7 +33,7 @@ export class ChoiceThemeModalComponent implements OnInit {
 
     constructor(private _ngbActiveModal: NgbActiveModal) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.themes = [];
         THEMES.forEach(theme => {

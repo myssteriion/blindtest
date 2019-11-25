@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 /**
  * Header for all views.
@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
 	/**
 	 * Title.
@@ -19,7 +19,5 @@ export class HeaderComponent implements OnInit {
 
 
 	constructor() { }
-
-	ngOnInit() { }
 
 }

@@ -61,7 +61,7 @@ export class GameEndViewComponent implements OnInit {
 				private _translate: TranslateService,
 				private _router: Router) { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 
 		this.audio = new Audio();
 		this.audio.src = OLYMPIA_ANTHEM_SOUND;

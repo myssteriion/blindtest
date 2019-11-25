@@ -36,7 +36,7 @@ export class ProfilePageModalComponent implements OnInit {
     /**
      * Close modal.
      */
-    private close() {
+    private close(): void {
         this._ngbActiveModal.close();
     }
 

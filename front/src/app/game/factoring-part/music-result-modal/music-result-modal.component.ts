@@ -61,7 +61,7 @@ export class MusicResultModalComponent implements OnInit {
                 private _gameResource: GameResource,
                 private _translate: TranslateService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.nbLoseChoices = [];
         this._translate.get("COMMON.MANY_TIMES").subscribe(
@@ -152,7 +152,7 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * Save music result and close modal.
      */
-    private save() {
+    private save(): void {
 
         let authorWinners: string[] = [];
         let titleWinners: string[] = [];

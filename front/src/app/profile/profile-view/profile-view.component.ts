@@ -16,7 +16,7 @@ export class ProfileViewComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
 }

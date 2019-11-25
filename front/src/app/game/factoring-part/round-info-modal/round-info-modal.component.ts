@@ -11,7 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
     templateUrl: './round-info-modal.component.html',
     styleUrls: ['./round-info-modal.component.css']
 })
-export class RoundInfoModalComponent implements OnInit {
+export class RoundInfoModalComponent {
 
     /**
      * The game.
@@ -24,8 +24,6 @@ export class RoundInfoModalComponent implements OnInit {
     constructor(private _ngbActiveModal: NgbActiveModal,
                 private _translate: TranslateService) {}
 
-    ngOnInit() {
-    }
 
 
     /**
@@ -68,7 +66,7 @@ export class RoundInfoModalComponent implements OnInit {
     /**
      * Close modal.
      */
-    private close() {
+    private close(): void {
         this._ngbActiveModal.close();
     }
 
