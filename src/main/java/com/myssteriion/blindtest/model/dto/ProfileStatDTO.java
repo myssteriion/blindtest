@@ -28,7 +28,7 @@ import java.util.Objects;
  * The ProfileStatDTO.
  */
 @Entity
-@Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_id_unique", columnNames={"profile_id"}) })
+@Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
 public class ProfileStatDTO extends AbstractDTO {
 
 	/**

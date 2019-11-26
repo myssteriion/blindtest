@@ -24,7 +24,7 @@ import java.util.Objects;
  * The MusicDTO.
  */
 @Entity
-@Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "name_theme_spotify_track_id_unique", columnNames={"name", "theme", "spotify_track_id"}) })
+@Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "music__name_theme_spotify_track_id__unique", columnNames={"name", "theme", "spotify_track_id"}) })
 public class MusicDTO extends AbstractDTO {
 
 	/**

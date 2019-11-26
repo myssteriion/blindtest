@@ -12,7 +12,7 @@ import java.util.Objects;
  * The ProfileDTO.
  */
 @Entity
-@Table(name = "profile", uniqueConstraints={ @UniqueConstraint(name = "name_unique", columnNames={"name"}) })
+@Table(name = "profile", uniqueConstraints={ @UniqueConstraint(name = "profile__name__unique", columnNames={"name"}) })
 public class ProfileDTO extends AbstractDTO {
 
 	/**
