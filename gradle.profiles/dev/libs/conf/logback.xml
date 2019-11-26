@@ -1,0 +1,42 @@
+<configuration>
+
+	<property name="LOG_FILE_NAME" value="blindtest"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    	<encoder>
+      		<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+ 
+ 	<appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        
+        <file>logs/${LOG_FILE_NAME}.log</file>
+
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>100MB</totalSizeCap>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+    </appender>
+
+
+	<logger name="com.myssteriion" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="com.myssteriion.blindtest.BlindtestApplication" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+	</logger>
+    
+    
+  	<root level="WARN">
+  		<appender-ref ref="STDOUT"/>
+  	</root>
+  	
+</configuration>
