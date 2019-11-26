@@ -104,11 +104,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
 
 		File themeDirectory = path.toFile();
-		for ( File music : Tool.getChildren(themeDirectory) ) {
+		for ( File file : Tool.getChildren(themeDirectory) ) {
 
-			MusicDTO musicDto = new MusicDTO(music.getName(), theme);
+			MusicDTO musicDto = new MusicDTO(file.getName(), theme);
 			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.OFFLINE);
-			if ( music.isFile() && Tool.hadAudioExtension(music.getName()) && !optionalMusic.isPresent() )
+			if ( file.isFile() && Tool.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
 	}
