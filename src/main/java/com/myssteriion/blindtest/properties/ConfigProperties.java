@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with config.properties.
  */
 @Configuration
-@PropertySource("classpath:config.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/config.properties")
 public class ConfigProperties {
 
     @Value("${pagination.elements.per.page.avatars}")

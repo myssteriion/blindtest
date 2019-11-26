@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with spotify.properties.
  */
 @Configuration
-@PropertySource("classpath:spotify.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/spotify.properties")
 public class SpotifyProperties {
 
     @Value("${clientId}")

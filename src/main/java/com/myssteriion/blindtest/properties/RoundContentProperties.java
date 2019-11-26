@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with round-content.properties.
  */
 @Configuration
-@PropertySource("classpath:round-content.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/round-content.properties")
 public class RoundContentProperties {
 
     @Value("${classic.nbMusics}")

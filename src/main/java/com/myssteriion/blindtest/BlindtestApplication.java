@@ -2,18 +2,22 @@ package com.myssteriion.blindtest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * The type Blindtest application.
  */
 @SpringBootApplication
-public class BlindtestApplication {
+@PropertySource("${SPRING_CONFIG_LOCATION}/application.properties")
+public class BlindtestApplication extends SpringBootServletInitializer {
 
-	/**
-	 * The entry point of application.
-	 *
-	 * @param args the input arguments
-	 */
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(BlindtestApplication.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(BlindtestApplication.class, args);
 	}
