@@ -13,14 +13,18 @@ buildscript {
 
 
 apply plugin: "java"
-apply plugin: "eclipse"
+apply plugin: "idea"
 apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "war"
 //apply plugin: "com.moowork.node"
 
 group = "com.myssteriion"
 version = "1.0"
 sourceCompatibility = "1.8"
 
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
 repositories {
 	mavenCentral()
@@ -45,7 +49,7 @@ dependencies {
 
 
 def deliveryFolder = "delivery"
-
+def env = project.hasProperty('env') ? project.env : 'dev'
 
 //node {
 //	version = "10.16.0"
@@ -66,9 +70,14 @@ clean {
 build {
 	doLast {
 		copy {
-		    from "conf"
+		    from "gradle.profiles/common"
 	    	include "**/*"
 		    into deliveryFolder
+		}
+		copy {
+			from "gradle.profiles/" + env
+			include "**/*"
+			into deliveryFolder
 		}
 		copy {
 		    from ".gradle/nodejs"
@@ -101,5 +110,6 @@ build {
 }
 
 test {
+	environment "SPRING_CONFIG_LOCATION", "file:///" + "${projectDir}" + "/src/test/resources/"
     exclude "**/TestSuite.class"
 }
