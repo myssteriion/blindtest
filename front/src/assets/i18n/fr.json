@@ -34,9 +34,9 @@
             "OFFLINE_MODE": "Hors ligne (musiques locales)",
             "BOTH_MODE": "Les deux",
             "SHORT": "Rapide",
-            "NORMAL": "Normal",
+            "NORMAL": "Normale",
             "LONG": "Longue",
-            "PLAYERS_LABEL": "Rechercher les profiles :",
+            "PLAYERS_LABEL": "Rechercher les profils :",
             "PLAYER": "Joueur",
             "MAX_PLAYERS_ERROR": "Le maximum de {{max_players}} joueurs est atteint.",
             "DUPLICATE_PLAYERS_ERROR": "{{player_name}} est déjà dans la partie.",
@@ -55,11 +55,11 @@
             "TITLE": "Manche \"{{name_round}}\" ({{current_music}}/{{total_musics}})",
             "EXIT": "Quitter le jeu",
             "ROUND_INFO": "Info manche",
-            "EXIT_BODY_MODAL_1": "Etes-vous sur de vouloir quitter la partie ?",
-            "EXIT_BODY_MODAL_2": "Tant que le jeu n'est pas arrêté, vous pouvez y revenir à tout moment, grâce à votre N° de partie précisée ci dessous.",
+            "EXIT_BODY_MODAL_1": "Etes-vous sûr de vouloir quitter la partie ?",
+            "EXIT_BODY_MODAL_2": "Tant que le jeu n'est pas arrêté, vous pouvez y revenir à tout moment, grâce à votre N° de partie précisé ci-dessous.",
             "EXIT_BODY_MODAL_3": "Votre N° de partie est le : {{game_id}}",
             "LISTEN": "Ecoutez !",
-            "FINISH": "C'est finis !",
+            "FINISH": "C'est fini !",
             "NEXT_MUSIC": "Musique suivante !",
             "STOP_MUSIC": "Arrêter la musique"
         },
@@ -89,21 +89,21 @@
         "END_VIEW": {
             "TITLE": "Fin de la partie",
             "BACK_TO_HOME": "Retourner au menu principal",
-            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principale ?"
+            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?"
         }
     },
     "ROUND": {
         "CLASSIC": {
             "NAME": "Classique",
-            "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien est à perdre, à vos cordes vocales !"
+            "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien n'est à perdre, à vos cordes vocales !"
         },
         "CHOICE": {
             "NAME": "Choix",
-            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème (<span class=\"inner-html-special-text\">{{nbMusics}} fois chacun</span>). Pour celui qui choisie, c'est des points bonus s'il trouve, sinon c'est des points en moins."
+            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème (<span class=\"inner-html-special-text\">{{nbMusics}} fois chacun</span>). Pour celui qui choisit, ce sont des points bonus s'il trouve, sinon ce sont des points en moins."
         },
         "THIEF": {
             "NAME": "Voleur ou Volé",
-            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemies ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en faisant en perdre à ses adversaires. Que les cris de déception commencent !"
+            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
         }
     },
     "PROFILE": {
