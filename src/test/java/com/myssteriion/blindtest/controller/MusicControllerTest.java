@@ -34,7 +34,7 @@ public class MusicControllerTest extends AbstractTest {
 
 		Flux fluxMock = Mockito.mock(Flux.class);
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
-		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60).setFlux(fluxMock);
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE).setFlux(fluxMock);
 		Mockito.when(musicService.random(null, ConnectionMode.OFFLINE)).thenReturn(musicDto);
 		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), ConnectionMode.OFFLINE)).thenReturn(musicDto);
 

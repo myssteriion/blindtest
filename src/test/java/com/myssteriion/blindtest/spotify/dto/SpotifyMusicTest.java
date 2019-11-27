@@ -114,6 +114,8 @@ public class SpotifyMusicTest extends AbstractTest {
         SpotifyMusic spotifyMusicIso2 = new SpotifyMusic(trackId, previewUrl + "1", artists + "1", name + "1");
         SpotifyMusic spotifyMusic2 = new SpotifyMusic(trackId + "1", previewUrl, artists, name);
 
+        Assert.assertEquals("trackId=trackId, previewUrl=previewUrl, trackUrl=https://open.spotify.com/embed/track/trackId, artists=artists, name=name", spotifyMusic.toString() );
+
         Assert.assertNotEquals(spotifyMusic, null);
         Assert.assertNotEquals(spotifyMusic, "bad class");
         Assert.assertEquals(spotifyMusic, spotifyMusicIso1);

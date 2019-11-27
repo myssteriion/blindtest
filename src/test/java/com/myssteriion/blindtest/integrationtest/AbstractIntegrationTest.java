@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -41,9 +42,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
 
 
 	protected static final List<MusicDTO> MUSICS_LIST = Arrays.asList(
-			new MusicDTO("musicName80", Theme.ANNEES_80),
-			new MusicDTO("musicName90", Theme.ANNEES_90),
-			new MusicDTO("musicName00", Theme.ANNEES_2000)
+			new MusicDTO("musicName80", Theme.ANNEES_80, ConnectionMode.OFFLINE),
+			new MusicDTO("musicName90", Theme.ANNEES_90, ConnectionMode.OFFLINE),
+			new MusicDTO("musicName00", Theme.ANNEES_2000, ConnectionMode.OFFLINE)
 	);
 
 	protected static final List<ProfileDTO> PROFILES_LIST = Arrays.asList(

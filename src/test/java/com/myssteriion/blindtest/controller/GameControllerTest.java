@@ -60,7 +60,7 @@ public class GameControllerTest extends AbstractTest {
 				new Player(new ProfileDTO("name1")));
 		Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null, ConnectionMode.OFFLINE));
 		
-		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60);
+		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
 		MusicResult musicResult = new MusicResult(0, musicDto, null, null, null);
 
 		ResponseEntity<Game> re = gameController.apply(musicResult);

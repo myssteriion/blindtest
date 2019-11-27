@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import org.junit.Assert;
@@ -14,7 +15,7 @@ public class MusicResultTest extends AbstractTest {
     public void constructor() {
 
         Integer gameId = 1;
-        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80);
+        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
 
 
         try {
@@ -40,7 +41,7 @@ public class MusicResultTest extends AbstractTest {
     public void getterSetter() {
 
         Integer gameId = 1;
-        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80);
+        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
 
 
         MusicResult musicResult = new MusicResult(gameId, music, null, null, null);
@@ -55,7 +56,7 @@ public class MusicResultTest extends AbstractTest {
     public void toStringAndEquals() {
 
         Integer gameId = 1;
-        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80);
+        MusicDTO music = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, music, null, null, null);
         Assert.assertEquals( "gameId=1, music={id=null, name=name, theme=ANNEES_80, played=0, connectionMode=OFFLINE, spotifyTrackId=null, spotifyPreviewUrl=null, spotifyTrackUrl=null, flux={null}, effect=null}, authorWinners=[], titleWinners=[], losers=[]", musicResult.toString() );
     }

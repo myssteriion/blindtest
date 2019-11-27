@@ -50,7 +50,7 @@ public class ClassicContentTest extends AbstractTest {
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, ConnectionMode.OFFLINE);
 
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
         Assert.assertSame( Round.CLASSIC, game.getRound() );

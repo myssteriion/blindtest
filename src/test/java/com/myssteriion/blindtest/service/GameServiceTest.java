@@ -93,7 +93,7 @@ public class GameServiceTest extends AbstractTest {
 	@Test
 	public void apply() throws NotFoundException, SpotifyException {
 
-		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
+		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
 		ProfileDTO profileDto = new ProfileDTO("name","avatarName").setId(1);
 		ProfileDTO profileDto1 = new ProfileDTO("name1","avatarName").setId(2);
 		ProfileDTO profileDto2 = new ProfileDTO("name2","avatarName").setId(3);
@@ -142,7 +142,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		musicDTO = new MusicDTO("name", Theme.ANNEES_60, 0);
+		musicDTO = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
 		profileDto = new ProfileDTO("name", "avatarName").setId(1);
 		profileDto1 = new ProfileDTO("name1","avatarName").setId(2);
 		profileDto2 = new ProfileDTO("name2","avatarName").setId(3);

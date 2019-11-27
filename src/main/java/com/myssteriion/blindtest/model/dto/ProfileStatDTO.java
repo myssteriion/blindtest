@@ -83,7 +83,6 @@ public class ProfileStatDTO extends AbstractDTO {
 
 
 
-
 	/**
 	 * Instantiates a new Profile stat dto.
 	 */

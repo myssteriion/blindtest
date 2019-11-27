@@ -53,7 +53,7 @@ public class ThiefContentTest extends AbstractTest {
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, ConnectionMode.OFFLINE);
 
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80);
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
         for (int i = 0; i < 28; i++)

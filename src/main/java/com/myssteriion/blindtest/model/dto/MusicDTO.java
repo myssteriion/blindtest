@@ -92,68 +92,45 @@ public class MusicDTO extends AbstractDTO {
 	private Effect effect;
 
 
+
 	/**
 	 * Instantiates a new Music dto.
 	 */
 	public MusicDTO() {
-		this("", null);
+		this("", null, null);
 	}
 
 	/**
 	 * Instantiates a new Music dto.
 	 *
-	 * @param name  the name
-	 * @param theme the theme
+	 * @param name           the name
+	 * @param theme          the theme
+	 * @param connectionMode the connection mode
 	 */
-	public MusicDTO(String name, Theme theme) {
-		this(name, theme, 0);
+	public MusicDTO(String name, Theme theme, ConnectionMode connectionMode) {
+		this(name, theme, connectionMode, null, null, null);
 	}
 
 	/**
 	 * Instantiates a new Music dto.
 	 *
-	 * @param name   the name
-	 * @param theme  the theme
-	 * @param played the played
+	 * @param name              the name
+	 * @param theme             the theme
+	 * @param connectionMode    the connection mode
+	 * @param spotifyTrackId    the spotify track id
+	 * @param spotifyPreviewUrl the spotify preview url
+	 * @param spotifyTrackUrl   the spotify track url
 	 */
-	public MusicDTO(String name, Theme theme, int played) {
+	public MusicDTO(String name, Theme theme, ConnectionMode connectionMode, String spotifyTrackId, String spotifyPreviewUrl, String spotifyTrackUrl) {
 
 		this.name = Tool.isNullOrEmpty(name) ? "" : name;
 		this.theme = theme;
-		this.played = Math.max(played, 0);
-		this.connectionMode = ConnectionMode.OFFLINE;
+		this.connectionMode = connectionMode;
+		this.spotifyTrackId = spotifyTrackId;
+		this.spotifyPreviewUrl = spotifyPreviewUrl;
+		this.spotifyTrackUrl = spotifyTrackUrl;
 	}
 
-	/**
-	 * Instantiates a new Music dto.
-	 *
-	 * @param spotifyMusic the spotifyMusic
-	 * @param theme        the theme
-	 */
-	public MusicDTO(SpotifyMusic spotifyMusic, Theme theme) {
-		this(spotifyMusic, theme, 0);
-	}
-
-	/**
-	 * Instantiates a new Music dto.
-	 *
-	 * @param spotifyMusic the spotifyMusic
-	 * @param theme        the theme
-	 * @param played       the played
-	 */
-	public MusicDTO(SpotifyMusic spotifyMusic, Theme theme, int played) {
-
-		Tool.verifyValue("spotifyMusic", spotifyMusic);
-		Tool.verifyValue("theme", theme);
-
-		this.name = spotifyMusic.getArtists() + " - " + spotifyMusic.getName();
-		this.theme = theme;
-		this.played = Math.max(played, 0);
-		this.connectionMode = ConnectionMode.ONLINE;
-		this.spotifyTrackId = spotifyMusic.getTrackId();
-		this.spotifyPreviewUrl = spotifyMusic.getPreviewUrl();
-		this.spotifyTrackUrl = spotifyMusic.getTrackUrl();
-	}
 
 
 	@Override
@@ -240,7 +217,7 @@ public class MusicDTO extends AbstractDTO {
 	 * Sets the game mode.
 	 *
 	 * @param connectionMode the game mode
-	 * @return this
+	 * @return this connection mode
 	 */
 	public MusicDTO setConnectionMode(ConnectionMode connectionMode) {
 		this.connectionMode = connectionMode;

@@ -106,8 +106,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		File themeDirectory = path.toFile();
 		for ( File file : Tool.getChildren(themeDirectory) ) {
 
-			MusicDTO musicDto = new MusicDTO(file.getName(), theme);
-			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.OFFLINE);
+			MusicDTO musicDto = new MusicDTO(file.getName(), theme, ConnectionMode.OFFLINE);
+			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
 			if ( file.isFile() && Tool.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
@@ -135,7 +135,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
 			for (SpotifyMusic spotifyMusic : spotifyMusics) {
 
-					MusicDTO musicDto = new MusicDTO(spotifyMusic, theme);
+					MusicDTO musicDto = new MusicDTO( spotifyMusic.getName(), theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
 					Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.ONLINE);
 					if (!optionalMusic.isPresent())
 						dao.save(musicDto);
