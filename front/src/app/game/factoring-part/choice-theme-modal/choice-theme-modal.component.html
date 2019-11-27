@@ -1,6 +1,6 @@
 <!-- modal header -->
 <div class="row choice-theme-modal-header">
-    <div class="col font-size-modal-title">{{ 'GAME.CHOICE_THEME_MODAL.TITLE' | translate }}</div>
+    <div class="col font-size-modal-title" [innerHTML]="'GAME.CHOICE_THEME_MODAL.TITLE' | translate : { 'playerName': playerName }"></div>
 </div>
 
 

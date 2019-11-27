@@ -347,6 +347,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
 			modalRef.componentInstance.filteredThemes = this.game.themes;
+			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose ).profile.name;
 
 			modalRef.result.then(
 				(result) => { let choiceTheme: Theme[] = []; choiceTheme.push(result); this.callNextMusic(choiceTheme); },

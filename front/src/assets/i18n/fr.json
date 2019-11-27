@@ -84,7 +84,7 @@
             "NB_POINTS_LOSE": "Victime d'un vol :"
         },
         "CHOICE_THEME_MODAL" : {
-            "TITLE" : "Choisir un thème"
+            "TITLE" : "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisis un thème"
         },
         "END_VIEW": {
             "TITLE": "Fin de la partie",

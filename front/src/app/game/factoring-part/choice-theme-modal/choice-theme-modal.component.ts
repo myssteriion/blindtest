@@ -20,6 +20,12 @@ export class ChoiceThemeModalComponent implements OnInit {
     private filteredThemes: Theme[];
 
     /**
+     * Player name.
+     */
+    @Input()
+    private playerName: string;
+
+    /**
      * Themes list.
      */
     private themes: {}[];
