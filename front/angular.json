@@ -31,7 +31,8 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/odometer/odometer.min.js"
+              "node_modules/odometer/odometer.min.js",
+              "node_modules/rxjs/_esm5/index.js"
             ]
           },
           "configurations": {

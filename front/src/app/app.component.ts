@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {routesWithHome} from "./tools/constant";
 import {Router} from '@angular/router';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
+import {Spinkit} from 'ng-http-loader';
 
 /**
  * App root.
@@ -19,6 +20,8 @@ export class AppComponent {
      */
     @ViewChild('navbarMenu', { static: false })
     private navbarMenu: NavbarMenuComponent;
+
+    Spinkit = Spinkit;
 
 
 
