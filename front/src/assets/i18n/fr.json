@@ -52,7 +52,7 @@
             "GAME_NOT_FOUND": "La partie n'existe pas."
         },
         "CURRENT_VIEW": {
-            "TITLE": "Manche \"{{name_round}}\" ({{current_music}}/{{total_musics}})",
+            "TITLE": "Manche '{{name_round}}' ({{current_music}}/{{total_musics}})",
             "EXIT": "Quitter le jeu",
             "ROUND_INFO": "Info manche",
             "EXIT_BODY_MODAL_1": "Etes-vous sûr de vouloir quitter la partie ?",
