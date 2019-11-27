@@ -218,19 +218,28 @@
             "USER_STATISTICS_BINDING_KO" : "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
         "CATEGORIES" : {
-            "PLAYED_GAMES" : "Nombre de parties jouées",
-            "BEST_SCORE": "Meilleur score"
+            "PLAYED_GAMES" : "Parties jouées",
+            "BEST_SCORE": "Meilleur score",
+            "FOUND_MUSICS_BY_THEME": {
+                "TITLE": "Titre uniquement",
+                "AUTHOR": "Artiste uniquement",
+                "LEGEND": "Musiques trouvées par thème",
+                "BOTH": "Titre et artiste",
+                "PERCENTAGE": "Pourcentage"
+            }
         }
     },
     "MUSIC_THEMES": {
-        "ANNEES_60": "Années 60",
-        "ANNEES_70": "Années 70",
-        "ANNEES_80": "Années 80",
-        "ANNEES_90": "Années 90",
+        "ANNEES_60": "Années 1960",
+        "ANNEES_70": "Années 1970",
+        "ANNEES_80": "Années 1980",
+        "ANNEES_90": "Années 1990",
         "ANNEES_2000": "Années 2000",
-        "CINEMAS": "Cinéma",
+        "ANNEES_2010": "Années 2010",
+        "SERIES_CINEMAS": "Séries & Cinéma",
         "CLASSIQUES": "Classiques",
         "DISNEY": "Disney",
+        "JEUX": "Jeux",
         "SERIES": "Séries"
     }
 }

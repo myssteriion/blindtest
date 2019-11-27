@@ -17,7 +17,6 @@ import {NgHttpLoaderModule} from 'ng-http-loader';
 import {MatRadioModule} from '@angular/material/radio';
 
 import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts'
 
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
@@ -42,11 +41,9 @@ import {MusicResultModalComponent} from "./game/factoring-part/music-result-moda
 import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/round-info-modal.component';
 import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
-import {StatisticsComponent} from './statistics/statistics.component';
-import {GlobalProfileStatisticsComponent} from './statistics/global-statistics/global-profile-statistics.component';
-import {ProfileStatisticsComponent} from './statistics/profile-statistics/profile-statistics.component';
 import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-view/profiles-statistics-view.component';
 import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-view/profile-statistics-view.component';
+import {ThemePercentagesComponent} from './statistics/theme-percentages/theme-percentages.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -56,8 +53,6 @@ import {ToasterService} from "./services/toaster.service";
 import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
 import {ProfileStatisticsResource} from './resources/profile-statistics.resource';
-import {ToolsService} from "./tools/tools.service";
-import {ToasterService} from "./services/toaster.service";
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
@@ -93,10 +88,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ChoiceThemeModalComponent,
 		GameEndViewComponent,
 		ErrorAlertModalComponent,
-		GameResumeViewComponent
 		GameResumeViewComponent,
 		ProfilesStatisticsViewComponent,
-		ProfileStatisticsViewComponent
+		ProfileStatisticsViewComponent,
+		ThemePercentagesComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
