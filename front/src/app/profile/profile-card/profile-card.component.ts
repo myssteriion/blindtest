@@ -34,7 +34,8 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Event after update/delete profile.
      */
-    @Output() onEdit = new EventEmitter();
+    @Output()
+    private onEdit = new EventEmitter();
 
     /**
      * If can select profile.
