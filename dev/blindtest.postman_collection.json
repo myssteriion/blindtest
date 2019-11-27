@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8df0dea9-3cd4-4c33-aca9-dfa9a44070c0",
+		"_postman_id": "328b43c2-6552-4e2b-8b1e-a2eb62e95097",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -49,7 +49,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, CINEMAS&connectionMode=OFFLINE",
+							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&connectionMode=OFFLINE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,8 +62,8 @@
 							"query": [
 								{
 									"key": "themes",
-									"value": "ANNEES_90, ANNEES_70, CINEMAS",
-									"description": "c'est une liste, valeurs possibles :\nANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nCINEMAS\nSERIES\nDISNEY\nCLASSIQUES"
+									"value": "ANNEES_90, ANNEES_70, SERIES_CINEMAS",
+									"description": "c'est une liste, valeurs possibles :\nANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nANNEES_2010\nSERIES_CINEMAS\nDISNEY\nJEUX\nCLASSIQUES"
 								},
 								{
 									"key": "connectionMode",
@@ -236,13 +236,18 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"name001\", \"name002\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"OFFLINE\"\n}"
+							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"ONLINE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game",
@@ -272,7 +277,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\",\n\t\t\"onlineMode\": false\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -787,7 +792,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\"\n\t},\n\t\"authorWinners\": [ \"{{player3}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\", \"{{player3}}\" ],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player3}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\", \"{{player3}}\" ],\n\t\"losers\": [ ]\n\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -830,7 +835,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\"\n\t},\n\t\"authorWinners\": [ \"{{player1}}\",\"{{player3}}\",\"{{player4}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player1}}\",\"{{player3}}\",\"{{player4}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -861,7 +866,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\"\n\t},\n\t\"authorWinners\": [ \"{{player2}}\"],\n\t\"titleWinners\": [ \"{{player2}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player2}}\"],\n\t\"titleWinners\": [ \"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -892,7 +897,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -923,7 +928,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player4}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -954,7 +959,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -985,7 +990,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [ \"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [ \"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1016,7 +1021,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\", \"{{player2}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\", \"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1047,7 +1052,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1078,7 +1083,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1109,7 +1114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1140,7 +1145,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1171,7 +1176,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1202,7 +1207,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1233,7 +1238,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1264,7 +1269,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1295,7 +1300,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1326,7 +1331,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1357,7 +1362,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1388,7 +1393,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1419,7 +1424,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1450,7 +1455,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1481,7 +1486,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1512,7 +1517,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1543,7 +1548,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1574,7 +1579,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1605,7 +1610,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1636,7 +1641,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1667,7 +1672,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player2}}\",\"{{player3}}\" ]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player2}}\",\"{{player3}}\" ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1698,7 +1703,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player4}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player4}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1729,7 +1734,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1760,7 +1765,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1791,7 +1796,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player4}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player3}}\",\"{{player4}}\",\"{{player4}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player4}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player3}}\",\"{{player4}}\",\"{{player4}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1822,7 +1827,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player3}}\",\"{{player3}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player3}}\",\"{{player3}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1853,7 +1858,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player4}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player4}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1884,7 +1889,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1915,7 +1920,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player3}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player3}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1946,7 +1951,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\",\"{{player3}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\",\"{{player3}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -1977,7 +1982,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [\"{{player2}}\",\"{{player2}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{classique}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [\"{{player2}}\",\"{{player2}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -2008,7 +2013,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n,\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -2026,7 +2031,7 @@
 					"response": []
 				}
 			],
-          	"protocolProfileBehavior": {}
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
