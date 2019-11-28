@@ -46,7 +46,8 @@
             "MAX_PLAYERS_ERROR": "Le maximum de {{max_players}} joueurs est atteint.",
             "DUPLICATE_PLAYERS_ERROR": "{{player_name}} est déjà dans la partie.",
             "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
-            "LAUNCH_GAME": "Lancer la partie !"
+            "LAUNCH_GAME": "Lancer la partie !",
+            "LAUNCH_GAME_ERROR": "Impossible de créer la partie."
         },
         "RESUME_VIEW": {
             "TITLE": "Reprendre une partie",

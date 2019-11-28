@@ -9,6 +9,8 @@ import {SLIDE_ANIMATION, THEMES} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 
 /**
  * The new game view.
@@ -179,7 +181,21 @@ export class GameNewViewComponent implements OnInit {
 			response => {
 				this._router.navigateByUrl("/game/" + response.id);
 			},
-			error => { throw Error("can't create new game : " + JSON.stringify(error)); }
+			error => {
+
+				let errorAlert: ErrorAlert = { status: error.status, statusText: error.statusText, name: error.name, error: error.error };
+
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = false;
+
+				modalRef.result.then(
+					(result) => { /* do nothing */ },
+					(reason) => { /* do nothing */ }
+				);
+			}
 		);
 	}
 
