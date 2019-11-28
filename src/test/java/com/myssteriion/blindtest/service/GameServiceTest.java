@@ -175,6 +175,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.SECOND, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 1, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(1), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 1, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(1), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -198,6 +199,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.SECOND, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 2, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(2), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 2, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(2), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -220,6 +222,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.SECOND, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 3, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 3, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(3), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 3, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(3), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -245,6 +248,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.THIRD, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 6, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 6, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(6), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 6, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(6), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -268,6 +272,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.THIRD, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 7, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 7, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(7), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 7, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(7), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -291,6 +296,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.THIRD, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 8, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 8, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(8), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 8, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(8), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );
@@ -314,6 +320,7 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertEquals( Rank.THIRD, game.getPlayers().get(2).getRank() );
 		Assert.assertEquals( 9, game.getNbMusicsPlayed() );
 		Assert.assertEquals( 9, game.getNbMusicsPlayedInRound() );
+		Assert.assertEquals( new Integer(9), game.getListenedMusics().get(Theme.ANNEES_60) );
 		Assert.assertEquals( 9, musicDTO.getPlayed() );
 		Assert.assertEquals( 0, profileStatDto.getBestScores().size() );
 		Assert.assertEquals( new Integer(9), profileStatDto.getListenedMusics().get(Theme.ANNEES_60) );

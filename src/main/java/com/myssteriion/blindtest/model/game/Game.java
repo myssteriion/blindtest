@@ -9,7 +9,9 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.tools.Tool;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,6 +67,11 @@ public class Game implements IModel {
      */
     private ConnectionMode connectionMode;
 
+    /**
+     * The number of listened musics by themes.
+     */
+    private Map<Theme, Integer> listenedMusics;
+
 
 
     /**
@@ -92,6 +99,7 @@ public class Game implements IModel {
         this.roundContent = this.round.createRoundContent(this);
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
         this.connectionMode = connectionMode;
+        this.listenedMusics = new HashMap<>();
     }
 
 
@@ -186,6 +194,33 @@ public class Game implements IModel {
         return connectionMode;
     }
 
+    /**
+     * Gets listenedMusics.
+     *
+     * @return The listenedMusics.
+     */
+    public Map<Theme, Integer> getListenedMusics() {
+        return listenedMusics;
+    }
+
+
+    /**
+     * Increment listenedMusics.
+     *
+     * @param theme the theme
+     */
+    public void incrementListenedMusics(Theme theme) {
+
+        Tool.verifyValue("theme", theme);
+
+        if (listenedMusics == null)
+            listenedMusics = new HashMap<>();
+
+        if ( !listenedMusics.containsKey(theme) )
+            listenedMusics.put(theme, 0);
+
+        listenedMusics.put(theme, listenedMusics.get(theme) + 1);
+    }
 
     /**
      * Pass to the next step.
@@ -239,7 +274,8 @@ public class Game implements IModel {
                 ", round=" + round +
                 ", roundContent={" + roundContent + "}" +
                 ", themes=" + themes +
-                ", connectionMode=" + connectionMode;
+                ", connectionMode=" + connectionMode +
+                ", listenedMusics=" + listenedMusics;
     }
 
 }

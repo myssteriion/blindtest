@@ -222,7 +222,7 @@ public class GameTest extends AbstractTest {
 
         Game gameUn = new Game(new HashSet<>(players), duration, themes, ConnectionMode.OFFLINE);
         Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, " +
-                "round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70], connectionMode=OFFLINE", gameUn.toString() );
+                "round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70], connectionMode=OFFLINE, listenedMusics={}", gameUn.toString() );
     }
 
 }

@@ -126,6 +126,8 @@ public class GameService {
 			musicDto.incrementPlayed();
 			musicService.update(musicDto);
 
+			game.incrementListenedMusics( musicResult.getMusic().getTheme() );
+
 			// apply score
 			game = game.getRoundContent().apply(game, musicResult);
 
