@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SLIDE_ANIMATION } from '../../tools/constant';
-import { Profile } from "../../interfaces/dto/profile.interface";
-import { TranslateService } from '@ngx-translate/core';
-import { ToasterService } from "../../services/toaster.service";
-import { ToolsService } from '../../tools/tools.service'
-import { Observable } from 'rxjs';
+import {Component, OnInit, Input} from '@angular/core';
+import {SLIDE_ANIMATION, THEMES} from '../../tools/constant';
+import {Profile} from "../../interfaces/dto/profile.interface";
+import {TranslateService} from '@ngx-translate/core';
+import {ToasterService} from "../../services/toaster.service";
+import {ToolsService} from '../../tools/tools.service'
+import {Observable} from 'rxjs';
 
 /**
  * The statistics view.
@@ -23,72 +23,25 @@ export class ProfileStatisticsViewComponent implements OnInit {
 
     public loaded: boolean = false;
 
-    single: any[];
-    multi: any[];
-
-    view: any[] = [700, 400];
-
-    // options
-    showXAxis = true;
-    showYAxis = true;
-    gradient = false;
-    showLegend = true;
-    showXAxisLabel = true;
-    xAxisLabel = "Country";
-    showYAxisLabel = true;
-    yAxisLabel = "Population";
     colorScheme = {
         domain: ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
     };
     animations: boolean = true;
-
-
-
-
-    // gauge
-    gaugeMin: number = 0;
-    gaugeMax: number = 100;
-    gaugeLargeSegments: number = 10;
-    gaugeSmallSegments: number = 5;
-    gaugeTextValue: string = '';
-    gaugeUnits: string = 'alerts';
-    gaugeAngleSpan: number = 240;
-    gaugeStartAngle: number = -120;
-    gaugeShowAxis: boolean = true;
-    gaugeValue: number = 50; // linear gauge value
-    gaugePreviousValue: number = 70;
-
-    margin: boolean = false;
-    marginTop: number = 40;
-    marginRight: number = 40;
-    marginBottom: number = 40;
-    marginLeft: number = 40;
-
-    textValue = 'text';
-
-
     counter = [];
-
-    percentages = [];
 
     public userHasStats: boolean = false;
 
-    constructor(private _translate: TranslateService,
-        private _toasterService: ToasterService) { }
+    constructor(private _translate: TranslateService) {
+    }
 
     ngOnInit() {
-        console.log("user on stats", this.user, !ToolsService.isNull(this.user.statistics))
-        if (ToolsService.isNull(this.user.statistics)) {
-            this.userHasStats = false;
-        } else {
-            this.userHasStats = true;
-        }
-
+        console.log("user on stats", this.user, !ToolsService.isNull(this.user.statistics));
+        this.userHasStats = !ToolsService.isNull(this.user.statistics);
         this.fillStats();
     }
 
     public noStatsForUser() {
-        return this._translate.instant("STATISTICS.NO_STATS_FOR_USER", { user: this.user.name });
+        return this._translate.instant("STATISTICS.NO_STATS_FOR_USER", {user: this.user.name});
     }
 
     public onLegendLabelClick(event: Event) {
@@ -108,7 +61,8 @@ export class ProfileStatisticsViewComponent implements OnInit {
     }
 
     public fillCounter() {
-        let scores = this.getAllTimeScores()
+        let scores = this.getAllTimeScores();
+        let playedGames = this.getAllPlayedGames();
         this.counter = [
             {
                 "name": this._translate.instant("STATISTICS.CATEGORIES.BEST_SCORE"),
@@ -116,7 +70,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
             },
             {
                 "name": this._translate.instant("STATISTICS.CATEGORIES.PLAYED_GAMES"),
-                "value": this.user.statistics.playedGames
+                "value": ToolsService.isNull(playedGames) ? 0 : playedGames
             }
 
         ];
@@ -131,27 +85,15 @@ export class ProfileStatisticsViewComponent implements OnInit {
     public fillStats() {
         let count = 0;
         let counter = new Observable((observer) => {
-            const { next, error } = observer;
-            this.fillCounter()
-            observer.next()
-        })
+            const {next, error} = observer;
+            this.fillCounter();
+            observer.next();
+        });
 
         counter.subscribe(() => {
             count += 1;
-            this.isFinal(count)
-        })
-
-        let themePercentages = new Observable((observer) => {
-            const { next, error } = observer;
-            this.getThemePercentage()
-            observer.next()
-        })
-
-        themePercentages.subscribe(() => {
-            count += 1;
-            this.isFinal(count)
-        })
-
+            this.isFinal(count);
+        });
 
     }
 
@@ -170,27 +112,23 @@ export class ProfileStatisticsViewComponent implements OnInit {
             }
         }
 
-        console.log("User is ", this.user.name, "bestUserScore", bestScore, "worstUserScore", worstScore)
-        return { bestScore: bestScore, worstScore: worstScore }
+        console.log("User is ", this.user.name, "bestUserScore", bestScore, "worstUserScore", worstScore);
+        return {bestScore: bestScore, worstScore: worstScore}
     }
 
-    private getThemePercentage() {
-        this.percentages = [];
-        let keys = Object.keys(this.user.statistics.listenedMusics);
-        let listenedThemes = this.user.statistics.listenedMusics;
-        let foundThemes = this.user.statistics.foundMusics;
-        let musicsFound = 0;
+    private getAllPlayedGames(): Number {
+        let keys = Object.keys(this.user.statistics.playedGames);
+        let playedGames = this.user.statistics.playedGames;
+        let numberOfPlayedGames = 0;
 
         for (let i = 0; i < keys.length; i++) {
-            let name = this._translate.instant("MUSIC_THEMES." + keys[i])
-            let value = 0;
-            if (!ToolsService.isNull(foundThemes[keys[i]])) {
-                value = Math.floor(foundThemes[keys[i]] / listenedThemes[keys[i]] * 100);
-            }
-            this.percentages.push({ name: name, value: value })
+            numberOfPlayedGames += playedGames[keys[i]]
         }
 
-        console.log("foundThemes ", foundThemes, "listenedThemes", listenedThemes, "percentages", this.percentages)
+        return numberOfPlayedGames
+    }
+
+    private getBestScoreByGameType() {
 
     }
 }

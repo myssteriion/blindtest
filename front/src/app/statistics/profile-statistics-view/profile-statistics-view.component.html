@@ -1,34 +1,41 @@
 <div class="container" *ngIf="loaded">
 
-  <div class="col-sm-5">
-    <profile-card class="col-4" [profile]="user" [canEdit]="false" [canSelect]="false" [canDeselect]="false">
-    </profile-card>
-  </div>
-
-  <div *ngIf="userHasStats">
-
-    <div class="row">
-      <ngx-charts-number-card class="chart-container" [view]="[350, 250]"
-        (legendLabelClick)="onLegendLabelClick($event)" [scheme]="colorScheme" cardColor="#232837" emptyColor="#1e222e"
-        [results]="counter" [animations]="animations" (select)="select($event)" (activate)="activate($event)"
-        (deactivate)="deactivate($event)">
-      </ngx-charts-number-card>
-    </div>
-    <div class="row">
-      <ngx-charts-gauge class="chart-container" [view]="[700, 400]" [legend]="showLegend" [legendTitle]="'Legend'"
-        [legendPosition]="'right'" [results]="percentages" [animations]="animations" [textValue]="textValue"
-        [scheme]="colorScheme" [min]="0" [max]="100" [units]="'%'" [angleSpan]="gaugeAngleSpan"
-        [startAngle]="gaugeStartAngle" [showAxis]="gaugeShowAxis" [bigSegments]="gaugeLargeSegments"
-        [smallSegments]="gaugeSmallSegments"
-        [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null" [tooltipDisabled]="false"
-        [showText]="true" (select)="select($event)" (legendLabelClick)="onLegendLabelClick($event)"
-        (activate)="activate($event)" (deactivate)="deactivate($event)">
-      </ngx-charts-gauge>
+    <div class="col-sm-5">
+        <profile-card class="col-4" [profile]="user" [canEdit]="false" [canSelect]="false" [canDeselect]="false">
+        </profile-card>
     </div>
 
-  </div>
+    <div *ngIf="userHasStats">
 
 
-  <div *ngIf="!userHasStats">{{noStatsForUser()}}</div>
+        <div class="row">
+            <!--   Best score & number of games played   -->
+            <ngx-charts-number-card class="chart-container" [view]="[350, 225]"
+                                    [scheme]="colorScheme"
+                                    cardColor="#232837" emptyColor="#1e222e"
+                                    [results]="counter" [animations]="animations" (select)="select($event)">
+            </ngx-charts-number-card>
+        </div>
+
+        <div class="row">
+            <!--      Score by game type      -->
+
+        </div>
+
+        <div class="row">
+            <!--      Percentage of musics found by theme      -->
+            <theme-percentages-view [statistics]="user.statistics" [colorScheme]="colorScheme"></theme-percentages-view>
+        </div>
+
+        <div class="row">
+            <!--      Number of musics listened to by theme      -->
+            <theme-listening-view [statistics]="user.statistics" [colorScheme]="colorScheme"></theme-listening-view>
+        </div>
+
+
+    </div>
+
+
+    <div *ngIf="!userHasStats">{{noStatsForUser()}}</div>
 
 </div>
