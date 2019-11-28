@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToasterService } from "../../services/toaster.service";
 
 /**
- * The statistics view.
+ * The theme comparison view.
  */
 @Component({
     selector: 'profiles-statistics-view',

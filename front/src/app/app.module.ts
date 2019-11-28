@@ -45,6 +45,9 @@ import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-
 import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-view/profile-statistics-view.component';
 import {ThemePercentagesComponent} from './statistics/common/theme-percentages/theme-percentages.component';
 import {ThemeListeningComponent} from './statistics/common/theme-listening/theme-listening.component';
+import {ThemeComparisonViewComponent} from './statistics/common/theme-comparison/theme-comparison-view.component';
+import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-comparison/theme-comparison-question-detail/theme-comparison-question-detail.component';
+import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -93,7 +96,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfilesStatisticsViewComponent,
 		ProfileStatisticsViewComponent,
 		ThemePercentagesComponent,
-        ThemeListeningComponent
+        ThemeListeningComponent,
+        ThemeComparisonViewComponent,
+        ThemeComparisonQuestionDetailComponent,
+        ThemeComparisonQuestionNumberComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
