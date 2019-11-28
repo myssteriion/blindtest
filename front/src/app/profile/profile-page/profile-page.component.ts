@@ -5,6 +5,9 @@ import {Page} from 'src/app/interfaces/base/page.interface';
 import {ProfileEditModalComponent} from "../profile-edit-modal/profile-edit-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {OPACITY_ANIMATION} from "../../tools/constant";
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * The profiles view.
@@ -65,7 +68,8 @@ export class ProfilePageComponent implements OnInit {
 
 
     constructor(private _profileResource: ProfileResource,
-                private _ngbModal: NgbModal) {}
+                private _ngbModal: NgbModal,
+                private _translate: TranslateService) {}
 
     ngOnInit(): void {
 
@@ -89,8 +93,26 @@ export class ProfilePageComponent implements OnInit {
             this.currentPage = 1;
 
         this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
-            response => { this.page = response; this.showProfiles = true; this.isLoaded = true; },
-            error => { throw Error("can't find all profiles : " + JSON.stringify(error)); }
+            response => {
+                this.page = response;
+                this.showProfiles = true;
+                this.isLoaded = true;
+            },
+            error => {
+
+                let errorAlert: ErrorAlert = { status: error.status, statusText: error.statusText, name: error.name, error: error.error };
+
+                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+                modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
+                modalRef.componentInstance.error = errorAlert;
+                modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+                modalRef.componentInstance.showRetry = true;
+
+                modalRef.result.then(
+                    (result) => { this.loadProfiles(true); },
+                    (reason) => { /* do nothing */ }
+                );
+            }
         );
     }
 

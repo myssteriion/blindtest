@@ -131,7 +131,8 @@
         },
         "PAGE": {
             "CREATE_BUTTON": "Nouveau profil",
-            "PREFIX_PLACE_HOLDER": "Chercher un profil"
+            "PREFIX_PLACE_HOLDER": "Chercher un profil",
+            "LOAD_PROFILES_ERROR": "Impossible de recupérer les profils."
         },
         "PAGE_MODAL": {
             "TITLE": "Qui joue ?"
