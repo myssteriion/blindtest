@@ -39,7 +39,7 @@
             "THEMES_LABEL": "Choix des thèmes :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs :",
             "ONLINE_MODE": "En ligne (avec Spotify)",
-            "OFFLINE_MODE": "Hors ligne (musiques locales)",
+            "OFFLINE_MODE": "Hors ligne",
             "BOTH_MODE": "Les deux",
             "SHORT": "Rapide",
             "NORMAL": "Normale",
@@ -121,7 +121,7 @@
             "EDIT_TOOLTIP": "Modifier le profil.",
             "DELETE_TOOLTIP": "Supprimer le profil.",
             "DESELECT_TOOLTIP": "Retirer le profil.",
-            "DELETE_BODY": "Etes-vous de vouloir supprimer le profil de {{profile_name}} ?",
+            "DELETE_BODY": "Etes-vous sûr de vouloir supprimer le profil de <span class=\"inner-html-special-text\">{{profile_name}}</span> ?",
             "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé."
         },
         "EDIT_MODAL": {

@@ -1,20 +1,20 @@
-.confirm-modal-header, .confirm-modal-body, .confirm-modal-footer {
+.error-alert-modal-header, .error-alert-modal-body, .error-alert-modal-footer {
     margin: 1em;
 }
 
-.confirm-modal-header {
+.error-alert-modal-header {
     border-bottom: 1px solid silver;
 }
 
-.confirm-modal-footer {
+.error-alert-modal-footer {
     border-top: 1px solid silver;
 }
 
-.confirm-modal-footer div {
+.error-alert-modal-footer div {
     text-align: right;
 }
 
-.confirm-modal-footer button {
+.error-alert-modal-footer button {
     margin-top: 10px;
     margin-left: 10px;
 }

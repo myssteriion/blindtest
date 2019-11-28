@@ -1,8 +1,8 @@
-<div class="row confirm-modal-header">
-    <h3 class="col">{{ 'COMMON.ERROR_MODAL.TITLE' | translate }}</h3>
+<div class="row error-alert-modal-header">
+    <h3 class="col font-size-modal-title">{{ 'COMMON.ERROR_MODAL.TITLE' | translate }}</h3>
 </div>
 
-<div class="row confirm-modal-body">
+<div class="row error-alert-modal-body">
 
     <div class="col">
 
@@ -47,7 +47,7 @@
 
 </div>
 
-<div class="row confirm-modal-footer">
+<div class="row error-alert-modal-footer">
     <div class="col">
         <button *ngIf="showRetry" class="btn btn-success font-size-normal" (click)="retry()">{{ 'COMMON.ERROR_MODAL.RETRY' | translate }}</button>
         <button class="btn btn-info font-size-normal" (click)="close()">{{ 'COMMON.CLOSE' | translate }}</button>

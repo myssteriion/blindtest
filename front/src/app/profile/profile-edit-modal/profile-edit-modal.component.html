@@ -12,7 +12,7 @@
         <div class="row profile-edit-name">
             <div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.NAME_LABEL' | translate }}</div>
             <div class="col-8">
-                <input class="form-control font-size-normal no-shadow" [(ngModel)]="newProfile.name"
+                <input class="form-control font-size-normal" [(ngModel)]="newProfile.name"
                        (change)="newProfile.name = newProfile.name.trim()"
                        placeholder="{{ 'PROFILE.EDIT_MODAL.NAME_PLACE_HOLDER' | translate }}" maxlength="15">
             </div>
@@ -21,8 +21,8 @@
         <!-- background -->
         <div class="row profile-edit-backgrounds">
             <div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.BACKGROUND_LABEL' | translate }}</div>
-            <div *ngFor="let backgroundId of backgroundIds; let i = index" class="col profile-edit-background" [ngClass]="getBackgroundClass(i)"
-                    (click)="newProfile.background = i">
+            <div *ngFor="let backgroundId of backgroundIds" class="col profile-edit-background box-shadow" [ngClass]="getBackgroundClass(backgroundId)"
+                    (click)="newProfile.background = backgroundId">
             </div>
         </div>
 
@@ -50,7 +50,7 @@
 <!-- modal footer -->
 <div class="row profile-edit-footer">
     <div class="col">
-        <button class="btn btn-success font-size-normal" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
-        <button class="btn btn-danger font-size-normal" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+        <button class="btn btn-success font-size-normal box-shadow" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
+        <button class="btn btn-danger font-size-normal box-shadow" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
     </div>
 </div>

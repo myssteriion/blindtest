@@ -3,16 +3,12 @@
     font-family: Georgia, serif;
 }
 
-button, input, .pagination, .alert, .box-shadow {
+input, .pagination, .alert, .box-shadow {
     box-shadow: 8px 8px 4px silver;
 }
 
 button:disabled {
     cursor: not-allowed;
-}
-
-.no-shadow {
-    box-shadow: none;
 }
 
 body {

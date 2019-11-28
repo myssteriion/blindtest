@@ -51,7 +51,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Background ids.
 	 */
-	private backgroundIds = ["0", "1", "2", "3", "4"];
+	private backgroundIds = [0, 1, 2, 3, 4];
 
 
 

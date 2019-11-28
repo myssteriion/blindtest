@@ -3,7 +3,7 @@
     <!-- 1st line -> create button ; filter input ; pagination -->
     <div class="row justify-content-center profile-page-line-one">
         <div class="col-3">
-            <button *ngIf="canEdit" class="btn btn-info font-size-normal" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
+            <button *ngIf="canEdit" class="btn btn-info font-size-normal box-shadow" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
         </div>
         <div class="col-3">
             <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"

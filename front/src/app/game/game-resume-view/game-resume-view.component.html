@@ -14,7 +14,7 @@
             <input class="form-control font-size-normal" (keyup.enter)="search()" [(ngModel)]="numGame" placeholder="{{ 'GAME.RESUME_VIEW.GAME_NUM_PLACE_HOLDER' | translate }}">
         </div>
         <div class="col-2">
-            <button class="btn btn-info font-size-normal" (click)="search()" [disabled]="gameNumIsNaN()">{{ 'GAME.RESUME_VIEW.SEARCH_BUTTON' | translate }}</button>
+            <button class="btn btn-info font-size-normal box-shadow" (click)="search()" [disabled]="gameNumIsNaN()">{{ 'GAME.RESUME_VIEW.SEARCH_BUTTON' | translate }}</button>
         </div>
     </div>
 
