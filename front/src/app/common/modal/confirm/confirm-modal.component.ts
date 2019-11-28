@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  * A yes-no modal.
  */
 @Component({
-    selector: 'modal-confirm',
+    selector: 'confirm-modal',
     templateUrl: './confirm-modal.component.html',
     styleUrls: ['./confirm-modal.component.css']
 })
