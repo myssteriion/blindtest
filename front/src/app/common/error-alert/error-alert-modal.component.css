@@ -19,15 +19,27 @@
     margin-left: 10px;
 }
 
-.error-alert-text div {
-    margin: 1em 0 2em 0;
+.error-alert-text {
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
-.error-alert-retry {
-    text-align: center;
+.error-alert-suggestion {
+    margin-bottom: 2em;
 }
+
+.error-alert-show a:hover {
+    color: orangered;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 
 .error-alert-causes {
     max-height: 6em;
     overflow: auto;
+}
+
+.error-alert-retry {
+    text-align: center;
 }

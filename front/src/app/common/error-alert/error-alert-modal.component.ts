@@ -1,19 +1,27 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ErrorAlert} from 'src/app/interfaces/base/error.alert.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
+import {ToolsService} from "../../tools/tools.service";
 
 @Component({
 	selector: 'error-alert-modal',
 	templateUrl: './error-alert-modal.component.html',
 	styleUrls: ['./error-alert-modal.component.css']
 })
-export class ErrorAlertModalComponent {
+export class ErrorAlertModalComponent implements OnInit {
 
 	/**
 	 * Text to show.
 	 */
 	@Input()
 	private text: string;
+
+	/**
+	 * Suggestion to show.
+	 */
+	@Input()
+	private suggestion: string;
 
 	/**
 	 * The error.
@@ -33,6 +41,8 @@ export class ErrorAlertModalComponent {
 	@Input()
 	private showRetry: boolean;
 
+	private showError: boolean;
+
 	/**
 	 * Error level.
 	 */
@@ -45,14 +55,19 @@ export class ErrorAlertModalComponent {
 
 
 
-	constructor(private _ngbActiveModal: NgbActiveModal) { }
+	constructor(private _ngbActiveModal: NgbActiveModal,
+				private _translate: TranslateService) { }
+
+	ngOnInit(): void {
+		this.showError = false;
+	}
 
 
 
 	/**
 	 * Gets css class for text.
 	 */
-	private getAlertClass() {
+	private getAlertClass(): string {
 
 		let css = "";
 
@@ -62,6 +77,25 @@ export class ErrorAlertModalComponent {
 			css = "alert alert-warning";
 
 		return css;
+	}
+
+	/**
+	 * If show suggestion.
+	 */
+	private showSuggestion(): boolean {
+		return !ToolsService.isNullOrEmpty(this.suggestion);
+	}
+
+	/**
+	 * Gets label.
+	 */
+	private getShowMoreShowLessLabel(): string {
+
+		let label = "COMMON.";
+
+		label += (this.showError) ? "HIDE_DETAIL" : "SHOW_DETAIL";
+
+		return this._translate.instant(label);
 	}
 
 	/**

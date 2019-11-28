@@ -6,11 +6,26 @@
 
     <div class="col">
 
+        <!-- error -->
         <div class="row error-alert-text">
             <div class="col font-size-normal" [ngClass]="getAlertClass()">{{ text }}</div>
         </div>
 
-        <div class="row alert alert-info error-alert-causes">
+        <!-- suggestion -->
+        <div *ngIf="showSuggestion()" class="error-alert-suggestion">
+            <div class="row"><div class="col error-alert-show font-size-normal">{{ 'COMMON.ERROR_MODAL.SUGGESTION_LABEL' | translate }}</div></div>
+            <div class="row alert alert-info"><div class="col font-size-normal">{{ suggestion }}</div></div>
+        </div>
+
+        <!-- show more / show less -->
+        <div class="row error-alert-show">
+            <div class="col">
+                <a class="font-size-normal" (click)="showError = !showError">{{ getShowMoreShowLessLabel() }}</a>
+            </div>
+        </div>
+
+        <!-- error -->
+        <div *ngIf="showError" class="row alert alert-secondary error-alert-causes">
             <div class="col">
 
                 <div *ngIf="error.status === 0">

@@ -10,6 +10,7 @@
         "ERROR_MODAL": {
             "TITLE": "Une erreur est survenue",
             "RETRY": "Réssayer",
+            "SUGGESTION_LABEL": "Suggestion :",
             "MAYBE_SERVER_OFF": "Le serveur est injoignable, vérifier que celui-ci est bien allumé."
         },
         "SAVE": "Enregistrer",
@@ -20,7 +21,9 @@
         "NO": "Non",
         "WARNING": "Attention",
         "NO_RESULT": "Pas de résultat.",
-        "MANY_TIMES": " fois"
+        "MANY_TIMES": " fois",
+        "SHOW_DETAIL": "Voir détail",
+        "HIDE_DETAIL": "Masquer détail"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"
@@ -47,7 +50,8 @@
             "DUPLICATE_PLAYERS_ERROR": "{{player_name}} est déjà dans la partie.",
             "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
             "LAUNCH_GAME": "Lancer la partie !",
-            "LAUNCH_GAME_ERROR": "Impossible de créer la partie."
+            "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
+            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiant soient correct."
         },
         "RESUME_VIEW": {
             "TITLE": "Reprendre une partie",
