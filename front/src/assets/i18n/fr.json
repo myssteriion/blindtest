@@ -226,6 +226,9 @@
                 "LEGEND": "Musiques trouvées par thème",
                 "BOTH": "Titre et artiste",
                 "PERCENTAGE": "Pourcentage"
+            },
+            "LISTENED_MUSICS_BY_THEME": {
+                "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème"
             }
         }
     },

@@ -19,9 +19,8 @@ export class ToolsService {
     private static BASE64: string = ";base64,";
 
 
-
-    constructor() { }
-
+    constructor() {
+    }
 
 
     /**
@@ -52,7 +51,7 @@ export class ToolsService {
      */
     public static verifyValue(key: string, value: any): void {
 
-        if ( !ToolsService.isNullOrEmpty(key) && ToolsService.isNull(value) )
+        if (!ToolsService.isNullOrEmpty(key) && ToolsService.isNull(value))
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
@@ -64,7 +63,7 @@ export class ToolsService {
      */
     public static verifyStringValue(key: string, value: string): void {
 
-        if ( !ToolsService.isNullOrEmpty(key) && ToolsService.isNullOrEmpty(value) )
+        if (!ToolsService.isNullOrEmpty(key) && ToolsService.isNullOrEmpty(value))
             throw new Error("Le champ '" + key + "' est obligatoire.");
     }
 
@@ -85,8 +84,7 @@ export class ToolsService {
             imageSrc += flux.contentType;
             imageSrc += ToolsService.BASE64;
             imageSrc += flux.contentFlux;
-        }
-        else {
+        } else {
             imageSrc = AVATAR_NOT_FOUND;
         }
 
@@ -117,7 +115,7 @@ export class ToolsService {
      * @param ms the sleep during (in ms)
      */
     public static sleep(ms: number) {
-        return new Promise( resolve => setTimeout(resolve, ms) );
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     /**
@@ -129,10 +127,19 @@ export class ToolsService {
      */
     public static random(min: number, max: number): number {
 
-        if ( ToolsService.isNull(min) || ToolsService.isNull(max) || min >= max)
+        if (ToolsService.isNull(min) || ToolsService.isNull(max) || min >= max)
             return 0;
 
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    public static sortByAlphabeticalAndNumerical(array): Array<any> {
+        array.sort(function (a, b) {
+            let textA = a.name.toUpperCase();
+            let textB = b.name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        });
+        return array;
     }
 
 }
