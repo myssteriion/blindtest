@@ -1,0 +1,40 @@
+<div class="row confirm-modal-header">
+    <h3 class="col">{{ 'COMMON.ERROR_MODAL.TITLE' | translate }}</h3>
+</div>
+
+<div class="row confirm-modal-body">
+
+    <div class="col">
+
+        <div class="row error-alert-text">
+            <div class="col font-size-normal" [ngClass]="getAlertClass()">{{ text }}</div>
+        </div>
+
+        <div class="row alert alert-info error-alert-causes font-size-normal">
+            <div class="col">
+
+                <div *ngIf="error.status === 0">
+                    <div class="row"><div class="col">{{ 'COMMON.ERROR_MODAL.MAYBE_SERVER_OFF' | translate }}</div></div>
+                </div>
+
+                <div *ngIf="error.status !== 0">
+                    <div>
+                        <div class="">{{ error.error.message }}</div>
+                        <ul>
+                            <li class="" *ngFor="let cause of error.error.causes">{{ cause }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row confirm-modal-footer">
+    <div class="col">
+        <button *ngIf="showRetry" class="btn btn-success font-size-normal" (click)="retry()">{{ 'COMMON.ERROR_MODAL.RETRY' | translate }}</button>
+        <button class="btn btn-info font-size-normal" (click)="close()">{{ 'COMMON.CLOSE' | translate }}</button>
+    </div>
+</div>

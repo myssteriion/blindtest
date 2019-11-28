@@ -48,6 +48,7 @@ import {ProfileResource} from './resources/profile.resource';
 import {AvatarResource} from './resources/avatar.resource';
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
+import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -78,7 +79,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MusicResultModalComponent,
 		RoundInfoModalComponent,
 		ChoiceThemeModalComponent,
-		GameEndViewComponent
+		GameEndViewComponent,
+		ErrorAlertModalComponent
 	],
 	entryComponents: [
 		ProfileEditModalComponent,
@@ -86,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ProfilePageModalComponent,
 		MusicResultModalComponent,
 		RoundInfoModalComponent,
-		ChoiceThemeModalComponent
+		ChoiceThemeModalComponent,
+		ErrorAlertModalComponent
 	],
 	imports: [
 		BrowserModule,

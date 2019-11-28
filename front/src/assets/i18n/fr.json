@@ -7,6 +7,11 @@
         "VERSION_VIEW": {
             "VERSION": "version"
         },
+        "ERROR_MODAL": {
+            "TITLE": "Une erreur est survenue",
+            "RETRY": "Réssayer",
+            "MAYBE_SERVER_OFF": "Le serveur est injoignable, vérifier que celui-ci est bien allumé."
+        },
         "SAVE": "Enregistrer",
         "VALID": "Valider",
         "CANCEL": "Annuler",

@@ -1,0 +1,33 @@
+.confirm-modal-header, .confirm-modal-body, .confirm-modal-footer {
+    margin: 1em;
+}
+
+.confirm-modal-header {
+    border-bottom: 1px solid silver;
+}
+
+.confirm-modal-footer {
+    border-top: 1px solid silver;
+}
+
+.confirm-modal-footer div {
+    text-align: right;
+}
+
+.confirm-modal-footer button {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.error-alert-text div {
+    margin: 1em 0 2em 0;
+}
+
+.error-alert-retry {
+    text-align: center;
+}
+
+.error-alert-causes {
+    max-height: 6em;
+    overflow: auto;
+}
