@@ -10,18 +10,18 @@
             <div class="col font-size-normal" [ngClass]="getAlertClass()">{{ text }}</div>
         </div>
 
-        <div class="row alert alert-info error-alert-causes font-size-normal">
+        <div class="row alert alert-info error-alert-causes">
             <div class="col">
 
                 <div *ngIf="error.status === 0">
-                    <div class="row"><div class="col">{{ 'COMMON.ERROR_MODAL.MAYBE_SERVER_OFF' | translate }}</div></div>
+                    <div class="row"><div class="col font-size-normal">{{ 'COMMON.ERROR_MODAL.MAYBE_SERVER_OFF' | translate }}</div></div>
                 </div>
 
                 <div *ngIf="error.status !== 0">
                     <div>
-                        <div class="">{{ error.error.message }}</div>
+                        <div class="font-size-normal">{{ error.error.message }}</div>
                         <ul>
-                            <li class="" *ngFor="let cause of error.error.causes">{{ cause }}</li>
+                            <li class="font-size-small" *ngFor="let cause of error.error.causes">{{ cause }}</li>
                         </ul>
                     </div>
                 </div>
