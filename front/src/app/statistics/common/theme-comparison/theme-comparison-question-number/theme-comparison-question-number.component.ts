@@ -1,6 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
-import {TranslateService} from '@ngx-translate/core';
+import {SLIDE_ANIMATION} from '../../../../tools/constant';
 import {ToolsService} from "../../../../tools/tools.service";
 
 /**
@@ -22,7 +21,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
     public questionsAnswered = [];
     public maxCount = 0;
 
-    constructor(private _translate: TranslateService) {
+    constructor() {
     }
 
     // Detect changes on input fields
@@ -30,26 +29,27 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
         this.calculateStatistics();
         // You can also use categoryId.previousValue and
         // categoryId.firstChange for comparing old and new values
-
     }
 
     ngOnInit() {
         this.calculateStatistics();
     }
 
+    /**
+     * Calculate each player's stats on found/listened musics
+     */
     calculateStatistics() {
         this.questionsAnswered = [];
         this.maxCount = this.statistics.listenedMusics[this.theme];
 
         this.statistics.players.forEach(player => {
-            let foundMusics = ToolsService.isNull(player.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.foundMusics[this.theme])
+            let foundMusics = ToolsService.isNull(player.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.foundMusics[this.theme]);
             this.questionsAnswered.push({
                 name: player.profile.name,
                 value: foundMusics
             })
         });
     }
-
 
     getAllMusicsForPlayer(musicsForTheme) {
         let foundMusics = 0;
