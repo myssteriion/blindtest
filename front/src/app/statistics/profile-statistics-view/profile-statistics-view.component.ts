@@ -1,8 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES} from '../../tools/constant';
+import {SLIDE_ANIMATION} from '../../tools/constant';
 import {Profile} from "../../interfaces/dto/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from '../../tools/tools.service'
 import {Observable} from 'rxjs';
 
@@ -65,7 +64,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
         let playedGames = this.getAllPlayedGames();
         this.counter = [
             {
-                "name": this._translate.instant("STATISTICS.CATEGORIES.BEST_SCORE"),
+                "name": this._translate.instant("STATISTICS.CATEGORIES.BEST_SCORE.TITLE"),
                 "value": ToolsService.isNull(scores.bestScore) ? 0 : scores.bestScore
             },
             {

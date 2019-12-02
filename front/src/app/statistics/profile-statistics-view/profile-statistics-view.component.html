@@ -10,11 +10,7 @@
 
         <div class="row">
             <!--   Best score & number of games played   -->
-            <ngx-charts-number-card class="chart-container" [view]="[350, 225]"
-                                    [scheme]="colorScheme"
-                                    cardColor="#232837" emptyColor="#1e222e"
-                                    [results]="counter" [animations]="animations" (select)="select($event)">
-            </ngx-charts-number-card>
+            <score-by-game-type [colorScheme]="colorScheme" [statistics]="user.statistics"></score-by-game-type>
         </div>
 
         <div class="row">

@@ -48,6 +48,7 @@ import {ThemeListeningComponent} from './statistics/common/theme-listening/theme
 import {ThemeComparisonViewComponent} from './statistics/common/theme-comparison/theme-comparison-view.component';
 import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-comparison/theme-comparison-question-detail/theme-comparison-question-detail.component';
 import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
+import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -99,7 +100,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ThemeListeningComponent,
         ThemeComparisonViewComponent,
         ThemeComparisonQuestionDetailComponent,
-        ThemeComparisonQuestionNumberComponent
+        ThemeComparisonQuestionNumberComponent,
+        ScoreByGameTypeComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,

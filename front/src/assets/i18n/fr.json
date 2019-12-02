@@ -219,7 +219,12 @@
         },
         "CATEGORIES" : {
             "PLAYED_GAMES" : "Parties jouées",
-            "BEST_SCORE": "Meilleur score",
+            "BEST_SCORE": {
+                "TITLE": "Meilleur score",
+                "SHORT": "Rapide",
+                "NORMAL": "Normale",
+                "LONG": "Longue"
+            },
             "FOUND_MUSICS_BY_THEME": {
                 "TITLE": "Titre uniquement",
                 "AUTHOR": "Artiste uniquement",
