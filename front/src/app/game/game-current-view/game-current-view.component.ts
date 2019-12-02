@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SLIDE_ANIMATION, ROUTES_WITH_HOME, HOME_PATH, HTTP_NOT_FOUND} from "../../tools/constant";
+import {END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -232,9 +232,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 		this.getIdParam().subscribe(
 			response => {
-				this._gameResource.findById( Number(response) ).subscribe(
+
+				let gameId = Number(response);
+				this._gameResource.findById(gameId).subscribe(
 					response => {
-						this.game = response; this.fillPlayers();
+
+						this.game = response;
+
+						if (this.game.finished)
+							this._router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
+						else
+							this.fillPlayers();
 					},
 					error => {
 

@@ -134,6 +134,11 @@ export const HOME_PATH = ROUTES_WITH_HOME[0].path;
 export const GAME_PREFIX_PATH = "game/";
 
 /**
+ * EndGame prefix path.
+ */
+export const END_GAME_PREFIX_PATH = "game/end/";
+
+/**
  * 404 http code.
  */
 export const HTTP_NOT_FOUND = 404;

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {
-	HOME_PATH, HTTP_NOT_FOUND,
+	GAME_PREFIX_PATH,
+	HOME_PATH,
+	HTTP_NOT_FOUND,
 	OLYMPIA_ANTHEM_SOUND,
 	RANKS_FIRST,
 	RANKS_SECOND,
@@ -94,8 +96,18 @@ export class GameEndViewComponent implements OnInit {
 
 		this.getIdParam().subscribe(
 			response => {
-				this._gameResource.findById( Number(response) ).subscribe(
-					response => { this.game = response; this.isLoaded = true; },
+
+				let gameId = Number(response);
+				this._gameResource.findById(gameId).subscribe(
+					response => {
+
+						this.game = response;
+
+						if (!this.game.finished)
+							this._router.navigateByUrl(GAME_PREFIX_PATH + gameId);
+						else
+							this.isLoaded = true;
+					},
 					error => {
 
 						let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
