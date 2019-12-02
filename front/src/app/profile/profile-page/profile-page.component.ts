@@ -4,10 +4,11 @@ import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/base/page.interface';
 import {ProfileEditModalComponent} from "../profile-edit-modal/profile-edit-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {OPACITY_ANIMATION} from "../../tools/constant";
+import {HOME_PATH, OPACITY_ANIMATION} from "../../tools/constant";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 /**
  * The profiles view.
@@ -69,7 +70,8 @@ export class ProfilePageComponent implements OnInit {
 
     constructor(private _profileResource: ProfileResource,
                 private _ngbModal: NgbModal,
-                private _translate: TranslateService) {}
+                private _translate: TranslateService,
+                private _router: Router) {}
 
     ngOnInit(): void {
 
@@ -110,7 +112,7 @@ export class ProfilePageComponent implements OnInit {
 
                 modalRef.result.then(
                     (result) => { this.loadProfiles(true); },
-                    (reason) => { /* do nothing */ }
+                    (reason) => { this._router.navigateByUrl(HOME_PATH); }
                 );
             }
         );
