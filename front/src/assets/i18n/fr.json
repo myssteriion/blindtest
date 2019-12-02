@@ -101,7 +101,9 @@
         "END_VIEW": {
             "TITLE": "Fin de la partie",
             "BACK_TO_HOME": "Retourner au menu principal",
-            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?"
+            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?",
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "FOUND_GAME_ERROR": "Impossible de retrouver la partie."
         }
     },
     "ROUND": {

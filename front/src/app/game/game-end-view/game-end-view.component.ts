@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-	HOME_PATH,
+	HOME_PATH, HTTP_NOT_FOUND,
 	OLYMPIA_ANTHEM_SOUND,
 	RANKS_FIRST,
 	RANKS_SECOND,
@@ -17,6 +17,9 @@ import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
+import {ToasterService} from "../../services/toaster.service";
 
 /**
  * The end game view.
@@ -66,7 +69,8 @@ export class GameEndViewComponent implements OnInit {
 				private _activatedRoute: ActivatedRoute,
 				private _ngbModal: NgbModal,
 				private _translate: TranslateService,
-				private _router: Router) { }
+				private _router: Router,
+				private _toasterService: ToasterService) { }
 
 	ngOnInit(): void {
 
@@ -92,7 +96,29 @@ export class GameEndViewComponent implements OnInit {
 			response => {
 				this._gameResource.findById( Number(response) ).subscribe(
 					response => { this.game = response; this.isLoaded = true; },
-					error => { throw Error("can't find game : " + JSON.stringify(error)); }
+					error => {
+
+						let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+						if (errorAlert.status === HTTP_NOT_FOUND) {
+							this._toasterService.error( this._translate.instant("GAME.END_VIEW.GAME_NOT_FOUND") );
+							this._router.navigateByUrl(HOME_PATH);
+						}
+						else {
+
+							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+							modalRef.componentInstance.text = this._translate.instant("GAME.END_VIEW.FOUND_GAME_ERROR");
+							modalRef.componentInstance.suggestion = undefined;
+							modalRef.componentInstance.error = errorAlert;
+							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+							modalRef.componentInstance.showRetry = true;
+
+							modalRef.result.then(
+								(result) => { this.getGame(); },
+								(reason) => { this._router.navigateByUrl(HOME_PATH); }
+							);
+						}
+					}
 				);
 			},
 			error => { throw Error("can't find id param : " + JSON.stringify(error)); }
