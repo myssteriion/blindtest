@@ -42,6 +42,12 @@ export class ErrorAlertModalComponent implements OnInit {
 	private showRetry: boolean;
 
 	/**
+	 * Button label for close.
+	 */
+	@Input()
+	private closeLabel: string;
+
+	/**
 	 * Show error.
 	 */
 	private showError: boolean;

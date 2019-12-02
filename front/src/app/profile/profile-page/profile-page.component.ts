@@ -110,6 +110,7 @@ export class ProfilePageComponent implements OnInit {
                 modalRef.componentInstance.error = errorAlert;
                 modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
                 modalRef.componentInstance.showRetry = true;
+                modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
                 modalRef.result.then(
                     (result) => { this.loadProfiles(true); },

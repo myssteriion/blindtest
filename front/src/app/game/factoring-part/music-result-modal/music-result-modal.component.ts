@@ -196,6 +196,7 @@ export class MusicResultModalComponent implements OnInit {
                 modalRef.componentInstance.error = errorAlert;
                 modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
                 modalRef.componentInstance.showRetry = true;
+                modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
 
                 modalRef.result.then(
                     (result) => { this.save(); },

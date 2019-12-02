@@ -252,6 +252,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 							modalRef.componentInstance.error = errorAlert;
 							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 							modalRef.componentInstance.showRetry = true;
+							modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
 							modalRef.result.then(
 								(result) => { this.getGame(); },

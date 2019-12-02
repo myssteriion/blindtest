@@ -23,7 +23,9 @@
         "NO_RESULT": "Pas de résultat.",
         "MANY_TIMES": " fois",
         "SHOW_DETAIL": "Voir détail",
-        "HIDE_DETAIL": "Masquer détail"
+        "HIDE_DETAIL": "Masquer détail",
+        "GO_HOME": "Retour au menu",
+        "CANCEL_MODIFICATION": "Annuler la modification en cours"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"

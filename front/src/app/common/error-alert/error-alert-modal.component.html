@@ -50,6 +50,6 @@
 <div class="row error-alert-modal-footer">
     <div class="col">
         <button *ngIf="showRetry" class="btn btn-success font-size-normal" (click)="retry()">{{ 'COMMON.ERROR_MODAL.RETRY' | translate }}</button>
-        <button class="btn btn-info font-size-normal" (click)="close()">{{ 'COMMON.CLOSE' | translate }}</button>
+        <button class="btn btn-info font-size-normal" (click)="close()">{{ closeLabel }}</button>
     </div>
 </div>
