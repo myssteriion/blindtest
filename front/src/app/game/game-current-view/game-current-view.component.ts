@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SLIDE_ANIMATION, ROUTES_WITH_HOME, HOME_PATH} from "../../tools/constant";
+import {SLIDE_ANIMATION, ROUTES_WITH_HOME, HOME_PATH, HTTP_NOT_FOUND} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +20,9 @@ import {MusicResultModalComponent} from "../factoring-part/music-result-modal/mu
 import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
 import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
+import {ToasterService} from "../../services/toaster.service";
 
 /**
  * The current game view.
@@ -156,7 +159,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				private _router: Router,
 				private _ngbModal: NgbModal,
 				private _musicResource: MusicResource,
-				private _sanitizer: DomSanitizer) { }
+				private _sanitizer: DomSanitizer,
+				private _toasterService: ToasterService) { }
 
 	ngOnInit(): void {
 
@@ -212,9 +216,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlinePreviewAudio = undefined;
 		}
 
-		this.offlineAudio.nativeElement.pause();
-		this.offlineAudio.nativeElement = undefined;
-		this.offlineAudio = undefined;
+		if ( ! ToolsService.isNull(this.offlineAudio) ) {
+			this.offlineAudio.nativeElement.pause();
+			this.offlineAudio.nativeElement = undefined;
+			this.offlineAudio = undefined;
+		}
 	}
 	
 
@@ -227,8 +233,32 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.getIdParam().subscribe(
 			response => {
 				this._gameResource.findById( Number(response) ).subscribe(
-					response => { this.game = response; this.fillPlayers(); },
-					error => { throw Error("can't find game : " + JSON.stringify(error)); }
+					response => {
+						this.game = response; this.fillPlayers();
+					},
+					error => {
+
+						let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+						if (errorAlert.status === HTTP_NOT_FOUND) {
+							this._toasterService.error( this._translate.instant("GAME.CURRENT_VIEW.GAME_NOT_FOUND") );
+							this._router.navigateByUrl(HOME_PATH);
+						}
+						else {
+
+							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+							modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.FOUND_GAME_ERROR");
+							modalRef.componentInstance.suggestion = undefined;
+							modalRef.componentInstance.error = errorAlert;
+							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+							modalRef.componentInstance.showRetry = true;
+
+							modalRef.result.then(
+								(result) => { this.getGame(); },
+								(reason) => { this._router.navigateByUrl(HOME_PATH); }
+							);
+						}
+					}
 				);
 			},
 			error => { throw Error("can't find id param : " + JSON.stringify(error)); }

@@ -51,7 +51,7 @@
             "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
             "LAUNCH_GAME": "Lancer la partie !",
             "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
-            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiant soient correct."
+            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiants soient corrects."
         },
         "RESUME_VIEW": {
             "TITLE": "Reprendre une partie",
@@ -71,7 +71,9 @@
             "LISTEN": "Ecoutez !",
             "FINISH": "C'est fini !",
             "NEXT_MUSIC": "Musique suivante !",
-            "STOP_MUSIC": "Arrêter la musique"
+            "STOP_MUSIC": "Arrêter la musique",
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "FOUND_GAME_ERROR": "Impossible de retrouver la partie."
         },
         "THEME_EFFECT": {
             "THEME_LABEL": "* Thème *",
