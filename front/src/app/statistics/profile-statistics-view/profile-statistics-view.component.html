@@ -9,12 +9,14 @@
 
 
         <div class="row">
-            <!--   Best score & number of games played   -->
-            <score-by-game-type [colorScheme]="colorScheme" [statistics]="user.statistics"></score-by-game-type>
+            <!--      Rank chart      -->
+            <rank-counter [statistics]="user.statistics" [colorScheme]="colorScheme"></rank-counter>
         </div>
 
         <div class="row">
-            <rank-counter [statistics]="user.statistics" [colorScheme]="colorScheme"></rank-counter>
+            <!--      Listened / found musics ratio      -->
+            <found-listened-musics-ratio [statistics]="user.statistics"
+                                         [colorScheme]="colorScheme"></found-listened-musics-ratio>
         </div>
 
         <div class="row">
@@ -26,7 +28,6 @@
             <!--      Number of musics listened to by theme      -->
             <theme-listening-view [statistics]="user.statistics" [colorScheme]="colorScheme"></theme-listening-view>
         </div>
-
 
     </div>
 

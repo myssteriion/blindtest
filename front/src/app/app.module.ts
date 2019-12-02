@@ -50,6 +50,7 @@ import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-
 import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
 import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
 import {RankCounterComponent} from './statistics/common/rank-counter/rank-counter.component';
+import {FoundListenedMusicsRatioComponent} from './statistics/common/found-listened-musics-ratio/found-listened-musics-ratio.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -103,7 +104,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ThemeComparisonQuestionDetailComponent,
         ThemeComparisonQuestionNumberComponent,
         ScoreByGameTypeComponent,
-        RankCounterComponent
+        RankCounterComponent,
+        FoundListenedMusicsRatioComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,

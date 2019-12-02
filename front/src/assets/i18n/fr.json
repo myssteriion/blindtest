@@ -248,7 +248,8 @@
                 "THIRD": "Troisième",
                 "SECOND": "Second",
                 "FIRST": "Premier"
-            }
+            },
+            "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées"
         }
     },
     "MUSIC_THEMES": {
