@@ -381,22 +381,28 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose ).profile.name;
 
 			modalRef.result.then(
-				(result) => { let choiceTheme: Theme[] = []; choiceTheme.push(result); this.callNextMusic(choiceTheme); },
+				(result) => {
+
+					let choiceTheme: Theme[] = [];
+					choiceTheme.push(result);
+					this.callNextMusic(choiceTheme, this.game.connectionMode);
+				},
 				(reason) => { /* do nothing */ }
 			);
 		}
 		else
-			this.callNextMusic(this.game.themes);
+			this.callNextMusic(this.game.themes, this.game.connectionMode);
 	}
 
 	/**
 	 * Call web service.
 	 *
-	 * @param themes the themes (optional)
+	 * @param themes 		 the themes (optional)
+	 * @param connectionMode the connection mode
 	 */
-	private callNextMusic(themes: Theme[]): void {
+	private callNextMusic(themes: Theme[], connectionMode: ConnectionMode): void {
 
-		this._musicResource.random(themes, this.game.connectionMode).subscribe(
+		this._musicResource.random(themes, connectionMode).subscribe(
 			response => {
 
 				this.currentMusic = response;
@@ -425,7 +431,21 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.rollThemeEffect();
 			},
 			error => {
-				throw Error("can't find music : " + JSON.stringify(error));
+
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+				modalRef.componentInstance.text = this._translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
+				modalRef.componentInstance.suggestion = undefined;
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = true;
+				modalRef.componentInstance.closeLabel = this._translate.instant("GAME.CURRENT_VIEW.RETRY_IN_OFFLINE_MODE_ERROR");
+
+				modalRef.result.then(
+					(result) => { this.callNextMusic(themes, connectionMode); },
+					(reason) => { this.callNextMusic(themes, ConnectionMode.OFFLINE); }
+				);
 			}
 		);
 	}
@@ -548,7 +568,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				if (this.game.nbMusicsPlayedInRound === 0)
 					this.openRoundInfoModal();
 			},
-			(reason) => { /* do nothing */ }
+			(reason) => {
+				this._router.navigateByUrl(HOME_PATH);
+			}
 		);
 	}
 
