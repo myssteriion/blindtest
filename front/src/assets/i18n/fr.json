@@ -86,7 +86,8 @@
             "AUTHOR_WINNER_HEADER": "Artiste(s)",
             "MOVIE_TITLE_HEADER": "Titre film",
             "TITLE_WINNER_HEADER": "Titre",
-            "VICTIM_HEADER": "Victime"
+            "VICTIM_HEADER": "Victime",
+            "SAVE_ERROR": "Impossible d'appliquer les résultats."
         },
         "ROUND_INFO_MODAL": {
             "TITLE": "Info manche",

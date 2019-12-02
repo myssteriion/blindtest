@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {GameResource} from "../../../resources/game.resource";
 import {MusicResult} from "../../../interfaces/game/music.result.interface";
 import {Music} from "../../../interfaces/dto/music.interface";
 import {TranslateService} from '@ngx-translate/core';
+import {ErrorAlertModalComponent} from "../../../common/error-alert/error-alert-modal.component";
+import {ErrorAlert} from "../../../interfaces/base/error.alert.interface";
 
 /**
  * The music result modal.
@@ -59,7 +61,8 @@ export class MusicResultModalComponent implements OnInit {
 
     constructor(private _ngbActiveModal: NgbActiveModal,
                 private _gameResource: GameResource,
-                private _translate: TranslateService) {}
+                private _translate: TranslateService,
+                private _ngbModal: NgbModal) {}
 
     ngOnInit(): void {
 
@@ -180,8 +183,25 @@ export class MusicResultModalComponent implements OnInit {
         };
 
         this._gameResource.apply(musicResult).subscribe(
-            value => { this._ngbActiveModal.close(value); },
-            error => { throw Error("can't apply music result : " + JSON.stringify(error)); }
+            value => {
+                this._ngbActiveModal.close(value);
+            },
+            error => {
+
+                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+                modalRef.componentInstance.text = this._translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
+                modalRef.componentInstance.suggestion = undefined;
+                modalRef.componentInstance.error = errorAlert;
+                modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+                modalRef.componentInstance.showRetry = true;
+
+                modalRef.result.then(
+                    (result) => { this.save(); },
+                    (reason) => { /* do nothing */ }
+                );
+            }
         );
     }
 

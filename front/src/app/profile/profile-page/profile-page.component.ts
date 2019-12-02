@@ -106,6 +106,7 @@ export class ProfilePageComponent implements OnInit {
 
                 const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
                 modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
+                modalRef.componentInstance.suggestion = undefined;
                 modalRef.componentInstance.error = errorAlert;
                 modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
                 modalRef.componentInstance.showRetry = true;
