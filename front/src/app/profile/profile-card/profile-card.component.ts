@@ -8,6 +8,9 @@ import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.co
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from 'src/app/services/toaster.service';
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {HTTP_CONFLICT} from "../../tools/constant";
+import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 
 /**
  * Profile card.
@@ -121,7 +124,7 @@ export class ProfileCardComponent implements OnInit {
     }
 
     /**
-     * Open modal for delete profile and emit it.
+     * Open modal for delete profile.
      */
     private delete(): void {
 
@@ -130,16 +133,43 @@ export class ProfileCardComponent implements OnInit {
         modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
 
         modalRef.result.then(
-            (result) => {
-                this._profileResource.delete(this.profile).subscribe(
-                    response => {
-                        this._toasterService.success( this._translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
-                        this.onEdit.emit();
-                    },
-                    error => { throw Error("can't delete profile: " + JSON.stringify(error)); }
-                );
-            },
+            (result) => { this.deletedProfile() },
             (reason) => { /* do nothing */ }
+        );
+    }
+
+    /**
+     * Delete profile and emit it.
+     */
+    private deletedProfile(): void {
+
+        this._profileResource.delete(this.profile).subscribe(
+            response => {
+                this._toasterService.success( this._translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
+                this.onEdit.emit();
+            },
+            error => {
+
+                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+                if (errorAlert.status === HTTP_CONFLICT) {
+                    this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+                }
+                else {
+
+                    const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+                    modalRef.componentInstance.text = this._translate.instant("PROFILE.CARD.DELETE_ERROR");
+                    modalRef.componentInstance.suggestion = undefined;
+                    modalRef.componentInstance.error = errorAlert;
+                    modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+                    modalRef.componentInstance.showRetry = true;
+
+                    modalRef.result.then(
+                        (result) => { this.deletedProfile(); },
+                        (reason) => { /* do nothing */ }
+                    );
+                }
+            }
         );
     }
 

@@ -124,7 +124,8 @@
             "DELETE_TOOLTIP": "Supprimer le profil.",
             "DESELECT_TOOLTIP": "Retirer le profil.",
             "DELETE_BODY": "Etes-vous sûr de vouloir supprimer le profil de <span class=\"inner-html-special-text\">{{profile_name}}</span> ?",
-            "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé."
+            "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé.",
+            "DELETE_ERROR": "Impossible de supprimer le profile."
         },
         "EDIT_MODAL": {
             "CREATION_TITLE": "Création du profil",
