@@ -129,6 +129,11 @@ export const ROUTES_WITH_HOME = [ { path: '/home', name: 'HOME_VIEW.TITLE' } ].c
 export const HOME_PATH = ROUTES_WITH_HOME[0].path;
 
 /**
+ * Game prefix path.
+ */
+export const GAME_PREFIX_PATH = "game/";
+
+/**
  * 404 http code.
  */
 export const HTTP_NOT_FOUND = 404;

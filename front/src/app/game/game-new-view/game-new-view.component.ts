@@ -5,7 +5,7 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {SLIDE_ANIMATION, THEMES} from "../../tools/constant";
+import {GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
@@ -179,7 +179,7 @@ export class GameNewViewComponent implements OnInit {
 
 		this._gameResource.newGame(newGame).subscribe(
 			response => {
-				this._router.navigateByUrl("/game/" + response.id);
+				this._router.navigateByUrl(GAME_PREFIX_PATH + response.id);
 			},
 			error => {
 

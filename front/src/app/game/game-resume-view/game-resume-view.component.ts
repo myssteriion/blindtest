@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SLIDE_ANIMATION} from "../../tools/constant";
+import {GAME_PREFIX_PATH, SLIDE_ANIMATION} from "../../tools/constant";
 import {ToolsService} from "../../tools/tools.service";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
@@ -43,7 +43,7 @@ export class GameResumeViewComponent implements OnInit {
 
 		if ( !this.gameNumIsNaN() ) {
 			this._gameResource.findById( Number(this.numGame) ).subscribe(
-				response => { this._router.navigateByUrl("game/" + response.id); },
+				response => { this._router.navigateByUrl(GAME_PREFIX_PATH + response.id); },
 				error => { this._toasterService.error( this._translate.instant("GAME.RESUME_VIEW.GAME_NOT_FOUND") ); }
 			);
 		}
