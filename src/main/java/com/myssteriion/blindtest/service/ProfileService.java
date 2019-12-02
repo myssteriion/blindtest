@@ -45,7 +45,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	}
 
 	@Override
-	public ProfileDTO update(ProfileDTO dto) throws NotFoundException {
+	public ProfileDTO update(ProfileDTO dto) throws NotFoundException, ConflictException {
 
 		ProfileDTO profile = super.update(dto);
 		createProfileAvatarFlux(profile);

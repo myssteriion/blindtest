@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Round;
@@ -13,6 +13,7 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
@@ -91,7 +92,7 @@ public class GameServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws NotFoundException, SpotifyException {
+	public void apply() throws NotFoundException, SpotifyException, ConflictException {
 
 		MusicDTO musicDTO = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
 		ProfileDTO profileDto = new ProfileDTO("name","avatarName").setId(1);

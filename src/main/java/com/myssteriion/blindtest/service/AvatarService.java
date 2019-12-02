@@ -122,7 +122,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	}
 
 	@Override
-	public AvatarDTO update(AvatarDTO dto) throws NotFoundException {
+	public AvatarDTO update(AvatarDTO dto) throws NotFoundException, ConflictException {
 
 		AvatarDTO avatar = super.update(dto);
 		createAvatarFlux(avatar);

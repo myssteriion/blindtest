@@ -6,10 +6,7 @@ import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.tools.Tool;
-import com.myssteriion.blindtest.tools.converter.ThemeWinModeConverter;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

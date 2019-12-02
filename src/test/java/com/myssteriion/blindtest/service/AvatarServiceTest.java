@@ -4,8 +4,6 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -20,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -141,7 +138,7 @@ public class AvatarServiceTest extends AbstractTest {
     }
 
     @Test
-    public void update() throws NotFoundException {
+    public void update() throws NotFoundException, ConflictException {
 
         String name = "name";
 

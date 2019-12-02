@@ -20,7 +20,7 @@ import java.util.Objects;
  * The AvatarDTO.
  */
 @Entity
-@Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name_unique", columnNames={"name"}) })
+@Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 public class AvatarDTO extends AbstractDTO {
 
     /**

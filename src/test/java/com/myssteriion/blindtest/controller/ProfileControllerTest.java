@@ -40,7 +40,7 @@ public class ProfileControllerTest extends AbstractTest {
 	}
 	
 	@Test
-	public void update() throws NotFoundException {
+	public void update() throws NotFoundException, ConflictException {
 		
 		ProfileDTO profileDto = new ProfileDTO("name", "avatar");
 		Mockito.when(profileService.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);

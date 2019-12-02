@@ -52,9 +52,10 @@ public class ProfileController {
 	 * @param profileDto the 'new' ProfileDTO
 	 * @return the ProfileDTO modified
 	 * @throws NotFoundException NotFound exception
+	 * @throws ConflictException the conflict exception
 	 */
 	@PutMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<ProfileDTO> update(@PathVariable(Constant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException {
+	public ResponseEntity<ProfileDTO> update(@PathVariable(Constant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
 		
 		profileDto.setId(id);
 		return ResponseBuilder.create200( profileService.update(profileDto) );
@@ -63,6 +64,7 @@ public class ProfileController {
 	/**
 	 * Find pageable of profile filtered by prefix name.
 	 *
+	 * @param prefixName the prefix name
 	 * @param pageNumber the page number
 	 * @return the pageable of profiles
 	 */

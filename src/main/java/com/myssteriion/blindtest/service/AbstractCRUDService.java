@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -53,8 +54,9 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      * @param dto the dto
      * @return the dto
      * @throws NotFoundException the not found exception
+     * @throws ConflictException the conflict exception
      */
-    public DTO update(DTO dto) throws NotFoundException {
+    public DTO update(DTO dto) throws NotFoundException, ConflictException {
 
         Tool.verifyValue("entity", dto);
         Tool.verifyValue("entity -> id", dto.getId());
@@ -62,7 +64,12 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
         if ( !dao.findById(dto.getId()).isPresent() )
             throw new NotFoundException("Entity not found.");
 
-        return dao.save(dto);
+        try {
+            return dao.save(dto);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new ConflictException("Entity already exists.");
+        }
     }
 
     /**

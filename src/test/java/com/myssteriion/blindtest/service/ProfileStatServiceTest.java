@@ -76,7 +76,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws NotFoundException {
+	public void update() throws NotFoundException, ConflictException {
 
 		Integer profileStatId = 1;
 

@@ -1,11 +1,10 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
 import com.myssteriion.blindtest.tools.Tool;
 
 import javax.persistence.Column;

@@ -9,6 +9,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
@@ -107,8 +108,9 @@ public class GameService {
 	 * @param musicResult the music result
 	 * @return the game
 	 * @throws NotFoundException the not found exception
+	 * @throws ConflictException the conflict exception
 	 */
-	public Game apply(MusicResult musicResult) throws NotFoundException {
+	public Game apply(MusicResult musicResult) throws NotFoundException, ConflictException {
 
 		Tool.verifyValue("musicResult", musicResult);
 		Game game = games.stream()

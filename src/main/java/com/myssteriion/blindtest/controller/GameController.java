@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
@@ -55,9 +56,10 @@ public class GameController {
 	 * @param musicResult the MusicResultDTO
 	 * @return the GameDTO after apply
 	 * @throws NotFoundException NotFound exception
+	 * @throws ConflictException the conflict exception
 	 */
 	@PostMapping(path = "/apply")
-	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException {
+	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException, ConflictException {
 
 		Game game = gameService.apply(musicResult);
 		return ResponseBuilder.create200(game);

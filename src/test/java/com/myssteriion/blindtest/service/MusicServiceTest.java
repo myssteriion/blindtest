@@ -2,8 +2,8 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
@@ -121,7 +121,7 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws NotFoundException {
+	public void update() throws NotFoundException, ConflictException {
 
 		String name = "name";
 		Theme theme = Theme.ANNEES_80;

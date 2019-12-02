@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -86,7 +87,7 @@ public class ProfileServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void update() throws NotFoundException {
+	public void update() throws NotFoundException, ConflictException {
 
 		String name = "name";
 		String avatarName = "avatarName";
@@ -117,7 +118,7 @@ public class ProfileServiceTest extends AbstractTest {
 		profileStatDtoMockSame.setId(1);
 		Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileStatDtoMockNotSame),
 				Optional.of(profileStatDtoMockNotSame), Optional.of(profileStatDtoMockSame));
-		Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
+		Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenThrow(new DataIntegrityViolationException("dive")).thenReturn(profileDto);
 
 		try {
 			profileDto.setId(1);
@@ -126,6 +127,15 @@ public class ProfileServiceTest extends AbstractTest {
 		}
 		catch (NotFoundException e) {
 			verifyException(new NotFoundException("Entity not found."), e);
+		}
+
+		try {
+			profileDto.setId(1);
+			profileService.update(profileDto);
+			Assert.fail("Doit lever une DaoException car le mock throw.");
+		}
+		catch (ConflictException e) {
+			verifyException(new ConflictException("Entity already exists."), e);
 		}
 
 		profileDto.setId(1);

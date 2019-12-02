@@ -10,6 +10,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
@@ -53,7 +54,7 @@ public class GameControllerTest extends AbstractTest {
 	}
 
 	@Test
-	public void apply() throws NotFoundException {
+	public void apply() throws NotFoundException, ConflictException {
 
 		List<Player> players = Arrays.asList(
 				new Player(new ProfileDTO("name")),
