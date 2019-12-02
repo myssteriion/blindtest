@@ -337,17 +337,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private getFormattedLabel(): string {
 
 		let body: string =
-			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
+			"<div class='row padding-bottom-1em'><div class='col'>" +
 				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_1") +
 			"</div></div>";
 
 		body +=
-			"<div class='row padding-bottom-1em font-size-normal'><div class='col'>" +
+			"<div class='row padding-bottom-1em'><div class='col'>" +
 				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_2") +
 			"</div></div>";
 
 		body +=
-			"<div class='row font-size-normal'><div class='col alert alert-info'>" +
+			"<div class='row'><div class='col alert alert-info'>" +
 				this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_3", { game_id: this.game.id } ) +
 			"</div></div>";
 
