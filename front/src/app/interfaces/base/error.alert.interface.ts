@@ -5,7 +5,6 @@ import {ErrorMessage} from "./error.message.interface";
  */
 export interface ErrorAlert {
 	status: number,
-	statusText: string,
 	name: string,
 	error: ErrorMessage
 }

@@ -183,7 +183,7 @@ export class GameNewViewComponent implements OnInit {
 			},
 			error => {
 
-				let errorAlert: ErrorAlert = { status: error.status, statusText: error.statusText, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
 
 				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
 				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");

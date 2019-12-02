@@ -41,6 +41,9 @@ export class ErrorAlertModalComponent implements OnInit {
 	@Input()
 	private showRetry: boolean;
 
+	/**
+	 * Show error.
+	 */
 	private showError: boolean;
 
 	/**
