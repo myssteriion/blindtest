@@ -62,7 +62,7 @@ export class ErrorAlertModalComponent implements OnInit {
 				private _translate: TranslateService) { }
 
 	ngOnInit(): void {
-		this.showError = false;
+		this.showError = this.error.status === 0;
 	}
 
 
