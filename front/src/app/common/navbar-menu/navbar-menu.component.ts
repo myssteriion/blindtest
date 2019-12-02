@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
-import {FFXII_THEME, LOGO, routesWithHome} from "../../tools/constant";
+import {FFXII_THEME, LOGO, ROUTES_WITH_HOME} from "../../tools/constant";
 import {ToolsService} from "../../tools/tools.service";
 
 /**
@@ -27,7 +27,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * Route (with home).
 	 */
-	public routes = routesWithHome;
+	public routes = ROUTES_WITH_HOME;
 
 	private faMusic = faMusic;
 	private faVolumeMute = faVolumeMute;

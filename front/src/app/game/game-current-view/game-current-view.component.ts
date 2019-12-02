@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SLIDE_ANIMATION} from "../../tools/constant";
+import {SLIDE_ANIMATION, ROUTES_WITH_HOME, HOME_PATH} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -294,7 +294,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.body = this.getFormattedLabel();
 
 		modalRef.result.then(
-			(result) => { this._router.navigateByUrl("/home"); },
+			(result) => { this._router.navigateByUrl(HOME_PATH); },
 			(reason) => { /* do nothing */ }
 		);
 	}

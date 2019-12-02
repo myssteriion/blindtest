@@ -1,5 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {OLYMPIA_ANTHEM_SOUND, RANKS_FIRST, RANKS_SECOND, RANKS_THIRD, SLIDE_ANIMATION} from "../../tools/constant";
+import {
+	HOME_PATH,
+	OLYMPIA_ANTHEM_SOUND,
+	RANKS_FIRST,
+	RANKS_SECOND,
+	RANKS_THIRD,
+	SLIDE_ANIMATION
+} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Observable} from 'rxjs';
@@ -158,7 +165,7 @@ export class GameEndViewComponent implements OnInit {
 			(result) => {
 				this.audio.play();
 				this.audio = undefined;
-				this._router.navigateByUrl("/home");
+				this._router.navigateByUrl(HOME_PATH);
 			},
 			(reason) => { /* do nothing */ }
 		);

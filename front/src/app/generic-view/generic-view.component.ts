@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {GENERIC, routesWithHome} from "../tools/constant";
+import {GENERIC, HOME_PATH} from "../tools/constant";
 import {Router} from '@angular/router';
 
 /**
@@ -27,7 +27,7 @@ export class GenericViewComponent {
 	 * Stop generic.
 	 */
 	private stopGeneric(): void {
-		this._router.navigateByUrl( routesWithHome[0].path );
+		this._router.navigateByUrl(HOME_PATH);
 	}
 
 }

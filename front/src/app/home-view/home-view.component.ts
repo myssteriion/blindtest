@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LOGO, routesWithoutHome, SLIDE_ANIMATION} from "../tools/constant";
+import {LOGO, ROUTES_WITHOUT_HOME, SLIDE_ANIMATION} from "../tools/constant";
 
 /**
  * HomeView.
@@ -17,7 +17,7 @@ export class HomeViewComponent {
 	/**
 	 * Route (without home).
 	 */
-	private routes = routesWithoutHome;
+	private routes = ROUTES_WITHOUT_HOME;
 
 
 

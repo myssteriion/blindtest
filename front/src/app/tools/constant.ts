@@ -112,7 +112,7 @@ export const REDUCTION_ANIMATION =
 /**
  * Route for the menu (button in view).
  */
-export const routesWithoutHome = [
+export const ROUTES_WITHOUT_HOME = [
     { path: '/game/new', name: 'GAME.NEW_VIEW.TITLE' },
     { path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE' },
     { path: '/profiles', name: 'PROFILE.VIEW.TITLE' }
@@ -121,4 +121,9 @@ export const routesWithoutHome = [
 /**
  * Route for the nav-bar (link in view).
  */
-export const routesWithHome = [ { path: '/home', name: 'HOME_VIEW.TITLE' } ].concat(routesWithoutHome);
+export const ROUTES_WITH_HOME = [ { path: '/home', name: 'HOME_VIEW.TITLE' } ].concat(ROUTES_WITHOUT_HOME);
+
+/**
+ * HOME path.
+ */
+export const HOME_PATH = ROUTES_WITH_HOME[0].path;

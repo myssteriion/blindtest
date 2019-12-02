@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {routesWithHome} from "./tools/constant";
+import {ROUTES_WITH_HOME} from "./tools/constant";
 import {Router} from '@angular/router';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {Spinkit} from 'ng-http-loader';
@@ -42,9 +42,9 @@ export class AppComponent {
         let i: number = 0;
 
         let showNavbar: boolean = false;
-        while (!showNavbar && i < routesWithHome.length) {
+        while (!showNavbar && i < ROUTES_WITH_HOME.length) {
 
-            showNavbar = (this._router.url === routesWithHome[i].path);
+            showNavbar = (this._router.url === ROUTES_WITH_HOME[i].path);
             i++;
         }
 
