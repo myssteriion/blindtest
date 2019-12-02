@@ -1,6 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
-import {TranslateService} from '@ngx-translate/core';
+import {SLIDE_ANIMATION} from '../../../tools/constant';
 
 /**
  * The theme comparison view.
@@ -24,11 +23,12 @@ export class ThemeComparisonViewComponent implements OnInit {
         domain: ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
     };
 
-    constructor(private _translate: TranslateService) {
+    constructor() {
     }
 
     ngOnInit() {
         this.availableThemes = this.gameStatistics.themes;
+        this.selectedTheme = this.availableThemes[0];
     }
 
     selectTheme(theme: Theme) {
