@@ -3,11 +3,14 @@ import {Profile} from 'src/app/interfaces/dto/profile.interface';
 import {Avatar} from 'src/app/interfaces/dto/avatar.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
 import {ToolsService} from "../../tools/tools.service";
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from "../../interfaces/base/page.interface";
 import {ToasterService} from "../../services/toaster.service";
 import {TranslateService} from '@ngx-translate/core';
+import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
+import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
+import {HTTP_CONFLICT} from "../../tools/constant";
 
 declare var $: any;
 
@@ -59,7 +62,8 @@ export class ProfileEditModalComponent implements OnInit {
 				private _ngbActiveModal: NgbActiveModal,
 				private _profileResource: ProfileResource,
 				private _toasterService: ToasterService,
-				private _translate: TranslateService) { }
+				private _translate: TranslateService,
+				private _ngbModal: NgbModal) { }
 
 	public ngOnInit(): void {
 
@@ -105,7 +109,22 @@ export class ProfileEditModalComponent implements OnInit {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
 			response => { this.page = response; },
-			error => { throw Error("can't find all avatars : " + JSON.stringify(error)); }
+			error => {
+
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.AVATAR_LOAD_ERROR");
+				modalRef.componentInstance.suggestion = undefined;
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = true;
+
+				modalRef.result.then(
+					(result) => { this.loadAvatars(1); },
+					(reason) => { this.cancel() }
+				);
+			}
 		);
 	}
 
@@ -187,30 +206,88 @@ export class ProfileEditModalComponent implements OnInit {
 		};
 
 
-		if (this.create) {
+		if (this.create)
+			this.createProfile(profileTmp);
+		else
+			this.updateProfile(profileTmp);
+	}
 
-			this._profileResource.create(profileTmp).subscribe(
-				response => {
+	/**
+	 * Create new profile.
+	 *
+	 * @param profileTmp the profile to save
+	 */
+	private createProfile(profileTmp: Profile): void {
 
-					this.profile = response;
-					this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.CREATED_TOASTER", { profile_name: this.profile.name } ) );
-					this._ngbActiveModal.close(this.profile);
-				},
-				error => { throw Error("can't create profile : " + JSON.stringify(error)); }
-			);
-		}
-		else {
+		this._profileResource.create(profileTmp).subscribe(
+			response => {
 
-			this._profileResource.update(profileTmp).subscribe(
-				response => {
+				this.profile = response;
+				this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.CREATED_TOASTER", { profile_name: this.profile.name } ) );
+				this._ngbActiveModal.close(this.profile);
+			},
+			error => {
 
-					this.profile = response;
-					this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
-					this._ngbActiveModal.close(this.profile);
-				},
-				error => { throw Error("can't update profile : " + JSON.stringify(error)); }
-			);
-		}
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+				if (errorAlert.status === HTTP_CONFLICT) {
+					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+				}
+				else {
+
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.CREATE_ERROR");
+					modalRef.componentInstance.suggestion = undefined;
+					modalRef.componentInstance.error = errorAlert;
+					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+					modalRef.componentInstance.showRetry = true;
+
+					modalRef.result.then(
+						(result) => { this.save(); },
+						(reason) => { /* do nothing */ }
+					);
+				}
+			}
+		);
+	}
+
+	/**
+	 * Update profile.
+	 *
+	 * @param profileTmp the profile to save
+	 */
+	private updateProfile(profileTmp: Profile): void {
+
+		this._profileResource.update(profileTmp).subscribe(
+			response => {
+
+				this.profile = response;
+				this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
+				this._ngbActiveModal.close(this.profile);
+			},
+			error => {
+
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+				if (errorAlert.status === HTTP_CONFLICT) {
+					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+				}
+				else {
+
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.UPDATE_ERROR");
+					modalRef.componentInstance.suggestion = undefined;
+					modalRef.componentInstance.error = errorAlert;
+					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+					modalRef.componentInstance.showRetry = true;
+
+					modalRef.result.then(
+						(result) => { this.save(); },
+						(reason) => { /* do nothing */ }
+					);
+				}
+			}
+		);
 	}
 
 	/**

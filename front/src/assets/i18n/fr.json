@@ -134,7 +134,11 @@
             "NAME_PLACE_HOLDER": "Entrez votre pseudo",
             "AVATAR_LABEL": "Avatar :",
             "CREATED_TOASTER": "Profil '{{profile_name}}' créé.",
-            "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour."
+            "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour.",
+            "AVATAR_LOAD_ERROR": "Impossible de charger les avatars.",
+            "CREATE_ERROR": "Impossible de créer le profil.",
+            "UPDATE_ERROR": "Impossible de sauvgarder le profil.",
+            "PROFILE_ALREADY_EXISTS_ERROR": "Ce pseudo est déjà pris."
         },
         "PAGE": {
             "CREATE_BUTTON": "Nouveau profil",
