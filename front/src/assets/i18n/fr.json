@@ -108,8 +108,8 @@
                 "NB_POINTS_LOSE": "Victime d'un vol :"
             }
         },
-        "CHOICE_THEME_MODAL" : {
-            "TITLE" : "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisis un thème"
+        "CHOICE_THEME_MODAL": {
+            "TITLE": "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisis un thème"
         },
         "END_VIEW": {
             "TITLE": "Fin de la partie",
@@ -215,10 +215,10 @@
             "USER_ADDED": "{{user_name}} a été ajouté au comparateur."
         },
         "ERROR": {
-            "USER_STATISTICS_BINDING_KO" : "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
+            "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
-        "CATEGORIES" : {
-            "PLAYED_GAMES" : "Parties jouées",
+        "CATEGORIES": {
+            "PLAYED_GAMES": "Parties jouées",
             "BEST_SCORE": {
                 "TITLE": "Meilleur score",
                 "SHORT": "Rapide",
@@ -234,6 +234,20 @@
             },
             "LISTENED_MUSICS_BY_THEME": {
                 "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème"
+            },
+            "RANK_OCCUPIED": {
+                "TWELFTH": "Douxième",
+                "ELEVENTH": "Onzième",
+                "TENTH": "Dixième",
+                "NINTH": "Neuvième",
+                "EIGHTH": "Huitième",
+                "SEVENTH": "Septième",
+                "SIXTH": "Sixième",
+                "FIFTH": "Cinquième",
+                "FOURTH": "Quatrième",
+                "THIRD": "Troisième",
+                "SECOND": "Second",
+                "FIRST": "Premier"
             }
         }
     },

@@ -49,6 +49,7 @@ import {ThemeComparisonViewComponent} from './statistics/common/theme-comparison
 import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-comparison/theme-comparison-question-detail/theme-comparison-question-detail.component';
 import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
 import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
+import {RankCounterComponent} from './statistics/common/rank-counter/rank-counter.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -101,7 +102,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ThemeComparisonViewComponent,
         ThemeComparisonQuestionDetailComponent,
         ThemeComparisonQuestionNumberComponent,
-        ScoreByGameTypeComponent
+        ScoreByGameTypeComponent,
+        RankCounterComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
