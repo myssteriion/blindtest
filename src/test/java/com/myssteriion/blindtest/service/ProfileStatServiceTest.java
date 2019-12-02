@@ -44,7 +44,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 		profileStatService = Mockito.spy( profileStatService = new ProfileStatService(profileStatDao, configProperties) );
@@ -66,7 +66,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("Dto already exists."), e);
+			verifyException(new ConflictException("Entity already exists."), e);
 		}
 
 		ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
@@ -86,7 +86,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 
@@ -96,7 +96,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto -> id' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
 		}
 
 
@@ -114,7 +114,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Dto not found."), e);
+			verifyException(new NotFoundException("Entity not found."), e);
 		}
 
 		profileStatDto.setId(1);
@@ -135,7 +135,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'dto' est obligatoire."), e);
+			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 		ProfileStatDTO profileStatDTO = new ProfileStatDTO(1);

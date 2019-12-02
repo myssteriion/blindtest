@@ -25,7 +25,7 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 	@Override
 	public ProfileStatDTO find(ProfileStatDTO dto) {
 
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("entity", dto);
 
 		if ( Tool.isNullOrEmpty(dto.getId()) )
 			return dao.findByProfileId(dto.getProfileId()).orElse(null);

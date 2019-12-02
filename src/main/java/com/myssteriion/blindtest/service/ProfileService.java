@@ -55,7 +55,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	@Override
 	public ProfileDTO find(ProfileDTO dto) {
 
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("entity", dto);
 
 		ProfileDTO profile;
 		if ( Tool.isNullOrEmpty(dto.getId()) )

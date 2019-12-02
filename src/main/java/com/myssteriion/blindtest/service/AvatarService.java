@@ -132,7 +132,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	@Override
 	public AvatarDTO find(AvatarDTO dto) {
 
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("entity", dto);
 
 		AvatarDTO avatar;
 		if ( Tool.isNullOrEmpty(dto.getId()) )

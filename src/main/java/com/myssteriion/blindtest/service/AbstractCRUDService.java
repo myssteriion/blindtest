@@ -38,11 +38,11 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
 
     public DTO save(DTO dto) throws ConflictException {
 
-        Tool.verifyValue("dto", dto);
+        Tool.verifyValue("entity", dto);
         dto.setId(null);
 
         if (find(dto) != null)
-            throw new ConflictException("Dto already exists.");
+            throw new ConflictException("Entity already exists.");
 
         return dao.save(dto);
     }
@@ -56,11 +56,11 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      */
     public DTO update(DTO dto) throws NotFoundException {
 
-        Tool.verifyValue("dto", dto);
-        Tool.verifyValue("dto -> id", dto.getId());
+        Tool.verifyValue("entity", dto);
+        Tool.verifyValue("entity -> id", dto.getId());
 
         if ( !dao.findById(dto.getId()).isPresent() )
-            throw new NotFoundException("Dto not found.");
+            throw new NotFoundException("Entity not found.");
 
         return dao.save(dto);
     }
@@ -73,8 +73,8 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      */
     public DTO find(DTO dto) {
 
-        Tool.verifyValue("dto", dto);
-        Tool.verifyValue("dto -> id", dto.getId());
+        Tool.verifyValue("entity", dto);
+        Tool.verifyValue("entity -> id", dto.getId());
 
         return dao.findById( dto.getId() ).orElse(null);
     }
@@ -87,11 +87,11 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      */
     public void delete(DTO dto) throws NotFoundException {
 
-        Tool.verifyValue("dto", dto);
-        Tool.verifyValue("dto -> id", dto.getId());
+        Tool.verifyValue("entity", dto);
+        Tool.verifyValue("entity -> id", dto.getId());
 
         if ( !dao.findById(dto.getId()).isPresent() )
-            throw new NotFoundException("Dto not found.");
+            throw new NotFoundException("Entity not found.");
 
         dao.deleteById(dto.getId());
     }

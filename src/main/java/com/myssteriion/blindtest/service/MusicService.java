@@ -180,7 +180,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	@Override
 	public MusicDTO find(MusicDTO dto) {
 
-		Tool.verifyValue("dto", dto);
+		Tool.verifyValue("entity", dto);
 
 		if ( Tool.isNullOrEmpty(dto.getId()) )
 			return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
