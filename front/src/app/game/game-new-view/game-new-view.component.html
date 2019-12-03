@@ -27,16 +27,16 @@
         </div>
     </div>
 
+    <!-- themes label -->
+    <div class="row">
+        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
+    </div>
+
 
     <!-- themes -->
     <div class="row game-new-view-themes">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col" *ngFor="let theme of themes">
-                    <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }" (click)="selectDeselectTheme(theme.enumVal)">
-                </div>
-            </div>
+        <div class="col-1" *ngFor="let theme of themes">
+            <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }" (click)="selectDeselectTheme(theme.enumVal)">
         </div>
     </div>
 
