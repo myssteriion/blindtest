@@ -78,10 +78,6 @@
             "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
             "RETRY_IN_OFFLINE_MODE_ERROR": "Passer en mode OFFLINE pour la prochaine musique uniquement."
         },
-        "THEME_EFFECT": {
-            "THEME_LABEL": "* Thème *",
-            "EFFECT_LABEL": "* Effet *"
-        },
         "MUSIC_RESULT_MODAL": {
             "TITLE": "Résultat",
             "NAME_HEADER": "Joueur",
