@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {
 	GAME_PREFIX_PATH,
 	HOME_PATH,
@@ -22,6 +22,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {ToasterService} from "../../services/toaster.service";
+import {ToolsService} from "../../tools/tools.service";
 
 /**
  * The end game view.
@@ -34,7 +35,7 @@ import {ToasterService} from "../../services/toaster.service";
 		SLIDE_ANIMATION
 	]
 })
-export class GameEndViewComponent implements OnInit {
+export class GameEndViewComponent implements OnInit, OnDestroy {
 
 
 	/**
@@ -85,6 +86,13 @@ export class GameEndViewComponent implements OnInit {
 		this.currentExitIcon = this.faDoorClosed;
 		this.podiumRank = [Rank.FIRST, Rank.SECOND, Rank.THIRD];
 		this.getGame();
+	}
+
+	ngOnDestroy(): void {
+		if ( !ToolsService.isNull(this.audio) ) {
+			this.audio.pause();
+			this.audio = undefined;
+		}
 	}
 
 
