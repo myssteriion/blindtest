@@ -216,7 +216,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlinePreviewAudio = undefined;
 		}
 
-		if ( ! ToolsService.isNull(this.offlineAudio) ) {
+		if ( !ToolsService.isNull(this.offlineAudio) ) {
 			this.offlineAudio.nativeElement.pause();
 			this.offlineAudio.nativeElement = undefined;
 			this.offlineAudio = undefined;

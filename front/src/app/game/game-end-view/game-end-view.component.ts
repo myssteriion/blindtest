@@ -207,11 +207,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.body = this._translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
 
 		modalRef.result.then(
-			(result) => {
-				this.audio.play();
-				this.audio = undefined;
-				this._router.navigateByUrl(HOME_PATH);
-			},
+			(result) => { this._router.navigateByUrl(HOME_PATH); },
 			(reason) => { /* do nothing */ }
 		);
 	}
