@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -64,41 +64,43 @@ import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
 
+import { NgSelectModule } from '@ng-select/ng-select';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		ProfileViewComponent,
-		ProfileCardComponent,
-		ProfileCardEmptyComponent,
-		ProfilePageComponent,
-		ProfilePageModalComponent,
-		ProfileEditModalComponent,
-		ConfirmModalComponent,
-		HeaderComponent,
-		GameNewViewComponent,
-		NavbarMenuComponent,
-		HomeViewComponent,
-		VersionViewComponent,
-		GenericViewComponent,
-		GameCurrentViewComponent,
-		GameResumeViewComponent,
-		PlayerCardComponent,
-		ThemeEffectComponent,
-		CustomCountdownComponent,
-		MusicResultModalComponent,
-		RoundInfoModalComponent,
-		ChoiceThemeModalComponent,
-		GameEndViewComponent,
-		ErrorAlertModalComponent,
-		GameResumeViewComponent,
-		ProfilesStatisticsViewComponent,
-		ProfileStatisticsViewComponent,
-		ThemePercentagesComponent,
+    declarations: [
+        AppComponent,
+        ProfileViewComponent,
+        ProfileCardComponent,
+        ProfileCardEmptyComponent,
+        ProfilePageComponent,
+        ProfilePageModalComponent,
+        ProfileEditModalComponent,
+        ConfirmModalComponent,
+        HeaderComponent,
+        GameNewViewComponent,
+        NavbarMenuComponent,
+        HomeViewComponent,
+        VersionViewComponent,
+        GenericViewComponent,
+        GameCurrentViewComponent,
+        GameResumeViewComponent,
+        PlayerCardComponent,
+        ThemeEffectComponent,
+        CustomCountdownComponent,
+        MusicResultModalComponent,
+        RoundInfoModalComponent,
+        ChoiceThemeModalComponent,
+        GameEndViewComponent,
+        ErrorAlertModalComponent,
+        GameResumeViewComponent,
+        ProfilesStatisticsViewComponent,
+        ProfileStatisticsViewComponent,
+        ThemePercentagesComponent,
         ThemeListeningComponent,
         ThemeComparisonViewComponent,
         ThemeComparisonQuestionDetailComponent,
@@ -122,7 +124,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NgbModule,
 		HttpClientModule,
 		FormsModule,
-		FontAwesomeModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
 		BrowserAnimationsModule,
 		NgxChartsModule,
 		ToastrModule.forRoot(),
@@ -137,8 +140,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 		CountdownModule,
 		MatCheckboxModule,
 		NgHttpLoaderModule.forRoot(),
-		MatRadioModule
-	],
+		MatRadioModule,
+        NgSelectModule
+    ],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
