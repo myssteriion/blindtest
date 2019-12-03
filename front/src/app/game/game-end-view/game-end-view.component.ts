@@ -191,10 +191,8 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		let players: Player[] = [];
 
 		let noPodiumRank = [Rank.FOURTH, Rank.FIFTH, Rank.SIXTH, Rank.SEVENTH, Rank.EIGHTH, Rank.NINTH, Rank.TENTH, Rank.ELEVENTH, Rank.TWELFTH];
-		for (let rank of noPodiumRank) {
-			console.log(rank,  this.getPlayersByRank(rank));
+		for (let rank of noPodiumRank)
 			players = players.concat( this.getPlayersByRank(rank) );
-		}
 
 		return players;
 	}
