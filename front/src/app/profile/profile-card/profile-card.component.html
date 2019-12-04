@@ -6,9 +6,9 @@
     </div>
 
     <!-- name -->
-    <div class="profile-card-name font-size-normal" [ngClass]="{'col-6': showIcons(), 'col-8': !showIcons()}">{{profile.name}}</div>
+    <div class="profile-card-name font-size-small" [ngClass]="{'col-6': showIcons(), 'col-8': !showIcons()}">{{profile.name}}</div>
 
-    <!-- update/delete/select icons -->
+    <!-- update/delete/deselect icons -->
     <div *ngIf="showIcons()" class="col-3 profile-card-action-button">
         <div>
             <fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faEdit" (click)="edit()" ngbTooltip="{{ 'PROFILE.CARD.EDIT_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>

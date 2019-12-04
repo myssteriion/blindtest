@@ -1,6 +1,6 @@
 <!-- modal header -->
 <div class="row round-info-modal-header">
-    <div class="col font-size-modal-title">{{ 'GAME.ROUND_INFO_MODAL.TITLE' | translate }}</div>
+    <div class="col modal-title">{{ 'GAME.ROUND_INFO_MODAL.TITLE' | translate }}</div>
 </div>
 
 
@@ -13,23 +13,23 @@
         </div>
 
         <div class="row alert alert-success">
-            <div class="col font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_WON' | translate }}</div>
-            <div class="col font-size-normal">{{ game.roundContent.nbPointWon }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_WON' | translate }}</div>
+            <div class="col-4 font-size-normal">{{ game.roundContent.nbPointWon }}</div>
         </div>
 
         <div *ngIf="showNpPointLose()" class="row alert alert-danger">
-            <div class="col font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_LOSE' | translate }}</div>
-            <div class="col font-size-normal">{{ game.roundContent.nbPointLoose }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_LOSE' | translate }}</div>
+            <div class="col-4 font-size-normal">{{ game.roundContent.nbPointLoose }}</div>
         </div>
 
         <div *ngIf="showNpPointBonus()" class="row alert alert-success">
-            <div class="col font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_BONUS' | translate }}</div>
-            <div class="col font-size-normal">{{ game.roundContent.nbPointBonus }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_BONUS' | translate }}</div>
+            <div class="col-4 font-size-normal">{{ game.roundContent.nbPointBonus }}</div>
         </div>
 
         <div *ngIf="showNpPointMalus()" class="row alert alert-danger">
-            <div class="col font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_MALUS' | translate }}</div>
-            <div class="col font-size-normal">{{ game.roundContent.nbPointMalus }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_MALUS' | translate }}</div>
+            <div class="col-4 font-size-normal">{{ game.roundContent.nbPointMalus }}</div>
         </div>
 
     </div>

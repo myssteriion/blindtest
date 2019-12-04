@@ -14,6 +14,7 @@ import {Ng2OdometerModule} from 'ng2-odometer';
 import {CountdownModule} from 'ngx-countdown';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgHttpLoaderModule} from 'ng-http-loader';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {AppComponent} from './app.component';
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
@@ -110,7 +111,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		Ng2OdometerModule.forRoot(),
 		CountdownModule,
 		MatCheckboxModule,
-		NgHttpLoaderModule.forRoot()
+		NgHttpLoaderModule.forRoot(),
+		MatRadioModule
 	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],

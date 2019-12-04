@@ -1,9 +1,10 @@
 .home-view-logo {
     margin: auto;
+    text-align: center;
 }
 
 .home-view-logo img {
-    height: 7em;
+    height: 9em;
 }
 
 .home-view-link {

@@ -11,6 +11,10 @@
     border-radius: 50%;
 }
 
+.navbar-menu-icons .tooltip {
+    font-size: 5em !important;
+}
+
 .navbar-nav li {
     margin: auto;
 }

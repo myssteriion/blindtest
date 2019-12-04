@@ -15,6 +15,11 @@ body {
     background-color: #F2F2F2;
 }
 
+.container-fluid-forced-marge {
+    padding-left: 10em;
+    padding-right: 10em;
+}
+
 .pagination .page-item .page-link {
     border-radius: 0 !important;
 }
@@ -35,17 +40,30 @@ body {
     font-style: italic;
 }
 
+.mat-checkbox .mat-checkbox-frame, .mat-checkbox-checked .mat-checkbox-background {
+    transform: scale(1.5);
+}
+
 .inner-html-special-text {
     color: orangered;
     font-style: italic;
     font-weight: bold;
 }
 
-.font-size-small { font-size: 1.1em; }
-.font-size-normal { font-size: 1.5em; }
-.font-size-large { font-size: 1.6em; }
-.font-size-modal-title { font-size: 2.0em; }
-.font-size-title { font-size: 3.2em; }
+.font-size-very-small, .toast-container { font-size: 1.6em; }
+.font-size-small { font-size: 1.8em; }
+.font-size-normal { font-size: 2.0em; }
+.font-size-large { font-size: 2.4em; }
+.font-size-title { font-size: 3.7em; }
+
+.modal-title {
+    font-size: 2.6em;
+    color: orangered;
+}
+
+.tooltip {
+    font-size: 1.4rem;
+}
 
 .padding-bottom-1em {
     padding-bottom: 1em;

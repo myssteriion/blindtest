@@ -25,7 +25,8 @@
 }
 
 .profile-edit-avatar img, .profile-edit-avatars img {
-    height: 3em;
+    height: 4em;
+	width: 4em;
 	border-radius: 50%;
 	margin: 10px;
 }
@@ -35,9 +36,10 @@
 	border-radius: 20px;
 	margin-bottom: 10px;
 	text-align: center;
+	min-height: 11em;
 }
 
-.profile-edit-avatar img, .profile-edit-avatars img {
+.profile-edit-avatars img {
 	cursor: pointer;
 }
 

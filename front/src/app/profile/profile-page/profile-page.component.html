@@ -2,10 +2,10 @@
 
     <!-- 1st line -> create button ; filter input ; pagination -->
     <div class="row justify-content-center profile-page-line-one">
-        <div class="col-3">
+        <div [ngClass]="{'col-3': canEdit, 'col-0': !canEdit}">
             <button *ngIf="canEdit" class="btn btn-info font-size-normal box-shadow" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
         </div>
-        <div class="col-3">
+        <div [ngClass]="{'col-3': canEdit, 'col-6': !canEdit}">
             <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
                    (ngModelChange)="loadProfiles(true)" maxlength="15">
         </div>
@@ -19,7 +19,7 @@
 
     <!-- profiles page -->
     <div *ngIf="showProfiles && !page.empty" class="row" @opacityTrigger>
-        <profile-card class="col-3 profile-page-profile-card" *ngFor="let profile of page.content" [profile]="profile"
+        <profile-card class="col-4 profile-page-profile-card" *ngFor="let profile of page.content" [profile]="profile"
                       [canEdit]="canEdit" (onEdit)="loadProfiles(true)"
                       [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)"
                       [canDeselect]="false">

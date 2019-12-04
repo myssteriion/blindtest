@@ -1,7 +1,7 @@
 <!-- modal header -->
 <div class="row profile-edit-header">
-    <div *ngIf="create" class="col font-size-modal-title">{{ 'PROFILE.EDIT_MODAL.CREATION_TITLE' | translate }}</div>
-    <div *ngIf="!create" class="col font-size-modal-title">{{ 'PROFILE.EDIT_MODAL.UPDATE_TITLE' | translate }}</div>
+    <div *ngIf="create" class="col modal-title">{{ 'PROFILE.EDIT_MODAL.CREATION_TITLE' | translate }}</div>
+    <div *ngIf="!create" class="col modal-title">{{ 'PROFILE.EDIT_MODAL.UPDATE_TITLE' | translate }}</div>
 </div>
 
 <!-- modal body -->
@@ -29,7 +29,7 @@
         <!-- avatar -->
         <div class="row profile-edit-avatar">
             <div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.AVATAR_LABEL' | translate }}</div>
-            <div class="col-8"><img src="{{ getCurrentFluxForImg() }}" (click)="showHideAvatars()"/></div>
+            <div class="col-8"><img src="{{ getCurrentFluxForImg() }}"/></div>
         </div>
 
         <!-- avatars page -->

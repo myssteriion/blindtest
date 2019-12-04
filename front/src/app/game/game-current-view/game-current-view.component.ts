@@ -238,7 +238,6 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					response => {
 
 						this.game = response;
-
 						if (this.game.finished)
 							this._router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
 						else
@@ -560,7 +559,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private fillResult(): void {
 
-		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
+		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'xl', keyboard: false } );
 		modalRef.componentInstance.gameId = this.game.id;
 		modalRef.componentInstance.round = this.game.round;
 		modalRef.componentInstance.players = this.game.players;
@@ -570,11 +569,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			(result) => {
 
 				this.game = result;
-				this.updatePlayers();
+				if (this.game.finished) {
+					this._router.navigateByUrl(END_GAME_PREFIX_PATH + this.game.id);
+				}
+				else {
 
-				this.showNextMusic = true;
-				if (this.game.nbMusicsPlayedInRound === 0)
-					this.openRoundInfoModal();
+					this.updatePlayers();
+
+					this.showNextMusic = true;
+					if (this.game.nbMusicsPlayedInRound === 0)
+						this.openRoundInfoModal();
+				}
 			},
 			(reason) => {
 				this._router.navigateByUrl(HOME_PATH);

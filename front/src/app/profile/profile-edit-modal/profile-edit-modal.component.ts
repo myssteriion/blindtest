@@ -108,7 +108,7 @@ export class ProfileEditModalComponent implements OnInit {
 	private loadAvatars(pageNumber: number): void {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
-			response => { this.page = response; },
+			response => { this.page = response; this.showAvatars = true; },
 			error => {
 
 				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
@@ -127,13 +127,6 @@ export class ProfileEditModalComponent implements OnInit {
 				);
 			}
 		);
-	}
-
-	/**
-	 * Show/hide avatars page.
-	 */
-	private showHideAvatars(): void {
-		this.showAvatars = !this.showAvatars;
 	}
 
 	/**

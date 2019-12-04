@@ -1,11 +1,11 @@
-<div *ngIf="isLoaded" class="container" @flyInOut>
+<div *ngIf="isLoaded" class="container-fluid container-fluid-forced-marge" @flyInOut>
 
     <!-- header & exit -->
     <div class="row">
-        <div class="offset-2 col-8">
+        <div class="offset-1 col-10">
             <header [title]="'GAME.END_VIEW.TITLE' | translate"></header>
         </div>
-        <div class="col-2 game-end-view-exit">
+        <div class="col-1 game-end-view-exit">
             <fa-icon [icon]="currentExitIcon" [class]="'fa-icon-custom-hover-2'" size="2x" (click)="exit()"
                      (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
                      ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto" [openDelay]="500">
@@ -19,7 +19,7 @@
         <div class="col-2">
             <img src="{{ getXXXImg(rank) }}">
         </div>
-        <div class="col-4" *ngFor="let player of getPlayersByRank(rank);">
+        <div class="col-5" *ngFor="let player of getPlayersByRank(rank);">
             <player-card [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
         </div>
     </div>

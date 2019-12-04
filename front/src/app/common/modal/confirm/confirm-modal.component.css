@@ -1,5 +1,6 @@
 .confirm-modal-header, .confirm-modal-body, .confirm-modal-footer {
     margin: 1em;
+    text-align: justify;
 }
 
 .confirm-modal-header {

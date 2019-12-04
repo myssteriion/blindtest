@@ -18,4 +18,5 @@
 
 .round-info-modal-round-description, .round-info-modal-round-nb-point-won {
     padding-bottom: 2em;
+    text-align: justify;
 }
