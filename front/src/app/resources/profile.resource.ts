@@ -51,6 +51,7 @@ export class ProfileResource {
 		let params = new HttpParams();
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
+		params = params.set('itemPerPage', environment.itemPerPageProfiles.toString());
 
 		return this._http.get< Page<Profile> >( this.path, { params: params } );
 	}

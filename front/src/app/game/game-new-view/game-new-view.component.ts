@@ -64,7 +64,7 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * The max players number.
 	 */
-    private static MAX_PLAYERS: number = environment.maxPlayer;
+    private static MAX_PLAYERS: number = environment.maxPlayers;
 
 
 

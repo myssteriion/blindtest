@@ -48,11 +48,11 @@
     <!-- players -->
     <div class="row">
 
-        <profile-card class="col-4 game-new-view-profile-card" *ngFor="let profile of playersProfiles" [profile]="profile" [canEdit]="false" [canSelect]="false"
+        <profile-card class="col-3 game-new-view-profile-card" *ngFor="let profile of playersProfiles" [profile]="profile" [canEdit]="false" [canSelect]="false"
                       [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
         </profile-card>
 
-        <profile-card-empty class="col-4 game-new-view-profile-card-empty" *ngFor="let emptyName of getEmptyNames()" [name]="emptyName" (onClick)="selectProfiles()"></profile-card-empty>
+        <profile-card-empty class="col-3 game-new-view-profile-card-empty" *ngFor="let emptyName of getEmptyNames()" [name]="emptyName" (onClick)="selectProfiles()"></profile-card-empty>
 
     </div>
 

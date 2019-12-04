@@ -33,6 +33,7 @@ export class AvatarResource {
 		let params = new HttpParams();
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
+		params = params.set('itemPerPage', environment.itemPerPageAvatars.toString());
 
 		return this._http.get< Page<Avatar> >( this.path, { params: params } );
 	}

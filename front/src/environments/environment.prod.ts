@@ -3,5 +3,7 @@ export const environment = {
 	version: "0.0.0",
 	baseBackendUrl: "http://localhost:8080",
 
-	maxPlayer: 12
+	maxPlayers: 16,
+	itemPerPageAvatars: 18,
+	itemPerPageProfiles: 20
 };
