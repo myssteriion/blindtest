@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
@@ -41,8 +40,8 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	 * @param avatarDAO the dao
 	 */
 	@Autowired
-	public AvatarService(AvatarDAO avatarDAO, ConfigProperties configProperties) {
-		super(avatarDAO, configProperties);
+	public AvatarService(AvatarDAO avatarDAO) {
+		super(avatarDAO);
 	}
 
 
@@ -149,18 +148,20 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	/**
 	 * Find a page of Avatar filtered by a prefix name.
 	 *
-	 * @param namePrefix the name prefix
-	 * @param pageNumber the page number
+	 * @param namePrefix  the name prefix
+	 * @param pageNumber  the page number
+	 * @param itemPerPage the item per page
 	 * @return the page of avatars
 	 */
-	public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int pageNumber) {
+	public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
 
 		if (namePrefix == null)
 			namePrefix = "";
 
+		itemPerPage = Math.max(itemPerPage, 1);
 
 		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, configProperties.getPaginationElementsPerPageAvatars(), Sort.by(order) );
+		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, ITEM_PER_PAGE_MAX), Sort.by(order) );
 
 		Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createAvatarFlux);

@@ -41,8 +41,7 @@ public class AvatarServiceTest extends AbstractTest {
 
     @Before
     public void before() {
-        avatarService = new AvatarService(dao, configProperties);
-        stubProperties();
+        avatarService = new AvatarService(dao);
     }
 
 
@@ -62,7 +61,7 @@ public class AvatarServiceTest extends AbstractTest {
         PowerMockito.when(Tool.hadImageExtension(Mockito.anyString())).thenReturn(true);
 
 
-        avatarService = Mockito.spy( new AvatarService(dao, configProperties) );
+        avatarService = Mockito.spy( new AvatarService(dao) );
         MockitoAnnotations.initMocks(avatarService);
         Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarDTO.class));
 
@@ -91,7 +90,7 @@ public class AvatarServiceTest extends AbstractTest {
         Page<AvatarDTO> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
         Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn(pageMock);
 
-        avatarService = Mockito.spy( new AvatarService(dao, configProperties));
+        avatarService = Mockito.spy( new AvatarService(dao));
         Mockito.doNothing().when(avatarService).createAvatarFlux(Mockito.any(AvatarDTO.class));
 
         Assert.assertTrue( avatarService.needRefresh() );
@@ -113,7 +112,7 @@ public class AvatarServiceTest extends AbstractTest {
         }
 
 
-        avatarService = Mockito.spy( new AvatarService(dao, configProperties) );
+        avatarService = Mockito.spy( new AvatarService(dao) );
         MockitoAnnotations.initMocks(avatarService);
 
         AvatarDTO avatarDtoMock = new AvatarDTO(name);
@@ -213,8 +212,8 @@ public class AvatarServiceTest extends AbstractTest {
         AvatarDTO avatarDto = new AvatarDTO("name");
         Mockito.when(dao.findAllByNameStartingWithIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
 
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0, 1) );
     }
     
 }

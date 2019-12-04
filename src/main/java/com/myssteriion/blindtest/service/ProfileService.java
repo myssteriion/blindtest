@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.ProfileDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -27,8 +26,8 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 
 
 	@Autowired
-	public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService, ConfigProperties configProperties) {
-		super(profileDao, configProperties);
+	public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService) {
+		super(profileDao);
 		this.profileStatService = profileStatService;
 		this.avatarService = avatarService;
 	}
@@ -72,17 +71,20 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	/**
 	 * Find a pageNumber of Profile filtered by a prefix name.
 	 *
-	 * @param namePrefix the name prefix
-	 * @param pageNumber the page number
+	 * @param namePrefix  the name prefix
+	 * @param pageNumber  the page number
+	 * @param itemPerPage the item per page
 	 * @return the page of profiles
 	 */
-	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber) {
+	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
 
 		if (namePrefix == null)
 			namePrefix = "";
 
+		itemPerPage = Math.max(itemPerPage, 1);
+
 		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, configProperties.getPaginationElementsPerPageProfiles(), Sort.by(order) );
+		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, ITEM_PER_PAGE_MAX), Sort.by(order) );
 
 		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createProfileAvatarFlux);

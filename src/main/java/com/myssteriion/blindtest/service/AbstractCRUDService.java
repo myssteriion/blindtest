@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.model.AbstractDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
@@ -21,7 +20,7 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      */
     protected DAO dao;
 
-    protected ConfigProperties configProperties;
+    protected static final Integer ITEM_PER_PAGE_MAX = 50;
 
 
 
@@ -30,9 +29,8 @@ public abstract class AbstractCRUDService< DTO extends AbstractDTO, DAO extends 
      *
      * @param dao the dao
      */
-    public AbstractCRUDService(DAO dao, ConfigProperties configProperties) {
+    public AbstractCRUDService(DAO dao) {
         this.dao = dao;
-        this.configProperties = configProperties;
     }
 
 

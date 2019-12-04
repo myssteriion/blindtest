@@ -47,7 +47,7 @@ public class MusicServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		musicService = new MusicService(dao, configProperties, spotifyService);
+		musicService = new MusicService(dao, spotifyService);
 	}
 
 
@@ -67,7 +67,7 @@ public class MusicServiceTest extends AbstractTest {
 		PowerMockito.when(Tool.hadAudioExtension(Mockito.anyString())).thenReturn(true);
 
 
-		musicService = Mockito.spy( new MusicService(dao, configProperties, spotifyService) );
+		musicService = Mockito.spy( new MusicService(dao, spotifyService) );
 		MockitoAnnotations.initMocks(musicService);
 		Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
 
@@ -94,7 +94,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 
-        musicService = Mockito.spy( new MusicService(dao, configProperties, spotifyService) );
+        musicService = Mockito.spy( new MusicService(dao, spotifyService) );
 		MockitoAnnotations.initMocks(musicService);
 
 		MusicDTO musicDtoMock = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
@@ -226,7 +226,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findByThemeInAndConnectionModeIn(Mockito.anyList(), Mockito.anyList())).thenReturn(allMusics);
 
 
-		musicService = PowerMockito.spy( new MusicService(dao, configProperties, spotifyService) );
+		musicService = PowerMockito.spy( new MusicService(dao, spotifyService) );
 		PowerMockito.doReturn(true).when(musicService, "offlineMusicExists", Mockito.any(MusicDTO.class));
 		PowerMockito.doReturn(true).when(musicService, "onlineMusicExists", Mockito.any(MusicDTO.class));
 

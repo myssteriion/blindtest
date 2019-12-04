@@ -6,7 +6,6 @@ import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
@@ -55,12 +54,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * Instantiates a new Music service.
 	 *
 	 * @param musicDao         the music dao
-	 * @param configProperties the config properties
 	 * @param spotifyService   the spotify service
 	 */
 	@Autowired
-	public MusicService(MusicDAO musicDao, ConfigProperties configProperties, SpotifyService spotifyService) {
-		super(musicDao, configProperties);
+	public MusicService(MusicDAO musicDao, SpotifyService spotifyService) {
+		super(musicDao);
 		this.spotifyService = spotifyService;
 	}
 

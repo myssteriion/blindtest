@@ -38,8 +38,7 @@ public class ProfileServiceTest extends AbstractTest {
 
 	@Before
 	public void before() {
-		profileService = new ProfileService(profileDao, profileStatService, avatarService, configProperties);
-		stubProperties();
+		profileService = new ProfileService(profileDao, profileStatService, avatarService);
 	}
 
 
@@ -59,7 +58,7 @@ public class ProfileServiceTest extends AbstractTest {
 			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
-		profileService = Mockito.spy( new ProfileService(profileDao, profileStatService, avatarService, configProperties) );
+		profileService = Mockito.spy( new ProfileService(profileDao, profileStatService, avatarService) );
 		MockitoAnnotations.initMocks(profileService);
 
 		ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
@@ -173,8 +172,8 @@ public class ProfileServiceTest extends AbstractTest {
 		ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
 		Mockito.when(profileDao.findAllByNameStartingWithIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
 
-		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith(null, 0) );
-		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith("", 0) );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith(null, 0, 1) );
+		Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllByNameStartingWith("", 0, 1) );
 	}
 
 	@Test

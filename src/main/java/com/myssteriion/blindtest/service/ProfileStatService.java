@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ import org.springframework.stereotype.Service;
 public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, ProfileStatDAO>   {
 
 	@Autowired
-	public ProfileStatService(ProfileStatDAO profileStatDao, ConfigProperties configProperties) {
-		super(profileStatDao, configProperties);
+	public ProfileStatService(ProfileStatDAO profileStatDao) {
+		super(profileStatDao);
 	}
 
 

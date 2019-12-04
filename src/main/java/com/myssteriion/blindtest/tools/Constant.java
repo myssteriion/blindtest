@@ -28,7 +28,7 @@ public class Constant {
 	public static final String THEMES 						= "themes";
 	public static final String CONNECTION_MODE 				= "connectionMode";
 	public static final String PAGE_NUMBER 					= "pageNumber";
-	public static final String PAGE_NUMBER_DEFAULT_VALUE 	= "0";
+	public static final String ITEM_PER_PAGE 				= "itemPerPage";
 	public static final String PREFIX_NAME					= "prefixName";
 	public static final String PREFIX_NAME_DEFAULT_VALUE	= "";
 	public static final String PROFILES_IDS					= "profilesIds";

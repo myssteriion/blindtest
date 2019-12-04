@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "328b43c2-6552-4e2b-8b1e-a2eb62e95097",
+		"_postman_id": "62d3a7f8-f5a3-4ca9-9982-8e37c9dba39c",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/avatars?prefixName&page=0",
+							"raw": "http://localhost:{{port}}/avatars?prefixName&pageNumber=0&itemPerPage=18",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -29,8 +29,12 @@
 									"value": null
 								},
 								{
-									"key": "page",
+									"key": "pageNumber",
 									"value": "0"
+								},
+								{
+									"key": "itemPerPage",
+									"value": "18"
 								}
 							]
 						}
@@ -148,7 +152,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles?prefixName=&page=0",
+							"raw": "http://localhost:{{port}}/profiles?prefixName=&pageNumber=0&itemPerPage=16",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -163,8 +167,12 @@
 									"value": ""
 								},
 								{
-									"key": "page",
+									"key": "pageNumber",
 									"value": "0"
+								},
+								{
+									"key": "itemPerPage",
+									"value": "16"
 								}
 							]
 						}
