@@ -35,3 +35,8 @@
     margin: 1em 0;
     text-align: center;
 }
+
+
+.game-new-view-profile-card, .game-new-view-profile-card-empty {
+    padding: 10px;
+}

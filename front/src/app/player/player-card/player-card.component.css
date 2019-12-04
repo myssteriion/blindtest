@@ -29,3 +29,7 @@
     font-weight: bold;
     box-shadow: 8px 8px 4px silver;
 }
+
+.player-card-profile-card {
+    padding: 10px;
+}

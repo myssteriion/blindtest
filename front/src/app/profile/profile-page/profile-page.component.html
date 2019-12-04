@@ -19,7 +19,7 @@
 
     <!-- profiles page -->
     <div *ngIf="showProfiles && !page.empty" class="row" @opacityTrigger>
-        <profile-card class="col-4" *ngFor="let profile of page.content" [profile]="profile"
+        <profile-card class="col-4 profile-page-profile-card" *ngFor="let profile of page.content" [profile]="profile"
                       [canEdit]="canEdit" (onEdit)="loadProfiles(true)"
                       [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)"
                       [canDeselect]="false">
