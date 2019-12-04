@@ -5,7 +5,9 @@
 export const environment = {
 	production: false,
 	version: "0.0.0",
-	baseBackendUrl: "http://localhost:9501"
+	baseBackendUrl: "http://localhost:9501",
+
+	maxPlayer: 12
 };
 
 /*
