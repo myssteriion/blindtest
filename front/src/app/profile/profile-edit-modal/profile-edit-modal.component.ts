@@ -115,7 +115,7 @@ export class ProfileEditModalComponent implements OnInit {
 
 				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
 				modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.AVATAR_LOAD_ERROR");
-				modalRef.componentInstance.suggestion = undefined;
+				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;
 				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 				modalRef.componentInstance.showRetry = true;
@@ -231,7 +231,7 @@ export class ProfileEditModalComponent implements OnInit {
 
 					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.CREATE_ERROR");
-					modalRef.componentInstance.suggestion = undefined;
+					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;
 					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 					modalRef.componentInstance.showRetry = true;
@@ -271,7 +271,7 @@ export class ProfileEditModalComponent implements OnInit {
 
 					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.UPDATE_ERROR");
-					modalRef.componentInstance.suggestion = undefined;
+					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;
 					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 					modalRef.componentInstance.showRetry = true;

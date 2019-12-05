@@ -21,7 +21,7 @@ export class ErrorAlertModalComponent implements OnInit {
 	 * Suggestion to show.
 	 */
 	@Input()
-	private suggestion: string;
+	private suggestions: string[];
 
 	/**
 	 * The error.
@@ -89,10 +89,10 @@ export class ErrorAlertModalComponent implements OnInit {
 	}
 
 	/**
-	 * If show suggestion.
+	 * If show suggestions.
 	 */
-	private showSuggestion(): boolean {
-		return !ToolsService.isNullOrEmpty(this.suggestion);
+	private showSuggestions(): boolean {
+		return !ToolsService.isNull(this.suggestions) && this.suggestions.length > 0;
 	}
 
 	/**

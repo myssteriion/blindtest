@@ -53,7 +53,8 @@
             "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
             "LAUNCH_GAME": "Lancer la partie !",
             "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
-            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiants soient corrects."
+            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiants soient corrects.",
+            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y est bien au moins 1 musique pour chacun des thèmes selectionés."
         },
         "RESUME_VIEW": {
             "TITLE": "Reprendre une partie",

@@ -186,9 +186,13 @@ export class GameNewViewComponent implements OnInit {
 
 				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
 
+				let suggestions = [];
+				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION") );
+				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION_2") );
+
 				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
 				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
-				modalRef.componentInstance.suggestion = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION");
+				modalRef.componentInstance.suggestions = suggestions;
 				modalRef.componentInstance.error = errorAlert;
 				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 				modalRef.componentInstance.showRetry = false;

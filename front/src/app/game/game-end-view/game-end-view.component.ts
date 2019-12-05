@@ -128,7 +128,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 
 							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
 							modalRef.componentInstance.text = this._translate.instant("GAME.END_VIEW.FOUND_GAME_ERROR");
-							modalRef.componentInstance.suggestion = undefined;
+							modalRef.componentInstance.suggestions = undefined;
 							modalRef.componentInstance.error = errorAlert;
 							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 							modalRef.componentInstance.showRetry = true;
