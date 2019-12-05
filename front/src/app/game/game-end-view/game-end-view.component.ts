@@ -160,7 +160,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 * Gets rank logo.
 	 *
 	 * @param rank the rank
-	 * @return players list
+	 * @return the image
 	 */
 	private getImgByRank(rank: Rank): string {
 		switch (rank) {
@@ -169,6 +169,16 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 			case Rank.THIRD:	return RANKS_THIRD;
 			default: 			return ""
 		}
+	}
+
+	/**
+	 * Gets rank tooltip.
+	 *
+	 * @param rank the rank
+	 * @return the tooltip
+	 */
+	private getTooltipByRank(rank: Rank): string {
+		return this._translate.instant("RANK." + rank);
 	}
 
 	/**

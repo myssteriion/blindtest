@@ -121,6 +121,13 @@
             "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
         }
     },
+    "RANK": {
+        "FIRST": "Médaillé d'or",
+        "SECOND": "Médaillé d'argent",
+        "THIRD": "Médaillé de bronze",
+        "FOURTH": "Bon pour un cookie",
+        "LAST": "Petit caca mignon"
+    },
     "PROFILE": {
         "CARD": {
             "EDIT_TOOLTIP": "Modifier le profil.",

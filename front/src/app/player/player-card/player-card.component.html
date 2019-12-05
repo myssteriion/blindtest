@@ -1,8 +1,10 @@
 <div class="row player-card-frame" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight}">
 
     <!-- rank -->
-    <div *ngIf="!rankOnRight && showMedal()" class="col-2 p-0 font-size-normal player-card-rank">
-        <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
+    <div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
+        <fa-icon *ngIf="showPoop()" [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showCookie()" [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showMedal()" [icon]="faMedal" [ngClass]="getMedalStyle()" ngbTooltip="{{ getMedalTooltip() }}" placement="bottom auto" size="2x"></fa-icon>
     </div>
 
     <!-- score -->
@@ -13,7 +15,7 @@
 
 
     <!-- profile -->
-    <profile-card class="col-7 player-card-profile-card" [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
+    <profile-card class="col-6 player-card-profile-card" [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
 
 
 
@@ -23,8 +25,10 @@
     </div>
 
     <!-- rank -->
-    <div *ngIf="rankOnRight && showMedal()" class="col-2 p-0 font-size-normal player-card-rank">
-        <fa-icon [icon]="faMedal" size="2x" [ngClass]="getMedalStyle()"></fa-icon>
+    <div *ngIf="rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
+        <fa-icon *ngIf="showMedal()" [icon]="faMedal" [ngClass]="getMedalStyle()" ngbTooltip="{{ getMedalTooltip() }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showCookie()" [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showPoop()" [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
     </div>
 
 </div>
