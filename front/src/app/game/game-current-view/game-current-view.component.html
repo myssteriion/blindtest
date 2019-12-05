@@ -29,9 +29,9 @@
         <div class="col-4">
 
             <theme-effect #themeEffect ></theme-effect>
-            <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEnd)="onPreCountdownEnd()"></custom-countdown>
-            <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEnd)="onCountdownEnd()"></custom-countdown>
-            <custom-countdown #postCountdown [animation]="''" [sound]="false" [countdownConfig]="postCountdownConfig" (onEnd)="onPostCountdownEnd()"></custom-countdown>
+            <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEvent)="undefined" (onEnd)="onPreCountdownEnd()"></custom-countdown>
+            <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEvent)="onCountdownEvent()" (onEnd)="onCountdownEnd()"></custom-countdown>
+            <custom-countdown #postCountdown [animation]="''" [sound]="false" [countdownConfig]="postCountdownConfig" (onEvent)="undefined" (onEnd)="onPostCountdownEnd()"></custom-countdown>
 
             <!-- next music -->
             <div *ngIf="showNextMusic" class="row game-current-view-next-music">

@@ -5,5 +5,5 @@ const enum Effect {
 	NONE = "NONE",
 	SLOW = "SLOW",
 	SPEED = "SPEED",
-	REVERSE = "REVERSE"
+	MIX = "MIX"
 }

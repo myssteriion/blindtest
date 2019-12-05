@@ -309,7 +309,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		if (r >= 40 && r < 60) return Effect.SLOW;
 		if (r >= 60 && r < 80) return Effect.SPEED;
-		if (r >= 80 && r < 100) return Effect.REVERSE;
+		if (r >= 80 && r < 100) return Effect.MIX;
 
 		return Effect.NONE;
 	}

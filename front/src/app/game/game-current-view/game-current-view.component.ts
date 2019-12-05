@@ -147,6 +147,10 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private onlineAudio: SafeResourceUrl;
 
+	private static SLOW_SPEED = 0.5;
+	private static NORMAL_SPEED = 1;
+	private static FAST_SPEED = 2;
+
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
 	private faQuestionCircle = faQuestionCircle;
@@ -193,7 +197,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					format: "ss",
 					leftTime: 30,
 					stopTime: 0,
-					notify: [],
+					notify: [26, 22, 18, 16, 12, 8, 4],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
 				};
 			}
@@ -425,16 +429,17 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					this.offlinePreviewAudio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
 
 					let defaultCurrentTime = 0;
-					let defaultPlaybackRate = 1;
-					if (this.currentMusic.effect === Effect.SLOW) {
+					let playbackRate = GameCurrentViewComponent.NORMAL_SPEED;
+					if (this.currentMusic.effect === Effect.SLOW || this.currentMusic.effect === Effect.MIX) {
 						defaultCurrentTime = 30;
-						defaultPlaybackRate = 0.5;
+						playbackRate = GameCurrentViewComponent.SLOW_SPEED;
 					}
 					else if (this.currentMusic.effect === Effect.SPEED) {
-						defaultPlaybackRate = 2;
+						playbackRate = GameCurrentViewComponent.FAST_SPEED;
 					}
 					this.offlinePreviewAudio.currentTime = defaultCurrentTime;
-					this.offlinePreviewAudio.defaultPlaybackRate = defaultPlaybackRate;
+					this.offlinePreviewAudio.defaultPlaybackRate = playbackRate;
+					this.offlinePreviewAudio.playbackRate = playbackRate;
 					this.offlinePreviewAudio.load();
 				}
 
@@ -503,6 +508,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.showOnlinePreviewAudio = true;
 		else
 			this.offlinePreviewAudio.play();
+	}
+
+	/**
+	 * When the countdown event emit.
+	 */
+	private onCountdownEvent(): void {
+
+		if (this.currentMusic.connectionMode === ConnectionMode.OFFLINE && this.currentMusic.effect === Effect.MIX) {
+
+			if (this.offlinePreviewAudio.playbackRate === GameCurrentViewComponent.SLOW_SPEED)
+				this.offlinePreviewAudio.playbackRate = GameCurrentViewComponent.FAST_SPEED;
+			else
+				this.offlinePreviewAudio.playbackRate = GameCurrentViewComponent.SLOW_SPEED;
+		}
 	}
 
 	/**

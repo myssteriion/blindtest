@@ -58,7 +58,7 @@ export const EFFECTS = [
     { srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE },
     { srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW },
     { srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED },
-    { srcImg: "assets/images/effects/reverse.png", enumVal: Effect.REVERSE }
+    { srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX }
 ];
 
 /**

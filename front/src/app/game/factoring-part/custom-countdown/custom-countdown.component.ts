@@ -34,6 +34,9 @@ export class CustomCountdownComponent implements OnInit {
 	@Input()
 	private sound: boolean;
 
+	@Output()
+	private onEvent = new EventEmitter();
+
 	/**
 	 * On end of the countdown.
 	 */
@@ -92,6 +95,8 @@ export class CustomCountdownComponent implements OnInit {
 			this.onEnd.emit();
 		}
 		else if (event.action !== "restart") {
+
+			this.onEvent.emit();
 
 			if (this.animation === "reduction") {
 				this.animationTriggerValue = "big";
