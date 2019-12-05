@@ -7,11 +7,13 @@
     <div class="row game-new-view-durations">
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
-            <div *ngFor="let duration of durations; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="duration === selectedDuration" type="radio" class="custom-control-input" id="{{ 'duration_' + i }}"
-                       name="durationsRadios" (change)="selectedDuration = duration">
-                <label class="custom-control-label" for="{{ 'duration_' + i }}">{{ 'GAME.NEW_VIEW.' + duration | translate }}</label>
-            </div>
+            <mat-radio-group class="font-size-normal" >
+                <mat-radio-button *ngFor="let duration of durations" value="{{ duration }}" color="warn"
+                                  (change)="selectedDuration = duration" [checked]="duration === selectedDuration">
+                    {{ 'GAME.NEW_VIEW.' + duration | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
+
         </div>
     </div>
 
@@ -19,11 +21,12 @@
     <div class="row game-new-view-online-mode">
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
         <div class="col-9">
-            <div *ngFor="let connectionMode of connectionModes; let i = index" class="custom-control custom-radio custom-control-inline font-size-normal">
-                <input [defaultChecked]="connectionMode === selectedConnectionMode" type="radio" class="custom-control-input" id="{{ 'connectionMode_' + i }}"
-                       name="connectionModesRadios" (change)="selectedConnectionMode = connectionMode">
-                <label class="custom-control-label" for="{{ 'connectionMode_' + i }}">{{ 'GAME.NEW_VIEW.' + connectionMode + '_MODE' | translate }}</label>
-            </div>
+            <mat-radio-group class="font-size-normal" >
+                <mat-radio-button *ngFor="let connectionMode of connectionModes" value="{{ connectionMode }}" color="warn"
+                                  (change)="selectedConnectionMode = connectionMode" [checked]="connectionMode === selectedConnectionMode">
+                    {{ 'GAME.NEW_VIEW.' + connectionMode + '_MODE' | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
         </div>
     </div>
 
@@ -31,7 +34,6 @@
     <div class="row">
         <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
     </div>
-
 
     <!-- themes -->
     <div class="row game-new-view-themes">

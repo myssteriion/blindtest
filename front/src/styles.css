@@ -15,6 +15,10 @@ body {
     background-color: #F2F2F2;
 }
 
+mat-radio-button {
+    padding-right: 1em;
+}
+
 .container-fluid-forced-marge {
     padding-left: 10em;
     padding-right: 10em;
