@@ -1,7 +1,22 @@
 .custom-countdown-frame {
     text-align: center;
-    color: #17a2b8;
     text-shadow: 2px 0 0 #555, 0 2px 0 #555, -2px 0 0 #555, 0 -2px 0 #555, 2px 2px 0 #555, -2px -2px 0 #555, 2px -2px 0 #555, -2px 2px 0 #555;
     font-weight: bold;
     font-size: 5em;
+}
+
+.custom-countdown-frame-blue {
+    color: #17a2b8;
+}
+
+.custom-countdown-frame-green {
+    color: #26dd10;
+}
+
+.custom-countdown-frame-yellow {
+    color: #efe81d;
+}
+
+.custom-countdown-frame-red {
+    color: #ff4834;
 }

@@ -197,7 +197,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					format: "ss",
 					leftTime: 30,
 					stopTime: 0,
-					notify: [26, 22, 18, 16, 12, 8, 4],
+					notify: [25, 20, 15, 10, 5],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
 				};
 			}
@@ -501,6 +501,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * Start the countdown.
 	 */
 	private startCountdown(): void {
+
+		this.countdown.setColor(CustomCountdownComponent.GREEN_COLOR);
 		this.countdown.setShow(true);
 		this.countdown.start();
 
@@ -512,8 +514,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 	/**
 	 * When the countdown event emit.
+	 *
+	 * @param timeLeft the timeLeft
 	 */
-	private onCountdownEvent(): void {
+	private onCountdownEvent(timeLeft): void {
+
+		if (timeLeft === "15") this.countdown.setColor(CustomCountdownComponent.YELLOW_COLOR);
+		if (timeLeft === "05") this.countdown.setColor(CustomCountdownComponent.RED_COLOR);
 
 		if (this.currentMusic.connectionMode === ConnectionMode.OFFLINE && this.currentMusic.effect === Effect.MIX) {
 
@@ -528,6 +535,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * When the countdown is ended.
 	 */
 	private onCountdownEnd(): void {
+
+		this.countdown.setColor(CustomCountdownComponent.BLUE_COLOR);
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showOnlinePreviewAudio = false;

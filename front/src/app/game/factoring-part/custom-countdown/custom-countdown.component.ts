@@ -34,6 +34,9 @@ export class CustomCountdownComponent implements OnInit {
 	@Input()
 	private sound: boolean;
 
+	/**
+	 * On event of the countdown.
+	 */
 	@Output()
 	private onEvent = new EventEmitter();
 
@@ -59,12 +62,23 @@ export class CustomCountdownComponent implements OnInit {
 	 */
 	private show: boolean;
 
+	/**
+	 * Css color.
+	 */
+	private color: string;
+
+	public static BLUE_COLOR = "custom-countdown-frame-blue";
+	public static GREEN_COLOR = "custom-countdown-frame-green";
+	public static YELLOW_COLOR = "custom-countdown-frame-yellow";
+	public static RED_COLOR = "custom-countdown-frame-red";
+
 
 
 	constructor() { }
 
 	ngOnInit(): void {
 		this.show = false;
+		this.color = CustomCountdownComponent.BLUE_COLOR;
 	}
 
 
@@ -96,7 +110,7 @@ export class CustomCountdownComponent implements OnInit {
 		}
 		else if (event.action !== "restart") {
 
-			this.onEvent.emit();
+			this.onEvent.emit(event.text);
 
 			if (this.animation === "reduction") {
 				this.animationTriggerValue = "big";
@@ -112,6 +126,15 @@ export class CustomCountdownComponent implements OnInit {
 
 			this.animationTriggerValue = "normal";
 		}
+	}
+
+	/**
+	 * Set color (default blue).
+	 *
+	 * @param color the color
+	 */
+	public setColor(color: string) {
+		this.color = ( ToolsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
 	}
 
 }
