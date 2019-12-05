@@ -189,6 +189,21 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 
 	/**
+	 * Count by theme and connection mode
+	 *
+	 * @param theme          the theme
+	 * @param connectionMode the connection mode
+	 * @return the number of music
+	 */
+	public Integer getMusicNumber(Theme theme, ConnectionMode connectionMode) {
+
+		Tool.verifyValue("theme", theme);
+		Tool.verifyValue("connectionMode", connectionMode);
+
+		return dao.countByThemeAndConnectionMode(theme, connectionMode);
+	}
+
+	/**
 	 * Randomly choose a music.
 	 *
 	 * @param themes     the themes filter (optional)

@@ -1,7 +1,9 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
@@ -67,6 +69,9 @@ public class GameService {
 
 		Tool.verifyValue("newGame", newGame);
 
+		musicService.refresh();
+		verifyContentTheme(newGame);
+
 		if ( newGame.getConnectionMode().isNeedConnection() )
 			spotifyService.testConnection();
 
@@ -74,9 +79,28 @@ public class GameService {
 		game.setId( games.size() );
 		games.add(game);
 
-		musicService.refresh();
 
 		return game;
+	}
+
+	/**
+	 * Check if all theme have one music at least.
+	 *
+	 * @param newGame the new game
+	 * @throws NotFoundException the not found exception
+	 */
+	private void verifyContentTheme(NewGame newGame) throws NotFoundException {
+
+		for ( Theme theme : newGame.getThemes() ) {
+
+			Integer nbMusic = 0;
+
+			for (ConnectionMode connectionMode : newGame.getConnectionMode().transformForSearchMusic() )
+				nbMusic += musicService.getMusicNumber(theme, connectionMode);
+
+			if (nbMusic == 0)
+				throw new NotFoundException("Zero music found ('" + theme + "' ; '" + newGame.getConnectionMode().transformForSearchMusic() + "')");
+		}
 	}
 
 	/**

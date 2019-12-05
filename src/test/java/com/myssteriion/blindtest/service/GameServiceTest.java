@@ -55,6 +55,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(null, profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 		Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
+		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
 
 		List<String> playersNames = Arrays.asList("name", "name1");
 
@@ -104,6 +105,7 @@ public class GameServiceTest extends AbstractTest {
 
 		Mockito.doNothing().when(musicService).refresh();
 		Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, musicDTO);
+		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
 		Mockito.when(profileService.find( new ProfileDTO("name") )).thenReturn(profileDto);
 		Mockito.when(profileService.find( new ProfileDTO("name1") )).thenReturn(profileDto1);
 		Mockito.when(profileService.find( new ProfileDTO("name2") )).thenReturn(profileDto2);
@@ -367,6 +369,7 @@ public class GameServiceTest extends AbstractTest {
 		ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
+		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
 
 		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, ConnectionMode.OFFLINE);
 		Game expected = gameService.newGame(ng);

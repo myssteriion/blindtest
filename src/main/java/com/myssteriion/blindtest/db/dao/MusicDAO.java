@@ -34,4 +34,13 @@ public interface MusicDAO extends PagingAndSortingRepository<MusicDTO, Integer> 
      */
     List<MusicDTO> findByThemeInAndConnectionModeIn(List<Theme> themes, List<ConnectionMode> connectionModes);
 
+    /**
+     * Count by theme and connection mode
+     *
+     * @param theme          the theme
+     * @param connectionMode the connection mode
+     * @return the number of music
+     */
+    int countByThemeAndConnectionMode(Theme theme, ConnectionMode connectionMode);
+
 }
