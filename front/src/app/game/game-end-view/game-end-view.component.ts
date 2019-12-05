@@ -162,7 +162,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 * @param rank the rank
 	 * @return players list
 	 */
-	private getXXXImg(rank: Rank): string {
+	private getImgByRank(rank: Rank): string {
 		switch (rank) {
 			case Rank.FIRST:	return RANKS_FIRST;
 			case Rank.SECOND:	return RANKS_SECOND;
@@ -179,6 +179,15 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 */
 	private getPlayersByRank(rank: Rank): Player[] {
 		return this.game.players.filter(player => player.rank === rank);
+	}
+
+	/**
+	 * If rank had player.
+	 *
+	 * @param rank the rank
+	 */
+	private hadPlayerByRank(rank: Rank): boolean {
+		return (this.game.players.filter(player => player.rank === rank).length) > 0;
 	}
 
 	/**

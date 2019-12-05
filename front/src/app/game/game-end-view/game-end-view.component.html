@@ -16,19 +16,15 @@
 
     <!-- 1st 2nd 3rd -->
     <div *ngFor="let rank of podiumRank" class="row justify-content-center game-end-view-first-second-third">
-        <div class="col-2">
-            <img src="{{ getXXXImg(rank) }}">
+        <div *ngIf="hadPlayerByRank(rank)" class="col-2">
+            <img src="{{ getImgByRank(rank) }}">
         </div>
-        <div class="col-5" *ngFor="let player of getPlayersByRank(rank);">
-            <player-card [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
-        </div>
+        <player-card class="col-5" *ngFor="let player of getPlayersByRank(rank);" [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
     </div>
 
     <!-- other ranks -->
     <div class="row game-end-view-other-ranks">
-        <div class="col-4" *ngFor="let player of getNoPodiumPlayers();">
-            <player-card [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
-        </div>
+        <player-card class="col-4" *ngFor="let player of getNoPodiumPlayers();" [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
     </div>
 
 </div>
