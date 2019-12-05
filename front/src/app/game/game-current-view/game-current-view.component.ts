@@ -639,6 +639,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			if ( !ToolsService.isNull(foundPlayer) ) {
 
 				foundPlayer.rank = player.rank;
+				foundPlayer.last = player.last;
 				foundPlayer.turnToChoose = player.turnToChoose;
 
 				if (foundPlayer.score !== player.score)
