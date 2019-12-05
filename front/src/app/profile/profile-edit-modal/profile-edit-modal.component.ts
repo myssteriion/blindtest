@@ -52,6 +52,11 @@ export class ProfileEditModalComponent implements OnInit {
 	private showAvatars: boolean;
 
 	/**
+	 * Show/hide pageable.
+	 */
+	private showPageable: boolean;
+
+	/**
 	 * Background ids.
 	 */
 	private backgroundIds = [0, 1, 2, 3, 4];
@@ -70,6 +75,7 @@ export class ProfileEditModalComponent implements OnInit {
 		ToolsService.verifyValue("create", this.create);
 
 		this.showAvatars = false;
+		this.showPageable = false;
 
 		if (this.create) {
 
@@ -108,7 +114,12 @@ export class ProfileEditModalComponent implements OnInit {
 	private loadAvatars(pageNumber: number): void {
 
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
-			response => { this.page = response; this.showAvatars = true; },
+			response => {
+
+				this.page = response;
+				this.showAvatars = true;
+				this.showPageable = this.page.totalPages > 1;
+			},
 			error => {
 
 				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };

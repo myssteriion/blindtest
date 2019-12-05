@@ -9,7 +9,7 @@
             <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
                    (ngModelChange)="loadProfiles(true)" maxlength="15">
         </div>
-        <div class="col-3">
+        <div *ngIf="showPageable" class="col-3">
             <ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
                             [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5"
                             (pageChange)="currentPage = $event; loadProfiles(false)" [(page)]="currentPage">

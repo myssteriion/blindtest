@@ -34,7 +34,7 @@
 
         <!-- avatars page -->
         <div *ngIf="showAvatars">
-            <div>
+            <div *ngIf="showPageable">
                 <ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
                                 [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
                 </ngb-pagination>

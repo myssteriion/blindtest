@@ -62,6 +62,11 @@ export class ProfilePageComponent implements OnInit {
     private showProfiles: boolean;
 
     /**
+     * Show/hide pageable.
+     */
+    private showPageable: boolean;
+
+    /**
      * The prefix name filter.
      */
     private prefixName: string;
@@ -99,6 +104,7 @@ export class ProfilePageComponent implements OnInit {
                 this.page = response;
                 this.showProfiles = true;
                 this.isLoaded = true;
+                this.showPageable = this.page.totalPages > 1;
             },
             error => {
 
