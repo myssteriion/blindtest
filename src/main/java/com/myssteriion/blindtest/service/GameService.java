@@ -227,6 +227,9 @@ public class GameService {
 			playersSorted.get(i).setRank(currentRank);
 			currentScore = playersSorted.get(i).getScore();
 		}
+
+		Rank lastRank = currentRank;
+		players.forEach( player -> player.setLast( (player.getRank() == lastRank) ) );
 	}
 
 	/**

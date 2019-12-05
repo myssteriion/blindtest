@@ -32,6 +32,11 @@ public class Player {
 	private Rank rank;
 
 	/**
+	 * If is the last (rank).
+	 */
+	private boolean last;
+
+	/**
 	 * If is his turn to play/choose.
 	 */
 	private boolean turnToChoose;
@@ -56,6 +61,7 @@ public class Player {
 		this.profile = profile;
 		this.score = 0;
 		this.rank = Rank.FIRST;
+		this.last = false;
 		this.turnToChoose = false;
 		this.foundMusics = new HashMap<>();
 	}
@@ -96,6 +102,25 @@ public class Player {
 	 */
 	public Rank getRank() {
 		return rank;
+	}
+
+	/**
+	 * Gets last.
+	 *
+	 * @return The last.
+	 */
+	public boolean isLast() {
+		return last;
+	}
+
+	/**
+	 * Set last.
+	 *
+	 * @param last The last.
+	 */
+	public Player setLast(boolean last) {
+		this.last = last;
+		return this;
 	}
 
 	/**
@@ -183,6 +208,7 @@ public class Player {
 		return "profile={" + profile + "}" +
 				", score=" + score +
 				", rank=" + rank +
+				", last=" + last +
 				", turnToChoose=" + turnToChoose +
                 ", foundMusics=" + foundMusics;
 	}

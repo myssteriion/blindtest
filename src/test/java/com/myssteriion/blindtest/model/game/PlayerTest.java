@@ -52,7 +52,7 @@ public class PlayerTest extends AbstractTest {
         ProfileDTO profile = new ProfileDTO(name);
         Player playerUn = new Player(profile);
 
-        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=FIRST, turnToChoose=false, foundMusics={}", playerUn.toString() );
+        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=FIRST, last=false, turnToChoose=false, foundMusics={}", playerUn.toString() );
 
         Player playerUnIso = new Player(profile);
         Player playerDeux = new Player(new ProfileDTO(name + "1"));
