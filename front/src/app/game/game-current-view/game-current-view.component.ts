@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
@@ -23,6 +23,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {ToasterService} from "../../services/toaster.service";
+import {PlayerCardComponent} from "../../player/player-card/player-card.component";
 
 /**
  * The current game view.
@@ -46,16 +47,6 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * The current exit icon.
 	 */
 	private currentExitIcon;
-
-	/**
-	 * Players left.
-	 */
-	private leftPlayers: Player[];
-
-	/**
-	 * Players right.
-	 */
-	private rightPlayers: Player[];
 
 	/**
 	 * If view is loaded.
@@ -128,6 +119,18 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private offlineAudio;
 
 	/**
+	 * Left player.
+	 */
+	@ViewChildren("leftPlayers")
+	private leftPlayersComponent: QueryList<PlayerCardComponent>;
+
+	/**
+	 * Left player.
+	 */
+	@ViewChildren("rightPlayers")
+	private rightPlayersComponent: QueryList<PlayerCardComponent>;
+
+	/**
 	 * In online mode, show preview audio.
 	 */
 	private showOnlinePreviewAudio: boolean;
@@ -146,6 +149,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * In online mode, audio url.
 	 */
 	private onlineAudio: SafeResourceUrl;
+
+	/**
+	 * During update phase, the current player to update.
+	 */
+	private currentPlayerToUpdate: PlayerCardComponent;
 
 	private static SLOW_SPEED = 0.5;
 	private static NORMAL_SPEED = 1;
@@ -195,7 +203,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.countdownConfig = {
 					demand: true,
 					format: "ss",
-					leftTime: 30,
+					leftTime: 3,
 					stopTime: 0,
 					notify: [25, 20, 15, 10, 5],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
@@ -244,8 +252,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 						this.game = response;
 						if (this.game.finished)
 							this._router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
-						else
-							this.fillPlayers();
+						else {
+
+							this.isLoaded = true;
+
+							if (this.game.nbMusicsPlayedInRound === 0)
+								this.openRoundInfoModal();
+						}
 					},
 					error => {
 
@@ -287,27 +300,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * Fill left/right players.
-	 * @private
+	 * Gets left players.
+	 *
+	 * @param left TRUE for left players, FALSE for right players
 	 */
-	private fillPlayers(): void {
+	private getPlayers(left: boolean): Player[] {
 
-		let allPlayers = this.game.players;
+		let gamePlayers = this.game.players;
 
-		this.leftPlayers = [];
-		this.rightPlayers = [];
+		let startIndex = left ? 0: 1;
+		let leftPlayers = [];
+		for (let i = startIndex; i < gamePlayers.length; i = i+2)
+			leftPlayers.push(gamePlayers[i]);
 
-		for (let i = 0; i < allPlayers.length; i++) {
-			if (i%2 === 0)
-				this.leftPlayers.push(allPlayers[i]);
-			else
-				this.rightPlayers.push(allPlayers[i]);
-		}
-
-		this.isLoaded = true;
-
-		if (this.game.nbMusicsPlayedInRound === 0)
-			this.openRoundInfoModal();
+		return leftPlayers;
 	}
 
 
@@ -600,20 +606,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.result.then(
 			(result: Game) => {
 
-				this.game = result;
-				if (this.game.finished) {
+				if (result.finished) {
 					this._router.navigateByUrl(END_GAME_PREFIX_PATH + this.game.id);
 				}
 				else {
 
-					this.updatePlayers();
-
-					this.showNextMusic = true;
-					if (this.game.nbMusicsPlayedInRound === 0)
-						this.openRoundInfoModal();
+					this.updatePlayers(result)
+						.then( () => {
+							this.showNextMusic = true;
+							if (this.game.nbMusicsPlayedInRound === 0)
+								this.openRoundInfoModal();
+						} );
 				}
 			},
-			(reason) => {
+			() => {
 				this._router.navigateByUrl(HOME_PATH);
 			}
 		);
@@ -623,31 +629,52 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * Update left/right players.
 	 * @private
 	 */
-	private updatePlayers(): void {
+	private async updatePlayers(appliedGame: Game): Promise<void> {
 
-		let allPlayers = this.game.players;
+		this.currentPlayerToUpdate = undefined;
 
-		for (let i = 0; i < allPlayers.length; i++) {
+		let appliedPlayers = appliedGame.players;
 
-			let player = allPlayers[i];
-			let playerName = player.profile.name;
+		for (let i = 0; i < appliedPlayers.length; i++) {
 
-			let foundPlayer = this.leftPlayers.find(value => value.profile.name === playerName);
-			if ( ToolsService.isNull(foundPlayer) )
-				foundPlayer = this.rightPlayers.find(value => value.profile.name === playerName);
+			let appliedPlayer = appliedPlayers[i];
+			let newPlayerName = appliedPlayer.profile.name;
 
-			if ( !ToolsService.isNull(foundPlayer) ) {
+			let foundPlayerComponent = this.leftPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
+			if ( ToolsService.isNull(foundPlayerComponent) )
+				foundPlayerComponent = this.rightPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
 
-				foundPlayer.rank = player.rank;
-				foundPlayer.last = player.last;
-				foundPlayer.turnToChoose = player.turnToChoose;
-
-				if (foundPlayer.score !== player.score)
-					foundPlayer.score = player.score;
-			}
+			this.currentPlayerToUpdate = foundPlayerComponent;
+			foundPlayerComponent.updatePLayer(appliedPlayer);
+			await ToolsService.sleep(1500);
 		}
+
+		this.currentPlayerToUpdate = undefined;
+
+		this.game.finished = appliedGame.finished;
+		this.game.nbMusicsPlayed = appliedGame.nbMusicsPlayed;
+		this.game.nbMusicsPlayedInRound = appliedGame.nbMusicsPlayedInRound;
+		this.game.round = appliedGame.round;
+		this.game.roundContent = appliedGame.roundContent;
+		this.game.firstStep = appliedGame.firstStep;
+		this.game.lastStep = appliedGame.lastStep;
+		this.game.finished = appliedGame.finished;
 	}
 
+	/**
+	 * Test if the dark css must me apply for "middle".
+	 */
+	private addDarkCssOnMiddle(): boolean {
+		return !ToolsService.isNull(this.currentPlayerToUpdate);
+	}
+
+	/**
+	 * Test if the dark css must me apply for "middle".
+	 */
+	private addDarkCssOnPlayer(player: Player): boolean {
+		return !ToolsService.isNull(this.currentPlayerToUpdate) &&
+			player.profile.name !== this.currentPlayerToUpdate.getPlayer().profile.name;
+	}
 
 	/**
 	 * Open round info modal.

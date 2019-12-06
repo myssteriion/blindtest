@@ -6,3 +6,7 @@
     padding-top: 2em;
     text-align: center;
 }
+
+.game-current-view-dark {
+    opacity: 0.3;
+}

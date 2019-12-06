@@ -88,4 +88,26 @@ export class PlayerCardComponent {
         return this.showFirstMedal() || this.showSecondMedal() || this.showThirdMedal() || this.showCookie() || this.showPoop();
     }
 
+    /**
+     * Get player.
+     */
+    public getPlayer(): Player {
+        return this.player;
+    }
+
+    /**
+     * Update player.
+     *
+     * @param player tht player
+     */
+    public updatePLayer(player: Player): void {
+
+        this.player.rank = player.rank;
+        this.player.last = player.last;
+        this.player.turnToChoose = player.turnToChoose;
+
+        if (this.player.score !== player.score)
+            this.player.score = player.score;
+    }
+
 }
