@@ -57,7 +57,7 @@
             "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y est bien au moins 1 musique pour chacun des thèmes selectionés."
         },
         "RESUME_VIEW": {
-            "TITLE": "Contiuer",
+            "TITLE": "Continuer",
             "RESUME_INFO": "Tant que le jeu n'a pas été arrêté, vous pouvez retrouver une partie en cours grâce à son N° qui est fourni lorsque la partie est quittée.",
             "GAME_NUM_PLACE_HOLDER": "Entrez le N°",
             "SEARCH_BUTTON": "Chercher",

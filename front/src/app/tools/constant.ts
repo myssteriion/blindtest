@@ -121,7 +121,7 @@ export const ADD_SCORE_ANIMATION =
     trigger('addScoreTrigger', [
         transition(':leave', [
             style({ }),
-            animate('1.5s', style({ opacity: 0, top: '-3em' })),
+            animate('2s', style({ opacity: 0, top: '-3em' })),
         ])
     ]);
 
