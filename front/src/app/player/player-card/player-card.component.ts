@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Player} from "../../interfaces/game/player.interface";
 import {faCookieBite, faMedal, faPoo} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
+import {OPACITY_ANIMATION} from "../../tools/constant";
 
 /**
  * Player card.
@@ -9,7 +10,10 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
     selector: 'player-card',
     templateUrl: './player-card.component.html',
-    styleUrls: ['./player-card.component.css']
+    styleUrls: ['./player-card.component.css'],
+    animations: [
+        OPACITY_ANIMATION
+    ]
 })
 export class PlayerCardComponent {
 
@@ -43,19 +47,31 @@ export class PlayerCardComponent {
 
 
     /**
-     * Test if the medal must be show.
+     * If the 1st medal must be show.
      */
-    private showMedal(): boolean {
-        let rank = this.player.rank;
-        return this.displayMedal && (rank === Rank.FIRST || rank === Rank.SECOND || rank === Rank.THIRD);
+    private showFirstMedal(): boolean {
+        return this.displayMedal && this.player.rank === Rank.FIRST;
+    }
+
+    /**
+     * If the 1st medal must be show.
+     */
+    private showSecondMedal(): boolean {
+        return this.displayMedal && this.player.rank === Rank.SECOND;
+    }
+
+    /**
+     * If the 1st medal must be show.
+     */
+    private showThirdMedal(): boolean {
+        return this.displayMedal && this.player.rank === Rank.THIRD;
     }
 
     /**
      * Test if the cookie must be show.
      */
     private showCookie(): boolean {
-        let rank = this.player.rank;
-        return this.displayMedal && rank === Rank.FOURTH;
+        return this.displayMedal && this.player.rank === Rank.FOURTH;
     }
 
     /**
@@ -69,30 +85,7 @@ export class PlayerCardComponent {
      * If show/hide icon(s).
      */
     private showIcon(): boolean {
-        return this.showMedal() || this.showCookie() || this.showPoop();
-    }
-
-    /**
-     * Get medal style.
-     */
-    private getMedalStyle(): string {
-
-        let colorStyle = "";
-
-        switch (this.player.rank) {
-            case Rank.FIRST: colorStyle = "player-card-rank-gold"; break;
-            case Rank.SECOND: colorStyle = "player-card-rank-silver"; break;
-            default: colorStyle = "player-card-rank-bronze";
-        }
-
-        return colorStyle;
-    }
-
-    /**
-     * Get medal tooltip.
-     */
-    private getMedalTooltip(): string {
-        return this._translate.instant("RANK." + this.player.rank);
+        return this.showFirstMedal() || this.showSecondMedal() || this.showThirdMedal() || this.showCookie() || this.showPoop();
     }
 
 }
