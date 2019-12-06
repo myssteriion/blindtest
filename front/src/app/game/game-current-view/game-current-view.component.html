@@ -1,7 +1,7 @@
 <div *ngIf="isLoaded" class="container-fluid" @flyInOut>
 
     <!-- header & exit -->
-    <div class="row">
+    <div class="row m-auto">
         <div class="offset-2 col-8">
             <header [title]="getTitle()"></header>
         </div>
@@ -16,13 +16,13 @@
         </div>
     </div>
 
-    <!-- theme and effect -->
-    <div class="row justify-content-center game-current-view-current-theme-effect">
+    <!-- players and theme and effect -->
+    <div class="row m-auto justify-content-center game-current-view-current-theme-effect">
 
         <!-- left players -->
         <div class="col-4">
             <player-card #leftPlayers *ngFor="let player of getPlayers(true);"
-                         [ngClass]="{ 'game-current-view-dark': addDarkCssOnPlayer(player) }"
+                         [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
                          [player]="player" [rankOnRight]="true" [displayMedal]="true">
             </player-card>
         </div>
@@ -74,7 +74,7 @@
         <!-- right players -->
         <div class="col-4">
             <player-card #rightPlayers *ngFor="let player of getPlayers(false);"
-                         [ngClass]="{ 'game-current-view-dark': addDarkCssOnPlayer(player) }"
+                         [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
                          [player]="player" [rankOnRight]="false" [displayMedal]="true">
             </player-card>
         </div>

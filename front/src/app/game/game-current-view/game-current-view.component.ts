@@ -151,9 +151,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private onlineAudio: SafeResourceUrl;
 
 	/**
-	 * During update phase, the current player to update.
+	 * During update phase, the current players to update.
 	 */
-	private currentPlayerToUpdate: PlayerCardComponent;
+	private currentPlayersToUpdate: String[];
 
 	private static SLOW_SPEED = 0.5;
 	private static NORMAL_SPEED = 1;
@@ -631,7 +631,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private async updatePlayers(appliedGame: Game): Promise<void> {
 
-		this.currentPlayerToUpdate = undefined;
+		this.currentPlayersToUpdate = [];
 
 		let appliedPlayers = appliedGame.players;
 
@@ -644,12 +644,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			if ( ToolsService.isNull(foundPlayerComponent) )
 				foundPlayerComponent = this.rightPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
 
-			this.currentPlayerToUpdate = foundPlayerComponent;
+			this.currentPlayersToUpdate.push( foundPlayerComponent.getPlayer().profile.name );
 			foundPlayerComponent.updatePLayer(appliedPlayer);
-			await ToolsService.sleep(1500);
+			if (i % 2 === 1 || i === appliedPlayers.length-1) {
+				await ToolsService.sleep(1500);
+				this.currentPlayersToUpdate = [];
+			}
 		}
-
-		this.currentPlayerToUpdate = undefined;
 
 		this.game.finished = appliedGame.finished;
 		this.game.nbMusicsPlayed = appliedGame.nbMusicsPlayed;
@@ -662,18 +663,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * Test if the dark css must me apply for "middle".
+	 * Test if the opacity css must me apply for player.
 	 */
-	private addDarkCssOnMiddle(): boolean {
-		return !ToolsService.isNull(this.currentPlayerToUpdate);
-	}
-
-	/**
-	 * Test if the dark css must me apply for "middle".
-	 */
-	private addDarkCssOnPlayer(player: Player): boolean {
-		return !ToolsService.isNull(this.currentPlayerToUpdate) &&
-			player.profile.name !== this.currentPlayerToUpdate.getPlayer().profile.name;
+	private addOpacityOnPlayer(player: Player): boolean {
+		return !ToolsService.isNull(this.currentPlayersToUpdate) && this.currentPlayersToUpdate.length > 0 &&
+			this.currentPlayersToUpdate.findIndex(playerName => playerName === player.profile.name) === -1;
 	}
 
 	/**
