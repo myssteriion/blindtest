@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../../interfaces/game/player.interface";
 import {faCookieBite, faMedal, faPoo} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
-import {RANK_ICON_ANIMATION} from "../../tools/constant";
+import {ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION} from "../../tools/constant";
+import {ToolsService} from "../../tools/tools.service";
 
 /**
  * Player card.
@@ -12,10 +13,10 @@ import {RANK_ICON_ANIMATION} from "../../tools/constant";
     templateUrl: './player-card.component.html',
     styleUrls: ['./player-card.component.css'],
     animations: [
-        RANK_ICON_ANIMATION
+        RANK_ICON_ANIMATION, ADD_SCORE_ANIMATION
     ]
 })
-export class PlayerCardComponent {
+export class PlayerCardComponent implements OnInit {
 
     /**
      * The player.
@@ -35,6 +36,16 @@ export class PlayerCardComponent {
     @Input()
     private displayMedal: boolean;
 
+    /**
+     * If show/hide add score.
+     */
+    private showAddScore: boolean;
+
+    /**
+     * Score to add.
+     */
+    private scoreToAdd: number;
+
     faMedal = faMedal;
     faPoo = faPoo;
     faCookieBite = faCookieBite;
@@ -42,6 +53,11 @@ export class PlayerCardComponent {
 
 
     constructor(private _translate: TranslateService) {
+    }
+
+    ngOnInit(): void {
+        this.showAddScore = false;
+        this.scoreToAdd = 0;
     }
 
 
@@ -100,14 +116,21 @@ export class PlayerCardComponent {
      *
      * @param player tht player
      */
-    public updatePLayer(player: Player): void {
+    public async updatePLayer(player: Player): Promise<void> {
 
         this.player.rank = player.rank;
         this.player.last = player.last;
         this.player.turnToChoose = player.turnToChoose;
 
-        if (this.player.score !== player.score)
+        if (this.player.score !== player.score) {
+
+            this.scoreToAdd = player.score - this.player.score;
+            this.showAddScore = true;
+
             this.player.score = player.score;
+            await ToolsService.sleep(100);
+            this.showAddScore = false;
+        }
     }
 
 }

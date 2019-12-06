@@ -1,4 +1,4 @@
-<div class="row player-card-frame" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight}">
+<div class="row" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight}">
 
     <!-- rank -->
     <div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
@@ -10,9 +10,18 @@
     </div>
 
     <!-- score -->
-    <div *ngIf="!rankOnRight" class="col-3 p-0 font-size-normal player-card-score">
-        <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+    <div *ngIf="!rankOnRight" class="col-3 p-0 player-card-score">
+        <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
+             [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
+            {{ scoreToAdd }}
+        </div>
+        <ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
     </div>
+
+<!--    <div class="player-card-frame-sum" @addScoreTrigger>-->
+<!--        <div *ngIf="!rankOnRight && showIcon()">+100</div>-->
+<!--        <div *ngIf="rankOnRight && showIcon()">+100</div>-->
+<!--    </div>-->
 
 
 
@@ -22,8 +31,12 @@
 
 
     <!-- score -->
-    <div *ngIf="rankOnRight" class="col-3 p-0 font-size-normal player-card-score">
-        <ng2-odometer [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+    <div *ngIf="rankOnRight" class="col-3 p-0 player-card-score">
+        <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
+             [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
+            {{ scoreToAdd }}
+        </div>
+        <ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
     </div>
 
     <!-- rank -->

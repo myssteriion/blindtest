@@ -115,6 +115,17 @@ export const RANK_ICON_ANIMATION =
     ]);
 
 /**
+ * Rank icon animation.
+ */
+export const ADD_SCORE_ANIMATION =
+    trigger('addScoreTrigger', [
+        transition(':leave', [
+            style({ }),
+            animate('1.5s', style({ opacity: 0, top: '-3em' })),
+        ])
+    ]);
+
+/**
  * Reduction animation.
  */
 export const REDUCTION_ANIMATION =

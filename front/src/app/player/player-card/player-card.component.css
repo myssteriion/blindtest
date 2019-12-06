@@ -1,3 +1,19 @@
+.player-card-add-score {
+    position: absolute;
+    z-index: 1;
+    top: -1em;
+    right: -0.1em;
+    font-size: 2.5em;
+}
+
+.player-card-add-score-green {
+    color: #11cd10;
+}
+
+.player-card-add-score-red {
+    color: #ff430f;
+}
+
 .player-card-rank {
     margin: auto;
     text-align: center;
@@ -33,7 +49,7 @@
     border-radius: 20px;
     text-align: center;
     margin: auto 0;
-    color: orangered;
+    color: #17a2b8;
     font-weight: bold;
     box-shadow: 8px 8px 4px silver;
 }
