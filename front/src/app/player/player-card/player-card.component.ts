@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Player} from "../../interfaces/game/player.interface";
 import {faCookieBite, faMedal, faPoo} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
-import {OPACITY_ANIMATION} from "../../tools/constant";
+import {RANK_ICON_ANIMATION} from "../../tools/constant";
 
 /**
  * Player card.
@@ -12,7 +12,7 @@ import {OPACITY_ANIMATION} from "../../tools/constant";
     templateUrl: './player-card.component.html',
     styleUrls: ['./player-card.component.css'],
     animations: [
-        OPACITY_ANIMATION
+        RANK_ICON_ANIMATION
     ]
 })
 export class PlayerCardComponent {

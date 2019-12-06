@@ -100,6 +100,21 @@ export const OPACITY_ANIMATION =
     ]);
 
 /**
+ * Rank icon animation.
+ */
+export const RANK_ICON_ANIMATION =
+    trigger('rankIconTrigger', [
+        transition(':enter', [
+            style({ opacity: 0 }),
+            animate('1s', style({ opacity: 1 })),
+        ]),
+        transition(':leave', [
+            style({ opacity: 1 }),
+            animate('1s', style({ opacity: 0 })),
+        ])
+    ]);
+
+/**
  * Reduction animation.
  */
 export const REDUCTION_ANIMATION =
