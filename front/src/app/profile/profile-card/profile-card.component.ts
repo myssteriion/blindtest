@@ -118,8 +118,8 @@ export class ProfileCardComponent implements OnInit {
         modalRef.componentInstance.create = false;
 
         modalRef.result.then(
-            (result) => { this.profile = result; this.onEdit.emit(); },
-            (reason) => { /* do nothing */ }
+            (result: Profile) => { this.profile = result; this.onEdit.emit(); },
+            () => { /* do nothing */ }
         );
     }
 
@@ -133,8 +133,8 @@ export class ProfileCardComponent implements OnInit {
         modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
 
         modalRef.result.then(
-            (result) => { this.deletedProfile() },
-            (reason) => { /* do nothing */ }
+            () => { this.deletedProfile() },
+            () => { /* do nothing */ }
         );
     }
 
@@ -166,8 +166,8 @@ export class ProfileCardComponent implements OnInit {
                     modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
 
                     modalRef.result.then(
-                        (result) => { this.deletedProfile(); },
-                        (reason) => { /* do nothing */ }
+                        () => { this.deletedProfile(); },
+                        () => { /* do nothing */ }
                     );
                 }
             }

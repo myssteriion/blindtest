@@ -199,8 +199,8 @@ export class GameNewViewComponent implements OnInit {
 				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
 
 				modalRef.result.then(
-					(result) => { /* do nothing */ },
-					(reason) => { /* do nothing */ }
+					() => { /* do nothing */ },
+					() => { /* do nothing */ }
 				);
 			}
 		);
@@ -227,8 +227,8 @@ export class GameNewViewComponent implements OnInit {
 		);
 
 		modalRef.result.then(
-			(result) => { /* do nothing */ },
-			(reason) => { /* do nothing */ }
+			() => { /* do nothing */ },
+			() => { /* do nothing */ }
 		);
 	}
 

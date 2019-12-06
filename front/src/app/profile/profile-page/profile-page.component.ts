@@ -119,8 +119,8 @@ export class ProfilePageComponent implements OnInit {
                 modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
                 modalRef.result.then(
-                    (result) => { this.loadProfiles(true); },
-                    (reason) => { this._router.navigateByUrl(HOME_PATH); }
+                    () => { this.loadProfiles(true); },
+                    () => { this._router.navigateByUrl(HOME_PATH); }
                 );
             }
         );
@@ -135,8 +135,8 @@ export class ProfilePageComponent implements OnInit {
         modalRef.componentInstance.create = true;
 
         modalRef.result.then(
-            (result) => { this.loadProfiles(true); },
-            (reason) => { /* do nothing */ }
+            () => { this.loadProfiles(true); },
+            () => { /* do nothing */ }
         );
     }
 

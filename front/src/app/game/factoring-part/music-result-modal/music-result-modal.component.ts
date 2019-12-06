@@ -199,8 +199,8 @@ export class MusicResultModalComponent implements OnInit {
                 modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
                 modalRef.result.then(
-                    (result) => { this.save(); },
-                    (reason) => { this._ngbActiveModal.dismiss(); }
+                    () => { this.save(); },
+                    () => { this._ngbActiveModal.dismiss(); }
                 );
             }
         );

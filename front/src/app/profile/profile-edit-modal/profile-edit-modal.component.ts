@@ -133,8 +133,8 @@ export class ProfileEditModalComponent implements OnInit {
 				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
 
 				modalRef.result.then(
-					(result) => { this.loadAvatars(1); },
-					(reason) => { this.cancel() }
+					() => { this.loadAvatars(1); },
+					() => { this.cancel() }
 				);
 			}
 		);
@@ -249,8 +249,8 @@ export class ProfileEditModalComponent implements OnInit {
 					modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
 
 					modalRef.result.then(
-						(result) => { this.save(); },
-						(reason) => { this.cancel(); }
+						() => { this.save(); },
+						() => { this.cancel(); }
 					);
 				}
 			}
@@ -289,8 +289,8 @@ export class ProfileEditModalComponent implements OnInit {
 					modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
 
 					modalRef.result.then(
-						(result) => { this.save(); },
-						(reason) => { this.cancel(); }
+						() => { this.save(); },
+						() => { this.cancel(); }
 					);
 				}
 			}

@@ -266,8 +266,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 							modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
 							modalRef.result.then(
-								(result) => { this.getGame(); },
-								(reason) => { this._router.navigateByUrl(HOME_PATH); }
+								() => { this.getGame(); },
+								() => { this._router.navigateByUrl(HOME_PATH); }
 							);
 						}
 					}
@@ -336,8 +336,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.body = this.getFormattedLabel();
 
 		modalRef.result.then(
-			(result) => { this._router.navigateByUrl(HOME_PATH); },
-			(reason) => { /* do nothing */ }
+			() => { this._router.navigateByUrl(HOME_PATH); },
+			() => { /* do nothing */ }
 		);
 	}
 
@@ -392,13 +392,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose ).profile.name;
 
 			modalRef.result.then(
-				(result) => {
+				(result: Theme) => {
 
 					let choiceTheme: Theme[] = [];
 					choiceTheme.push(result);
 					this.callNextMusic(choiceTheme, this.game.connectionMode);
 				},
-				(reason) => { /* do nothing */ }
+				() => { /* do nothing */ }
 			);
 		}
 		else
@@ -459,8 +459,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				modalRef.componentInstance.closeLabel = this._translate.instant("GAME.CURRENT_VIEW.RETRY_IN_OFFLINE_MODE_ERROR");
 
 				modalRef.result.then(
-					(result) => { this.callNextMusic(themes, connectionMode); },
-					(reason) => { this.callNextMusic(themes, ConnectionMode.OFFLINE); }
+					() => { this.callNextMusic(themes, connectionMode); },
+					() => { this.callNextMusic(themes, ConnectionMode.OFFLINE); }
 				);
 			}
 		);
@@ -598,7 +598,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.music = this.currentMusic;
 
 		modalRef.result.then(
-			(result) => {
+			(result: Game) => {
 
 				this.game = result;
 				if (this.game.finished) {
@@ -658,8 +658,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.game = this.game;
 
 		modalRef.result.then(
-			(result) => { /* do nothing */ },
-			(reason) => { /* do nothing */ }
+			() => { /* do nothing */ },
+			() => { /* do nothing */ }
 		);
 	}
 

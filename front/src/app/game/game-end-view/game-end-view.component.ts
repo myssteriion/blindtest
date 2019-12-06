@@ -135,8 +135,8 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 							modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 
 							modalRef.result.then(
-								(result) => { this.getGame(); },
-								(reason) => { this._router.navigateByUrl(HOME_PATH); }
+								() => { this.getGame(); },
+								() => { this._router.navigateByUrl(HOME_PATH); }
 							);
 						}
 					}
@@ -226,8 +226,8 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		modalRef.componentInstance.body = this._translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
 
 		modalRef.result.then(
-			(result) => { this._router.navigateByUrl(HOME_PATH); },
-			(reason) => { /* do nothing */ }
+			() => { this._router.navigateByUrl(HOME_PATH); },
+			() => { /* do nothing */ }
 		);
 	}
 
