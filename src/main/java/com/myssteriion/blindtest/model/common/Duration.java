@@ -7,7 +7,7 @@ public enum Duration {
 
     SHORT(0.5),
     NORMAL(1),
-    LONG(2);
+    LONG(1.5);
 
 
 
