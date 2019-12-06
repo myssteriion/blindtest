@@ -316,6 +316,15 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		return leftPlayers;
 	}
 
+	private addPaddingClass(): string {
+
+		let css = "game-current-view-players-padding-";
+
+		if (this.game.players.length >= 2 && this.game.players.length <= 8) css += "10";
+		if (this.game.players.length >= 9 && this.game.players.length <= 14) css += "5";
+
+		return css;
+	}
 
 
 	/**
