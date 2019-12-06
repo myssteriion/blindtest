@@ -24,19 +24,24 @@
     color: red;
 }
 
+.music-result-modal-table-row {
+    max-height: 40em;
+    overflow: auto;
+}
+
 .music-result-modal-table {
     width: 100%;
 }
 
 .music-result-modal-table th {
     text-align: center;
-    height: 4em;
+    height: 3em;
     background-color: #ffc066;
 }
 
 .music-result-modal-table td {
     text-align: center;
-    height: 2.8em;
+    height: 2.4em;
 }
 
 .music-result-modal-table-odd {
