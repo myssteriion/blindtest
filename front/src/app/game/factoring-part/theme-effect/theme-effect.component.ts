@@ -26,7 +26,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	/**
 	 * The theme image.
 	 */
-	private themeImg: string;
+	private theme: {};
 
 	/**
 	 * The effect image.
@@ -48,7 +48,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	constructor() { }
 
 	ngOnInit() {
-		this.themeImg = THEMES[0].srcImg;
+		this.theme = THEMES[0];
 		this.effectImg = EFFECTS[0].srcImg;
 
 		this.audio = new Audio();
@@ -98,41 +98,41 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 			if ( this.music.connectionMode === ConnectionMode.ONLINE && rollTheme) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
-				this.themeImg = THEMES[themeIndex].srcImg;
+				this.theme = THEMES[themeIndex];
 				this.audio.play();
 
 				while (!this.audio.ended) {
-					this.themeImg = THEMES[ToolsService.random(0, THEMES.length - 1)].srcImg;
+					this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
 					await ToolsService.sleep(100);
 				}
 
-				this.themeImg = THEMES[themeIndex].srcImg;
+				this.theme = THEMES[themeIndex];
 			}
 			else if (this.music.connectionMode === ConnectionMode.ONLINE && !rollTheme) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
-				this.themeImg = THEMES[themeIndex].srcImg;
+				this.theme = THEMES[themeIndex];
 			}
 			else if ( this.music.connectionMode === ConnectionMode.OFFLINE ) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
 
-				this.themeImg = THEMES[themeIndex].srcImg;
+				this.theme = THEMES[themeIndex];
 				this.effectImg = EFFECTS[effectIndex].srcImg;
 
 				this.audio.play();
 
 				while (!this.audio.ended) {
 					if (rollTheme)
-						this.themeImg = THEMES[ToolsService.random(0, THEMES.length - 1)].srcImg;
+						this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
 
 					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)].srcImg;
 
 					await ToolsService.sleep(100);
 				}
 
-				this.themeImg = THEMES[themeIndex].srcImg;
+				this.theme = THEMES[themeIndex];
 				this.effectImg = EFFECTS[effectIndex].srcImg;
 			}
 

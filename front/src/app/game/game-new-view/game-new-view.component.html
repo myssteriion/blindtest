@@ -38,7 +38,8 @@
     <!-- themes -->
     <div class="row game-new-view-themes">
         <div class="col-1" *ngFor="let theme of themes">
-            <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }" (click)="selectDeselectTheme(theme.enumVal)">
+            <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }"
+                 (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto">
         </div>
     </div>
 
