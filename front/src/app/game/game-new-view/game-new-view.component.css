@@ -1,16 +1,14 @@
-.game-new-view-durations, .game-new-view-themes, .game-new-view-online-mode {
-    padding-bottom: 2em;
+.game-new-view-part {
+    padding: 0.5em 0;
+    margin: 0.5em 0;
 }
 
-.custom-control-input:hover, .custom-control-label:hover {
-    cursor: pointer;
-}
-
-.game-new-view-themes div {
+.game-new-view-label {
     margin: auto;
+    text-decoration: underline;
 }
 
-.game-new-view-themes-img {
+.game-new-view-img {
     height: 6em;
     width: 6em;
     margin: 5px;
@@ -21,11 +19,11 @@
     opacity: 0.3;
 }
 
-.game-new-view-themes-img:hover {
+.game-new-view-img:hover {
     cursor: pointer;
 }
 
-.game-new-view-themes-img-active {
+.game-new-view-img-active {
     opacity: 1;
 }
 
@@ -34,7 +32,6 @@
     margin: 1em 0;
     text-align: center;
 }
-
 
 .game-new-view-profile-card, .game-new-view-profile-card-empty {
     padding: 10px;

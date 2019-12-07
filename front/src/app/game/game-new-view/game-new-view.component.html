@@ -4,8 +4,8 @@
     <header [title]="'GAME.NEW_VIEW.TITLE' | translate"></header>
 
     <!-- durations -->
-    <div class="row game-new-view-durations">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
+    <div class="row game-new-view-part">
+        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-9">
             <mat-radio-group class="font-size-normal" >
                 <mat-radio-button *ngFor="let duration of durations" value="{{ duration }}" color="warn"
@@ -18,8 +18,8 @@
     </div>
 
     <!-- connection mode -->
-    <div class="row game-new-view-online-mode">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
+    <div class="row game-new-view-part">
+        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
         <div class="col-9">
             <mat-radio-group class="font-size-normal" >
                 <mat-radio-button *ngFor="let connectionMode of connectionModes" value="{{ connectionMode }}" color="warn"
@@ -30,33 +30,41 @@
         </div>
     </div>
 
-    <!-- themes label -->
-    <div class="row">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
-    </div>
-
     <!-- themes -->
-    <div class="row game-new-view-themes">
-        <div class="col-1" *ngFor="let theme of themes">
-            <img src="{{ theme.srcImg }}" class="game-new-view-themes-img" [ngClass]="{ 'game-new-view-themes-img-active': (themeIsSelected(theme.enumVal)) }"
-                 (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto">
+    <div class="row game-new-view-part">
+        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
+        <div class="col-9">
+            <div class="row">
+                <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (themeIsSelected(theme.enumVal)) }"
+                     (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto">
+            </div>
         </div>
     </div>
 
-    <!-- players label -->
-    <div class="row">
-        <div class="col-3 font-size-normal">{{ 'GAME.NEW_VIEW.PLAYERS_LIST_LABEL' | translate }}</div>
+    <!-- effects label -->
+    <div class="row game-new-view-part">
+        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</div>
+        <div class="col-9">
+            <div class="row">
+                <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (effectIsSelected(effect.enumVal)) }"
+                         (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto">
+            </div>
+        </div>
     </div>
 
     <!-- players -->
-    <div class="row">
-
-        <profile-card class="col-3 game-new-view-profile-card" *ngFor="let profile of playersProfiles" [profile]="profile" [canEdit]="false" [canSelect]="false"
-                      [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
-        </profile-card>
-
-        <profile-card-empty class="col-3 game-new-view-profile-card-empty" *ngFor="let emptyName of getEmptyNames()" [name]="emptyName" (onClick)="selectProfiles()"></profile-card-empty>
-
+    <div class="row game-new-view-part">
+        <div class="col">
+            <div class="row">
+                <div class="col game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.PLAYERS_LIST_LABEL' | translate }}</div>
+            </div>
+            <div class="row">
+                <profile-card class="col-3 game-new-view-profile-card" *ngFor="let profile of playersProfiles" [profile]="profile" [canEdit]="false" [canSelect]="false"
+                              [canDeselect]="true" (onDeselect)="deselectProfile(profile)">
+                </profile-card>
+                <profile-card-empty class="col-3 game-new-view-profile-card-empty" *ngFor="let emptyName of getEmptyNames()" [name]="emptyName" (onClick)="selectProfiles()"></profile-card-empty>
+            </div>
+        </div>
     </div>
 
     <!-- button -->

@@ -5,7 +5,7 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
+import {EFFECTS, GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
@@ -57,6 +57,16 @@ export class GameNewViewComponent implements OnInit {
 	public selectedThemes: Theme[];
 
 	/**
+	 * Themes list.
+	 */
+	private effects = EFFECTS;
+
+	/**
+	 * Selected themes.
+	 */
+	public selectedEffect: Effect[];
+
+	/**
 	 * Players profiles and empty names.
 	 */
 	public playersProfiles: Profile[];
@@ -78,17 +88,22 @@ export class GameNewViewComponent implements OnInit {
 
         this.playersProfiles = [];
         this.selectedDuration = Duration.NORMAL;
+
 		this.selectedThemes = [];
 		THEMES.forEach(theme => { this.selectedThemes.push(theme.enumVal); } );
+
+		this.selectedEffect = [];
+		EFFECTS.forEach(effect => { this.selectedEffect.push(effect.enumVal); } );
+
 		this.selectedConnectionMode = ConnectionMode.OFFLINE;
     }
 
 
 
 	/**
-	 * Select/deselect duration.
+	 * Select/deselect theme.
 	 *
-	 * @param theme: Theme
+	 * @param theme the theme
 	 */
 	public selectDeselectTheme(theme: Theme): void {
 
@@ -104,11 +119,38 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Tests if the theme is selected.
 	 *
-	 * @param theme: Theme
+	 * @param theme the theme
 	 */
 	public themeIsSelected(theme: Theme): boolean {
 		return (this.selectedThemes.findIndex(thm => thm === theme)) !== -1;
 	}
+
+
+	/**
+	 * Select/deselect effect.
+	 *
+	 * @param effect the effect
+	 */
+	public selectDeselectEffect(effect: Effect): void {
+
+		let index = this.selectedEffect.findIndex(eff => eff === effect);
+		if (index !== -1) {
+			if (this.selectedEffect.length > 1)
+				this.selectedEffect.splice(index, 1);
+		}
+		else
+			this.selectedEffect.push(effect);
+	}
+
+	/**
+	 * Tests if the effect is selected.
+	 *
+	 * @param effect the effect
+	 */
+	public effectIsSelected(effect: Effect): boolean {
+		return (this.selectedEffect.findIndex(eff => eff === effect)) !== -1;
+	}
+
 
 	/**
 	 * Gets empty players.
@@ -175,6 +217,7 @@ export class GameNewViewComponent implements OnInit {
 			duration: this.selectedDuration,
 			playersNames: playersNames,
 			themes: this.selectedThemes,
+			effects: this.selectedEffect,
 			connectionMode: this.selectedConnectionMode
 		};
 

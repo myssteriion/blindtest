@@ -39,6 +39,7 @@
             "DURATIONS_LABEL": "Durée de la partie :",
             "MODE_LABEL": "Mode de la partie :",
             "THEMES_LABEL": "Choix des thèmes :",
+            "EFFECTS_LABEL": "Choix des effets :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs :",
             "ONLINE_MODE": "En ligne (avec Spotify)",
             "OFFLINE_MODE": "Hors ligne",
@@ -174,5 +175,11 @@
         "SERIES_CINEMAS": "Les musiques de Films et Séries.",
         "JEUX":  "Les musiques de jeux.",
         "CLASSIQUES": "Les musiques classiques."
+    },
+    "EFFECTS": {
+        "NONE": "Musique sans effet.",
+        "SLOW": "Musique au ralentis.",
+        "SPEED": "Musique en accéléré.",
+        "MIX": "Alternance entre ralentis et accéléré."
     }
 }

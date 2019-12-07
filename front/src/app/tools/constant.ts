@@ -55,10 +55,10 @@ export const THEMES = [
  * Path to "effect" in assets folder.
  */
 export const EFFECTS = [
-    { srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE },
-    { srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW },
-    { srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED },
-    { srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX }
+    { srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE, tooltip: "EFFECTS.NONE" },
+    { srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW, tooltip: "EFFECTS.SLOW" },
+    { srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED, tooltip: "EFFECTS.SPEED" },
+    { srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX, tooltip: "EFFECTS.MIX" }
 ];
 
 /**

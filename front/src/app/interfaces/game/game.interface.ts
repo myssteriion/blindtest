@@ -13,6 +13,7 @@ export interface Game {
 	round: Round,
 	roundContent: AbstractRoundContent,
 	themes: Theme[],
+	effects: Effect[],
 	connectionMode: ConnectionMode,
 
 	firstStep: boolean,

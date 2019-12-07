@@ -26,13 +26,14 @@ export class MusicResource {
 	 * Get random musics.
 	 *
 	 * @param themes 	 	 the themes
+	 * @param effects 	 	 the effects
 	 * @param connectionMode the connectionMode
 	 */
-	public random(themes: Theme[], connectionMode: ConnectionMode): Observable<Music> {
+	public random(themes: Theme[], effects: Effect[], connectionMode: ConnectionMode): Observable<Music> {
 
 		let queryParam = "?connectionMode=" + connectionMode;
-		if ( !ToolsService.isNull(themes) )
-			queryParam += "&themes=" + themes;
+		if ( !ToolsService.isNull(themes) )	queryParam += "&themes=" + themes;
+		if ( !ToolsService.isNull(effects) ) queryParam += "&effects=" + effects;
 
 		return this._http.get<Music>(this.path + "/random" + queryParam);
 	}
