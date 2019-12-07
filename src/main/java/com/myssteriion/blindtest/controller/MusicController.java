@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
@@ -47,13 +48,14 @@ public class MusicController {
 	 */
 	@GetMapping(path = "/random")
 	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
+										   @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
 										   @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
 			throws NotFoundException, IOException, SpotifyException {
 
-		MusicDTO music = musicService.random(themes, connectionMode);
+		MusicDTO music = musicService.random(themes, effects, connectionMode);
 		if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random(themes, connectionMode);
+			music = musicService.random(themes, effects, connectionMode);
 		}
 
 		return ResponseBuilder.create200(music);

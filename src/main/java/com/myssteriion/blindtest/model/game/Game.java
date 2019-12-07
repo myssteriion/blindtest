@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.game;
 import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
@@ -63,6 +64,11 @@ public class Game implements IModel {
     private List<Theme> themes;
 
     /**
+     * The effects.
+     */
+    private List<Effect> effects;
+
+    /**
      * The connection mode.
      */
     private ConnectionMode connectionMode;
@@ -82,7 +88,7 @@ public class Game implements IModel {
      * @param themes   the themes
      * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes, ConnectionMode connectionMode) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
         Tool.verifyValue("players", players);
         Tool.verifyValue("duration", duration);
@@ -98,6 +104,7 @@ public class Game implements IModel {
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.effects = Tool.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
         this.listenedMusics = new HashMap<>();
     }
@@ -183,6 +190,15 @@ public class Game implements IModel {
      */
     public List<Theme> getThemes() {
         return themes;
+    }
+
+    /**
+     * Gets effects.
+     *
+     * @return The effects.
+     */
+    public List<Effect> getEffects() {
+        return effects;
     }
 
     /**
@@ -274,6 +290,7 @@ public class Game implements IModel {
                 ", round=" + round +
                 ", roundContent={" + roundContent + "}" +
                 ", themes=" + themes +
+                ", effects=" + effects +
                 ", connectionMode=" + connectionMode +
                 ", listenedMusics=" + listenedMusics;
     }

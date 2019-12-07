@@ -28,6 +28,7 @@ public class PlayerTest extends AbstractTest {
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
         Assert.assertEquals( Rank.FIRST, player.getRank() );
+        Assert.assertFalse( player.isLast() );
     }
 
     @Test
@@ -40,9 +41,12 @@ public class PlayerTest extends AbstractTest {
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
         Assert.assertEquals( Rank.FIRST, player.getRank() );
+        Assert.assertFalse( player.isLast() );
 
         player.setRank(Rank.SEVENTH);
+        player.setLast(true);
         Assert.assertEquals( Rank.SEVENTH, player.getRank() );
+        Assert.assertTrue( player.isLast() );
     }
 
     @Test

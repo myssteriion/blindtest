@@ -592,6 +592,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlineAudio.nativeElement.controls = true;
 			this.offlineAudio.nativeElement.load();
 			this.offlineAudio.nativeElement.currentTime = currentTime;
+			this.offlineAudio.nativeElement.volume = 0.25;
 			this.offlineAudio.nativeElement.play();
 
 			this.showOfflineAudio = true;

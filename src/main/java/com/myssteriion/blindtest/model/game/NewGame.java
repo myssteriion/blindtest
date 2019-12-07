@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.game;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -30,6 +31,11 @@ public class NewGame {
     private List<Theme> themes;
 
     /**
+     * The effects.
+     */
+    private List<Effect> effects;
+
+    /**
      * The connection mode.
      */
     private ConnectionMode connectionMode;
@@ -45,7 +51,7 @@ public class NewGame {
      * @param connectionMode the connectionMode mode
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, ConnectionMode connectionMode) {
+    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
         Tool.verifyValue("playersNames", playersNames);
         Tool.verifyValue("duration", duration);
@@ -54,6 +60,7 @@ public class NewGame {
         this.playersNames = playersNames;
         this.duration = duration;
         this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.effects = Tool.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
     }
 
@@ -87,6 +94,15 @@ public class NewGame {
     }
 
     /**
+     * Gets effects.
+     *
+     * @return The effects.
+     */
+    public List<Effect> getEffects() {
+        return effects;
+    }
+
+    /**
      * Gets game mode.
      *
      * @return the game mode
@@ -101,6 +117,7 @@ public class NewGame {
         return "playersNames=" + playersNames +
                 ", duration=" + duration +
                 ", themes=" + themes +
+                ", effects=" + effects +
                 ", connectionMode=" + connectionMode;
     }
 

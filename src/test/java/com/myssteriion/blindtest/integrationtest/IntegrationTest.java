@@ -2,6 +2,7 @@ package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -52,7 +53,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
 
-        NewGame newGame = new NewGame(playersNames, duration, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), ConnectionMode.OFFLINE);
+        NewGame newGame = new NewGame(playersNames, duration, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), Arrays.asList(Effect.NONE, Effect.SPEED), ConnectionMode.OFFLINE);
         Game game = gameService.newGame(newGame);
 
 

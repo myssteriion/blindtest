@@ -201,7 +201,7 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), new ArrayList<>(), allMusics);
 
 		try {
-			musicService.random(null, ConnectionMode.OFFLINE);
+			musicService.random(null, null, ConnectionMode.OFFLINE);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -209,7 +209,7 @@ public class MusicServiceTest extends AbstractTest {
 		}
 
 		try {
-			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), ConnectionMode.OFFLINE);
+			musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
@@ -233,10 +233,10 @@ public class MusicServiceTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
 
-		MusicDTO music = musicService.random(null, ConnectionMode.OFFLINE);
+		MusicDTO music = musicService.random(null, null, ConnectionMode.OFFLINE);
 		Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
 
-		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), ConnectionMode.OFFLINE);
+		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
 		Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
 
 
@@ -250,14 +250,14 @@ public class MusicServiceTest extends AbstractTest {
 		Mockito.doThrow(new SpotifyException("se")).doNothing().when(spotifyService).testConnection();
 
 		try {
-			musicService.random(null, ConnectionMode.ONLINE);
+			musicService.random(null, null, ConnectionMode.ONLINE);
 			Assert.fail("Doit lever une SpotifyException car le mock throw.");
 		}
 		catch (SpotifyException e) {
 			verifyException(new SpotifyException("se"), e);
 		}
 
-		music = musicService.random(null, ConnectionMode.ONLINE);
+		music = musicService.random(null, null, ConnectionMode.ONLINE);
 		Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
 	}
 

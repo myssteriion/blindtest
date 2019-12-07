@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -212,7 +213,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * @throws NotFoundException the not found exception
 	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
+	public MusicDTO random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
 
 		Tool.verifyValue("connectionMode", connectionMode);
 
@@ -239,7 +240,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 			music.setFlux( new Flux(path.toFile()) );
-			music.setEffect( findNextEffect() );
+
+			List<Effect> searchEffects = (Tool.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
+			music.setEffect( findNextEffect(searchEffects) );
 		}
 
 		return music;
@@ -318,15 +321,33 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 *
 	 * @return an effect
 	 */
-	private Effect findNextEffect() {
+	private Effect findNextEffect(List<Effect> effects) {
 
-		int r = Tool.RANDOM.nextInt(100);
+		int ratio = 100 / effects.size();
 
-		if (r >= 40 && r < 60) return Effect.SLOW;
-		if (r >= 60 && r < 80) return Effect.SPEED;
-		if (r >= 80 && r < 100) return Effect.MIX;
+		List<Double> cumulativePercent = new ArrayList<>();
 
-		return Effect.NONE;
+		cumulativePercent.add( (double) ratio );
+		for (int i = 1; i < Effect.getSortedEffect().size(); i++)
+			cumulativePercent.add( cumulativePercent.get(i-1) + ratio );
+
+
+
+		Effect foundEffect = null;
+
+		double random = Tool.RANDOM.nextDouble() * 100;
+		int index = 0;
+
+		while (foundEffect == null) {
+
+			double cumul = cumulativePercent.get(index);
+			if (random < cumul)
+				foundEffect = Effect.getSortedEffect().get(index);
+			else
+				index++;
+		}
+
+		return foundEffect;
 	}
 
 }
