@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -242,10 +241,29 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			music.setFlux( new Flux(path.toFile()) );
 
 			List<Effect> searchEffects = (Tool.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
-			music.setEffect( findNextEffect(searchEffects) );
+			music.setEffect( foundEffect(searchEffects) );
 		}
 
 		return music;
+	}
+
+	private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {
+
+		List<MusicDTO> allMusicsTheme = allMusics.stream()
+				.filter(music -> music.getTheme() == theme)
+				.collect( Collectors.toList() );
+
+		int min = allMusicsTheme.stream()
+				.mapToInt(MusicDTO::getPlayed)
+				.min()
+				.getAsInt();
+
+		List<MusicDTO> potentialMusics = allMusicsTheme.stream()
+				.filter(music -> music.getPlayed() == min)
+				.collect( Collectors.toList() );
+
+		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
+		return potentialMusics.get(random);
 	}
 
 	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
@@ -296,58 +314,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		
 		return foundTheme;
 	}
-	
-	private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {
-	
-		List<MusicDTO> allMusicsTheme = allMusics.stream()
-												.filter(music -> music.getTheme() == theme)
-												.collect( Collectors.toList() );
-		
-		int min = allMusicsTheme.stream()
-								.mapToInt(MusicDTO::getPlayed)
-								.min()
-								.getAsInt();
-		
-		List<MusicDTO> potentialMusics = allMusicsTheme.stream()
-												.filter(music -> music.getPlayed() == min)
-												.collect( Collectors.toList() );
-		
-		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
-		return potentialMusics.get(random);
-	}
 
-	/**
-	 * Randomly choose an effect.
-	 *
-	 * @return an effect
-	 */
-	private Effect findNextEffect(List<Effect> effects) {
-
-		int ratio = 100 / effects.size();
-
-		List<Double> cumulativePercent = new ArrayList<>();
-
-		cumulativePercent.add( (double) ratio );
-		for (int i = 1; i < Effect.getSortedEffect().size(); i++)
-			cumulativePercent.add( cumulativePercent.get(i-1) + ratio );
-
-
-
-		Effect foundEffect = null;
-
-		double random = Tool.RANDOM.nextDouble() * 100;
-		int index = 0;
-
-		while (foundEffect == null) {
-
-			double cumul = cumulativePercent.get(index);
-			if (random < cumul)
-				foundEffect = Effect.getSortedEffect().get(index);
-			else
-				index++;
-		}
-
-		return foundEffect;
+	private Effect foundEffect(List<Effect> effects) {
+		return effects.get( Tool.RANDOM.nextInt(effects.size()) );
 	}
 
 }
