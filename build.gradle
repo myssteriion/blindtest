@@ -64,7 +64,7 @@ def env = project.hasProperty('env') ? project.env : 'dev'
 
 clean {
 	delete deliveryFolder
-	delete "front/dist"
+//	delete "front/dist"
 }
 
 build {
