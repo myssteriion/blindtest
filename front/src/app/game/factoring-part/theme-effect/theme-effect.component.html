@@ -7,7 +7,7 @@
 
     <!-- effect -->
     <div *ngIf="showEffect" class="col">
-        <img src="{{ effectImg }}"/>
+        <img src="{{ effect.srcImg }}" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto"/>
     </div>
 
 </div>

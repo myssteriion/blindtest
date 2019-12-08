@@ -31,7 +31,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	/**
 	 * The effect image.
 	 */
-	private effectImg: string;
+	private effect: {};
 
 	/**
 	 * Audio.
@@ -49,7 +49,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.theme = THEMES[0];
-		this.effectImg = EFFECTS[0].srcImg;
+		this.effect = EFFECTS[0];
 
 		this.audio = new Audio();
 		this.audio.src = MARIO_KART_SOUND;
@@ -119,7 +119,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
 
 				this.theme = THEMES[themeIndex];
-				this.effectImg = EFFECTS[effectIndex].srcImg;
+				this.effect = EFFECTS[effectIndex];
 
 				this.audio.play();
 
@@ -127,13 +127,13 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 					if (rollTheme)
 						this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
 
-					this.effectImg = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)].srcImg;
+					this.effect = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)];
 
 					await ToolsService.sleep(100);
 				}
 
 				this.theme = THEMES[themeIndex];
-				this.effectImg = EFFECTS[effectIndex].srcImg;
+				this.effect = EFFECTS[effectIndex];
 			}
 
 			resolve();
