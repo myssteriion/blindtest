@@ -2,11 +2,11 @@
 
     <!-- rank -->
     <div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
-        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" ngbTooltip="{{ 'RANK.THIRD' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" ngbTooltip="{{ 'RANK.SECOND' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" ngbTooltip="{{ 'RANK.FIRST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" ngbTooltip="{{ 'RANK.THIRD' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" ngbTooltip="{{ 'RANK.SECOND' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" ngbTooltip="{{ 'RANK.FIRST' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
     </div>
 
     <!-- score -->
@@ -36,11 +36,11 @@
 
     <!-- rank -->
     <div *ngIf="rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
-        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" ngbTooltip="{{ 'RANK.FIRST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" ngbTooltip="{{ 'RANK.SECOND' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" ngbTooltip="{{ 'RANK.THIRD' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x"></fa-icon>
-        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x"></fa-icon>
+        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" ngbTooltip="{{ 'RANK.FIRST' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" ngbTooltip="{{ 'RANK.SECOND' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" ngbTooltip="{{ 'RANK.THIRD' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" ngbTooltip="{{ 'RANK.FOURTH' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" ngbTooltip="{{ 'RANK.LAST' | translate }}" placement="bottom auto" size="2x" [openDelay]="500"></fa-icon>
     </div>
 
 </div>

@@ -46,9 +46,9 @@ export class PlayerCardComponent implements OnInit {
      */
     private scoreToAdd: number;
 
-    faMedal = faMedal;
-    faPoo = faPoo;
-    faCookieBite = faCookieBite;
+    private faMedal = faMedal;
+    private faPoo = faPoo;
+    private faCookieBite = faCookieBite;
 
 
 
