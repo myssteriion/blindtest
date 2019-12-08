@@ -488,10 +488,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private rollThemeEffect(): void {
 
 		let rollTheme: boolean = !(this.game.round === Round.CHOICE || this.game.themes.length === 1);
+		let rollEffect: boolean = this.game.effects.length > 1;
 
 		this.themeEffect.setShow(true);
 		this.themeEffect.setMusic(this.currentMusic);
-		this.themeEffect.roll(rollTheme)
+		this.themeEffect.roll(rollTheme, rollEffect)
 			.then( () => { this.startPreCountdown(); } );
 	}
 

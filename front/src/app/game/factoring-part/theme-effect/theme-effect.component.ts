@@ -91,49 +91,52 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	 * @param rollTheme if the theme must be roll
 	 * @return (Promise<void>)
 	 */
-	public roll(rollTheme: boolean): Promise<void> {
+	public roll(rollTheme: boolean, rollEffect: boolean): Promise<void> {
 
 		return new Promise(async (resolve) => {
 
-			if ( this.music.connectionMode === ConnectionMode.ONLINE && rollTheme) {
+			if (this.music.connectionMode === ConnectionMode.ONLINE) {
 
 				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				this.theme = THEMES[themeIndex];
-				this.audio.play();
 
-				while (!this.audio.ended) {
-					this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
-					await ToolsService.sleep(100);
-				}
+				if (rollTheme) {
 
-				this.theme = THEMES[themeIndex];
-			}
-			else if (this.music.connectionMode === ConnectionMode.ONLINE && !rollTheme) {
+					this.audio.play();
 
-				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
-				this.theme = THEMES[themeIndex];
-			}
-			else if ( this.music.connectionMode === ConnectionMode.OFFLINE ) {
-
-				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
-				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
-
-				this.theme = THEMES[themeIndex];
-				this.effect = EFFECTS[effectIndex];
-
-				this.audio.play();
-
-				while (!this.audio.ended) {
-					if (rollTheme)
+					while (!this.audio.ended) {
 						this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
+						await ToolsService.sleep(100);
+					}
 
-					this.effect = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)];
-
-					await ToolsService.sleep(100);
+					this.theme = THEMES[themeIndex];
 				}
+			}
+			else {
 
+				let themeIndex = THEMES.findIndex(theme => theme.enumVal === this.music.theme);
 				this.theme = THEMES[themeIndex];
+
+				let effectIndex = EFFECTS.findIndex(effect => effect.enumVal === this.music.effect);
 				this.effect = EFFECTS[effectIndex];
+
+				if (rollTheme || rollEffect) {
+
+					this.audio.play();
+
+					while (!this.audio.ended) {
+						if (rollTheme)
+							this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
+
+						if (rollEffect)
+							this.effect = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)];
+
+						await ToolsService.sleep(100);
+					}
+
+					this.theme = THEMES[themeIndex];
+					this.effect = EFFECTS[effectIndex];
+				}
 			}
 
 			resolve();
