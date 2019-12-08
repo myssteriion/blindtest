@@ -16,7 +16,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	/**
 	 * Show view.
 	 */
-	private show: boolean;
+	public show: boolean;
 
 	/**
 	 * The music.

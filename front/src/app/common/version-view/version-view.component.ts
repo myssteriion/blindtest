@@ -9,18 +9,15 @@ import {environment} from "../../../environments/environment";
 	templateUrl: './version-view.component.html',
 	styleUrls: ['./version-view.component.css']
 })
-export class VersionViewComponent implements OnInit {
+export class VersionViewComponent {
 
 	/**
 	 * The version.
 	 */
-	private version: string = environment.version;
+	public version: string = environment.version;
 
 
 
 	constructor() { }
-
-	ngOnInit() {
-	}
 
 }

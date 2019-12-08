@@ -20,7 +20,7 @@ export class CustomCountdownComponent implements OnInit {
 	 * The countdown config.
 	 */
 	@Input()
-	private countdownConfig: CountdownConfig;
+	public countdownConfig: CountdownConfig;
 
 	/**
 	 * The animation.
@@ -60,12 +60,12 @@ export class CustomCountdownComponent implements OnInit {
 	/**
 	 * Show view.
 	 */
-	private show: boolean;
+	public show: boolean;
 
 	/**
 	 * Css color.
 	 */
-	private color: string;
+	public color: string;
 
 	public static BLUE_COLOR = "custom-countdown-frame-blue";
 	public static GREEN_COLOR = "custom-countdown-frame-green";
@@ -103,7 +103,7 @@ export class CustomCountdownComponent implements OnInit {
 	/**
 	 * The event callback. Send event on done.
 	 */
-	private async countdownEvent(event) {
+	public async countdownEvent(event) {
 
 		if (event.action === "done") {
 			this.onEnd.emit();

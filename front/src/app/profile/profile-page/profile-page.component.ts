@@ -44,7 +44,7 @@ export class ProfilePageComponent implements OnInit {
     /**
      * If view is loaded.
      */
-    private isLoaded: boolean;
+    public isLoaded: boolean;
 
     /**
      * Profiles page.

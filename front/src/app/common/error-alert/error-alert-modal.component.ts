@@ -15,7 +15,7 @@ export class ErrorAlertModalComponent implements OnInit {
 	 * Text to show.
 	 */
 	@Input()
-	private text: string;
+	public text: string;
 
 	/**
 	 * Suggestion to show.
@@ -39,18 +39,18 @@ export class ErrorAlertModalComponent implements OnInit {
 	 * Show retry button.
 	 */
 	@Input()
-	private showRetry: boolean;
+	public showRetry: boolean;
 
 	/**
 	 * Button label for close.
 	 */
 	@Input()
-	private closeLabel: string;
+	public closeLabel: string;
 
 	/**
 	 * Show error.
 	 */
-	private showError: boolean;
+	public showError: boolean;
 
 	/**
 	 * Error level.
@@ -76,7 +76,7 @@ export class ErrorAlertModalComponent implements OnInit {
 	/**
 	 * Gets css class for text.
 	 */
-	private getAlertClass(): string {
+	public getAlertClass(): string {
 
 		let css = "";
 
@@ -91,14 +91,14 @@ export class ErrorAlertModalComponent implements OnInit {
 	/**
 	 * If show suggestions.
 	 */
-	private showSuggestions(): boolean {
+	public showSuggestions(): boolean {
 		return !ToolsService.isNull(this.suggestions) && this.suggestions.length > 0;
 	}
 
 	/**
 	 * Gets label.
 	 */
-	private getShowMoreShowLessLabel(): string {
+	public getShowMoreShowLessLabel(): string {
 
 		let label = "COMMON.";
 
@@ -117,7 +117,7 @@ export class ErrorAlertModalComponent implements OnInit {
 	/**
 	 * On close.
 	 */
-	private close(): void {
+	public close(): void {
 		this._ngbActiveModal.dismiss();
 	}
 

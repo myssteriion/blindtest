@@ -34,12 +34,12 @@ export class ProfileEditModalComponent implements OnInit {
 	 * Creation or edition.
 	 */
 	@Input()
-	private create: boolean;
+	public create: boolean;
 
 	/**
 	 * The new profile.
 	 */
-	private newProfile: Profile;
+	public newProfile: Profile;
 
 	/**
 	 * The avatars page.
@@ -49,7 +49,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Show/hide avatars page.
 	 */
-	private showAvatars: boolean;
+	public showAvatars: boolean;
 
 	/**
 	 * Show/hide pageable.
@@ -59,7 +59,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Background ids.
 	 */
-	private backgroundIds = [0, 1, 2, 3, 4];
+	public backgroundIds = [0, 1, 2, 3, 4];
 
 
 
@@ -143,7 +143,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Gets the new avatar flux.
 	 */
-	private getCurrentFluxForImg(): string {
+	public getCurrentFluxForImg(): string {
 		return ToolsService.getFluxForImg(this.newProfile.avatar.flux);
 	}
 
@@ -190,7 +190,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Test if the save button is disabled.
 	 */
-	private disabledSave(): boolean {
+	public disabledSave(): boolean {
 		return ToolsService.isNullOrEmpty(this.newProfile.name) ||
 			ToolsService.isNull(this.newProfile.avatar) ||
 			ToolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
@@ -201,7 +201,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Save/update profile.
 	 */
-	private save(): void {
+	public save(): void {
 
 		let profileTmp = {
 			id: this.newProfile.id,
@@ -300,7 +300,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Cancel the modal.
 	 */
-	private cancel(): void {
+	public cancel(): void {
 		this._ngbActiveModal.dismiss();
 	}
 

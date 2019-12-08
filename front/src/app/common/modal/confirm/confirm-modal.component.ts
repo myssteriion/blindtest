@@ -15,13 +15,13 @@ export class ConfirmModalComponent {
      * The modal title.
      */
     @Input()
-    private title: string;
+    public title: string;
 
     /**
      * The modal message.
      */
     @Input()
-    private body: string;
+    public body: string;
 
 
 
@@ -32,14 +32,14 @@ export class ConfirmModalComponent {
     /**
      * On yes.
      */
-    private yes(): void {
+    public yes(): void {
         this._ngbActiveModal.close();
     }
 
     /**
      * On no.
      */
-    private no(): void {
+    public no(): void {
         this._ngbActiveModal.dismiss();
     }
 

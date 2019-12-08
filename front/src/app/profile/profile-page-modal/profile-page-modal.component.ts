@@ -17,13 +17,13 @@ export class ProfilePageModalComponent implements OnInit {
      * Profiles page.
      */
     @Input()
-    private page: Page<Profile>;
+    public page: Page<Profile>;
 
     /**
      * On select profile card.
      */
     @Output()
-    private onSelect = new EventEmitter();
+    public onSelect = new EventEmitter();
 
 
 
@@ -36,7 +36,7 @@ export class ProfilePageModalComponent implements OnInit {
     /**
      * Close modal.
      */
-    private close(): void {
+    public close(): void {
         this._ngbActiveModal.close();
     }
 

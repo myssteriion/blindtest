@@ -17,7 +17,7 @@ export class RoundInfoModalComponent {
      * The game.
      */
     @Input()
-    private game: Game;
+    public game: Game;
 
 
 
@@ -29,7 +29,7 @@ export class RoundInfoModalComponent {
     /**
      * Gets the round description.
      */
-    private getDescription(): string {
+    public getDescription(): string {
 
         let params = {
             roundName: this._translate.instant("ROUND." + this.game.round + ".NAME"),
@@ -45,28 +45,28 @@ export class RoundInfoModalComponent {
     /**
      * If lose point part is showed.
      */
-    private showNpPointLose(): boolean {
+    public showNpPointLose(): boolean {
         return this.game.round === Round.THIEF;
     }
 
     /**
      * If bonus point part is showed.
      */
-    private showNpPointBonus(): boolean {
+    public showNpPointBonus(): boolean {
         return this.game.round === Round.CHOICE;
     }
 
     /**
      * If malus point part is showed.
      */
-    private showNpPointMalus(): boolean {
+    public showNpPointMalus(): boolean {
         return this.game.round === Round.CHOICE;
     }
 
     /**
      * Close modal.
      */
-    private close(): void {
+    public close(): void {
         this._ngbActiveModal.close();
     }
 

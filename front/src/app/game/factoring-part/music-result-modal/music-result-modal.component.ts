@@ -45,12 +45,12 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * The table headers.
      */
-    private headers: string[];
+    public headers: string[];
 
     /**
      * The lines table.
      */
-    private lines: PLayerLine[];
+    public lines: PLayerLine[];
 
     /**
      * Drop down choice list.
@@ -119,7 +119,7 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * If th author column is showed.
      */
-    private showAuthorColumn(): boolean {
+    public showAuthorColumn(): boolean {
         return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
                 || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
                 || this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY || this.music.theme === Theme.CLASSIQUES;
@@ -128,7 +128,7 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * If th author column is showed.
      */
-    private showTitleColumn(): boolean {
+    public showTitleColumn(): boolean {
         return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
                 || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
                 || this.music.theme === Theme.DISNEY || this.music.theme === Theme.JEUX || this.music.theme === Theme.CLASSIQUES;
@@ -137,14 +137,14 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * If th loser column is showed.
      */
-    private showLoserColumn(): boolean {
+    public showLoserColumn(): boolean {
         return this.round === Round.THIEF;
     }
 
     /**
      * Gets music name.
      */
-    private getMusicName(): string {
+    public getMusicName(): string {
 
         if ( this.music.name.endsWith(".mp3") )
             return this.music.name.substring(0, this.music.name.length-4);
@@ -155,7 +155,7 @@ export class MusicResultModalComponent implements OnInit {
     /**
      * Save music result and close modal.
      */
-    private save(): void {
+    public save(): void {
 
         let authorWinners: string[] = [];
         let titleWinners: string[] = [];

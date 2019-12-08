@@ -49,7 +49,7 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Themes list.
 	 */
-	private themes = THEMES;
+	public themes = THEMES;
 
 	/**
 	 * Selected themes.
@@ -59,7 +59,7 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Themes list.
 	 */
-	private effects = EFFECTS;
+	public effects = EFFECTS;
 
 	/**
 	 * Selected themes.

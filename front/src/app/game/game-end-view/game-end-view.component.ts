@@ -46,7 +46,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	/**
 	 * If view is loaded.
 	 */
-	private isLoaded: boolean;
+	public isLoaded: boolean;
 
 	/**
 	 * The podium ranks.

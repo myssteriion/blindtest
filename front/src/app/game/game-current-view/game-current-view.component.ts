@@ -51,7 +51,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * If view is loaded.
 	 */
-	private isLoaded: boolean;
+	public isLoaded: boolean;
 
 	/**
 	 * The theme-effect component.

@@ -22,7 +22,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * If the music must be played.
 	 */
-	private musicIsPlaying: boolean;
+	public musicIsPlaying: boolean;
 
 	/**
 	 * Route (with home).
@@ -57,7 +57,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	/**
 	 * Gets logo.
 	 */
-	private getLogo(): string {
+	public getLogo(): string {
 		return LOGO;
 	}
 

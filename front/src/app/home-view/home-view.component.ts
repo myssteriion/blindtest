@@ -17,7 +17,7 @@ export class HomeViewComponent {
 	/**
 	 * Route (without home).
 	 */
-	private routes = ROUTES_WITHOUT_HOME;
+	public routes = ROUTES_WITHOUT_HOME;
 
 
 
@@ -28,7 +28,7 @@ export class HomeViewComponent {
 	/**
 	 * Gets logo.
 	 */
-	private getLogo(): string {
+	public getLogo(): string {
 		return LOGO;
 	}
 

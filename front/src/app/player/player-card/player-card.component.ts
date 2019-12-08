@@ -22,13 +22,13 @@ export class PlayerCardComponent implements OnInit {
      * The player.
      */
     @Input()
-    private player: Player;
+    public player: Player;
 
     /**
      * True for show rank on right, false for left.
      */
     @Input()
-    private rankOnRight: boolean;
+    public rankOnRight: boolean;
 
     /**
      * True to display medal, false to force to hide.
@@ -100,7 +100,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * If show/hide icon(s).
      */
-    private showIcon(): boolean {
+    public showIcon(): boolean {
         return this.showFirstMedal() || this.showSecondMedal() || this.showThirdMedal() || this.showCookie() || this.showPoop();
     }
 

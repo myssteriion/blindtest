@@ -14,7 +14,7 @@ export class HeaderComponent {
 	 * Title.
 	 */
 	@Input()
-	private title: string;
+	public title: string;
 
 
 

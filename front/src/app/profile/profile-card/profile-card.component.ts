@@ -26,7 +26,7 @@ export class ProfileCardComponent implements OnInit {
      * The profile.
      */
     @Input()
-    private profile: Profile;
+    public profile: Profile;
 
     /**
      * If can update/delete profile.
@@ -91,14 +91,14 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Gets the avatar flux.
      */
-    private getFluxForImg(): string {
+    public getFluxForImg(): string {
         return ToolsService.getFluxForImg(this.profile.avatar.flux);
     }
 
     /**
      * Gets background class.
      */
-    private getBackgroundClass(): string {
+    public getBackgroundClass(): string {
 
         let backgroundClass = "profile-card-background-" + this.profile.background;
 
@@ -177,7 +177,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * On click on profile.
      */
-    private select(): void {
+    public select(): void {
         if (this.canSelect)
             this.onSelect.emit();
     }
@@ -185,7 +185,7 @@ export class ProfileCardComponent implements OnInit {
     /**
      * Test if icons need to be show.
      */
-    private showIcons(): boolean {
+    public showIcons(): boolean {
         return this.canEdit || this.canDeselect;
     }
 

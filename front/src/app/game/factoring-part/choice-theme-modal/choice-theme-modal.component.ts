@@ -23,12 +23,12 @@ export class ChoiceThemeModalComponent implements OnInit {
      * Player name.
      */
     @Input()
-    private playerName: string;
+    public playerName: string;
 
     /**
      * Themes list.
      */
-    private themes: {}[];
+    public themes: {}[];
 
     /**
      * Selected theme.
@@ -56,14 +56,14 @@ export class ChoiceThemeModalComponent implements OnInit {
     /**
      * If the button is disabled.
      */
-    private closeIsDisabled(): boolean {
+    public closeIsDisabled(): boolean {
         return ToolsService.isNull(this.selectedTheme);
     }
 
     /**
      * Close modal.
      */
-    private close(): void {
+    public close(): void {
         this._ngbActiveModal.close(this.selectedTheme);
     }
 

@@ -12,13 +12,13 @@ export class ProfileCardEmptyComponent implements OnInit {
 	 * Name.
 	 */
 	@Input()
-	private name: string;
+	public name: string;
 
 	/**
 	 * Event after click.
 	 */
 	@Output()
-	private onClick = new EventEmitter();
+	public onClick = new EventEmitter();
 
 
 
