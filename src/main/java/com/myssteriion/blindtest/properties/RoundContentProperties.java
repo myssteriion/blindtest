@@ -33,6 +33,17 @@ public class RoundContentProperties {
 
 
 
+    @Value("${lucky.nbMusics}")
+    private Integer luckyNbMusics;
+
+    @Value("${lucky.nbPointWon}")
+    private Integer luckyNbPointWon;
+
+    @Value("${lucky.nbPointBonus}")
+    private Integer luckyNbPointBonus;
+
+
+
     @Value("${thief.nbMusics}")
     private Integer thiefNbMusics;
 
@@ -95,6 +106,33 @@ public class RoundContentProperties {
      */
     public Integer getChoiceNbPointMalus() {
         return choiceNbPointMalus;
+    }
+
+    /**
+     * Gets lucky nb musics.
+     *
+     * @return the lucky nb musics
+     */
+    public Integer getLuckyNbMusics() {
+        return luckyNbMusics;
+    }
+
+    /**
+     * Gets lucky nb point won.
+     *
+     * @return the lucky nb point won
+     */
+    public Integer getLuckyNbPointWon() {
+        return luckyNbPointWon;
+    }
+
+    /**
+     * Gets lucky nb point bonus.
+     *
+     * @return the lucky nb point bonus
+     */
+    public Integer getLuckyNbPointBonus() {
+        return luckyNbPointBonus;
     }
 
     /**

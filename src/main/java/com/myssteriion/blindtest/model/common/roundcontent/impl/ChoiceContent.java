@@ -21,6 +21,7 @@ public class ChoiceContent extends AbstractRoundContent {
     private int nbPointMalus;
 
 
+
     /**
      * Instantiates a new Choice content.
      *
@@ -35,6 +36,7 @@ public class ChoiceContent extends AbstractRoundContent {
         this.nbPointBonus = Math.max(nbPointBonus, 0);
         this.nbPointMalus = Math.min(nbPointMalus, 0);
     }
+
 
 
     /**

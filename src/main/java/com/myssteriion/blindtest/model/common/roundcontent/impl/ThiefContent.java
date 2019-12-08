@@ -15,6 +15,7 @@ public class ThiefContent extends AbstractRoundContent {
     private int nbPointLoose;
 
 
+
     /**
      * Instantiates a new Thief content.
      *
@@ -27,6 +28,7 @@ public class ThiefContent extends AbstractRoundContent {
         super(nbMusics, nbPointWon);
         this.nbPointLoose = Math.min(nbPointLoose, 0);
     }
+
 
 
     /**
