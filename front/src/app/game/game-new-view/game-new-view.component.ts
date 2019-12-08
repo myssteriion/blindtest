@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 import {environment} from "../../../environments/environment";
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 
 /**
  * The new game view.
@@ -75,6 +76,8 @@ export class GameNewViewComponent implements OnInit {
 	 * The max players number.
 	 */
     private static MAX_PLAYERS: number = environment.maxPlayers;
+
+	private faExclamationCircle = faExclamationCircle;
 
 
 

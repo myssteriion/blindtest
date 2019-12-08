@@ -32,22 +32,32 @@
 
     <!-- themes -->
     <div class="row game-new-view-part">
-        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</div>
+        <div class="col-3 game-new-view-label font-size-normal">
+            <span>{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</span>
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
+                     placement="bottom auto" [openDelay]="500">
+            </fa-icon>
+        </div>
         <div class="col-9">
             <div class="row">
                 <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (themeIsSelected(theme.enumVal)) }"
-                     (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto">
+                     (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
             </div>
         </div>
     </div>
 
     <!-- effects label -->
     <div class="row game-new-view-part">
-        <div class="col-3 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</div>
+        <div class="col-3 game-new-view-label font-size-normal">
+            <span>{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</span>
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
+                     placement="bottom auto" [openDelay]="500">
+            </fa-icon>
+        </div>
         <div class="col-9">
             <div class="row">
                 <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (effectIsSelected(effect.enumVal)) }"
-                         (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto">
+                         (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
             </div>
         </div>
     </div>

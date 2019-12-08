@@ -55,7 +55,9 @@
             "LAUNCH_GAME": "Lancer la partie !",
             "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
             "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiants soient corrects.",
-            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y est bien au moins 1 musique pour chacun des thèmes selectionés."
+            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y est bien au moins 1 musique pour chacun des thèmes selectionés.",
+            "THEMES_HELP": "Le thème 1960 regroupe également des musiques des années 1940 et 1950.",
+            "EFFECTS_HELP": "Les effets ne sont pas appliqués sur les musiques Spotify."
         },
         "RESUME_VIEW": {
             "TITLE": "Continuer",
