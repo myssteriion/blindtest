@@ -54,6 +54,15 @@ public class RoundContentProperties {
     private Integer thiefNbPointLoose;
 
 
+
+    @Value("${recovery.nbMusics}")
+    private Integer recoveryNbMusics;
+
+    @Value("${recovery.nbPointWon}")
+    private Integer recoveryNbPointWon;
+
+
+
     /**
      * Gets classic nb musics.
      *
@@ -160,6 +169,24 @@ public class RoundContentProperties {
      */
     public Integer getThiefNbPointLoose() {
         return thiefNbPointLoose;
+    }
+
+    /**
+     * Gets recoveryNbMusics.
+     *
+     * @return The recoveryNbMusics.
+     */
+    public Integer getRecoveryNbMusics() {
+        return recoveryNbMusics;
+    }
+
+    /**
+     * Gets recoveryNbPointWon.
+     *
+     * @return The recoveryNbPointWon.
+     */
+    public Integer getRecoveryNbPointWon() {
+        return recoveryNbPointWon;
     }
 
 }

@@ -144,59 +144,6 @@ public class ChoiceContentTest extends AbstractTest {
     }
 
     @Test
-    public void isFinished() {
-
-        List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
-
-        for (int i = 0; i < 20; i++)
-            game.nextStep();
-
-        Assert.assertSame( Round.CHOICE, game.getRound() );
-        ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
-
-        try {
-            choiceContent.isFinished(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
-        }
-
-        Assert.assertFalse( choiceContent.isFinished(game) );
-    }
-
-    @Test
-    public void isLast() {
-
-        List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
-
-        for (int i = 0; i < 20; i++)
-            game.nextStep();
-
-        Assert.assertSame( Round.CHOICE, game.getRound() );
-        ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
-
-        Assert.assertFalse( choiceContent.isLastMusic(game) );
-
-        for (int i = 0; i < (4*players.size())-2; i++) {
-            game.nextStep();
-            Assert.assertFalse( choiceContent.isLastMusic(game) );
-        }
-
-        game.nextStep();
-        Assert.assertTrue( choiceContent.isLastMusic(game) );
-
-        game.nextStep();
-        Assert.assertFalse( choiceContent.isLastMusic(game) );
-    }
-
-    @Test
     public void toStringAndEquals() {
 
         ChoiceContent choiceContent = new ChoiceContent(5,  100, 50, -50);

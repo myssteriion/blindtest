@@ -65,9 +65,9 @@ public class ChoiceContent extends AbstractRoundContent {
 
         game.getPlayers().stream()
                 .filter(Player::isTurnToChoose)
-                .forEach( playerDto -> {
+                .forEach( player -> {
 
-                    String profileName = playerDto.getProfile().getName();
+                    String profileName = player.getProfile().getName();
 
                     int point = nbPointMalus;
                     if ( musicResult.isAuthorAndTitleWinner(profileName) )
@@ -75,8 +75,8 @@ public class ChoiceContent extends AbstractRoundContent {
                     else if ( musicResult.isAuthorWinner(profileName) || musicResult.isTitleWinner(profileName) )
                         point = nbPointBonus;
 
-                    playerDto.addScore(point);
-                    playerDto.setTurnToChoose(false);
+                    player.addScore(point);
+                    player.setTurnToChoose(false);
                 });
 
         if ( !isLastMusic(game) ) {

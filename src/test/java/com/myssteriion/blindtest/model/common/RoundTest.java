@@ -3,6 +3,8 @@ package com.myssteriion.blindtest.model.common;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
@@ -26,7 +28,8 @@ public class RoundTest extends AbstractTest {
         Assert.assertEquals( Round.CHOICE, Round.CLASSIC.nextRound() );
         Assert.assertEquals( Round.LUCKY, Round.CHOICE.nextRound() );
         Assert.assertEquals( Round.THIEF, Round.LUCKY.nextRound() );
-        Assert.assertNull( Round.THIEF.nextRound() );
+        Assert.assertEquals( Round.RECOVERY, Round.THIEF.nextRound() );
+        Assert.assertNull( Round.RECOVERY.nextRound() );
     }
 
     @Test
@@ -48,7 +51,15 @@ public class RoundTest extends AbstractTest {
         Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
+        Assert.assertTrue( Round.LUCKY.createRoundContent(game) instanceof LuckyContent);
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+
         Assert.assertTrue( Round.THIEF.createRoundContent(game) instanceof ThiefContent);
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+
+        Assert.assertTrue( Round.RECOVERY.createRoundContent(game) instanceof RecoveryContent);
         Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
     }
@@ -58,7 +69,9 @@ public class RoundTest extends AbstractTest {
 
         Assert.assertFalse( Round.CLASSIC.isLast() );
         Assert.assertFalse( Round.CHOICE.isLast() );
-        Assert.assertTrue( Round.THIEF.isLast() );
+        Assert.assertFalse( Round.LUCKY.isLast() );
+        Assert.assertFalse( Round.THIEF.isLast() );
+        Assert.assertTrue( Round.RECOVERY.isLast() );
     }
 
     @Test

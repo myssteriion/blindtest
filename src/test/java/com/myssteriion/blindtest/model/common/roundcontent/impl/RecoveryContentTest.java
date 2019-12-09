@@ -11,7 +11,6 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -19,35 +18,28 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class LuckyContentTest extends AbstractTest {
+public class RecoveryContentTest extends AbstractTest {
 
     @Test
     public void constructors() {
 
-        LuckyContent luckyContent = new LuckyContent(-1,  -2, -1, -1);
-        Assert.assertEquals( 0, luckyContent.getNbMusics() );
-        Assert.assertEquals( 0, luckyContent.getNbPointWon() );
-        Assert.assertEquals( 0, luckyContent.getNbPointBonus() );
-        Assert.assertEquals( 1, luckyContent.getNbPlayers() );
+        RecoveryContent recoveryContent = new RecoveryContent(-1,  -2);
+        Assert.assertEquals( 0, recoveryContent.getNbMusics() );
+        Assert.assertEquals( 0, recoveryContent.getNbPointWon() );
     }
 
     @Test
     public void getterSetter() {
 
-        LuckyContent luckyContent = new LuckyContent(-1,  -2, -1, -1);
-        Assert.assertEquals( 0, luckyContent.getNbMusics() );
-        Assert.assertEquals( 0, luckyContent.getNbPointWon() );
-        Assert.assertEquals( 0, luckyContent.getNbPointBonus() );
-        Assert.assertEquals( 1, luckyContent.getNbPlayers() );
+        RecoveryContent recoveryContent = new RecoveryContent(-1,  -2);
+        Assert.assertEquals( 0, recoveryContent.getNbMusics() );
+        Assert.assertEquals( 0, recoveryContent.getNbPointWon() );
 
-        luckyContent = new LuckyContent(5,  100, 100, 2);
-        Assert.assertEquals( 5, luckyContent.getNbMusics() );
-        Assert.assertEquals( 100, luckyContent.getNbPointWon() );
-        Assert.assertEquals( 100, luckyContent.getNbPointBonus() );
-        Assert.assertEquals( 2, luckyContent.getNbPlayers() );
+        recoveryContent = new RecoveryContent(5,  100);
+        Assert.assertEquals( 5, recoveryContent.getNbMusics() );
+        Assert.assertEquals( 100, recoveryContent.getNbPointWon() );
     }
 
-    @Ignore
     @Test
     public void apply() {
 
@@ -61,10 +53,10 @@ public class LuckyContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 58; i++)
             game.nextStep();
 
-        Assert.assertSame( Round.LUCKY, game.getRound() );
+        Assert.assertSame( Round.RECOVERY, game.getRound() );
         RecoveryContent recoveryContent = (RecoveryContent) game.getRoundContent();
 
         try {
@@ -86,30 +78,22 @@ public class LuckyContentTest extends AbstractTest {
 
         Game actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 150 && actual.getPlayers().get(0).getScore() <= 250);
+        Assert.assertEquals( 30, actual.getPlayers().get(0).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 500);
+        Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
+        Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
-
-    }
-
-    @Test
-    public void toStringAndEquals() {
-
-        LuckyContent luckyContent = new LuckyContent(5,  150, 100, 1);
-        Assert.assertEquals( "nbMusics=5, nbPointWon=150, nbPointBonus=100, nbPlayers=1", luckyContent.toString() );
+        Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
     }
 
 }

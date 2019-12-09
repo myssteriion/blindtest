@@ -66,12 +66,12 @@ public abstract class AbstractRoundContent {
         Tool.verifyValue("musicResult", musicResult);
 
         game.getPlayers().stream()
-                .filter( playerDto -> musicResult.isAuthorWinner(playerDto.getProfile().getName()) )
-                .forEach( playerDto -> playerDto.addScore(nbPointWon) );
+                .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )
+                .forEach( player -> player.addScore(nbPointWon) );
 
         game.getPlayers().stream()
-                .filter( playerDto -> musicResult.isTitleWinner(playerDto.getProfile().getName()) )
-                .forEach( playerDto -> playerDto.addScore(nbPointWon) );
+                .filter( player -> musicResult.isTitleWinner(player.getProfile().getName()) )
+                .forEach( player -> player.addScore(nbPointWon) );
 
         return game;
     }

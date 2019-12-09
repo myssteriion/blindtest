@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
@@ -20,7 +21,8 @@ public enum Round {
     CLASSIC(0),
     CHOICE(1),
     LUCKY(2),
-    THIEF(3);
+    THIEF(3),
+    RECOVERY(4);
 
 
 
@@ -91,6 +93,11 @@ public enum Round {
                 nbPointWon = prop.getThiefNbPointWon();
                 int nbPointLoose = prop.getThiefNbPointLoose();
                 return new ThiefContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
+
+            case RECOVERY:
+                nbMusics = prop.getRecoveryNbMusics();
+                nbPointWon = prop.getRecoveryNbPointWon();
+                return new RecoveryContent((int) (nbMusics * durationRatio), nbPointWon);
 
 
             default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");

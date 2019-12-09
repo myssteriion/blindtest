@@ -266,6 +266,53 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Assert.assertTrue( game.getPlayers().get(1).getScore() >= scoreName2 );
         Assert.assertTrue( game.getPlayers().get(2).getScore() >= scoreName3 );
 
+
+
+        /********** RECOVERY Round **********/
+        Assert.assertEquals( Round.RECOVERY, game.getRound() );
+        Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
+
+        roundContent = game.getRoundContent();
+        nbPointWon = roundContent.getNbPointWon();
+
+        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+
+            List<String> winners = new ArrayList<>();
+            List<String> losers = new ArrayList<>();
+
+            for (int j = 1; j < 20; j++) {
+
+                String name = "name" + j;
+                if ( Tool.RANDOM.nextBoolean() ) {
+                    winners.add(name);
+                    switch (j) {
+                        case 1: scoreName1 += nbPointWon; foundName1++; break;
+                        case 2: scoreName2 += nbPointWon; foundName2++; break;
+                        case 3: scoreName3 += nbPointWon; foundName3++; break;
+                        default:
+                    }
+                }
+                else {
+                    losers.add(name);
+                    switch (j) {
+                        case 1: scoreName1 += nbPointLoose; break;
+                        case 2: scoreName2 += nbPointLoose; break;
+                        case 3: scoreName3 += nbPointLoose; break;
+                        default:
+                    }
+                }
+            }
+
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            game = gameService.apply(musicResult);
+            nbMusicPlayed++;
+        }
+
+        Assert.assertTrue( game.getPlayers().get(0).getScore() >= scoreName1 );
+        Assert.assertTrue( game.getPlayers().get(1).getScore() >= scoreName2 );
+        Assert.assertTrue( game.getPlayers().get(2).getScore() >= scoreName3 );
+
         ProfileStatDTO profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(0)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get( game.getDuration() ) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
