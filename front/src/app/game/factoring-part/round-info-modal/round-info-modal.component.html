@@ -18,17 +18,17 @@
         </div>
 
         <div *ngIf="showNpPointLose()" class="row alert alert-danger">
-            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_LOSE' | translate }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.' + game.round + '_ROUND.NB_POINTS_LOSE' | translate }}</div>
             <div class="col-4 font-size-normal">{{ game.roundContent.nbPointLoose }}</div>
         </div>
 
         <div *ngIf="showNpPointBonus()" class="row alert alert-success">
-            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_BONUS' | translate }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.' + game.round + '_ROUND.NB_POINTS_BONUS' | translate }}</div>
             <div class="col-4 font-size-normal">{{ game.roundContent.nbPointBonus }}</div>
         </div>
 
         <div *ngIf="showNpPointMalus()" class="row alert alert-danger">
-            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_MALUS' | translate }}</div>
+            <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.' + game.round + '_ROUND.NB_POINTS_MALUS' | translate }}</div>
             <div class="col-4 font-size-normal">{{ game.roundContent.nbPointMalus }}</div>
         </div>
 
