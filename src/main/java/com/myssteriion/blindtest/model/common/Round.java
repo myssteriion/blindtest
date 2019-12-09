@@ -83,7 +83,8 @@ public enum Round {
                 nbMusics = prop.getLuckyNbMusics();
                 nbPointWon = prop.getLuckyNbPointWon();
                 nbPointBonusWon = prop.getLuckyNbPointBonus();
-                return new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
+                int nbPlayers = (game.getPlayers().size() <= 6) ? 1 : 2;
+                return new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon, nbPlayers);
 
             case THIEF:
                 nbMusics = prop.getThiefNbMusics();

@@ -15,6 +15,11 @@ public class LuckyContent extends AbstractRoundContent {
      */
     private int nbPointBonus;
 
+    /**
+     * The number of players.
+     */
+    private int nbPlayers;
+
 
 
     /**
@@ -24,9 +29,10 @@ public class LuckyContent extends AbstractRoundContent {
      * @param nbPointWon   the nb point won
      * @param nbPointBonus the nb bonus point
      */
-    public LuckyContent(int nbMusics, int nbPointWon, int nbPointBonus) {
+    public LuckyContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPlayers) {
         super(nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
+        this.nbPlayers = Math.max(nbPlayers, 1);
     }
 
 
@@ -40,13 +46,23 @@ public class LuckyContent extends AbstractRoundContent {
         return nbPointBonus;
     }
 
+    /**
+     * Gets nbPlayers.
+     *
+     * @return The nbPlayers.
+     */
+    public int getNbPlayers() {
+        return nbPlayers;
+    }
+
 
     @Override
     public Game apply(Game game, MusicResult musicResult) {
 
         game = super.apply(game, musicResult);
 
-        game.getPlayers().get( Tool.RANDOM.nextInt(game.getPlayers().size() ) ).addScore(nbPointBonus);
+        for (int i = 0; i < nbPlayers; i++)
+            game.getPlayers().get( Tool.RANDOM.nextInt(game.getPlayers().size() ) ).addScore(nbPointBonus);
 
         return game;
     }
@@ -55,7 +71,8 @@ public class LuckyContent extends AbstractRoundContent {
     @Override
     public String toString() {
         return super.toString() +
-                ", nbPointBonus=" + nbPointBonus;
+                ", nbPointBonus=" + nbPointBonus +
+                ", nbPlayers=" + nbPlayers;
     }
 
 }
