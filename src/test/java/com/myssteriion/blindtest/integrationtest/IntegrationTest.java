@@ -8,6 +8,7 @@ import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -185,6 +186,40 @@ public class IntegrationTest extends AbstractIntegrationTest {
 
 
 
+        /********** LUCKY Round **********/
+        Assert.assertEquals( Round.LUCKY, game.getRound() );
+        Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
+
+        roundContent = game.getRoundContent();
+        nbPointWon = roundContent.getNbPointWon();
+
+        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+
+            List<String> winners = new ArrayList<>();
+            List<String> losers = new ArrayList<>();
+
+            for (int j = 1; j < 10; j++) {
+
+                String name = "name" + j;
+                if ( Tool.RANDOM.nextBoolean() ) {
+                    winners.add(name);
+                    switch (j) {
+                        case 1: scoreName1 += nbPointWon; foundName1++; break;
+                        case 2: scoreName2 += nbPointWon; foundName2++; break;
+                        case 3: scoreName3 += nbPointWon; foundName3++; break;
+                        default:
+                    }
+                }
+            }
+
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            game = gameService.apply(musicResult);
+            nbMusicPlayed++;
+        }
+
+
+
         /********** THIEF Round **********/
         Assert.assertEquals( Round.THIEF, game.getRound() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
@@ -227,27 +262,27 @@ public class IntegrationTest extends AbstractIntegrationTest {
             nbMusicPlayed++;
         }
 
-        Assert.assertEquals( scoreName1, game.getPlayers().get(0).getScore() );
-        Assert.assertEquals( scoreName2, game.getPlayers().get(1).getScore() );
-        Assert.assertEquals( scoreName3, game.getPlayers().get(2).getScore() );
+        Assert.assertTrue( game.getPlayers().get(0).getScore() >= scoreName1 );
+        Assert.assertTrue( game.getPlayers().get(1).getScore() >= scoreName2 );
+        Assert.assertTrue( game.getPlayers().get(2).getScore() >= scoreName3 );
 
         ProfileStatDTO profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(0)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get( game.getDuration() ) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
-        Assert.assertEquals( new Integer(scoreName1), profileStat.getBestScores().get(duration) );
+        Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName1);
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(1)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
-        Assert.assertEquals( new Integer(scoreName2), profileStat.getBestScores().get(duration) );
+        Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName2);
 
         profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(2)) );
         Assert.assertEquals( new Integer(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( new Integer(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( new Integer(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
-        Assert.assertEquals( new Integer(scoreName3), profileStat.getBestScores().get(duration) );
+        Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName3);
 
         MusicDTO music = musicService.find( MUSICS_LIST.get(0) );
         Assert.assertEquals( nbMusicPlayed, music.getPlayed() );

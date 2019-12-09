@@ -145,7 +145,7 @@ public class GameTest extends AbstractTest {
 
         Assert.assertEquals( players.size(), game.getPlayers().size() );
         Assert.assertEquals( duration, game.getDuration() );
-        Assert.assertEquals( 48, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 58, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         Assert.assertNull( game.getRound() );
         Assert.assertNull( game.getRoundContent() );
@@ -181,7 +181,7 @@ public class GameTest extends AbstractTest {
         Game game = new Game(new HashSet<>(players), duration, null, null, ConnectionMode.OFFLINE);
         Assert.assertFalse( game.isLastStep() );
 
-        for (int i = 0; i < 46; i++) {
+        for (int i = 0; i < 56; i++) {
             game.nextStep();
             Assert.assertFalse( game.isLastStep() );
         }

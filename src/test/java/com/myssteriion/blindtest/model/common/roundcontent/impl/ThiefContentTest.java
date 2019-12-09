@@ -56,7 +56,7 @@ public class ThiefContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 38; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );
@@ -103,7 +103,7 @@ public class ThiefContentTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 38; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );
@@ -128,7 +128,7 @@ public class ThiefContentTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 38; i++)
             game.nextStep();
 
         Assert.assertSame( Round.THIEF, game.getRound() );
