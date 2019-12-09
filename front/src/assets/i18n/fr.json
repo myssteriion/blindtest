@@ -25,7 +25,8 @@
         "SHOW_DETAIL": "Voir détail",
         "HIDE_DETAIL": "Masquer détail",
         "GO_HOME": "Retour au menu",
-        "CANCEL_MODIFICATION": "Annuler la modification en cours"
+        "CANCEL_MODIFICATION": "Annuler la modification en cours",
+        "RANK": "n° rang"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"
@@ -132,7 +133,11 @@
         },
         "THIEF": {
             "NAME": "Voleur ou Volé",
-            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
+            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! Prendre aux riches pour donner au pauvres ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
+        },
+        "RECOVERY": {
+            "NAME": "Rattrapage",
+            "DESCRIPTION": "La disparité, c'est mal, l'équilibre c'est mieux. La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> est là pour aider les lanternes rouges à remonter. Avec ces <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, vous marquez des points fonction de votre rang ! Et oui, nous n'avons pas les mêmes valeurs."
         }
     },
     "RANK": {

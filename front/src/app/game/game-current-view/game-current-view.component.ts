@@ -203,7 +203,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.countdownConfig = {
 					demand: true,
 					format: "ss",
-					leftTime: 30,
+					leftTime: 3,
 					stopTime: 0,
 					notify: [25, 20, 15, 10, 5],
 					prettyText: text => function() { return (text === "00") ? value : text; }()

@@ -48,6 +48,20 @@ export class RoundInfoModalComponent {
     }
 
     /**
+     * Gets nb point won.
+     */
+    public getNpPointWon(): string {
+
+        let npPointWon = "";
+
+        npPointWon = this.game.roundContent.nbPointWon.toString();
+        if (this.game.round === Round.RECOVERY)
+            npPointWon += " x " + this._translate.instant("COMMON.RANK");
+
+        return npPointWon;
+    }
+
+    /**
      * If lose point part is showed.
      */
     public showNpPointLose(): boolean {

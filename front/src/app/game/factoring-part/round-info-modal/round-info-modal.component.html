@@ -14,7 +14,7 @@
 
         <div class="row alert alert-success">
             <div class="col-8 font-size-normal">{{ 'GAME.ROUND_INFO_MODAL.NB_POINTS_WON' | translate }}</div>
-            <div class="col-4 font-size-normal">{{ game.roundContent.nbPointWon }}</div>
+            <div class="col-4 font-size-normal">{{ getNpPointWon() }}</div>
         </div>
 
         <div *ngIf="showNpPointLose()" class="row alert alert-danger">
