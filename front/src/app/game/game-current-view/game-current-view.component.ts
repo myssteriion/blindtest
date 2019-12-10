@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION, ADD_SCORE_DURING} from "../../tools/constant";
+import {ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -611,7 +611,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlineAudio.nativeElement.controls = true;
 			this.offlineAudio.nativeElement.load();
 			this.offlineAudio.nativeElement.currentTime = currentTime;
-			this.offlineAudio.nativeElement.volume = 0.25;
+			this.offlineAudio.nativeElement.volume = 0.5;
 			this.offlineAudio.nativeElement.play();
 
 			this.showOfflineAudio = true;

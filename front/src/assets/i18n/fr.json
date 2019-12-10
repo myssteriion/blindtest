@@ -133,7 +133,7 @@
         },
         "FRIENDSHIP": {
             "NAME": "Amitié passagère",
-            "DESCRIPTION": "L'union fais la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} de 2 joueurs</span> vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont t'elles vraiment équitables ?"
+            "DESCRIPTION": "L'union fais la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} équipes</span> de 2 joueurs (et si impair, un des 1er est seul) vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont t'elles vraiment équitables ?"
         },
         "THIEF": {
             "NAME": "Voleur ou Volé",

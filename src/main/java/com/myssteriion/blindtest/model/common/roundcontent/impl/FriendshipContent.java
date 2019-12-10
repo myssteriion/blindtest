@@ -1,7 +1,13 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
+import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
+import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.tools.Tool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Friendship round content.
@@ -44,16 +50,43 @@ public class FriendshipContent extends AbstractRoundContent {
         super.prepare(game);
 
         int nbPlayers = game.getPlayers().size();
-        nbTeams = (nbPlayers % 2 == 0) ? nbPlayers / 2 : (nbPlayers / 2) + 1;
+        if (nbPlayers == 2) {
+            game.getPlayers().get(0).setTeamNumber(0);
+            game.getPlayers().get(1).setTeamNumber(1);
+        }
+        else {
 
-        for (int i = 0; i < nbTeams; i++) {
+            nbTeams = (nbPlayers % 2 == 0) ? nbPlayers / 2 : (nbPlayers / 2) + 1;
 
-            int iBis = i;
+            List<Player> playersCopied = new ArrayList<>( game.getPlayers() );
 
-            game.getPlayers().stream()
-                    .filter( player -> player.getTeamNumber() == -1 )
-                    .limit(2)
-                    .forEach( player -> player.setTeamNumber(iBis) );
+            int currentTeamNumber = 0;
+            if (nbPlayers % 2 == 1) {
+
+                playersCopied.stream()
+                        .filter( player -> player.getRank() == Rank.FIRST )
+                        .findAny()
+                        .get()
+                        .setTeamNumber(currentTeamNumber);
+
+                playersCopied.removeIf( player -> player.getTeamNumber() != -1);
+
+                currentTeamNumber++;
+            }
+
+
+            while ( !playersCopied.isEmpty() ) {
+
+                int index = Tool.RANDOM.nextInt( playersCopied.size() );
+                playersCopied.get(index).setTeamNumber(currentTeamNumber);
+                playersCopied.remove(index);
+
+                index = Tool.RANDOM.nextInt( playersCopied.size() );
+                playersCopied.get(index).setTeamNumber(currentTeamNumber);
+                playersCopied.remove(index);
+
+                currentTeamNumber++;
+            }
         }
     }
 
