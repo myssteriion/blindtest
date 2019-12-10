@@ -77,6 +77,11 @@ export class GameNewViewComponent implements OnInit {
 	 */
     private static MAX_PLAYERS: number = environment.maxPlayers;
 
+	/**
+	 * The min players number.
+	 */
+	private static MIN_PLAYERS: number = environment.minPlayers;
+
 	private faExclamationCircle = faExclamationCircle;
 
 
@@ -102,6 +107,18 @@ export class GameNewViewComponent implements OnInit {
     }
 
 
+	/**
+	 * Gets players label.
+	 */
+	public getPlayersLabel(): string {
+
+    	let params = {
+			minPlayers: GameNewViewComponent.MIN_PLAYERS,
+			maxPlayers: GameNewViewComponent.MAX_PLAYERS
+		};
+
+    	return this._translate.instant("GAME.NEW_VIEW.PLAYERS_LIST_LABEL", params);
+	}
 
 	/**
 	 * Select/deselect theme.
@@ -256,7 +273,7 @@ export class GameNewViewComponent implements OnInit {
 	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedDuration) || ToolsService.isNull(this.selectedConnectionMode) || this.playersProfiles.length < 2;
+		return ToolsService.isNull(this.selectedDuration) || ToolsService.isNull(this.selectedConnectionMode) || this.playersProfiles.length < GameNewViewComponent.MIN_PLAYERS;
 	}
 
 	/**

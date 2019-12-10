@@ -62,7 +62,7 @@
     <div class="row game-new-view-part">
         <div class="col">
             <div class="row">
-                <div class="col game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.PLAYERS_LIST_LABEL' | translate }}</div>
+                <div class="col game-new-view-label font-size-normal">{{ getPlayersLabel() }}</div>
             </div>
             <div class="row">
                 <profile-card class="col-3 game-new-view-profile-card" *ngFor="let profile of playersProfiles" [profile]="profile" [canEdit]="false" [canSelect]="false"

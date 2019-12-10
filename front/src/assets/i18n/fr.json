@@ -41,7 +41,7 @@
             "MODE_LABEL": "Mode de la partie :",
             "THEMES_LABEL": "Choix des thèmes :",
             "EFFECTS_LABEL": "Choix des effets :",
-            "PLAYERS_LIST_LABEL": "Liste des joueurs :",
+            "PLAYERS_LIST_LABEL": "Liste des joueurs (de {{minPlayers}} à {{maxPlayers}}):",
             "ONLINE_MODE": "En ligne (avec Spotify)",
             "OFFLINE_MODE": "Hors ligne",
             "BOTH_MODE": "Les deux",
