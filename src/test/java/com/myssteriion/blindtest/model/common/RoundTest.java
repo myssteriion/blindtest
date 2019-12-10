@@ -52,15 +52,15 @@ public class RoundTest extends AbstractTest {
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
         Assert.assertTrue( Round.LUCKY.createRoundContent(game) instanceof LuckyContent);
-        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
         Assert.assertTrue( Round.THIEF.createRoundContent(game) instanceof ThiefContent);
-        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
 
         Assert.assertTrue( Round.RECOVERY.createRoundContent(game) instanceof RecoveryContent);
-        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
     }
 

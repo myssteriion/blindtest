@@ -62,6 +62,7 @@ public enum Round {
 
         int nbPlayer = game.getPlayers().size();
         double durationRatio = game.getDuration().getRatio();
+        game.getPlayers().forEach( player -> player.setTurnToChoose(false) );
 
         RoundContentProperties prop = BeanFactory.getBean(RoundContentProperties.class);
 
