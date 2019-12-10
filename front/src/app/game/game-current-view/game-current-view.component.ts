@@ -103,6 +103,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private showNextMusic: boolean;
 
 	/**
+	 * Show pass music button.
+	 */
+	private showPassMusic: boolean;
+
+	/**
 	 * In offline mode, preview audio.
 	 */
 	private offlinePreviewAudio;
@@ -180,6 +185,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.isLoaded = false;
 
 		this.showNextMusic = true;
+		this.showPassMusic = false;
 
 		this.showOfflineAudio = false;
 		this.showOnlinePreviewAudio = false;
@@ -203,7 +209,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.countdownConfig = {
 					demand: true,
 					format: "ss",
-					leftTime: 3,
+					leftTime: 30,
 					stopTime: 0,
 					notify: [25, 20, 15, 10, 5],
 					prettyText: text => function() { return (text === "00") ? value : text; }()
@@ -521,6 +527,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.countdown.setColor(CustomCountdownComponent.GREEN_COLOR);
 		this.countdown.setShow(true);
 		this.countdown.start();
+		this.showPassMusic = true;
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showOnlinePreviewAudio = true;
@@ -553,6 +560,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private onCountdownEnd(): void {
 
 		this.countdown.setColor(CustomCountdownComponent.BLUE_COLOR);
+		this.showPassMusic = false;
 
 		if (this.currentMusic.connectionMode === ConnectionMode.ONLINE)
 			this.showOnlinePreviewAudio = false;
@@ -560,6 +568,16 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlinePreviewAudio.pause();
 
 		this.startPostCountdown();
+	}
+
+	/**
+	 * On pass music button.
+	 */
+	public passMusic(): void {
+
+		this.countdown.stop();
+		this.countdown.setShow(false);
+		this.onCountdownEnd();
 	}
 
 

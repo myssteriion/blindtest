@@ -43,6 +43,13 @@
                 </div>
             </div>
 
+            <!-- pass music -->
+            <div *ngIf="showPassMusic" class="row game-current-view-next-music">
+                <div class="col">
+                    <button class="btn btn-info font-size-normal box-shadow" (click)="passMusic()">{{ 'GAME.CURRENT_VIEW.PASS_MUSIC' | translate }}</button>
+                </div>
+            </div>
+
             <!-- offline mode - audio -->
             <div [hidden]="!showOfflineAudio" class="row game-current-view-offline-audio">
                 <div class="col">

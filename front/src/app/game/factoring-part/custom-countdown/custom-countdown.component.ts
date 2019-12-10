@@ -101,6 +101,13 @@ export class CustomCountdownComponent implements OnInit {
 	}
 
 	/**
+	 * Stop the countdown.
+	 */
+	public stop(): void {
+		this.countdown.stop();
+	}
+
+	/**
 	 * The event callback. Send event on done.
 	 */
 	public async countdownEvent(event) {

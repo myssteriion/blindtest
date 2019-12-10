@@ -78,7 +78,7 @@
             "LISTEN": "Ecoutez !",
             "FINISH": "C'est fini !",
             "NEXT_MUSIC": "Musique suivante !",
-            "STOP_MUSIC": "Arrêter la musique",
+            "PASS_MUSIC": "J'attend pas la fin du chrono !",
             "GAME_NOT_FOUND": "La partie n'existe pas.",
             "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
             "RETRY_IN_OFFLINE_MODE_ERROR": "Passer en mode OFFLINE pour la prochaine musique uniquement."
