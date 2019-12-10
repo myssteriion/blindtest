@@ -220,6 +220,40 @@ public class IntegrationTest extends AbstractIntegrationTest {
 
 
 
+        /********** FRIENDSHIP Round **********/
+        Assert.assertEquals( Round.FRIENDSHIP, game.getRound() );
+        Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
+        Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
+
+        roundContent = game.getRoundContent();
+        nbPointWon = roundContent.getNbPointWon();
+
+        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+
+            List<String> winners = new ArrayList<>();
+            List<String> losers = new ArrayList<>();
+
+            for (int j = 1; j < 10; j++) {
+
+                String name = "name" + j;
+                if ( Tool.RANDOM.nextBoolean() ) {
+                    winners.add(name);
+                    switch (j) {
+                        case 1: scoreName1 += nbPointWon; foundName1++; break;
+                        case 2: scoreName2 += nbPointWon; foundName2++; break;
+                        case 3: scoreName3 += nbPointWon; foundName3++; break;
+                        default:
+                    }
+                }
+            }
+
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            game = gameService.apply(musicResult);
+            nbMusicPlayed++;
+        }
+
+
+
         /********** THIEF Round **********/
         Assert.assertEquals( Round.THIEF, game.getRound() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );

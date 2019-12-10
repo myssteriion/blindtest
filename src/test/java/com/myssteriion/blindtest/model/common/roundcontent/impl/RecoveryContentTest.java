@@ -53,7 +53,7 @@ public class RecoveryContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
-        for (int i = 0; i < 58; i++)
+        for (int i = 0; i < 68; i++)
             game.nextStep();
 
         Assert.assertSame( Round.RECOVERY, game.getRound() );

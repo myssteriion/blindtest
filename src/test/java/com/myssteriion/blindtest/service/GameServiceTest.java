@@ -340,10 +340,12 @@ public class GameServiceTest extends AbstractTest {
 		Assert.assertTrue( game.isFinished() );
 		// classic : 15 à 100pts / 1 à 200pts (15 car 20 - 1 loser - 3 ou profile1 gagne - 1 ou profile gagne auteur et titre)
 		// choice : 4 à 150pts / 8 à 100 pts
-		// choice : 10 à 150pts / 10 à 100 pts (le 10*100 c'est la aléatoire)
+		// lucky : 10 à 150pts / 10 à 100 pts (le 10*100 c'est la aléatoire)
+		// friendship : 10 à 150pts
 		// thief : 20 à 100pts
-		Assert.assertTrue( profileStatDto.getBestScores().get(Duration.NORMAL) >= new Integer(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 20*100)
-						   && profileStatDto.getBestScores().get(Duration.NORMAL) <= new Integer(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 10*100 + 20*100) );
+		// recovery : 10 à 30pts
+		Assert.assertTrue( profileStatDto.getBestScores().get(Duration.NORMAL) >= new Integer(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 10*150 + 20*100 + 10*30)
+						   && profileStatDto.getBestScores().get(Duration.NORMAL) <= new Integer(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 10*100 + 10*150 + 20*100 + 10*30) );
 	}
 
 	@Test

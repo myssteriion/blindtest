@@ -58,8 +58,8 @@ public class FriendshipContentTest extends AbstractTest {
 
         friendshipContent.prepare(game);
         Assert.assertTrue( game.getPlayers().get(0).getTeamNumber() == 0 || game.getPlayers().get(0).getTeamNumber() == 1 );
-        Assert.assertTrue( game.getPlayers().get(1).getTeamNumber() == 0 || game.getPlayers().get(0).getTeamNumber() == 1 );
-        Assert.assertTrue( game.getPlayers().get(2).getTeamNumber() == 0 || game.getPlayers().get(0).getTeamNumber() == 1 );
+        Assert.assertTrue( game.getPlayers().get(1).getTeamNumber() == 0 || game.getPlayers().get(1).getTeamNumber() == 1 );
+        Assert.assertTrue( game.getPlayers().get(2).getTeamNumber() == 0 || game.getPlayers().get(2).getTeamNumber() == 1 );
     }
 
     @Test
@@ -76,15 +76,16 @@ public class FriendshipContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 42; i++)
             game.nextStep();
 
-        Assert.assertSame( Round.CHOICE, game.getRound() );
+        Assert.assertSame( Round.FRIENDSHIP, game.getRound() );
         FriendshipContent friendshipContent = (FriendshipContent) game.getRoundContent();
 
-        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
+        Assert.assertTrue( game.getPlayers().get(0).getTeamNumber() != -1 );
+        Assert.assertTrue( game.getPlayers().get(1).getTeamNumber() != -1 );
+        Assert.assertTrue( game.getPlayers().get(2).getTeamNumber() != -1 );
+
 
 
         try {
@@ -106,57 +107,45 @@ public class FriendshipContentTest extends AbstractTest {
         Game actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 100, actual.getPlayers().get(1).getScore() );
-        Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
+        Assert.assertEquals( 150, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 150, actual.getPlayers().get(2).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 100-50, actual.getPlayers().get(1).getScore() );
-        Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
+        Assert.assertEquals( 150, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 150, actual.getPlayers().get(2).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertEquals( 150+100, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 50+100, actual.getPlayers().get(1).getScore() );
-        Assert.assertEquals( 100+100+50, actual.getPlayers().get(2).getScore() );
+        Assert.assertEquals( 150+150, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 150+150, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 150+150, actual.getPlayers().get(2).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertEquals( 250+150, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 150+100, actual.getPlayers().get(1).getScore() );
-        Assert.assertEquals( 250+100, actual.getPlayers().get(2).getScore() );
+        Assert.assertEquals( 300+150, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 300+150, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 300+150, actual.getPlayers().get(2).getScore() );
 
         musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
-        Assert.assertEquals( 400+200, actual.getPlayers().get(0).getScore() );
-        Assert.assertEquals( 250+300, actual.getPlayers().get(1).getScore() );
-        Assert.assertEquals( 350+200, actual.getPlayers().get(2).getScore() );
+        Assert.assertEquals( 450+300, actual.getPlayers().get(0).getScore() );
+        Assert.assertEquals( 450+300, actual.getPlayers().get(1).getScore() );
+        Assert.assertEquals( 450+300, actual.getPlayers().get(2).getScore() );
 
-        for (int i = 6; i < 12; i++) {
+        for (int i = 6; i < 10; i++) {
 
             friendshipContent.apply(game, musicResult);
             game.nextStep();
 
-            if (i%3 == 0) {
-                Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
-            }
-            else if (i%3 == 1) {
-                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertTrue( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
-            }
-            else {
-                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertTrue( game.getPlayers().get(2).isTurnToChoose() );
-            }
+            Assert.assertTrue( game.getPlayers().get(0).getTeamNumber() != -1 );
+            Assert.assertTrue( game.getPlayers().get(1).getTeamNumber() != -1 );
+            Assert.assertTrue( game.getPlayers().get(2).getTeamNumber() != -1 );
         }
     }
 
