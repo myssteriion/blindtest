@@ -41,6 +41,11 @@ public class Player {
 	 */
 	private boolean turnToChoose;
 
+	/**
+	 * Team number.
+	 */
+	private int teamNumber;
+
     /**
      * The number of found musics by themes by WinMode.
      */
@@ -63,6 +68,7 @@ public class Player {
 		this.rank = Rank.FIRST;
 		this.last = false;
 		this.turnToChoose = false;
+		this.teamNumber = -1;
 		this.foundMusics = new HashMap<>();
 	}
 
@@ -151,7 +157,26 @@ public class Player {
 		this.turnToChoose = turnToChoose;
 	}
 
-    /**
+	/**
+	 * Gets teamNumber.
+	 *
+	 * @return The teamNumber.
+	 */
+	public int getTeamNumber() {
+		return teamNumber;
+	}
+
+	/**
+	 * Set teamNumber.
+	 *
+	 * @param teamNumber The teamNumber.
+	 */
+	public Player setTeamNumber(int teamNumber) {
+		this.teamNumber = teamNumber;
+		return this;
+	}
+
+	/**
      * Gets found musics.
      *
      * @return the found musics
@@ -210,6 +235,7 @@ public class Player {
 				", rank=" + rank +
 				", last=" + last +
 				", turnToChoose=" + turnToChoose +
+				", teamNumber=" + teamNumber +
                 ", foundMusics=" + foundMusics;
 	}
 	

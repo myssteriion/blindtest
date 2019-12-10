@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.common;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
+import com.myssteriion.blindtest.model.common.roundcontent.impl.FriendshipContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
@@ -21,8 +22,9 @@ public enum Round {
     CLASSIC(0),
     CHOICE(1),
     LUCKY(2),
-    THIEF(3),
-    RECOVERY(4);
+    FRIENDSHIP(3),
+    THIEF(4),
+    RECOVERY(5);
 
 
 
@@ -87,6 +89,12 @@ public enum Round {
                 nbPointWon = prop.getLuckyNbPointWon();
                 nbPointBonusWon = prop.getLuckyNbPointBonus();
                 roundContent = new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
+                break;
+
+            case FRIENDSHIP:
+                nbMusics = prop.getFriendshipNbMusics();
+                nbPointWon = prop.getFriendshipNbPointWon();
+                roundContent = new FriendshipContent( (int) (nbMusics * durationRatio), nbPointWon);
                 break;
 
             case THIEF:
