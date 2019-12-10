@@ -61,6 +61,22 @@ public class GameTest extends AbstractTest {
             verifyException(new IllegalArgumentException("2 players at minimum"), e);
         }
 
+        try {
+            new Game(new HashSet<>(
+                    Arrays.asList(
+                            new Player(new ProfileDTO("name")),
+                            new Player(new ProfileDTO("name1")),
+                            new Player(new ProfileDTO("name2")),
+                            new Player(new ProfileDTO("name3")),
+                            new Player(new ProfileDTO("name4"))
+                    )
+            ), duration, null, null, ConnectionMode.OFFLINE);
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            verifyException(new IllegalArgumentException("4 players at maximum"), e);
+        }
+
         Game game = new Game(new HashSet<>(players), duration, null, null, ConnectionMode.OFFLINE);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
