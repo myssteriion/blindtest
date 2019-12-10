@@ -131,6 +131,10 @@
             "NAME": "Coup d'chance",
             "DESCRIPTION": "Les maitres mots de la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> sont karma et jalousie. Composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, <span class=\"inner-html-special-text\">{{nbPlayers}} joueur(s)</span> aléatoirement choisis se verra attribuer des points. Comme ça. C'est gratuit. Cadeau d'la maison."
         },
+        "FRIENDSHIP": {
+            "NAME": "Amitié passagère",
+            "DESCRIPTION": "L'union fais la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} de 2 joueurs</span> vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont t'elles vraiment équitables ?"
+        },
         "THIEF": {
             "NAME": "Voleur ou Volé",
             "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! Prendre aux riches pour donner au pauvres ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
