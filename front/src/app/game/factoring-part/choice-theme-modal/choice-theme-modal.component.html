@@ -6,11 +6,9 @@
 
 <!-- modal body -->
 <div class="row choice-theme-modal-body">
-    <div class="col" *ngFor="let theme of themes">
-
-        <img src="{{ theme.srcImg }}" class="choice-theme-modal-img" [ngClass]="{ 'choice-theme-modal-img-active': (selectedTheme == theme.enumVal) }"
+    <div class="col choice-theme-modal-themes">
+        <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="choice-theme-modal-img" [ngClass]="{ 'choice-theme-modal-img-active': (selectedTheme == theme.enumVal) }"
              (click)="selectedTheme = theme.enumVal">
-
     </div>
 </div>
 

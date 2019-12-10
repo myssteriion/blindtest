@@ -39,10 +39,8 @@
             </fa-icon>
         </div>
         <div class="col-9">
-            <div class="row">
-                <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (themeIsSelected(theme.enumVal)) }"
-                     (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
-            </div>
+            <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (themeIsSelected(theme.enumVal)) }"
+                 (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
         </div>
     </div>
 
@@ -55,10 +53,8 @@
             </fa-icon>
         </div>
         <div class="col-9">
-            <div class="row">
-                <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (effectIsSelected(effect.enumVal)) }"
-                         (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
-            </div>
+            <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (effectIsSelected(effect.enumVal)) }"
+                 (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
         </div>
     </div>
 
