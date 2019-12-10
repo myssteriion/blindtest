@@ -48,6 +48,20 @@ public class LuckyContentTest extends AbstractTest {
     }
 
     @Test
+    public void prepareRound() {
+
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name3")),
+                new Player(new ProfileDTO("name2")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
+
+        LuckyContent luckyContent = new LuckyContent(10, 100, 50);
+        luckyContent.prepare(game);
+        Assert.assertEquals( 1, luckyContent.getNbPlayers() );
+    }
+
+    @Test
     public void apply() {
 
         List<String> playersNames = Collections.singletonList("name");

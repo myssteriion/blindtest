@@ -41,6 +41,23 @@ public class ClassicContentTest extends AbstractTest {
     }
 
     @Test
+    public void prepareRound() {
+
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name3")),
+                new Player(new ProfileDTO("name2")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
+
+        ClassicContent classicContent = new ClassicContent(10, 100);
+        classicContent.prepare(game);
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
+
+    }
+
+    @Test
     public void apply() {
 
         List<String> playersNames = Collections.singletonList("name");

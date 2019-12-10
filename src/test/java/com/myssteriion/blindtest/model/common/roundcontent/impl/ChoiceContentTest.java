@@ -46,6 +46,26 @@ public class ChoiceContentTest extends AbstractTest {
     }
 
     @Test
+    public void prepareRound() {
+
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name3")),
+                new Player(new ProfileDTO("name2")));
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
+
+        ChoiceContent choiceContent = new ChoiceContent(10, 100, 50, 50);
+        Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
+
+        choiceContent.prepare(game);
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
+        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
+    }
+
+    @Test
     public void apply() {
 
         List<String> playersNames = Arrays.asList("name", "name3", "name2");
