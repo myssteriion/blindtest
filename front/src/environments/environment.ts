@@ -8,7 +8,7 @@ export const environment = {
 	baseBackendUrl: "http://localhost:9501",
 
 	maxPlayers: 12,
-	minPlayers: 3,
+	minPlayers: 2,
 	itemPerPageAvatars: 16,
 	itemPerPageProfiles: 15
 };
