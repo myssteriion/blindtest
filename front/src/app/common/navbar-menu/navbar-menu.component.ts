@@ -42,6 +42,7 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 		this.audio = new Audio();
 		this.audio.src = FFXII_THEME;
 		this.audio.loop = true;
+		this.audio.volume = 0.75;
 		this.audio.load();
 
 		this.playMusic();
