@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION} from "../../tools/constant";
+import {END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION, ADD_SCORE_DURING} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -658,7 +658,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.currentPlayersToUpdate.push( foundPlayerComponent.getPlayer().profile.name );
 			foundPlayerComponent.updatePLayer(appliedPlayer);
 			if (i % 2 === 1 || i === appliedPlayers.length-1) {
-				await ToolsService.sleep(1500);
+				await ToolsService.sleep(ADD_SCORE_DURING);
 				this.currentPlayersToUpdate = [];
 			}
 		}

@@ -115,6 +115,11 @@ export const RANK_ICON_ANIMATION =
     ]);
 
 /**
+ * Add score during.
+ */
+export const ADD_SCORE_DURING = 2000;
+
+/**
  * Rank icon animation.
  */
 export const ADD_SCORE_ANIMATION =
