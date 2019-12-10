@@ -62,47 +62,52 @@ public enum Round {
 
         int nbPlayer = game.getPlayers().size();
         double durationRatio = game.getDuration().getRatio();
-        game.getPlayers().forEach( player -> player.setTurnToChoose(false) );
 
         RoundContentProperties prop = BeanFactory.getBean(RoundContentProperties.class);
+
+        AbstractRoundContent roundContent;
 
         switch (this) {
             case CLASSIC:
                 int nbMusics = prop.getClassicNbMusics();
                 int nbPointWon = prop.getClassicNbPointWon();
-                return new ClassicContent((int) (nbMusics * durationRatio), nbPointWon);
+                roundContent = new ClassicContent((int) (nbMusics * durationRatio), nbPointWon);
+                break;
 
             case CHOICE:
                 nbMusics = prop.getChoiceNbMusics();
                 nbPointWon = prop.getChoiceNbPointWon();
                 int nbPointBonusWon = prop.getChoiceNbPointBonus();
                 int nbPointMalusLoose = prop.getChoiceNbPointMalus();
-
-                game.getPlayers().get(0).setTurnToChoose(true);
-
-                return new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
+                roundContent = new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
+                break;
 
             case LUCKY:
                 nbMusics = prop.getLuckyNbMusics();
                 nbPointWon = prop.getLuckyNbPointWon();
                 nbPointBonusWon = prop.getLuckyNbPointBonus();
-                int nbPlayers = (game.getPlayers().size() <= 6) ? 1 : 2;
-                return new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon, nbPlayers);
+                roundContent = new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
+                break;
 
             case THIEF:
                 nbMusics = prop.getThiefNbMusics();
                 nbPointWon = prop.getThiefNbPointWon();
                 int nbPointLoose = prop.getThiefNbPointLoose();
-                return new ThiefContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
+                roundContent = new ThiefContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
+                break;
 
             case RECOVERY:
                 nbMusics = prop.getRecoveryNbMusics();
                 nbPointWon = prop.getRecoveryNbPointWon();
-                return new RecoveryContent((int) (nbMusics * durationRatio), nbPointWon);
+                roundContent = new RecoveryContent((int) (nbMusics * durationRatio), nbPointWon);
+                break;
 
 
             default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
+
+        roundContent.prepare(game);
+        return roundContent;
     }
 
     /**

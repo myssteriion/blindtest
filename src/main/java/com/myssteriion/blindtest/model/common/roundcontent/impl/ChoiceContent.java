@@ -59,6 +59,13 @@ public class ChoiceContent extends AbstractRoundContent {
 
 
     @Override
+    public void prepare(Game game) {
+
+        super.prepare(game);
+        game.getPlayers().get(0).setTurnToChoose(true);
+    }
+
+    @Override
     public Game apply(Game game, MusicResult musicResult) {
 
         game = super.apply(game, musicResult);

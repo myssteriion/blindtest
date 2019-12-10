@@ -29,10 +29,9 @@ public class LuckyContent extends AbstractRoundContent {
      * @param nbPointWon   the nb point won
      * @param nbPointBonus the nb bonus point
      */
-    public LuckyContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPlayers) {
+    public LuckyContent(int nbMusics, int nbPointWon, int nbPointBonus) {
         super(nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
-        this.nbPlayers = Math.max(nbPlayers, 1);
     }
 
 
@@ -55,6 +54,13 @@ public class LuckyContent extends AbstractRoundContent {
         return nbPlayers;
     }
 
+
+    @Override
+    public void prepare(Game game) {
+
+        super.prepare(game);
+        nbPlayers = (game.getPlayers().size() <= 6) ? 1 : 2;
+    }
 
     @Override
     public Game apply(Game game, MusicResult musicResult) {

@@ -54,6 +54,20 @@ public abstract class AbstractRoundContent {
 
 
     /**
+     * Prepare round.
+     *
+     * @param game the game
+     */
+    public void prepare(Game game) {
+
+        game.getPlayers().forEach( player -> {
+
+            player.setTurnToChoose(false);
+            player.setTeamNumber(-1);
+        });
+    }
+
+    /**
      * Update the game from music result and this round content.
      *
      * @param game        the game
@@ -75,6 +89,7 @@ public abstract class AbstractRoundContent {
 
         return game;
     }
+
 
     /**
      * Test if the round content is finished.
