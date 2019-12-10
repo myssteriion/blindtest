@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../../interfaces/game/player.interface";
-import {faCookieBite, faMedal, faPoo} from '@fortawesome/free-solid-svg-icons';
+import {faCookieBite, faMedal, faPoo, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
 import {ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION} from "../../tools/constant";
 import {ToolsService} from "../../tools/tools.service";
@@ -49,6 +49,7 @@ export class PlayerCardComponent implements OnInit {
     private faMedal = faMedal;
     private faPoo = faPoo;
     private faCookieBite = faCookieBite;
+    private faUserFriends = faUserFriends;
 
 
 
@@ -98,6 +99,20 @@ export class PlayerCardComponent implements OnInit {
     }
 
     /**
+     * Test ig the team must be show.
+     */
+    private showTeam(): boolean {
+        return this.displayMedal && this.player.teamNumber != -1;
+    }
+
+    /**
+     * Add css color.
+     */
+    private getTeamClass(): string {
+        return "player-card-team-" + this.player.teamNumber;
+    }
+
+    /**
      * If show/hide icon(s).
      */
     public showIcon(): boolean {
@@ -119,6 +134,7 @@ export class PlayerCardComponent implements OnInit {
     public async updatePLayer(player: Player): Promise<void> {
 
         this.player.rank = player.rank;
+        this.player.teamNumber = player.teamNumber;
         this.player.last = player.last;
         this.player.turnToChoose = player.turnToChoose;
 

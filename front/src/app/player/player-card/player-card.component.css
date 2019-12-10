@@ -32,14 +32,15 @@
 }
 
 .player-card-rank-chocolate {
-    color: #c1611e;
+    color: #7a3b1f;
 }
 
 .player-card-rank-poop {
     color: #c17920;
 }
 
-.player-card-rank-gold:hover, .player-card-rank-silver:hover, .player-card-rank-bronze:hover, .player-card-rank-chocolate:hover, .player-card-rank-poop:hover {
+.player-card-rank-gold:hover, .player-card-rank-silver:hover, .player-card-rank-bronze:hover, .player-card-rank-chocolate:hover,
+.player-card-rank-poop:hover, .player-card-team {
     cursor: auto;
 }
 
@@ -57,3 +58,10 @@
 .player-card-profile-card {
     padding: 10px;
 }
+
+.player-card-team-0 { color: #00c900; }
+.player-card-team-1 { color: blue; }
+.player-card-team-2 { color: red; }
+.player-card-team-3 { color: gold; }
+.player-card-team-4 { color: #22e9ee; }
+.player-card-team-5 { color: #ff6ae1; }

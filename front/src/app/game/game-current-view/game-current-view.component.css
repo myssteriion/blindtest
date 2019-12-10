@@ -18,3 +18,13 @@
 .game-current-view-players-opacity {
     opacity: 0.3;
 }
+
+.game-current-view-players {
+    width: 37%;
+    max-width: 37%;
+}
+
+.game-current-view-middle {
+    width: 26%;
+    max-width: 26%;
+}

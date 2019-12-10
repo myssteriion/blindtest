@@ -7,6 +7,7 @@ export interface Player {
 	profile: Profile,
 	score: number,
 	rank: Rank,
+	teamNumber: number,
 	last: boolean,
 	turnToChoose: boolean
 }

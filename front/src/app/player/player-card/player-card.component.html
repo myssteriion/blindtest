@@ -10,13 +10,18 @@
     </div>
 
     <!-- score -->
-    <div *ngIf="!rankOnRight" class="col-3 p-0 player-card-score">
+    <div *ngIf="!rankOnRight" class="col-2 p-0 player-card-score">
         <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
              [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
             {{ scoreToAdd }}
         </div>
         <ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
     </div>
+
+    <!-- team -->
+    <fa-icon *ngIf="rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
+             @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
+    </fa-icon>
 
 
 
@@ -25,8 +30,13 @@
 
 
 
+    <!-- team -->
+    <fa-icon *ngIf="!rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
+             @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
+    </fa-icon>
+
     <!-- score -->
-    <div *ngIf="rankOnRight" class="col-3 p-0 player-card-score">
+    <div *ngIf="rankOnRight" class="col-2 p-0 player-card-score">
         <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
              [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
             {{ scoreToAdd }}

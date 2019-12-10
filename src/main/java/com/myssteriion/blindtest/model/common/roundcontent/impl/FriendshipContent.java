@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
+import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.tools.Tool;
 
@@ -88,6 +89,31 @@ public class FriendshipContent extends AbstractRoundContent {
                 currentTeamNumber++;
             }
         }
+    }
+
+    @Override
+    public Game apply(Game game, MusicResult musicResult) {
+
+        Tool.verifyValue("game", game);
+        Tool.verifyValue("musicResult", musicResult);
+
+        List<Integer> winningTeams = new ArrayList<>();
+        game.getPlayers().stream()
+                .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )
+                .forEach( player -> winningTeams.add(player.getTeamNumber()) );
+
+        game.getPlayers().stream()
+                .filter( player -> musicResult.isTitleWinner(player.getProfile().getName()) )
+                .forEach( player -> winningTeams.add(player.getTeamNumber()) );
+
+        for (int teamNumber : winningTeams) {
+
+            game.getPlayers().stream()
+                    .filter( player -> player.getTeamNumber() == teamNumber )
+                    .forEach( player -> player.addScore(nbPointWon) );
+        }
+
+        return game;
     }
 
 

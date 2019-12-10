@@ -20,7 +20,7 @@
     <div class="row m-auto justify-content-center game-current-view-current-theme-effect">
 
         <!-- left players -->
-        <div class="col-4" [ngClass]="addPaddingClass()">
+        <div class="col game-current-view-players" [ngClass]="addPaddingClass()">
             <player-card #leftPlayers *ngFor="let player of getPlayers(true);"
                          [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
                          [player]="player" [rankOnRight]="true" [displayMedal]="true">
@@ -29,7 +29,7 @@
 
 
         <!-- middle -->
-        <div class="col-4">
+        <div class="col game-current-view-middle">
 
             <theme-effect #themeEffect ></theme-effect>
             <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEvent)="undefined" (onEnd)="onPreCountdownEnd()"></custom-countdown>
@@ -79,7 +79,7 @@
 
 
         <!-- right players -->
-        <div class="col-4" [ngClass]="addPaddingClass()">
+        <div class="col game-current-view-players" [ngClass]="addPaddingClass()">
             <player-card #rightPlayers *ngFor="let player of getPlayers(false);"
                          [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
                          [player]="player" [rankOnRight]="false" [displayMedal]="true">

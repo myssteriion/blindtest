@@ -322,6 +322,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		return leftPlayers;
 	}
 
+	/**
+	 * Add padding class for players list.
+	 */
 	private addPaddingClass(): string {
 
 		let css = "game-current-view-players-padding-";
