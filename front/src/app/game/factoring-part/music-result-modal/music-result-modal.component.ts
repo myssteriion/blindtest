@@ -98,6 +98,7 @@ export class MusicResultModalComponent implements OnInit {
 
         this.headers.push(prefix + "TITLE_WINNER_HEADER");
         this.headers.push(prefix + "VICTIM_HEADER");
+        this.headers.push(prefix + "WRONGLY_PASS_HEADER");
     }
 
     /**
@@ -113,7 +114,7 @@ export class MusicResultModalComponent implements OnInit {
     private fillRows(): void {
         this.lines = [];
         for (let player of this.players)
-            this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0 } );
+            this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0, wronglyPass: false } );
     }
 
     /**
@@ -160,10 +161,13 @@ export class MusicResultModalComponent implements OnInit {
         let authorWinners: string[] = [];
         let titleWinners: string[] = [];
         let losers: string[] = [];
+        let wronglyPass: string[] = [];
 
         for (let playerLine of this.lines) {
+
             if (playerLine.authorWinner)    authorWinners.push(playerLine.name);
             if (playerLine.titleWinner)     titleWinners.push(playerLine.name);
+            if (playerLine.wronglyPass) wronglyPass.push(playerLine.name);
             for (let i = 0; i < playerLine.loser; i++)
                 losers.push(playerLine.name);
         }
@@ -179,7 +183,8 @@ export class MusicResultModalComponent implements OnInit {
             music: copyMusic,
             authorWinners: authorWinners,
             titleWinners: titleWinners,
-            losers: losers
+            losers: losers,
+            wronglyPass: wronglyPass
         };
 
         this._gameResource.apply(musicResult).subscribe(
@@ -216,7 +221,8 @@ interface PLayerLine {
     score: number;
     authorWinner: boolean;
     titleWinner: boolean;
-    loser: number;
+    loser: number,
+    wronglyPass: boolean;
 }
 
 /**

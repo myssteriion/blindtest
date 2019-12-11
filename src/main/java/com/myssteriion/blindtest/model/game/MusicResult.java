@@ -37,6 +37,11 @@ public class MusicResult {
 	 */
 	private List<String> losers;
 
+	/**
+	 * The losers list.
+	 */
+	private List<String> wronglyPass;
+
 
 
 	/**
@@ -49,7 +54,7 @@ public class MusicResult {
 	 * @param losers  		the losers
 	 */
 	@JsonCreator
-	public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers) {
+	public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers, List<String> wronglyPass) {
 
 		Tool.verifyValue("gameId", gameId);
 		Tool.verifyValue("music", music);
@@ -60,6 +65,7 @@ public class MusicResult {
 		this.authorWinners = (authorWinners == null) ? new ArrayList<>() : authorWinners;
 		this.titleWinners = (titleWinners == null) ? new ArrayList<>() : titleWinners;
 		this.losers = (losers == null) ? new ArrayList<>() : losers;
+		this.wronglyPass = (wronglyPass == null) ? new ArrayList<>() : wronglyPass;
 	}
 
 
@@ -109,6 +115,15 @@ public class MusicResult {
 		return losers;
 	}
 
+	/**
+	 * Gets wronglyPass.
+	 *
+	 * @return The wronglyPass.
+	 */
+	public List<String> getWronglyPass() {
+		return wronglyPass;
+	}
+
 
 	/**
 	 * Test if "name" is a author winner.
@@ -120,7 +135,7 @@ public class MusicResult {
 
 		Tool.verifyValue("name", name);
 
-		return authorWinners.stream().anyMatch(authorWinner -> authorWinner.equals(name));
+		return authorWinners.stream().anyMatch(playerName -> playerName.equals(name));
 	}
 
 	/**
@@ -133,7 +148,7 @@ public class MusicResult {
 
 		Tool.verifyValue("name", name);
 
-		return titleWinners.stream().anyMatch(titleWinner -> titleWinner.equals(name));
+		return titleWinners.stream().anyMatch(playerName -> playerName.equals(name));
 	}
 
 	/**
@@ -159,9 +174,21 @@ public class MusicResult {
 
 		Tool.verifyValue("name", name);
 
-		return losers.stream().anyMatch(winner -> winner.equals(name));
+		return losers.stream().anyMatch(playerName -> playerName.equals(name));
 	}
 
+	/**
+	 * Test if "name" is a looser.
+	 *
+	 * @param name the name
+	 * @return TRUE if "name" is a looser, FALSE otherwise
+	 */
+	public boolean hadWronglyPass(String name) {
+
+		Tool.verifyValue("name", name);
+
+		return wronglyPass.stream().anyMatch(playerName -> playerName.equals(name));
+	}
 
 
 	@Override
@@ -170,7 +197,8 @@ public class MusicResult {
 				", music={" + music + "}" +
 				", authorWinners=" + authorWinners +
 				", titleWinners=" + titleWinners +
-				", losers=" + losers;
+				", losers=" + losers +
+				", wronglyPass=" + wronglyPass;
 	}
 
 }

@@ -87,6 +87,10 @@ public abstract class AbstractRoundContent {
                 .filter( player -> musicResult.isTitleWinner(player.getProfile().getName()) )
                 .forEach( player -> player.addScore(nbPointWon) );
 
+        game.getPlayers().stream()
+                .filter( player -> musicResult.hadWronglyPass(player.getProfile().getName()) )
+                .forEach( player -> player.addScore(nbPointWon * -2) );
+
         return game;
     }
 

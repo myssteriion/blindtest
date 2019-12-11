@@ -95,7 +95,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -175,7 +175,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -213,7 +213,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -247,7 +247,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -291,7 +291,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }
@@ -338,7 +338,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
                 }
             }
 
-            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers);
+            MusicResult musicResult = new MusicResult(game.getId(), MUSICS_LIST.get(0), winners, null, losers, null);
             game = gameService.apply(musicResult);
             nbMusicPlayed++;
         }

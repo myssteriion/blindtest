@@ -72,7 +72,7 @@ public class LuckyContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
 
         for (int i = 0; i < 28; i++)
             game.nextStep();
@@ -101,21 +101,25 @@ public class LuckyContentTest extends AbstractTest {
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 150 && actual.getPlayers().get(0).getScore() <= 250);
 
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 500);
 
-        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
 
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
 
+        musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
+        actual = recoveryContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 700);
     }
 
     @Test

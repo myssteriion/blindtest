@@ -51,7 +51,7 @@ public class RecoveryContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
 
         for (int i = 0; i < 68; i++)
             game.nextStep();
@@ -80,20 +80,25 @@ public class RecoveryContentTest extends AbstractTest {
         game.nextStep();
         Assert.assertEquals( 30, actual.getPlayers().get(0).getScore() );
 
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
 
-        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
 
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
+
+        musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
+        actual = recoveryContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
     }
 
 }

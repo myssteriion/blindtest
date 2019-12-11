@@ -23,6 +23,7 @@
                         <th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
                         <th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
                         <th *ngIf="showLoserColumn()">{{ headers[4] | translate }}</th>
+                        <th>{{ headers[5] | translate }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,9 @@
                             <select class="form-control music-result-modal-select" (change)="line.loser = $event.target.value">
                                 <option *ngFor="let nbLoseChoice of nbLoseChoices" [value]="nbLoseChoice.id">{{ nbLoseChoice.label }}</option>
                             </select>
+                        </td>
+                        <td>
+                            <mat-checkbox color="warn" [(ngModel)]="line.wronglyPass"></mat-checkbox>
                         </td>
                     </tr>
                     </tbody>

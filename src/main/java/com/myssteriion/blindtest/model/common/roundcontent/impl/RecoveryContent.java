@@ -25,16 +25,16 @@ public class RecoveryContent extends AbstractRoundContent {
     @Override
     public Game apply(Game game, MusicResult musicResult) {
 
-        Tool.verifyValue("game", game);
-        Tool.verifyValue("musicResult", musicResult);
+        game = super.apply(game, musicResult);
 
+        // -1 car un premier apply est fait dans le super
         game.getPlayers().stream()
                 .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )
-                .forEach( player -> player.addScore( nbPointWon * player.getRank().getNum() ) );
+                .forEach( player -> player.addScore( nbPointWon * (player.getRank().getNum() - 1) ) );
 
         game.getPlayers().stream()
                 .filter( player -> musicResult.isTitleWinner(player.getProfile().getName()) )
-                .forEach( player -> player.addScore( nbPointWon * player.getRank().getNum() ) );
+                .forEach( player -> player.addScore( nbPointWon * (player.getRank().getNum() -1) ) );
 
         return game;
     }

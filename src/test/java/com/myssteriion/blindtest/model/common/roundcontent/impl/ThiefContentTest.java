@@ -54,7 +54,7 @@ public class ThiefContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
 
         for (int i = 0; i < 48; i++)
             game.nextStep();
@@ -83,16 +83,22 @@ public class ThiefContentTest extends AbstractTest {
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
 
 
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
 
         playersNames = Arrays.asList("name", "name", "name");
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertEquals( -300, actual.getPlayers().get(0).getScore() );
+
+        playersNames = Arrays.asList("name", "name", "name");
+        musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
+        actual = thiefContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertEquals( -500, actual.getPlayers().get(0).getScore() );
     }
 
     @Test

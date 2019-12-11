@@ -97,6 +97,13 @@ public class FriendshipContent extends AbstractRoundContent {
         Tool.verifyValue("game", game);
         Tool.verifyValue("musicResult", musicResult);
 
+        // le super n'est pas appelé dans cette redéfinition
+        game.getPlayers().stream()
+                .filter( player -> musicResult.hadWronglyPass(player.getProfile().getName()) )
+                .forEach( player -> player.addScore(nbPointWon * -2) );
+
+
+
         List<Integer> winningTeams = new ArrayList<>();
         game.getPlayers().stream()
                 .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )

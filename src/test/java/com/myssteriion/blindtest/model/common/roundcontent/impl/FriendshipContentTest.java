@@ -74,7 +74,7 @@ public class FriendshipContentTest extends AbstractTest {
 
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
 
         for (int i = 0; i < 42; i++)
             game.nextStep();
@@ -110,35 +110,42 @@ public class FriendshipContentTest extends AbstractTest {
         Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 150 && actual.getPlayers().get(1).getScore() <= 300);
         Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 150 && actual.getPlayers().get(2).getScore() <= 300);
 
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames);
+        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 150 && actual.getPlayers().get(0).getScore() <= 300);
         Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 150 && actual.getPlayers().get(1).getScore() <= 300);
         Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 150 && actual.getPlayers().get(2).getScore() <= 300);
 
-        musicResult = new MusicResult(gameId, musicDto, playersNames, null, null);
+        musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 600);
         Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 300 && actual.getPlayers().get(1).getScore() <= 600);
         Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 300 && actual.getPlayers().get(2).getScore() <= 600);
 
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 450 && actual.getPlayers().get(0).getScore() <= 900);
         Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 450 && actual.getPlayers().get(1).getScore() <= 900);
         Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 450 && actual.getPlayers().get(2).getScore() <= 900);
 
-        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null);
+        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
         actual = friendshipContent.apply(game, musicResult);
         game.nextStep();
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 750 && actual.getPlayers().get(0).getScore() <= 1500);
         Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 750 && actual.getPlayers().get(1).getScore() <= 1500);
         Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 750 && actual.getPlayers().get(2).getScore() <= 1500);
 
-        for (int i = 6; i < 10; i++) {
+        musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
+        actual = friendshipContent.apply(game, musicResult);
+        game.nextStep();
+        Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 450 && actual.getPlayers().get(0).getScore() <= 1200);
+        Assert.assertTrue( actual.getPlayers().get(1).getScore() >= 450 && actual.getPlayers().get(1).getScore() <= 1200);
+        Assert.assertTrue( actual.getPlayers().get(2).getScore() >= 450 && actual.getPlayers().get(2).getScore() <= 1200);
+
+        for (int i = 7; i < 10; i++) {
 
             friendshipContent.apply(game, musicResult);
             game.nextStep();
