@@ -101,7 +101,7 @@ export class PlayerCardComponent implements OnInit {
     /**
      * Test ig the team must be show.
      */
-    private showTeam(): boolean {
+    public showTeam(): boolean {
         return this.displayMedal && this.player.teamNumber != -1;
     }
 
