@@ -12,7 +12,9 @@ button:disabled {
 }
 
 body {
-    background-color: #F2F2F2;
+    background: url("assets/images/background/background.png") no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
 }
 
 mat-radio-button {
