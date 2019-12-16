@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "62d3a7f8-f5a3-4ca9-9982-8e37c9dba39c",
+		"_postman_id": "bea477d5-c50f-4ceb-9023-b62b82453ac4",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -285,7 +285,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"David Guetta - Like I do.mp3\",\n\t\t\"theme\": \"ANNEES_60\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Adamo - Mes mains sur tes hanches.mp3\",\n\t\t\"theme\": \"ANNEES_60\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
