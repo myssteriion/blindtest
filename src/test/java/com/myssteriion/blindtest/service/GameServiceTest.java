@@ -55,7 +55,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(null, profileDto);
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 		Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
-		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
+		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(0, 10);
 
 		List<String> playersNames = Arrays.asList("name", "name1");
 
@@ -65,6 +65,14 @@ public class GameServiceTest extends AbstractTest {
 		}
 		catch (IllegalArgumentException e) {
 			verifyException(new IllegalArgumentException("Le champ 'newGame' est obligatoire."), e);
+		}
+
+		try {
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, Collections.singletonList(Theme.ANNEES_60), null, ConnectionMode.OFFLINE) );
+			Assert.fail("Doit lever une NotFoundException car un mock (musicService) return 0.");
+		}
+		catch (NotFoundException e) {
+			verifyException(new NotFoundException("Zero music found ('ANNEES_60' ; '[OFFLINE]')"), e);
 		}
 
 		try {

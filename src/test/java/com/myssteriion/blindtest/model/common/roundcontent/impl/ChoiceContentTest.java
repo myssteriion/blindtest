@@ -13,6 +13,7 @@ import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,7 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 0, choiceContent.getNbPointWon() );
         Assert.assertEquals( 0, choiceContent.getNbPointBonus() );
         Assert.assertEquals( 0, choiceContent.getNbPointMalus() );
+        Assert.assertEquals( new ArrayList<>(), choiceContent.getOrder() );
     }
 
     @Test
@@ -37,12 +39,14 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 0, choiceContent.getNbPointWon() );
         Assert.assertEquals( 0, choiceContent.getNbPointBonus() );
         Assert.assertEquals( 0, choiceContent.getNbPointMalus() );
+        Assert.assertEquals( new ArrayList<>(), choiceContent.getOrder() );
 
         choiceContent = new ChoiceContent(5,  100, 50, -50);
         Assert.assertEquals( 5, choiceContent.getNbMusics() );
         Assert.assertEquals( 100, choiceContent.getNbPointWon() );
         Assert.assertEquals( 50, choiceContent.getNbPointBonus() );
         Assert.assertEquals( -50, choiceContent.getNbPointMalus() );
+        Assert.assertEquals( new ArrayList<>(), choiceContent.getOrder() );
     }
 
     @Test
