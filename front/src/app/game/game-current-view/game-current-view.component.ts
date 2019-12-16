@@ -329,8 +329,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 
 		let css = "game-current-view-players-padding-";
 
-		if (this.game.players.length >= 2 && this.game.players.length <= 8) css += "10";
-		if (this.game.players.length >= 9 && this.game.players.length <= 14) css += "5";
+		if (this.game.players.length >= 2 && this.game.players.length <= 4) css += "20";
+		if (this.game.players.length >= 5 && this.game.players.length <= 8) css += "15";
+		if (this.game.players.length >= 9) css += "10";
 
 		return css;
 	}
