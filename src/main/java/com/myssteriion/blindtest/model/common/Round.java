@@ -88,13 +88,13 @@ public enum Round {
                 nbMusics = prop.getLuckyNbMusics();
                 nbPointWon = prop.getLuckyNbPointWon();
                 nbPointBonusWon = prop.getLuckyNbPointBonus();
-                roundContent = new LuckyContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
+                roundContent = new LuckyContent((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
                 break;
 
             case FRIENDSHIP:
                 nbMusics = prop.getFriendshipNbMusics();
                 nbPointWon = prop.getFriendshipNbPointWon();
-                roundContent = new FriendshipContent( (int) (nbMusics * durationRatio), nbPointWon);
+                roundContent = new FriendshipContent((int) (nbMusics * durationRatio), nbPointWon);
                 break;
 
             case THIEF:
@@ -111,7 +111,7 @@ public enum Round {
                 break;
 
 
-            default:        throw new IllegalArgumentException("Il manque un case ('" + this + "').");
+            default: throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
 
         roundContent.prepare(game);
