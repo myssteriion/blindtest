@@ -5,5 +5,6 @@ import {AbstractRoundContent} from "../abstract.round.content";
  */
 export interface ChoiceContent extends AbstractRoundContent {
 	nbPointBonus: number,
-	nbPointMalus: number
+	nbPointMalus: number,
+	order: number[]
 }

@@ -125,8 +125,8 @@
             "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien n'est à perdre, à vos cordes vocales !"
         },
         "CHOICE": {
-            "NAME": "Choix",
-            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème (<span class=\"inner-html-special-text\">{{nbMusics}} fois chacun</span>). Pour celui qui choisit, ce sont des points bonus s'il trouve, sinon ce sont des points en moins."
+            "NAME": "Je choisis donc je suis",
+            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème à tous les autres, et ce, pour un total de (<span class=\"inner-html-special-text\">{{nbMusics}} musique</span>). Pour celui qui choisit, ce sont des points bonus s'il trouve, sinon ce sont des points en moins. Tout le monde à le droit de répondre."
         },
         "LUCKY": {
             "NAME": "Coup d'chance",
@@ -138,7 +138,7 @@
         },
         "THIEF": {
             "NAME": "Voleur ou Volé",
-            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! Prendre aux riches pour donner au pauvres ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris de déception commencent !"
+            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! Prendre aux riches pour donner au pauvres ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris commencent !"
         },
         "RECOVERY": {
             "NAME": "Rattrapage",

@@ -40,9 +40,6 @@ export class RoundInfoModalComponent {
             nbTeams: undefined
         };
 
-        if (this.game.round === Round.CHOICE)
-            params.nbMusics = params.nbMusics / this.game.players.length;
-
         if (this.game.round === Round.LUCKY)
             params.nbPlayers = (<LuckyContent>this.game.roundContent).nbPlayers;
 
