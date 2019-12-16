@@ -62,7 +62,6 @@ public enum Round {
 
         Tool.verifyValue("game", game);
 
-        int nbPlayer = game.getPlayers().size();
         double durationRatio = game.getDuration().getRatio();
 
         RoundContentProperties prop = BeanFactory.getBean(RoundContentProperties.class);
@@ -81,7 +80,7 @@ public enum Round {
                 nbPointWon = prop.getChoiceNbPointWon();
                 int nbPointBonusWon = prop.getChoiceNbPointBonus();
                 int nbPointMalusLoose = prop.getChoiceNbPointMalus();
-                roundContent = new ChoiceContent((int) ((nbMusics * nbPlayer) * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
+                roundContent = new ChoiceContent((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
                 break;
 
             case LUCKY:

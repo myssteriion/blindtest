@@ -74,7 +74,7 @@ public class LuckyContentTest extends AbstractTest {
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 32; i++)
             game.nextStep();
 
         Assert.assertSame( Round.LUCKY, game.getRound() );

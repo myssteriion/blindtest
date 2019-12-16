@@ -60,9 +60,7 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
 
         choiceContent.prepare(game);
-        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
-        Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-        Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
+        Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() ^ game.getPlayers().get(1).isTurnToChoose() ^ game.getPlayers().get(2).isTurnToChoose() );
     }
 
     @Test
@@ -84,6 +82,10 @@ public class ChoiceContentTest extends AbstractTest {
 
         Assert.assertSame( Round.CHOICE, game.getRound() );
         ChoiceContent choiceContent = (ChoiceContent) game.getRoundContent();
+
+        game.getPlayers().get(0).setTurnToChoose(true);
+        game.getPlayers().get(1).setTurnToChoose(false);
+        game.getPlayers().get(2).setTurnToChoose(false);
 
         Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
@@ -111,6 +113,9 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
+        game.getPlayers().get(0).setTurnToChoose(false);
+        game.getPlayers().get(1).setTurnToChoose(true);
+        game.getPlayers().get(2).setTurnToChoose(false);
 
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = choiceContent.apply(game, musicResult);
@@ -118,6 +123,9 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 100-50, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100, actual.getPlayers().get(2).getScore() );
+        game.getPlayers().get(0).setTurnToChoose(false);
+        game.getPlayers().get(1).setTurnToChoose(false);
+        game.getPlayers().get(2).setTurnToChoose(true);
 
         musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
         actual = choiceContent.apply(game, musicResult);
@@ -125,6 +133,9 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 150+100, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 50+100, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 100+100+50, actual.getPlayers().get(2).getScore() );
+        game.getPlayers().get(0).setTurnToChoose(true);
+        game.getPlayers().get(1).setTurnToChoose(false);
+        game.getPlayers().get(2).setTurnToChoose(false);
 
         musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
         actual = choiceContent.apply(game, musicResult);
@@ -132,6 +143,9 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 250+150, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 150+100, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 250+100, actual.getPlayers().get(2).getScore() );
+        game.getPlayers().get(0).setTurnToChoose(false);
+        game.getPlayers().get(1).setTurnToChoose(true);
+        game.getPlayers().get(2).setTurnToChoose(false);
 
         musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
         actual = choiceContent.apply(game, musicResult);
@@ -139,6 +153,9 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 400+200, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 250+300, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 350+200, actual.getPlayers().get(2).getScore() );
+        game.getPlayers().get(0).setTurnToChoose(false);
+        game.getPlayers().get(1).setTurnToChoose(false);
+        game.getPlayers().get(2).setTurnToChoose(true);
 
         musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
         actual = choiceContent.apply(game, musicResult);
@@ -146,35 +163,16 @@ public class ChoiceContentTest extends AbstractTest {
         Assert.assertEquals( 600-200, actual.getPlayers().get(0).getScore() );
         Assert.assertEquals( 550-200, actual.getPlayers().get(1).getScore() );
         Assert.assertEquals( 550-200-50, actual.getPlayers().get(2).getScore() );
-
-        for (int i = 7; i < 12; i++) {
-
-            choiceContent.apply(game, musicResult);
-            game.nextStep();
-
-            if (i%3 == 0) {
-                Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
-            }
-            else if (i%3 == 1) {
-                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertTrue( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(2).isTurnToChoose() );
-            }
-            else {
-                Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
-                Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
-                Assert.assertTrue( game.getPlayers().get(2).isTurnToChoose() );
-            }
-        }
+        game.getPlayers().get(0).setTurnToChoose(true);
+        game.getPlayers().get(1).setTurnToChoose(false);
+        game.getPlayers().get(2).setTurnToChoose(false);
     }
 
     @Test
     public void toStringAndEquals() {
 
         ChoiceContent choiceContent = new ChoiceContent(5,  100, 50, -50);
-        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointBonus=50, nbPointMalus=-50", choiceContent.toString() );
+        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointBonus=50, nbPointMalus=-50, order=[]", choiceContent.toString() );
     }
 
 }

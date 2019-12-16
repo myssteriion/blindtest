@@ -4,6 +4,10 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.tools.Tool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Choice round content.
@@ -20,6 +24,11 @@ public class ChoiceContent extends AbstractRoundContent {
      */
     private int nbPointMalus;
 
+    /**
+     * Index players order.
+     */
+    private List<Integer> order;
+
 
 
     /**
@@ -35,6 +44,7 @@ public class ChoiceContent extends AbstractRoundContent {
         super(nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
         this.nbPointMalus = Math.min(nbPointMalus, 0);
+        this.order = new ArrayList<>();
     }
 
 
@@ -57,12 +67,50 @@ public class ChoiceContent extends AbstractRoundContent {
         return nbPointMalus;
     }
 
+    /**
+     * Gets order.
+     *
+     * @return The order.
+     */
+    public List<Integer> getOrder() {
+        return order;
+    }
+
 
     @Override
     public void prepare(Game game) {
 
         super.prepare(game);
-        game.getPlayers().get(0).setTurnToChoose(true);
+
+        int nbPlayers = game.getPlayers().size();
+        List<Integer> currentIndexPlayers = initCurrentIndexPlayers(nbPlayers);
+
+        for (int i = 0; i < this.nbMusics; i++) {
+
+            int indexToAdd = Tool.RANDOM.nextInt( currentIndexPlayers.size() );
+            order.add( currentIndexPlayers.remove(indexToAdd) );
+
+            if ( currentIndexPlayers.isEmpty() )
+                currentIndexPlayers = initCurrentIndexPlayers(nbPlayers);
+        }
+
+        game.getPlayers().get( order.remove(0) ).setTurnToChoose(true);
+    }
+
+    /**
+     * Init list with all index players.
+     *
+     * @param nbPlayers the number of players
+     * @return A list with all index players.
+     */
+    private List<Integer> initCurrentIndexPlayers(int nbPlayers) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < nbPlayers; i++)
+            list.add(i);
+
+        return list;
     }
 
     @Override
@@ -86,12 +134,8 @@ public class ChoiceContent extends AbstractRoundContent {
                     player.setTurnToChoose(false);
                 });
 
-        if ( !isLastMusic(game) ) {
-
-            // +1 car le gameDTO n'a pas encore subit le next
-            int numPlayer = (1 + game.getNbMusicsPlayedInRound()) % game.getPlayers().size();
-            game.getPlayers().get(numPlayer).setTurnToChoose(true);
-        }
+        if ( !isLastMusic(game) )
+            game.getPlayers().get( order.remove(0) ).setTurnToChoose(true);
 
         return game;
     }
@@ -101,7 +145,8 @@ public class ChoiceContent extends AbstractRoundContent {
     public String toString() {
         return super.toString() +
                 ", nbPointBonus=" + nbPointBonus +
-                ", nbPointMalus=" + nbPointMalus;
+                ", nbPointMalus=" + nbPointMalus +
+                ", order=" + order;
     }
 
 }
