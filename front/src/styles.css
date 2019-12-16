@@ -11,6 +11,11 @@ button:disabled {
     cursor: not-allowed;
 }
 
+html {
+    min-height: 100%;
+    cursor: url(assets/images/icons/default.svg), default;
+}
+
 body {
     background: url("assets/images/background/background.png") no-repeat center center fixed;
     background-size: cover;
