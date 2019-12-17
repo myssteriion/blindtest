@@ -8,7 +8,7 @@
             "VERSION": "version"
         },
         "ERROR_MODAL": {
-            "TITLE": "Une erreur est survenue",
+            "TITLE": "Une erreur est survenue.",
             "RETRY": "Réssayer",
             "SUGGESTION_LABEL": "Suggestion :",
             "MAYBE_SERVER_OFF": "Le serveur est injoignable, vérifier que celui-ci est bien allumé."
@@ -58,8 +58,8 @@
             "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
             "LAUNCH_GAME": "Lancer la partie !",
             "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
-            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les indentifiants soient corrects.",
-            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y est bien au moins 1 musique pour chacun des thèmes selectionés.",
+            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les identifiants soient corrects.",
+            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y ait bien au moins 1 musique pour chacun des thèmes selectionés.",
             "THEMES_HELP": "Le thème 1960 regroupe également des musiques des années 1940 et 1950.",
             "EFFECTS_HELP": "Les effets ne sont pas appliqués sur les musiques Spotify."
         },
@@ -81,7 +81,7 @@
             "LISTEN": "Ecoutez !",
             "FINISH": "C'est fini !",
             "NEXT_MUSIC": "Musique suivante !",
-            "PASS_MUSIC": "J'attend pas la fin du chrono !",
+            "PASS_MUSIC": "J'attends pas la fin du chrono !",
             "GAME_NOT_FOUND": "La partie n'existe pas.",
             "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
             "RETRY_IN_OFFLINE_MODE_ERROR": "Passer en mode OFFLINE pour la prochaine musique uniquement."
@@ -131,7 +131,7 @@
         },
         "CHOICE": {
             "NAME": "Je choisis donc je suis",
-            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème à tous les autres, et ce, pour un total de (<span class=\"inner-html-special-text\">{{nbMusics}} musique</span>). Pour celui qui choisit, ce sont des points bonus s'il trouve, sinon ce sont des points en moins. Tout le monde à le droit de répondre."
+            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème à tous les autres, et ce, pour un total de (<span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>). Pour celui qui choisi, ce sont des points bonus s'il trouve, sinon ce sont des points en moins. Tout le monde a le droit de répondre."
         },
         "LUCKY": {
             "NAME": "Coup d'chance",
@@ -139,7 +139,7 @@
         },
         "FRIENDSHIP": {
             "NAME": "Amitié passagère",
-            "DESCRIPTION": "L'union fais la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} équipes</span> de 2 joueurs (et si impair, un des 1er est seul) vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont t'elles vraiment équitables ?"
+            "DESCRIPTION": "L'union fait la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} équipes</span> de 2 joueurs (et si impair, un des 1er est seul) vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont-elles vraiment équitables ?"
         },
         "THIEF": {
             "NAME": "Voleur ou Volé",
@@ -147,7 +147,7 @@
         },
         "RECOVERY": {
             "NAME": "Rattrapage",
-            "DESCRIPTION": "La disparité, c'est mal, l'équilibre c'est mieux. La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> est là pour aider les lanternes rouges à remonter. Avec ces <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, vous marquez des points fonction de votre rang ! Et oui, nous n'avons pas les mêmes valeurs."
+            "DESCRIPTION": "La disparité, c'est mal, l'équilibre c'est mieux. La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> est là pour aider les lanternes rouges à remonter. Avec ces <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, vous marquez des points en fonction de votre rang ! Et oui, nous n'avons pas les mêmes valeurs."
         }
     },
     "RANK": {
@@ -164,7 +164,7 @@
             "DESELECT_TOOLTIP": "Retirer le profil.",
             "DELETE_BODY": "Etes-vous sûr de vouloir supprimer le profil de <span class=\"inner-html-special-text\">{{profile_name}}</span> ?",
             "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé.",
-            "DELETE_ERROR": "Impossible de supprimer le profile."
+            "DELETE_ERROR": "Impossible de supprimer le profil."
         },
         "EDIT_MODAL": {
             "CREATION_TITLE": "Création du profil",
@@ -177,7 +177,7 @@
             "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour.",
             "AVATAR_LOAD_ERROR": "Impossible de charger les avatars.",
             "CREATE_ERROR": "Impossible de créer le profil.",
-            "UPDATE_ERROR": "Impossible de sauvgarder le profil.",
+            "UPDATE_ERROR": "Impossible de sauvegarder le profil.",
             "PROFILE_ALREADY_EXISTS_ERROR": "Ce pseudo est déjà pris."
         },
         "PAGE": {
@@ -206,9 +206,9 @@
     },
     "EFFECTS": {
         "NONE": "Musique sans effet.",
-        "SLOW": "Musique au ralentis.",
+        "SLOW": "Musique au ralenti.",
         "SPEED": "Musique en accéléré.",
-        "MIX": "Alternance entre ralentis et accéléré."
+        "MIX": "Alternance entre ralenti et accéléré."
     },
     "STATISTICS": {
         "TITLE": "Statistiques",
@@ -243,13 +243,13 @@
             },
             "RANK_OCCUPIED": {
                 "TITLE": "Rang occupé",
-                "TWELFTH": "Douxième",
+                "TWELFTH": "Douzième",
                 "ELEVENTH": "Onzième",
-                "TENTH": "Dixième",
+                "TENTH": "Dizième",
                 "NINTH": "Neuvième",
                 "EIGHTH": "Huitième",
                 "SEVENTH": "Septième",
-                "SIXTH": "Sixième",
+                "SIXTH": "Sizième",
                 "FIFTH": "Cinquième",
                 "FOURTH": "Quatrième",
                 "THIRD": "Troisième",
