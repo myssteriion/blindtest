@@ -8,23 +8,43 @@
         <div class="col-1 game-end-view-exit">
             <fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
                      (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
-                     ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto" [openDelay]="500">
+                     ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto"
+                     [openDelay]="500">
             </fa-icon>
         </div>
     </div>
 
+    <div class="row">
+        <mat-tab-group mat-stretch-tabs style="width: 100%;" (selectedTabChange)="onTabClick($event)">
+            <mat-tab label="{{'GAME.END_VIEW.RANK'|translate}}">
+                <div class="game-end-view-margin-top-5 game-end-view-side-2">
+                    <!-- 1st 2nd 3rd -->
+                    <div *ngFor="let rank of podiumRank"
+                         class="row justify-content-center game-end-view-first-second-third">
+                        <div *ngIf="hadPlayerByRank(rank)" class="col-2">
+                            <img src="{{ getImgByRank(rank) }}" ngbTooltip="{{ getTooltipByRank(rank) }}"
+                                 placement="bottom auto">
+                        </div>
+                        <player-card class="col-5" *ngFor="let player of getPlayersByRank(rank);" [player]="player"
+                                     [rankOnRight]="true"
+                                     [displayMedal]="false"></player-card>
+                    </div>
 
-    <!-- 1st 2nd 3rd -->
-    <div *ngFor="let rank of podiumRank" class="row justify-content-center game-end-view-first-second-third">
-        <div *ngIf="hadPlayerByRank(rank)" class="col-2">
-            <img src="{{ getImgByRank(rank) }}" ngbTooltip="{{ getTooltipByRank(rank) }}" placement="bottom auto" >
-        </div>
-        <player-card class="col-5" *ngFor="let player of getPlayersByRank(rank);" [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
-    </div>
+                    <!-- other ranks -->
+                    <div class="row game-end-view-other-ranks">
+                        <player-card class="col-4" *ngFor="let player of getNoPodiumPlayers();" [player]="player"
+                                     [rankOnRight]="true"
+                                     [displayMedal]="false"></player-card>
+                    </div>
+                </div>
+            </mat-tab>
 
-    <!-- other ranks -->
-    <div class="row game-end-view-other-ranks">
-        <player-card class="col-4" *ngFor="let player of getNoPodiumPlayers();" [player]="player" [rankOnRight]="true" [displayMedal]="false"></player-card>
+            <mat-tab label="{{'GAME.END_VIEW.STATISTICS'|translate}}">
+                <div class="game-end-view-margin-top-5" *ngIf="showGraph">
+                    <theme-comparison-view [gameStatistics]="game"></theme-comparison-view>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 
 </div>

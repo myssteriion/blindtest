@@ -16,3 +16,12 @@
     margin-top: 1.5em;
     padding-top: 1.5em;
 }
+
+.game-end-view-margin-top-5 {
+    margin-top: 5em;
+}
+
+.game-end-view-side-2 {
+    margin-left: 2em;
+    margin-right: 2em;
+}
