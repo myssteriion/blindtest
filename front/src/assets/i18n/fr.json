@@ -238,7 +238,8 @@
                 "PERCENTAGE": "Pourcentage"
             },
             "LISTENED_MUSICS_BY_THEME": {
-                "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème"
+                "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème",
+                "NUMBER_FOUND_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées / trouvées par thème"
             },
             "RANK_OCCUPIED": {
                 "TITLE": "Rang occupé",
