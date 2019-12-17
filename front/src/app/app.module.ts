@@ -46,11 +46,16 @@ import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-vi
 import {ThemePercentagesComponent} from './statistics/common/theme-percentages/theme-percentages.component';
 import {ThemeListeningComponent} from './statistics/common/theme-listening/theme-listening.component';
 import {ThemeComparisonViewComponent} from './statistics/common/theme-comparison/theme-comparison-view.component';
+import {UserThemeComparisonViewComponent} from './statistics/common/user-comparison/theme-comparison/user-theme-comparison-view.component';
+import {UserThemeComparisonQuestionDetailComponent} from './statistics/common/user-comparison/theme-comparison/user-theme-comparison-question-detail/user-theme-comparison-question-detail.component';
+import {UserThemeComparisonQuestionNumberComponent} from './statistics/common/user-comparison/theme-comparison/user-theme-comparison-question-number/user-theme-comparison-question-number.component';
+import {UserRankComparisonComponent} from './statistics/common/user-comparison/user-rank-comparison/user-rank-comparison.component';
 import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-comparison/theme-comparison-question-detail/theme-comparison-question-detail.component';
 import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
 import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
 import {RankCounterComponent} from './statistics/common/rank-counter/rank-counter.component';
 import {FoundListenedMusicsRatioComponent} from './statistics/common/found-listened-musics-ratio/found-listened-musics-ratio.component';
+import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -65,6 +70,7 @@ import {MusicResource} from "./resources/music.resource";
 import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -107,7 +113,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         ThemeComparisonQuestionNumberComponent,
         ScoreByGameTypeComponent,
         RankCounterComponent,
-        FoundListenedMusicsRatioComponent
+        FoundListenedMusicsRatioComponent,
+        UserThemeComparisonViewComponent,
+        UserThemeComparisonQuestionDetailComponent,
+        UserThemeComparisonQuestionNumberComponent,
+        ProfilesComparisonViewComponent,
+        UserRankComparisonComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
@@ -141,7 +152,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MatCheckboxModule,
 		NgHttpLoaderModule.forRoot(),
 		MatRadioModule,
-        NgSelectModule
+        NgSelectModule,
+        MatTabsModule
     ],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],

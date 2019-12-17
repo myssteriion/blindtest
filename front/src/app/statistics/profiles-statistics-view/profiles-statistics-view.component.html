@@ -1,33 +1,33 @@
-<div class="container" @flyInOut *ngIf="!isLoading">
+<div class="container-fluid-forced-marge" @flyInOut *ngIf="!isLoading">
 
-    <!-- header -->
     <header [title]="'STATISTICS.TITLE' | translate"></header>
 
-    <!--    <button class="btn btn-info font-size-normal"-->
-    <!--            (click)="select()">{{ 'STATISTICS.SELECT_PLAYERS' | translate }}</button>-->
+    <!--    maxSelectedItems="12"-->
 
-    <div class="row">
-        <ng-select
-                (change)="getPlayersStatistics()"
-                maxSelectedItems="5"
-                [items]="users"
-                [multiple]="true"
-                bindLabel="name"
-                notFoundText="{{'COMMON.USER_SEARCH.NO_USERS_FOUND'|translate}}"
-                [closeOnSelect]="false"
-                [(ngModel)]="selectedUsers">
-            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>
-                <img class="example-option-img" aria-hidden [src]="getFluxForImg(item)" height="25">
-                {{item.name}}
-            </ng-template>
-        </ng-select>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <ng-select
+                    placeholder="Sélectionner des utilisateurs"
+                    (change)="getPlayersStatistics()"
+                    [items]="users"
+                    [multiple]="true"
+                    bindLabel="name"
+                    notFoundText="{{'COMMON.USER_SEARCH.NO_USERS_FOUND'|translate}}"
+                    [closeOnSelect]="false"
+                    [(ngModel)]="selectedUsers">
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>
+                    <img class="example-option-img" aria-hidden [src]="getFluxForImg(item)" height="25">
+                    {{item.name}}
+                </ng-template>
+            </ng-select>
+        </div>
     </div>
 
     <div class="row" *ngIf="isLoaded">
-        <profile-statistics-view [user]="profile" *ngFor="let profile of selectedProfiles" class="{{getActiveClass()}}">
-        </profile-statistics-view>
+        <div class="col">
+            <profiles-comparison-view [selectedUsers]="selectedUsers"></profiles-comparison-view>
+        </div>
     </div>
-
 
 </div>

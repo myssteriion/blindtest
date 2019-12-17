@@ -1,0 +1,13 @@
+<div>
+    <div class="theme-list">
+    <span class="theme" [ngClass]="{'selected-theme': isSelectedTheme(theme)}"
+          *ngFor="let theme of availableThemes"
+          (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
+    </div>
+
+    <theme-comparison-question-number [theme]="selectedTheme" [statistics]="gameStatistics"
+                                      [colorScheme]="colorScheme"></theme-comparison-question-number>
+
+    <theme-comparison-question-detail [theme]="selectedTheme" [statistics]="gameStatistics"
+                                      [colorScheme]="colorScheme"></theme-comparison-question-detail>
+</div>

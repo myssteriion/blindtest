@@ -1,0 +1,40 @@
+<div class="" style="margin-left: 40px;margin-right: 40px;">
+    <!--    container-fluid-->
+    <div *ngIf="noThemesAvailable">
+
+        <!--        TODO : Replace with translation + format -->
+        AUCUN THEME DISPONIBLE
+    </div>
+
+    <div *ngIf="!noThemesAvailable">
+        <div class="theme-list">
+            <div class="row">
+                <div class="col">
+                    <span class="theme" [ngClass]="{'selected-theme': isSelectedTheme(theme)}"
+                          *ngFor="let theme of availableThemes"
+                          (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col">
+                <user-theme-comparison-question-detail [colorScheme]="colorScheme" [theme]="selectedTheme"
+                                                       [statistics]="selectedUsers"></user-theme-comparison-question-detail>
+            </div>
+            <div class="col">
+                <user-theme-comparison-question-number [colorScheme]="colorScheme" [theme]="selectedTheme"
+                                                       [statistics]="selectedUsers"></user-theme-comparison-question-number>
+            </div>
+        </div>
+
+        <div class="row margin-top">
+            <div class="col">
+                <user-rank-comparison [colorScheme]="colorScheme" [statistics]="selectedUsers"></user-rank-comparison>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
