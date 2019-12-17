@@ -119,7 +119,9 @@
             "BACK_TO_HOME": "Retourner au menu principal",
             "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?",
             "GAME_NOT_FOUND": "La partie n'existe pas.",
-            "FOUND_GAME_ERROR": "Impossible de retrouver la partie."
+            "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
+            "STATISTICS": "Statistiques",
+            "RANK": "Classement"
         }
     },
     "ROUND": {
@@ -239,6 +241,7 @@
                 "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème"
             },
             "RANK_OCCUPIED": {
+                "TITLE": "Rang occupé",
                 "TWELFTH": "Douxième",
                 "ELEVENTH": "Onzième",
                 "TENTH": "Dixième",
