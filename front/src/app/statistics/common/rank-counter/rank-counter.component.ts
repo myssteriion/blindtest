@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../../tools/constant';
+import {HORIZONTAL_BAR_GRAPH_SIZE} from '../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../tools/tools.service';
 
@@ -9,16 +9,14 @@ import {ToolsService} from '../../../tools/tools.service';
 @Component({
     selector: 'rank-counter',
     templateUrl: './rank-counter.component.html',
-    styleUrls: ['./rank-counter.component.css'],
-    animations: [
-        SLIDE_ANIMATION
-    ]
+    styleUrls: ['./rank-counter.component.css']
 })
 export class RankCounterComponent implements OnInit {
     @Input() colorScheme;
     @Input() statistics;
 
     public rankCounter = [];
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
 
     constructor(private _translate: TranslateService) {
     }
@@ -27,6 +25,9 @@ export class RankCounterComponent implements OnInit {
         this.calculateStatistics();
     }
 
+    /**
+     * Calculate statistics for players
+     */
     private calculateStatistics() {
         let rankValues = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH"];
         rankValues.forEach(rank => {

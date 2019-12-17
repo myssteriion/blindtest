@@ -1,24 +1,22 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
+import {THEMES, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../tools/tools.service'
 
 /**
- * The statistics view.
+ * The theme percentages view.
  */
 @Component({
     selector: 'theme-percentages-view',
     templateUrl: './theme-percentages.component.html',
-    styleUrls: ['./theme-percentages.component.css'],
-    animations: [
-        SLIDE_ANIMATION
-    ]
+    styleUrls: ['./theme-percentages.component.css']
 })
 export class ThemePercentagesComponent implements OnInit {
     @Input() statistics;
     @Input() colorScheme;
 
-    stackedPercentages = [];
+    public stackedPercentages = [];
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
 
     constructor(private _translate: TranslateService) {
     }

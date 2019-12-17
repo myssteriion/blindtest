@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../tools/constant';
+import {COLOR_SCHEME, SLIDE_ANIMATION} from '../../tools/constant';
 import {Profile} from "../../interfaces/dto/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../tools/tools.service'
@@ -22,9 +22,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
 
     public loaded: boolean = false;
 
-    colorScheme = {
-        domain: ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
-    };
+    colorScheme = COLOR_SCHEME;
     animations: boolean = true;
     counter = [];
 
@@ -43,6 +41,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
         return this._translate.instant("STATISTICS.NO_STATS_FOR_USER", {user: this.user.name});
     }
 
+    //TODO : Voir quelles fonctions sont utiles ou non
     public onLegendLabelClick(event: Event) {
         // console.log("onLegend", event)
     }
@@ -59,6 +58,9 @@ export class ProfileStatisticsViewComponent implements OnInit {
         // console.log("deactivate", event)
     }
 
+    /**
+     * Fill counters with infos
+     */
     public fillCounter() {
         let scores = this.getAllTimeScores();
         let playedGames = this.getAllPlayedGames();
@@ -71,16 +73,22 @@ export class ProfileStatisticsViewComponent implements OnInit {
                 "name": this._translate.instant("STATISTICS.CATEGORIES.PLAYED_GAMES"),
                 "value": ToolsService.isNull(playedGames) ? 0 : playedGames
             }
-
         ];
     }
 
+    /**
+     * Return true if all stats have been loaded
+     * @param count
+     */
     public isFinal(count) {
-        if (count === 2) {
+        if (count === 1) {
             this.loaded = true;
         }
     }
 
+    /**
+     * Fill all stats
+     */
     public fillStats() {
         let count = 0;
         let counter = new Observable((observer) => {
@@ -96,6 +104,9 @@ export class ProfileStatisticsViewComponent implements OnInit {
 
     }
 
+    /**
+     * Get best score ever
+     */
     private getAllTimeScores() {
         let keys = Object.keys(this.user.statistics.bestScores);
         let scores = this.user.statistics.bestScores;
@@ -115,6 +126,9 @@ export class ProfileStatisticsViewComponent implements OnInit {
         return {bestScore: bestScore, worstScore: worstScore}
     }
 
+    /**
+     * Get total number of games played
+     */
     private getAllPlayedGames(): Number {
         let keys = Object.keys(this.user.statistics.playedGames);
         let playedGames = this.user.statistics.playedGames;
@@ -127,6 +141,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
         return numberOfPlayedGames
     }
 
+    // TODO : implement function
     private getBestScoreByGameType() {
 
     }

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../../tools/constant';
+import {COLOR_SCHEME, SLIDE_ANIMATION} from '../../../tools/constant';
 
 /**
  * The theme comparison view.
@@ -18,10 +18,7 @@ export class ThemeComparisonViewComponent implements OnInit {
 
     public availableThemes: Theme[] = null;
     public selectedTheme: Theme = null;
-
-    public colorScheme = {
-        domain: ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
-    };
+    public colorScheme = COLOR_SCHEME;
 
     constructor() {
     }
@@ -31,10 +28,18 @@ export class ThemeComparisonViewComponent implements OnInit {
         this.selectedTheme = this.availableThemes[0];
     }
 
+    /**
+     * Select theme to display
+     * @param theme
+     */
     selectTheme(theme: Theme) {
         this.selectedTheme = theme;
     }
 
+    /**
+     * Return true if theme is selected
+     * @param theme
+     */
     isSelectedTheme(theme) {
         return theme === this.selectedTheme;
     }

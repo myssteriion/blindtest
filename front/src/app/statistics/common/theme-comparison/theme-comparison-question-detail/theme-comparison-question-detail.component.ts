@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../../../tools/constant';
+import {HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 
@@ -9,17 +9,15 @@ import {ToolsService} from '../../../../tools/tools.service'
 @Component({
     selector: 'theme-comparison-question-detail',
     templateUrl: './theme-comparison-question-detail.component.html',
-    styleUrls: ['./theme-comparison-question-detail.component.css'],
-    animations: [
-        SLIDE_ANIMATION
-    ]
+    styleUrls: ['./theme-comparison-question-detail.component.css']
 })
 export class ThemeComparisonQuestionDetailComponent implements OnInit {
     @Input() theme: Theme;
     @Input() statistics;
     @Input() colorScheme;
 
-    stackedPercentages = [];
+    public stackedPercentages = [];
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
 
     constructor(private _translate: TranslateService) {
     }
@@ -31,8 +29,6 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
     // Detect changes on input fields
     ngOnChanges(changes: SimpleChanges) {
         this.calculateStatistics();
-        // You can also use categoryId.previousValue and
-        // categoryId.firstChange for comparing old and new values
     }
 
     /**
@@ -47,6 +43,10 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
         this.stackedPercentages = ToolsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);
     }
 
+    /**
+     * Get musics found for each player on theme
+     * @param musicsForTheme
+     */
     getMusicWinForPlayer(musicsForTheme) {
         let foundMusics = [];
         let listenedMusicsInTheme = this.statistics.listenedMusics[this.theme];

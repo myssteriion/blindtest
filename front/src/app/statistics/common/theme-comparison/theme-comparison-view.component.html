@@ -5,9 +5,16 @@
           (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
     </div>
 
-    <theme-comparison-question-number [theme]="selectedTheme" [statistics]="gameStatistics"
-                                      [colorScheme]="colorScheme"></theme-comparison-question-number>
+    <div class="row theme-comparison-margin-1">
+        <div class="col-6">
+            <theme-comparison-question-number [theme]="selectedTheme" [statistics]="gameStatistics"
+                                              [colorScheme]="colorScheme"></theme-comparison-question-number>
+        </div>
 
-    <theme-comparison-question-detail [theme]="selectedTheme" [statistics]="gameStatistics"
-                                      [colorScheme]="colorScheme"></theme-comparison-question-detail>
+        <div class="col-6">
+            <theme-comparison-question-detail [theme]="selectedTheme" [statistics]="gameStatistics"
+                                              [colorScheme]="colorScheme"></theme-comparison-question-detail>
+        </div>
+    </div>
+
 </div>

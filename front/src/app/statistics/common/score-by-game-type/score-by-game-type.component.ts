@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../../tools/constant';
+import {NUMBER_CARD_GRAPH_SIZE} from '../../../tools/constant';
 import {ToolsService} from '../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
 
@@ -9,10 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
     selector: 'score-by-game-type',
     templateUrl: './score-by-game-type.component.html',
-    styleUrls: ['./score-by-game-type.component.css'],
-    animations: [
-        SLIDE_ANIMATION
-    ]
+    styleUrls: ['./score-by-game-type.component.css']
 })
 export class ScoreByGameTypeComponent implements OnInit {
 
@@ -20,6 +17,7 @@ export class ScoreByGameTypeComponent implements OnInit {
     @Input() colorScheme;
 
     public cardResults = [];
+    public view = NUMBER_CARD_GRAPH_SIZE;
 
     constructor(private _translate: TranslateService) {
     }
@@ -28,6 +26,9 @@ export class ScoreByGameTypeComponent implements OnInit {
         this.calculateStatistics();
     }
 
+    /**
+     * Calculate statistics for each game type
+     */
     private calculateStatistics() {
         let keys = ["SHORT", "NORMAL", "LONG"];
         keys.forEach(key => {

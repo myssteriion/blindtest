@@ -133,6 +133,10 @@ export class ToolsService {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    /**
+     * Sort values by alphabetical and numerical order
+     * @param array
+     */
     public static sortByAlphabeticalAndNumerical(array): Array<any> {
         array.sort(function (a, b) {
             let textA = a.name.toUpperCase();

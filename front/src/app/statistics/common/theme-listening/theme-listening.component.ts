@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
+import {SLIDE_ANIMATION, THEMES, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../tools/tools.service'
 
@@ -18,8 +18,9 @@ export class ThemeListeningComponent implements OnInit {
     @Input() statistics;
     @Input() colorScheme;
 
-    listenedMusicsByTheme = [];
-    maxCount = 0;
+    public listenedMusicsByTheme = [];
+    public maxCount = 0;
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
 
     constructor(private _translate: TranslateService) {
     }

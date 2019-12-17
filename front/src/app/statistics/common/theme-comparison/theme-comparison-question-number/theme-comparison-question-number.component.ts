@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {SLIDE_ANIMATION} from '../../../../tools/constant';
+import {HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {ToolsService} from "../../../../tools/tools.service";
 
 /**
@@ -8,10 +8,7 @@ import {ToolsService} from "../../../../tools/tools.service";
 @Component({
     selector: 'theme-comparison-question-number',
     templateUrl: './theme-comparison-question-number.component.html',
-    styleUrls: ['./theme-comparison-question-number.component.css'],
-    animations: [
-        SLIDE_ANIMATION
-    ]
+    styleUrls: ['./theme-comparison-question-number.component.css']
 })
 export class ThemeComparisonQuestionNumberComponent implements OnInit {
     @Input() theme: Theme;
@@ -20,6 +17,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
 
     public questionsAnswered = [];
     public maxCount = 0;
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
 
     constructor() {
     }
@@ -27,8 +25,6 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
     // Detect changes on input fields
     ngOnChanges(changes: SimpleChanges) {
         this.calculateStatistics();
-        // You can also use categoryId.previousValue and
-        // categoryId.firstChange for comparing old and new values
     }
 
     ngOnInit() {
@@ -51,6 +47,10 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
         });
     }
 
+    /**
+     * Get all found musics for theme
+     * @param musicsForTheme
+     */
     getAllMusicsForPlayer(musicsForTheme) {
         let foundMusics = 0;
         let typeKeys = ["BOTH", "TITLE", "AUTHOR"];
