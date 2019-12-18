@@ -231,6 +231,7 @@
                 "LONG": "Longue"
             },
             "FOUND_MUSICS_BY_THEME": {
+                "GRAPH_TITLE_PERCENTAGE": "Pourcentage de musiques trouvées par thème",
                 "TITLE": "Titre uniquement",
                 "AUTHOR": "Artiste uniquement",
                 "LEGEND": "Musiques trouvées par thème",
@@ -238,8 +239,9 @@
                 "PERCENTAGE": "Pourcentage"
             },
             "LISTENED_MUSICS_BY_THEME": {
+                "NUMBER_LISTENED_MUSICS_IN_THEME": "Musiques écoutées dans ce thème",
                 "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème",
-                "NUMBER_FOUND_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées / trouvées par thème"
+                "GRAPH_TITLE_NUMBER": "Nombre de musiques trouvées par thème"
             },
             "RANK_OCCUPIED": {
                 "TITLE": "Rang occupé",
@@ -256,7 +258,8 @@
                 "SECOND": "Second",
                 "FIRST": "Premier"
             },
-            "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées"
+            "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées",
+            "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie"
         }
     },
     "MUSIC_THEMES": {
