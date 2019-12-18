@@ -5,7 +5,14 @@
           (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
     </div>
 
-    <div class="row theme-comparison-margin-1">
+    <div class="row justify-content-center theme-comparison-margin-2">
+        <ngx-charts-number-card class="chart-container" [view]="view"
+                                [results]="cardResults" [scheme]="colorScheme"
+                                cardColor="#1e222e">
+        </ngx-charts-number-card>
+    </div>
+
+    <div class="row theme-comparison-margin-2">
         <div class="col-6">
             <theme-comparison-question-number [theme]="selectedTheme" [statistics]="gameStatistics"
                                               [colorScheme]="colorScheme"></theme-comparison-question-number>
