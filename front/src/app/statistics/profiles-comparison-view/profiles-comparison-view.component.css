@@ -5,8 +5,8 @@
 }
 
 .theme {
-    height: 30px;
-    width: 100px;
+    height: 3em;
+    width: 10em;
     background-color: lightgray;
     text-align: center;
     vertical-align: middle;
@@ -18,8 +18,7 @@
 }
 
 .theme:hover {
-    box-shadow: 3px 7px 13px lightgrey;
-    color: grey;
+    box-shadow: 3px 7px 8px grey;
 }
 
 .selected-theme {
