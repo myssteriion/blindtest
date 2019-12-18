@@ -1,10 +1,14 @@
+<div class="row theme-comparison-question-detail-center">
+    <span class="col theme-comparison-question-detail-title">{{'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.GRAPH_TITLE_PERCENTAGE'|translate}}</span>
+</div>
+
 <div class="row">
     <!--      Percentage of musics found by theme      -->
     <ngx-charts-bar-horizontal-stacked class="chart-container" [view]="view"
                                        [animations]="true"
-                                       [legend]="true"
                                        [legendPosition]="'below'"
-                                       [legendTitle]="'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.LEGEND'|translate"
+                                       [legend]="true"
+                                       [legendTitle]="''"
                                        [results]="stackedPercentages"
                                        [scheme]="colorScheme"
                                        [showXAxisLabel]="true"
@@ -12,5 +16,6 @@
                                        [xAxisLabel]="'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.PERCENTAGE'|translate"
                                        [xScaleMax]="100"
                                        [yAxis]="true">
+        <!--         [legendTitle]="'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.LEGEND'|translate"-->
     </ngx-charts-bar-horizontal-stacked>
 </div>

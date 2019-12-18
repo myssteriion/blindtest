@@ -1,11 +1,17 @@
-<ngx-charts-bar-horizontal class="chart-container" [view]="view"
-                           [animations]="true"
-                           [results]="questionsAnswered"
-                           [scheme]="colorScheme"
-                           [showXAxisLabel]="true"
-                           [tooltipDisabled]="false" [xAxis]="true"
-                           [xAxisLabel]="'STATISTICS.CATEGORIES.LISTENED_MUSICS_BY_THEME.NUMBER_FOUND_LISTENED_MUSICS_BY_THEME'|translate"
-                           [xScaleMax]="maxCount"
-                           [yAxis]="true"
-                           [roundEdges]="false">
-</ngx-charts-bar-horizontal>
+<div class="row theme-comparison-question-number-center">
+    <span class="col theme-comparison-question-number-title">{{'STATISTICS.CATEGORIES.LISTENED_MUSICS_BY_THEME.GRAPH_TITLE_NUMBER'|translate}}</span>
+</div>
+
+<div class="row">
+    <ngx-charts-bar-horizontal class="chart-container" [view]="view"
+                               [animations]="true"
+                               [results]="questionsAnswered"
+                               [scheme]="colorScheme"
+                               [showXAxisLabel]="true"
+                               [tooltipDisabled]="false" [xAxis]="true"
+                               [xAxisLabel]="'STATISTICS.CATEGORIES.LISTENED_MUSICS_BY_THEME.NUMBER_LISTENED_MUSICS_BY_THEME'|translate"
+                               [xScaleMax]="maxCount"
+                               [yAxis]="true"
+                               [roundEdges]="false">
+    </ngx-charts-bar-horizontal>
+</div>
