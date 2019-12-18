@@ -40,8 +40,8 @@
             </mat-tab>
 
             <mat-tab label="{{'GAME.END_VIEW.STATISTICS'|translate}}">
-                <div class="game-end-view-margin-top-5" *ngIf="showGraph">
-                    <theme-comparison-view [gameStatistics]="game"></theme-comparison-view>
+                <div class="game-end-view-margin-top-1" *ngIf="showGraph">
+                    <end-game-statistics-view [gameStatistics]="game"></end-game-statistics-view>
                 </div>
             </mat-tab>
         </mat-tab-group>

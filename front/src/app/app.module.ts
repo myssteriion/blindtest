@@ -55,6 +55,7 @@ import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-
 import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
 import {RankCounterComponent} from './statistics/common/rank-counter/rank-counter.component';
 import {FoundListenedMusicsRatioComponent} from './statistics/common/found-listened-musics-ratio/found-listened-musics-ratio.component';
+import {EndGameStatisticsViewComponent} from './statistics/common/end-game-statistics/end-game-statistics-view.component';
 import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
@@ -69,12 +70,12 @@ import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 import {ErrorAlertModalComponent} from './common/error-alert/error-alert-modal.component';
 
-import { NgSelectModule } from '@ng-select/ng-select';
+import {NgSelectModule} from '@ng-select/ng-select';
 import {MatTabsModule} from '@angular/material/tabs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-	return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -118,7 +119,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         UserThemeComparisonQuestionDetailComponent,
         UserThemeComparisonQuestionNumberComponent,
         ProfilesComparisonViewComponent,
-        UserRankComparisonComponent
+        UserRankComparisonComponent,
+        EndGameStatisticsViewComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
