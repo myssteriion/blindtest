@@ -6,7 +6,7 @@
             <header [title]="'GAME.END_VIEW.TITLE' | translate"></header>
         </div>
         <div class="col-1 game-end-view-exit">
-            <fa-icon [icon]="currentExitIcon" [class]="'fa-icon-custom-hover-2'" size="2x" (click)="exit()"
+            <fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
                      (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
                      ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto" [openDelay]="500">
             </fa-icon>
