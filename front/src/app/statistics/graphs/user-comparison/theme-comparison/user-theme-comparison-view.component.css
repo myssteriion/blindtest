@@ -24,3 +24,22 @@
     background-color: #17a2b8;
     color: white !important;
 }
+
+.user-theme-comparison-img {
+    height: 6em;
+    width: 6em;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 8px 8px 4px silver;
+    opacity: 0.3;
+}
+
+.user-theme-comparison-img:hover {
+    cursor: pointer;
+}
+
+.user-theme-comparison-img-active {
+    opacity: 1;
+}

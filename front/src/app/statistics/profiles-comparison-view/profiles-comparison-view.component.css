@@ -33,3 +33,22 @@
 .profiles-comparison-margin-4 {
     margin: 0 4em 0 4em;
 }
+
+.profiles-comparison-img {
+    height: 6em;
+    width: 6em;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 8px 8px 4px silver;
+    opacity: 0.3;
+}
+
+.profiles-comparison-img:hover {
+    cursor: pointer;
+}
+
+.profiles-comparison-img-active {
+    opacity: 1;
+}

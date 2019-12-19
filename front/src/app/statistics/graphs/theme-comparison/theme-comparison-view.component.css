@@ -32,3 +32,22 @@
 .theme-comparison-margin-2 {
     margin: 2em 1em 0 1em;
 }
+
+.theme-comparison-img {
+    height: 6em;
+    width: 6em;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 8px 8px 4px silver;
+    opacity: 0.3;
+}
+
+.theme-comparison-img:hover {
+    cursor: pointer;
+}
+
+.theme-comparison-img-active {
+    opacity: 1;
+}

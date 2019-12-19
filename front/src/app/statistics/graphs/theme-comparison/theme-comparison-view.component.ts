@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {NUMBER_CARD_GRAPH_SIZE_SMALL, SLIDE_ANIMATION} from '../../../tools/constant';
+import {NUMBER_CARD_GRAPH_SIZE_SMALL, SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
 import {ToolsService} from "../../../tools/tools.service";
 import {Game} from "../../../interfaces/game/game.interface";
 
@@ -23,12 +23,14 @@ export class ThemeComparisonViewComponent implements OnInit {
     public selectedTheme: Theme = null;
     public view = NUMBER_CARD_GRAPH_SIZE_SMALL;
     public listenedMusics: number = 0;
+    public themes = THEMES;
 
     constructor() {
     }
 
     ngOnInit() {
         this.availableThemes = this.gameStatistics.themes;
+        this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
         this.selectTheme(this.availableThemes[0]);
     }
 
@@ -47,6 +49,16 @@ export class ThemeComparisonViewComponent implements OnInit {
      */
     public isSelectedTheme(theme) {
         return theme === this.selectedTheme;
+    }
+
+    /**
+     * Get corresponding theme values
+     * @param selectedTheme
+     */
+    public getTheme(selectedTheme) {
+        return this.themes.find(theme => {
+            return theme.enumVal === selectedTheme;
+        })
     }
 
 }

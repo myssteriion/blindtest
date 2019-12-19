@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, SLIDE_ANIMATION} from '../../../../tools/constant';
+import {COLOR_SCHEME, SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {Game} from "../../../../interfaces/game/game.interface";
+import {ToolsService} from "../../../../tools/tools.service";
 
 /**
  * The theme comparison view.
@@ -22,12 +23,14 @@ export class UserThemeComparisonViewComponent implements OnInit {
     public availableThemes: Theme[] = null;
     public selectedTheme: Theme = null;
     public colorScheme = COLOR_SCHEME;
+    public themes = THEMES;
 
     constructor() {
     }
 
     ngOnInit() {
         this.availableThemes = this.gameStatistics.themes;
+        this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
         this.selectedTheme = this.availableThemes[0];
     }
 
@@ -45,6 +48,16 @@ export class UserThemeComparisonViewComponent implements OnInit {
      */
     public isSelectedTheme(theme) {
         return theme === this.selectedTheme;
+    }
+
+    /**
+     * Get corresponding theme values
+     * @param selectedTheme
+     */
+    public getTheme(selectedTheme) {
+        return this.themes.find(theme => {
+            return theme.enumVal === selectedTheme;
+        })
     }
 
 }

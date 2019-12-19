@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ToolsService} from "../../tools/tools.service";
-import {COLOR_SCHEME} from "../../tools/constant";
+import {COLOR_SCHEME, THEMES} from "../../tools/constant";
 import {Profile} from "../../interfaces/dto/profile.interface";
 
 /**
@@ -16,6 +16,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
     @Input()
     public selectedUsers: Profile[];
 
+    public themes = THEMES;
     public availableThemes = null;
     public selectedTheme: Theme = null;
     public noThemesAvailable = true;
@@ -64,8 +65,19 @@ export class ProfilesComparisonViewComponent implements OnInit {
                 if (ToolsService.isNull(themeAlreadyAdded)) {
                     this.availableThemes.push(key);
                 }
-            })
+            });
+            this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
         });
+    }
+
+    /**
+     * Get corresponding theme values
+     * @param selectedTheme
+     */
+    public getTheme(selectedTheme) {
+        return this.themes.find(theme => {
+            return theme.enumVal === selectedTheme;
+        })
     }
 
 }

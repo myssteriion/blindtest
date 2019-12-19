@@ -7,9 +7,12 @@
         <div class="theme-list">
             <div class="row">
                 <div class="col">
-                    <span class="theme" [ngClass]="{'selected-theme': isSelectedTheme(theme)}"
-                          *ngFor="let theme of availableThemes"
-                          (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
+                    <img *ngFor="let theme of availableThemes" src="{{ getTheme(theme).srcImg }}"
+                         class="profiles-comparison-img"
+                         [ngClass]="{ 'profiles-comparison-img-active': (isSelectedTheme(getTheme(theme).enumVal)) }"
+                         (click)="selectTheme(getTheme(theme).enumVal)"
+                         ngbTooltip="{{ getTheme(theme).tooltip | translate }}"
+                         placement="bottom auto" [openDelay]="500">
                 </div>
             </div>
         </div>

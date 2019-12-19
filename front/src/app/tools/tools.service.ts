@@ -146,4 +146,17 @@ export class ToolsService {
         return array;
     }
 
+    /**
+     * Sort values by alphabetical and numerical order
+     * @param array
+     */
+    public static sortByAlphabeticalAndNumericalThemes(array): Array<any> {
+        array.sort(function (a, b) {
+            let textA = a.toUpperCase();
+            let textB = b.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        });
+        return array;
+    }
+
 }
