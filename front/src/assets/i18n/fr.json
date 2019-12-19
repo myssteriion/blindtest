@@ -213,24 +213,20 @@
     "STATISTICS": {
         "TITLE": "Statistiques",
         "SELECT_PLAYERS": "Sélectionner les joueurs à comparer",
-        "MODAL": {
-            "TITLE": "Quels joueurs comparer ?",
-            "MAX_USERS_ERROR": "Le maximum de {{max_users}} joueurs à comparer est atteint.",
-            "DUPLICATE_USER_ERROR": "{{user_name}} est déjà ajouté.",
-            "USER_ADDED": "{{user_name}} a été ajouté au comparateur."
-        },
         "ERROR": {
             "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
         "CATEGORIES": {
             "PLAYED_GAMES": {
                 "PLAYED_GAMES_TITLE": "Nombre de parties jouées",
+                "GAME_TYPE": "Type de partie",
                 "SHORT": "Rapide",
                 "NORMAL": "Normale",
                 "LONG": "Longue"
             },
             "BEST_SCORE": {
                 "BEST_SCORE_BY_GAME_TYPE": "Meilleur score par type de partie",
+                "GAME_TYPE": "Type de partie",
                 "SHORT": "Rapide",
                 "NORMAL": "Normale",
                 "LONG": "Longue"
@@ -265,7 +261,17 @@
                 "FIRST": "Premier"
             },
             "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées",
-            "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie"
+            "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie",
+            "ANSWER_TYPES": {
+                "ANSWER_TYPES_TITLE": "Type de réponses",
+                "AUTHOR": "Artiste uniquement",
+                "TITLE": "Titre uniquement",
+                "BOTH": "Les deux"
+            }
+        },
+        "TABS": {
+            "GENERAL_STATISTICS": "Statistiques générales",
+            "THEME_STATISTICS": "Statistiques par thème"
         }
     },
     "MUSIC_THEMES": {
