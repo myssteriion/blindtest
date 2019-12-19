@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ToolsService} from "../../tools/tools.service";
 import {COLOR_SCHEME} from "../../tools/constant";
+import {Profile} from "../../interfaces/dto/profile.interface";
 
 /**
  * The theme comparison view.
@@ -12,10 +13,11 @@ import {COLOR_SCHEME} from "../../tools/constant";
 })
 export class ProfilesComparisonViewComponent implements OnInit {
 
-    @Input() selectedUsers;
+    @Input()
+    public selectedUsers: Profile[];
 
     public availableThemes = null;
-    public selectedTheme = null;
+    public selectedTheme: Theme = null;
     public noThemesAvailable = true;
     public colorScheme = COLOR_SCHEME;
 
@@ -38,7 +40,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Select theme
      * @param theme
      */
-    selectTheme(theme: Theme) {
+    public selectTheme(theme: Theme) {
         this.selectedTheme = theme;
     }
 
@@ -46,14 +48,14 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Return true if theme is selected
      * @param theme
      */
-    isSelectedTheme(theme) {
+    public isSelectedTheme(theme) {
         return theme === this.selectedTheme;
     }
 
     /**
      * Get all available themes
      */
-    getAvailableThemes() {
+    private getAvailableThemes() {
         // TODO : Compare first in order to reset or not -> Reset available themes ?
         this.selectedUsers.forEach(user => {
             let keys = Object.keys(user.statistics.listenedMusics);

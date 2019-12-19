@@ -30,31 +30,31 @@
                 <div class="row profiles-statistics-margin-top-3">
                     <!-- Number played games -->
                     <div class="col">
-                        <played-games [statistics]="selectedUsers"></played-games>
+                        <played-games [players]="selectedUsers"></played-games>
                     </div>
 
                     <!-- Score by game type -->
                     <div class="col">
-                        <score-by-game-type [statistics]="selectedUsers"></score-by-game-type>
+                        <score-by-game-type [players]="selectedUsers"></score-by-game-type>
                     </div>
                 </div>
 
                 <div class="row profiles-statistics-margin-top-3">
                     <!-- Answer types -->
                     <div class="col">
-                        <answer-types [statistics]="selectedUsers"></answer-types>
+                        <answer-types [players]="selectedUsers"></answer-types>
                     </div>
 
                     <!-- User rank -->
                     <div class="col">
-                        <user-rank-comparison [statistics]="selectedUsers"></user-rank-comparison>
+                        <user-rank-comparison [players]="selectedUsers"></user-rank-comparison>
                     </div>
                 </div>
 
                 <div class="row profiles-statistics-margin-top-3">
                     <!-- Global percentages -->
                     <div class="col">
-                        <global-percentages-view [statistics]="selectedUsers"></global-percentages-view>
+                        <global-percentages-view [players]="selectedUsers"></global-percentages-view>
                     </div>
 
                 </div>

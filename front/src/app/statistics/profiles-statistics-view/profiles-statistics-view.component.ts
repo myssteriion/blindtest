@@ -9,7 +9,6 @@ import {ProfileResource} from "../../resources/profile.resource";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {Router} from "@angular/router";
-
 import {ToolsService} from "../../tools/tools.service";
 
 /**
@@ -25,12 +24,11 @@ import {ToolsService} from "../../tools/tools.service";
 })
 export class ProfilesStatisticsViewComponent implements OnInit {
 
-    public selectedProfiles: Profile[];
     public isLoaded: boolean = false;
-    public users = [];
-    public isLoading = true;
-    public selectedUsers = [];
-    public showGeneralGraph = true;
+    public users: Profile[] = [];
+    public isLoading: boolean = true;
+    public selectedUsers: Profile[] = [];
+    public showGeneralGraph: boolean = true;
 
     constructor(private _profileStatisticsResource: ProfileStatisticsResource,
                 private _translate: TranslateService,
@@ -41,7 +39,6 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectedProfiles = [];
         this.getAllPlayers(0);
     }
 

@@ -1,0 +1,30 @@
+<div>
+    <div class="theme-list">
+    <span class="theme" [ngClass]="{'selected-theme': isSelectedTheme(theme)}"
+          *ngFor="let theme of availableThemes"
+          (click)="selectTheme(theme)">{{'MUSIC_THEMES.' + theme |translate}}</span>
+    </div>
+
+    <div class="row justify-content-center theme-comparison-margin-2">
+        <div class="col">
+            <div class="row justify-content-center ">
+                <ng2-odometer class="font-size-normal" [number]="listenedMusics" [format]="'(ddd)'"></ng2-odometer>
+            </div>
+            <div class="row justify-content-center ">
+                <span>{{'STATISTICS.LISTENED_IN_THEME' | translate}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row theme-comparison-margin-2">
+        <div class="col-6">
+            <theme-comparison-question-number [theme]="selectedTheme"
+                                              [statistics]="gameStatistics"></theme-comparison-question-number>
+        </div>
+
+        <div class="col-6">
+            <theme-comparison-question-detail [theme]="selectedTheme"
+                                              [statistics]="gameStatistics"></theme-comparison-question-detail>
+        </div>
+    </div>
+</div>
