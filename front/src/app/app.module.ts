@@ -43,6 +43,7 @@ import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-moda
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
 import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-view/profiles-statistics-view.component';
 import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-view/profile-statistics-view.component';
+import {GlobalPercentagesComponent} from './statistics/common/global-percentages/global-percentages.component';
 import {ThemePercentagesComponent} from './statistics/common/theme-percentages/theme-percentages.component';
 import {ThemeListeningComponent} from './statistics/common/theme-listening/theme-listening.component';
 import {ThemeComparisonViewComponent} from './statistics/common/theme-comparison/theme-comparison-view.component';
@@ -120,7 +121,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         UserThemeComparisonQuestionNumberComponent,
         ProfilesComparisonViewComponent,
         UserRankComparisonComponent,
-        EndGameStatisticsViewComponent
+        EndGameStatisticsViewComponent,
+        GlobalPercentagesComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
