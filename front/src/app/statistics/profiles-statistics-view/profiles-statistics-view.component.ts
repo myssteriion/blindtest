@@ -30,6 +30,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     public users = [];
     public isLoading = true;
     public selectedUsers = [];
+    public showGeneralGraph = true;
 
     constructor(private _profileStatisticsResource: ProfileStatisticsResource,
                 private _translate: TranslateService,
@@ -95,7 +96,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
         this.isLoaded = false;
         this._profileStatisticsResource.getStatisticsForProfile(this.selectedUsers).subscribe(
             response => {
-                this.isLoaded = true;
+                this.isLoaded = this.selectedUsers.length !== 0;
                 response.content.forEach(user =>
                     this.mapProfile(user)
                 )
@@ -104,6 +105,14 @@ export class ProfilesStatisticsViewComponent implements OnInit {
                 throw Error("can't retrieve statistics : " + error);
             }
         );
+    }
+
+    /**
+     * Display graphs on appropriata tab
+     * @param event
+     */
+    public onTabClick(event) {
+        this.showGeneralGraph = event.index === 0;
     }
 
     /**

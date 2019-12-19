@@ -70,7 +70,7 @@ export class ProfileStatisticsViewComponent implements OnInit {
                 "value": ToolsService.isNull(scores.bestScore) ? 0 : scores.bestScore
             },
             {
-                "name": this._translate.instant("STATISTICS.CATEGORIES.PLAYED_GAMES"),
+                "name": this._translate.instant("STATISTICS.CATEGORIES.PLAYED_GAMES.PLAYED_GAMES_TITLE"),
                 "value": ToolsService.isNull(playedGames) ? 0 : playedGames
             }
         ];
