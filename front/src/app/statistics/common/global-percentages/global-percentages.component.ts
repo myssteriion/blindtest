@@ -44,9 +44,10 @@ export class GlobalPercentagesComponent implements OnInit {
                 })
             });
 
+            // Necessary to put value = 0 if no value in order to make graph library work
             this.percentages.push({
                 name: player.name,
-                value: Math.floor(foundMusics / listenedMusics * 100)
+                value: isNaN(Math.floor(foundMusics / listenedMusics * 100)) ? 0 : Math.floor(foundMusics / listenedMusics * 100)
             });
         });
 
