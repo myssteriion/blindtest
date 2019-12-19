@@ -59,6 +59,7 @@ import {RankCounterComponent} from './statistics/common/rank-counter/rank-counte
 import {FoundListenedMusicsRatioComponent} from './statistics/common/found-listened-musics-ratio/found-listened-musics-ratio.component';
 import {EndGameStatisticsViewComponent} from './statistics/common/end-game-statistics/end-game-statistics-view.component';
 import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
+import {AnswerTypesComponent} from "./statistics/common/answer-types/answer-types.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -124,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         UserRankComparisonComponent,
         EndGameStatisticsViewComponent,
         GlobalPercentagesComponent,
-        PlayedGamesComponent
+        PlayedGamesComponent,
+        AnswerTypesComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
