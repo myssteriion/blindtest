@@ -1,4 +1,4 @@
-<div class="container-fluid-forced-marge margin-bottom-5" @flyInOut *ngIf="!isLoading">
+<div class="container-fluid-forced-marge profiles-statistics-view-margin-bottom-5" @flyInOut *ngIf="!isLoading">
 
     <header [title]="'STATISTICS.TITLE' | translate"></header>
 
@@ -22,7 +22,8 @@
         </div>
     </div>
 
-    <mat-tab-group mat-stretch-tabs class="width100" (selectedTabChange)="onTabClick($event)" *ngIf="isLoaded">
+    <mat-tab-group mat-stretch-tabs class="profiles-statistics-view-width100" (selectedTabChange)="onTabClick($event)"
+                   *ngIf="isLoaded">
         <mat-tab label="{{'STATISTICS.TABS.GENERAL_STATISTICS'|translate}}">
             <div class="profiles-statistics-view-margin-top-4 profiles-statistics-view-side-2" *ngIf="showGeneralGraph">
 
