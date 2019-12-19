@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { Observable } from 'rxjs';
-import { Page } from '../interfaces/base/page.interface';
-import { environment } from 'src/environments/environment';
-import { ProfileStatistics } from '../interfaces/common/profile-statistics';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http'
+import {Observable} from 'rxjs';
+import {Page} from '../interfaces/base/page.interface';
+import {environment} from 'src/environments/environment';
+import {ProfileStatistics} from '../interfaces/common/profile-statistics.interface';
 
 /**
  * Profile resource.
@@ -11,21 +11,21 @@ import { ProfileStatistics } from '../interfaces/common/profile-statistics';
 @Injectable()
 export class ProfileStatisticsResource {
 
-	/**
-	 * Rest path.
-	 */
+    /**
+     * Rest path.
+     */
     private _statisticsPath = environment.baseBackendUrl + "/profilestats";
 
 
+    constructor(private _http: HttpClient) {
+    }
 
-    constructor(private _http: HttpClient) { }
 
-
-	/**
-	 * Get statistics for defined profiles.
-	 *
-	 * @param profiles list of profiles
-	 */
+    /**
+     * Get statistics for defined profiles.
+     *
+     * @param profiles list of profiles
+     */
     public getStatisticsForProfile(profiles): Observable<Page<ProfileStatistics>> {
         let query = "";
         profiles.forEach(profile => {

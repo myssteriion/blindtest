@@ -205,3 +205,13 @@ export const HORIZONTAL_BAR_GRAPH_SIZE = [700, 400];
  * Statistics graph size for linear gauge
  */
 export const LINEAR_GAUGE_GRAPH_SIZE = [350, 200];
+
+/**
+ * Found music types list
+ */
+export const FOUND_MUSIC_TYPES = [FoundMusicTypes.AUTHOR, FoundMusicTypes.TITLE, FoundMusicTypes.BOTH];
+
+/**
+ * Duration list
+ */
+export const DURATION = [Duration.SHORT, Duration.NORMAL, Duration.LONG];
