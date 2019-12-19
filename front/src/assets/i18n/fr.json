@@ -244,6 +244,7 @@
                 "GRAPH_TITLE_NUMBER": "Nombre de musiques trouvées par thème"
             },
             "RANK_OCCUPIED": {
+                "PERCENTAGE": "Pourcentage",
                 "TITLE": "Rang occupé",
                 "TWELFTH": "Douzième",
                 "ELEVENTH": "Onzième",

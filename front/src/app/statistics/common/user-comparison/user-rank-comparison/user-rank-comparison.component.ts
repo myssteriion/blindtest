@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 
@@ -15,10 +15,10 @@ import {ToolsService} from '../../../../tools/tools.service'
 export class UserRankComparisonComponent implements OnInit {
 
     @Input() statistics;
-    @Input() colorScheme;
 
     public rankResults = [];
     public view = HORIZONTAL_STACKED_BAR_GRAPH_SIZE;
+    public colorScheme = COLOR_SCHEME;
 
     constructor(private _translate: TranslateService) {
     }
