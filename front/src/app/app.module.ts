@@ -54,6 +54,7 @@ import {UserRankComparisonComponent} from './statistics/common/user-comparison/u
 import {ThemeComparisonQuestionDetailComponent} from './statistics/common/theme-comparison/theme-comparison-question-detail/theme-comparison-question-detail.component';
 import {ThemeComparisonQuestionNumberComponent} from './statistics/common/theme-comparison/theme-comparison-question-number/theme-comparison-question-number.component';
 import {ScoreByGameTypeComponent} from './statistics/common/score-by-game-type/score-by-game-type.component';
+import {PlayedGamesComponent} from './statistics/common/played-games/played-games.component';
 import {RankCounterComponent} from './statistics/common/rank-counter/rank-counter.component';
 import {FoundListenedMusicsRatioComponent} from './statistics/common/found-listened-musics-ratio/found-listened-musics-ratio.component';
 import {EndGameStatisticsViewComponent} from './statistics/common/end-game-statistics/end-game-statistics-view.component';
@@ -122,7 +123,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ProfilesComparisonViewComponent,
         UserRankComparisonComponent,
         EndGameStatisticsViewComponent,
-        GlobalPercentagesComponent
+        GlobalPercentagesComponent,
+        PlayedGamesComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,

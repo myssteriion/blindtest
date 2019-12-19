@@ -27,7 +27,7 @@
         "GO_HOME": "Retour au menu",
         "CANCEL_MODIFICATION": "Annuler la modification en cours",
         "RANK": "n° rang",
-        "USER_SEARCH" : {
+        "USER_SEARCH": {
             "NO_USERS_FOUND": "Aucun utilisateur trouvé"
         }
     },
@@ -193,15 +193,15 @@
         }
     },
     "THEMES": {
-        "ANNEES_60":  "Les années 1960.",
+        "ANNEES_60": "Les années 1960.",
         "ANNEES_70": "Les années 1970.",
-        "ANNEES_80":  "Les années 1980.",
+        "ANNEES_80": "Les années 1980.",
         "ANNEES_90": "Les années 1990.",
-        "ANNEES_2000":  "Les années 2000.",
+        "ANNEES_2000": "Les années 2000.",
         "ANNEES_2010": "Les années 2010.",
-        "DISNEY":  "Les chansons Disney.",
+        "DISNEY": "Les chansons Disney.",
         "SERIES_CINEMAS": "Les musiques de Films et Séries.",
-        "JEUX":  "Les musiques de jeux.",
+        "JEUX": "Les musiques de jeux.",
         "CLASSIQUES": "Les musiques classiques."
     },
     "EFFECTS": {
@@ -223,7 +223,12 @@
             "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
         "CATEGORIES": {
-            "PLAYED_GAMES": "Parties jouées",
+            "PLAYED_GAMES": {
+                "PLAYED_GAMES_TITLE": "Nombre de parties jouées",
+                "SHORT": "Rapide",
+                "NORMAL": "Normale",
+                "LONG": "Longue"
+            },
             "BEST_SCORE": {
                 "BEST_SCORE_BY_GAME_TYPE": "Meilleur score par type de partie",
                 "SHORT": "Rapide",
