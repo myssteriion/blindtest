@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {NUMBER_CARD_GRAPH_SIZE} from '../../../tools/constant';
+import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../tools/constant';
 import {ToolsService} from '../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
 
@@ -14,10 +14,10 @@ import {TranslateService} from "@ngx-translate/core";
 export class ScoreByGameTypeComponent implements OnInit {
 
     @Input() statistics;
-    @Input() colorScheme;
 
-    public cardResults = [];
-    public view = NUMBER_CARD_GRAPH_SIZE;
+    public view = HORIZONTAL_BAR_GRAPH_SIZE;
+    public results = [];
+    public colorScheme = COLOR_SCHEME;
 
     constructor(private _translate: TranslateService) {
     }
@@ -30,13 +30,24 @@ export class ScoreByGameTypeComponent implements OnInit {
      * Calculate statistics for each game type
      */
     private calculateStatistics() {
+        this.results = [];
         let keys = ["SHORT", "NORMAL", "LONG"];
-        keys.forEach(key => {
-            this.cardResults.push({
-                name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
-                value: ToolsService.isNull(this.statistics.bestScores[key]) ? 0 : this.statistics.bestScores[key]
+
+        this.statistics.forEach(player => {
+            let series = [];
+            keys.forEach(key => {
+                series.push({
+                    name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
+                    value: ToolsService.isNull(player.statistics.bestScores[key]) ? 0 : player.statistics.bestScores[key]
+                });
             });
+
+            this.results.push({
+                name: player.name,
+                series: series
+            })
         });
+        this.results = ToolsService.sortByAlphabeticalAndNumerical(this.results);
     }
 
 }

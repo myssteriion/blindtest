@@ -1,4 +1,12 @@
-<ngx-charts-number-card class="chart-container" [view]="view"
-                        [results]="cardResults" [scheme]="colorScheme"
-                        cardColor="#232837" emptyColor="#1e222e">
-</ngx-charts-number-card>
+<ngx-charts-bar-horizontal-2d
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="results"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="''"
+        [legendPosition]="'below'"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'STATISTICS.CATEGORIES.BEST_SCORE.BEST_SCORE_BY_GAME_TYPE' | translate">
+</ngx-charts-bar-horizontal-2d>

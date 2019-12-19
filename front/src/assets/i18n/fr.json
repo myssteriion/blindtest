@@ -225,7 +225,7 @@
         "CATEGORIES": {
             "PLAYED_GAMES": "Parties jouées",
             "BEST_SCORE": {
-                "TITLE": "Meilleur score",
+                "BEST_SCORE_BY_GAME_TYPE": "Meilleur score par type de partie",
                 "SHORT": "Rapide",
                 "NORMAL": "Normale",
                 "LONG": "Longue"
