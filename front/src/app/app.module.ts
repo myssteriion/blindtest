@@ -42,7 +42,6 @@ import {RoundInfoModalComponent} from './game/factoring-part/round-info-modal/ro
 import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
 import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-view/profiles-statistics-view.component';
-import {ProfileStatisticsViewComponent} from './statistics/profile-statistics-view/profile-statistics-view.component';
 import {GlobalPercentagesComponent} from './statistics/common/global-percentages/global-percentages.component';
 import {ThemePercentagesComponent} from './statistics/common/theme-percentages/theme-percentages.component';
 import {ThemeListeningComponent} from './statistics/common/theme-listening/theme-listening.component';
@@ -109,7 +108,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ErrorAlertModalComponent,
         GameResumeViewComponent,
         ProfilesStatisticsViewComponent,
-        ProfileStatisticsViewComponent,
         ThemePercentagesComponent,
         ThemeListeningComponent,
         ThemeComparisonViewComponent,
