@@ -1,9 +1,6 @@
-<div class="" style="margin-left: 40px;margin-right: 40px;">
-    <!--    container-fluid-->
+<div class="profiles-comparison-margin-4">
     <div *ngIf="noThemesAvailable">
-
-        <!--        TODO : Replace with translation + format -->
-        AUCUN THEME DISPONIBLE
+        {{'STATISTICS.NO_THEME_AVAILABLE' | translate}}
     </div>
 
     <div *ngIf="!noThemesAvailable">
@@ -27,14 +24,6 @@
                                                        [statistics]="selectedUsers"></user-theme-comparison-question-number>
             </div>
         </div>
-
-        <div class="row margin-top">
-            <div class="col">
-                <user-rank-comparison [colorScheme]="colorScheme" [statistics]="selectedUsers"></user-rank-comparison>
-            </div>
-        </div>
-
-
     </div>
 
 </div>

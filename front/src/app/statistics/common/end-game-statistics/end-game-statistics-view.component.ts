@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {COLOR_SCHEME, NUMBER_CARD_GRAPH_SIZE_SMALL} from '../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from "../../../tools/tools.service";
 
 /**
  * The end game statistics view.
@@ -33,16 +32,6 @@ export class EndGameStatisticsViewComponent implements OnInit {
         this.cardResults.push({
             name: this._translate.instant("STATISTICS.CATEGORIES.TOTAL_LISTENED_MUSICS"),
             value: this.gameStatistics.nbMusicsPlayed
-        });
-        let bestScore = null;
-        this.gameStatistics.players.forEach(player => {
-            if (player.score > bestScore) {
-                bestScore = player.score;
-            }
-        });
-        this.cardResults.push({
-            name: this._translate.instant("STATISTICS.CATEGORIES.BEST_SCORE.TITLE"),
-            value: ToolsService.isNull(bestScore) ? 0 : bestScore
         });
     }
 }

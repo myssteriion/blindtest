@@ -1,9 +1,13 @@
 <div class="end-game-statistics-margin">
     <div class="row justify-content-center">
-        <ngx-charts-number-card class="chart-container" [view]="view"
-                                [results]="cardResults" [scheme]="colorScheme"
-                                cardColor="#1e222e">
-        </ngx-charts-number-card>
+        <div *ngFor="let result of cardResults" class="col end-game-statistics-margin-bottom-3">
+            <div class="row justify-content-center">
+                <ng2-odometer class="font-size-normal" [number]="result.value" [format]="'(ddd)'"></ng2-odometer>
+            </div>
+            <div class="row justify-content-center ">
+                <span>{{result.name}}</span>
+            </div>
+        </div>
     </div>
 
     <div class="row justify-content-center">

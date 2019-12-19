@@ -212,10 +212,12 @@
     },
     "STATISTICS": {
         "TITLE": "Statistiques",
-        "SELECT_PLAYERS": "Sélectionner les joueurs à comparer",
+        "SELECT_PLAYERS": "Sélectionner des utilisateurs",
         "ERROR": {
             "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
+        "NO_THEME_AVAILABLE":"Aucun thème disponible",
+        "LISTENED_IN_THEME": "Musiques écoutées dans ce thème",
         "CATEGORIES": {
             "PLAYED_GAMES": {
                 "PLAYED_GAMES_TITLE": "Nombre de parties jouées",
@@ -264,6 +266,7 @@
             "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie",
             "ANSWER_TYPES": {
                 "ANSWER_TYPES_TITLE": "Type de réponses",
+                "ANSWER_TYPES_NUMBER": "Nombre de réponses",
                 "AUTHOR": "Artiste uniquement",
                 "TITLE": "Titre uniquement",
                 "BOTH": "Les deux"

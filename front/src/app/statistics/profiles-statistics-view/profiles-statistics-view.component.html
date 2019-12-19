@@ -1,13 +1,11 @@
-<div class="container-fluid-forced-marge" @flyInOut *ngIf="!isLoading">
+<div class="container-fluid-forced-marge margin-bottom-5" @flyInOut *ngIf="!isLoading">
 
     <header [title]="'STATISTICS.TITLE' | translate"></header>
-
-    <!--    maxSelectedItems="12"-->
 
     <div class="row justify-content-center">
         <div class="col-4">
             <ng-select
-                    placeholder="Sélectionner des utilisateurs"
+                    placeholder="{{'STATISTICS.SELECT_PLAYERS' | translate}}"
                     (change)="getPlayersStatistics()"
                     [items]="users"
                     [multiple]="true"
@@ -24,10 +22,54 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="isLoaded">
-        <div class="col">
-            <profiles-comparison-view [selectedUsers]="selectedUsers"></profiles-comparison-view>
-        </div>
-    </div>
+    <mat-tab-group mat-stretch-tabs class="width100" (selectedTabChange)="onTabClick($event)" *ngIf="isLoaded">
+        <mat-tab label="{{'STATISTICS.TABS.GENERAL_STATISTICS'|translate}}">
+            <div class="profiles-statistics-view-margin-top-4 profiles-statistics-view-side-2" *ngIf="showGeneralGraph">
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Number played games -->
+                    <div class="col">
+                        <played-games [statistics]="selectedUsers"></played-games>
+                    </div>
+
+                    <!-- Score by game type -->
+                    <div class="col">
+                        <score-by-game-type [statistics]="selectedUsers"></score-by-game-type>
+                    </div>
+                </div>
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Answer types -->
+                    <div class="col">
+                        <answer-types [statistics]="selectedUsers"></answer-types>
+                    </div>
+
+                    <!-- User rank -->
+                    <div class="col">
+                        <user-rank-comparison [statistics]="selectedUsers"></user-rank-comparison>
+                    </div>
+                </div>
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Global percentages -->
+                    <div class="col">
+                        <global-percentages-view [statistics]="selectedUsers"></global-percentages-view>
+                    </div>
+
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="{{'STATISTICS.TABS.THEME_STATISTICS'|translate}}">
+            <div class="profiles-statistics-view-margin-top-4 profiles-statistics-view-side-2"
+                 *ngIf="!showGeneralGraph">
+                <div class="row">
+                    <div class="col">
+                        <profiles-comparison-view [selectedUsers]="selectedUsers"></profiles-comparison-view>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 
 </div>

@@ -6,10 +6,14 @@
     </div>
 
     <div class="row justify-content-center theme-comparison-margin-2">
-        <ngx-charts-number-card class="chart-container" [view]="view"
-                                [results]="cardResults" [scheme]="colorScheme"
-                                cardColor="#1e222e">
-        </ngx-charts-number-card>
+        <div class="col">
+            <div class="row justify-content-center ">
+                <ng2-odometer class="font-size-normal" [number]="listenedMusics" [format]="'(ddd)'"></ng2-odometer>
+            </div>
+            <div class="row justify-content-center ">
+                <span>{{'STATISTICS.LISTENED_IN_THEME' | translate}}</span>
+            </div>
+        </div>
     </div>
 
     <div class="row theme-comparison-margin-2">
@@ -23,5 +27,4 @@
                                               [colorScheme]="colorScheme"></theme-comparison-question-detail>
         </div>
     </div>
-
 </div>
