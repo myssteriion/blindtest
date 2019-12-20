@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/dto/profile.interface";
@@ -34,7 +34,7 @@ export class AnswerTypesComponent implements OnInit {
      */
     private calculateStatistics() {
         this.results = [];
-        let keys = FOUND_MUSIC_TYPES;
+        let keys = GOOD_ANSWERS;
 
         this.players.forEach(player => {
             let musicKeys = Object.keys(player.statistics.foundMusics);

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, LINEAR_GAUGE_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, GOOD_ANSWERS, LINEAR_GAUGE_GRAPH_SIZE} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service';
 import {ProfileStatistics} from "../../../../interfaces/common/profile-statistics.interface";
 
@@ -45,7 +45,7 @@ export class FoundListenedMusicsRatioComponent implements OnInit {
      */
     private getAllMusicsFound(musicsForTheme) {
         let foundMusics = 0;
-        let typeKeys = FOUND_MUSIC_TYPES;
+        let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
             foundMusics = ToolsService.isNull(musicsForTheme[typeKey]) ? foundMusics : foundMusics + musicsForTheme[typeKey];
         });

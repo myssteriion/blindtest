@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service'
 import {Profile} from "../../../../interfaces/dto/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
@@ -33,7 +33,7 @@ export class GlobalPercentagesComponent implements OnInit {
     private calculateStatistics() {
         this.percentages = [];
 
-        let keys = FOUND_MUSIC_TYPES;
+        let keys = GOOD_ANSWERS;
         this.players.forEach(player => {
             let listenedMusics = 0;
             let foundMusics = 0;

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, DURATION, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, DURATIONS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/dto/profile.interface";
@@ -34,7 +34,7 @@ export class ScoreByGameTypeComponent implements OnInit {
      */
     private calculateStatistics() {
         this.results = [];
-        let keys = DURATION;
+        let keys = DURATIONS;
 
         this.players.forEach(player => {
             let series = [];

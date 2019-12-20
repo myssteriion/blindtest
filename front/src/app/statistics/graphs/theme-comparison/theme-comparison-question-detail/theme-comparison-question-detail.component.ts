@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 import {Game} from "../../../../interfaces/game/game.interface";
@@ -54,7 +54,7 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
     private getMusicWinForPlayer(musicsForTheme) {
         let foundMusics = [];
         let listenedMusicsInTheme = this.statistics.listenedMusics[this.theme];
-        let typeKeys = FOUND_MUSIC_TYPES;
+        let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
             let value = ToolsService.isNull(musicsForTheme[typeKey]) ? 0 : musicsForTheme[typeKey];
             foundMusics.push({

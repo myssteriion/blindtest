@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {THEMES, HORIZONTAL_BAR_GRAPH_SIZE, COLOR_SCHEME, FOUND_MUSIC_TYPES} from '../../../../tools/constant';
+import {THEMES, HORIZONTAL_BAR_GRAPH_SIZE, COLOR_SCHEME, GOOD_ANSWERS} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
@@ -32,7 +32,7 @@ export class ThemePercentagesComponent implements OnInit {
         });
         let listenedThemes = this.user.statistics.listenedMusics;
         let foundThemes = this.user.statistics.foundMusics;
-        let typeKeys = FOUND_MUSIC_TYPES;
+        let typeKeys = GOOD_ANSWERS;
 
         keys.forEach(key => {
             let series = [];

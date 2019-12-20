@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../../tools/tools.service'
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from '../../../../../tools/constant'
+import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from '../../../../../tools/constant'
 import {Profile} from "../../../../../interfaces/dto/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
 
@@ -55,7 +55,7 @@ export class UserThemeComparisonQuestionDetailComponent implements OnInit {
     private getMusicWinForPlayer(playerStats) {
         let foundMusics = [];
         let listenedMusicsInTheme = playerStats.listenedMusics[this.theme];
-        let typeKeys = FOUND_MUSIC_TYPES;
+        let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
             let value = ToolsService.isNull(playerStats.foundMusics[this.theme][typeKey]) ? 0 : playerStats.foundMusics[this.theme][typeKey];
             foundMusics.push({

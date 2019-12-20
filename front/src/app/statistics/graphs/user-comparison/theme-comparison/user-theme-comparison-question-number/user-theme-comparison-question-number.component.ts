@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {ToolsService} from "../../../../../tools/tools.service";
-import {COLOR_SCHEME, FOUND_MUSIC_TYPES, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/constant";
+import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/constant";
 import {Profile} from "../../../../../interfaces/dto/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
 
@@ -63,7 +63,7 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
      */
     private getAllMusicsForPlayer(playerStats) {
         let foundMusics = 0;
-        let typeKeys = FOUND_MUSIC_TYPES;
+        let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(key => {
             if (!ToolsService.isNull(playerStats.foundMusics[this.theme][key])) {
                 foundMusics += playerStats.foundMusics[this.theme][key];
