@@ -181,10 +181,8 @@ public class GameService {
 					player.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.TITLE );
 				}
 
-
-				if ( game.isFirstStep() )
+				if ( game.isLastStep() ) {
 					profileStatDto.incrementPlayedGames( game.getDuration() );
-				else if ( game.isLastStep() ) {
 					profileStatDto.addBestScoreIfBetter( game.getDuration(), player.getScore() );
 					profileStatDto.incrementWonGames( player.getRank() );
 				}
