@@ -453,16 +453,14 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					this.offlinePreviewAudio = new Audio();
 					this.offlinePreviewAudio.src = ToolsService.getFluxForAudio(this.currentMusic.flux);
 
-					let defaultCurrentTime = 0;
 					let playbackRate = GameCurrentViewComponent.NORMAL_SPEED;
-					if (this.currentMusic.effect === Effect.SLOW || this.currentMusic.effect === Effect.MIX) {
-						defaultCurrentTime = 30;
+					if (this.currentMusic.effect === Effect.SLOW) {
 						playbackRate = GameCurrentViewComponent.SLOW_SPEED;
 					}
-					else if (this.currentMusic.effect === Effect.SPEED) {
+					else if (this.currentMusic.effect === Effect.SPEED || this.currentMusic.effect === Effect.MIX) {
 						playbackRate = GameCurrentViewComponent.FAST_SPEED;
 					}
-					this.offlinePreviewAudio.currentTime = defaultCurrentTime;
+					this.offlinePreviewAudio.currentTime = 0;
 					this.offlinePreviewAudio.defaultPlaybackRate = playbackRate;
 					this.offlinePreviewAudio.playbackRate = playbackRate;
 					this.offlinePreviewAudio.load();
