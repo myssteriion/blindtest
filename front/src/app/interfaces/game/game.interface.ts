@@ -5,19 +5,19 @@ import {AbstractRoundContent} from "../common/roundcontent/abstract.round.conten
  * Game.
  */
 export interface Game {
-    id: number,
-    players: Player[],
-    duration: Duration,
-    nbMusicsPlayed: number,
-    nbMusicsPlayedInRound: number,
-    round: Round,
-    roundContent: AbstractRoundContent,
-    themes: Theme[],
-    effects: Effect[],
-    connectionMode: ConnectionMode,
-    listenedMusics?: Theme[],
+	id: number,
+	players: Player[],
+	duration: Duration,
+	nbMusicsPlayed: number,
+	nbMusicsPlayedInRound: number,
+	round: Round,
+	roundContent: AbstractRoundContent,
+	themes: Theme[],
+	effects: Effect[],
+	connectionMode: ConnectionMode,
+	listenedMusics?: Theme[],
 
-    firstStep: boolean,
-    lastStep: boolean,
-    finished: boolean
+	firstStep: boolean,
+	lastStep: boolean,
+	finished: boolean
 }
