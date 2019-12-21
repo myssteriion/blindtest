@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, GOOD_ANSWERS, LINEAR_GAUGE_GRAPH_SIZE} from '../../../../tools/constant';
+import {GOOD_ANSWERS} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service';
 import {ProfileStatistics} from "../../../../interfaces/common/profile-statistics.interface";
+import {COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
  * The listened / found musics ratio view.

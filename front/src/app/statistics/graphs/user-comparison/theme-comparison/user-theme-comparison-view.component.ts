@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
+import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {Game} from "../../../../interfaces/game/game.interface";
 import {ToolsService} from "../../../../tools/tools.service";
+import {COLOR_SCHEME} from "../../../../tools/graph.constant";
 
 /**
  * The theme comparison view.

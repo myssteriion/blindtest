@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {NUMBER_CARD_GRAPH_SIZE_SMALL, SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
+import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
 import {ToolsService} from "../../../tools/tools.service";
 import {Game} from "../../../interfaces/game/game.interface";
+import {NUMBER_CARD_GRAPH_SIZE_SMALL} from "../../../tools/graph.constant";
 
 /**
  * The theme comparison view.

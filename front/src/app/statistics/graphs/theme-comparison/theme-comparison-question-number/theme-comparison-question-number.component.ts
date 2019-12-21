@@ -1,8 +1,9 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {GOOD_ANSWERS} from '../../../../tools/constant';
 import {ToolsService} from "../../../../tools/tools.service";
 import {Game} from "../../../../interfaces/game/game.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
+import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
  * The theme comparison question number view.

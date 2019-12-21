@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ToolsService} from "../../tools/tools.service";
-import {COLOR_SCHEME, THEMES} from "../../tools/constant";
+import {THEMES} from "../../tools/constant";
 import {Profile} from "../../interfaces/dto/profile.interface";
+import {COLOR_SCHEME} from "../../tools/graph.constant";
 
 /**
  * The theme comparison view.
@@ -20,7 +21,6 @@ export class ProfilesComparisonViewComponent implements OnInit {
     public availableThemes = null;
     public selectedTheme: Theme = null;
     public noThemesAvailable = true;
-    public colorScheme = COLOR_SCHEME;
 
     constructor() {
     }

@@ -1,8 +1,9 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {ToolsService} from "../../../../../tools/tools.service";
-import {COLOR_SCHEME, GOOD_ANSWERS, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/constant";
+import {GOOD_ANSWERS} from "../../../../../tools/constant";
 import {Profile} from "../../../../../interfaces/dto/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
+import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/graph.constant";
 
 /**
  * The theme comparison question number view.
@@ -30,8 +31,6 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
     // Detect changes on input fields
     ngOnChanges(changes: SimpleChanges) {
         this.calculateStatistics();
-        // You can also use categoryId.previousValue and
-        // categoryId.firstChange for comparing old and new values
     }
 
     ngOnInit() {

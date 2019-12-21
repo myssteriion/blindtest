@@ -1,9 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {COLOR_SCHEME, DURATIONS, HORIZONTAL_BAR_GRAPH_SIZE} from '../../../../tools/constant';
+import {DURATIONS} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/dto/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
+import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
  * The scores by game type view.
