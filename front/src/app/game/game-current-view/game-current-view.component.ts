@@ -613,7 +613,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this.offlineAudio.nativeElement.controls = true;
 			this.offlineAudio.nativeElement.load();
 			this.offlineAudio.nativeElement.currentTime = currentTime;
-			this.offlineAudio.nativeElement.volume = 0.5;
+			this.offlineAudio.nativeElement.volume = 0.33;
 			this.offlineAudio.nativeElement.play();
 
 			this.showOfflineAudio = true;
@@ -645,8 +645,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					this.updatePlayers(result)
 						.then( () => {
 							this.showNextMusic = true;
-							if (this.game.nbMusicsPlayedInRound === 0)
+							if (this.game.nbMusicsPlayedInRound === 0) {
 								this.openRoundInfoModal();
+								if ( !ToolsService.isNull(this.offlineAudio) )
+									this.offlineAudio.nativeElement.volume = 0.05;
+							}
 						} );
 				}
 			},
