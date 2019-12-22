@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Game} from "../../interfaces/game/game.interface";
-import {SimpleGraphStatisticsInterface} from "../../interfaces/common/graph.interface";
+import {Game} from "../../../interfaces/game/game.interface";
+import {SimpleGraphStatisticsInterface} from "../../../interfaces/common/graph.interface";
 
 /**
  * The end game statistics view.

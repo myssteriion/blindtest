@@ -56,7 +56,7 @@ import {ScoreByGameTypeComponent} from './statistics/graphs/comparison/score-by-
 import {PlayedGamesComponent} from './statistics/graphs/comparison/played-games/played-games.component';
 import {RankCounterComponent} from './statistics/graphs/single-user/rank-counter/rank-counter.component';
 import {FoundListenedMusicsRatioComponent} from './statistics/graphs/single-user/found-listened-musics-ratio/found-listened-musics-ratio.component';
-import {EndGameStatisticsViewComponent} from './statistics/end-game-statistics/end-game-statistics-view.component';
+import {EndGameStatisticsViewComponent} from './game/game-end-view/end-game-statistics/end-game-statistics-view.component';
 import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
 import {AnswerTypesComponent} from "./statistics/graphs/comparison/answer-types/answer-types.component";
 
