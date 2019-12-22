@@ -1,7 +1,7 @@
 /**
- * Found music types
+ * Good answers
  */
-const enum FoundMusicTypes {
+const enum GoodAnswer {
     AUTHOR = "AUTHOR",
     TITLE = "TITLE",
     BOTH = "BOTH"

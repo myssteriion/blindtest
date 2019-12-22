@@ -62,9 +62,9 @@ export const EFFECTS = [
 ];
 
 /**
- * Found music types list
+ * Good answers list
  */
-export const GOOD_ANSWERS = [FoundMusicTypes.AUTHOR, FoundMusicTypes.TITLE, FoundMusicTypes.BOTH];
+export const GOOD_ANSWERS = [GoodAnswer.AUTHOR, GoodAnswer.TITLE, GoodAnswer.BOTH];
 
 /**
  * Duration list

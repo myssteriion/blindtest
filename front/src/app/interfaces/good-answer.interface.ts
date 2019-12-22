@@ -1,8 +1,8 @@
 /**
- * Good answers.
+ * Found music types.
  */
-export interface GoodAnswer {
-    [FoundMusicTypes.AUTHOR]?: number,
-    [FoundMusicTypes.TITLE]?: number,
-    [FoundMusicTypes.BOTH]?: number,
+export interface FoundMusicTypes {
+    [GoodAnswer.AUTHOR]?: number,
+    [GoodAnswer.TITLE]?: number,
+    [GoodAnswer.BOTH]?: number,
 }

@@ -18,7 +18,8 @@ export class ProfilePageModalComponent implements OnInit {
      */
     @Input()
     public page: Page<Profile>;
-    @Input()  title: string;
+    @Input()
+    public title: string;
 
     /**
      * On select profile card.
