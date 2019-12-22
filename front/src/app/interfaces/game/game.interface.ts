@@ -1,5 +1,6 @@
 import {Player} from './player.interface';
 import {AbstractRoundContent} from "../common/roundcontent/abstract.round.content";
+import {ListenedMusics} from "../listened-musics.interface";
 
 /**
  * Game.
@@ -15,7 +16,7 @@ export interface Game {
 	themes: Theme[],
 	effects: Effect[],
 	connectionMode: ConnectionMode,
-	listenedMusics?: Theme[],
+	listenedMusics?: ListenedMusics,
 
 	firstStep: boolean,
 	lastStep: boolean,

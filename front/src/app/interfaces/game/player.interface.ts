@@ -2,6 +2,7 @@
  * Player.
  */
 import {Profile} from "../dto/profile.interface";
+import {FoundMusics} from "../found-musics.interface";
 
 export interface Player {
 	profile: Profile,
@@ -10,5 +11,5 @@ export interface Player {
 	teamNumber: number,
 	last: boolean,
 	turnToChoose: boolean,
-	foundMusics?: Theme[]
+	foundMusics?: FoundMusics
 }
