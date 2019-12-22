@@ -247,23 +247,6 @@
                 "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème",
                 "GRAPH_TITLE_NUMBER": "Nombre de musiques trouvées par thème"
             },
-            "RANK_OCCUPIED": {
-                "GRAPH_TITLE": "Rang occupé",
-                "PERCENTAGE": "Pourcentage",
-                "TITLE": "Rang occupé",
-                "TWELFTH": "Douzième",
-                "ELEVENTH": "Onzième",
-                "TENTH": "Dizième",
-                "NINTH": "Neuvième",
-                "EIGHTH": "Huitième",
-                "SEVENTH": "Septième",
-                "SIXTH": "Sizième",
-                "FIFTH": "Cinquième",
-                "FOURTH": "Quatrième",
-                "THIRD": "Troisième",
-                "SECOND": "Second",
-                "FIRST": "Premier"
-            },
             "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées",
             "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie",
             "ANSWER_TYPES": {
@@ -296,5 +279,22 @@
         "DISNEY": "Disney",
         "JEUX": "Jeux",
         "SERIES": "Séries"
+    },
+    "RANK_OCCUPIED": {
+        "GRAPH_TITLE": "Rang occupé",
+        "PERCENTAGE": "Pourcentage",
+        "TITLE": "Rang occupé",
+        "TWELFTH": "Douzième",
+        "ELEVENTH": "Onzième",
+        "TENTH": "Dizième",
+        "NINTH": "Neuvième",
+        "EIGHTH": "Huitième",
+        "SEVENTH": "Septième",
+        "SIXTH": "Sizième",
+        "FIFTH": "Cinquième",
+        "FOURTH": "Quatrième",
+        "THIRD": "Troisième",
+        "SECOND": "Second",
+        "FIRST": "Premier"
     }
 }

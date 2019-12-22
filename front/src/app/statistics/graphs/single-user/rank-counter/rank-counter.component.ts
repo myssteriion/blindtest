@@ -35,7 +35,7 @@ export class RankCounterComponent implements OnInit {
         let rankValues = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH"];
         rankValues.forEach(rank => {
             this.rankCounter.push({
-                name: this._translate.instant("STATISTICS.CATEGORIES.RANK_OCCUPIED." + rank),
+                name: this._translate.instant("RANK_OCCUPIED." + rank),
                 value: ToolsService.isNull(this.user.statistics.wonGames[rank]) ? 0 : this.user.statistics.wonGames[rank]
             });
         });
