@@ -7,6 +7,7 @@ import {Music} from "../../../interfaces/dto/music.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlertModalComponent} from "../../../common/error-alert/error-alert-modal.component";
 import {ErrorAlert} from "../../../interfaces/base/error.alert.interface";
+import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 
 /**
  * The music result modal.
@@ -57,6 +58,7 @@ export class MusicResultModalComponent implements OnInit {
      */
     private nbLoseChoices: PLayerLoserItem[];
 
+    private faQuestionCircle = faQuestionCircle;
 
 
     constructor(private _ngbActiveModal: NgbActiveModal,

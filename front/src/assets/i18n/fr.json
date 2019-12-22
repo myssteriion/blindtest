@@ -94,7 +94,8 @@
             "MOVIE_TITLE_HEADER": "Titre film",
             "TITLE_WINNER_HEADER": "Titre",
             "VICTIM_HEADER": "Victime",
-            "WRONGLY_PASS_HEADER": "Pénalité (clic de trop)",
+            "WRONGLY_PASS_HEADER": "Pénalité",
+            "WRONGLY_PASS_HEADER_TOOLTIP": "Le clic de trop !",
             "SAVE_ERROR": "Impossible d'appliquer les résultats."
         },
         "ROUND_INFO_MODAL": {

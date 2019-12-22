@@ -8,10 +8,12 @@
 <div class="row music-result-modal-body">
     <div class="col">
 
+        <!-- music response-->
         <div class="row alert alert-info font-size-normal music-result-modal-music-name">
             <div class="col">{{ getMusicName() }}</div>
         </div>
 
+        <!-- table -->
         <div class="row music-result-modal-table-row">
             <div class="col">
 
@@ -23,7 +25,12 @@
                         <th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
                         <th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
                         <th *ngIf="showLoserColumn()">{{ headers[4] | translate }}</th>
-                        <th>{{ headers[5] | translate }}</th>
+                        <th>
+                            {{ headers[5] | translate }}
+                            <fa-icon [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.MUSIC_RESULT_MODAL.WRONGLY_PASS_HEADER_TOOLTIP' | translate }}"
+                                     placement="bottom auto" [openDelay]="500">
+                            </fa-icon>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
