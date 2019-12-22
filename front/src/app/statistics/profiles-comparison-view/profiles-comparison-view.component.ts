@@ -28,12 +28,10 @@ export class ProfilesComparisonViewComponent implements OnInit {
     ngOnInit() {
         this.availableThemes = [];
         this.getAvailableThemes();
+        this.noThemesAvailable = this.availableThemes.length === 0;
 
         if (this.availableThemes.length > 0) {
-            this.selectedTheme = this.availableThemes[0];
-            this.noThemesAvailable = false;
-        } else {
-            this.noThemesAvailable = true;
+            this.selectTheme(this.availableThemes[0]);
         }
     }
 
@@ -57,17 +55,22 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Get all available themes
      */
     private getAvailableThemes() {
-        // TODO : Compare first in order to reset or not -> Reset available themes ?
         this.selectedUsers.forEach(user => {
             let keys = Object.keys(user.statistics.listenedMusics);
-            keys.forEach(key => {
-                let themeAlreadyAdded = this.availableThemes.find(theme => theme === key);
-                if (ToolsService.isNull(themeAlreadyAdded)) {
-                    this.availableThemes.push(key);
+            THEMES.forEach(theme => {
+                let userHasTheme = keys.find(userTheme => {
+                    return userTheme === theme.enumVal
+                });
+                if (!ToolsService.isNull(userHasTheme)) {
+                    let themeAlreadyAdded = this.availableThemes.find(availableTheme => {
+                        return availableTheme === theme.enumVal
+                    });
+                    if (ToolsService.isNull(themeAlreadyAdded)) {
+                        this.availableThemes.push(theme.enumVal);
+                    }
                 }
-            });
-            this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
-        });
+            })
+        })
     }
 
     /**

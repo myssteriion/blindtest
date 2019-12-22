@@ -30,8 +30,15 @@ export class ThemeComparisonViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.availableThemes = this.gameStatistics.themes;
-        this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
+        this.availableThemes = [];
+        this.gameStatistics.themes.forEach(gameTheme => {
+            let themeExists = THEMES.find(theme => {
+                return theme.enumVal === gameTheme
+            });
+            if (!ToolsService.isNull(themeExists)) {
+                this.availableThemes.push(themeExists.enumVal)
+            }
+        });
         this.selectTheme(this.availableThemes[0]);
     }
 
