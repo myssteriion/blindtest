@@ -59,3 +59,7 @@
     height: 75%;
     font-size: 0.7em;
 }
+
+.music-result-modal-lose-header {
+    min-width: 7em;
+}
