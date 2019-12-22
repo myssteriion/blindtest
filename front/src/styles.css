@@ -13,7 +13,7 @@ button:disabled {
 
 html {
     min-height: 100%;
-    cursor: url(assets/images/icons/default.svg), default;
+    cursor: url(assets/images/icons/default.svg) 6 0, default;
 }
 
 body {
