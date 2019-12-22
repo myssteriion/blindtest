@@ -112,7 +112,7 @@
             }
         },
         "CHOICE_THEME_MODAL": {
-            "TITLE": "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisis un thème"
+            "TITLE": "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisit un thème"
         },
         "END_VIEW": {
             "TITLE": "Fin de la partie",
@@ -135,7 +135,7 @@
         },
         "LUCKY": {
             "NAME": "Coup d'chance",
-            "DESCRIPTION": "Les maitres mots de la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> sont karma et jalousie. Composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, <span class=\"inner-html-special-text\">{{nbPlayers}} joueur(s)</span> aléatoirement choisis se verra attribuer des points. Comme ça. C'est gratuit. Cadeau d'la maison."
+            "DESCRIPTION": "Les maitres mots de la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> sont karma et jalousie. Composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, <span class=\"inner-html-special-text\">{{nbPlayers}} joueur(s)</span> aléatoirement choisit se verra attribuer des points. Comme ça. C'est gratuit. Cadeau d'la maison."
         },
         "FRIENDSHIP": {
             "NAME": "Amitié passagère",
