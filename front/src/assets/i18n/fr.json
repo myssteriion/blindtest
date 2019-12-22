@@ -216,18 +216,20 @@
         "ERROR": {
             "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
         },
-        "NO_THEME_AVAILABLE":"Aucun thème disponible",
+        "NO_THEME_AVAILABLE": "Aucun thème disponible",
         "LISTENED_IN_THEME": "Musiques écoutées dans ce thème",
         "CATEGORIES": {
             "PLAYED_GAMES": {
-                "PLAYED_GAMES_TITLE": "Nombre de parties jouées",
+                "GRAPH_TITLE": "Nombre de parties jouées par type de partie",
+                "NUMBER_PLAYED_GAMES": "Nombre de parties jouées",
                 "GAME_TYPE": "Type de partie",
                 "SHORT": "Rapide",
                 "NORMAL": "Normale",
                 "LONG": "Longue"
             },
             "BEST_SCORE": {
-                "BEST_SCORE_BY_GAME_TYPE": "Meilleur score par type de partie",
+                "SCORE": "Score",
+                "GRAPH_TITLE": "Meilleur score par type de partie",
                 "GAME_TYPE": "Type de partie",
                 "SHORT": "Rapide",
                 "NORMAL": "Normale",
@@ -247,6 +249,7 @@
                 "GRAPH_TITLE_NUMBER": "Nombre de musiques trouvées par thème"
             },
             "RANK_OCCUPIED": {
+                "GRAPH_TITLE": "Rang occupé",
                 "PERCENTAGE": "Pourcentage",
                 "TITLE": "Rang occupé",
                 "TWELFTH": "Douzième",
@@ -265,11 +268,16 @@
             "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées",
             "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie",
             "ANSWER_TYPES": {
+                "GRAPH_TITLE": "Type de réponses les plus données",
                 "ANSWER_TYPES_TITLE": "Type de réponses",
                 "ANSWER_TYPES_NUMBER": "Nombre de réponses",
                 "AUTHOR": "Artiste uniquement",
                 "TITLE": "Titre uniquement",
                 "BOTH": "Les deux"
+            },
+            "FOUND_MUSICS": {
+                "GRAPH_TITLE": "Pourcentage de musiques trouvées",
+                "PERCENTAGE": "Pourcentage"
             }
         },
         "TABS": {

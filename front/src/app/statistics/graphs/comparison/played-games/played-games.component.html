@@ -1,12 +1,18 @@
-<ngx-charts-bar-horizontal-2d
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="results"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [legendTitle]="'STATISTICS.CATEGORIES.PLAYED_GAMES.GAME_TYPE' | translate"
-        [legendPosition]="'below'"
-        [showXAxisLabel]="true"
-        [xAxisLabel]="'STATISTICS.CATEGORIES.PLAYED_GAMES.PLAYED_GAMES_TITLE' | translate">
-</ngx-charts-bar-horizontal-2d>
+<div class="row graph-title-center">
+    <span class="col graph-title">{{'STATISTICS.CATEGORIES.PLAYED_GAMES.GRAPH_TITLE'|translate}}</span>
+</div>
+
+<div class="row">
+    <ngx-charts-bar-horizontal-2d
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="results"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [legendTitle]="'STATISTICS.CATEGORIES.PLAYED_GAMES.GAME_TYPE' | translate"
+            [legendPosition]="'below'"
+            [showXAxisLabel]="true"
+            [xAxisLabel]="'STATISTICS.CATEGORIES.PLAYED_GAMES.NUMBER_PLAYED_GAMES' | translate">
+    </ngx-charts-bar-horizontal-2d>
+</div>

@@ -122,3 +122,29 @@ fa-icon:hover {
 }
 
 /*************** background ***************/
+
+/*************** graphs ***************/
+
+.legend-labels {
+    overflow: auto !important;
+}
+
+.legend-label-text {
+    color: dimgrey !important;
+}
+
+.legend-label-text:hover {
+    color: black !important;
+}
+
+.graph-title {
+    margin-bottom: 1em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.graph-title-center {
+    text-align: center;
+}
+
+/*************** graphs ***************/
