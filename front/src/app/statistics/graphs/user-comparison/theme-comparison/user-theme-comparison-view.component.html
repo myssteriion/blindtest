@@ -1,5 +1,5 @@
 <div>
-    <theme-selection class="theme-list" [themes]="availableThemes" (onEvent)="onThemeChange($event)"></theme-selection>
+    <theme-selection class="theme-list" [themes]="availableThemes" (onThemeChange)="onThemeChange($event)"></theme-selection>
 
     <theme-comparison-question-number [theme]="selectedTheme"
                                       [statistics]="gameStatistics"></theme-comparison-question-number>

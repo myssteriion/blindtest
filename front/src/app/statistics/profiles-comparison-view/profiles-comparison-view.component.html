@@ -4,7 +4,7 @@
     </div>
 
     <div *ngIf="!noThemesAvailable">
-        <theme-selection class="theme-list"[themes]="availableThemes" (onEvent)="onThemeChange($event)"></theme-selection>
+        <theme-selection class="theme-list"[themes]="availableThemes" (onThemeChange)="onThemeChange($event)"></theme-selection>
 
         <div class="row profiles-comparison-margin-top">
             <div class="col">

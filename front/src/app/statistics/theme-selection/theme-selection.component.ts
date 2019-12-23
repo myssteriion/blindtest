@@ -12,10 +12,10 @@ import {THEMES} from "../../tools/constant";
 export class ThemeSelectionComponent implements OnInit {
 
     @Input()
-    public themes;
+    public themes: Theme[];
 
     @Output()
-    private onEvent = new EventEmitter();
+    private onThemeChange = new EventEmitter();
 
     public selectedTheme: Theme = null;
 
@@ -34,7 +34,7 @@ export class ThemeSelectionComponent implements OnInit {
      */
     public selectTheme(theme: Theme): void {
         this.selectedTheme = theme;
-        this.onEvent.emit(theme);
+        this.onThemeChange.emit(theme);
     }
 
     /**
