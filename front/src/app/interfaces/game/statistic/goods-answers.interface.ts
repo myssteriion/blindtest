@@ -1,7 +1,7 @@
 /**
- * Found music types.
+ * Goods Answers.
  */
-export interface FoundMusicTypes {
+export interface GoodsAnswers {
     [GoodAnswer.AUTHOR]?: number,
     [GoodAnswer.TITLE]?: number,
     [GoodAnswer.BOTH]?: number,

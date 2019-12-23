@@ -1,9 +1,9 @@
+import {Profile} from "../dto/profile.interface";
+import {FoundMusics} from "./statistic/found-musics.interface";
+
 /**
  * Player.
  */
-import {Profile} from "../dto/profile.interface";
-import {FoundMusics} from "../found-musics.interface";
-
 export interface Player {
 	profile: Profile,
 	score: number,
