@@ -18,8 +18,8 @@
     </div>
 
     <div class="navbar-menu-icons">
-        <fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faVolumeMute" (click)="stopMusic()" ngbTooltip="{{ 'COMMON.HEADER.START_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
-        <fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faMusic" (click)="playMusic()" ngbTooltip="{{ 'COMMON.HEADER.STOP_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faVolumeMute" (click)="stopMusic()" ngbTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
+        <fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faMusic" (click)="playMusic()" ngbTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500"></fa-icon>
     </div>
 
 </nav>

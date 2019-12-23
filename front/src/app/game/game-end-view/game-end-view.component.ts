@@ -15,7 +15,7 @@ import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Player} from 'src/app/interfaces/game/player.interface';
-import {faDoorClosed, faDoorOpen} from '@fortawesome/free-solid-svg-icons';
+import {faDoorClosed, faDoorOpen, faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
@@ -67,9 +67,15 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 */
 	public showGraph = false;
 
+	/**
+	 * If the music must be played.
+	 */
+	public musicIsPlaying: boolean;
+
 	private faDoorClosed = faDoorClosed;
 	private faDoorOpen = faDoorOpen;
-
+	private faMusic = faMusic;
+	private faVolumeMute = faVolumeMute;
 
 
     constructor(private _gameResource: GameResource,
@@ -90,11 +96,14 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 
+		this.musicIsPlaying = true;
+
 		this.audio = new Audio();
 		this.audio.src = OLYMPIA_ANTHEM_SOUND;
 		this.audio.loop = true;
+		this.audio.volume = 0.75;
 		this.audio.load();
-		this.audio.play();
+		this.playMusic();
 
 		this.currentExitIcon = this.faDoorClosed;
 		this.podiumRank = [Rank.FIRST, Rank.SECOND, Rank.THIRD];
@@ -242,6 +251,25 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 			() => { this._router.navigateByUrl(HOME_PATH); },
 			() => { /* do nothing */ }
 		);
+	}
+
+	/**
+	 * Play music.
+	 */
+	private playMusic(): void {
+
+		this.musicIsPlaying = true;
+		this.audio.play();
+	}
+
+	/**
+	 * Stop music.
+	 */
+	public stopMusic(): void {
+
+		this.musicIsPlaying = false;
+		this.audio.pause();
+		this.audio.currentTime = 0;
 	}
 
 }
