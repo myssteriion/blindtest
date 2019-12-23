@@ -17,26 +17,28 @@
     <!-- tabs (rank & stats) -->
     <div class="row">
         <mat-tab-group mat-stretch-tabs class="col game-end-view-width100" (selectedTabChange)="onTabClick($event)">
+
             <mat-tab label="{{'GAME.END_VIEW.RANK'|translate}}">
                 <div class="game-end-view-margin-top-4 game-end-view-side-2">
+
                     <!-- 1st 2nd 3rd -->
                     <div *ngFor="let rank of podiumRank"
                          class="row justify-content-center game-end-view-first-second-third">
                         <div *ngIf="hadPlayerByRank(rank)" class="col-2">
-                            <img src="{{ getImgByRank(rank) }}" ngbTooltip="{{ getTooltipByRank(rank) }}"
-                                 placement="bottom auto">
+                            <img src="{{ getImgByRank(rank) }}" ngbTooltip="{{ getTooltipByRank(rank) }}" placement="bottom auto">
                         </div>
                         <player-card class="col-5" *ngFor="let player of getPlayersByRank(rank);" [player]="player"
-                                     [rankOnRight]="true"
-                                     [displayMedal]="false"></player-card>
+                                     [rankOnRight]="true" [displayMedal]="false">
+                        </player-card>
                     </div>
 
-                    <!-- other ranks -->
+                    <!-- others ranks -->
                     <div class="row game-end-view-other-ranks">
                         <player-card class="col-4" *ngFor="let player of getNoPodiumPlayers();" [player]="player"
-                                     [rankOnRight]="true"
-                                     [displayMedal]="false"></player-card>
+                                     [rankOnRight]="true" [displayMedal]="false">
+                        </player-card>
                     </div>
+
                 </div>
             </mat-tab>
 
@@ -45,6 +47,7 @@
                     <end-game-statistics-view [gameStatistics]="game"></end-game-statistics-view>
                 </div>
             </mat-tab>
+
         </mat-tab-group>
     </div>
 
