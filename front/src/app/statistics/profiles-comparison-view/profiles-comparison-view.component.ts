@@ -43,8 +43,8 @@ export class ProfilesComparisonViewComponent implements OnInit {
 
         themesToFilter = themesToFilter.filter((item, index) => themesToFilter.indexOf(item) === index);
         THEMES.forEach(theme => {
-            let themeExists = themesToFilter.find(theme => {
-                return theme === theme.enumVal
+            let themeExists = themesToFilter.find(themeToFilter => {
+                return themeToFilter === theme.enumVal
             });
 
             if (!ToolsService.isNull(themeExists)) {
