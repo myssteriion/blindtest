@@ -149,6 +149,9 @@ public class GameService {
 			if (musicDto == null)
 				throw new NotFoundException("Music not found.");
 
+			if ( !game.getThemes().contains(musicDto.getTheme()) )
+				throw new NotFoundException("'" + musicDto.getTheme() + "' not found for this game (" + game.getThemes() + ").");
+
 			musicDto.incrementPlayed();
 			musicService.update(musicDto);
 
