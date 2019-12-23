@@ -119,8 +119,8 @@
             "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?",
             "GAME_NOT_FOUND": "La partie n'existe pas.",
             "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
-            "STATISTICS": "Statistiques",
-            "RANK": "Classement"
+            "STATISTICS_TAB_TITLE": "Statistiques",
+            "RANK_TAB_TITLE": "Classement"
         }
     },
     "ROUND": {

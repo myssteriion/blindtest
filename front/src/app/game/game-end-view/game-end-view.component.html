@@ -24,7 +24,7 @@
     <div class="row">
         <mat-tab-group mat-stretch-tabs class="col game-end-view-width100" (selectedTabChange)="onTabClick($event)">
 
-            <mat-tab label="{{'GAME.END_VIEW.RANK'|translate}}">
+            <mat-tab label="{{'GAME.END_VIEW.RANK_TAB_TITLE'|translate}}">
                 <div class="game-end-view-margin-top-4 game-end-view-side-2">
 
                     <!-- 1st 2nd 3rd -->
@@ -48,7 +48,7 @@
                 </div>
             </mat-tab>
 
-            <mat-tab label="{{'GAME.END_VIEW.STATISTICS'|translate}}">
+            <mat-tab label="{{'GAME.END_VIEW.STATISTICS_TAB_TITLE'|translate}}">
                 <div class="game-end-view-margin-top-1" *ngIf="showGraph">
                     <end-game-statistics-view [gameStatistics]="game"></end-game-statistics-view>
                 </div>
