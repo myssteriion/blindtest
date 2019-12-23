@@ -35,22 +35,22 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Get all available themes
      */
     private getAvailableThemes(): void {
+        let themesToFilter = [];
         this.selectedUsers.forEach(user => {
             let keys = Object.keys(user.statistics.listenedMusics);
-            THEMES.forEach(theme => {
-                let userHasTheme = keys.find(userTheme => {
-                    return userTheme === theme.enumVal
-                });
-                if (!ToolsService.isNull(userHasTheme)) {
-                    let themeAlreadyAdded = this.availableThemes.find(availableTheme => {
-                        return availableTheme === theme.enumVal
-                    });
-                    if (ToolsService.isNull(themeAlreadyAdded)) {
-                        this.availableThemes.push(theme.enumVal);
-                    }
-                }
-            })
-        })
+            themesToFilter = themesToFilter.concat(keys);
+        });
+
+        themesToFilter = themesToFilter.filter((item, index) => themesToFilter.indexOf(item) === index);
+        THEMES.forEach(theme => {
+            let themeExists = themesToFilter.find(theme => {
+                return theme === theme.enumVal
+            });
+
+            if (!ToolsService.isNull(themeExists)) {
+                this.availableThemes.push(themeExists);
+            }
+        });
     }
 
     /**
