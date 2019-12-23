@@ -4,18 +4,7 @@
     </div>
 
     <div *ngIf="!noThemesAvailable">
-        <div class="theme-list">
-            <div class="row">
-                <div class="col">
-                    <img *ngFor="let theme of availableThemes" src="{{ getTheme(theme).srcImg }}"
-                         class="profiles-comparison-img"
-                         [ngClass]="{ 'profiles-comparison-img-active': (isSelectedTheme(getTheme(theme).enumVal)) }"
-                         (click)="selectTheme(getTheme(theme).enumVal)"
-                         ngbTooltip="{{ getTheme(theme).tooltip | translate }}"
-                         placement="bottom auto" [openDelay]="500">
-                </div>
-            </div>
-        </div>
+        <theme-selection class="theme-list"[themes]="availableThemes" (onEvent)="onThemeChange($event)"></theme-selection>
 
         <div class="row profiles-comparison-margin-top">
             <div class="col">

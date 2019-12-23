@@ -1,10 +1,5 @@
 <div>
-    <div class="theme-list">
-        <img *ngFor="let theme of availableThemes" src="{{ getTheme(theme).srcImg }}" class="user-theme-comparison-img"
-             [ngClass]="{ 'user-theme-comparison-img-active': (isSelectedTheme(getTheme(theme).enumVal)) }"
-             (click)="selectTheme(getTheme(theme).enumVal)" ngbTooltip="{{ getTheme(theme).tooltip | translate }}"
-             placement="bottom auto" [openDelay]="500">
-    </div>
+    <theme-selection class="theme-list" [themes]="availableThemes" (onEvent)="onThemeChange($event)"></theme-selection>
 
     <theme-comparison-question-number [theme]="selectedTheme"
                                       [statistics]="gameStatistics"></theme-comparison-question-number>

@@ -59,6 +59,7 @@ import {FoundListenedMusicsRatioComponent} from './statistics/graphs/single-user
 import {EndGameStatisticsViewComponent} from './game/game-end-view/end-game-statistics/end-game-statistics-view.component';
 import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
 import {AnswerTypesComponent} from "./statistics/graphs/comparison/answer-types/answer-types.component";
+import {ThemeSelectionComponent} from "./statistics/theme-selection/theme-selection.component";
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -124,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         EndGameStatisticsViewComponent,
         GlobalPercentagesComponent,
         PlayedGamesComponent,
-        AnswerTypesComponent
+        AnswerTypesComponent,
+        ThemeSelectionComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,

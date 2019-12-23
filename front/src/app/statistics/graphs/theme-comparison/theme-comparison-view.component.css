@@ -3,51 +3,10 @@
     text-align: center;
 }
 
-.theme {
-    height: 3em;
-    width: 10em;
-    background-color: lightgray;
-    text-align: center;
-    vertical-align: middle;
-    box-shadow: 1px 5px 10px lightgrey;
-    border: 1px solid gray;
-    border-radius: 7px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.theme:hover {
-    box-shadow: 3px 7px 8px grey;
-}
-
-.selected-theme {
-    background-color: #17a2b8;
-    color: white !important;
-}
-
 .theme-comparison-margin-1 {
     margin: 5em 1em 0 1em;
 }
 
 .theme-comparison-margin-2 {
     margin: 2em 1em 0 1em;
-}
-
-.theme-comparison-img {
-    height: 6em;
-    width: 6em;
-    margin: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 8px 8px 4px silver;
-    opacity: 0.3;
-}
-
-.theme-comparison-img:hover {
-    cursor: pointer;
-}
-
-.theme-comparison-img-active {
-    opacity: 1;
 }

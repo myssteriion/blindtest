@@ -39,34 +39,14 @@ export class ThemeComparisonViewComponent implements OnInit {
                 this.availableThemes.push(themeExists.enumVal)
             }
         });
-        this.selectTheme(this.availableThemes[0]);
     }
 
     /**
-     * Select theme to display
+     * Update theme on event received
      * @param theme
      */
-    public selectTheme(theme: Theme) {
+    public onThemeChange(theme): void {
         this.selectedTheme = theme;
-        this.listenedMusics = ToolsService.isNull(this.gameStatistics.listenedMusics[this.selectedTheme]) ? 0 : this.gameStatistics.listenedMusics[this.selectedTheme];
-    }
-
-    /**
-     * Return true if theme is selected
-     * @param theme
-     */
-    public isSelectedTheme(theme) {
-        return theme === this.selectedTheme;
-    }
-
-    /**
-     * Get corresponding theme values
-     * @param selectedTheme
-     */
-    public getTheme(selectedTheme) {
-        return this.themes.find(theme => {
-            return theme.enumVal === selectedTheme;
-        })
     }
 
 }

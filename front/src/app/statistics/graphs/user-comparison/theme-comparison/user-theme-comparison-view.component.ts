@@ -30,35 +30,23 @@ export class UserThemeComparisonViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.availableThemes = this.gameStatistics.themes;
-        this.availableThemes = ToolsService.sortByAlphabeticalAndNumericalThemes(this.availableThemes);
-        this.selectedTheme = this.availableThemes[0];
+        this.availableThemes = [];
+        this.gameStatistics.themes.forEach(gameTheme => {
+            let themeExists = THEMES.find(theme => {
+                return theme.enumVal === gameTheme
+            });
+            if (!ToolsService.isNull(themeExists)) {
+                this.availableThemes.push(themeExists.enumVal)
+            }
+        });
     }
 
     /**
-     * Select theme
+     * Update theme on event received
      * @param theme
      */
-    public selectTheme(theme: Theme) {
+    public onThemeChange(theme): void {
         this.selectedTheme = theme;
-    }
-
-    /**
-     * Return true if theme is selected
-     * @param theme
-     */
-    public isSelectedTheme(theme) {
-        return theme === this.selectedTheme;
-    }
-
-    /**
-     * Get corresponding theme values
-     * @param selectedTheme
-     */
-    public getTheme(selectedTheme) {
-        return this.themes.find(theme => {
-            return theme.enumVal === selectedTheme;
-        })
     }
 
 }

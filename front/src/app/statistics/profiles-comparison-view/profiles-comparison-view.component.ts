@@ -25,36 +25,16 @@ export class ProfilesComparisonViewComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.availableThemes = [];
         this.getAvailableThemes();
         this.noThemesAvailable = this.availableThemes.length === 0;
-
-        if (this.availableThemes.length > 0) {
-            this.selectTheme(this.availableThemes[0]);
-        }
-    }
-
-    /**
-     * Select theme
-     * @param theme
-     */
-    public selectTheme(theme: Theme) {
-        this.selectedTheme = theme;
-    }
-
-    /**
-     * Return true if theme is selected
-     * @param theme
-     */
-    public isSelectedTheme(theme) {
-        return theme === this.selectedTheme;
     }
 
     /**
      * Get all available themes
      */
-    private getAvailableThemes() {
+    private getAvailableThemes(): void {
         this.selectedUsers.forEach(user => {
             let keys = Object.keys(user.statistics.listenedMusics);
             THEMES.forEach(theme => {
@@ -74,13 +54,11 @@ export class ProfilesComparisonViewComponent implements OnInit {
     }
 
     /**
-     * Get corresponding theme values
-     * @param selectedTheme
+     * Update theme on event received
+     * @param theme
      */
-    public getTheme(selectedTheme) {
-        return this.themes.find(theme => {
-            return theme.enumVal === selectedTheme;
-        })
+    public onThemeChange(theme): void {
+        this.selectedTheme = theme;
     }
 
 }
