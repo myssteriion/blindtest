@@ -48,11 +48,6 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	public isLoaded: boolean;
 
 	/**
-	 * The podium ranks.
-	 */
-	private podiumRank: Rank[];
-
-	/**
 	 * The current exit icon.
 	 */
 	private currentExitIcon;
@@ -106,7 +101,6 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		this.playMusic();
 
 		this.currentExitIcon = this.faDoorClosed;
-		this.podiumRank = [Rank.FIRST, Rank.SECOND, Rank.THIRD];
 		this.getGame();
 	}
 
@@ -177,66 +171,6 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		return this._activatedRoute.params.pipe( map(param => param.id) );
 	}
 
-
-	/**
-	 * Gets rank logo.
-	 *
-	 * @param rank the rank
-	 * @return the image
-	 */
-	private getImgByRank(rank: Rank): string {
-		switch (rank) {
-			case Rank.FIRST:	return RANKS_FIRST;
-			case Rank.SECOND:	return RANKS_SECOND;
-			case Rank.THIRD:	return RANKS_THIRD;
-			default: 			return ""
-		}
-	}
-
-	/**
-	 * Gets rank tooltip.
-	 *
-	 * @param rank the rank
-	 * @return the tooltip
-	 */
-	private getTooltipByRank(rank: Rank): string {
-		return this._translate.instant("RANK." + rank);
-	}
-
-	/**
-	 * Gets players by ranks.
-	 *
-	 * @param rank the rank
-	 * @return players list
-	 */
-	private getPlayersByRank(rank: Rank): Player[] {
-		return this.game.players.filter(player => player.rank === rank);
-	}
-
-	/**
-	 * If rank had player.
-	 *
-	 * @param rank the rank
-	 */
-	private hadPlayerByRank(rank: Rank): boolean {
-		return (this.game.players.filter(player => player.rank === rank).length) > 0;
-	}
-
-	/**
-	 * Gets no-podium players.
-	 *
-	 * @return players list
-	 */
-	private getNoPodiumPlayers(): Player[] {
-
-		let players: Player[] = [];
-
-		let noPodiumRank = [Rank.FOURTH, Rank.FIFTH, Rank.SIXTH, Rank.SEVENTH, Rank.EIGHTH, Rank.NINTH, Rank.TENTH, Rank.ELEVENTH, Rank.TWELFTH];
-		for (let rank of noPodiumRank)
-			players = players.concat( this.getPlayersByRank(rank) );
-
-		return players;
-	}
 
 	/**
 	 * Open modal for back to home.

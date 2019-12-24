@@ -1,16 +1,18 @@
-<div class="end-game-statistics-margin">
-    <div class="row justify-content-center">
-        <div *ngFor="let result of cardResults" class="col end-game-statistics-margin-bottom-3">
-            <div class="row justify-content-center">
-                <ng2-odometer class="font-size-normal" [number]="result.value" [format]="'(ddd)'"></ng2-odometer>
-            </div>
-            <div class="row justify-content-center ">
-                <span>{{result.name}}</span>
-            </div>
-        </div>
+<div class="container-fluid">
+
+    <!-- total music value -->
+    <div class="row">
+        <ng2-odometer class="col font-size-normal end-game-statistics-total-musics-value" [number]="game.nbMusicsPlayed" [format]="'( ddd)'"></ng2-odometer>
     </div>
 
-    <div class="row justify-content-center">
-        <theme-comparison-view [gameStatistics]="gameStatistics"></theme-comparison-view>
+    <!-- total music label -->
+    <div class="row">
+        <div class="col font-size-very-very-small end-game-statistics-total-musics-label">{{ 'STATISTICS.CATEGORIES.TOTAL_LISTENED_MUSICS' | translate }}</div>
     </div>
+
+    <!-- graphs -->
+    <div class="row justify-content-center end-game-statistics-graphs">
+        <theme-comparison-view [gameStatistics]="game"></theme-comparison-view>
+    </div>
+
 </div>

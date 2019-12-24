@@ -60,6 +60,7 @@ import {EndGameStatisticsViewComponent} from './game/game-end-view/end-game-stat
 import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-view/profiles-comparison-view.component";
 import {AnswerTypesComponent} from "./statistics/graphs/comparison/answer-types/answer-types.component";
 import {ThemeSelectionComponent} from "./statistics/theme-selection/theme-selection.component";
+import {EndGameRanksComponent} from './game/game-end-view/end-game-ranks/end-game-ranks.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -126,7 +127,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         GlobalPercentagesComponent,
         PlayedGamesComponent,
         AnswerTypesComponent,
-        ThemeSelectionComponent
+        ThemeSelectionComponent,
+        EndGameRanksComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,

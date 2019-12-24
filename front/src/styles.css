@@ -61,6 +61,7 @@ mat-radio-button {
     font-weight: bold;
 }
 
+.font-size-very-very-small { font-size: 1.2em; }
 .font-size-very-small, .toast-container { font-size: 1.6em; }
 .font-size-small { font-size: 1.8em; }
 .font-size-normal { font-size: 2.0em; }
@@ -80,6 +81,16 @@ mat-radio-button {
     padding-bottom: 1em;
 }
 
+
+/****************** tabs ******************/
+.mat-tab-label {
+    font-size: 2.4em;
+}
+
+.mat-tab-body {
+    padding-top: 2em;
+}
+
 /****************** icon ******************/
 fa-icon {
     padding: 5px;
@@ -97,10 +108,7 @@ fa-icon:hover {
     color: orangered;
 }
 
-/****************** icon ******************/
-
 /*************** background ***************/
-
 .profile-card-background-0 {
     background: radial-gradient(seashell, silver);
 }
@@ -121,10 +129,7 @@ fa-icon:hover {
     background: radial-gradient(yellowgreen, green);
 }
 
-/*************** background ***************/
-
 /*************** graphs ***************/
-
 .legend-labels {
     overflow: auto !important;
 }
@@ -146,5 +151,3 @@ fa-icon:hover {
 .graph-title-center {
     text-align: center;
 }
-
-/*************** graphs ***************/
