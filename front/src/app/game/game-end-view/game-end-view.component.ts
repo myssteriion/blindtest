@@ -81,14 +81,6 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
                 private _toasterService: ToasterService) {
     }
 
-    /**
-     * Reload graphs on tab click
-     * @param event
-     */
-    public onTabClick(event) {
-        this.showGraph = event.index === 1;
-    }
-
 	ngOnInit(): void {
 
 		this.musicIsPlaying = true;
@@ -204,6 +196,16 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		this.musicIsPlaying = false;
 		this.audio.pause();
 		this.audio.currentTime = 0;
+	}
+
+
+	/**
+	 * Show graph on graph tab click.
+	 *
+	 * @param event the event
+	 */
+	public onChangeTab(event) {
+		this.showGraph = event.index === 1;
 	}
 
 }
