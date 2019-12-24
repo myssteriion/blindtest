@@ -1,21 +1,25 @@
-<div class="row graph-title-center">
-    <span class="col graph-title">{{'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.GRAPH_TITLE_PERCENTAGE'|translate}}</span>
-</div>
+<div class="container-fluid">
 
-<div class="row">
-    <!--      Percentage of musics found by theme      -->
-    <ngx-charts-bar-horizontal-stacked class="chart-container" [view]="view"
-                                       [animations]="true"
-                                       [legendPosition]="'below'"
-                                       [legend]="true"
-                                       [legendTitle]="''"
-                                       [results]="stackedPercentages"
-                                       [scheme]="colorScheme"
-                                       [showXAxisLabel]="true"
-                                       [tooltipDisabled]="false" [xAxis]="true"
-                                       [xAxisLabel]="'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.PERCENTAGE'|translate"
-                                       [xScaleMax]="100"
-                                       [yAxis]="true">
-        <!--         [legendTitle]="'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.LEGEND'|translate"-->
-    </ngx-charts-bar-horizontal-stacked>
+    <div class="row">
+        <div class="col graph-title">{{ 'STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME.GRAPH_TITLE_PERCENTAGE' | translate }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col graph-content">
+            <ngx-charts-bar-horizontal-stacked class="chart-container"
+                                               [animations]="true"
+                                               [results]="stackedPercentages"
+                                               [scheme]="colorScheme"
+                                               [showXAxisLabel]="true"
+                                               [tooltipDisabled]="false"
+                                               [xAxis]="true"
+                                               [xScaleMax]="100"
+                                               [yAxis]="true"
+                                               [legend]="true"
+                                               [legendTitle]="''"
+                                               [legendPosition]="'right'">
+            </ngx-charts-bar-horizontal-stacked>
+        </div>
+    </div>
+
 </div>

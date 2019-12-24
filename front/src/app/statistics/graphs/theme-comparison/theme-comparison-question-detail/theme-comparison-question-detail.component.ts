@@ -1,10 +1,10 @@
-import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 import {Game} from "../../../../interfaces/game/game.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
-import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {COLOR_SCHEME} from "../../../../tools/graph.constant";
 
 /**
  * The theme comparison question detail view.
@@ -15,14 +15,24 @@ import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.c
     styleUrls: ['./theme-comparison-question-detail.component.css']
 })
 export class ThemeComparisonQuestionDetailComponent implements OnInit {
-    @Input()
-    private theme: Theme;
+
+    /**
+     * The game.
+     */
     @Input()
     private statistics: Game;
 
+    /**
+     * The theme.
+     */
+    @Input()
+    private theme: Theme;
+
     public stackedPercentages: ComplexGraphStatisticsInterface[] = [];
-    public view = HORIZONTAL_BAR_GRAPH_SIZE;
+
     public colorScheme = COLOR_SCHEME;
+
+
 
     constructor(private _translate: TranslateService) {
     }
@@ -31,10 +41,14 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
         this.calculateStatistics();
     }
 
-    // Detect changes on input fields
+    /**
+     * Detect changes on input fields.
+     */
     ngOnChanges(changes: SimpleChanges) {
         this.calculateStatistics();
     }
+
+
 
     /**
      * Calculate each player's stats on found/listened musics with answers specification (both, title, artist)

@@ -130,24 +130,19 @@ fa-icon:hover {
 }
 
 /*************** graphs ***************/
-.legend-labels {
-    overflow: auto !important;
-}
-
-.legend-label-text {
-    color: dimgrey !important;
-}
-
-.legend-label-text:hover {
-    color: black !important;
-}
-
 .graph-title {
-    margin-bottom: 1em;
-    font-size: 1em;
     font-weight: bold;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2em;
 }
 
-.graph-title-center {
+.graph-content {
+    height: 22em;
+    margin: auto;
     text-align: center;
+}
+
+g text {
+    font-size: 1.2em !important;
 }

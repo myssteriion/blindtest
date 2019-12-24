@@ -1,9 +1,9 @@
-import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
 import {ToolsService} from "../../../../tools/tools.service";
 import {Game} from "../../../../interfaces/game/game.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
-import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {COLOR_SCHEME} from "../../../../tools/graph.constant";
 
 /**
  * The theme comparison question number view.
@@ -14,27 +14,42 @@ import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.c
     styleUrls: ['./theme-comparison-question-number.component.css']
 })
 export class ThemeComparisonQuestionNumberComponent implements OnInit {
-    @Input()
-    private theme: Theme;
+
+    /**
+     * The game.
+     */
     @Input()
     private statistics: Game;
 
+    /**
+     * The theme.
+     */
+    @Input()
+    private theme: Theme;
+
     public questionsAnswered: SimpleGraphStatisticsInterface[] = [];
+
     public maxCount: number = 0;
-    public view = HORIZONTAL_BAR_GRAPH_SIZE;
+
     public colorScheme = COLOR_SCHEME;
 
-    constructor() {
-    }
 
-    // Detect changes on input fields
-    ngOnChanges(changes: SimpleChanges) {
-        this.calculateStatistics();
+
+    constructor() {
     }
 
     ngOnInit() {
         this.calculateStatistics();
     }
+
+    /**
+     * Detect changes on input fields.
+     */
+    ngOnChanges(changes: SimpleChanges) {
+        this.calculateStatistics();
+    }
+
+
 
     /**
      * Calculate each player's stats on found/listened musics
