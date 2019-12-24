@@ -1,8 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
-import {ToolsService} from "../../../tools/tools.service";
 import {Game} from "../../../interfaces/game/game.interface";
-import {NUMBER_CARD_GRAPH_SIZE_SMALL} from "../../../tools/graph.constant";
+import {ToolsService} from "../../../tools/tools.service";
 
 /**
  * The theme comparison view.
@@ -17,36 +16,54 @@ import {NUMBER_CARD_GRAPH_SIZE_SMALL} from "../../../tools/graph.constant";
 })
 export class ThemeComparisonViewComponent implements OnInit {
 
+    /**
+     * The game.
+     */
     @Input()
-    public gameStatistics: Game;
+    public game: Game;
 
-    public availableThemes: Theme[] = null;
-    public selectedTheme: Theme = null;
-    public view = NUMBER_CARD_GRAPH_SIZE_SMALL;
-    public listenedMusics: number = 0;
-    public themes = THEMES;
+    /**
+     * Themes list.
+     */
+    public themes: {}[];
+
+    /**
+     * Selected theme.
+     */
+    private selectedTheme: Theme;
+
+
 
     constructor() {
     }
 
     ngOnInit(): void {
-        this.availableThemes = [];
+
+        this.themes = [];
         THEMES.forEach(theme => {
-            let themeExists = this.gameStatistics.themes.find(gameTheme => {
-                return theme.enumVal === gameTheme
-            });
-            if (!ToolsService.isNull(themeExists)) {
-                this.availableThemes.push(themeExists)
-            }
+
+            let index = this.game.themes.findIndex(thm => thm === theme.enumVal);
+
+            if (index !== -1)
+                this.themes.push(theme);
+
+            if (this.themes.length === 1)
+                this.selectedTheme = theme.enumVal;
         });
     }
 
+
+
     /**
-     * Update theme on event received
-     * @param theme
+     * Get the nb musics for the selected theme.
      */
-    public onThemeChange(theme): void {
-        this.selectedTheme = theme;
+    public getNbMusicsInTheme(): number {
+
+        let nbMusics: number = 0;
+        if ( !ToolsService.isNull(this.game.listenedMusics[this.selectedTheme]) )
+            nbMusics = this.game.listenedMusics[this.selectedTheme];
+
+        return nbMusics;
     }
 
 }

@@ -1,26 +1,30 @@
-<div>
-    <theme-selection class="theme-list" [themes]="availableThemes" (onThemeChange)="onThemeChange($event)"></theme-selection>
+<div class="container-fluid">
 
-    <div class="row justify-content-center theme-comparison-margin-2">
-        <div class="col">
-            <div class="row justify-content-center ">
-                <ng2-odometer class="font-size-normal" [number]="listenedMusics" [format]="'(ddd)'"></ng2-odometer>
-            </div>
-            <div class="row justify-content-center ">
-                <span>{{'STATISTICS.LISTENED_IN_THEME' | translate}}</span>
-            </div>
+    <!-- themes -->
+    <div class="row">
+        <div class="col theme-comparison-themes">
+            <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="theme-comparison-img"
+                 [ngClass]="{ 'theme-comparison-img-active': (selectedTheme == theme.enumVal) }"
+                 (click)="selectedTheme = theme.enumVal">
         </div>
     </div>
 
-    <div class="row theme-comparison-margin-2">
-        <div class="col-6">
-            <theme-comparison-question-number [theme]="selectedTheme"
-                                              [statistics]="gameStatistics"></theme-comparison-question-number>
-        </div>
 
-        <div class="col-6">
-            <theme-comparison-question-detail [theme]="selectedTheme"
-                                              [statistics]="gameStatistics"></theme-comparison-question-detail>
-        </div>
+    <!-- total musics in theme value -->
+    <div class="row">
+        <ng2-odometer class="col font-size-normal theme-comparison-total-musics-in-theme-value" [number]="getNbMusicsInTheme()" [format]="'( ddd)'"></ng2-odometer>
     </div>
+
+    <!-- total musics in theme  label -->
+    <div class="row">
+        <div class="col font-size-very-very-small theme-comparison-total-musics-in-theme-label">{{ 'STATISTICS.LISTENED_IN_THEME' | translate }}</div>
+    </div>
+
+
+    <!-- graphs -->
+    <div class="row theme-comparison-graphs">
+        <theme-comparison-question-number class="col" [theme]="selectedTheme" [statistics]="game"></theme-comparison-question-number>
+        <theme-comparison-question-detail class="col" [theme]="selectedTheme" [statistics]="game"></theme-comparison-question-detail>
+    </div>
+
 </div>

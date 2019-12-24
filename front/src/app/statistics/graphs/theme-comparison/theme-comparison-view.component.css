@@ -1,12 +1,31 @@
-.theme-list {
-    margin-bottom: 30px;
+.theme-comparison-total-musics-in-theme-value, .theme-comparison-total-musics-in-theme-label {
     text-align: center;
 }
 
-.theme-comparison-margin-1 {
-    margin: 5em 1em 0 1em;
+.theme-comparison-themes {
+    text-align: center;
 }
 
-.theme-comparison-margin-2 {
-    margin: 2em 1em 0 1em;
+.theme-comparison-img {
+    height: 6em;
+    width: 6em;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 8px 8px 4px silver;
+    opacity: 0.3;
+}
+
+.theme-comparison-img:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.theme-comparison-img-active {
+    opacity: 1;
+}
+
+.theme-comparison-graphs {
+    padding-top: 2em;
 }
