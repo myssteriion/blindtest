@@ -20,7 +20,7 @@ export class EndGameRanksComponent implements OnInit {
 	/**
 	 * The podium ranks.
 	 */
-	private podiumRank: Rank[];
+	public podiumRank: Rank[];
 
 
 
@@ -81,7 +81,7 @@ export class EndGameRanksComponent implements OnInit {
 	 *
 	 * @return players list
 	 */
-	private getNoPodiumPlayers(): Player[] {
+	public getNoPodiumPlayers(): Player[] {
 
 		let players: Player[] = [];
 

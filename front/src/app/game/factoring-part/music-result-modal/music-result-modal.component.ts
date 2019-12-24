@@ -58,7 +58,7 @@ export class MusicResultModalComponent implements OnInit {
      */
     private nbLoseChoices: PLayerLoserItem[];
 
-    private faQuestionCircle = faQuestionCircle;
+    public faQuestionCircle = faQuestionCircle;
 
 
     constructor(private _ngbActiveModal: NgbActiveModal,

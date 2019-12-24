@@ -30,7 +30,7 @@ export class ThemeComparisonViewComponent implements OnInit {
     /**
      * Selected theme.
      */
-    private selectedTheme: Theme;
+    public selectedTheme: Theme;
 
 
 
