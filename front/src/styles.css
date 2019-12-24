@@ -130,19 +130,30 @@ fa-icon:hover {
 }
 
 /*************** graphs ***************/
-.graph-title {
+.graph-frame {
+    background-color: #f2f2f2;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.graph-frame .graph-title {
     font-weight: bold;
     margin: auto;
     text-align: center;
     font-size: 1.2em;
+    padding: 1em;
+
+    background-color: #cbc7cc;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
-.graph-content {
+.graph-frame .graph-content {
     height: 22em;
     margin: auto;
-    text-align: center;
 }
 
-g text {
+.graph-frame g text {
     font-size: 1.2em !important;
 }
