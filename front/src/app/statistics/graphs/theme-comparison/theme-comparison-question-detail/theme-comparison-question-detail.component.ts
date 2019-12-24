@@ -74,9 +74,23 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
             let value = ToolsService.isNull(musicsForTheme[typeKey]) ? 0 : musicsForTheme[typeKey];
             foundMusics.push({
                 name: this._translate.instant("STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME." + typeKey),
-                value: Math.floor(value / listenedMusicsInTheme * 100)
+                // value: Math.floor(value / listenedMusicsInTheme * 100)
+                value: Math.floor(value)
             })
         });
         return foundMusics;
     }
+
+    /**
+     * Get the nb musics for the selected theme.
+     */
+    public getMaximum(): number {
+
+        let nbMusics: number = 0;
+        if ( !ToolsService.isNull(this.game.listenedMusics[this.theme]) )
+            nbMusics = this.game.listenedMusics[this.theme];
+
+        return nbMusics;
+    }
+
 }

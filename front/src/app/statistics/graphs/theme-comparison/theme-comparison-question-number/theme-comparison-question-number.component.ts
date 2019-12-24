@@ -82,4 +82,16 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
         return foundMusics;
     }
 
+    /**
+     * Get the nb musics for the selected theme.
+     */
+    public getMaximum(): number {
+
+        let nbMusics: number = 0;
+        if ( !ToolsService.isNull(this.game.listenedMusics[this.theme]) )
+            nbMusics = this.game.listenedMusics[this.theme];
+
+        return nbMusics;
+    }
+
 }
