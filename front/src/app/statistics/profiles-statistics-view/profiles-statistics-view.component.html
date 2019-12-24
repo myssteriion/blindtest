@@ -1,3 +1,14 @@
+
+<div *ngIf="true" @flyInOut>
+    <div class="row">
+        <div class="col font-size-normal"
+             style="color: orangered; text-align: center; margin: auto; font-weight: bold; font-style: italic; padding-top: 4em">
+            Un peu de patience, cette page n'est pas encore prête.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="false">
 <div class="container-fluid-forced-marge profiles-statistics-view-margin-bottom-5" @flyInOut *ngIf="!isLoading">
 
     <header [title]="'STATISTICS.TITLE' | translate"></header>
@@ -73,4 +84,5 @@
         </mat-tab>
     </mat-tab-group>
 
+</div>
 </div>
