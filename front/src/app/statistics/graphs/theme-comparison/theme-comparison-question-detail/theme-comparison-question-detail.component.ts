@@ -20,7 +20,7 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
      * The game.
      */
     @Input()
-    private statistics: Game;
+    private game: Game;
 
     /**
      * The theme.
@@ -55,7 +55,7 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
      */
     private calculateStatistics() {
         this.stackedPercentages = [];
-        this.statistics.players.forEach(player => {
+        this.game.players.forEach(player => {
             let series = ToolsService.isNull(player.foundMusics[this.theme]) ? [] : this.getMusicWinForPlayer(player.foundMusics[this.theme]);
             this.stackedPercentages.push({name: player.profile.name, series: series})
         });
@@ -68,7 +68,7 @@ export class ThemeComparisonQuestionDetailComponent implements OnInit {
      */
     private getMusicWinForPlayer(musicsForTheme) {
         let foundMusics = [];
-        let listenedMusicsInTheme = this.statistics.listenedMusics[this.theme];
+        let listenedMusicsInTheme = this.game.listenedMusics[this.theme];
         let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
             let value = ToolsService.isNull(musicsForTheme[typeKey]) ? 0 : musicsForTheme[typeKey];

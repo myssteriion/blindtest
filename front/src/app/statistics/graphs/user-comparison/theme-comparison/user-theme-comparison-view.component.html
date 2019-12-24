@@ -2,8 +2,8 @@
     <theme-selection class="theme-list" [themes]="availableThemes" (onThemeChange)="onThemeChange($event)"></theme-selection>
 
     <theme-comparison-question-number [theme]="selectedTheme"
-                                      [statistics]="gameStatistics"></theme-comparison-question-number>
+                                      [game]="gameStatistics"></theme-comparison-question-number>
 
     <theme-comparison-question-detail [theme]="selectedTheme"
-                                      [statistics]="gameStatistics"></theme-comparison-question-detail>
+                                      [game]="gameStatistics"></theme-comparison-question-detail>
 </div>

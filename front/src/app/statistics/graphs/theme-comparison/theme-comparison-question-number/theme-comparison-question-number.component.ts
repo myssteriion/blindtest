@@ -19,7 +19,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
      * The game.
      */
     @Input()
-    private statistics: Game;
+    private game: Game;
 
     /**
      * The theme.
@@ -56,9 +56,9 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
      */
     private calculateStatistics() {
         this.questionsAnswered = [];
-        this.maxCount = this.statistics.listenedMusics[this.theme];
+        this.maxCount = this.game.listenedMusics[this.theme];
 
-        this.statistics.players.forEach(player => {
+        this.game.players.forEach(player => {
             let foundMusics = ToolsService.isNull(player.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.foundMusics[this.theme]);
             this.questionsAnswered.push({
                 name: player.profile.name,
