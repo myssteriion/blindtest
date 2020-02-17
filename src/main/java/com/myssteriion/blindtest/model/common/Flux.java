@@ -108,8 +108,13 @@ public class Flux {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+
+        if (this == o)
+            return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
         Flux flux = (Flux) o;
         return Objects.equals(name, flux.name);
     }
