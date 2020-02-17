@@ -39,6 +39,7 @@ public class ProfileStatController {
 	 * Instantiates a new Profile stat controller.
 	 *
 	 * @param profileStatService the profile stat service
+	 * @param  profileService    the profile  service
 	 */
 	@Autowired
 	public ProfileStatController(ProfileStatService profileStatService, ProfileService profileService) {

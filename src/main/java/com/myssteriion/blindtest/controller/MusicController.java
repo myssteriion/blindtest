@@ -32,6 +32,11 @@ public class MusicController {
 
 
 
+	/**
+	 * Instantiates a new Music controller.
+	 *
+	 * @param musicService the music service
+	 */
 	@Autowired
 	public MusicController(MusicService musicService) {
 		this.musicService = musicService;
@@ -60,5 +65,5 @@ public class MusicController {
 
 		return ResponseBuilder.create200(music);
 	}
-	
+
 }

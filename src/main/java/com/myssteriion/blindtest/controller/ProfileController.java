@@ -22,6 +22,8 @@ public class ProfileController {
 
 	private ProfileService profileService;
 
+
+
 	/**
 	 * Instantiates a new Profile controller.
 	 *
@@ -31,6 +33,7 @@ public class ProfileController {
 	public ProfileController(ProfileService profileService) {
 		this.profileService = profileService;
 	}
+
 
 
 	/**

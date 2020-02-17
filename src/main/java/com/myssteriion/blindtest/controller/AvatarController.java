@@ -17,8 +17,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "avatars")
 public class AvatarController {
 
-	@Autowired
 	private AvatarService avatarService;
+
+
+
+	/**
+	 * Instantiates a new Avatar controller.
+	 *
+	 * @param avatarService the avatar service
+	 */
+	@Autowired
+	public AvatarController(AvatarService avatarService) {
+		this.avatarService = avatarService;
+	}
 
 
 

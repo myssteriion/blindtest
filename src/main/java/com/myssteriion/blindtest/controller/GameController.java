@@ -29,6 +29,13 @@ public class GameController {
 
 	private GameService gameService;
 
+
+
+	/**
+	 * Instantiates a new Game controller.
+	 *
+	 * @param gameService the game service
+	 */
 	@Autowired
 	public GameController(GameService gameService) {
 		this.gameService = gameService;
