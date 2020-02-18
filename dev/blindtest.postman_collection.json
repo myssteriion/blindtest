@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bea477d5-c50f-4ceb-9023-b62b82453ac4",
+		"_postman_id": "62d3a7f8-f5a3-4ca9-9982-8e37c9dba39c",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -48,12 +48,32 @@
 			"name": "music",
 			"item": [
 				{
+					"name": "compute themes info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/musics/compute-themes-info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"musics",
+								"compute-themes-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "random",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&connectionMode=OFFLINE",
+							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&effects=NONE, SPEED&connectionMode=OFFLINE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -68,6 +88,11 @@
 									"key": "themes",
 									"value": "ANNEES_90, ANNEES_70, SERIES_CINEMAS",
 									"description": "c'est une liste, valeurs possibles :\nANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nANNEES_2010\nSERIES_CINEMAS\nDISNEY\nJEUX\nCLASSIQUES"
+								},
+								{
+									"key": "effects",
+									"value": "NONE, SPEED",
+									"description": "c'est une liste, valeurs possibles :\nNONE\nSLOW\nSPEED\nMIX"
 								},
 								{
 									"key": "connectionMode",
@@ -250,7 +275,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"ONLINE\"\n}",
+							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\", \"Despacito\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [\"ANNEES_60\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -285,7 +310,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Adamo - Mes mains sur tes hanches.mp3\",\n\t\t\"theme\": \"ANNEES_60\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Bigflo & Oli - Nous aussi.mp3\",\n\t\t\"theme\": \"JEUX\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game/apply",
@@ -758,7 +783,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"{{player1}}\", \"{{player2}}\",  \"{{player3}}\",  \"{{player4}}\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"effects\": [\"NONE\", \"SLOW\", \"SPEED\", \"MIX\"],\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
+							"raw": "{\n\t\"playersNames\": [ \"{{player1}}\", \"{{player2}}\",  \"{{player3}}\",  \"{{player4}}\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/game",
@@ -2009,564 +2034,6 @@
 				},
 				{
 					"name": "apply 040",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 041",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 042",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 043",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 044",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 045",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 046",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 047",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 048",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 049",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 050",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 051",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 052",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 053",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 054",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 055",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 056",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 057",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"game",
-								"apply"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "apply 058",
 					"request": {
 						"method": "POST",
 						"header": [
