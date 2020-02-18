@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
@@ -15,6 +16,7 @@ import com.myssteriion.blindtest.tools.Tool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -200,7 +202,31 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Tool.verifyValue("theme", theme);
 		Tool.verifyValue("connectionMode", connectionMode);
 
-		return dao.countByThemeAndConnectionMode(theme, connectionMode);
+		Integer nbMusic = 0;
+		for (ConnectionMode mode : connectionMode.transformForSearchMusic() )
+			nbMusic += dao.countByThemeAndConnectionMode(theme, mode);
+
+		return nbMusic;
+	}
+
+	/**
+	 * Get nb musics by themes by connection mode.
+	 *
+	 * @return the themes info list
+	 */
+	public List<ThemeInfo> computeThemesInfo() {
+
+		List<ThemeInfo> themesInfo = new ArrayList<>();
+
+		for ( Theme theme : Theme.getSortedTheme() ) {
+
+			Integer offlineNbMusics = getMusicNumber(theme, ConnectionMode.OFFLINE);
+			Integer onlineNbMusics = getMusicNumber(theme, ConnectionMode.ONLINE);
+
+			themesInfo.add( new ThemeInfo(theme, offlineNbMusics, onlineNbMusics) );
+		}
+
+		return themesInfo;
 	}
 
 	/**

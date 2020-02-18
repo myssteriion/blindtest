@@ -93,11 +93,7 @@ public class GameService {
 
 		for ( Theme theme : newGame.getThemes() ) {
 
-			Integer nbMusic = 0;
-
-			for (ConnectionMode connectionMode : newGame.getConnectionMode().transformForSearchMusic() )
-				nbMusic += musicService.getMusicNumber(theme, connectionMode);
-
+			Integer nbMusic = musicService.getMusicNumber( theme, newGame.getConnectionMode() );
 			if (nbMusic == 0)
 				throw new NotFoundException("Zero music found ('" + theme + "' ; '" + newGame.getConnectionMode().transformForSearchMusic() + "')");
 		}

@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -51,6 +52,48 @@ public class MusicServiceTest extends AbstractTest {
 	}
 
 
+
+	@Test
+	public void getMusicNumber() {
+
+		Mockito.when(dao.countByThemeAndConnectionMode(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(2, 3, 5, 7);
+
+		Theme theme = Theme.ANNEES_80;
+
+		try {
+			musicService.getMusicNumber(null, ConnectionMode.OFFLINE);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
+		}
+
+		try {
+			musicService.getMusicNumber(theme, null);
+			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+		}
+		catch (IllegalArgumentException e) {
+			verifyException(new IllegalArgumentException("Le champ 'connectionMode' est obligatoire."), e);
+		}
+
+		Assert.assertEquals( new Integer(2), musicService.getMusicNumber(theme, ConnectionMode.OFFLINE) );
+		Assert.assertEquals( new Integer(3), musicService.getMusicNumber(theme, ConnectionMode.ONLINE) );
+		Assert.assertEquals( new Integer(5+7), musicService.getMusicNumber(theme, ConnectionMode.BOTH) );
+	}
+
+	@Test
+	public void computeThemesInfo() {
+
+		musicService = Mockito.spy( new MusicService(dao, spotifyService) );
+		MockitoAnnotations.initMocks(musicService);
+		Mockito.doReturn(2, 3, 5, 7, 11).when(musicService).getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class));
+
+		List<ThemeInfo> actual = musicService.computeThemesInfo();
+		Assert.assertEquals( new ThemeInfo(Theme.ANNEES_60, 2, 3), actual.get(0) );
+		Assert.assertEquals( new ThemeInfo(Theme.ANNEES_70, 5, 7), actual.get(1) );
+		Assert.assertEquals( new ThemeInfo(Theme.ANNEES_80, 11, 11), actual.get(2) );
+		Assert.assertEquals( new ThemeInfo(Theme.ANNEES_90, 11, 11), actual.get(3) );
+	}
 
 	@Test
 	public void refresh() throws ConflictException {
