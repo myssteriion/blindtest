@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.controller;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
@@ -10,6 +11,8 @@ import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,20 @@ public class MusicController {
 	}
 
 
+
+	/**
+	 * Get nb musics by themes by connection mode.
+	 *
+	 * @return the themesInfo
+	 */
+	@GetMapping(path = "/compute-themes-info")
+	public ResponseEntity< Page<ThemeInfo> > computeThemesInfo() {
+
+		musicService.refresh();
+
+		List<ThemeInfo> themesInfo = musicService.computeThemesInfo();
+		return ResponseBuilder.create200( new PageImpl<>(themesInfo) );
+	}
 
 	/**
 	 * Randomly choose a music.

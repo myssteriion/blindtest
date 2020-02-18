@@ -1,10 +1,11 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.model.common.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
@@ -14,11 +15,14 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class MusicControllerTest extends AbstractTest {
 
@@ -29,7 +33,25 @@ public class MusicControllerTest extends AbstractTest {
 	private MusicController musicController;
 	
 	
-	
+
+	@Test
+	public void computeThemesInfo() {
+
+		Mockito.doNothing().when(musicService).refresh();
+
+		List<ThemeInfo> themesInfo = Arrays.asList(
+				new ThemeInfo(Theme.ANNEES_60, 2, 4),
+				new ThemeInfo(Theme.ANNEES_70, 12, 14),
+				new ThemeInfo(Theme.ANNEES_80, 22, 24)
+		);
+
+		Mockito.when(musicService.computeThemesInfo()).thenReturn(themesInfo);
+
+		ResponseEntity< Page<ThemeInfo> > re = musicController.computeThemesInfo();
+		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+		Assert.assertEquals( themesInfo, re.getBody().getContent() );
+	}
+
 	@Test
 	public void random() throws NotFoundException, IOException, SpotifyException {
 
