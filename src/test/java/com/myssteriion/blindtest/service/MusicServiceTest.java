@@ -10,7 +10,7 @@ import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.blindtest.spotify.exception.SpotifyException;
+import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Tool;
 import org.junit.Assert;
 import org.junit.Before;

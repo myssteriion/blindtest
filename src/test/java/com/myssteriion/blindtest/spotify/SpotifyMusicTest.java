@@ -1,6 +1,7 @@
-package com.myssteriion.blindtest.spotify.dto;
+package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.spotify.SpotifyMusic;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.spotify.exception;
+package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.tools.Tool;
 

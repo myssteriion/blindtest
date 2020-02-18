@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

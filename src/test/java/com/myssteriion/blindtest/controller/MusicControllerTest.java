@@ -9,7 +9,7 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
-import com.myssteriion.blindtest.spotify.exception.SpotifyException;
+import com.myssteriion.blindtest.spotify.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;

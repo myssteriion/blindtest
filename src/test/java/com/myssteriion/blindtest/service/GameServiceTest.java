@@ -16,7 +16,7 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.rest.exception.ConflictException;
 import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.blindtest.spotify.exception.SpotifyException;
+import com.myssteriion.blindtest.spotify.SpotifyException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;

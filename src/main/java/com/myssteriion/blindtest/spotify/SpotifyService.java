@@ -2,8 +2,6 @@ package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.properties.SpotifyProperties;
-import com.myssteriion.blindtest.spotify.dto.SpotifyMusic;
-import com.myssteriion.blindtest.spotify.exception.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.blindtest.tools.Tool;
 import com.wrapper.spotify.SpotifyApi;
