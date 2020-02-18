@@ -196,9 +196,6 @@ public class Player {
         Tool.verifyValue("theme", theme);
         Tool.verifyValue("winMode", goodAnswer);
 
-        if (foundMusics == null)
-            foundMusics = new HashMap<>();
-
         if ( !foundMusics.containsKey(theme) )
             foundMusics.put(theme, new HashMap<>());
 

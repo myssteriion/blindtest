@@ -1,10 +1,14 @@
 package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class PlayerTest extends AbstractTest {
 
@@ -72,6 +76,22 @@ public class PlayerTest extends AbstractTest {
         Assert.assertEquals(playerUn.hashCode(), playerUn.hashCode());
         Assert.assertEquals(playerUn.hashCode(), playerUnIso.hashCode());
         Assert.assertNotEquals(playerUn.hashCode(), playerDeux.hashCode());
+    }
+
+    @Test
+    public void incrementFoundMusics() {
+
+        String name = "name";
+        ProfileDTO profile = new ProfileDTO(name);
+        Player player = new Player(profile);
+
+        player.incrementFoundMusics(Theme.ANNEES_60, GoodAnswer.TITLE);
+        Map<Theme, Map<GoodAnswer, Integer>> foundMusics = player.getFoundMusics();
+        Assert.assertEquals( new Integer(1), foundMusics.get(Theme.ANNEES_60).get(GoodAnswer.TITLE) );
+
+        player.incrementFoundMusics(Theme.ANNEES_60, GoodAnswer.TITLE);
+        foundMusics = player.getFoundMusics();
+        Assert.assertEquals( new Integer(2), foundMusics.get(Theme.ANNEES_60).get(GoodAnswer.TITLE) );
     }
 
 }
