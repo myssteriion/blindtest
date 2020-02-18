@@ -119,10 +119,12 @@ public class SpotifyMusicTest extends AbstractTest {
 
         Assert.assertNotEquals(spotifyMusic, null);
         Assert.assertNotEquals(spotifyMusic, "bad class");
+        Assert.assertEquals(spotifyMusic, spotifyMusic);
         Assert.assertEquals(spotifyMusic, spotifyMusicIso1);
         Assert.assertEquals(spotifyMusic, spotifyMusicIso2);
         Assert.assertNotEquals(spotifyMusic, spotifyMusic2);
 
+        Assert.assertEquals(spotifyMusic.hashCode(), spotifyMusic.hashCode());
         Assert.assertEquals(spotifyMusic.hashCode(), spotifyMusicIso1.hashCode());
         Assert.assertEquals(spotifyMusic.hashCode(), spotifyMusicIso2.hashCode());
         Assert.assertNotEquals(spotifyMusic.hashCode(), spotifyMusic2.hashCode());
