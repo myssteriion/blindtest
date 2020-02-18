@@ -241,9 +241,6 @@ public class Game implements IModel {
 
         Tool.verifyValue("theme", theme);
 
-        if (listenedMusics == null)
-            listenedMusics = new HashMap<>();
-
         if ( !listenedMusics.containsKey(theme) )
             listenedMusics.put(theme, 0);
 

@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class GameTest extends AbstractTest {
 
@@ -133,6 +135,40 @@ public class GameTest extends AbstractTest {
     }
 
     @Test
+    public void toStringAndEquals() {
+
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Duration duration = Duration.NORMAL;
+        List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
+        List<Effect> effects = Arrays.asList(Effect.NONE, Effect.SPEED);
+
+        Game gameUn = new Game(new HashSet<>(players), duration, themes, effects, ConnectionMode.OFFLINE);
+        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, " +
+                "round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70], effects=[NONE, SPEED], connectionMode=OFFLINE, listenedMusics={}", gameUn.toString() );
+    }
+
+    @Test
+    public void incrementListenedMusics() {
+
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Duration duration = Duration.NORMAL;
+
+        Game game = new Game(new HashSet<>(players), duration, null, null, ConnectionMode.OFFLINE);
+
+        game.incrementListenedMusics(Theme.ANNEES_60);
+        Map<Theme, Integer> foundMusics = game.getListenedMusics();
+        Assert.assertEquals( new Integer(1), foundMusics.get(Theme.ANNEES_60) );
+
+        game.incrementListenedMusics(Theme.ANNEES_60);
+        foundMusics = game.getListenedMusics();
+        Assert.assertEquals( new Integer(2), foundMusics.get(Theme.ANNEES_60) );
+    }
+
+    @Test
     public void nextStep() {
 
         List<Player> players = Arrays.asList(
@@ -231,21 +267,6 @@ public class GameTest extends AbstractTest {
 
         Assert.assertTrue( game.isFinished() );
         Assert.assertEquals( nbMusic, game.getNbMusicsPlayed() );
-    }
-
-    @Test
-    public void toStringAndEquals() {
-
-        List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Duration duration = Duration.NORMAL;
-        List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
-        List<Effect> effects = Arrays.asList(Effect.NONE, Effect.SPEED);
-
-        Game gameUn = new Game(new HashSet<>(players), duration, themes, effects, ConnectionMode.OFFLINE);
-        Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, " +
-                "round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}, themes=[ANNEES_60, ANNEES_70], effects=[NONE, SPEED], connectionMode=OFFLINE, listenedMusics={}", gameUn.toString() );
     }
 
 }
