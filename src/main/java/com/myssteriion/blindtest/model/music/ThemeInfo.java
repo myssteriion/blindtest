@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.common.music;
+package com.myssteriion.blindtest.model.music;
 
 import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Theme;
