@@ -24,10 +24,7 @@
         "HIDE_DETAIL": "Masquer détail",
         "GO_HOME": "Retour au menu",
         "CANCEL_MODIFICATION": "Annuler la modification en cours",
-        "RANK": "n° rang",
-        "USER_SEARCH": {
-            "NO_USERS_FOUND": "Aucun utilisateur trouvé"
-        }
+        "RANK": "n° rang"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"

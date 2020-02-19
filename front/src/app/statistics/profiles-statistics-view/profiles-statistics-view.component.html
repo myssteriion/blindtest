@@ -21,7 +21,7 @@
                     [items]="users"
                     [multiple]="true"
                     bindLabel="name"
-                    notFoundText="{{'COMMON.USER_SEARCH.NO_USERS_FOUND'|translate}}"
+                    notFoundText="{{'COMMON.NO_RESULT'|translate}}"
                     [closeOnSelect]="false"
                     [(ngModel)]="selectedUsers">
                 <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
