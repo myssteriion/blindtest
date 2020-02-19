@@ -48,7 +48,7 @@ export class ThemePercentagesComponent implements OnInit {
                 });
             }
 
-            this.stackedPercentages.push({name: this._translate.instant("MUSIC_THEMES." + key), series: series})
+            this.stackedPercentages.push({name: this._translate.instant("THEMES." + key), series: series})
         });
 
         this.stackedPercentages = ToolsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);

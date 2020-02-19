@@ -42,7 +42,7 @@ export class ThemeListeningComponent implements OnInit {
 
         keys.forEach(key => {
             this.listenedMusicsByTheme.push({
-                name: this._translate.instant("MUSIC_THEMES." + key),
+                name: this._translate.instant("THEMES." + key),
                 value: ToolsService.isNull(listenedThemes[key]) ? 0 : parseInt(listenedThemes[key])
             });
             if (this.maxCount < parseInt(listenedThemes[key])) {

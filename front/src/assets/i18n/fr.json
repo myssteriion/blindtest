@@ -194,14 +194,14 @@
         }
     },
     "THEMES": {
-        "ANNEES_60": "Les années 1960.",
-        "ANNEES_70": "Les années 1970.",
-        "ANNEES_80": "Les années 1980.",
-        "ANNEES_90": "Les années 1990.",
-        "ANNEES_2000": "Les années 2000.",
-        "ANNEES_2010": "Les années 2010.",
-        "DISNEY": "Les chansons Disney.",
-        "SERIES_CINEMAS": "Les musiques de Films et Séries."
+        "ANNEES_60": "Années 1960",
+        "ANNEES_70": "Années 1970",
+        "ANNEES_80": "Années 1980",
+        "ANNEES_90": "Années 1990",
+        "ANNEES_2000": "Années 2000",
+        "ANNEES_2010": "Années 2010",
+        "DISNEY": "Disney",
+        "SERIES_CINEMAS": "Séries & Cinéma"
     },
     "EFFECTS": {
         "NONE": "Musique sans effet.",
@@ -266,19 +266,6 @@
             "GENERAL_STATISTICS": "Statistiques générales",
             "THEME_STATISTICS": "Statistiques par thème"
         }
-    },
-    "MUSIC_THEMES": {
-        "ANNEES_60": "Années 1960",
-        "ANNEES_70": "Années 1970",
-        "ANNEES_80": "Années 1980",
-        "ANNEES_90": "Années 1990",
-        "ANNEES_2000": "Années 2000",
-        "ANNEES_2010": "Années 2010",
-        "SERIES_CINEMAS": "Séries & Cinéma",
-        "CLASSIQUES": "Classiques",
-        "DISNEY": "Disney",
-        "JEUX": "Jeux",
-        "SERIES": "Séries"
     },
     "RANK_OCCUPIED": {
         "GRAPH_TITLE": "Rang occupé",
