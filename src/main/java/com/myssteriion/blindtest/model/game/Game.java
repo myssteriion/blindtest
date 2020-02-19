@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
@@ -8,8 +7,9 @@ import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.tools.BeanFactory;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.BeanFactory;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.model.IModel;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -92,9 +92,9 @@ public class Game implements IModel {
      */
     public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
-        Tool.verifyValue("players", players);
-        Tool.verifyValue("duration", duration);
-        Tool.verifyValue("gameMode", connectionMode);
+        Tools.verifyValue("players", players);
+        Tools.verifyValue("duration", duration);
+        Tools.verifyValue("gameMode", connectionMode);
 
         checkNbPlayers(players);
 
@@ -104,8 +104,8 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
-        this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.effects = Tool.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
+        this.themes = Tools.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.effects = Tools.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
         this.listenedMusics = new HashMap<>();
     }
@@ -239,7 +239,7 @@ public class Game implements IModel {
      */
     public void incrementListenedMusics(Theme theme) {
 
-        Tool.verifyValue("theme", theme);
+        Tools.verifyValue("theme", theme);
 
         if ( !listenedMusics.containsKey(theme) )
             listenedMusics.put(theme, 0);
@@ -286,7 +286,7 @@ public class Game implements IModel {
      * @return TRUE if it's the game is finish, FALSE otherwise
      */
     public boolean isFinished() {
-        return Tool.isNullOrEmpty(round);
+        return Tools.isNullOrEmpty(round);
     }
 
 

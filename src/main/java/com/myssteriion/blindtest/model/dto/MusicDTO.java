@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.model.dto;
 
-import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -122,7 +122,7 @@ public class MusicDTO extends AbstractDTO {
 	 */
 	public MusicDTO(String name, Theme theme, ConnectionMode connectionMode, String spotifyTrackId, String spotifyPreviewUrl, String spotifyTrackUrl) {
 
-		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		this.name = Tools.isNullOrEmpty(name) ? "" : name;
 		this.theme = theme;
 		this.connectionMode = connectionMode;
 		this.spotifyTrackId = spotifyTrackId;
@@ -159,7 +159,7 @@ public class MusicDTO extends AbstractDTO {
 	 * @return this name
 	 */
 	public MusicDTO setName(String name) {
-		this.name = Tool.isNullOrEmpty(name) ? "" : name;
+		this.name = Tools.isNullOrEmpty(name) ? "" : name;
 		return this;
 	}
 

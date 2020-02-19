@@ -2,12 +2,12 @@ package com.myssteriion.blindtest.tools.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
-import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.exception.CustomRuntimeException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -22,8 +22,8 @@ public class ThemeGoodAnswerConverterTest extends AbstractTest {
 
         ThemeWinModeConverter converter = new ThemeWinModeConverter();
 
-        Assert.assertEquals( Constant.EMPTY_JSON, converter.convertToDatabaseColumn(null) );
-        Assert.assertEquals( Constant.EMPTY_JSON, converter.convertToDatabaseColumn(new HashMap<>()) );
+        Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(null) );
+        Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(new HashMap<>()) );
 
 
         Map<Theme, Map<GoodAnswer, Integer>> map = new HashMap<>();

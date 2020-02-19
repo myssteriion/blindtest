@@ -3,12 +3,13 @@ package com.myssteriion.blindtest.controller;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.rest.RestUtils;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,7 +55,7 @@ public class GameController {
 	public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException, SpotifyException {
 
 		Game game = gameService.newGame(newGame);
-		return ResponseBuilder.create200(game);
+		return RestUtils.create200(game);
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class GameController {
 	public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException, ConflictException {
 
 		Game game = gameService.apply(musicResult);
-		return ResponseBuilder.create200(game);
+		return RestUtils.create200(game);
 	}
 
 	/**
@@ -79,11 +80,11 @@ public class GameController {
 	 * @return a GameDTO
 	 * @throws NotFoundException NotFound exception
 	 */
-	@GetMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<Game> findById(@PathVariable(Constant.ID) Integer id) throws NotFoundException {
+	@GetMapping(path = CommonConstant.ID_PATH_PARAM)
+	public ResponseEntity<Game> findById(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
 
 		Game game = gameService.findGame(id);
-		return ResponseBuilder.create200(game);
+		return RestUtils.create200(game);
 	}
 
 }

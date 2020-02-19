@@ -1,16 +1,26 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.base.Empty;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.rest.RestUtils;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller for ProfileDTO.
@@ -45,7 +55,7 @@ public class ProfileController {
 	 */
 	@PostMapping
 	public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws ConflictException {
-		return ResponseBuilder.create201( profileService.save(profileDto) );
+		return RestUtils.create201( profileService.save(profileDto) );
 	}
 
 	/**
@@ -57,11 +67,11 @@ public class ProfileController {
 	 * @throws NotFoundException NotFound exception
 	 * @throws ConflictException the conflict exception
 	 */
-	@PutMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<ProfileDTO> update(@PathVariable(Constant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
+	@PutMapping(path = CommonConstant.ID_PATH_PARAM)
+	public ResponseEntity<ProfileDTO> update(@PathVariable(CommonConstant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
 		
 		profileDto.setId(id);
-		return ResponseBuilder.create200( profileService.update(profileDto) );
+		return RestUtils.create200( profileService.update(profileDto) );
 	}
 
 	/**
@@ -75,10 +85,10 @@ public class ProfileController {
 	@GetMapping
 	public ResponseEntity< Page<ProfileDTO> > findAllByNameStartingWith(
 			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = Constant.PAGE_NUMBER) Integer pageNumber,
-			@RequestParam(value = Constant.ITEM_PER_PAGE) Integer itemPerPage) {
+			@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+			@RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
 
-		return ResponseBuilder.create200( profileService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage) );
+		return RestUtils.create200( profileService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage) );
 	}
 
 	/**
@@ -88,15 +98,15 @@ public class ProfileController {
 	 * @return the response entity
 	 * @throws NotFoundException the not found exception
 	 */
-	@DeleteMapping(path = Constant.ID_PATH_PARAM)
-	public ResponseEntity<Empty> delete(@PathVariable(Constant.ID) Integer id) throws NotFoundException {
+	@DeleteMapping(path = CommonConstant.ID_PATH_PARAM)
+	public ResponseEntity<Empty> delete(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
 
 		ProfileDTO profileDto = new ProfileDTO("ANY");
 		profileDto.setId(id);
 
 		profileService.delete(profileDto);
 
-		return ResponseBuilder.create204();
+		return RestUtils.create204();
 	}
 
 }

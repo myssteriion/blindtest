@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
 
 import java.util.List;
 import java.util.Set;
@@ -53,14 +53,14 @@ public class NewGame {
     @JsonCreator
     public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
-        Tool.verifyValue("playersNames", playersNames);
-        Tool.verifyValue("duration", duration);
-        Tool.verifyValue("gameMode", connectionMode);
+        Tools.verifyValue("playersNames", playersNames);
+        Tools.verifyValue("duration", duration);
+        Tools.verifyValue("gameMode", connectionMode);
 
         this.playersNames = playersNames;
         this.duration = duration;
-        this.themes = Tool.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.effects = Tool.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
+        this.themes = Tools.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.effects = Tools.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
     }
 

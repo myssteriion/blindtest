@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.service.AvatarService;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;

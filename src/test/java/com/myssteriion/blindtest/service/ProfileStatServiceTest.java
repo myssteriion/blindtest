@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

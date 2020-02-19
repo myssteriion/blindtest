@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.spotify;
 
-import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.spotify.SpotifyException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 

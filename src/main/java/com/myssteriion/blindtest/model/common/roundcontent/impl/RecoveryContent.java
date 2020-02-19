@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
-import com.myssteriion.blindtest.tools.Tool;
 
 /**
  * The Recovery round content.

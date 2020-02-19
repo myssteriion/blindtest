@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +56,8 @@ public class MusicResult {
 	@JsonCreator
 	public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers, List<String> wronglyPass) {
 
-		Tool.verifyValue("gameId", gameId);
-		Tool.verifyValue("music", music);
+		Tools.verifyValue("gameId", gameId);
+		Tools.verifyValue("music", music);
 
 		this.gameId = gameId;
 		this.music = music;
@@ -133,7 +133,7 @@ public class MusicResult {
 	 */
 	public boolean isAuthorWinner(String name) {
 
-		Tool.verifyValue("name", name);
+		Tools.verifyValue("name", name);
 
 		return authorWinners.stream().anyMatch(playerName -> playerName.equals(name));
 	}
@@ -146,7 +146,7 @@ public class MusicResult {
 	 */
 	public boolean isTitleWinner(String name) {
 
-		Tool.verifyValue("name", name);
+		Tools.verifyValue("name", name);
 
 		return titleWinners.stream().anyMatch(playerName -> playerName.equals(name));
 	}
@@ -159,7 +159,7 @@ public class MusicResult {
 	 */
 	public boolean isAuthorAndTitleWinner(String name) {
 
-		Tool.verifyValue("name", name);
+		Tools.verifyValue("name", name);
 
 		return isAuthorWinner(name) && isTitleWinner(name);
 	}
@@ -172,7 +172,7 @@ public class MusicResult {
 	 */
 	public boolean isLoser(String name) {
 
-		Tool.verifyValue("name", name);
+		Tools.verifyValue("name", name);
 
 		return losers.stream().anyMatch(playerName -> playerName.equals(name));
 	}
@@ -185,7 +185,7 @@ public class MusicResult {
 	 */
 	public boolean hadWronglyPass(String name) {
 
-		Tool.verifyValue("name", name);
+		Tools.verifyValue("name", name);
 
 		return wronglyPass.stream().anyMatch(playerName -> playerName.equals(name));
 	}

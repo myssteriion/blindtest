@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Round;
@@ -10,6 +9,7 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.spotify;
 
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
 
 import java.util.Objects;
 
@@ -47,10 +47,10 @@ public class SpotifyMusic {
      */
     public SpotifyMusic(String trackId, String previewUrl, String artists, String name) {
 
-        Tool.verifyValue("trackId", trackId);
-        Tool.verifyValue("previewUrl", previewUrl);
-        Tool.verifyValue("artists", artists);
-        Tool.verifyValue("name", name);
+        Tools.verifyValue("trackId", trackId);
+        Tools.verifyValue("previewUrl", previewUrl);
+        Tools.verifyValue("artists", artists);
+        Tools.verifyValue("name", name);
 
         this.trackId = trackId;
         this.previewUrl = previewUrl;

@@ -5,11 +5,11 @@ import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.rest.RestUtils;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -58,7 +58,7 @@ public class MusicController {
 		musicService.refresh();
 
 		List<ThemeInfo> themesInfo = musicService.computeThemesInfo();
-		return ResponseBuilder.create200( new PageImpl<>(themesInfo) );
+		return RestUtils.create200( new PageImpl<>(themesInfo) );
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class MusicController {
 			music = musicService.random(themes, effects, connectionMode);
 		}
 
-		return ResponseBuilder.create200(music);
+		return RestUtils.create200(music);
 	}
 
 }

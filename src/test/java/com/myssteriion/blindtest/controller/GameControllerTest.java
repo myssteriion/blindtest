@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -10,10 +9,11 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;

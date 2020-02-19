@@ -9,8 +9,8 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
-import com.myssteriion.blindtest.tools.BeanFactory;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.BeanFactory;
+import com.myssteriion.utils.Tools;
 
 import java.util.Arrays;
 
@@ -60,7 +60,7 @@ public enum Round {
      */
     public AbstractRoundContent createRoundContent(Game game) {
 
-        Tool.verifyValue("game", game);
+        Tools.verifyValue("game", game);
 
         double durationRatio = game.getDuration().getRatio();
 

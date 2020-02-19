@@ -1,15 +1,15 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;

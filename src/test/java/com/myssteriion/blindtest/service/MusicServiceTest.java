@@ -1,17 +1,17 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ MusicService.class, Tool.class })
+@PrepareForTest({ MusicService.class, Tools.class })
 public class MusicServiceTest extends AbstractTest {
 
 	@Mock
@@ -105,9 +105,9 @@ public class MusicServiceTest extends AbstractTest {
 		File mockDirectory = Mockito.mock(File.class);
 		Mockito.when(mockDirectory.isFile()).thenReturn(false);
 
-		PowerMockito.mockStatic(Tool.class);
-		PowerMockito.when(Tool.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-		PowerMockito.when(Tool.hadAudioExtension(Mockito.anyString())).thenReturn(true);
+		PowerMockito.mockStatic(Tools.class);
+		PowerMockito.when(Tools.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+		PowerMockito.when(Tools.hadAudioExtension(Mockito.anyString())).thenReturn(true);
 
 
 		musicService = Mockito.spy( new MusicService(dao, spotifyService) );

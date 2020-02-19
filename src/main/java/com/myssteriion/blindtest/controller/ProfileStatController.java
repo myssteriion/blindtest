@@ -2,12 +2,12 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import com.myssteriion.utils.exception.CustomRuntimeException;
+import com.myssteriion.utils.rest.RestUtils;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -77,7 +77,7 @@ public class ProfileStatController {
 			}
 		});
 
-		return ResponseBuilder.create200( new PageImpl<>(profilesStats) );
+		return RestUtils.create200( new PageImpl<>(profilesStats) );
 	}
 
 }

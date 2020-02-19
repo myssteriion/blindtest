@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.model.music;
 
-import com.myssteriion.blindtest.model.IModel;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.model.IModel;
 
 import java.util.Objects;
 
@@ -37,7 +37,7 @@ public class ThemeInfo implements IModel {
      */
     public ThemeInfo(Theme theme, Integer offlineNbMusics, Integer onlineNbMusics) {
 
-        Tool.verifyValue("theme", theme);
+        Tools.verifyValue("theme", theme);
 
         this.theme = theme;
         this.offlineNbMusics = Math.max(offlineNbMusics, 0);

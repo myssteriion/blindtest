@@ -10,11 +10,11 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,7 +66,7 @@ public class GameService {
 	 */
 	public Game newGame(NewGame newGame) throws NotFoundException, SpotifyException {
 
-		Tool.verifyValue("newGame", newGame);
+		Tools.verifyValue("newGame", newGame);
 
 		musicService.refresh();
 		verifyContentTheme(newGame);
@@ -131,7 +131,7 @@ public class GameService {
 	 */
 	public Game apply(MusicResult musicResult) throws NotFoundException, ConflictException {
 
-		Tool.verifyValue("musicResult", musicResult);
+		Tools.verifyValue("musicResult", musicResult);
 		Game game = games.stream()
 							.filter( g -> g.getId().equals(musicResult.getGameId()) )
 							.findFirst()
@@ -237,7 +237,7 @@ public class GameService {
 	 */
 	public Game findGame(Integer id) throws NotFoundException {
 
-		Tool.verifyValue("id", id);
+		Tools.verifyValue("id", id);
 
 		return games.stream()
 				.filter( game -> game.getId().equals(id) )

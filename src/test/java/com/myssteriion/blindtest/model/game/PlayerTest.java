@@ -1,10 +1,10 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 

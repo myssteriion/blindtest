@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.properties;
 
-import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

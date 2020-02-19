@@ -15,12 +15,12 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,7 +81,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 4; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
 
                     winners.add(name);
 
@@ -123,7 +123,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 4; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
 
                     winners.add(name);
 
@@ -201,7 +201,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 10; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
                     winners.add(name);
                     switch (j) {
                         case 1: scoreName1 += nbPointWon; foundName1++; break;
@@ -235,7 +235,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 10; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
                     winners.add(name);
                     switch (j) {
                         case 1: scoreName1 += nbPointWon; foundName1++; break;
@@ -270,7 +270,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 20; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
                     winners.add(name);
                     switch (j) {
                         case 1: scoreName1 += nbPointWon; foundName1++; break;
@@ -317,7 +317,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
             for (int j = 1; j < 20; j++) {
 
                 String name = "name" + j;
-                if ( Tool.RANDOM.nextBoolean() ) {
+                if ( Tools.RANDOM.nextBoolean() ) {
                     winners.add(name);
                     switch (j) {
                         case 1: scoreName1 += nbPointWon; foundName1++; break;

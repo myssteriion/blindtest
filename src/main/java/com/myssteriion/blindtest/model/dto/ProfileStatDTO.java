@@ -1,15 +1,15 @@
 package com.myssteriion.blindtest.model.dto;
 
-import com.myssteriion.blindtest.model.AbstractDTO;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.tools.Tool;
 import com.myssteriion.blindtest.tools.converter.DurationConverter;
 import com.myssteriion.blindtest.tools.converter.RankConverter;
 import com.myssteriion.blindtest.tools.converter.ThemeConverter;
 import com.myssteriion.blindtest.tools.converter.ThemeWinModeConverter;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -244,7 +244,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementPlayedGames(Duration duration) {
 
-		Tool.verifyValue("duration", duration);
+		Tools.verifyValue("duration", duration);
 
 		if (playedGames == null)
 			playedGames = new HashMap<>();
@@ -263,7 +263,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void addBestScoreIfBetter(Duration duration, int scores) {
 
-		Tool.verifyValue("duration", duration);
+		Tools.verifyValue("duration", duration);
 
 		if (bestScores == null)
 			bestScores = new HashMap<>();
@@ -282,7 +282,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementWonGames(Rank rank) {
 
-		Tool.verifyValue("rank", rank);
+		Tools.verifyValue("rank", rank);
 
 		if (wonGames == null)
 			wonGames = new HashMap<>();
@@ -300,7 +300,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementListenedMusics(Theme theme) {
 
-		Tool.verifyValue("theme", theme);
+		Tools.verifyValue("theme", theme);
 
 		if (listenedMusics == null)
 			listenedMusics = new HashMap<>();
@@ -319,8 +319,8 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementFoundMusics(Theme theme, GoodAnswer goodAnswer) {
 
-		Tool.verifyValue("theme", theme);
-		Tool.verifyValue("winMode", goodAnswer);
+		Tools.verifyValue("theme", theme);
+		Tools.verifyValue("winMode", goodAnswer);
 
 		if (foundMusics == null)
 			foundMusics = new HashMap<>();

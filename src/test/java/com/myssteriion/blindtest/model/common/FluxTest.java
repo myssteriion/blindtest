@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.model.common;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.ToolTest;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.test.AbstractTest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 
 public class FluxTest extends AbstractTest {
 
-    private static final File RESOURCE_DIR = new File( ToolTest.class.getClassLoader().getResource(".").getFile());
+    private static final File RESOURCE_DIR = new File( FluxTest.class.getClassLoader().getResource(".").getFile());
 
     private static final Path FILE_EXISTS = Paths.get(RESOURCE_DIR.getAbsolutePath(), "exists-file.txt");
 
@@ -69,7 +69,7 @@ public class FluxTest extends AbstractTest {
         Assert.assertEquals( FILE_EXISTS_3.toFile().getName(), flux.getName() );
         Assert.assertTrue( flux.isFileExists() );
         Assert.assertEquals( Files.readAllBytes(FILE_EXISTS).length, flux.getContentFlux().length );
-        Assert.assertEquals( Constant.WAV_CONTENT_TYPE, flux.getContentType() );
+        Assert.assertEquals( CommonConstant.WAV_CONTENT_TYPE, flux.getContentType() );
     }
 
     @Test

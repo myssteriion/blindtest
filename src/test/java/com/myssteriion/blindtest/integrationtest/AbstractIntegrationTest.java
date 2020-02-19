@@ -1,18 +1,18 @@
 package com.myssteriion.blindtest.integrationtest;
 
-import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.db.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.test.AbstractTest;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 

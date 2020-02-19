@@ -7,12 +7,14 @@ import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.SpotifyMusic;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.service.AbstractCRUDService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	/**
 	 * The music folder path.
 	 */
-	private static final String MUSIC_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
+	private static final String MUSIC_FOLDER_PATH = Paths.get(CommonConstant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
 
 	/**
 	 * The spotify service.
@@ -103,11 +105,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
 
 		File themeDirectory = path.toFile();
-		for ( File file : Tool.getChildren(themeDirectory) ) {
+		for ( File file : Tools.getChildren(themeDirectory) ) {
 
 			MusicDTO musicDto = new MusicDTO(file.getName(), theme, ConnectionMode.OFFLINE);
 			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
-			if ( file.isFile() && Tool.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
+			if ( file.isFile() && Tools.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
 	}
@@ -179,9 +181,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	@Override
 	public MusicDTO find(MusicDTO dto) {
 
-		Tool.verifyValue("entity", dto);
+		Tools.verifyValue("entity", dto);
 
-		if ( Tool.isNullOrEmpty(dto.getId()) )
+		if ( Tools.isNullOrEmpty(dto.getId()) )
 			return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
 		else
 			return super.find(dto);
@@ -198,8 +200,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	public Integer getMusicNumber(Theme theme, ConnectionMode connectionMode) {
 
-		Tool.verifyValue("theme", theme);
-		Tool.verifyValue("connectionMode", connectionMode);
+		Tools.verifyValue("theme", theme);
+		Tools.verifyValue("connectionMode", connectionMode);
 
 		Integer nbMusic = 0;
 		for (ConnectionMode mode : connectionMode.transformForSearchMusic() )
@@ -239,15 +241,15 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	public MusicDTO random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
 
-		Tool.verifyValue("connectionMode", connectionMode);
+		Tools.verifyValue("connectionMode", connectionMode);
 
-		List<Theme> searchThemes = (Tool.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
+		List<Theme> searchThemes = (Tools.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 		List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
 
 		List<MusicDTO> allMusics = new ArrayList<>();
 		dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes).forEach(allMusics::add);
 
-		if ( Tool.isNullOrEmpty(allMusics) )
+		if ( Tools.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
 
 
@@ -265,7 +267,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 			music.setFlux( new Flux(path.toFile()) );
 
-			List<Effect> searchEffects = (Tool.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
+			List<Effect> searchEffects = (Tools.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
 			music.setEffect( foundEffect(searchEffects) );
 		}
 
@@ -287,7 +289,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				.filter(music -> music.getPlayed() == min)
 				.collect( Collectors.toList() );
 
-		int random = Tool.RANDOM.nextInt( potentialMusics.size() );
+		int random = Tools.RANDOM.nextInt( potentialMusics.size() );
 		return potentialMusics.get(random);
 	}
 
@@ -325,7 +327,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		
 		Theme foundTheme = null;
 		
-		double random = Tool.RANDOM.nextDouble() * 100;
+		double random = Tools.RANDOM.nextDouble() * 100;
 		int index = 0;
 		
 		while (foundTheme == null) {
@@ -341,7 +343,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	}
 
 	private Effect foundEffect(List<Effect> effects) {
-		return effects.get( Tool.RANDOM.nextInt(effects.size()) );
+		return effects.get( Tools.RANDOM.nextInt(effects.size()) );
 	}
 
 }

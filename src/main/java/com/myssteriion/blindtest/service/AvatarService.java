@@ -3,11 +3,13 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
-import com.myssteriion.blindtest.rest.exception.ConflictException;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.blindtest.tools.Tool;
-import com.myssteriion.blindtest.tools.exception.CustomRuntimeException;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.exception.CustomRuntimeException;
+import com.myssteriion.utils.rest.exception.ConflictException;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +32,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	/**
 	 * The avatar folder path.
 	 */
-	public static final String AVATAR_FOLDER_PATH = Paths.get(Constant.BASE_DIR, Constant.AVATAR_FOLDER).toFile().getAbsolutePath();
+	public static final String AVATAR_FOLDER_PATH = Paths.get(CommonConstant.BASE_DIR, Constant.AVATAR_FOLDER).toFile().getAbsolutePath();
 
 
 
@@ -52,10 +54,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		Path path = Paths.get(AVATAR_FOLDER_PATH);
 
 		File avatarDirectory = path.toFile();
-		for ( File file : Tool.getChildren(avatarDirectory) ) {
+		for ( File file : Tools.getChildren(avatarDirectory) ) {
 
 			AvatarDTO avatarDTO = new AvatarDTO( file.getName() );
-			if ( file.isFile() && Tool.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
+			if ( file.isFile() && Tools.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
 				dao.save(avatarDTO);
 		}
 
@@ -90,7 +92,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	public boolean needRefresh() {
 
 		File avatarDirectory = Paths.get(AVATAR_FOLDER_PATH).toFile();
-		if ( Tool.getChildren(avatarDirectory).size() != dao.count() )
+		if ( Tools.getChildren(avatarDirectory).size() != dao.count() )
 			return true;
 
 
@@ -131,10 +133,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	@Override
 	public AvatarDTO find(AvatarDTO dto) {
 
-		Tool.verifyValue("entity", dto);
+		Tools.verifyValue("entity", dto);
 
 		AvatarDTO avatar;
-		if ( Tool.isNullOrEmpty(dto.getId()) )
+		if ( com.myssteriion.utils.Tools.isNullOrEmpty(dto.getId()) )
 			avatar = dao.findByName(dto.getName()).orElse(null);
 		else
 			avatar = super.find(dto);
@@ -161,7 +163,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		itemPerPage = Math.max(itemPerPage, 1);
 
 		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, ITEM_PER_PAGE_MAX), Sort.by(order) );
+		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX), Sort.by(order) );
 
 		Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createAvatarFlux);

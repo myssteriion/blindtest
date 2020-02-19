@@ -3,8 +3,9 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.db.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
-import com.myssteriion.blindtest.rest.exception.NotFoundException;
-import com.myssteriion.blindtest.tools.Tool;
+import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Service for ProfileStatDTO.
  */
 @Service
-public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, ProfileStatDAO>   {
+public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, ProfileStatDAO> {
 
 	@Autowired
 	public ProfileStatService(ProfileStatDAO profileStatDao) {
@@ -24,9 +25,9 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 	@Override
 	public ProfileStatDTO find(ProfileStatDTO dto) {
 
-		Tool.verifyValue("entity", dto);
+		Tools.verifyValue("entity", dto);
 
-		if ( Tool.isNullOrEmpty(dto.getId()) )
+		if ( Tools.isNullOrEmpty(dto.getId()) )
 			return dao.findByProfileId(dto.getProfileId()).orElse(null);
 		else
 			return super.find(dto);
@@ -41,13 +42,13 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
 	 */
 	public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws NotFoundException {
 
-		Tool.verifyValue("profile", profileDto);
-		Tool.verifyValue("profile -> id", profileDto.getId());
+		Tools.verifyValue("profile", profileDto);
+		Tools.verifyValue("profile -> id", profileDto.getId());
 
 		ProfileStatDTO profileStatDto = new ProfileStatDTO( profileDto.getId() );
 		ProfileStatDTO foundProfileStatDTO = find(profileStatDto);
 
-		if ( Tool.isNullOrEmpty(foundProfileStatDTO) )
+		if ( Tools.isNullOrEmpty(foundProfileStatDTO) )
 			throw new NotFoundException("Profile stat not found.");
 
 		return foundProfileStatDTO;

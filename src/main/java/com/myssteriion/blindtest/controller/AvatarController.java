@@ -1,9 +1,10 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
-import com.myssteriion.blindtest.rest.ResponseBuilder;
 import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,8 @@ public class AvatarController {
 	@GetMapping
 	public ResponseEntity< Page<AvatarDTO> > findAllByNameStartingWith(
 			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = Constant.PAGE_NUMBER) Integer pageNumber,
-			@RequestParam(value = Constant.ITEM_PER_PAGE) Integer itemPerPage) {
+			@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+			@RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
 
 		Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
 		if ( avatarService.needRefresh() ) {
@@ -53,7 +54,7 @@ public class AvatarController {
 			page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
 		}
 
-		return ResponseBuilder.create200(page);
+		return RestUtils.create200(page);
 	}
 	
 }
