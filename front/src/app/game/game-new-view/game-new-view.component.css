@@ -8,14 +8,19 @@
     text-decoration: underline;
 }
 
-.game-new-view-theme-info {
+.game-new-view-themes {
     display: inline-block;
 }
 
-.game-new-view-theme-img {
+.game-new-view-theme-info {
+    margin:  10px 5px 0 5px;
+    border-radius: 10px;
+    box-shadow: 8px 8px 4px silver;
+}
+
+.game-new-view-theme-info-img {
     height: 6em;
     width: 6em;
-    margin:  10px 5px 0 5px;
     border: 1px solid black;
     border-radius: 10px 10px 0 0;
     background-color: white;
@@ -31,7 +36,7 @@
     box-shadow: 8px 8px 4px silver;
 }
 
-.game-new-view-theme-img:hover, .game-new-view-effect-img:hover {
+.game-new-view-theme-info-img:hover, .game-new-view-effect-img:hover {
     cursor: pointer;
 }
 
@@ -39,9 +44,8 @@
     background-color: white;
     border: 1px solid black;
     border-top: none;
-    border-radius: 0 0 10px 10px ;
+    border-radius: 0 0 10px 10px;
     text-align: center;
-    margin: 0 5px;
     color: gray;
 }
 
