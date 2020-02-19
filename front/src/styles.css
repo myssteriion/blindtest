@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Averia Sans Libre";
+    src: url("assets/fonts/Averia_Sans_Libre/AveriaSansLibre-Regular.ttf");
+}
+
 * {
-    font-family: Georgia, serif;
+    font-family: 'Averia Sans Libre', Georgia, serif;
 }
 
 input, .pagination, .alert, .box-shadow {
