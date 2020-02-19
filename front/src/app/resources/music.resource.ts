@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Music} from "../interfaces/dto/music.interface";
 import {ToolsService} from "../tools/tools.service";
+import {ThemeInfo} from "../interfaces/music/theme.info";
+import {Page} from "../interfaces/base/page.interface";
 
 /**
  * Music resource.
@@ -21,6 +23,13 @@ export class MusicResource {
 	constructor(private _http: HttpClient) { }
 
 
+
+	/**
+	 * Compute themes info.
+	 */
+	public computeThemesInfo(): Observable< Page<ThemeInfo> > {
+		return this._http.get< Page<ThemeInfo> >(this.path + "/compute-themes-info");
+	}
 
 	/**
 	 * Get random musics.
