@@ -42,6 +42,7 @@
             "MODE_LABEL": "Mode de la partie :",
             "THEMES_LABEL": "Choix des thèmes :",
             "COMPUTE_THEMES_INFO_ERROR": "Impossible de calculer les pourcentages d'apparations des thèmes sélectionnés.",
+            "COMPUTE_THEMES_INFO_REFRESH_HELP": "Synchroniser les musiques.",
             "EFFECTS_LABEL": "Choix des effets :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs (de {{minPlayers}} à {{maxPlayers}}):",
             "ONLINE_MODE": "En ligne (avec Spotify)",

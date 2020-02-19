@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 import {environment} from "../../../environments/environment";
-import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import {faExclamationCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
 import {ThemeInfo} from "../../interfaces/music/theme.info";
 
@@ -89,7 +89,8 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	private static MIN_PLAYERS: number = environment.minPlayers;
 
-	public faExclamationCircle = faExclamationCircle;
+	private faExclamationCircle = faExclamationCircle;
+	private faSyncAlt = faSyncAlt;
 
 
 
@@ -119,7 +120,7 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Compute themes info.
 	 */
-	private computeThemesInfo(): void {
+	public computeThemesInfo(): void {
 
 		this.themesInfo = [];
 

@@ -37,6 +37,9 @@
             <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
                      placement="bottom auto" [openDelay]="0">
             </fa-icon>
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faSyncAlt" ngbTooltip="{{ 'GAME.NEW_VIEW.COMPUTE_THEMES_INFO_REFRESH_HELP' | translate }}"
+                     placement="bottom auto" [openDelay]="0" (click)="computeThemesInfo()">
+            </fa-icon>
         </div>
         <div class="col-9">
             <div *ngFor="let theme of themes" class="game-new-view-theme-info" >
