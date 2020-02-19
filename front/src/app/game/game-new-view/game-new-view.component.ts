@@ -13,6 +13,8 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 import {environment} from "../../../environments/environment";
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import {MusicResource} from "../../resources/music.resource";
+import {ThemeInfo} from "../../interfaces/music/theme.info";
 
 /**
  * The new game view.
@@ -58,6 +60,11 @@ export class GameNewViewComponent implements OnInit {
 	public selectedThemes: Theme[];
 
 	/**
+	 * Themes info.
+	 */
+	private themesInfo: ThemeInfo[];
+
+	/**
 	 * Themes list.
 	 */
 	public effects = EFFECTS;
@@ -90,6 +97,7 @@ export class GameNewViewComponent implements OnInit {
                 private _toasterService: ToasterService,
 				private _ngbModal: NgbModal,
 				private _gameResource: GameResource,
+				private _musicResource: MusicResource,
 				private _router: Router) {}
 
     ngOnInit(): void {
@@ -104,7 +112,40 @@ export class GameNewViewComponent implements OnInit {
 		EFFECTS.forEach(effect => { this.selectedEffect.push(effect.enumVal); } );
 
 		this.selectedConnectionMode = ConnectionMode.OFFLINE;
+
+		this.computeThemesInfo();
     }
+
+	/**
+	 * Compute themes info.
+	 */
+	private computeThemesInfo(): void {
+
+		this.themesInfo = [];
+
+		this._musicResource.computeThemesInfo().subscribe(
+			response => {
+				this.themesInfo = response.content;
+			},
+			error => {
+
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.COMPUTE_THEMES_INFO_ERROR");
+				modalRef.componentInstance.suggestions = undefined;
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = true;
+				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
+
+				modalRef.result.then(
+					() => { this.computeThemesInfo(); },
+					() => { /* do nothing */ }
+				);
+			}
+		);
+	}
 
 
 	/**
@@ -143,6 +184,61 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	public themeIsSelected(theme: Theme): boolean {
 		return (this.selectedThemes.findIndex(thm => thm === theme)) !== -1;
+	}
+
+
+	/**
+	 * Get theme percent.
+	 *
+	 * @param theme the theme
+	 */
+	public getThemePercent(theme: Theme): string {
+
+		let percent: number = 0;
+
+		if ( this.themesInfo.length > 0)
+			percent = 100 * this.computeThemeNbMusics(theme) / this.computeTotalNbMusics();
+
+		return percent.toFixed(0) + "%";
+	}
+
+	/**
+	 * Compute nb musics for the theme according to the "selectedConnectionMode" field.
+	 *
+	 * @param theme the theme
+	 */
+	private computeThemeNbMusics(theme: Theme): number {
+
+		let nbMusics: number = 0;
+
+		let index = this.themesInfo.findIndex( thm => thm.theme === theme);
+		if ( index != -1 && this.themeIsSelected(theme) ) {
+
+			switch (this.selectedConnectionMode) {
+
+				case ConnectionMode.OFFLINE:	nbMusics = this.themesInfo[index].offlineNbMusics; break;
+				case ConnectionMode.ONLINE:		nbMusics = this.themesInfo[index].onlineNbMusics; break;
+
+				default:
+					nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
+			}
+		}
+
+		return nbMusics;
+	}
+
+	/**
+	 * Compute nb musics for all themes according to the "selectedConnectionMode" field.
+	 */
+	private computeTotalNbMusics(): number {
+
+		let nbMusics: number = 0;
+
+		this.themesInfo.forEach(themeInfo => {
+			nbMusics += this.computeThemeNbMusics(themeInfo.theme);
+		} );
+
+		return nbMusics;
 	}
 
 

@@ -35,12 +35,17 @@
         <div class="col-3 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</span>
             <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
-                     placement="bottom auto" [openDelay]="500">
+                     placement="bottom auto" [openDelay]="0">
             </fa-icon>
         </div>
         <div class="col-9">
-            <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (themeIsSelected(theme.enumVal)) }"
-                 (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
+            <div *ngFor="let theme of themes" class="game-new-view-theme-info" >
+                <img src="{{ theme.srcImg }}" class="game-new-view-theme-img" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }"
+                     (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
+                <div class="game-new-view-theme-info-percent font-size-very-very-very-small" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }">
+                    {{ getThemePercent(theme.enumVal) }}
+                </div>
+            </div>
         </div>
     </div>
 
@@ -49,11 +54,11 @@
         <div class="col-3 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</span>
             <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
-                     placement="bottom auto" [openDelay]="500">
+                     placement="bottom auto" [openDelay]="0">
             </fa-icon>
         </div>
         <div class="col-9">
-            <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-img" [ngClass]="{ 'game-new-view-img-active': (effectIsSelected(effect.enumVal)) }"
+            <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-effect-img" [ngClass]="{ 'game-new-view-inactive': (!effectIsSelected(effect.enumVal)) }"
                  (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
         </div>
     </div>

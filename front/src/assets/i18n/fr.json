@@ -41,6 +41,7 @@
             "DURATIONS_LABEL": "Durée de la partie :",
             "MODE_LABEL": "Mode de la partie :",
             "THEMES_LABEL": "Choix des thèmes :",
+            "COMPUTE_THEMES_INFO_ERROR": "Impossible de calculer les pourcentages d'apparations des thèmes sélectionnés.",
             "EFFECTS_LABEL": "Choix des effets :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs (de {{minPlayers}} à {{maxPlayers}}):",
             "ONLINE_MODE": "En ligne (avec Spotify)",
