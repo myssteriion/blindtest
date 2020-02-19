@@ -42,12 +42,6 @@ public class SpotifyProperties {
     @Value("${playlistId.disney}")
     private String playlistIdDisney;
 
-    @Value("${playlistId.jeux}")
-    private String playlistIdJeux;
-
-    @Value("${playlistId.classiques}")
-    private String playlistIdClassiques;
-
 
 
     /**
@@ -86,8 +80,6 @@ public class SpotifyProperties {
             case ANNEES_2010:       return playlistIdAnnees2010;
             case SERIES_CINEMAS:    return playlistIdSeriesCinemas;
             case DISNEY:            return playlistIdDisney;
-            case JEUX:              return playlistIdJeux;
-            case CLASSIQUES:        return playlistIdClassiques;
 
             default:                throw new IllegalArgumentException("Il manque un case.");
         }

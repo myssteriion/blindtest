@@ -248,7 +248,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY, JEUX, CLASSIQUES])."), e);
+			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY])."), e);
 		}
 
 		try {

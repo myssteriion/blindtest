@@ -104,8 +104,6 @@ build {
 		mkdir deliveryFolder + "/musiques/annees_2010"
 		mkdir deliveryFolder + "/musiques/series-cinemas"
 		mkdir deliveryFolder + "/musiques/disney"
-		mkdir deliveryFolder + "/musiques/jeux"
-		mkdir deliveryFolder + "/musiques/classiques"
 	}
 }
 

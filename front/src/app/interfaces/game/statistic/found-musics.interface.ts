@@ -11,7 +11,5 @@ export interface FoundMusics {
     [Theme.ANNEES_2000]?: GoodsAnswers,
     [Theme.ANNEES_2010]?: GoodsAnswers,
     [Theme.DISNEY]?: GoodsAnswers,
-    [Theme.SERIES_CINEMAS]?: GoodsAnswers,
-    [Theme.JEUX]?: GoodsAnswers,
-    [Theme.CLASSIQUES]?: GoodsAnswers
+    [Theme.SERIES_CINEMAS]?: GoodsAnswers
 }

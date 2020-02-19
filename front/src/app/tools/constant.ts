@@ -46,9 +46,7 @@ export const THEMES = [
     {srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000, tooltip: "THEMES.ANNEES_2000"},
     {srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010, tooltip: "THEMES.ANNEES_2010"},
     {srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY, tooltip: "THEMES.DISNEY"},
-    {srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS"},
-    {srcImg: "assets/images/themes/jeux.png", enumVal: Theme.JEUX, tooltip: "THEMES.JEUX"},
-    {srcImg: "assets/images/themes/classiques.png", enumVal: Theme.CLASSIQUES, tooltip: "THEMES.CLASSIQUES"}
+    {srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS"}
 ];
 
 /**

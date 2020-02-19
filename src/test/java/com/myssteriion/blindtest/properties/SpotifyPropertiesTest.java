@@ -33,8 +33,6 @@ public class SpotifyPropertiesTest extends AbstractTest {
         Assert.assertEquals("123h", props.getPlaylistIdByTheme(Theme.ANNEES_2010) );
         Assert.assertEquals("123i", props.getPlaylistIdByTheme(Theme.SERIES_CINEMAS) );
         Assert.assertEquals("123j", props.getPlaylistIdByTheme(Theme.DISNEY) );
-        Assert.assertEquals("123k", props.getPlaylistIdByTheme(Theme.JEUX) );
-        Assert.assertEquals("123l", props.getPlaylistIdByTheme(Theme.CLASSIQUES) );
     }
 
 }

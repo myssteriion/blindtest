@@ -125,7 +125,7 @@ export class MusicResultModalComponent implements OnInit {
     public showAuthorColumn(): boolean {
         return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
                 || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
-                || this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY || this.music.theme === Theme.CLASSIQUES;
+                || this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY;
     }
 
     /**
@@ -134,7 +134,7 @@ export class MusicResultModalComponent implements OnInit {
     public showTitleColumn(): boolean {
         return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
                 || this.music.theme === Theme.ANNEES_90 || this.music.theme === Theme.ANNEES_2000 || this.music.theme === Theme.ANNEES_2010
-                || this.music.theme === Theme.DISNEY || this.music.theme === Theme.JEUX || this.music.theme === Theme.CLASSIQUES;
+                || this.music.theme === Theme.DISNEY;
     }
 
     /**
