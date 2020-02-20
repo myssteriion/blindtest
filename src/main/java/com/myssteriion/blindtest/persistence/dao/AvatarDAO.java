@@ -1,15 +1,15 @@
 package com.myssteriion.blindtest.persistence.dao;
 
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.utils.persistence.dao.IDAO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 /**
- * DAO for MusicDTO.
+ * DAO for AvatarDTO.
  */
 @Repository
 public interface AvatarDAO extends IDAO<AvatarDTO> {

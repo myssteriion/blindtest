@@ -9,10 +9,6 @@ import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -25,15 +21,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "music__name_theme_spotify_track_id__unique", columnNames={"name", "theme", "spotify_track_id"}) })
 public class MusicDTO extends AbstractDTO {
-
-	/**
-	 * The DB id.
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "music_sequence")
-	@SequenceGenerator(name = "music_sequence", sequenceName = "music_sequence", allocationSize = 1)
-	@Column(name = "id", nullable = false)
-	protected Integer id;
 
 	/**
 	 * The name.
@@ -131,17 +118,6 @@ public class MusicDTO extends AbstractDTO {
 	}
 
 
-
-	@Override
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public MusicDTO setId(Integer id) {
-		this.id = id;
-		return this;
-	}
 
 	/**
 	 * Gets name.
@@ -353,7 +329,7 @@ public class MusicDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return "id=" + id +
+		return super.toString() +
 				", name=" + name +
 				", theme=" + theme +
 				", played=" + played +

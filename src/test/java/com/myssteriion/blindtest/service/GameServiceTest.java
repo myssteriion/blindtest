@@ -106,9 +106,9 @@ public class GameServiceTest extends AbstractTest {
 		MusicDTO music = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
 		MusicDTO music2 = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
 
-		ProfileDTO profile = new ProfileDTO("name","avatarName").setId(1);
-		ProfileDTO profile1 = new ProfileDTO("name1","avatarName").setId(2);
-		ProfileDTO profile2 = new ProfileDTO("name2","avatarName").setId(3);
+		ProfileDTO profile = (ProfileDTO) new ProfileDTO("name","avatarName").setId(1);
+		ProfileDTO profile1 = (ProfileDTO) new ProfileDTO("name1","avatarName").setId(2);
+		ProfileDTO profile2 = (ProfileDTO) new ProfileDTO("name2","avatarName").setId(3);
 		ProfileStatDTO profileStat;
 		ProfileStatDTO profileStat1;
 		ProfileStatDTO profileStat2;
@@ -168,9 +168,9 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		music = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
-		profile = new ProfileDTO("name", "avatarName").setId(1);
-		profile1 = new ProfileDTO("name1","avatarName").setId(2);
-		profile2 = new ProfileDTO("name2","avatarName").setId(3);
+		profile = (ProfileDTO) new ProfileDTO("name", "avatarName").setId(1);
+		profile1 = (ProfileDTO) new ProfileDTO("name1","avatarName").setId(2);
+		profile2 = (ProfileDTO) new ProfileDTO("name2","avatarName").setId(3);
 		profileStat = new ProfileStatDTO(1);
 		profileStat1 = new ProfileStatDTO(2);
 		profileStat2 = new ProfileStatDTO(3);

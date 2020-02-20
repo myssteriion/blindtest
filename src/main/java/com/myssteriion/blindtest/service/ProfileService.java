@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.Tools;
 import com.myssteriion.utils.rest.exception.ConflictException;
@@ -84,9 +84,10 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 			namePrefix = "";
 
 		itemPerPage = Math.max(itemPerPage, 1);
+		itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
 
 		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX), Sort.by(order) );
+		Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
 
 		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createProfileAvatarFlux);

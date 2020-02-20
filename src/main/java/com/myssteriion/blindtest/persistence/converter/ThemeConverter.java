@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.tools.converter;
+package com.myssteriion.blindtest.persistence.converter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Convert json to map (and reverse).
+ * A Map<Theme, Integer> - json converter.
  */
 @Converter()
-public class ThemeConverter extends AbstractConverter<Theme> {
+public class ThemeConverter extends AbstractConverter<Theme, Integer> {
 
     @Override
     protected Map<Theme, Integer> convertToMap(String json) throws IOException {

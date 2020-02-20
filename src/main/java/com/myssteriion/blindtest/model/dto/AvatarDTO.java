@@ -6,10 +6,6 @@ import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -22,15 +18,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 public class AvatarDTO extends AbstractDTO {
-
-    /**
-     * The DB id.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avatar_sequence")
-    @SequenceGenerator(name = "avatar_sequence", sequenceName = "avatar_sequence", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    protected Integer id;
 
     /**
      * The name.
@@ -64,27 +51,6 @@ public class AvatarDTO extends AbstractDTO {
     }
 
 
-
-    /**
-     * Gets id.
-     *
-     * @return The id.
-     */
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * Set id.
-     *
-     * @param id The id.
-     */
-    @Override
-    public AvatarDTO setId(Integer id) {
-        this.id = id;
-        return this;
-    }
 
     /**
      * Gets name.
@@ -147,7 +113,7 @@ public class AvatarDTO extends AbstractDTO {
 
     @Override
     public String toString() {
-        return "id="+ id +
+        return super.toString() +
                 ", name=" + name +
                 ", flux={" + flux + "}";
 

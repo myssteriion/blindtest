@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.persistence.dao;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import com.myssteriion.utils.persistence.dao.IDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * DAO for MusicDTO.
  */
 @Repository
-public interface MusicDAO extends PagingAndSortingRepository<MusicDTO, Integer> {
+public interface MusicDAO extends IDAO<MusicDTO> {
 
     /**
      * Find by name and theme.

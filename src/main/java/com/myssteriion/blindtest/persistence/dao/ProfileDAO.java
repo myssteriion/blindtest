@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.persistence.dao;
 
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.utils.persistence.dao.IDAO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
  * DAO for ProfileDTO.
  */
 @Repository
-public interface ProfileDAO extends PagingAndSortingRepository<ProfileDTO, Integer> {
+public interface ProfileDAO extends IDAO<ProfileDTO> {
 
 	/**
 	 * Find by name.

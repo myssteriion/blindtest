@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * The mapping with round-content.properties.
+ * The mapping with config.properties.
  */
 @Configuration
 @PropertySource("${SPRING_CONFIG_LOCATION}/config.properties")

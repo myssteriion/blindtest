@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.tools.converter;
+package com.myssteriion.blindtest.persistence.converter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.myssteriion.blindtest.model.common.Duration;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Convert json to map (and reverse).
+ * A Map<Duration, Integer> - json converter.
  */
 @Converter()
-public class DurationConverter extends AbstractConverter<Duration> {
+public class DurationConverter extends AbstractConverter<Duration, Integer> {
 
     @Override
     protected Map<Duration, Integer> convertToMap(String json) throws IOException {

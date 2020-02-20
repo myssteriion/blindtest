@@ -1,15 +1,15 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.blindtest.spotify.SpotifyMusic;
+import com.myssteriion.blindtest.model.music.ThemeInfo;
+import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.spotify.SpotifyException;
+import com.myssteriion.blindtest.spotify.SpotifyMusic;
+import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.Tools;

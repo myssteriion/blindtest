@@ -1,23 +1,19 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.tools.converter.DurationConverter;
-import com.myssteriion.blindtest.tools.converter.RankConverter;
-import com.myssteriion.blindtest.tools.converter.ThemeConverter;
-import com.myssteriion.blindtest.tools.converter.ThemeWinModeConverter;
+import com.myssteriion.blindtest.persistence.converter.RankConverter;
+import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
+import com.myssteriion.blindtest.persistence.converter.ThemeGoodAnswerConverter;
 import com.myssteriion.utils.Tools;
 import com.myssteriion.utils.model.dto.AbstractDTO;
+import com.myssteriion.blindtest.persistence.converter.DurationConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.HashMap;
@@ -30,15 +26,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
 public class ProfileStatDTO extends AbstractDTO {
-
-	/**
-	 * The DB id.
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_stat")
-	@SequenceGenerator(name = "profile_stat", sequenceName = "profile_stat_sequence", allocationSize = 1)
-	@Column(name = "id", nullable = false)
-	protected Integer id;
 
 	/**
 	 * The profileId.
@@ -78,7 +65,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * The number of found musics by themes by WinMode.
 	 */
 	@Column(name = "found_musics", nullable = false, length = 1000)
-	@Convert(converter = ThemeWinModeConverter.class)
+	@Convert(converter = ThemeGoodAnswerConverter.class)
 	private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
 
 
@@ -106,17 +93,6 @@ public class ProfileStatDTO extends AbstractDTO {
 	}
 
 
-
-	@Override
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public ProfileStatDTO setId(Integer id) {
-		this.id = id;
-		return this;
-	}
 
 	/**
 	 * Gets profile id.
@@ -355,7 +331,7 @@ public class ProfileStatDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return "id=" + id +
+		return super.toString() +
 				", profileId=" + profileId +
 				", playedGames=" + playedGames +
 				", bestScores=" + bestScores +

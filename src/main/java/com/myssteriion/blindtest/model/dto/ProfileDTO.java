@@ -4,7 +4,11 @@ import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.Tools;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
@@ -14,15 +18,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "profile", uniqueConstraints={ @UniqueConstraint(name = "profile__name__unique", columnNames={"name"}) })
 public class ProfileDTO extends AbstractDTO {
-
-	/**
-	 * The DB id.
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_sequence")
-	@SequenceGenerator(name = "profile_sequence", sequenceName = "profile_sequence", allocationSize = 1)
-	@Column(name = "id", nullable = false)
-	protected Integer id;
 
 	/**
 	 * The name.
@@ -94,17 +89,6 @@ public class ProfileDTO extends AbstractDTO {
 	}
 
 
-
-	@Override
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public ProfileDTO setId(Integer id) {
-		this.id = id;
-		return this;
-	}
 
 	/**
 	 * Gets background.
@@ -208,7 +192,7 @@ public class ProfileDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return "id=" + id +
+		return super.toString() +
 				", background=" + background +
 				", name=" + name +
 				", avatarName=" + avatarName +

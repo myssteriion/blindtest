@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.Tools;
@@ -136,7 +136,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		Tools.verifyValue("entity", dto);
 
 		AvatarDTO avatar;
-		if ( com.myssteriion.utils.Tools.isNullOrEmpty(dto.getId()) )
+		if ( Tools.isNullOrEmpty(dto.getId()) )
 			avatar = dao.findByName(dto.getName()).orElse(null);
 		else
 			avatar = super.find(dto);
@@ -161,9 +161,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 			namePrefix = "";
 
 		itemPerPage = Math.max(itemPerPage, 1);
+		itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
 
 		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX), Sort.by(order) );
+		Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
 
 		Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
 		page.forEach(this::createAvatarFlux);
@@ -178,6 +179,8 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	 * @param dto the dto
 	 */
 	public void createAvatarFlux(AvatarDTO dto) {
+
+		Tools.verifyValue("entity", dto);
 
 		try {
 

@@ -1,9 +1,10 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import com.myssteriion.utils.test.AbstractTest;
@@ -23,6 +24,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
@@ -202,7 +204,7 @@ public class AvatarServiceTest extends AbstractTest {
         Assert.assertNull( avatarService.find(avatarDto) );
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
 
-        avatarDto = new AvatarDTO("name").setId(1);
+        avatarDto = (AvatarDTO) new AvatarDTO("name").setId(1);
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
     }
 
@@ -215,5 +217,21 @@ public class AvatarServiceTest extends AbstractTest {
         Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0, 1) );
         Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0, 1) );
     }
-    
+
+    @Test
+    public void createFlux() {
+
+        try {
+            avatarService.createAvatarFlux(null);
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+        }
+
+        AvatarDTO avatarDtoMock = new AvatarDTO("name");
+        avatarService.createAvatarFlux(avatarDtoMock);
+        Assert.assertNotNull( avatarDtoMock.getFlux() );
+    }
+
 }
