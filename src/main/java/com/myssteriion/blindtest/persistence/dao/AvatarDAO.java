@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.db.dao;
+package com.myssteriion.blindtest.persistence.dao;
 
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,7 @@ import java.util.Optional;
  * DAO for MusicDTO.
  */
 @Repository
-public interface AvatarDAO extends PagingAndSortingRepository<AvatarDTO, Integer> {
+public interface AvatarDAO extends IDAO<AvatarDTO> {
 
     /**
      * Find by name.

@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.dao.ProfileDAO;
+import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.utils.rest.exception.ConflictException;

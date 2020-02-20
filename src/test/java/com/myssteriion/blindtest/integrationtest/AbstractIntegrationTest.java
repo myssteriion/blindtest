@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.integrationtest;
 
-import com.myssteriion.blindtest.db.dao.MusicDAO;
+import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;

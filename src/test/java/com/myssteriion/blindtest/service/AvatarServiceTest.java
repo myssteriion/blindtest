@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.db.dao.AvatarDAO;
+import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.utils.Tools;

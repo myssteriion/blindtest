@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.db.dao;
+package com.myssteriion.blindtest.persistence.dao;
 
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import org.springframework.data.repository.PagingAndSortingRepository;
