@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * The type Blindtest application.
+ * The Blindtest application.
  */
 @SpringBootApplication
 @Import( {BeanFactory.class, RestUtils.class} )
