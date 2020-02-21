@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.integrationtest;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -12,7 +13,6 @@ import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
@@ -16,7 +17,7 @@ import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -64,7 +65,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'newGame' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame' est obligatoire."), e);
 		}
 
 		try {
@@ -72,7 +73,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car un mock (musicService) return 0.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Zero music found ('ANNEES_60' ; '[OFFLINE]')"), e);
+			TestUtils.verifyException(new NotFoundException("Zero music found ('ANNEES_60' ; '[OFFLINE]')"), e);
 		}
 
 		try {
@@ -80,7 +81,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Player 'name' must have a profile."), e);
+			TestUtils.verifyException(new NotFoundException("Player 'name' must have a profile."), e);
 		}
 
 
@@ -96,7 +97,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une car la connection spotify est KO.");
 		}
 		catch (SpotifyException e) {
-			verifyException( new SpotifyException("se"), e);
+			TestUtils.verifyException( new SpotifyException("se"), e);
 		}
 	}
 
@@ -131,7 +132,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException le gameDto n'est pas retrouvée.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
 		}
 
 		try {
@@ -139,7 +140,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException le gameDto n'est pas retrouvée.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Game not found."), e);
+			TestUtils.verifyException(new NotFoundException("Game not found."), e);
 		}
 
 
@@ -151,7 +152,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le mock return null.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Music not found."), e);
+			TestUtils.verifyException(new NotFoundException("Music not found."), e);
 		}
 
 		try {
@@ -164,7 +165,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le theme de la musique n'est pas dans la game.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("'ANNEES_80' not found for this game ([ANNEES_60, ANNEES_70])."), e);
+			TestUtils.verifyException(new NotFoundException("'ANNEES_80' not found for this game ([ANNEES_60, ANNEES_70])."), e);
 		}
 
 		music = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
@@ -381,7 +382,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'id' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'id' est obligatoire."), e);
 		}
 
 
@@ -390,7 +391,7 @@ public class GameServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le dto n'existe pas.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Game not found."), e);
+			TestUtils.verifyException(new NotFoundException("Game not found."), e);
 		}
 
 

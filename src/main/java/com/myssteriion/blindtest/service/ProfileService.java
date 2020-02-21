@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
@@ -56,10 +56,10 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	@Override
 	public ProfileDTO find(ProfileDTO dto) {
 
-		Tools.verifyValue("entity", dto);
+		CommonUtils.verifyValue("entity", dto);
 
 		ProfileDTO profile;
-		if ( Tools.isNullOrEmpty(dto.getId()) )
+		if ( CommonUtils.isNullOrEmpty(dto.getId()) )
 			profile = dao.findByName(dto.getName()).orElse(null);
 		else
 			profile = super.find(dto);
@@ -98,8 +98,8 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
 	@Override
 	public void delete(ProfileDTO profile) throws NotFoundException {
 
-		Tools.verifyValue("profile", profile);
-		Tools.verifyValue("profile -> id", profile.getId());
+		CommonUtils.verifyValue("profile", profile);
+		CommonUtils.verifyValue("profile -> id", profile.getId());
 
 		profileStatService.delete( profileStatService.findByProfile(profile) );
 		super.delete(profile);

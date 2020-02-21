@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.spotify;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.properties.SpotifyProperties;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.exceptions.detailed.NotFoundException;
@@ -81,7 +81,7 @@ public class SpotifyService {
     public boolean isConnected() {
 
         try {
-            return !Tools.isNullOrEmpty( getSpotifyApi() );
+            return !CommonUtils.isNullOrEmpty( getSpotifyApi() );
         }
         catch (SpotifyException e) {
             return false;
@@ -117,7 +117,7 @@ public class SpotifyService {
             while (hasNext) {
 
                 Paging<PlaylistTrack> page = spotifyApi.getPlaylistsTracks(playlistId).offset(currentOffset).limit(Constant.LIMIT).build().execute();
-                hasNext = !Tools.isNullOrEmpty( page.getNext() );
+                hasNext = !CommonUtils.isNullOrEmpty( page.getNext() );
                 currentOffset += Constant.LIMIT;
 
                 for ( PlaylistTrack playlistTrack : page.getItems() ) {
@@ -128,7 +128,7 @@ public class SpotifyService {
                     for (int i = 1; i < track.getArtists().length; i++)
                         artists.append(Constant.FEAT).append(track.getArtists()[i].getName());
 
-                    if ( Tools.isNullOrEmpty(track.getPreviewUrl()) )
+                    if ( CommonUtils.isNullOrEmpty(track.getPreviewUrl()) )
                         LOGGER.warn("The music haven't preview ('" + track.getId() + "', '" + theme + "'" + "', '" + track.getName() + "', '" + artists.toString() + "')");
                     else
                         spotifyMusics.add( new SpotifyMusic(track.getId(), track.getPreviewUrl(), artists.toString(), track.getName()) );
@@ -152,7 +152,7 @@ public class SpotifyService {
     public boolean trackExists(String trackId) throws SpotifyException {
 
         try {
-            return !Tools.isNullOrEmpty( getSpotifyApi().getTrack(trackId).build().execute() );
+            return !CommonUtils.isNullOrEmpty( getSpotifyApi().getTrack(trackId).build().execute() );
         }
         catch (NotFoundException e) {
             return false;

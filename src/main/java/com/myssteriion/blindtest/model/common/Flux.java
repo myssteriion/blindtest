@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.common;
 
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class Flux {
      * @return the content type
      */
     private String determinateContentType(File file) {
-        return ( Tools.hadAudioExtension(file.getName()) ) ? CommonConstant.WAV_CONTENT_TYPE : URLConnection.guessContentTypeFromName(file.getName());
+        return ( CommonUtils.hadAudioExtension(file.getName()) ) ? CommonConstant.WAV_CONTENT_TYPE : URLConnection.guessContentTypeFromName(file.getName());
     }
 
 

@@ -1,8 +1,9 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,7 +51,7 @@ public class FluxTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'file' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'file' est obligatoire."), e);
         }
 
         Flux flux = new Flux( new File("existe pas") );

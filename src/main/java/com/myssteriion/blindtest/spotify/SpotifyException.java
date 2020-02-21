@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.spotify;
 
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 
 /**
  * The Spotify exception.
@@ -15,7 +15,7 @@ public class SpotifyException extends Exception {
 	public SpotifyException(String message) {
 		
 		super(message);
-		Tools.verifyValue("message", message);
+		CommonUtils.verifyValue("message", message);
 	}
 
 	/**
@@ -26,8 +26,8 @@ public class SpotifyException extends Exception {
 	 */
 	public SpotifyException(String message, Throwable cause) {
 		super(message, cause);
-		Tools.verifyValue("message", message);
-		Tools.verifyValue("cause", cause);
+		CommonUtils.verifyValue("message", message);
+		CommonUtils.verifyValue("cause", cause);
 	}
 
 }

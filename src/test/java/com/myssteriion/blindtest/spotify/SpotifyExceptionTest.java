@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.spotify;
 
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class SpotifyExceptionTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
         try {
@@ -24,7 +25,7 @@ public class SpotifyExceptionTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'message' est obligatoire."), e);
         }
 
         SpotifyException se = new SpotifyException(message);
@@ -38,7 +39,7 @@ public class SpotifyExceptionTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'cause' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'cause' est obligatoire."), e);
         }
 
         IllegalArgumentException iae = new IllegalArgumentException("iae");

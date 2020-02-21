@@ -8,7 +8,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.utils.BeanFactory;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
 import java.util.Comparator;
@@ -92,9 +92,9 @@ public class Game implements IModel {
      */
     public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
-        Tools.verifyValue("players", players);
-        Tools.verifyValue("duration", duration);
-        Tools.verifyValue("gameMode", connectionMode);
+        CommonUtils.verifyValue("players", players);
+        CommonUtils.verifyValue("duration", duration);
+        CommonUtils.verifyValue("gameMode", connectionMode);
 
         checkNbPlayers(players);
 
@@ -104,8 +104,8 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
-        this.themes = Tools.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.effects = Tools.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
+        this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
+        this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
         this.listenedMusics = new HashMap<>();
     }
@@ -239,7 +239,7 @@ public class Game implements IModel {
      */
     public void incrementListenedMusics(Theme theme) {
 
-        Tools.verifyValue("theme", theme);
+        CommonUtils.verifyValue("theme", theme);
 
         if ( !listenedMusics.containsKey(theme) )
             listenedMusics.put(theme, 0);
@@ -286,7 +286,7 @@ public class Game implements IModel {
      * @return TRUE if it's the game is finish, FALSE otherwise
      */
     public boolean isFinished() {
-        return Tools.isNullOrEmpty(round);
+        return CommonUtils.isNullOrEmpty(round);
     }
 
 

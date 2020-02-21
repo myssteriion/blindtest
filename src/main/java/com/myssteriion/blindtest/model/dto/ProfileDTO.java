@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
@@ -82,9 +82,9 @@ public class ProfileDTO extends AbstractDTO {
 	 */
 	public ProfileDTO(String name, String avatarName, Integer background) {
 
-		this.name = Tools.isNullOrEmpty(name) ? "" : name.trim();
+		this.name = CommonUtils.isNullOrEmpty(name) ? "" : name.trim();
 		this.background = Math.max(background, 0);
-		this.avatarName = Tools.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
+		this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
 		this.avatar = new AvatarDTO(this.avatarName);
 	}
 
@@ -137,7 +137,7 @@ public class ProfileDTO extends AbstractDTO {
 	 * @return this
 	 */
 	public ProfileDTO setName(String name) {
-		this.name = Tools.isNullOrEmpty(name) ? "" : name.trim();
+		this.name = CommonUtils.isNullOrEmpty(name) ? "" : name.trim();
 		return this;
 	}
 
@@ -157,7 +157,7 @@ public class ProfileDTO extends AbstractDTO {
 	 * @return this
 	 */
 	public ProfileDTO setAvatarName(String avatarName) {
-		this.avatarName = Tools.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
+		this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
 		this.avatar = new AvatarDTO(this.avatarName);
 		return this;
 	}

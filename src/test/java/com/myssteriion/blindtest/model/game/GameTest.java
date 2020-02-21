@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.game;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
@@ -7,7 +8,7 @@ import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class GameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
         }
 
         try {
@@ -43,7 +44,7 @@ public class GameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
         }
 
         try {
@@ -51,7 +52,7 @@ public class GameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
         }
 
         try {
@@ -59,7 +60,7 @@ public class GameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("2 players at minimum"), e);
+            TestUtils.verifyException(new IllegalArgumentException("2 players at minimum"), e);
         }
 
         try {
@@ -75,7 +76,7 @@ public class GameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("4 players at maximum"), e);
+            TestUtils.verifyException(new IllegalArgumentException("4 players at maximum"), e);
         }
 
         Game game = new Game(new HashSet<>(players), duration, null, null, ConnectionMode.OFFLINE);

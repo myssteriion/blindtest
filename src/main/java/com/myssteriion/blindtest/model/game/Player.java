@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class Player {
 	@JsonCreator
 	public Player(ProfileDTO profile) {
 
-		Tools.verifyValue("profile", profile);
+		CommonUtils.verifyValue("profile", profile);
 
 		this.profile = profile;
 		this.score = 0;
@@ -193,8 +193,8 @@ public class Player {
      */
     public void incrementFoundMusics(Theme theme, GoodAnswer goodAnswer) {
 
-        Tools.verifyValue("theme", theme);
-        Tools.verifyValue("winMode", goodAnswer);
+        CommonUtils.verifyValue("theme", theme);
+        CommonUtils.verifyValue("winMode", goodAnswer);
 
         if ( !foundMusics.containsKey(theme) )
             foundMusics.put(theme, new HashMap<>());

@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
@@ -54,10 +54,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 		Path path = Paths.get(AVATAR_FOLDER_PATH);
 
 		File avatarDirectory = path.toFile();
-		for ( File file : Tools.getChildren(avatarDirectory) ) {
+		for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
 
 			AvatarDTO avatarDTO = new AvatarDTO( file.getName() );
-			if ( file.isFile() && Tools.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
+			if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
 				dao.save(avatarDTO);
 		}
 
@@ -92,7 +92,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	public boolean needRefresh() {
 
 		File avatarDirectory = Paths.get(AVATAR_FOLDER_PATH).toFile();
-		if ( Tools.getChildren(avatarDirectory).size() != dao.count() )
+		if ( CommonUtils.getChildren(avatarDirectory).size() != dao.count() )
 			return true;
 
 
@@ -133,10 +133,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	@Override
 	public AvatarDTO find(AvatarDTO dto) {
 
-		Tools.verifyValue("entity", dto);
+		CommonUtils.verifyValue("entity", dto);
 
 		AvatarDTO avatar;
-		if ( Tools.isNullOrEmpty(dto.getId()) )
+		if ( CommonUtils.isNullOrEmpty(dto.getId()) )
 			avatar = dao.findByName(dto.getName()).orElse(null);
 		else
 			avatar = super.find(dto);
@@ -180,7 +180,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
 	 */
 	public void createAvatarFlux(AvatarDTO dto) {
 
-		Tools.verifyValue("entity", dto);
+		CommonUtils.verifyValue("entity", dto);
 
 		try {
 

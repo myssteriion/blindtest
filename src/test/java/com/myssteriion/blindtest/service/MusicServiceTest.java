@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Flux;
@@ -8,10 +9,10 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ MusicService.class, Tools.class })
+@PrepareForTest({ MusicService.class, CommonUtils.class })
 public class MusicServiceTest extends AbstractTest {
 
 	@Mock
@@ -65,7 +66,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
 		}
 
 		try {
@@ -73,7 +74,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'connectionMode' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'connectionMode' est obligatoire."), e);
 		}
 
 		Assert.assertEquals( new Integer(2), musicService.getMusicNumber(theme, ConnectionMode.OFFLINE) );
@@ -105,9 +106,9 @@ public class MusicServiceTest extends AbstractTest {
 		File mockDirectory = Mockito.mock(File.class);
 		Mockito.when(mockDirectory.isFile()).thenReturn(false);
 
-		PowerMockito.mockStatic(Tools.class);
-		PowerMockito.when(Tools.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-		PowerMockito.when(Tools.hadAudioExtension(Mockito.anyString())).thenReturn(true);
+		PowerMockito.mockStatic(CommonUtils.class);
+		PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+		PowerMockito.when(CommonUtils.hadAudioExtension(Mockito.anyString())).thenReturn(true);
 
 
 		musicService = Mockito.spy( new MusicService(dao, spotifyService) );
@@ -133,7 +134,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 
@@ -153,7 +154,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (ConflictException e) {
-			verifyException(new ConflictException("Entity already exists."), e);
+			TestUtils.verifyException(new ConflictException("Entity already exists."), e);
 		}
 
 		MusicDTO musicSaved = musicService.save(musicDto);
@@ -175,7 +176,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 
@@ -185,7 +186,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
 		}
 
 
@@ -203,7 +204,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une DaoException car le mock throw.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("Entity not found."), e);
+			TestUtils.verifyException(new NotFoundException("Entity not found."), e);
 		}
 
 		music.setId(1);
@@ -224,7 +225,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+			TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
@@ -248,7 +249,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY])."), e);
+			TestUtils.verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY])."), e);
 		}
 
 		try {
@@ -256,7 +257,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
 		}
 		catch (NotFoundException e) {
-			verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70])."), e);
+			TestUtils.verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70])."), e);
 		}
 
 
@@ -297,7 +298,7 @@ public class MusicServiceTest extends AbstractTest {
 			Assert.fail("Doit lever une SpotifyException car le mock throw.");
 		}
 		catch (SpotifyException e) {
-			verifyException(new SpotifyException("se"), e);
+			TestUtils.verifyException(new SpotifyException("se"), e);
 		}
 
 		music = musicService.random(null, null, ConnectionMode.ONLINE);

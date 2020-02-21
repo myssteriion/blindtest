@@ -1,10 +1,11 @@
 package com.myssteriion.blindtest.model.game;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class NewGameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'playersNames' est obligatoire."), e);
         }
 
         try {
@@ -36,7 +37,7 @@ public class NewGameTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'duration' est obligatoire."), e);
         }
 
         Assert.assertNotNull( new NewGame(new HashSet<>(playersNames), duration, null, null, ConnectionMode.OFFLINE) );

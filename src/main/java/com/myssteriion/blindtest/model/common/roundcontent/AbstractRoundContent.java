@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.common.roundcontent;
 
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 
 /**
  * Abstract class for all round content.
@@ -76,8 +76,8 @@ public abstract class AbstractRoundContent {
      */
     public Game apply(Game game, MusicResult musicResult) {
 
-        Tools.verifyValue("game", game);
-        Tools.verifyValue("musicResult", musicResult);
+        CommonUtils.verifyValue("game", game);
+        CommonUtils.verifyValue("musicResult", musicResult);
 
         game.getPlayers().stream()
                 .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )
@@ -103,7 +103,7 @@ public abstract class AbstractRoundContent {
      */
     public boolean isFinished(Game game) {
 
-        Tools.verifyValue("game", game);
+        CommonUtils.verifyValue("game", game);
 
         return game.getNbMusicsPlayedInRound() == nbMusics;
     }
@@ -116,7 +116,7 @@ public abstract class AbstractRoundContent {
      */
     public boolean isLastMusic(Game game) {
 
-        Tools.verifyValue("game", game);
+        CommonUtils.verifyValue("game", game);
 
         return game.getNbMusicsPlayedInRound() == nbMusics - 1;
     }

@@ -1,7 +1,8 @@
 package com.myssteriion.blindtest.model.music;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class ThemeInfoTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
         }
 
         ThemeInfo themeInfo = new ThemeInfo(theme, 5, 10);

@@ -1,12 +1,13 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -45,7 +46,7 @@ public class ProfileStatControllerTest extends AbstractTest {
 			Assert.fail("Doit lever une CustomRuntimeException car le mock return null.");
 		}
 		catch (CustomRuntimeException e) {
-			verifyException(new CustomRuntimeException("Can't find profile stat.", new NotFoundException("Profile not found.")), e);
+			TestUtils.verifyException(new CustomRuntimeException("Can't find profile stat.", new NotFoundException("Profile not found.")), e);
 		}
 
 		try {
@@ -53,7 +54,7 @@ public class ProfileStatControllerTest extends AbstractTest {
 			Assert.fail("Doit lever une CustomRuntimeException car le mock throw.");
 		}
 		catch (CustomRuntimeException e) {
-			verifyException(new CustomRuntimeException("Can't find profile stat.", nfe), e);
+			TestUtils.verifyException(new CustomRuntimeException("Can't find profile stat.", nfe), e);
 		}
 		
 		ResponseEntity< Page<ProfileStatDTO> > re = profileStatController.findAllByProfilesIds(Arrays.asList(0));

@@ -12,7 +12,7 @@ import com.myssteriion.blindtest.spotify.SpotifyMusic;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.slf4j.Logger;
@@ -105,11 +105,11 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
 
 		File themeDirectory = path.toFile();
-		for ( File file : Tools.getChildren(themeDirectory) ) {
+		for ( File file : CommonUtils.getChildren(themeDirectory) ) {
 
 			MusicDTO musicDto = new MusicDTO(file.getName(), theme, ConnectionMode.OFFLINE);
 			Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
-			if ( file.isFile() && Tools.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
+			if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
 				dao.save(musicDto);
 		}
 	}
@@ -181,9 +181,9 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	@Override
 	public MusicDTO find(MusicDTO dto) {
 
-		Tools.verifyValue("entity", dto);
+		CommonUtils.verifyValue("entity", dto);
 
-		if ( Tools.isNullOrEmpty(dto.getId()) )
+		if ( CommonUtils.isNullOrEmpty(dto.getId()) )
 			return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
 		else
 			return super.find(dto);
@@ -200,8 +200,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	public Integer getMusicNumber(Theme theme, ConnectionMode connectionMode) {
 
-		Tools.verifyValue("theme", theme);
-		Tools.verifyValue("connectionMode", connectionMode);
+		CommonUtils.verifyValue("theme", theme);
+		CommonUtils.verifyValue("connectionMode", connectionMode);
 
 		Integer nbMusic = 0;
 		for (ConnectionMode mode : connectionMode.transformForSearchMusic() )
@@ -241,15 +241,15 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 */
 	public MusicDTO random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
 
-		Tools.verifyValue("connectionMode", connectionMode);
+		CommonUtils.verifyValue("connectionMode", connectionMode);
 
-		List<Theme> searchThemes = (Tools.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
+		List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
 		List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
 
 		List<MusicDTO> allMusics = new ArrayList<>();
 		dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes).forEach(allMusics::add);
 
-		if ( Tools.isNullOrEmpty(allMusics) )
+		if ( CommonUtils.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
 
 
@@ -267,7 +267,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 			music.setFlux( new Flux(path.toFile()) );
 
-			List<Effect> searchEffects = (Tools.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
+			List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
 			music.setEffect( foundEffect(searchEffects) );
 		}
 
@@ -289,7 +289,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 				.filter(music -> music.getPlayed() == min)
 				.collect( Collectors.toList() );
 
-		int random = Tools.RANDOM.nextInt( potentialMusics.size() );
+		int random = CommonUtils.RANDOM.nextInt( potentialMusics.size() );
 		return potentialMusics.get(random);
 	}
 
@@ -327,7 +327,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		
 		Theme foundTheme = null;
 		
-		double random = Tools.RANDOM.nextDouble() * 100;
+		double random = CommonUtils.RANDOM.nextDouble() * 100;
 		int index = 0;
 		
 		while (foundTheme == null) {
@@ -343,7 +343,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	}
 
 	private Effect foundEffect(List<Effect> effects) {
-		return effects.get( Tools.RANDOM.nextInt(effects.size()) );
+		return effects.get( CommonUtils.RANDOM.nextInt(effects.size()) );
 	}
 
 }

@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,11 +78,11 @@ public class FriendshipContent extends AbstractRoundContent {
 
             while ( !playersCopied.isEmpty() ) {
 
-                int index = Tools.RANDOM.nextInt( playersCopied.size() );
+                int index = CommonUtils.RANDOM.nextInt( playersCopied.size() );
                 playersCopied.get(index).setTeamNumber(currentTeamNumber);
                 playersCopied.remove(index);
 
-                index = Tools.RANDOM.nextInt( playersCopied.size() );
+                index = CommonUtils.RANDOM.nextInt( playersCopied.size() );
                 playersCopied.get(index).setTeamNumber(currentTeamNumber);
                 playersCopied.remove(index);
 
@@ -94,8 +94,8 @@ public class FriendshipContent extends AbstractRoundContent {
     @Override
     public Game apply(Game game, MusicResult musicResult) {
 
-        Tools.verifyValue("game", game);
-        Tools.verifyValue("musicResult", musicResult);
+        CommonUtils.verifyValue("game", game);
+        CommonUtils.verifyValue("musicResult", musicResult);
 
         // le super n'est pas appelé dans cette redéfinition
         game.getPlayers().stream()

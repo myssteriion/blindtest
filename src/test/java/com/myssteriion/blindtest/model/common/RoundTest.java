@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
@@ -8,7 +9,6 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.utils.test.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 

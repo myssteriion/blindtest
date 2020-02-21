@@ -7,7 +7,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.RankConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeGoodAnswerConverter;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 import com.myssteriion.blindtest.persistence.converter.DurationConverter;
 
@@ -220,7 +220,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementPlayedGames(Duration duration) {
 
-		Tools.verifyValue("duration", duration);
+		CommonUtils.verifyValue("duration", duration);
 
 		if (playedGames == null)
 			playedGames = new HashMap<>();
@@ -239,7 +239,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void addBestScoreIfBetter(Duration duration, int scores) {
 
-		Tools.verifyValue("duration", duration);
+		CommonUtils.verifyValue("duration", duration);
 
 		if (bestScores == null)
 			bestScores = new HashMap<>();
@@ -258,7 +258,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementWonGames(Rank rank) {
 
-		Tools.verifyValue("rank", rank);
+		CommonUtils.verifyValue("rank", rank);
 
 		if (wonGames == null)
 			wonGames = new HashMap<>();
@@ -276,7 +276,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementListenedMusics(Theme theme) {
 
-		Tools.verifyValue("theme", theme);
+		CommonUtils.verifyValue("theme", theme);
 
 		if (listenedMusics == null)
 			listenedMusics = new HashMap<>();
@@ -295,8 +295,8 @@ public class ProfileStatDTO extends AbstractDTO {
 	 */
 	public void incrementFoundMusics(Theme theme, GoodAnswer goodAnswer) {
 
-		Tools.verifyValue("theme", theme);
-		Tools.verifyValue("winMode", goodAnswer);
+		CommonUtils.verifyValue("theme", theme);
+		CommonUtils.verifyValue("winMode", goodAnswer);
 
 		if (foundMusics == null)
 			foundMusics = new HashMap<>();

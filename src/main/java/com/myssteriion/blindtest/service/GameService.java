@@ -12,7 +12,7 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class GameService {
 	 */
 	public Game newGame(NewGame newGame) throws NotFoundException, SpotifyException {
 
-		Tools.verifyValue("newGame", newGame);
+		CommonUtils.verifyValue("newGame", newGame);
 
 		musicService.refresh();
 		verifyContentTheme(newGame);
@@ -131,7 +131,7 @@ public class GameService {
 	 */
 	public Game apply(MusicResult musicResult) throws NotFoundException, ConflictException {
 
-		Tools.verifyValue("musicResult", musicResult);
+		CommonUtils.verifyValue("musicResult", musicResult);
 		Game game = games.stream()
 							.filter( g -> g.getId().equals(musicResult.getGameId()) )
 							.findFirst()
@@ -237,7 +237,7 @@ public class GameService {
 	 */
 	public Game findGame(Integer id) throws NotFoundException {
 
-		Tools.verifyValue("id", id);
+		CommonUtils.verifyValue("id", id);
 
 		return games.stream()
 				.filter( game -> game.getId().equals(id) )

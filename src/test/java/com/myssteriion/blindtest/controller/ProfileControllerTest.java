@@ -1,11 +1,12 @@
 package com.myssteriion.blindtest.controller;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.utils.model.Empty;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -64,7 +65,7 @@ public class ProfileControllerTest extends AbstractTest {
 			Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
 		}
 		catch (IllegalArgumentException e) {
-			verifyException(iae, e);
+			TestUtils.verifyException(iae, e);
 		}
 
 		ResponseEntity< Page<ProfileDTO> > re = profileController.findAllByNameStartingWith("", 0, 1);

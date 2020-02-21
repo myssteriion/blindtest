@@ -1,13 +1,14 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ AvatarService.class, Tools.class })
+@PrepareForTest({ AvatarService.class, CommonUtils.class })
 public class AvatarServiceTest extends AbstractTest {
 
     @Mock
@@ -58,9 +59,9 @@ public class AvatarServiceTest extends AbstractTest {
         File mockDirectory = Mockito.mock(File.class);
         Mockito.when(mockDirectory.isFile()).thenReturn(false);
 
-        PowerMockito.mockStatic(Tools.class);
-        PowerMockito.when(Tools.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-        PowerMockito.when(Tools.hadImageExtension(Mockito.anyString())).thenReturn(true);
+        PowerMockito.mockStatic(CommonUtils.class);
+        PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
+        PowerMockito.when(CommonUtils.hadImageExtension(Mockito.anyString())).thenReturn(true);
 
 
         avatarService = Mockito.spy( new AvatarService(dao) );
@@ -79,8 +80,8 @@ public class AvatarServiceTest extends AbstractTest {
 
         File mockFile = Mockito.mock(File.class);
 
-        PowerMockito.mockStatic(Tools.class);
-        PowerMockito.when(Tools.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile));
+        PowerMockito.mockStatic(CommonUtils.class);
+        PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile));
 
         Mockito.when(dao.count()).thenReturn(0l, 1l);
 
@@ -110,7 +111,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
         }
 
 
@@ -130,7 +131,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
-            verifyException(new ConflictException("Entity already exists."), e);
+            TestUtils.verifyException(new ConflictException("Entity already exists."), e);
         }
 
         AvatarDTO avatarDtoSaved = avatarService.save(avatarDto);
@@ -148,7 +149,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
         }
 
 
@@ -158,7 +159,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
         }
 
 
@@ -176,7 +177,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
-            verifyException(new NotFoundException("Entity not found."), e);
+            TestUtils.verifyException(new NotFoundException("Entity not found."), e);
         }
 
         avatarDto.setId(1);
@@ -197,7 +198,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
         }
 
         AvatarDTO avatarDto = new AvatarDTO("name");
@@ -226,7 +227,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
         }
 
         AvatarDTO avatarDtoMock = new AvatarDTO("name");

@@ -2,10 +2,11 @@ package com.myssteriion.blindtest.persistence.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.exception.CustomRuntimeException;
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -36,17 +37,17 @@ public class ThemeConverterTest extends AbstractTest {
         JsonProcessingException jpe = Mockito.mock(JsonProcessingException.class);
         ObjectMapper mapper = Mockito.mock(ObjectMapper.class);
         Mockito.when(mapper.writeValueAsString(Mockito.any())).thenThrow(jpe);
-        setMapper(mapper);
+        TestUtils.setMapper(mapper);
 
         try {
             converter.convertToDatabaseColumn(map);
             Assert.fail("Doit lever une CustomRuntimeException car le mock throw.");
         }
         catch (CustomRuntimeException e) {
-            verifyException(new CustomRuntimeException("Can't parse json.", e.getCause()), e);
+            TestUtils.verifyException(new CustomRuntimeException("Can't parse json.", e.getCause()), e);
         }
         finally {
-            setMapper( new ObjectMapper() );
+            TestUtils.setMapper( new ObjectMapper() );
         }
     }
     
@@ -68,7 +69,7 @@ public class ThemeConverterTest extends AbstractTest {
             Assert.fail("Doit lever une CustomRuntimeException car le json est KO.");
         }
         catch (CustomRuntimeException e) {
-            verifyException(new CustomRuntimeException("Can't parse json.", e.getCause()), e);
+            TestUtils.verifyException(new CustomRuntimeException("Can't parse json.", e.getCause()), e);
         }
     }
 

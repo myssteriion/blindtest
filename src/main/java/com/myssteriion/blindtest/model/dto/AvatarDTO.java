@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.utils.Tools;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
@@ -47,7 +47,7 @@ public class AvatarDTO extends AbstractDTO {
      * @param name the name
      */
     public AvatarDTO(String name) {
-        this.name = Tools.isNullOrEmpty(name) ? "" : name;
+        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name;
     }
 
 

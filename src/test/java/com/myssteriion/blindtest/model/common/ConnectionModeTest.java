@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
-import com.myssteriion.utils.test.AbstractTest;
+import com.myssteriion.blindtest.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 
