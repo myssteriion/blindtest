@@ -21,8 +21,7 @@
 
         <!-- left players -->
         <div class="col game-current-view-players" [ngClass]="addPaddingClass()">
-            <player-card #leftPlayers *ngFor="let player of getPlayers(true);"
-                         [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
+            <player-card #leftPlayers *ngFor="let player of getPlayers(true);" [displayOpacity]="addOpacityOnPlayer(player)"
                          [player]="player" [rankOnRight]="true" [displayMedal]="true">
             </player-card>
         </div>
@@ -80,8 +79,7 @@
 
         <!-- right players -->
         <div class="col game-current-view-players" [ngClass]="addPaddingClass()">
-            <player-card #rightPlayers *ngFor="let player of getPlayers(false);"
-                         [ngClass]="{ 'game-current-view-players-opacity': addOpacityOnPlayer(player) }"
+            <player-card #rightPlayers *ngFor="let player of getPlayers(false);" [displayOpacity]="addOpacityOnPlayer(player)"
                          [player]="player" [rankOnRight]="false" [displayMedal]="true">
             </player-card>
         </div>

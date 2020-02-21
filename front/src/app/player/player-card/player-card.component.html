@@ -1,4 +1,4 @@
-<div class="row" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight}">
+<div class="row" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight, 'player-card-player-opacity': displayOpacity}">
 
     <!-- rank -->
     <div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">

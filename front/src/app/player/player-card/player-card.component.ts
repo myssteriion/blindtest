@@ -37,6 +37,12 @@ export class PlayerCardComponent implements OnInit {
     private displayMedal: boolean;
 
     /**
+     * True to display opacity.
+     */
+    @Input()
+    private displayOpacity: boolean;
+
+    /**
      * If show/hide add score.
      */
     private showAddScore: boolean;
