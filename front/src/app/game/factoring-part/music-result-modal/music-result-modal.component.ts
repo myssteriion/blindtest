@@ -115,6 +115,10 @@ export class MusicResultModalComponent implements OnInit {
         this.lines = [];
         for (let player of this.players)
             this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0, wronglyPass: false } );
+
+        this.lines.sort( (line1, line2) => {
+            return line2.score - line1.score;
+        })
     }
 
     /**
