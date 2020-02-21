@@ -7,6 +7,7 @@ import {Music} from "../../../interfaces/dto/music.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlertModalComponent} from "../../../common/error-alert/error-alert-modal.component";
 import {ErrorAlert} from "../../../interfaces/base/error.alert.interface";
+import {environment} from "../../../../environments/environment";
 
 /**
  * The music result modal.
@@ -69,7 +70,7 @@ export class MusicResultModalComponent implements OnInit {
         this.nbLoseChoices = [];
         this._translate.get("COMMON.MANY_TIMES").subscribe(
             value => {
-                for (let i = 0; i < 7; i++)
+                for (let i = 0; i <= environment.nbLoseMax; i++)
                     this.nbLoseChoices.push( { id: i, label: i + " " + value } );
             }
         );
