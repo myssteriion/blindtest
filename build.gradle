@@ -19,9 +19,13 @@ apply plugin: "io.spring.dependency-management"
 apply plugin: "war"
 //apply plugin: "com.moowork.node"
 
+def currentVersion = "1.1-SNAPSHOT"
+def myssteriionUtilsVersion = "1.0-SNAPSHOT"
+
+
 group = "com.myssteriion"
-version = "1.0"
-sourceCompatibility = "1.8"
+version = currentVersion
+sourceCompatibility = 1.8
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -39,7 +43,7 @@ dependencies {
 	implementation "ch.qos.logback:logback-core:1.2.3"
 	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.9"
 
-	implementation "com.myssteriion:com.myssteriion.utils:1.0"
+	implementation "com.myssteriion:com.myssteriion.utils:" + myssteriionUtilsVersion
 
 	compile "se.michaelthelin.spotify:spotify-web-api-java:4.2.0"
 	

@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	version: "1.0",
+	version: "1.1-SNAPSHOT",
 	baseBackendUrl: "http://localhost:9501",
 
 	maxPlayers: 16,
