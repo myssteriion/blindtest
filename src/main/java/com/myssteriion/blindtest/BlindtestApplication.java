@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest;
 
+import com.myssteriion.utils.BeanFactory;
 import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
  * The type Blindtest application.
  */
 @SpringBootApplication
-@Import({ RestUtils.class })
+@Import( {BeanFactory.class, RestUtils.class} )
 @PropertySource("${SPRING_CONFIG_LOCATION}/application.properties")
 public class BlindtestApplication extends SpringBootServletInitializer {
 
