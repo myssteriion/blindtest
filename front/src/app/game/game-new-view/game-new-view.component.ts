@@ -89,8 +89,8 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	private static MIN_PLAYERS: number = environment.minPlayers;
 
-	private faExclamationCircle = faExclamationCircle;
-	private faSyncAlt = faSyncAlt;
+	public faExclamationCircle = faExclamationCircle;
+	public faSyncAlt = faSyncAlt;
 
 
 

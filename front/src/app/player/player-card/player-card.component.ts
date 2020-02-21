@@ -40,7 +40,7 @@ export class PlayerCardComponent implements OnInit {
      * True to display opacity.
      */
     @Input()
-    private displayOpacity: boolean;
+    public displayOpacity: boolean;
 
     /**
      * If show/hide add score.
