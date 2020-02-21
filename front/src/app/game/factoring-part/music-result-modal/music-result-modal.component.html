@@ -25,12 +25,7 @@
                         <th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
                         <th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
                         <th *ngIf="showLoserColumn()" class="music-result-modal-lose-header">{{ headers[4] | translate }}</th>
-                        <th>
-                            {{ headers[5] | translate }}
-                            <fa-icon [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.MUSIC_RESULT_MODAL.WRONGLY_PASS_HEADER_TOOLTIP' | translate }}"
-                                     placement="bottom auto" [openDelay]="500">
-                            </fa-icon>
-                        </th>
+                        <th>{{ headers[5] | translate }}</th>
                     </tr>
                     </thead>
                     <tbody>
