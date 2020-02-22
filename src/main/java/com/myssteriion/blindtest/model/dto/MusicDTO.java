@@ -9,6 +9,7 @@ import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -20,6 +21,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "music__name_theme_spotify_track_id__unique", columnNames={"name", "theme", "spotify_track_id"}) })
+@SequenceGenerator(name = "sequence_id", sequenceName = "music_sequence", allocationSize = 1)
 public class MusicDTO extends AbstractDTO {
 
 	/**

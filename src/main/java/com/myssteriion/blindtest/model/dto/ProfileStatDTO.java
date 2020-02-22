@@ -14,6 +14,7 @@ import com.myssteriion.blindtest.persistence.converter.DurationConverter;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
+@SequenceGenerator(name = "sequence_id", sequenceName = "profile_stat_sequence", allocationSize = 1)
 public class ProfileStatDTO extends AbstractDTO {
 
 	/**

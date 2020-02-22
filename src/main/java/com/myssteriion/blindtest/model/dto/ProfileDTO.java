@@ -6,6 +6,7 @@ import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -17,6 +18,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "profile", uniqueConstraints={ @UniqueConstraint(name = "profile__name__unique", columnNames={"name"}) })
+@SequenceGenerator(name = "sequence_id", sequenceName = "profile_sequence", allocationSize = 1)
 public class ProfileDTO extends AbstractDTO {
 
 	/**
