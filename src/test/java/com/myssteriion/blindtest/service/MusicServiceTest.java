@@ -242,7 +242,6 @@ public class MusicServiceTest extends AbstractTest {
 		List<MusicDTO> allMusics = new ArrayList<>();
 		allMusics.add(expected);
 		allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE) );
-		Mockito.when(dao.findAll()).thenReturn(new ArrayList<>(), new ArrayList<>(), allMusics);
 
 		try {
 			musicService.random(null, null, ConnectionMode.OFFLINE);
@@ -282,7 +281,6 @@ public class MusicServiceTest extends AbstractTest {
 
 		music = musicService.random(Collections.singletonList(Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
 		Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
-
 
 
 
