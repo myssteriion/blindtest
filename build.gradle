@@ -17,9 +17,11 @@ apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "war"
 
-def currentVersion = "1.1-SNAPSHOT"
-def myssteriionUtilsVersion = "1.0-SNAPSHOT"
+def currentVersion = "1.1.0-SNAPSHOT"
+def myssteriionUtilsVersion = "1.0.0-SNAPSHOT"
 
+def deliveryFolder = "delivery"
+def env = project.hasProperty("env") ? project.env : "dev"
 
 group = "com.myssteriion"
 version = currentVersion
@@ -50,11 +52,6 @@ dependencies {
 	testImplementation "org.powermock:powermock-module-junit4:2.0.5"
 	testImplementation "org.powermock:powermock-api-mockito2:2.0.5"
 }
-
-
-def deliveryFolder = "delivery"
-def env = project.hasProperty("env") ? project.env : "dev"
-
 
 clean {
 	delete deliveryFolder
