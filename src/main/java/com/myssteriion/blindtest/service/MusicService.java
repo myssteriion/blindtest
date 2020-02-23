@@ -158,7 +158,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		boolean exists;
 
 		try {
-			exists = spotifyService.trackExists( music.getSpotifyTrackId() );
+			exists = spotifyService.trackExistsInTheme( music.getSpotifyTrackId(), music.getTheme() );
 		}
 		catch (SpotifyException e) {
 			exists = true;

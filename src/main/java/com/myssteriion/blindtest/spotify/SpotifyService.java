@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public class SpotifyService {
     }
 
     /**
-     * Is the connection is ok.
+     * If the connection is ok.
      *
      * @return TRUE if the connection is ok, FALSE otherwise.
      */
@@ -109,7 +110,6 @@ public class SpotifyService {
             List<SpotifyMusic> spotifyMusics = new ArrayList<>();
 
             String playlistId = spotifyProperties.getPlaylistIdByTheme(theme);
-
             SpotifyApi spotifyApi = getSpotifyApi();
 
             boolean hasNext = true;
@@ -143,16 +143,35 @@ public class SpotifyService {
     }
 
     /**
-     * Test if the track exists.
+     * Test if the track exists in theme.
      *
      * @param trackId the track id
+     * @param theme   the theme
      * @return TRUE if the track exists, FALSE otherwise.
      * @throws SpotifyException the spotify exception
      */
-    public boolean trackExists(String trackId) throws SpotifyException {
+    public boolean trackExistsInTheme(String trackId, Theme theme) throws SpotifyException {
 
         try {
-            return !CommonUtils.isNullOrEmpty( getSpotifyApi().getTrack(trackId).build().execute() );
+
+            boolean isFound = false;
+
+            String playlistId = spotifyProperties.getPlaylistIdByTheme(theme);
+            SpotifyApi spotifyApi = getSpotifyApi();
+
+            boolean hasNext = true;
+            int currentOffset = 0;
+            while (hasNext && !isFound) {
+
+                Paging<PlaylistTrack> page = spotifyApi.getPlaylistsTracks(playlistId).offset(currentOffset).limit(Constant.LIMIT).build().execute();
+                hasNext = !CommonUtils.isNullOrEmpty( page.getNext() );
+                currentOffset += Constant.LIMIT;
+
+                List<PlaylistTrack> list = Arrays.asList( page.getItems() );
+                isFound = list.stream().anyMatch( track -> track.getTrack().getId().equals(trackId) );
+            }
+
+            return isFound;
         }
         catch (NotFoundException e) {
             return false;
