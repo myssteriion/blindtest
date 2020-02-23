@@ -30,7 +30,7 @@
         <!-- middle -->
         <div class="col game-current-view-middle">
 
-            <theme-effect #themeEffect ></theme-effect>
+            <theme-effect #themeEffect></theme-effect>
             <custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEvent)="undefined" (onEnd)="onPreCountdownEnd()"></custom-countdown>
             <custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEvent)="onCountdownEvent($event)" (onEnd)="onCountdownEnd()"></custom-countdown>
             <custom-countdown #postCountdown [animation]="''" [sound]="false" [countdownConfig]="postCountdownConfig" (onEvent)="undefined" (onEnd)="onPostCountdownEnd()"></custom-countdown>

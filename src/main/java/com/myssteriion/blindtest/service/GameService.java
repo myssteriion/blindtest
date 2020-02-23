@@ -78,7 +78,6 @@ public class GameService {
 		game.setId( games.size() );
 		games.add(game);
 
-
 		return game;
 	}
 

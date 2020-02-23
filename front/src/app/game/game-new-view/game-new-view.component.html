@@ -7,7 +7,7 @@
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.DURATIONS_LABEL' | translate }}</div>
         <div class="col-8">
-            <mat-radio-group class="font-size-normal" >
+            <mat-radio-group class="font-size-normal">
                 <mat-radio-button *ngFor="let duration of durations" value="{{ duration }}" color="warn"
                                   (change)="selectedDuration = duration" [checked]="duration === selectedDuration">
                     {{ 'GAME.NEW_VIEW.' + duration | translate }}
@@ -21,7 +21,7 @@
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
         <div class="col-8">
-            <mat-radio-group class="font-size-normal" >
+            <mat-radio-group class="font-size-normal">
                 <mat-radio-button *ngFor="let connectionMode of connectionModes" value="{{ connectionMode }}" color="warn"
                                   (change)="selectedConnectionMode = connectionMode" [checked]="connectionMode === selectedConnectionMode">
                     {{ 'GAME.NEW_VIEW.' + connectionMode + '_MODE' | translate }}
@@ -34,7 +34,7 @@
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</span>
-            <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
                      placement="bottom auto" [openDelay]="0">
             </fa-icon>
             <fa-icon class="fa-icon-custom-hover-2" [icon]="faSyncAlt" ngbTooltip="{{ 'GAME.NEW_VIEW.COMPUTE_THEMES_INFO_REFRESH_HELP' | translate }}"
@@ -42,12 +42,12 @@
             </fa-icon>
         </div>
         <div class="col-8">
-            <div *ngFor="let theme of themes" class="game-new-view-themes" >
+            <div *ngFor="let theme of themes" class="game-new-view-themes">
                 <div class="game-new-view-theme-info">
                     <img src="{{ theme.srcImg }}" class="game-new-view-theme-info-img" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }"
                          (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
                     <div class="game-new-view-theme-info-percent font-size-very-very-very-small" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }">
-                        {{ getThemePercent(theme.enumVal) }}
+                        {{ getNumberOfMusicsInTheme(theme.enumVal) }}
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</span>
-            <fa-icon class="fa-icon-custom-hover-2" [icon]="faExclamationCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
                      placement="bottom auto" [openDelay]="0">
             </fa-icon>
         </div>

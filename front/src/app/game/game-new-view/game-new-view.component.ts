@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 import {environment} from "../../../environments/environment";
-import {faExclamationCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
+import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
 import {ThemeInfo} from "../../interfaces/music/theme.info";
 
@@ -89,7 +89,7 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	private static MIN_PLAYERS: number = environment.minPlayers;
 
-	public faExclamationCircle = faExclamationCircle;
+	public faQuestionCircle = faQuestionCircle;
 	public faSyncAlt = faSyncAlt;
 
 
@@ -189,55 +189,22 @@ export class GameNewViewComponent implements OnInit {
 
 
 	/**
-	 * Get theme percent.
+	 * Gets the number of musics in theme.
 	 *
 	 * @param theme the theme
 	 */
-	public getThemePercent(theme: Theme): string {
-
-		let percent: number = 0;
-
-		if ( this.themesInfo.length > 0)
-			percent = 100 * this.computeThemeNbMusics(theme) / this.computeTotalNbMusics();
-
-		return percent.toFixed(0) + "%";
-	}
-
-	/**
-	 * Compute nb musics for the theme according to the "selectedConnectionMode" field.
-	 *
-	 * @param theme the theme
-	 */
-	private computeThemeNbMusics(theme: Theme): number {
+	public getNumberOfMusicsInTheme(theme: Theme): number {
 
 		let nbMusics: number = 0;
 
-		let index = this.themesInfo.findIndex( thm => thm.theme === theme);
-		if ( index != -1 && this.themeIsSelected(theme) ) {
-
+		let index = this.themesInfo.findIndex(thm => thm.theme === theme);
+		if (index != -1) {
 			switch (this.selectedConnectionMode) {
-
 				case ConnectionMode.OFFLINE:	nbMusics = this.themesInfo[index].offlineNbMusics; break;
 				case ConnectionMode.ONLINE:		nbMusics = this.themesInfo[index].onlineNbMusics; break;
-
-				default:
-					nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
+				default: 						nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
 			}
 		}
-
-		return nbMusics;
-	}
-
-	/**
-	 * Compute nb musics for all themes according to the "selectedConnectionMode" field.
-	 */
-	private computeTotalNbMusics(): number {
-
-		let nbMusics: number = 0;
-
-		this.themesInfo.forEach(themeInfo => {
-			nbMusics += this.computeThemeNbMusics(themeInfo.theme);
-		} );
 
 		return nbMusics;
 	}

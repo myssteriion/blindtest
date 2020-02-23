@@ -64,7 +64,9 @@ public class MusicController {
 	/**
 	 * Randomly choose a music.
 	 *
-	 * @param themes themes filter (optional)
+	 * @param themes     	 the themes filter (optional)
+	 * @param effects     	 the effects filter (optional)
+	 * @param connectionMode the online mode
 	 * @return a MusicDTO
 	 * @throws NotFoundException NotFound exception
 	 */
