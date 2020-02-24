@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "62d3a7f8-f5a3-4ca9-9982-8e37c9dba39c",
+		"_postman_id": "9b48a212-f36f-4b21-88e6-22232fe634de",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,13 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/avatars?prefixName&pageNumber=0&itemPerPage=18",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/avatars?prefixName&pageNumber=0&itemPerPage=18",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"avatars"
 							],
 							"query": [
@@ -53,13 +54,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/compute-themes-info",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/musics/compute-themes-info",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"musics",
 								"compute-themes-info"
 							]
@@ -73,13 +75,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&effects=NONE, SPEED&connectionMode=OFFLINE",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&effects=NONE, SPEED&connectionMode=OFFLINE",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"musics",
 								"random"
 							],
@@ -127,13 +130,14 @@
 							"raw": "{\n\t\"name\": \"name\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -157,13 +161,14 @@
 							"raw": "{\n\t\"name\": \"Myssteriion\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles/1",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles",
 								"1"
 							]
@@ -177,13 +182,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles?prefixName=&pageNumber=0&itemPerPage=16",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles?prefixName=&pageNumber=0&itemPerPage=16",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							],
 							"query": [
@@ -210,13 +216,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles/0",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles",
 								"0"
 							]
@@ -236,13 +243,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/profilestats?profilesIds=1, 2",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profilestats?profilesIds=1, 2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profilestats"
 							],
 							"query": [
@@ -275,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\", \"Despacito\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [\"ANNEES_60\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
+							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\", \"Despacito\" ],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": false,\n\t\"themes\": [\"ANNEES_60\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,13 +291,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game"
 							]
 						}
@@ -313,13 +322,14 @@
 							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -340,13 +350,14 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:{{port}}/game/0",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"0"
 							]
@@ -377,13 +388,14 @@
 							"raw": "{\n    \"name\": \"Jean\",\n    \"background\": \"0\",\n    \"avatarName\": \"deadpool.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -407,13 +419,14 @@
 							"raw": "{\n    \"name\": \"Paul\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -437,13 +450,14 @@
 							"raw": "{\n    \"name\": \"Kurby\",\n    \"background\": \"4\",\n    \"avatarName\": \"elephant.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -467,13 +481,14 @@
 							"raw": "{\n    \"name\": \"Darkana\",\n    \"background\": \"3\",\n    \"avatarName\": \"harryPotter.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -497,13 +512,14 @@
 							"raw": "{\n    \"name\": \"Myssteriion\",\n    \"background\": \"1\",\n    \"avatarName\": \"licorne.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -527,13 +543,14 @@
 							"raw": "{\n    \"name\": \"Tooms\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -557,13 +574,14 @@
 							"raw": "{\n    \"name\": \"Mouton\",\n    \"background\": \"3\",\n    \"avatarName\": \"ronflex.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -587,13 +605,14 @@
 							"raw": "{\n    \"name\": \"Stanouch\",\n    \"background\": \"0\",\n    \"avatarName\": \"lapin.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -617,13 +636,14 @@
 							"raw": "{\n    \"name\": \"Menencia\",\n    \"background\": \"1\",\n    \"avatarName\": \"sangoku.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -647,13 +667,14 @@
 							"raw": "{\n    \"name\": \"O2\",\n    \"background\": \"3\",\n    \"avatarName\": \"pinguin.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -677,13 +698,14 @@
 							"raw": "{\n    \"name\": \"LinC\",\n    \"background\": \"4\",\n    \"avatarName\": \"spiderman.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -707,13 +729,14 @@
 							"raw": "{\n    \"name\": \"Despacito\",\n    \"background\": \"4\",\n    \"avatarName\": \"wolwerine.jpg\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -737,13 +760,14 @@
 							"raw": "{\n    \"name\": \"Ricard'o\",\n    \"background\": \"4\",\n    \"avatarName\": \"licorne.png\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/profiles",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"profiles"
 							]
 						}
@@ -786,13 +810,14 @@
 							"raw": "{\n\t\"playersNames\": [ \"{{player1}}\", \"{{player2}}\",  \"{{player3}}\",  \"{{player4}}\" ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [],\n\t\"connectionMode\": \"{{onlineMode}}\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game"
 							]
 						}
@@ -828,13 +853,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player3}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\", \"{{player3}}\" ],\n\t\"losers\": [ ]\n\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -871,13 +897,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player1}}\",\"{{player3}}\",\"{{player4}}\" ],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -902,13 +929,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [ \"{{player2}}\"],\n\t\"titleWinners\": [ \"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -933,13 +961,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -964,13 +993,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -995,13 +1025,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [ \"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1026,13 +1057,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [ \"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1057,13 +1089,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\", \"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1088,13 +1121,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1119,13 +1153,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1150,13 +1185,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1181,13 +1217,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1212,13 +1249,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1243,13 +1281,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1274,13 +1313,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1305,13 +1345,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1336,13 +1377,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1367,13 +1409,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1398,13 +1441,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{60s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1429,13 +1473,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1460,13 +1505,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1491,13 +1537,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1522,13 +1569,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1553,13 +1601,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player4}}\"],\n\t\"titleWinners\": [\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1584,13 +1633,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1615,13 +1665,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1646,13 +1697,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1677,13 +1729,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1708,13 +1761,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player2}}\",\"{{player3}}\" ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1739,13 +1793,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player4}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1770,13 +1825,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1801,13 +1857,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player1}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1832,13 +1889,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player4}}\",\"{{player3}}\"],\n\t\"losers\": [\"{{player3}}\",\"{{player4}}\",\"{{player4}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1863,13 +1921,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{disney}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\",\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player3}}\",\"{{player3}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1894,13 +1953,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{90s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [],\n\t\"losers\": [\"{{player4}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1925,13 +1985,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{00s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\",\"{{player3}}\"],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player2}}\",\"{{player4}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1956,13 +2017,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player2}}\"],\n\t\"losers\": [\"{{player3}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -1987,13 +2049,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{70s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player2}}\"],\n\t\"titleWinners\": [\"{{player2}}\",\"{{player3}}\",\"{{player4}}\"],\n\t\"losers\": [\"{{player1}}\",\"{{player1}}\",\"{{player1}}\",\"{{player3}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -2018,13 +2081,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{80s}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [\"{{player1}}\"],\n\t\"titleWinners\": [\"{{player1}}\"],\n\t\"losers\": [\"{{player2}}\",\"{{player2}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -2049,13 +2113,14 @@
 							"raw": "{\n\t\"gameId\": {{gameId}},\n\t\"music\": {\n\t\t\"name\": \"{{music}}\",\n\t\t\"theme\": \"{{cinema}}\",\n\t\t\"connectionMode\": \"{{onlineMode}}\"\n\t},\n\t\"authorWinners\": [],\n\t\"titleWinners\": [\"{{player3}}\"],\n\t\"losers\": [\"{{player2}}\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"{{applicationContext}}",
 								"game",
 								"apply"
 							]
@@ -2091,97 +2156,103 @@
 	],
 	"variable": [
 		{
-			"id": "3dff3096-e9e9-4fb9-9676-6180eac1f117",
+			"id": "d24fb084-37f2-4a11-9f3f-b7df10341152",
 			"key": "port",
 			"value": "9501",
 			"type": "string"
 		},
 		{
-			"id": "77509653-8823-44bc-87d6-3806fd5672d9",
+			"id": "a559c5b5-0b40-47ce-859e-a3d5274b1904",
+			"key": "applicationContext",
+			"value": "musics-blindtest",
+			"type": "string"
+		},
+		{
+			"id": "1a79cf14-6d4b-4a9a-b48f-c961c1d404f1",
 			"key": "gameId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "15ea5825-4d51-429f-bf0c-33a714222d28",
+			"id": "06316940-15b4-4100-a494-6cde160abfc0",
 			"key": "60s",
 			"value": "ANNEES_60",
 			"type": "string"
 		},
 		{
-			"id": "d9b24c08-dd4f-42c1-88fb-e8f0420efd63",
+			"id": "9ebbba73-2bcc-4ae7-ae25-69b4b7ac0485",
 			"key": "70s",
 			"value": "ANNEES_70",
 			"type": "string"
 		},
 		{
-			"id": "bd7a20d5-837e-49f2-9a43-c236650c1ea1",
+			"id": "53a2640d-1441-4c27-8a8d-ca748030edef",
 			"key": "80s",
 			"value": "ANNEES_80",
 			"type": "string"
 		},
 		{
-			"id": "b6838c41-d004-412f-a269-4a5add6f0b2a",
+			"id": "e993df01-3d8b-411e-bb83-fa4c3621dd4d",
 			"key": "90s",
 			"value": "ANNEES_90",
 			"type": "string"
 		},
 		{
-			"id": "6df6b82c-4d22-40ea-ac0f-ee2fa0f6cf5f",
+			"id": "678fe7c7-2712-4cb3-9830-4f9c7154f90d",
 			"key": "00s",
 			"value": "ANNEES_2000",
 			"type": "string"
 		},
 		{
-			"id": "ddd3b424-23a0-4154-9111-13c8dd41e1e0",
+			"id": "268dfb98-1c2d-45ed-a0e8-b3109d66dfc1",
 			"key": "10s",
 			"value": "ANNEES_2010",
 			"type": "string"
 		},
 		{
-			"id": "f188a2cb-1bf7-44d8-b080-9b75c3a1444f",
+			"id": "d7a53abe-5fc6-4828-92cb-b025980b4d61",
 			"key": "cinema",
 			"value": "SERIES_CINEMAS",
 			"type": "string"
 		},
 		{
-			"id": "8fc2ed3c-bf64-4669-a5e6-ac8356a3be96",
+			"id": "2d01f0d1-8572-4822-8d1a-29aa08873b42",
 			"key": "disney",
 			"value": "DISNEY",
 			"type": "string"
 		},
 		{
-			"id": "0b4caebc-0a59-4848-b5ad-2fdae935eb9c",
+			"id": "06c709e8-d765-4676-a0c3-6492f3e5862a",
 			"key": "player1",
 			"value": "Darkana",
 			"type": "string"
 		},
 		{
-			"id": "5df58853-0728-455a-b618-23f0c46ade27",
+			"id": "fe763d57-c846-44f0-b0a7-16f417051451",
 			"key": "player2",
 			"value": "Despacito",
 			"type": "string"
 		},
 		{
-			"id": "cd920da4-24d7-40a0-8496-8a94427a2285",
+			"id": "d019ce9f-0262-4cd3-8470-1f2181334972",
 			"key": "player3",
 			"value": "Myssteriion",
 			"type": "string"
 		},
 		{
-			"id": "c4440809-957f-485d-ab14-1a5b7581bbd9",
+			"id": "99f0ee93-7d76-4b67-89e5-00cf2582a004",
 			"key": "player4",
 			"value": "LinC",
 			"type": "string"
 		},
 		{
-			"id": "9b19f832-aac6-41c6-8afc-456b0df72157",
+			"id": "c0b2356d-ffaf-45ee-a0e4-b000a1d08a50",
 			"key": "music",
 			"value": "Taxi.mp3",
 			"type": "string"
 		},
 		{
-			"id": "36ae1ac0-6a77-4ce7-acc9-e53c9c05170a",
+			"id": "9086e1ea-2222-4f31-87f2-5c2fe23ca2df",
 			"key": "onlineMode",
 			"value": "OFFLINE",
 			"type": "string"
