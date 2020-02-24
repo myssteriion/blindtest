@@ -79,8 +79,11 @@ mat-radio-button {
     color: orangered;
 }
 
-.tooltip {
-    font-size: 1.4rem;
+.mat-tooltip {
+    font-size: 1.2em !important;
+    max-width: 40em !important;
+    background-color: #515151;
+    opacity: 1;
 }
 
 .padding-bottom-1em {

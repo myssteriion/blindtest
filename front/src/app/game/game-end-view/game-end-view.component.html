@@ -8,14 +8,13 @@
         <div class="col-2 game-end-view-exit">
             <fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
                      (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
-                     ngbTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" placement="bottom auto"
-                     [openDelay]="500">
+                     matTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" matTooltipShowDelay="500">
             </fa-icon>
             <fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-2" size="2x" [icon]="faVolumeMute" (click)="stopMusic()"
-                     ngbTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500">
+                     matTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500">
             </fa-icon>
             <fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-2" size="2x" [icon]="faMusic" (click)="playMusic()"
-                     ngbTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" placement="bottom auto" [openDelay]="500">
+                     matTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500">
             </fa-icon>
         </div>
     </div>

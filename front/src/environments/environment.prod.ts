@@ -8,5 +8,6 @@ export const environment = {
 	itemPerPageAvatars: 24,
 	itemPerPageProfiles: 15,
 
-	nbLoseMax: 4
+	nbLoseMax: 4,
+	nbMusicsMinLabelHelp: 100
 };

@@ -74,7 +74,7 @@ public class GameService {
 		if ( newGame.getConnectionMode().isNeedConnection() )
 			spotifyService.testConnection();
 
-		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
+		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
 		game.setId( games.size() );
 		games.add(game);
 

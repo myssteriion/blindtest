@@ -438,7 +438,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private callNextMusic(themes: Theme[], connectionMode: ConnectionMode): void {
 
-		this._musicResource.random(themes, this.game.effects, connectionMode).subscribe(
+		this._musicResource.random(this.game.sameProbability, themes, this.game.effects, connectionMode).subscribe(
 			response => {
 
 				this.currentMusic = response;

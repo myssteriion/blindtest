@@ -41,24 +41,9 @@ public class Game implements IModel {
     private Duration duration;
 
     /**
-     * The number of musics played.
+     * If the themes are same probability.
      */
-    private int nbMusicsPlayed;
-
-    /**
-     * The number of musics played in current roud.
-     */
-    private int nbMusicsPlayedInRound;
-
-    /**
-     * The current round.
-     */
-    private Round round;
-
-    /**
-     * The implementation of the current round.
-     */
-    private AbstractRoundContent roundContent;
+    private boolean sameProbability;
 
     /**
      * The themes.
@@ -80,6 +65,26 @@ public class Game implements IModel {
      */
     private Map<Theme, Integer> listenedMusics;
 
+    /**
+     * The number of musics played.
+     */
+    private int nbMusicsPlayed;
+
+    /**
+     * The number of musics played in current roud.
+     */
+    private int nbMusicsPlayedInRound;
+
+    /**
+     * The current round.
+     */
+    private Round round;
+
+    /**
+     * The implementation of the current round.
+     */
+    private AbstractRoundContent roundContent;
+
 
 
     /**
@@ -90,7 +95,7 @@ public class Game implements IModel {
      * @param themes   the themes
      * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
+    public Game(Set<Player> players, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
         CommonUtils.verifyValue("players", players);
         CommonUtils.verifyValue("duration", duration);
@@ -100,14 +105,16 @@ public class Game implements IModel {
 
         this.players = players.stream().sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
         this.duration = duration;
-        this.nbMusicsPlayed = INIT;
-        this.nbMusicsPlayedInRound = INIT;
-        this.round = Round.getFirst();
-        this.roundContent = this.round.createRoundContent(this);
+        this.sameProbability = sameProbability;
         this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
         this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
         this.listenedMusics = new HashMap<>();
+
+        this.nbMusicsPlayed = INIT;
+        this.nbMusicsPlayedInRound = INIT;
+        this.round = Round.getFirst();
+        this.roundContent = this.round.createRoundContent(this);
     }
 
     private void checkNbPlayers(Set<Player> players) {
@@ -160,39 +167,12 @@ public class Game implements IModel {
     }
 
     /**
-     * Gets nbMusicsPlayed.
+     * Gets sameProbability.
      *
-     * @return the nbMusicsPlayed
+     * @return The sameProbability.
      */
-    public int getNbMusicsPlayed() {
-        return nbMusicsPlayed;
-    }
-
-    /**
-     * Gets nbMusicsPlayed.
-     *
-     * @return the nbMusicsPlayed
-     */
-    public int getNbMusicsPlayedInRound() {
-        return nbMusicsPlayedInRound;
-    }
-
-    /**
-     * Gets round.
-     *
-     * @return the round
-     */
-    public Round getRound() {
-        return round;
-    }
-
-    /**
-     * Gets roundContent.
-     *
-     * @return the roundContent
-     */
-    public AbstractRoundContent getRoundContent() {
-        return roundContent;
+    public boolean isSameProbability() {
+        return sameProbability;
     }
 
     /**
@@ -229,6 +209,42 @@ public class Game implements IModel {
      */
     public Map<Theme, Integer> getListenedMusics() {
         return listenedMusics;
+    }
+
+    /**
+     * Gets nbMusicsPlayed.
+     *
+     * @return the nbMusicsPlayed
+     */
+    public int getNbMusicsPlayed() {
+        return nbMusicsPlayed;
+    }
+
+    /**
+     * Gets nbMusicsPlayed.
+     *
+     * @return the nbMusicsPlayed
+     */
+    public int getNbMusicsPlayedInRound() {
+        return nbMusicsPlayedInRound;
+    }
+
+    /**
+     * Gets round.
+     *
+     * @return the round
+     */
+    public Round getRound() {
+        return round;
+    }
+
+    /**
+     * Gets roundContent.
+     *
+     * @return the roundContent
+     */
+    public AbstractRoundContent getRoundContent() {
+        return roundContent;
     }
 
 
@@ -294,14 +310,15 @@ public class Game implements IModel {
     public String toString() {
         return "players=" + players +
                 ", duration=" + duration +
-                ", nbMusicsPlayed=" + nbMusicsPlayed +
-                ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
-                ", round=" + round +
-                ", roundContent={" + roundContent + "}" +
+                ", sameProbability=" + sameProbability +
                 ", themes=" + themes +
                 ", effects=" + effects +
                 ", connectionMode=" + connectionMode +
-                ", listenedMusics=" + listenedMusics;
+                ", listenedMusics=" + listenedMusics +
+                ", nbMusicsPlayed=" + nbMusicsPlayed +
+                ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
+                ", round=" + round +
+                ", roundContent={" + roundContent + "}";
     }
 
 }

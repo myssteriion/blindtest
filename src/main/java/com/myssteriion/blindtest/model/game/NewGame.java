@@ -26,6 +26,11 @@ public class NewGame {
     private Duration duration;
 
     /**
+     * If the themes are same probability.
+     */
+    private boolean sameProbability;
+
+    /**
      * The themes.
      */
     private List<Theme> themes;
@@ -51,7 +56,7 @@ public class NewGame {
      * @param connectionMode the connectionMode mode
      */
     @JsonCreator
-    public NewGame(Set<String> playersNames, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
+    public NewGame(Set<String> playersNames, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
 
         CommonUtils.verifyValue("playersNames", playersNames);
         CommonUtils.verifyValue("duration", duration);
@@ -59,6 +64,7 @@ public class NewGame {
 
         this.playersNames = playersNames;
         this.duration = duration;
+        this.sameProbability = sameProbability;
         this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
         this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
         this.connectionMode = connectionMode;
@@ -82,6 +88,15 @@ public class NewGame {
      */
     public Duration getDuration() {
         return duration;
+    }
+
+    /**
+     * Gets sameProbability.
+     *
+     * @return The sameProbability.
+     */
+    public boolean isSameProbability() {
+        return sameProbability;
     }
 
     /**
@@ -116,6 +131,7 @@ public class NewGame {
     public String toString() {
         return "playersNames=" + playersNames +
                 ", duration=" + duration +
+                ", sameProbability=" + sameProbability +
                 ", themes=" + themes +
                 ", effects=" + effects +
                 ", connectionMode=" + connectionMode;

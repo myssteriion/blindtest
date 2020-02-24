@@ -7,11 +7,11 @@
         </div>
         <div class="col-2 game-current-view-exit">
             <fa-icon [icon]="faQuestionCircle" class="fa-icon-custom-hover-2" size="2x" (click)="openRoundInfoModal()"
-                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.ROUND_INFO' | translate }}" placement="bottom auto" [openDelay]="500">
+                     matTooltip="{{ 'GAME.CURRENT_VIEW.ROUND_INFO' | translate }}" matTooltipShowDelay="500">
             </fa-icon>
             <fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
                      (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
-                     ngbTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" placement="bottom auto" [openDelay]="500">
+                     matTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" matTooltipShowDelay="500">
             </fa-icon>
         </div>
     </div>

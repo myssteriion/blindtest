@@ -2,12 +2,12 @@
 
     <!-- theme -->
     <div class="col">
-        <img src="{{ theme.srcImg }}" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto"/>
+        <img src="{{ theme.srcImg }}" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500"/>
     </div>
 
     <!-- effect -->
     <div *ngIf="showEffect" class="col">
-        <img src="{{ effect.srcImg }}" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto"/>
+        <img src="{{ effect.srcImg }}" matTooltip="{{ effect.tooltip | translate }}" matTooltipShowDelay="500"/>
     </div>
 
 </div>

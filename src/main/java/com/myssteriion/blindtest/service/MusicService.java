@@ -233,6 +233,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	/**
 	 * Randomly choose a music.
 	 *
+	 * @param sameProbability if themes probability are same
 	 * @param themes     	 the themes filter (optional)
 	 * @param effects     	 the effects filter (optional)
 	 * @param connectionMode the online mode
@@ -240,7 +241,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 	 * @throws NotFoundException the not found exception
 	 * @throws IOException       the io exception
 	 */
-	public MusicDTO random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
+	public MusicDTO random(boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
 
 		CommonUtils.verifyValue("connectionMode", connectionMode);
 
@@ -253,7 +254,18 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		if ( CommonUtils.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
 
-		Theme foundTheme = foundTheme(searchThemes);
+		Theme foundTheme;
+
+		if (sameProbability) {
+			foundTheme = foundTheme(searchThemes);
+		}
+		else {
+			List<Double> coefs = calculateCoefList(allMusics);
+			double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
+			List<Double> cumulativePercent = calculateCumulativePercent(coefs, ratio);
+			foundTheme = foundThemeByCumulativePercent(cumulativePercent);
+		}
+
 		MusicDTO music = foundMusic(allMusics, foundTheme);
 
 		if ( music.getConnectionMode().isNeedConnection() ) {
@@ -269,6 +281,55 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		}
 
 		return music;
+	}
+
+	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
+
+		List<Double> coefs = new ArrayList<>();
+
+		for ( Theme theme : Theme.getSortedTheme() ) {
+
+			List<MusicDTO> allMusicsInTheme = allMusics.stream()
+					.filter(music -> music.getTheme() == theme)
+					.collect( Collectors.toList() );
+
+			double nbMusics = allMusicsInTheme.size();
+			double nbPlayedSum = allMusicsInTheme.stream().mapToDouble(MusicDTO::getPlayed).sum();
+			nbPlayedSum = (nbPlayedSum == 0) ? 1 : nbPlayedSum;
+			coefs.add(nbMusics / nbPlayedSum);
+		}
+
+		return coefs;
+	}
+
+	private List<Double> calculateCumulativePercent(List<Double> coefs, double ratio) {
+
+		List<Double> cumulativePercent = new ArrayList<>();
+
+		cumulativePercent.add( coefs.get(0) * ratio );
+		for (int i = 1; i < coefs.size(); i++)
+			cumulativePercent.add( cumulativePercent.get(i-1) + (coefs.get(i) * ratio) );
+
+		return cumulativePercent;
+	}
+
+	private Theme foundThemeByCumulativePercent(List<Double> cumulativePercent) {
+
+		Theme foundTheme = null;
+
+		double random = CommonUtils.RANDOM.nextDouble() * 100;
+		int index = 0;
+
+		while (foundTheme == null) {
+
+			double cumul = cumulativePercent.get(index);
+			if (random < cumul)
+				foundTheme = Theme.getSortedTheme().get(index);
+			else
+				index++;
+		}
+
+		return foundTheme;
 	}
 
 	private Theme foundTheme(List<Theme> themes) {

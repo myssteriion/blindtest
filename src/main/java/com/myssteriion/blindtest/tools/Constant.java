@@ -15,6 +15,7 @@ public class Constant {
 	public static final String DEFAULT_AVATAR	= "defaut.png";
 
 	public static final Integer ITEM_PER_PAGE_MAX 			= 50;
+	public static final String SAME_PROBABILITY 			= "sameProbability";
 	public static final String THEMES 						= "themes";
 	public static final String EFFECTS 						= "effects";
 	public static final String CONNECTION_MODE 				= "connectionMode";

@@ -50,6 +50,11 @@ export class GameNewViewComponent implements OnInit {
 	public selectedConnectionMode: ConnectionMode;
 
 	/**
+	 * TRUE if themes are same probability, FALSE otherwise.
+	 */
+	public sameProbability: boolean = false;
+
+	/**
 	 * Themes list.
 	 */
 	public themes = THEMES;
@@ -88,6 +93,11 @@ export class GameNewViewComponent implements OnInit {
 	 * The min players number.
 	 */
 	private static MIN_PLAYERS: number = environment.minPlayers;
+
+	/**
+	 * The min musics number for the same probability mode (tooltip).
+	 */
+	public nbMusicsMinLabelHelp: number = environment.nbMusicsMinLabelHelp;
 
 	public faQuestionCircle = faQuestionCircle;
 	public faSyncAlt = faSyncAlt;
@@ -189,11 +199,21 @@ export class GameNewViewComponent implements OnInit {
 
 
 	/**
+	 * Gets the number of musics OR theme percent.
+	 *
+	 * @param theme the theme
+	 */
+	public getThemeInfo(theme: Theme): string {
+		console.log("ici", this.sameProbability);
+		return (this.sameProbability) ? this.getNumberOfMusicsInTheme(theme) : this.getThemePercent(theme);
+	}
+
+	/**
 	 * Gets the number of musics in theme.
 	 *
 	 * @param theme the theme
 	 */
-	public getNumberOfMusicsInTheme(theme: Theme): number {
+	private getNumberOfMusicsInTheme(theme: Theme): string {
 
 		let nbMusics: number = 0;
 
@@ -205,6 +225,60 @@ export class GameNewViewComponent implements OnInit {
 				default: 						nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
 			}
 		}
+
+		return nbMusics.toString();
+	}
+
+	/**
+	 * Get theme percent.
+	 *
+	 * @param theme the theme
+	 */
+	private getThemePercent(theme: Theme): string {
+
+		let percent: number = 0;
+
+		if ( this.themesInfo.length > 0)
+			percent = 100 * this.computeThemeNbMusics(theme) / this.computeTotalNbMusics();
+
+		return percent.toFixed(0) + "%";
+	}
+
+	/**
+	 * Compute nb musics for the theme according to the "selectedConnectionMode" field.
+	 *
+	 * @param theme the theme
+	 */
+	private computeThemeNbMusics(theme: Theme): number {
+
+		let nbMusics: number = 0;
+
+		let index = this.themesInfo.findIndex( thm => thm.theme === theme);
+		if ( index != -1 && this.themeIsSelected(theme) ) {
+
+			switch (this.selectedConnectionMode) {
+
+				case ConnectionMode.OFFLINE:	nbMusics = this.themesInfo[index].offlineNbMusics; break;
+				case ConnectionMode.ONLINE:		nbMusics = this.themesInfo[index].onlineNbMusics; break;
+
+				default:
+					nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
+			}
+		}
+
+		return nbMusics;
+	}
+
+	/**
+	 * Compute nb musics for all themes according to the "selectedConnectionMode" field.
+	 */
+	private computeTotalNbMusics(): number {
+
+		let nbMusics: number = 0;
+
+		this.themesInfo.forEach(themeInfo => {
+			nbMusics += this.computeThemeNbMusics(themeInfo.theme);
+		} );
 
 		return nbMusics;
 	}
@@ -300,6 +374,7 @@ export class GameNewViewComponent implements OnInit {
 		let newGame: NewGame = {
 			duration: this.selectedDuration,
 			playersNames: playersNames,
+			sameProbability: this.sameProbability,
 			themes: this.selectedThemes,
 			effects: this.selectedEffect,
 			connectionMode: this.selectedConnectionMode

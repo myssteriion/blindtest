@@ -64,22 +64,24 @@ public class MusicController {
 	/**
 	 * Randomly choose a music.
 	 *
-	 * @param themes     	 the themes filter (optional)
-	 * @param effects     	 the effects filter (optional)
-	 * @param connectionMode the online mode
+	 * @param sameProbability if themes probability are same
+	 * @param themes     	  the themes filter (optional)
+	 * @param effects     	  the effects filter (optional)
+	 * @param connectionMode  the online mode
 	 * @return a MusicDTO
 	 * @throws NotFoundException NotFound exception
 	 */
 	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
+	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.SAME_PROBABILITY, required = false) boolean sameProbability,
+										   @RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
 										   @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
 										   @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
 			throws NotFoundException, IOException, SpotifyException {
 
-		MusicDTO music = musicService.random(themes, effects, connectionMode);
+		MusicDTO music = musicService.random(sameProbability, themes, effects, connectionMode);
 		if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
 			musicService.refresh();
-			music = musicService.random(themes, effects, connectionMode);
+			music = musicService.random(sameProbability, themes, effects, connectionMode);
 		}
 
 		return RestUtils.create200(music);

@@ -30,24 +30,39 @@
         </div>
     </div>
 
+    <!-- themes same probability -->
+    <div class="row game-new-view-part">
+        <div class="col-4 game-new-view-label font-size-normal">
+            <span>{{ 'GAME.NEW_VIEW.THEMES_SAME_PROBABILITY_LABEL' | translate }}</span>
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle"
+                     matTooltip="{{ 'GAME.NEW_VIEW.THEMES_SAME_PROBABILITY_HELP' | translate: {'nb_musics_min_label_help': nbMusicsMinLabelHelp} }}"
+                     matTooltipShowDelay="500">
+            </fa-icon>
+        </div>
+        <div class="col-8">
+            <mat-slide-toggle [(ngModel)]="sameProbability" color="warn"></mat-slide-toggle>
+        </div>
+    </div>
+
     <!-- themes -->
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.THEMES_LABEL' | translate }}</span>
-            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
-                     placement="bottom auto" [openDelay]="0">
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" matTooltip="{{ 'GAME.NEW_VIEW.THEMES_HELP' | translate }}"
+                     matTooltipShowDelay="500">
             </fa-icon>
-            <fa-icon class="fa-icon-custom-hover-2" [icon]="faSyncAlt" ngbTooltip="{{ 'GAME.NEW_VIEW.COMPUTE_THEMES_INFO_REFRESH_HELP' | translate }}"
-                     placement="bottom auto" [openDelay]="0" (click)="computeThemesInfo()">
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faSyncAlt" matTooltip="{{ 'GAME.NEW_VIEW.COMPUTE_THEMES_INFO_REFRESH_HELP' | translate }}"
+                     matTooltipShowDelay="500"
+                     (click)="computeThemesInfo()">
             </fa-icon>
         </div>
         <div class="col-8">
             <div *ngFor="let theme of themes" class="game-new-view-themes">
                 <div class="game-new-view-theme-info">
                     <img src="{{ theme.srcImg }}" class="game-new-view-theme-info-img" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }"
-                         (click)="selectDeselectTheme(theme.enumVal)" ngbTooltip="{{ theme.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
+                         (click)="selectDeselectTheme(theme.enumVal)" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500">
                     <div class="game-new-view-theme-info-percent font-size-very-very-very-small" [ngClass]="{ 'game-new-view-inactive': (!themeIsSelected(theme.enumVal)) }">
-                        {{ getNumberOfMusicsInTheme(theme.enumVal) }}
+                        {{ getThemeInfo(theme.enumVal) }}
                     </div>
                 </div>
             </div>
@@ -58,13 +73,13 @@
     <div class="row game-new-view-part">
         <div class="col-4 game-new-view-label font-size-normal">
             <span>{{ 'GAME.NEW_VIEW.EFFECTS_LABEL' | translate }}</span>
-            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" ngbTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
-                     placement="bottom auto" [openDelay]="0">
+            <fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle" matTooltip="{{ 'GAME.NEW_VIEW.EFFECTS_HELP' | translate }}"
+                     matTooltipShowDelay="500">
             </fa-icon>
         </div>
         <div class="col-8">
             <img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-effect-img" [ngClass]="{ 'game-new-view-inactive': (!effectIsSelected(effect.enumVal)) }"
-                 (click)="selectDeselectEffect(effect.enumVal)" ngbTooltip="{{ effect.tooltip | translate }}" placement="bottom auto" [openDelay]="500">
+                 (click)="selectDeselectEffect(effect.enumVal)" matTooltip="{{ effect.tooltip | translate }}">
         </div>
     </div>
 

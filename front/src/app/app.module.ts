@@ -15,6 +15,8 @@ import {CountdownModule} from "ngx-countdown";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import {AppComponent} from "./app.component";
 import {NgxChartsModule} from "@swimlane/ngx-charts"
@@ -163,7 +165,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NgHttpLoaderModule.forRoot(),
 		MatRadioModule,
         NgSelectModule,
-        MatTabsModule
+        MatTabsModule,
+        MatSlideToggleModule,
+        MatTooltipModule
     ],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],

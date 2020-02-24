@@ -4,7 +4,6 @@
              class="theme-selection-img"
              [ngClass]="{ 'theme-selection-img-active': (isSelectedTheme(getTheme(theme).enumVal)) }"
              (click)="selectTheme(getTheme(theme).enumVal)"
-             ngbTooltip="{{ getTheme(theme).tooltip | translate }}"
-             placement="bottom auto" [openDelay]="500">
+             matTooltip="{{ getTheme(theme).tooltip | translate }}" matTooltipShowDelay="500">
     </div>
 </div>
