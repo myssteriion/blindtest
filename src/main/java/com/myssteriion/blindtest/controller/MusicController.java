@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Controller for MusicDTO.
  */
-@CrossOrigin
+@CrossOrigin( origins = {"http://localhost:3000"} )
 @RestController
 @RequestMapping(path = "musics")
 public class MusicController {

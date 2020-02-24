@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller for Avatar
  */
-@CrossOrigin
+@CrossOrigin( origins = {"http://localhost:3000"} )
 @RestController
 @RequestMapping(path = "avatars")
 public class AvatarController {

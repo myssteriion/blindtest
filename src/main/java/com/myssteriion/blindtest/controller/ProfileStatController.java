@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Controller for ProfileStatDTO.
  */
-@CrossOrigin
+@CrossOrigin( origins = {"http://localhost:3000"} )
 @RestController
 @RequestMapping(path = "profilestats")
 public class ProfileStatController {
