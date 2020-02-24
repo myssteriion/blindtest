@@ -50,7 +50,7 @@ public class AvatarServiceTest extends AbstractTest {
 
 
     @Test
-    public void refresh() throws ConflictException {
+    public void refresh() throws Exception {
 
         File mockFile = Mockito.mock(File.class);
         Mockito.when(mockFile.isFile()).thenReturn(true);

@@ -69,7 +69,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, Collections.singletonList(Theme.ANNEES_60), null, ConnectionMode.OFFLINE) );
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, Collections.singletonList(Theme.ANNEES_60), null, ConnectionMode.OFFLINE) );
 			Assert.fail("Doit lever une NotFoundException car un mock (musicService) return 0.");
 		}
 		catch (NotFoundException e) {
@@ -77,7 +77,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, null, ConnectionMode.OFFLINE) );
+			gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
 			Assert.fail("Doit lever une NotFoundException car un param est KO.");
 		}
 		catch (NotFoundException e) {
@@ -86,14 +86,14 @@ public class GameServiceTest extends AbstractTest {
 
 
 
-		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, null, null, ConnectionMode.OFFLINE) );
+		Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
 		Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
 
-		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, null, ConnectionMode.OFFLINE) );
+		game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
 		Assert.assertEquals( 2, game.getPlayers().size() );
 
 		try {
-			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, null, ConnectionMode.ONLINE) );
+			gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.ONLINE) );
 			Assert.fail("Doit lever une car la connection spotify est KO.");
 		}
 		catch (SpotifyException e) {
@@ -144,7 +144,7 @@ public class GameServiceTest extends AbstractTest {
 		}
 
 
-		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE) );
+		gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE) );
 
 
 		try {
@@ -401,7 +401,7 @@ public class GameServiceTest extends AbstractTest {
 		Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
 		Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
 
-		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
+		NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
 		Game expected = gameService.newGame(ng);
 
 		Game actual = gameService.findGame(expected.getId());

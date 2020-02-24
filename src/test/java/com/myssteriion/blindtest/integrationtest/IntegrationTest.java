@@ -53,7 +53,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
 
-        NewGame newGame = new NewGame(playersNames, duration, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), Arrays.asList(Effect.NONE, Effect.SPEED), ConnectionMode.OFFLINE);
+        NewGame newGame = new NewGame(playersNames, duration, false, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), Arrays.asList(Effect.NONE, Effect.SPEED), ConnectionMode.OFFLINE);
         Game game = gameService.newGame(newGame);
 
 

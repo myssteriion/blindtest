@@ -58,18 +58,18 @@ public class MusicControllerTest extends AbstractTest {
 		Flux fluxMock = Mockito.mock(Flux.class);
 		Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
 		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE).setFlux(fluxMock);
-		Mockito.when(musicService.random(null, null, ConnectionMode.OFFLINE)).thenReturn(musicDto);
-		Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE)).thenReturn(musicDto);
+		Mockito.when(musicService.random(false, null, null, ConnectionMode.OFFLINE)).thenReturn(musicDto);
+		Mockito.when(musicService.random(false, Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE)).thenReturn(musicDto);
 
-		ResponseEntity<MusicDTO> re = musicController.random(null, null, ConnectionMode.OFFLINE);
+		ResponseEntity<MusicDTO> re = musicController.random(false, null, null, ConnectionMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(null, null, ConnectionMode.OFFLINE);
+		re = musicController.random(false, null, null, ConnectionMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 
-		re = musicController.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE);
+		re = musicController.random(false, Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE);
 		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
 		Assert.assertEquals( musicDto, re.getBody() );
 	}

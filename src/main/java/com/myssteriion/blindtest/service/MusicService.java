@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -254,19 +255,24 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		if ( CommonUtils.isNullOrEmpty(allMusics) )
 			throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
 
-		Theme foundTheme;
+		MusicDTO music;
 
 		if (sameProbability) {
-			foundTheme = foundTheme(searchThemes);
+
+			searchThemes.removeIf(currentTheme -> allMusics.stream().noneMatch(mu -> mu.getTheme() == currentTheme));
+
+			Theme foundTheme = foundTheme(searchThemes);
+			music = foundMusic(allMusics, foundTheme);
 		}
 		else {
+
 			List<Double> coefs = calculateCoefList(allMusics);
 			double ratio = 100 / (coefs.stream().mapToDouble(Double::doubleValue).sum());
 			List<Double> cumulativePercent = calculateCumulativePercent(coefs, ratio);
-			foundTheme = foundThemeByCumulativePercent(cumulativePercent);
+			Theme foundTheme = foundThemeByCumulativePercent(cumulativePercent);
+			music = foundMusic(allMusics, foundTheme);
 		}
 
-		MusicDTO music = foundMusic(allMusics, foundTheme);
 
 		if ( music.getConnectionMode().isNeedConnection() ) {
 			spotifyService.testConnection();
@@ -281,6 +287,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		}
 
 		return music;
+	}
+
+	private Theme foundTheme(List<Theme> themes) {
+		return themes.get( CommonUtils.RANDOM.nextInt(themes.size()) );
 	}
 
 	private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
@@ -330,10 +340,6 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 		}
 
 		return foundTheme;
-	}
-
-	private Theme foundTheme(List<Theme> themes) {
-		return themes.get( CommonUtils.RANDOM.nextInt(themes.size()) );
 	}
 
 	private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {

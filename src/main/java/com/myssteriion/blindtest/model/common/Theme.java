@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public enum Theme {
 	 * @return the sorted theme
 	 */
 	public static List<Theme> getSortedTheme() {
-		return Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY);
+		return new ArrayList<>( Arrays.asList(ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY) );
 	}
 	
 }
