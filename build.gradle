@@ -70,11 +70,6 @@ build {
 			into deliveryFolder
 		}
 		copy {
-		    from ".gradle/nodejs"
-		    include "**/*"
-		    into deliveryFolder + "/libs/nodejs"
-		}
-		copy {
 		    from "build/libs"
 		    include "*"
 		    into deliveryFolder + "/libs"
