@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller for ProfileDTO.
  */
-@CrossOrigin( origins = {"http://localhost:3000"} )
+@CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController
 @RequestMapping(path = "profiles")
 public class ProfileController {

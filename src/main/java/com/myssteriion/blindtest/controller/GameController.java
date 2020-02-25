@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller for GameDTO
  */
-@CrossOrigin( origins = {"http://localhost:3000"} )
+@CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController
 @RequestMapping(path = "game")
 public class GameController {
