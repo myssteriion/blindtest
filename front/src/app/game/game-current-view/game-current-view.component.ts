@@ -332,6 +332,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		if (this.game.players.length >= 2 && this.game.players.length <= 4) css += "20";
 		if (this.game.players.length >= 5 && this.game.players.length <= 8) css += "15";
 		if (this.game.players.length >= 9 && this.game.players.length <= 12) css += "10";
+        if (this.game.players.length >= 13 && this.game.players.length <= 16) css += "5";
 
 		return css;
 	}
