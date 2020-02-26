@@ -1,9 +1,10 @@
-package com.myssteriion.blindtest.persistence.converter;
+package com.myssteriion.blindtest.persistence.converter.theme;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.common.GoodAnswer;
+import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.test.TestUtils;
@@ -15,22 +16,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DurationConverterTest extends AbstractTest {
+public class ThemeGoodAnswerIntegerMapConverterTest extends AbstractTest {
 
     @Test
     public void convertToDatabaseColumn() throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
 
-        DurationConverter converter = new DurationConverter();
+        ThemeGoodAnswerIntegerMapConverter converter = new ThemeGoodAnswerIntegerMapConverter();
 
         Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(null) );
         Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(new HashMap<>()) );
 
-        Map<Duration, Integer> map = new HashMap<>();
-        map.put(Duration.SHORT, 2);
-        map.put(Duration.LONG, 4);
+        Map<GoodAnswer, Integer> m = new HashMap<>();
+        m.put(GoodAnswer.AUTHOR, 2);
+        m.put(GoodAnswer.TITLE, 4);
 
-        String caseOne = "{\"SHORT\":2,\"LONG\":4}";
-        String caseTwo = "{\"LONG\":4,\"SHORT\":2}";
+        Map<Theme, Map<GoodAnswer, Integer>> map = new HashMap<>();
+        map.put(Theme.ANNEES_90, m);
+
+        String caseOne = "{\"ANNEES_90\":{\"AUTHOR\":2,\"TITLE\":4}}";
+        String caseTwo = "{\"ANNEES_90\":{\"TITLE\":4,\"AUTHOR\":2}}";
         String actual = converter.convertToDatabaseColumn(map);
         Assert.assertTrue( actual.equals(caseOne) || actual.equals(caseTwo) );
 
@@ -50,19 +54,19 @@ public class DurationConverterTest extends AbstractTest {
             TestUtils.setMapper( new ObjectMapper() );
         }
     }
-    
+
     @Test
     public void convertToEntityAttributeString() {
 
-        DurationConverter converter = new DurationConverter();
+        ThemeGoodAnswerIntegerMapConverter converter = new ThemeGoodAnswerIntegerMapConverter();
 
         Assert.assertEquals( new HashMap<String, Integer>(), converter.convertToEntityAttribute(null) );
         Assert.assertEquals( new HashMap<String, Integer>(), converter.convertToEntityAttribute("") );
 
-        Map<Duration, Integer> actual = converter.convertToEntityAttribute("{\"SHORT\":2,\"LONG\":4}");
-        Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Duration.SHORT) );
-        Assert.assertEquals( new Integer(4), actual.get(Duration.LONG) );
+        Map<Theme, Map<GoodAnswer, Integer>> actual = converter.convertToEntityAttribute("{\"ANNEES_90\":{\"AUTHOR\":2,\"TITLE\":4}}");
+        Assert.assertEquals( 1, actual.size() );
+        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
+        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
 
         try {
             converter.convertToEntityAttribute("{\"name\":\"pouet\",\"number\":4}");
@@ -76,12 +80,12 @@ public class DurationConverterTest extends AbstractTest {
     @Test
     public void convertToMap() throws IOException {
 
-        DurationConverter converter = new DurationConverter();
+        ThemeGoodAnswerIntegerMapConverter converter = new ThemeGoodAnswerIntegerMapConverter();
 
-        Map<Duration, Integer> actual = converter.convertToMap("{\"SHORT\":2,\"LONG\":4}");
-        Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Duration.SHORT) );
-        Assert.assertEquals( new Integer(4), actual.get(Duration.LONG) );
+        Map<Theme, Map<GoodAnswer, Integer>> actual = converter.convertToMap("{\"ANNEES_90\":{\"AUTHOR\":2,\"TITLE\":4}}");
+        Assert.assertEquals( 1, actual.size() );
+        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
+        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
     }
 
 }

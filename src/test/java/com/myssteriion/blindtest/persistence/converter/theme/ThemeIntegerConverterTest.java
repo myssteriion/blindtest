@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.persistence.converter;
+package com.myssteriion.blindtest.persistence.converter.theme;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,12 +15,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThemeConverterTest extends AbstractTest {
+public class ThemeIntegerConverterTest extends AbstractTest {
 
     @Test
     public void convertToDatabaseColumn() throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
 
-        ThemeConverter converter = new ThemeConverter();
+        ThemeIntegerMapConverter converter = new ThemeIntegerMapConverter();
 
         Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(null) );
         Assert.assertEquals( CommonConstant.EMPTY_JSON, converter.convertToDatabaseColumn(new HashMap<>()) );
@@ -54,7 +54,7 @@ public class ThemeConverterTest extends AbstractTest {
     @Test
     public void convertToEntityAttributeString() {
 
-        ThemeConverter converter = new ThemeConverter();
+        ThemeIntegerMapConverter converter = new ThemeIntegerMapConverter();
 
         Assert.assertEquals( new HashMap<String, Integer>(), converter.convertToEntityAttribute(null) );
         Assert.assertEquals( new HashMap<String, Integer>(), converter.convertToEntityAttribute("") );
@@ -76,7 +76,7 @@ public class ThemeConverterTest extends AbstractTest {
     @Test
     public void convertToMap() throws IOException {
 
-        ThemeConverter converter = new ThemeConverter();
+        ThemeIntegerMapConverter converter = new ThemeIntegerMapConverter();
 
         Map<Theme, Integer> actual = converter.convertToMap("{\"ANNEES_90\":2,\"ANNEES_80\":4}");
         Assert.assertEquals( 2, actual.size() );

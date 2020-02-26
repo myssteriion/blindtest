@@ -3,12 +3,12 @@ package com.myssteriion.blindtest.model.dto;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
-import com.myssteriion.blindtest.persistence.converter.ThemeGoodAnswerConverter;
+import com.myssteriion.blindtest.persistence.converter.duration.DurationIntegerMapConverter;
+import com.myssteriion.blindtest.persistence.converter.theme.ThemeGoodAnswerIntegerMapConverter;
+import com.myssteriion.blindtest.persistence.converter.theme.ThemeIntegerMapConverter;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
-import com.myssteriion.blindtest.persistence.converter.DurationConverter;
-import com.myssteriion.utils.persistence.converter.impl.StringIntegerConverter;
+import com.myssteriion.utils.persistence.converter.impl.StringIntegerMapConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -38,35 +38,35 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * The number of game played.
 	 */
 	@Column(name = "played_games", nullable = false, length = 500)
-	@Convert(converter = DurationConverter.class)
+	@Convert(converter = DurationIntegerMapConverter.class)
 	private Map<Duration, Integer> playedGames;
 
 	/**
 	 * The bests scores by durations.
 	 */
 	@Column(name = "best_scores", nullable = false, length = 500)
-	@Convert(converter = DurationConverter.class)
+	@Convert(converter = DurationIntegerMapConverter.class)
 	private Map<Duration, Integer> bestScores;
 
 	/**
 	 * The number of game won. (the key is Integer).
 	 */
 	@Column(name = "won_games", nullable = false, length = 500)
-	@Convert(converter = StringIntegerConverter.class)
+	@Convert(converter = StringIntegerMapConverter.class)
 	private Map<String, Integer> wonGames;
 
 	/**
 	 * The number of listened musics by themes.
 	 */
 	@Column(name = "listened_musics", nullable = false, length = 500)
-	@Convert(converter = ThemeConverter.class)
+	@Convert(converter = ThemeIntegerMapConverter.class)
 	private Map<Theme, Integer> listenedMusics;
 
 	/**
 	 * The number of found musics by themes by WinMode.
 	 */
 	@Column(name = "found_musics", nullable = false, length = 1000)
-	@Convert(converter = ThemeGoodAnswerConverter.class)
+	@Convert(converter = ThemeGoodAnswerIntegerMapConverter.class)
 	private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
 
 
