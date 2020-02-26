@@ -65,8 +65,8 @@ public class NewGame {
         this.playersNames = playersNames;
         this.duration = duration;
         this.sameProbability = sameProbability;
-        this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : themes;
-        this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : effects;
+        this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
+        this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
         this.connectionMode = connectionMode;
     }
 

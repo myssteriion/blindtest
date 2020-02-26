@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.RestUtils;
 import com.myssteriion.utils.rest.exception.NotFoundException;
@@ -61,7 +62,8 @@ public class ProfileStatController {
 
 		List<ProfileStatDTO> profilesStats = new ArrayList<>();
 
-		profilesIds.forEach(id -> {
+        List<Integer> uniqueProfilesIds = CommonUtils.removeDuplicate(profilesIds);
+        uniqueProfilesIds.forEach(id -> {
 
 			try {
 

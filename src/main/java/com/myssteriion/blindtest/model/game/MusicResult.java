@@ -62,10 +62,10 @@ public class MusicResult {
 		this.gameId = gameId;
 		this.music = music;
 		
-		this.authorWinners = (authorWinners == null) ? new ArrayList<>() : authorWinners;
-		this.titleWinners = (titleWinners == null) ? new ArrayList<>() : titleWinners;
+		this.authorWinners = (authorWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(authorWinners);
+		this.titleWinners = (titleWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(titleWinners);
 		this.losers = (losers == null) ? new ArrayList<>() : losers;
-		this.wronglyPass = (wronglyPass == null) ? new ArrayList<>() : wronglyPass;
+		this.wronglyPass = (wronglyPass == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(wronglyPass);
 	}
 
 

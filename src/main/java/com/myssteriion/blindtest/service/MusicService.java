@@ -246,7 +246,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 
 		CommonUtils.verifyValue("connectionMode", connectionMode);
 
-		List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : themes;
+		List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
 		List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
 
 		List<MusicDTO> allMusics = new ArrayList<>();
@@ -282,7 +282,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
 			Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
 			music.setFlux( new Flux(path.toFile()) );
 
-			List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : effects;
+			List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
 			music.setEffect( foundEffect(searchEffects) );
 		}
 
