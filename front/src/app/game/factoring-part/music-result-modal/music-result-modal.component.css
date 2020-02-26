@@ -24,22 +24,26 @@
     color: red;
 }
 
-.music-result-modal-table-row {
-    max-height: 40em;
-    overflow: auto;
+
+
+.music-result-modal-table-div {
+    max-height: 45em;
 }
 
-.music-result-modal-table {
-    width: 100%;
+.music-result-modal-table-div table {
+    min-width: 100%;
 }
 
-.music-result-modal-table th {
+.music-result-modal-table-div table th {
     text-align: center;
     height: 3em;
     background-color: #ffc066;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
-.music-result-modal-table td {
+.music-result-modal-table-div table td {
     text-align: center;
     height: 2.4em;
 }
@@ -47,6 +51,8 @@
 .music-result-modal-table-odd {
     background-color: #e6e6e6;
 }
+
+
 
 .music-result-modal-music-name {
     text-align: center;
