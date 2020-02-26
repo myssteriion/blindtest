@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.model.SingleValue;
 import com.myssteriion.utils.rest.RestUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
@@ -86,5 +86,19 @@ public class GameController {
 		Game game = gameService.findGame(id);
 		return RestUtils.create200(game);
 	}
+
+    /**
+     * Load game.
+     *
+     * @param game the game
+     * @return id game
+     * @throws NotFoundException NotFound exception
+     */
+    @PostMapping(path = "/load")
+    public ResponseEntity< SingleValue<Integer> > load(@RequestBody Game game) {
+
+        Integer gameId = gameService.load(game);
+        return RestUtils.create200( new SingleValue<>(gameId) );
+    }
 
 }

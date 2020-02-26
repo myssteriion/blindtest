@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -74,8 +75,9 @@ public class GameService {
 			spotifyService.testConnection();
 
 		Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
-		game.setId( games.size() );
-		games.add(game);
+        game.setId( findNextId() );
+
+        games.add(game);
 
 		return game;
 	}
@@ -118,6 +120,12 @@ public class GameService {
 
 		return players;
 	}
+
+	private Integer findNextId() {
+        OptionalInt optionalInt = games.stream().mapToInt(Game::getId).max();
+        return ( optionalInt.isPresent() ) ? optionalInt.getAsInt() + 1 : 0;
+    }
+
 
 	/**
 	 * Update the game from music result.
@@ -242,5 +250,24 @@ public class GameService {
 				.findFirst()
 				.orElseThrow(() -> new NotFoundException("Game not found."));
 	}
+
+    /**
+     * Load game.
+     *
+     * @param game the game
+     */
+	public Integer load(Game game) {
+
+        CommonUtils.verifyValue("game", game);
+        game.setId( findNextId() );
+        game.generateRoundContent();
+
+        for ( Player player : game.getPlayers() )
+            profileService.createProfileAvatarFlux( player.getProfile() );
+
+        games.add(game);
+
+        return game.getId();
+    }
 
 }

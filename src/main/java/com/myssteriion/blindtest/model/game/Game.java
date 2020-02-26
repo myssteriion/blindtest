@@ -114,7 +114,7 @@ public class Game implements IModel {
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
-        this.roundContent = this.round.createRoundContent(this);
+        this.generateRoundContent();
     }
 
     private void checkNbPlayers(Set<Player> players) {
@@ -276,6 +276,13 @@ public class Game implements IModel {
             roundContent = (round == null) ? null : round.createRoundContent(this);
             nbMusicsPlayedInRound = INIT;
         }
+    }
+
+    /**
+     * Generate round content.
+     */
+    public void generateRoundContent() {
+        this.roundContent = this.round.createRoundContent(this);
     }
 
     /**
