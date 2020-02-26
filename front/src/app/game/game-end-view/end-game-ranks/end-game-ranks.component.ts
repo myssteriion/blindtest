@@ -20,14 +20,14 @@ export class EndGameRanksComponent implements OnInit {
 	/**
 	 * The podium ranks.
 	 */
-	public podiumRank: Rank[];
+	public podiumRank: number[];
 
 
 
 	constructor(private _translate: TranslateService) { }
 
 	ngOnInit(): void {
-		this.podiumRank = [Rank.FIRST, Rank.SECOND, Rank.THIRD];
+		this.podiumRank = [1, 2, 3];
 	}
 
 
@@ -37,7 +37,7 @@ export class EndGameRanksComponent implements OnInit {
 	 *
 	 * @param rank the rank
 	 */
-	private hadPlayerByRank(rank: Rank): boolean {
+	private hadPlayerByRank(rank: number): boolean {
 		return (this.game.players.filter(player => player.rank === rank).length) > 0;
 	}
 
@@ -47,12 +47,12 @@ export class EndGameRanksComponent implements OnInit {
 	 * @param rank the rank
 	 * @return the image
 	 */
-	private getImgByRank(rank: Rank): string {
+	private getImgByRank(rank: number): string {
 		switch (rank) {
-			case Rank.FIRST:	return RANKS_FIRST;
-			case Rank.SECOND:	return RANKS_SECOND;
-			case Rank.THIRD:	return RANKS_THIRD;
-			default: 			return ""
+			case 1:     return RANKS_FIRST;
+			case 2:     return RANKS_SECOND;
+			case 3:     return RANKS_THIRD;
+			default:    return ""
 		}
 	}
 
@@ -62,7 +62,7 @@ export class EndGameRanksComponent implements OnInit {
 	 * @param rank the rank
 	 * @return the tooltip
 	 */
-	private getTooltipByRank(rank: Rank): string {
+	private getTooltipByRank(rank: number): string {
 		return this._translate.instant("RANK." + rank);
 	}
 
@@ -72,7 +72,7 @@ export class EndGameRanksComponent implements OnInit {
 	 * @param rank the rank
 	 * @return players list
 	 */
-	private getPlayersByRank(rank: Rank): Player[] {
+	private getPlayersByRank(rank: number): Player[] {
 		return this.game.players.filter(player => player.rank === rank);
 	}
 
@@ -85,7 +85,11 @@ export class EndGameRanksComponent implements OnInit {
 
 		let players: Player[] = [];
 
-		let noPodiumRank = [Rank.FOURTH, Rank.FIFTH, Rank.SIXTH, Rank.SEVENTH, Rank.EIGHTH, Rank.NINTH, Rank.TENTH, Rank.ELEVENTH, Rank.TWELFTH];
+        let noPodiumRank: number[] = [];
+		for (let i: number = 4; i <= this.game.players.length; i++) {
+            noPodiumRank.push(i);
+        }
+
 		for (let rank of noPodiumRank)
 			players = players.concat( this.getPlayersByRank(rank) );
 

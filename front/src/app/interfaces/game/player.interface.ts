@@ -7,7 +7,7 @@ import {FoundMusics} from "./statistic/found-musics.interface";
 export interface Player {
 	profile: Profile,
 	score: number,
-	rank: Rank,
+	rank: number,
 	teamNumber: number,
 	last: boolean,
 	turnToChoose: boolean,

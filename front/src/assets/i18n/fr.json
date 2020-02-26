@@ -150,10 +150,10 @@
         }
     },
     "RANK": {
-        "FIRST": "Médaillé d'or",
-        "SECOND": "Médaillé d'argent",
-        "THIRD": "Médaillé de bronze",
-        "FOURTH": "Bon pour un cookie",
+        "1": "Médaillé d'or",
+        "2": "Médaillé d'argent",
+        "3": "Médaillé de bronze",
+        "4": "Bon pour un cookie",
         "LAST": "Petit caca mignon"
     },
     "PROFILE": {

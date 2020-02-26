@@ -73,28 +73,28 @@ export class PlayerCardComponent implements OnInit {
      * If the 1st medal must be show.
      */
     private showFirstMedal(): boolean {
-        return this.displayMedal && this.player.rank === Rank.FIRST;
+        return this.displayMedal && this.player.rank === 1;
     }
 
     /**
      * If the 1st medal must be show.
      */
     private showSecondMedal(): boolean {
-        return this.displayMedal && this.player.rank === Rank.SECOND;
+        return this.displayMedal && this.player.rank === 2;
     }
 
     /**
      * If the 1st medal must be show.
      */
     private showThirdMedal(): boolean {
-        return this.displayMedal && this.player.rank === Rank.THIRD;
+        return this.displayMedal && this.player.rank === 3;
     }
 
     /**
      * Test if the cookie must be show.
      */
     private showCookie(): boolean {
-        return this.displayMedal && this.player.rank === Rank.FOURTH;
+        return this.displayMedal && this.player.rank === 4;
     }
 
     /**
