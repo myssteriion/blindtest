@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
-import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
@@ -65,7 +64,7 @@ public class FriendshipContent extends AbstractRoundContent {
             if (nbPlayers % 2 == 1) {
 
                 playersCopied.stream()
-                        .filter( player -> player.getRank() == Rank.FIRST )
+                        .filter( player -> player.getRank() == 1 )
                         .findAny()
                         .get()
                         .setTeamNumber(currentTeamNumber);

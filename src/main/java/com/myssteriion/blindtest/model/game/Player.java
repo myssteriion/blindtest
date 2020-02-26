@@ -2,7 +2,6 @@ package com.myssteriion.blindtest.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.utils.CommonUtils;
@@ -29,7 +28,7 @@ public class Player {
 	/**
 	 * The rank.
 	 */
-	private Rank rank;
+	private int rank;
 
 	/**
 	 * If is the last (rank).
@@ -65,7 +64,7 @@ public class Player {
 
 		this.profile = profile;
 		this.score = 0;
-		this.rank = Rank.FIRST;
+		this.rank = 1;
 		this.last = false;
 		this.turnToChoose = false;
 		this.teamNumber = -1;
@@ -106,7 +105,7 @@ public class Player {
 	 *
 	 * @return The rank.
 	 */
-	public Rank getRank() {
+	public int getRank() {
 		return rank;
 	}
 
@@ -134,7 +133,7 @@ public class Player {
 	 *
 	 * @param rank The rank.
 	 */
-	public Player setRank(Rank rank) {
+	public Player setRank(int rank) {
 		this.rank = rank;
 		return this;
 	}

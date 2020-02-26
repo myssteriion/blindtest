@@ -29,11 +29,11 @@ public class RecoveryContent extends AbstractRoundContent {
         // -1 car un premier apply est fait dans le super
         game.getPlayers().stream()
                 .filter( player -> musicResult.isAuthorWinner(player.getProfile().getName()) )
-                .forEach( player -> player.addScore( nbPointWon * (player.getRank().getNum() - 1) ) );
+                .forEach( player -> player.addScore( nbPointWon * (player.getRank() - 1) ) );
 
         game.getPlayers().stream()
                 .filter( player -> musicResult.isTitleWinner(player.getProfile().getName()) )
-                .forEach( player -> player.addScore( nbPointWon * (player.getRank().getNum() -1) ) );
+                .forEach( player -> player.addScore( nbPointWon * (player.getRank() -1) ) );
 
         return game;
     }

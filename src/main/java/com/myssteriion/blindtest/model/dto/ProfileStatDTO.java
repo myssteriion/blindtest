@@ -2,14 +2,13 @@ package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.persistence.converter.RankConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeGoodAnswerConverter;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 import com.myssteriion.blindtest.persistence.converter.DurationConverter;
+import com.myssteriion.utils.persistence.converter.impl.StringIntegerConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -50,11 +49,11 @@ public class ProfileStatDTO extends AbstractDTO {
 	private Map<Duration, Integer> bestScores;
 
 	/**
-	 * The number of game won.
+	 * The number of game won. (the key is Integer).
 	 */
 	@Column(name = "won_games", nullable = false, length = 500)
-	@Convert(converter = RankConverter.class)
-	private Map<Rank, Integer> wonGames;
+	@Convert(converter = StringIntegerConverter.class)
+	private Map<String, Integer> wonGames;
 
 	/**
 	 * The number of listened musics by themes.
@@ -161,7 +160,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 *
 	 * @return the wonGames
 	 */
-	public Map<Rank, Integer> getWonGames() {
+	public Map<String, Integer> getWonGames() {
 		return wonGames;
 	}
 
@@ -171,7 +170,7 @@ public class ProfileStatDTO extends AbstractDTO {
 	 * @param wonGames the wonGames
 	 * @return this
 	 */
-	public ProfileStatDTO setWonGames(Map<Rank, Integer> wonGames) {
+	public ProfileStatDTO setWonGames(Map<String, Integer> wonGames) {
 		this.wonGames = wonGames;
 		return this;
 	}
@@ -258,17 +257,19 @@ public class ProfileStatDTO extends AbstractDTO {
 	 *
 	 * @param rank the rank
 	 */
-	public void incrementWonGames(Rank rank) {
+	public void incrementWonGames(int rank) {
 
 		CommonUtils.verifyValue("rank", rank);
+
+		String strRank = new Integer(rank).toString();
 
 		if (wonGames == null)
 			wonGames = new HashMap<>();
 
-		if ( !wonGames.containsKey(rank) )
-			wonGames.put(rank, 0);
+		if ( !wonGames.containsKey(strRank) )
+			wonGames.put(strRank, 0);
 
-		wonGames.put(rank, wonGames.get(rank) + 1);
+		wonGames.put(strRank, wonGames.get(strRank) + 1);
 	}
 
 	/**

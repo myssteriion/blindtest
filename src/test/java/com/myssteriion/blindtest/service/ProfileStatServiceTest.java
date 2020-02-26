@@ -48,7 +48,7 @@ public class ProfileStatServiceTest extends AbstractTest {
 			TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
 		}
 
-		profileStatService = Mockito.spy( profileStatService = new ProfileStatService(profileStatDao) );
+		profileStatService = Mockito.spy( new ProfileStatService(profileStatDao) );
 		MockitoAnnotations.initMocks(profileStatService);
 
 		ProfileDTO profileDTOMock = new ProfileDTO("name", "avatarName");

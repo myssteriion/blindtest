@@ -1,4 +1,4 @@
--- themes removed : JEUX and CLASSIQUES
+-------------- themes removed : JEUX and CLASSIQUES --------------
 
 -- delete on music table
 DELETE FROM music WHERE theme = 8 OR theme = 9;
@@ -12,3 +12,13 @@ SELECT listened_musics, id FROM profile_stat where listened_musics like '%CLASSI
 -- update impacted profile_stat
 UPDATE profile_stat SET found_musics = '' WHERE id = -1 ORDER BY id ASC;
 UPDATE profile_stat SET listened_musics = '' WHERE id = -1 ORDER BY id ASC;
+
+
+
+-------------- rank enum removed --------------
+
+-- select impacted profile_stat
+SELECT won_games, id FROM profile_stat ORDER BY id ASC;
+
+-- update impacted profile_stat
+UPDATE profile_stat SET won_games = '' WHERE id = -1 ORDER BY id ASC;

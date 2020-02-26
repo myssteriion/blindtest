@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -202,7 +201,7 @@ public class GameService {
 
 		List<Player> playersSorted = players.stream().sorted(Comparator.comparingInt(Player::getScore).reversed()).collect(Collectors.toList());
 
-		Rank currentRank = Rank.FIRST;
+        int currentRank = 1;
 		int jumpRank = 1;
 
 		playersSorted.get(0).setRank(currentRank);
@@ -215,7 +214,7 @@ public class GameService {
 			}
 			else {
 				for (int j = 0; j < jumpRank; j++)
-					currentRank = currentRank.getNext();
+					currentRank++;
 				jumpRank = 1;
 			}
 
@@ -223,8 +222,8 @@ public class GameService {
 			currentScore = playersSorted.get(i).getScore();
 		}
 
-		Rank lastRank = currentRank;
-		players.forEach( player -> player.setLast( (player.getRank() == lastRank) ) );
+        int lastRank = currentRank;
+		players.forEach( player -> player.setLast(player.getRank() == lastRank) );
 	}
 
 	/**

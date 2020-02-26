@@ -2,7 +2,6 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.common.Rank;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.utils.test.TestUtils;
@@ -32,7 +31,7 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
-        Assert.assertEquals( Rank.FIRST, player.getRank() );
+        Assert.assertEquals( 1, player.getRank() );
         Assert.assertFalse( player.isLast() );
     }
 
@@ -45,12 +44,12 @@ public class PlayerTest extends AbstractTest {
         Player player = new Player(profile);
         Assert.assertEquals( profile, player.getProfile() );
         Assert.assertEquals( 0, player.getScore() );
-        Assert.assertEquals( Rank.FIRST, player.getRank() );
+        Assert.assertEquals( 1, player.getRank() );
         Assert.assertFalse( player.isLast() );
 
-        player.setRank(Rank.SEVENTH);
+        player.setRank(7);
         player.setLast(true);
-        Assert.assertEquals( Rank.SEVENTH, player.getRank() );
+        Assert.assertEquals( 7, player.getRank() );
         Assert.assertTrue( player.isLast() );
     }
 
@@ -61,7 +60,7 @@ public class PlayerTest extends AbstractTest {
         ProfileDTO profile = new ProfileDTO(name);
         Player playerUn = new Player(profile);
 
-        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=FIRST, last=false, turnToChoose=false, teamNumber=-1, foundMusics={}", playerUn.toString() );
+        Assert.assertEquals( "profile={" + profile + "}, score=0, rank=1, last=false, turnToChoose=false, teamNumber=-1, foundMusics={}", playerUn.toString() );
 
         Player playerUnIso = new Player(profile);
         Player playerDeux = new Player(new ProfileDTO(name + "1"));
