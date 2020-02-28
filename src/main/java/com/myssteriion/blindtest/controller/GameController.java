@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller for GameDTO
+ * Controller for GameDTO.
  */
 @CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController

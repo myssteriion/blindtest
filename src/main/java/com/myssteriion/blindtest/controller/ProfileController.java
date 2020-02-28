@@ -64,7 +64,7 @@ public class ProfileController {
 	 * @param id         the ProfileDTO id
 	 * @param profileDto the 'new' ProfileDTO
 	 * @return the ProfileDTO modified
-	 * @throws NotFoundException NotFound exception
+	 * @throws NotFoundException the not found exception
 	 * @throws ConflictException the conflict exception
 	 */
 	@PutMapping(path = CommonConstant.ID_PATH_PARAM)
