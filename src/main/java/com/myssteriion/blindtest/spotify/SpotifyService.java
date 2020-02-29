@@ -1,7 +1,8 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.properties.SpotifyProperties;
+import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.wrapper.spotify.SpotifyApi;
@@ -35,18 +36,18 @@ public class SpotifyService {
     /**
      * The spotify properties.
      */
-    private SpotifyProperties spotifyProperties;
+    private SpotifyParamService spotifyParamService;
 
 
 
     /**
      * Instantiates a new Spotify service.
      *
-     * @param spotifyProperties the spotify properties
+     * @param spotifyParamService the SpotifyParam service
      */
     @Autowired
-    public SpotifyService(SpotifyProperties spotifyProperties) {
-        this.spotifyProperties = spotifyProperties;
+    public SpotifyService(SpotifyParamService spotifyParamService) {
+        this.spotifyParamService = spotifyParamService;
     }
 
 
@@ -58,9 +59,11 @@ public class SpotifyService {
 
         try {
 
+            SpotifyParamDTO spotifyParam = spotifyParamService.find();
+
             SpotifyApi spotifyApi = new SpotifyApi.Builder()
-                    .setClientId( spotifyProperties.getClientId() )
-                    .setClientSecret( spotifyProperties.getClientSecret() )
+                    .setClientId( spotifyParam.getClientId() )
+                    .setClientSecret( spotifyParam.getClientSecret() )
                     .build();
 
             ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
@@ -109,7 +112,7 @@ public class SpotifyService {
 
             List<SpotifyMusic> spotifyMusics = new ArrayList<>();
 
-            String playlistId = spotifyProperties.getPlaylistIdByTheme(theme);
+            String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             SpotifyApi spotifyApi = getSpotifyApi();
 
             boolean hasNext = true;
@@ -156,7 +159,7 @@ public class SpotifyService {
 
             boolean isFound = false;
 
-            String playlistId = spotifyProperties.getPlaylistIdByTheme(theme);
+            String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             SpotifyApi spotifyApi = getSpotifyApi();
 
             boolean hasNext = true;

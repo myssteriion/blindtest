@@ -369,6 +369,79 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "param",
+			"item": [
+				{
+					"name": "spotify param",
+					"item": [
+						{
+							"name": "get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n\t\"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n\t\"playlistIds\": {\n\t\t\"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n\t\t\"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n\t\t\"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n\t\t\"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n\t\t\"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n\t\t\"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n\t\t\"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n\t\t\"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "insert profiles",
 			"item": [
 				{
