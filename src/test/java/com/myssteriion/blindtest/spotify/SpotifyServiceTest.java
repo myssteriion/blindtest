@@ -6,20 +6,20 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SpotifyServiceTest extends AbstractTest {
-
+    
     @Autowired
     private SpotifyService spotifyService;
-
-
-
+    
+    
+    
     @Test
     public void isConnected() {
         Assert.assertFalse( spotifyService.isConnected() );
     }
-
+    
     @Test
     public void testConnection() {
-
+        
         try {
             spotifyService.testConnection();
             Assert.fail("Doit lever SpotifyException une car le mock throw.");
@@ -28,5 +28,5 @@ public class SpotifyServiceTest extends AbstractTest {
             Assert.assertEquals( "Can't create spotify connection.", e.getMessage() );
         }
     }
-
+    
 }

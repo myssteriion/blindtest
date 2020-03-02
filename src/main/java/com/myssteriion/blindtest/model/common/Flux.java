@@ -14,50 +14,50 @@ import java.util.Objects;
  * The Flux type.
  */
 public class Flux {
-
+    
     /**
      * The name.
      */
     private String name;
-
+    
     /**
      * File exists.
      */
     private boolean fileExists;
-
+    
     /**
      * The contentFlux.
      */
     private byte[] contentFlux;
-
+    
     /**
      * The content type.
      */
     private String contentType;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Flux.
      *
      * @param file the file
      */
     public Flux(File file) throws IOException {
-
+        
         if (file == null)
             throw new IllegalArgumentException("Le champ 'file' est obligatoire.");
-
+        
         this.name = file.getName();
         fileExists = file.exists() && file.isFile();
-
+        
         if (fileExists) {
             this.contentFlux = Files.readAllBytes(file.toPath());
             this.contentType = determinateContentType(file);
         }
     }
-
-
-
+    
+    
+    
     /**
      * Determinate the file content type.
      *
@@ -67,8 +67,8 @@ public class Flux {
     private String determinateContentType(File file) {
         return ( CommonUtils.hadAudioExtension(file.getName()) ) ? CommonConstant.WAV_CONTENT_TYPE : URLConnection.guessContentTypeFromName(file.getName());
     }
-
-
+    
+    
     /**
      * Gets name.
      *
@@ -77,7 +77,7 @@ public class Flux {
     public String getName() {
         return name;
     }
-
+    
     /**
      * Gets fileExists.
      *
@@ -86,8 +86,8 @@ public class Flux {
     public boolean isFileExists() {
         return fileExists;
     }
-
-
+    
+    
     /**
      * Gets contentFlux.
      *
@@ -96,7 +96,7 @@ public class Flux {
     public byte[] getContentFlux() {
         return contentFlux;
     }
-
+    
     /**
      * Gets contentType.
      *
@@ -105,31 +105,31 @@ public class Flux {
     public String getContentType() {
         return contentType;
     }
-
-
+    
+    
     @Override
     public boolean equals(Object o) {
-
+        
         if (this == o)
             return true;
-
+        
         if (o == null || getClass() != o.getClass())
             return false;
-
+        
         Flux flux = (Flux) o;
         return Objects.equals(name, flux.name);
     }
-
+    
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
-
+    
     @Override
     public String toString() {
         return "name=" + name +
                 ", fileExists=" + fileExists +
                 ", contentType=" + contentType;
     }
-
+    
 }

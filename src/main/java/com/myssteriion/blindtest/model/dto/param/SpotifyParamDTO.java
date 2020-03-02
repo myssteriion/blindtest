@@ -21,26 +21,26 @@ import java.util.Objects;
 @Table(name = "spotify_param")
 @SequenceGenerator(name = "sequence_id", sequenceName = "spotify_param_sequence", allocationSize = 1)
 public class SpotifyParamDTO extends AbstractDTO {
-
+    
     @Column(name = "client_id")
     private String clientId;
-
+    
     @Column(name = "client_secret")
     private String clientSecret;
-
+    
     @Column(name = "playlist_ids", length = 500)
     @Convert(converter = ThemeStringMapConverter.class)
     private Map<Theme, String> playlistIds;
-
-
-
+    
+    
+    
     /**
      * Instantiate a new SpotifyParam dto.
      */
     public SpotifyParamDTO() {
         this( "", "", new HashMap<>() );
     }
-
+    
     /**
      * Instantiate a new SpotifyParam dto.
      *
@@ -49,64 +49,64 @@ public class SpotifyParamDTO extends AbstractDTO {
      * @param playlistIds  the playlist ids
      */
     public SpotifyParamDTO(String clientId, String clientSecret, Map<Theme, String> playlistIds) {
-
+        
         this.clientId = CommonUtils.isNullOrEmpty(clientId) ? "" : clientId;
         this.clientSecret = CommonUtils.isNullOrEmpty(clientSecret) ? "" : clientSecret;
         this.playlistIds = CommonUtils.isNullOrEmpty(playlistIds) ? new HashMap<>() : playlistIds;
     }
-
-
-
+    
+    
+    
     public String getClientId() {
         return clientId;
     }
-
+    
     public SpotifyParamDTO setClientId(String clientId) {
         this.clientId = clientId;
         return this;
     }
-
+    
     public String getClientSecret() {
         return clientSecret;
     }
-
+    
     public SpotifyParamDTO setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
-
+    
     public Map<Theme, String> getPlaylistIds() {
         return playlistIds;
     }
-
+    
     public SpotifyParamDTO setPlaylistIds(Map<Theme, String> playlistIds) {
         this.playlistIds = playlistIds;
         return this;
     }
-
-
+    
+    
     @Override
     public boolean equals(Object o) {
-
+        
         if (this == o)
             return true;
-
+        
         if (o == null || getClass() != o.getClass())
             return false;
-
+        
         SpotifyParamDTO that = (SpotifyParamDTO) o;
         return Objects.equals(clientId, that.clientId);
     }
-
+    
     @Override
     public int hashCode() {
         return Objects.hash(clientId);
     }
-
+    
     @Override
     public String toString() {
         return "clientId=" + clientId +
                 ", playListId=" + playlistIds;
     }
-
+    
 }

@@ -7,11 +7,11 @@ import java.util.List;
  * The Effect enum.
  */
 public enum Effect {
-
+    
     NONE, SLOW, SPEED, MIX;
-
-
-
+    
+    
+    
     /**
      * Gets sorted effect.
      *
@@ -20,5 +20,5 @@ public enum Effect {
     public static List<Effect> getSortedEffect() {
         return Arrays.asList(NONE, SLOW, SPEED, MIX);
     }
-
+    
 }

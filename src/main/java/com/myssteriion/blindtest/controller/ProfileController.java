@@ -30,82 +30,82 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "profiles")
 public class ProfileController {
 
-	private ProfileService profileService;
+    private ProfileService profileService;
 
 
 
-	/**
-	 * Instantiates a new Profile controller.
-	 *
-	 * @param profileService the profile service
-	 */
-	@Autowired
-	public ProfileController(ProfileService profileService) {
-		this.profileService = profileService;
-	}
+    /**
+     * Instantiates a new Profile controller.
+     *
+     * @param profileService the profile service
+     */
+    @Autowired
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
 
 
-	/**
-	 * Save a new ProfileDTO.
-	 *
-	 * @param profileDto the ProfileDTO
-	 * @return the ProfileDTO saved
-	 * @throws ConflictException Conflict exception
-	 */
-	@PostMapping
-	public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws ConflictException {
-		return RestUtils.create201( profileService.save(profileDto) );
-	}
+    /**
+     * Save a new ProfileDTO.
+     *
+     * @param profileDto the ProfileDTO
+     * @return the ProfileDTO saved
+     * @throws ConflictException Conflict exception
+     */
+    @PostMapping
+    public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws ConflictException {
+        return RestUtils.create201( profileService.save(profileDto) );
+    }
 
-	/**
-	 * Update an existing ProfileDTO.
-	 *
-	 * @param id         the ProfileDTO id
-	 * @param profileDto the 'new' ProfileDTO
-	 * @return the ProfileDTO modified
-	 * @throws NotFoundException the not found exception
-	 * @throws ConflictException the conflict exception
-	 */
-	@PutMapping(path = CommonConstant.ID_PATH_PARAM)
-	public ResponseEntity<ProfileDTO> update(@PathVariable(CommonConstant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
-		
-		profileDto.setId(id);
-		return RestUtils.create200( profileService.update(profileDto) );
-	}
+    /**
+     * Update an existing ProfileDTO.
+     *
+     * @param id         the ProfileDTO id
+     * @param profileDto the 'new' ProfileDTO
+     * @return the ProfileDTO modified
+     * @throws NotFoundException the not found exception
+     * @throws ConflictException the conflict exception
+     */
+    @PutMapping(path = CommonConstant.ID_PATH_PARAM)
+    public ResponseEntity<ProfileDTO> update(@PathVariable(CommonConstant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
 
-	/**
-	 * Find pageable of profile filtered by prefix name.
-	 *
-	 * @param prefixName  the prefix name
-	 * @param pageNumber  the page number
-	 * @param itemPerPage the item per page
-	 * @return the pageable of profiles
-	 */
-	@GetMapping
-	public ResponseEntity< Page<ProfileDTO> > findAllByNameStartingWith(
-			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
-			@RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
+        profileDto.setId(id);
+        return RestUtils.create200( profileService.update(profileDto) );
+    }
 
-		return RestUtils.create200( profileService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage) );
-	}
+    /**
+     * Find pageable of profile filtered by prefix name.
+     *
+     * @param prefixName  the prefix name
+     * @param pageNumber  the page number
+     * @param itemPerPage the item per page
+     * @return the pageable of profiles
+     */
+    @GetMapping
+    public ResponseEntity< Page<ProfileDTO> > findAllByNameStartingWith(
+            @RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
+            @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
 
-	/**
-	 * Delete response entity.
-	 *
-	 * @param id the id
-	 * @return the response entity
-	 * @throws NotFoundException the not found exception
-	 */
-	@DeleteMapping(path = CommonConstant.ID_PATH_PARAM)
-	public ResponseEntity<Empty> delete(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
+        return RestUtils.create200( profileService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage) );
+    }
 
-		ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("ANY").setId(id);
+    /**
+     * Delete response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     * @throws NotFoundException the not found exception
+     */
+    @DeleteMapping(path = CommonConstant.ID_PATH_PARAM)
+    public ResponseEntity<Empty> delete(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
 
-		profileService.delete(profileDto);
+        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("ANY").setId(id);
 
-		return RestUtils.create204();
-	}
+        profileService.delete(profileDto);
+
+        return RestUtils.create204();
+    }
 
 }

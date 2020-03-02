@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @Repository
 public interface AvatarDAO extends IDAO<AvatarDTO> {
-
+    
     /**
      * Find by name.
      *
@@ -21,7 +21,7 @@ public interface AvatarDAO extends IDAO<AvatarDTO> {
      * @return the optional
      */
     Optional<AvatarDTO> findByName(String name);
-
+    
     /**
      * Find a page of Avatar filtered by prefix name.
      *
@@ -30,5 +30,5 @@ public interface AvatarDAO extends IDAO<AvatarDTO> {
      * @return a page of Avatar filtered by prefix name
      */
     Page<AvatarDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
-
+    
 }

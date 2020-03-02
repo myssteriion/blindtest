@@ -20,102 +20,102 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> {
-
-	private ProfileStatService profileStatService;
-
-	private AvatarService avatarService;
-
-
-
-	@Autowired
-	public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService) {
-		super(profileDao);
-		this.profileStatService = profileStatService;
-		this.avatarService = avatarService;
-	}
-
-
-
-	@Override
-	public ProfileDTO save(ProfileDTO dto) throws ConflictException {
-
-		ProfileDTO profile = super.save(dto);
-		createProfileAvatarFlux(profile);
-		profileStatService.save( new ProfileStatDTO(profile.getId()) );
-		return profile;
-	}
-
-	@Override
-	public ProfileDTO update(ProfileDTO dto) throws NotFoundException, ConflictException {
-
-		ProfileDTO profile = super.update(dto);
-		createProfileAvatarFlux(profile);
-		return profile;
-	}
-
-	@Override
-	public ProfileDTO find(ProfileDTO dto) {
-
-		CommonUtils.verifyValue("entity", dto);
-
-		ProfileDTO profile;
-		if ( CommonUtils.isNullOrEmpty(dto.getId()) )
-			profile = dao.findByName(dto.getName()).orElse(null);
-		else
-			profile = super.find(dto);
-
-		if (profile != null)
-			createProfileAvatarFlux(profile);
-
-		return profile;
-	}
-
-	/**
-	 * Find a pageNumber of Profile filtered by a prefix name.
-	 *
-	 * @param namePrefix  the name prefix
-	 * @param pageNumber  the page number
-	 * @param itemPerPage the item per page
-	 * @return the page of profiles
-	 */
-	public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
-
-		if (namePrefix == null)
-			namePrefix = "";
-
-		itemPerPage = Math.max(itemPerPage, 1);
-		itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
-
-		Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
-		Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
-
-		Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
-		page.forEach(this::createProfileAvatarFlux);
-
-		return page;
-	}
-
-	@Override
-	public void delete(ProfileDTO profile) throws NotFoundException {
-
-		CommonUtils.verifyValue("profile", profile);
-		CommonUtils.verifyValue("profile -> id", profile.getId());
-
-		profileStatService.delete( profileStatService.findByProfile(profile) );
-		super.delete(profile);
-	}
-
-
-	/**
-	 * Create profile avatar flux.
-	 *
-	 * @param dto the dto
-	 */
-	public void createProfileAvatarFlux(ProfileDTO dto) {
-
-		// setter is useful for create avatar inside profile
-		dto.setAvatarName( dto.getAvatarName() );
-		avatarService.createAvatarFlux( dto.getAvatar() );
-	}
-
+    
+    private ProfileStatService profileStatService;
+    
+    private AvatarService avatarService;
+    
+    
+    
+    @Autowired
+    public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService) {
+        super(profileDao);
+        this.profileStatService = profileStatService;
+        this.avatarService = avatarService;
+    }
+    
+    
+    
+    @Override
+    public ProfileDTO save(ProfileDTO dto) throws ConflictException {
+        
+        ProfileDTO profile = super.save(dto);
+        createProfileAvatarFlux(profile);
+        profileStatService.save( new ProfileStatDTO(profile.getId()) );
+        return profile;
+    }
+    
+    @Override
+    public ProfileDTO update(ProfileDTO dto) throws NotFoundException, ConflictException {
+        
+        ProfileDTO profile = super.update(dto);
+        createProfileAvatarFlux(profile);
+        return profile;
+    }
+    
+    @Override
+    public ProfileDTO find(ProfileDTO dto) {
+        
+        CommonUtils.verifyValue("entity", dto);
+        
+        ProfileDTO profile;
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+            profile = dao.findByName(dto.getName()).orElse(null);
+        else
+            profile = super.find(dto);
+        
+        if (profile != null)
+            createProfileAvatarFlux(profile);
+        
+        return profile;
+    }
+    
+    /**
+     * Find a pageNumber of Profile filtered by a prefix name.
+     *
+     * @param namePrefix  the name prefix
+     * @param pageNumber  the page number
+     * @param itemPerPage the item per page
+     * @return the page of profiles
+     */
+    public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
+        
+        if (namePrefix == null)
+            namePrefix = "";
+        
+        itemPerPage = Math.max(itemPerPage, 1);
+        itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
+        
+        Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
+        Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
+        
+        Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
+        page.forEach(this::createProfileAvatarFlux);
+        
+        return page;
+    }
+    
+    @Override
+    public void delete(ProfileDTO profile) throws NotFoundException {
+        
+        CommonUtils.verifyValue("profile", profile);
+        CommonUtils.verifyValue("profile -> id", profile.getId());
+        
+        profileStatService.delete( profileStatService.findByProfile(profile) );
+        super.delete(profile);
+    }
+    
+    
+    /**
+     * Create profile avatar flux.
+     *
+     * @param dto the dto
+     */
+    public void createProfileAvatarFlux(ProfileDTO dto) {
+        
+        // setter is useful for create avatar inside profile
+        dto.setAvatarName( dto.getAvatarName() );
+        avatarService.createAvatarFlux( dto.getAvatar() );
+    }
+    
 }

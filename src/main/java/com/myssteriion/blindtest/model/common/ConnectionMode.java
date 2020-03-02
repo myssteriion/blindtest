@@ -8,19 +8,19 @@ import java.util.List;
  * The enum connection mode.
  */
 public enum ConnectionMode {
-
+    
     OFFLINE (false),
     ONLINE(true),
     BOTH(true);
-
-
-
+    
+    
+    
     private boolean needConnection;
-
+    
     ConnectionMode(boolean needConnection) {
         this.needConnection = needConnection;
     }
-
+    
     /**
      * Is need connection boolean.
      *
@@ -29,7 +29,7 @@ public enum ConnectionMode {
     public boolean isNeedConnection() {
         return needConnection;
     }
-
+    
     /**
      * Transform connection mode for search music.
      *

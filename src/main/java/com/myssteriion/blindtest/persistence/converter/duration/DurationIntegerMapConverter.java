@@ -13,10 +13,10 @@ import java.util.Map;
  * A Map<Duration, Integer> - json converter.
  */
 public class DurationIntegerMapConverter extends AbstractMapConverter<Duration, Integer> {
-
+    
     @Override
     protected Map<Duration, Integer> convertToMap(String json) throws IOException {
         return CommonUtils.MAPPER.readValue(json, new TypeReference<HashMap<Duration, Integer>>() {});
     }
-
+    
 }

@@ -60,7 +60,7 @@ public class SpotifyService {
     private SpotifyApi getSpotifyApi() throws SpotifyException {
         
         try {
-    
+            
             SpotifyParamDTO spotifyParam = spotifyParamService.find();
             
             SpotifyApi spotifyApi = new SpotifyApi.Builder()
@@ -205,7 +205,7 @@ public class SpotifyService {
             
             if ( !spotifyParam.getPlaylistIds().containsKey(theme) )
                 throw new SpotifyException("playlist id is mandatory (theme: '" + theme + "').");
-                
+            
             String playlistId = spotifyParam.getPlaylistIds().get(theme);
             if ( CommonUtils.isNullOrEmpty(playlistId) )
                 throw new SpotifyException("playlist id is mandatory (theme: '" + theme + "').");
@@ -227,14 +227,14 @@ public class SpotifyService {
      * @throws SpotifyException the spotify exception
      */
     private SpotifyApi credentialTest(SpotifyParamDTO spotifyParam) throws SpotifyException {
-    
+        
         try {
-    
+            
             SpotifyApi spotifyApi = new SpotifyApi.Builder()
                     .setClientId( spotifyParam.getClientId() )
                     .setClientSecret( spotifyParam.getClientSecret() )
                     .build();
-        
+            
             ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
             spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
             

@@ -18,43 +18,43 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "avatars")
 public class AvatarController {
 
-	private AvatarService avatarService;
+    private AvatarService avatarService;
 
 
 
-	/**
-	 * Instantiates a new Avatar controller.
-	 *
-	 * @param avatarService the avatar service
-	 */
-	@Autowired
-	public AvatarController(AvatarService avatarService) {
-		this.avatarService = avatarService;
-	}
+    /**
+     * Instantiates a new Avatar controller.
+     *
+     * @param avatarService the avatar service
+     */
+    @Autowired
+    public AvatarController(AvatarService avatarService) {
+        this.avatarService = avatarService;
+    }
 
 
 
-	/**
-	 * Find pageable of avatar filtered by prefix name.
-	 *
-	 * @param prefixName  the prefix name
-	 * @param pageNumber  the page number
-	 * @param itemPerPage the item per page
-	 * @return the pageable of avatars
-	 */
-	@GetMapping
-	public ResponseEntity< Page<AvatarDTO> > findAllByNameStartingWith(
-			@RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
-			@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
-			@RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
+    /**
+     * Find pageable of avatar filtered by prefix name.
+     *
+     * @param prefixName  the prefix name
+     * @param pageNumber  the page number
+     * @param itemPerPage the item per page
+     * @return the pageable of avatars
+     */
+    @GetMapping
+    public ResponseEntity< Page<AvatarDTO> > findAllByNameStartingWith(
+            @RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
+            @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
 
-		Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
-		if ( avatarService.needRefresh() ) {
-			avatarService.refresh();
-			page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
-		}
+        Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
+        if ( avatarService.needRefresh() ) {
+            avatarService.refresh();
+            page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
+        }
 
-		return RestUtils.create200(page);
-	}
-	
+        return RestUtils.create200(page);
+    }
+
 }

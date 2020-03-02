@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 @Repository
 public interface ProfileStatDAO extends IDAO<ProfileStatDTO> {
-
+    
     /**
      * Find by profile id.
      *
@@ -19,5 +19,5 @@ public interface ProfileStatDAO extends IDAO<ProfileStatDTO> {
      * @return the optional
      */
     Optional<ProfileStatDTO> findByProfileId(Integer profileId);
-
+    
 }

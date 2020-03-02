@@ -16,14 +16,14 @@ import org.springframework.context.annotation.PropertySource;
 @Import( {BeanFactory.class, RestUtils.class} )
 @PropertySource("${SPRING_CONFIG_LOCATION}/application.properties")
 public class BlindtestApplication extends SpringBootServletInitializer {
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(BlindtestApplication.class);
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(BlindtestApplication.class, args);
-	}
-
+    
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(BlindtestApplication.class);
+    }
+    
+    public static void main(String[] args) {
+        SpringApplication.run(BlindtestApplication.class, args);
+    }
+    
 }

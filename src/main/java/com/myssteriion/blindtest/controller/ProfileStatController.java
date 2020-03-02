@@ -30,56 +30,56 @@ import java.util.List;
 @RequestMapping(path = "profilestats")
 public class ProfileStatController {
 
-	private ProfileStatService profileStatService;
+    private ProfileStatService profileStatService;
 
-	private ProfileService profileService;
-
-
-
-	/**
-	 * Instantiates a new Profile stat controller.
-	 *
-	 * @param profileStatService the profile stat service
-	 * @param  profileService    the profile  service
-	 */
-	@Autowired
-	public ProfileStatController(ProfileStatService profileStatService, ProfileService profileService) {
-		this.profileStatService = profileStatService;
-		this.profileService = profileService;
-	}
+    private ProfileService profileService;
 
 
 
-	/**
-	 * Find profiles stats list from profiles ids list.
-	 *
-	 * @param profilesIds the profiles ids list
-	 * @return the profiles stats list
-	 */
-	@GetMapping
-	public ResponseEntity< Page<ProfileStatDTO> > findAllByProfilesIds(
-			@RequestParam(value = Constant.PROFILES_IDS, required = false, defaultValue = Constant.PROFILES_IDS_DEFAULT_VALUE) List<Integer> profilesIds) {
+    /**
+     * Instantiates a new Profile stat controller.
+     *
+     * @param profileStatService the profile stat service
+     * @param  profileService    the profile  service
+     */
+    @Autowired
+    public ProfileStatController(ProfileStatService profileStatService, ProfileService profileService) {
+        this.profileStatService = profileStatService;
+        this.profileService = profileService;
+    }
 
-		List<ProfileStatDTO> profilesStats = new ArrayList<>();
+
+
+    /**
+     * Find profiles stats list from profiles ids list.
+     *
+     * @param profilesIds the profiles ids list
+     * @return the profiles stats list
+     */
+    @GetMapping
+    public ResponseEntity< Page<ProfileStatDTO> > findAllByProfilesIds(
+            @RequestParam(value = Constant.PROFILES_IDS, required = false, defaultValue = Constant.PROFILES_IDS_DEFAULT_VALUE) List<Integer> profilesIds) {
+
+        List<ProfileStatDTO> profilesStats = new ArrayList<>();
 
         List<Integer> uniqueProfilesIds = CommonUtils.removeDuplicate(profilesIds);
         uniqueProfilesIds.forEach(id -> {
 
-			try {
+            try {
 
-				ProfileDTO profile = (ProfileDTO) new ProfileDTO().setId(id);
-				profile = profileService.find(profile);
-				if (profile == null)
-					throw new NotFoundException("Profile not found.");
+                ProfileDTO profile = (ProfileDTO) new ProfileDTO().setId(id);
+                profile = profileService.find(profile);
+                if (profile == null)
+                    throw new NotFoundException("Profile not found.");
 
-				profilesStats.add( profileStatService.findByProfile(profile));
-			}
-			catch (NotFoundException e) {
-				throw new CustomRuntimeException("Can't find profile stat.", e);
-			}
-		});
+                profilesStats.add( profileStatService.findByProfile(profile));
+            }
+            catch (NotFoundException e) {
+                throw new CustomRuntimeException("Can't find profile stat.", e);
+            }
+        });
 
-		return RestUtils.create200( new PageImpl<>(profilesStats) );
-	}
+        return RestUtils.create200( new PageImpl<>(profilesStats) );
+    }
 
 }

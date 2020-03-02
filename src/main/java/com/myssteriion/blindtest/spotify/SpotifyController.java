@@ -18,35 +18,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "spotify")
 public class SpotifyController {
-
-	private SpotifyService spotifyService;
-
-
-
-	/**
-	 * Instantiates a new Spotify controller.
-	 *
-	 * @param spotifyService the Spotify service
-	 */
-	@Autowired
-	public SpotifyController(SpotifyService spotifyService) {
-		this.spotifyService = spotifyService;
-	}
-
-
-
-	/**
-	 * Test the Spotify connection.
-	 *
-	 * @param spotifyParamDTO the 'new' SpotifyParamDTO
-	 * @return the pageable of avatars
+    
+    private SpotifyService spotifyService;
+    
+    
+    
+    /**
+     * Instantiates a new Spotify controller.
+     *
+     * @param spotifyService the Spotify service
+     */
+    @Autowired
+    public SpotifyController(SpotifyService spotifyService) {
+        this.spotifyService = spotifyService;
+    }
+    
+    
+    
+    /**
+     * Test the Spotify connection.
+     *
+     * @param spotifyParamDTO the 'new' SpotifyParamDTO
+     * @return the pageable of avatars
      * @throws SpotifyException the spotify exception
-	 */
-	@PostMapping(path = "connection-test")
-	public ResponseEntity<Empty> connectionTest(@RequestBody SpotifyParamDTO spotifyParamDTO) throws SpotifyException {
-
-	    spotifyService.testSpotifyParamConnection(spotifyParamDTO);
-		return RestUtils.create204();
-	}
-	
+     */
+    @PostMapping(path = "connection-test")
+    public ResponseEntity<Empty> connectionTest(@RequestBody SpotifyParamDTO spotifyParamDTO) throws SpotifyException {
+        
+        spotifyService.testSpotifyParamConnection(spotifyParamDTO);
+        return RestUtils.create204();
+    }
+    
 }

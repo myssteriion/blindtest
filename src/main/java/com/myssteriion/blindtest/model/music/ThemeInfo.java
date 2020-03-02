@@ -10,24 +10,24 @@ import java.util.Objects;
  * Theme info (nb musics by ConnectionMode).
  */
 public class ThemeInfo implements IModel {
-
+    
     /**
      * The theme.
      */
     private Theme theme;
-
+    
     /**
      * Nb musics for OFFLINE mode.
      */
     private Integer offlineNbMusics;
-
+    
     /**
      * Nb musics for ONLINE mode.
      */
     private Integer onlineNbMusics;
-
-
-
+    
+    
+    
     /**
      * Instantiate a new ThemeInfo.
      *
@@ -36,16 +36,16 @@ public class ThemeInfo implements IModel {
      * @param onlineNbMusics  online nb musics
      */
     public ThemeInfo(Theme theme, Integer offlineNbMusics, Integer onlineNbMusics) {
-
+        
         CommonUtils.verifyValue("theme", theme);
-
+        
         this.theme = theme;
         this.offlineNbMusics = Math.max(offlineNbMusics, 0);
         this.onlineNbMusics = Math.max(onlineNbMusics, 0);
     }
-
-
-
+    
+    
+    
     /**
      * Gets theme.
      *
@@ -54,7 +54,7 @@ public class ThemeInfo implements IModel {
     public Theme getTheme() {
         return theme;
     }
-
+    
     /**
      * Gets offlineNbMusics.
      *
@@ -63,7 +63,7 @@ public class ThemeInfo implements IModel {
     public Integer getOfflineNbMusics() {
         return offlineNbMusics;
     }
-
+    
     /**
      * Gets onlineNbMusics.
      *
@@ -72,31 +72,31 @@ public class ThemeInfo implements IModel {
     public Integer getOnlineNbMusics() {
         return onlineNbMusics;
     }
-
-
+    
+    
     @Override
     public boolean equals(Object o) {
-
+        
         if (this == o)
             return true;
-
+        
         if (o == null || getClass() != o.getClass())
             return false;
-
+        
         ThemeInfo themeInfo = (ThemeInfo) o;
         return theme == themeInfo.theme && Objects.equals(offlineNbMusics, themeInfo.offlineNbMusics) && Objects.equals(onlineNbMusics, themeInfo.onlineNbMusics);
     }
-
+    
     @Override
     public int hashCode() {
         return Objects.hash(theme, offlineNbMusics, onlineNbMusics);
     }
-
+    
     @Override
     public String toString() {
         return "theme=" + theme +
                 ", offlineNbMusics=" + offlineNbMusics +
                 ", onlineNbMusics=" + onlineNbMusics;
     }
-
+    
 }

@@ -10,15 +10,15 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("${SPRING_CONFIG_LOCATION}/config.properties")
 public class ConfigProperties {
-
+    
     @Value("${maxPlayers}")
     private Integer maxPlayers;
-
+    
     @Value("${minPlayers}")
     private Integer minPlayers;
-
-
-
+    
+    
+    
     /**
      * Gets maxPlayers.
      *
@@ -27,7 +27,7 @@ public class ConfigProperties {
     public Integer getMaxPlayers() {
         return maxPlayers;
     }
-
+    
     /**
      * Gets minPlayers.
      *
@@ -36,5 +36,5 @@ public class ConfigProperties {
     public Integer getMinPlayers() {
         return minPlayers;
     }
-
+    
 }

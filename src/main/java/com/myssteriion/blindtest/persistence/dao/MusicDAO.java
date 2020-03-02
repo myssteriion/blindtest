@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 @Repository
 public interface MusicDAO extends IDAO<MusicDTO> {
-
+    
     /**
      * Find by name and theme.
      *
@@ -24,7 +24,7 @@ public interface MusicDAO extends IDAO<MusicDTO> {
      * @return the optional
      */
     Optional<MusicDTO> findByNameAndThemeAndConnectionMode(String name, Theme theme, ConnectionMode connectionMode);
-
+    
     /**
      * Find by themes.
      *
@@ -33,7 +33,7 @@ public interface MusicDAO extends IDAO<MusicDTO> {
      * @return the musics list
      */
     List<MusicDTO> findByThemeInAndConnectionModeIn(List<Theme> themes, List<ConnectionMode> connectionModes);
-
+    
     /**
      * Count by theme and connection mode
      *
@@ -42,5 +42,5 @@ public interface MusicDAO extends IDAO<MusicDTO> {
      * @return the number of music
      */
     int countByThemeAndConnectionMode(Theme theme, ConnectionMode connectionMode);
-
+    
 }

@@ -20,29 +20,29 @@ import java.util.Objects;
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "avatar_sequence", allocationSize = 1)
 public class AvatarDTO extends AbstractDTO {
-
+    
     /**
      * The name.
      */
     @Column(name = "name", nullable = false)
     @NotEmpty(message = "Name can't be empty.")
     private String name;
-
+    
     /**
      * If the file exists.
      */
     @Transient
     private Flux flux;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Avatar dto.
      */
     public AvatarDTO() {
         this("");
     }
-
+    
     /**
      * Instantiates a new AvatarDTO.
      *
@@ -51,9 +51,9 @@ public class AvatarDTO extends AbstractDTO {
     public AvatarDTO(String name) {
         this.name = CommonUtils.isNullOrEmpty(name) ? "" : name;
     }
-
-
-
+    
+    
+    
     /**
      * Gets name.
      *
@@ -62,7 +62,7 @@ public class AvatarDTO extends AbstractDTO {
     public String getName() {
         return name;
     }
-
+    
     /**
      * Set name.
      *
@@ -73,7 +73,7 @@ public class AvatarDTO extends AbstractDTO {
         this.name = name;
         return this;
     }
-
+    
     /**
      * Gets flux.
      *
@@ -82,7 +82,7 @@ public class AvatarDTO extends AbstractDTO {
     public Flux getFlux() {
         return flux;
     }
-
+    
     /**
      * Set flux.
      *
@@ -93,32 +93,32 @@ public class AvatarDTO extends AbstractDTO {
         this.flux = flux;
         return this;
     }
-
-
+    
+    
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
-
+    
     @Override
     public boolean equals(Object obj) {
-
+        
         if (this == obj)
             return true;
-
+        
         if(obj == null || obj.getClass()!= this.getClass())
             return false;
-
+        
         AvatarDTO other = (AvatarDTO) obj;
         return Objects.equals(this.name, other.name);
     }
-
+    
     @Override
     public String toString() {
         return super.toString() +
                 ", name=" + name +
                 ", flux={" + flux + "}";
-
+        
     }
-
+    
 }

@@ -13,22 +13,22 @@ import java.util.Optional;
  */
 @Repository
 public interface ProfileDAO extends IDAO<ProfileDTO> {
-
-	/**
-	 * Find by name.
-	 *
-	 * @param name the name
-	 * @return the optional
-	 */
-	Optional<ProfileDTO> findByName(String name);
-
-	/**
-	 * Find a page of profile filtered by prefix name.
-	 *
-	 * @param prefixName the prefix name
-	 * @param pageable   the page
-	 * @return a page of profile filtered by prefix name
-	 */
-	Page<ProfileDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
-
+    
+    /**
+     * Find by name.
+     *
+     * @param name the name
+     * @return the optional
+     */
+    Optional<ProfileDTO> findByName(String name);
+    
+    /**
+     * Find a page of profile filtered by prefix name.
+     *
+     * @param prefixName the prefix name
+     * @param pageable   the page
+     * @return a page of profile filtered by prefix name
+     */
+    Page<ProfileDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
+    
 }

@@ -28,63 +28,63 @@ import java.util.HashSet;
 import java.util.List;
 
 public class GameControllerTest extends AbstractTest {
-
-	@Mock
-	private GameService gameService;
-	
-	@InjectMocks
-	private GameController gameController;
-
-
-
-	@Test
-	public void newGame() throws NotFoundException, SpotifyException {
-
-		String playerName = "name";
-		List<Player> players = Arrays.asList(
-				new Player(new ProfileDTO("name")),
-				new Player(new ProfileDTO("name1")));
-		Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
-
-		NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
-
-		ResponseEntity<Game> re = gameController.newGame(newGame);
-		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		Assert.assertNotNull( re.getBody() );
-	}
-
-	@Test
-	public void apply() throws NotFoundException, ConflictException {
-
-		List<Player> players = Arrays.asList(
-				new Player(new ProfileDTO("name")),
-				new Player(new ProfileDTO("name1")));
-		Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
-		
-		MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
-		MusicResult musicResult = new MusicResult(0, musicDto, null, null, null, null);
-
-		ResponseEntity<Game> re = gameController.apply(musicResult);
-		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		Assert.assertNotNull( re.getBody() );
-		Assert.assertEquals( players.size(), re.getBody().getPlayers().size() );
-	}
-
-	@Test
-	public void findById() throws NotFoundException {
-
-		List<Player> players = Arrays.asList(
-				new Player(new ProfileDTO("name")),
-				new Player(new ProfileDTO("name1")));
-
-		Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
-		game.setId(11);
-		Mockito.when(gameService.findGame( Mockito.anyInt())).thenReturn(game);
-
-		ResponseEntity<Game> re = gameController.findById(game.getId());
-		Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-		Assert.assertNotNull( re.getBody() );
-		Assert.assertSame( game, re.getBody() );
-	}
-
+    
+    @Mock
+    private GameService gameService;
+    
+    @InjectMocks
+    private GameController gameController;
+    
+    
+    
+    @Test
+    public void newGame() throws NotFoundException, SpotifyException {
+        
+        String playerName = "name";
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
+        
+        NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        
+        ResponseEntity<Game> re = gameController.newGame(newGame);
+        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assert.assertNotNull( re.getBody() );
+    }
+    
+    @Test
+    public void apply() throws NotFoundException, ConflictException {
+        
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
+        
+        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
+        MusicResult musicResult = new MusicResult(0, musicDto, null, null, null, null);
+        
+        ResponseEntity<Game> re = gameController.apply(musicResult);
+        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assert.assertNotNull( re.getBody() );
+        Assert.assertEquals( players.size(), re.getBody().getPlayers().size() );
+    }
+    
+    @Test
+    public void findById() throws NotFoundException {
+        
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        game.setId(11);
+        Mockito.when(gameService.findGame( Mockito.anyInt())).thenReturn(game);
+        
+        ResponseEntity<Game> re = gameController.findById(game.getId());
+        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assert.assertNotNull( re.getBody() );
+        Assert.assertSame( game, re.getBody() );
+    }
+    
 }

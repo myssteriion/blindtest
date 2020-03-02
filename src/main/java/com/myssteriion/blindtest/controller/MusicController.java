@@ -31,60 +31,60 @@ import java.util.List;
 @RequestMapping(path = "musics")
 public class MusicController {
 
-	private MusicService musicService;
+    private MusicService musicService;
 
 
 
-	/**
-	 * Instantiates a new Music controller.
-	 *
-	 * @param musicService the music service
-	 */
-	@Autowired
-	public MusicController(MusicService musicService) {
-		this.musicService = musicService;
-	}
+    /**
+     * Instantiates a new Music controller.
+     *
+     * @param musicService the music service
+     */
+    @Autowired
+    public MusicController(MusicService musicService) {
+        this.musicService = musicService;
+    }
 
 
 
-	/**
-	 * Get nb musics by themes by connection mode.
-	 *
-	 * @return the themesInfo
-	 */
-	@GetMapping(path = "/compute-themes-info")
-	public ResponseEntity< Page<ThemeInfo> > computeThemesInfo() {
+    /**
+     * Get nb musics by themes by connection mode.
+     *
+     * @return the themesInfo
+     */
+    @GetMapping(path = "/compute-themes-info")
+    public ResponseEntity< Page<ThemeInfo> > computeThemesInfo() {
 
-		musicService.refresh();
+        musicService.refresh();
 
-		List<ThemeInfo> themesInfo = musicService.computeThemesInfo();
-		return RestUtils.create200( new PageImpl<>(themesInfo) );
-	}
+        List<ThemeInfo> themesInfo = musicService.computeThemesInfo();
+        return RestUtils.create200( new PageImpl<>(themesInfo) );
+    }
 
-	/**
-	 * Randomly choose a music.
-	 *
-	 * @param sameProbability if themes probability are same
-	 * @param themes     	  the themes filter (optional)
-	 * @param effects     	  the effects filter (optional)
-	 * @param connectionMode  the online mode
-	 * @return a MusicDTO
-	 * @throws NotFoundException NotFound exception
-	 */
-	@GetMapping(path = "/random")
-	public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.SAME_PROBABILITY, required = false) boolean sameProbability,
-										   @RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-										   @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
-										   @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
-			throws NotFoundException, IOException, SpotifyException {
+    /**
+     * Randomly choose a music.
+     *
+     * @param sameProbability if themes probability are same
+     * @param themes     	  the themes filter (optional)
+     * @param effects     	  the effects filter (optional)
+     * @param connectionMode  the online mode
+     * @return a MusicDTO
+     * @throws NotFoundException NotFound exception
+     */
+    @GetMapping(path = "/random")
+    public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.SAME_PROBABILITY, required = false) boolean sameProbability,
+                                           @RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
+                                           @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
+                                           @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
+            throws NotFoundException, IOException, SpotifyException {
 
-		MusicDTO music = musicService.random(sameProbability, themes, effects, connectionMode);
-		if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
-			musicService.refresh();
-			music = musicService.random(sameProbability, themes, effects, connectionMode);
-		}
+        MusicDTO music = musicService.random(sameProbability, themes, effects, connectionMode);
+        if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
+            musicService.refresh();
+            music = musicService.random(sameProbability, themes, effects, connectionMode);
+        }
 
-		return RestUtils.create200(music);
-	}
+        return RestUtils.create200(music);
+    }
 
 }

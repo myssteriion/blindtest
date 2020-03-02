@@ -6,7 +6,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
  * The Classic round content.
  */
 public class ClassicContent extends AbstractRoundContent {
-
+    
     /**
      * Instantiates a new Classic content.
      *
@@ -16,5 +16,5 @@ public class ClassicContent extends AbstractRoundContent {
     public ClassicContent(int nbMusics, int nbPointWon) {
         super(nbMusics, nbPointWon);
     }
-
+    
 }

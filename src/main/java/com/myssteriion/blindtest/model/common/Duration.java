@@ -4,19 +4,19 @@ package com.myssteriion.blindtest.model.common;
  * The Duration enum.
  */
 public enum Duration {
-
+    
     SHORT(0.5),
     NORMAL(1),
     LONG(1.5);
-
-
-
+    
+    
+    
     private double ratio;
-
+    
     Duration(double ratio) {
         this.ratio = ratio;
     }
-
+    
     /**
      * Gets ratio.
      *
@@ -25,5 +25,5 @@ public enum Duration {
     public double getRatio() {
         return ratio;
     }
-
+    
 }

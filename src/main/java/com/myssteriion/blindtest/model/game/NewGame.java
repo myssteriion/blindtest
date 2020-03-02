@@ -14,39 +14,39 @@ import java.util.Set;
  * Represents a new game (for create a game).
  */
 public class NewGame {
-
+    
     /**
      * The players names list.
      */
     private Set<String> playersNames;
-
+    
     /**
      * The duration.
      */
     private Duration duration;
-
+    
     /**
      * If the themes are same probability.
      */
     private boolean sameProbability;
-
+    
     /**
      * The themes.
      */
     private List<Theme> themes;
-
+    
     /**
      * The effects.
      */
     private List<Effect> effects;
-
+    
     /**
      * The connection mode.
      */
     private ConnectionMode connectionMode;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new New game.
      *
@@ -57,11 +57,11 @@ public class NewGame {
      */
     @JsonCreator
     public NewGame(Set<String> playersNames, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
-
+        
         CommonUtils.verifyValue("playersNames", playersNames);
         CommonUtils.verifyValue("duration", duration);
         CommonUtils.verifyValue("gameMode", connectionMode);
-
+        
         this.playersNames = playersNames;
         this.duration = duration;
         this.sameProbability = sameProbability;
@@ -69,9 +69,9 @@ public class NewGame {
         this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
         this.connectionMode = connectionMode;
     }
-
-
-
+    
+    
+    
     /**
      * Gets players names.
      *
@@ -80,7 +80,7 @@ public class NewGame {
     public Set<String> getPlayersNames() {
         return playersNames;
     }
-
+    
     /**
      * Gets duration.
      *
@@ -89,7 +89,7 @@ public class NewGame {
     public Duration getDuration() {
         return duration;
     }
-
+    
     /**
      * Gets sameProbability.
      *
@@ -98,7 +98,7 @@ public class NewGame {
     public boolean isSameProbability() {
         return sameProbability;
     }
-
+    
     /**
      * Gets themes.
      *
@@ -107,7 +107,7 @@ public class NewGame {
     public List<Theme> getThemes() {
         return themes;
     }
-
+    
     /**
      * Gets effects.
      *
@@ -116,7 +116,7 @@ public class NewGame {
     public List<Effect> getEffects() {
         return effects;
     }
-
+    
     /**
      * Gets game mode.
      *
@@ -125,8 +125,8 @@ public class NewGame {
     public ConnectionMode getConnectionMode() {
         return connectionMode;
     }
-
-
+    
+    
     @Override
     public String toString() {
         return "playersNames=" + playersNames +
@@ -136,5 +136,5 @@ public class NewGame {
                 ", effects=" + effects +
                 ", connectionMode=" + connectionMode;
     }
-
+    
 }

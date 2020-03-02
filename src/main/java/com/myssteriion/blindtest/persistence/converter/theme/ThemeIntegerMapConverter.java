@@ -13,10 +13,10 @@ import java.util.Map;
  * A Map<Theme, Integer> - json converter.
  */
 public class ThemeIntegerMapConverter extends AbstractMapConverter<Theme, Integer> {
-
+    
     @Override
     protected Map<Theme, Integer> convertToMap(String json) throws IOException {
         return CommonUtils.MAPPER.readValue(json, new TypeReference<HashMap<Theme, Integer>>() {});
     }
-
+    
 }
