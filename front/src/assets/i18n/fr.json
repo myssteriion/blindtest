@@ -32,6 +32,16 @@
     "HOME_VIEW": {
         "TITLE": "Menu principal"
     },
+    "PARAMS_VIEW": {
+        "TITLE": "Paramètre",
+        "SPOTIFY_PARAM_VIEW": {
+            "TITLE": "Connexion Spotify",
+            "FIND_SPOTIFY_PARAM_ERROR": "Impossible de récupérer le paramétrage Spotify.",
+            "CLIENT_ID": "Login :",
+            "CLIENT_SECRET": "Phrase secrète :",
+            "THEMES_LABEL": "Thèmes :"
+        }
+    },
     "GAME": {
         "NEW_VIEW": {
             "TITLE": "Commencer",

@@ -12,6 +12,10 @@ input, .pagination, .alert, .box-shadow {
     box-shadow: 8px 8px 4px silver;
 }
 
+.no-box-shadow {
+    box-shadow: none;
+}
+
 button:disabled {
     cursor: not-allowed;
 }

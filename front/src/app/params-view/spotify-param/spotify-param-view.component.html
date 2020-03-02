@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+    <!-- clientId -->
+    <div class="row spotify-param-view-part">
+        <div class="col-3 spotify-param-view-label font-size-normal">{{ 'PARAMS_VIEW.SPOTIFY_PARAM_VIEW.CLIENT_ID' | translate }}</div>
+        <div class="col-6 spotify-param-view-no-padding">
+            <input class="form-control font-size-normal" [(ngModel)]="spotifyParams.clientId">
+        </div>
+    </div>
+
+    <!-- clientSecret -->
+    <div class="row spotify-param-view-part">
+        <div class="col-3 spotify-param-view-label font-size-normal">{{ 'PARAMS_VIEW.SPOTIFY_PARAM_VIEW.CLIENT_SECRET' | translate }}</div>
+        <div class="col-6 input-group box-shadow spotify-param-view-no-padding">
+            <input class="form-control font-size-normal no-box-shadow" [(ngModel)]="spotifyParams.clientSecret" type="{{ getClientSecretType() }}">
+            <div class="input-group-append">
+                <fa-icon class="input-group-text" [icon]="getClientSecretIcon()" (click)="isHide = !isHide" size="2x"></fa-icon>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- themes -->
+    <div class="row">
+
+        <div class="col">
+            <div *ngFor="let theme of getSubListThemes(true)" class="row">
+                <div class="col-3">
+                    <img src="{{ theme.srcImg }}" class="spotify-param-view-theme-img" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500">
+                </div>
+                <div class="col-8 spotify-param-view-no-padding">
+                    <input class="form-control font-size-normal" [(ngModel)]="spotifyParams.playlistIds[theme.enumVal]">
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div *ngFor="let theme of getSubListThemes(false)" class="row">
+                <div class="col-3">
+                    <img src="{{ theme.srcImg }}" class="spotify-param-view-theme-img" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500">
+                </div>
+                <div class="col-8 spotify-param-view-no-padding">
+                    <input class="form-control font-size-normal" [(ngModel)]="spotifyParams.playlistIds[theme.enumVal]">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

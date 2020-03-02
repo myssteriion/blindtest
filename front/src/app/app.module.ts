@@ -43,6 +43,7 @@ import {MusicResultModalComponent} from "./game/factoring-part/music-result-moda
 import {RoundInfoModalComponent} from "./game/factoring-part/round-info-modal/round-info-modal.component";
 import {ChoiceThemeModalComponent} from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
 import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
+import {ErrorAlertModalComponent} from "./common/error-alert/error-alert-modal.component";
 import {ProfilesStatisticsViewComponent} from "./statistics/profiles-statistics-view/profiles-statistics-view.component";
 import {GlobalPercentagesComponent} from "./statistics/graphs/comparison/global-percentages/global-percentages.component";
 import {ThemePercentagesComponent} from "./statistics/graphs/single-user/theme-percentages/theme-percentages.component";
@@ -63,6 +64,8 @@ import {ProfilesComparisonViewComponent} from "./statistics/profiles-comparison-
 import {AnswerTypesComponent} from "./statistics/graphs/comparison/answer-types/answer-types.component";
 import {ThemeSelectionComponent} from "./statistics/theme-selection/theme-selection.component";
 import {EndGameRanksComponent} from "./game/game-end-view/end-game-ranks/end-game-ranks.component";
+import {ParamsViewComponent} from './params-view/params-view.component';
+import {SpotifyParamViewComponent} from './params-view/spotify-param/spotify-param-view.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
@@ -74,7 +77,7 @@ import {AvatarResource} from "./resources/avatar.resource";
 import {ProfileStatisticsResource} from "./resources/profile-statistics.resource";
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
-import {ErrorAlertModalComponent} from "./common/error-alert/error-alert-modal.component";
+import {SpotifyParamResource} from "./resources/spotify-param.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -130,7 +133,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         PlayedGamesComponent,
         AnswerTypesComponent,
         ThemeSelectionComponent,
-        EndGameRanksComponent
+        EndGameRanksComponent,
+        ParamsViewComponent,
+        SpotifyParamViewComponent
     ],
 	entryComponents: [
 		ProfileEditModalComponent,
@@ -177,7 +182,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameResource,
 		ToolsService,
 		ToasterService,
-		MusicResource
+		MusicResource,
+		SpotifyParamResource
 	],
 	bootstrap: [AppComponent]
 })
