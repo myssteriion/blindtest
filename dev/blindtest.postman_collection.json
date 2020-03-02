@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9b48a212-f36f-4b21-88e6-22232fe634de",
+		"_postman_id": "04eb0ff8-7633-4400-aebd-20751c1dbd7d",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -364,79 +364,38 @@
 						}
 					},
 					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "param",
-			"item": [
+				},
 				{
-					"name": "spotify param",
-					"item": [
-						{
-							"name": "get",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
+					"name": "load",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"players\": [\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 98,\n\t\t\t\t\"name\": \"Aedoox\",\n\t\t\t\t\"background\": 4,\n\t\t\t\t\"avatarName\": \"fry.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"fry.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1450,\n\t\t\t\"rank\": 7,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 4,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 6,\n\t\t\t\t\"name\": \"Darkana\",\n\t\t\t\t\"background\": 0,\n\t\t\t\t\"avatarName\": \"harryPotter.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"harryPotter.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 3025,\n\t\t\t\"rank\": 2,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 1,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 97,\n\t\t\t\t\"name\": \"Lorène\",\n\t\t\t\t\"background\": 4,\n\t\t\t\t\"avatarName\": \"girafe.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"girafe.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 2200,\n\t\t\t\"rank\": 4,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 3,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 4\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 100,\n\t\t\t\t\"name\": \"Léo\",\n\t\t\t\t\"background\": 1,\n\t\t\t\t\"avatarName\": \"ff7_01.jpeg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"ff7_01.jpeg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 950,\n\t\t\t\"rank\": 9,\n\t\t\t\"last\": true,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 1,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"name\": \"Myssteriion\",\n\t\t\t\t\"background\": 1,\n\t\t\t\t\"avatarName\": \"mysterion.jpeg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"mysterion.jpeg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 3525,\n\t\t\t\"rank\": 1,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 0,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 4\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 3,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 99,\n\t\t\t\t\"name\": \"Ninouille\",\n\t\t\t\t\"background\": 3,\n\t\t\t\t\"avatarName\": \"godzilla.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"godzilla.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1950,\n\t\t\t\"rank\": 5,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 2,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 5,\n\t\t\t\t\"name\": \"O2\",\n\t\t\t\t\"background\": 2,\n\t\t\t\t\"avatarName\": \"elephant.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"elephant.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1825,\n\t\t\t\"rank\": 6,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 4,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 2,\n\t\t\t\t\"name\": \"Stanouch\",\n\t\t\t\t\"background\": 3,\n\t\t\t\t\"avatarName\": \"girafe.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"girafe.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1250,\n\t\t\t\"rank\": 8,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 3,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 4,\n\t\t\t\t\"name\": \"Sylvain\",\n\t\t\t\t\"background\": 0,\n\t\t\t\t\"avatarName\": \"wolwerine.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"wolwerine.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 2750,\n\t\t\t\"rank\": 3,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 2,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 4\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 2,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": true,\n\t\"themes\": [\n\t\t\"ANNEES_80\",\n\t\t\"ANNEES_90\",\n\t\t\"ANNEES_2000\",\n\t\t\"ANNEES_2010\",\n\t\t\"DISNEY\",\n\t\t\"SERIES_CINEMAS\"\n\t],\n\t\"effects\": [\n\t\t\"NONE\",\n\t\t\"SLOW\",\n\t\t\"SPEED\",\n\t\t\"MIX\"\n\t],\n\t\"connectionMode\": \"OFFLINE\",\n\t\"listenedMusics\": {\n\t\t\"ANNEES_2010\": 2,\n\t\t\"SERIES_CINEMAS\": 6,\n\t\t\"ANNEES_80\": 4,\n\t\t\"ANNEES_2000\": 6,\n\t\t\"ANNEES_90\": 5,\n\t\t\"DISNEY\": 5\n\t},\n\t\"nbMusicsPlayed\": 28,\n\t\"nbMusicsPlayedInRound\": 0,\n\t\"round\": \"FRIENDSHIP\",\n\t\"firstStep\": false,\n\t\"lastStep\": false,\n\t\"finished\": false\n}"
 						},
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n\t\"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n\t\"playlistIds\": {\n\t\t\"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n\t\t\"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n\t\t\"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n\t\t\"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n\t\t\"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n\t\t\"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n\t\t\"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n\t\t\"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n\t}\n}"
-								},
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/load",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"game",
+								"load"
+							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2196,6 +2155,122 @@
 								"{{applicationContext}}",
 								"game",
 								"apply"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "param",
+			"item": [
+				{
+					"name": "spotify param",
+					"item": [
+						{
+							"name": "find",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "spotify",
+			"item": [
+				{
+					"name": "connection test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeika\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/spotify/connection-test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"spotify",
+								"connection-test"
 							]
 						}
 					},
