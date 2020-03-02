@@ -1,20 +1,20 @@
 .navbar-menu-logo {
-    cursor: pointer;
+	cursor: pointer;
 }
 .navbar-menu-logo img {
-    height: 3em;
-    padding-right: 1em;
+	height: 3em;
+	padding-right: 1em;
 }
 
 .navbar-menu-icons {
-    background-color: #17a2b8;
-    border-radius: 50%;
+	background-color: #17a2b8;
+	border-radius: 50%;
 }
 
 .navbar-menu-icons .tooltip {
-    font-size: 5em !important;
+	font-size: 5em !important;
 }
 
 .navbar-nav li {
-    margin: auto;
+	margin: auto;
 }

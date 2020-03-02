@@ -1,18 +1,18 @@
 <div class="container-fluid">
-
-    <!-- total music value -->
-    <div class="row">
-        <ng2-odometer class="col font-size-normal end-game-statistics-total-musics-value" [number]="game.nbMusicsPlayed" [format]="'( ddd)'"></ng2-odometer>
-    </div>
-
-    <!-- total music label -->
-    <div class="row">
-        <div class="col font-size-very-very-small end-game-statistics-total-musics-label">{{ 'STATISTICS.CATEGORIES.TOTAL_LISTENED_MUSICS' | translate }}</div>
-    </div>
-
-    <!-- graphs -->
-    <div class="row end-game-graphs">
-        <theme-comparison-view class="col" [game]="game"></theme-comparison-view>
-    </div>
+	
+	<!-- total music value -->
+	<div class="row">
+		<ng2-odometer class="col font-size-normal end-game-statistics-total-musics-value" [number]="game.nbMusicsPlayed" [format]="'( ddd)'"></ng2-odometer>
+	</div>
+	
+	<!-- total music label -->
+	<div class="row">
+		<div class="col font-size-very-very-small end-game-statistics-total-musics-label">{{ 'STATISTICS.CATEGORIES.TOTAL_LISTENED_MUSICS' | translate }}</div>
+	</div>
+	
+	<!-- graphs -->
+	<div class="row end-game-graphs">
+		<theme-comparison-view class="col" [game]="game"></theme-comparison-view>
+	</div>
 
 </div>

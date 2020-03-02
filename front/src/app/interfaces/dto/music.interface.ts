@@ -8,13 +8,13 @@ export interface Music {
 	name: string,
 	theme: Theme,
 	connectionMode: ConnectionMode,
-
+	
 	spotifyTrackId?: string,
 	spotifyPreviewUrl?: string,
 	spotifyTrackUrl?: string,
-
+	
 	played?: number,
-
+	
 	flux?: Flux,
 	effect?: Effect,
 }

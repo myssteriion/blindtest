@@ -1,41 +1,41 @@
 .choice-theme-modal-header, .choice-theme-modal-body, .choice-theme-modal-footer {
-    margin: 1em;
+	margin: 1em;
 }
 
 .choice-theme-modal-header {
-    border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver;
 }
 
 .choice-theme-modal-footer {
-    border-top: 1px solid silver;
-    text-align: center;
+	border-top: 1px solid silver;
+	text-align: center;
 }
 
 .choice-theme-modal-footer button {
-    margin-top: 10px;
-    margin-left: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .choice-theme-modal-themes {
-    text-align: center;
+	text-align: center;
 }
 
 .choice-theme-modal-img {
-    height: 6em;
-    width: 6em;
-    margin: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 8px 8px 4px silver;
-    opacity: 0.2;
+	height: 6em;
+	width: 6em;
+	margin: 10px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 8px 8px 4px silver;
+	opacity: 0.2;
 }
 
 .choice-theme-modal-img:hover {
-    cursor: pointer;
-    opacity: 1;
+	cursor: pointer;
+	opacity: 1;
 }
 
 .choice-theme-modal-img-active {
-    opacity: 1;
+	opacity: 1;
 }

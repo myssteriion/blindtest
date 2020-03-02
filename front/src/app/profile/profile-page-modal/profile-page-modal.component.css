@@ -1,17 +1,17 @@
 .profile-page-modal-header, .profile-page-modal-body, .profile-page-modal-footer {
-    margin: 1em;
+	margin: 1em;
 }
 
 .profile-page-modal-header {
-    border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver;
 }
 
 .profile-page-modal-footer {
-    border-top: 1px solid silver;
-    text-align: center;
+	border-top: 1px solid silver;
+	text-align: center;
 }
 
 .profile-page-modal-footer button {
-    margin-top: 10px;
-    margin-left: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }

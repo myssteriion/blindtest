@@ -1,9 +1,9 @@
 <div class="home-view-video">
-    <video #videoPlayer [autoplay]="true" (ended)="stopGeneric()">
-        <source src="{{ getGeneric() }}" type="video/mp4" />
-    </video>
+	<video #videoPlayer [autoplay]="true" (ended)="stopGeneric()">
+		<source src="{{ getGeneric() }}" type="video/mp4" />
+	</video>
 </div>
 
 <div class="home-view-skip font-size-normal">
-    <button class="btn btn-dark" (click)="stopGeneric()">{{ 'GENERIC_VIEW.STOP_BUTTON' | translate }}</button>
+	<button class="btn btn-dark" (click)="stopGeneric()">{{ 'GENERIC_VIEW.STOP_BUTTON' | translate }}</button>
 </div>

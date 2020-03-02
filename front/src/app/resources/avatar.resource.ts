@@ -10,18 +10,18 @@ import {environment} from 'src/environments/environment';
  */
 @Injectable()
 export class AvatarResource {
-
+	
 	/**
 	 * Rest path.
 	 */
 	private path = environment.baseBackendUrl + "/avatars";
-
-
-
+	
+	
+	
 	constructor(private _http: HttpClient) { }
-
-
-
+	
+	
+	
 	/**
 	 * Gets avatars pageable filtered by prefix name.
 	 *
@@ -29,13 +29,13 @@ export class AvatarResource {
 	 * @param pageNumber the page number
 	 */
 	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Avatar> > {
-
+		
 		let params = new HttpParams();
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
 		params = params.set('itemPerPage', environment.itemPerPageAvatars.toString());
-
+		
 		return this._http.get< Page<Avatar> >( this.path, { params: params } );
 	}
-
+	
 }

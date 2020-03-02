@@ -14,130 +14,130 @@ import {Router} from '@angular/router';
  * The profiles view.
  */
 @Component({
-    selector: 'profile-page',
-    templateUrl: './profile-page.component.html',
-    styleUrls: ['./profile-page.component.css'],
-    animations: [
-        OPACITY_ANIMATION
-    ]
+	selector: 'profile-page',
+	templateUrl: './profile-page.component.html',
+	styleUrls: ['./profile-page.component.css'],
+	animations: [
+		OPACITY_ANIMATION
+	]
 })
 export class ProfilePageComponent implements OnInit {
-
-    /**
-     * If can create/update/delete profile.
-     */
-    @Input()
-    private canEdit: boolean;
-
-    /**
-     * If can select profile card.
-     */
-    @Input()
-    private canSelect: boolean;
-
-    /**
-     * On select profile card.
-     */
-    @Output()
-    private onSelect = new EventEmitter();
-
-    /**
-     * If view is loaded.
-     */
-    public isLoaded: boolean;
-
-    /**
-     * Profiles page.
-     */
-    private page: Page<Profile>;
-
-    /**
-     * The current page.
-     */
-    private currentPage: number;
-
-    /**
-     * Show/hide profiles pages.
-     */
-    private showProfiles: boolean;
-
-    /**
-     * Show/hide pageable.
-     */
-    private showPageable: boolean;
-
-    /**
-     * The prefix name filter.
-     */
-    private prefixName: string;
-
-
-
-    constructor(private _profileResource: ProfileResource,
-                private _ngbModal: NgbModal,
-                private _translate: TranslateService,
-                private _router: Router) {}
-
-    ngOnInit(): void {
-
-        this.isLoaded = false;
-        this.showProfiles = false;
-        this.prefixName = "";
-        this.loadProfiles(true);
-    }
-
-
-
-    /**
-     * Load profiles page.
-     *
-     * @param initPageNumber TRUE for force page number to 1
-     */
-    private loadProfiles(initPageNumber: boolean): void {
-
-        this.showProfiles = false;
-        if (initPageNumber)
-            this.currentPage = 1;
-
-        this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
-            response => {
-                this.page = response;
-                this.showProfiles = true;
-                this.isLoaded = true;
-                this.showPageable = this.page.totalPages > 1;
-            },
-            error => {
-
-                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
-
-                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
-                modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
-                modalRef.componentInstance.suggestions = undefined;
-                modalRef.componentInstance.error = errorAlert;
-                modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-                modalRef.componentInstance.showRetry = true;
-                modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
-
-                modalRef.result.then(
-                    () => { this.loadProfiles(true); },
-                    () => { this._router.navigateByUrl(HOME_PATH); }
-                );
-            }
-        );
-    }
-
-    /**
-     * Open modal for create new profile.
-     */
-    private createProfile(): void {
-
-        const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'lg' } );
-        modalRef.componentInstance.create = true;
-
-        modalRef.result.then(
-            () => { this.loadProfiles(true); },
-            () => { /* do nothing */ }
-        );
-    }
-
+	
+	/**
+	 * If can create/update/delete profile.
+	 */
+	@Input()
+	private canEdit: boolean;
+	
+	/**
+	 * If can select profile card.
+	 */
+	@Input()
+	private canSelect: boolean;
+	
+	/**
+	 * On select profile card.
+	 */
+	@Output()
+	private onSelect = new EventEmitter();
+	
+	/**
+	 * If view is loaded.
+	 */
+	public isLoaded: boolean;
+	
+	/**
+	 * Profiles page.
+	 */
+	private page: Page<Profile>;
+	
+	/**
+	 * The current page.
+	 */
+	private currentPage: number;
+	
+	/**
+	 * Show/hide profiles pages.
+	 */
+	private showProfiles: boolean;
+	
+	/**
+	 * Show/hide pageable.
+	 */
+	private showPageable: boolean;
+	
+	/**
+	 * The prefix name filter.
+	 */
+	private prefixName: string;
+	
+	
+	
+	constructor(private _profileResource: ProfileResource,
+				private _ngbModal: NgbModal,
+				private _translate: TranslateService,
+				private _router: Router) {}
+	
+	ngOnInit(): void {
+		
+		this.isLoaded = false;
+		this.showProfiles = false;
+		this.prefixName = "";
+		this.loadProfiles(true);
+	}
+	
+	
+	
+	/**
+	 * Load profiles page.
+	 *
+	 * @param initPageNumber TRUE for force page number to 1
+	 */
+	private loadProfiles(initPageNumber: boolean): void {
+		
+		this.showProfiles = false;
+		if (initPageNumber)
+			this.currentPage = 1;
+		
+		this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
+			response => {
+				this.page = response;
+				this.showProfiles = true;
+				this.isLoaded = true;
+				this.showPageable = this.page.totalPages > 1;
+			},
+			error => {
+				
+				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
+				modalRef.componentInstance.suggestions = undefined;
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = true;
+				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
+				
+				modalRef.result.then(
+					() => { this.loadProfiles(true); },
+					() => { this._router.navigateByUrl(HOME_PATH); }
+				);
+			}
+		);
+	}
+	
+	/**
+	 * Open modal for create new profile.
+	 */
+	private createProfile(): void {
+		
+		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'lg' } );
+		modalRef.componentInstance.create = true;
+		
+		modalRef.result.then(
+			() => { this.loadProfiles(true); },
+			() => { /* do nothing */ }
+		);
+	}
+	
 }

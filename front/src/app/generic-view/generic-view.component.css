@@ -1,32 +1,32 @@
 .home-view-video {
-    text-align: center;
-    background-color: black;
+	text-align: center;
+	background-color: black;
 }
 
 .home-view-video video {
-    width: 99%
+	width: 99%
 }
 
 .home-view-skip {
-    position: fixed;
-    bottom: 60px;
-    width: 10%;
-    right: 30px;
+	position: fixed;
+	bottom: 60px;
+	width: 10%;
+	right: 30px;
 }
 
 .home-view-skip button {
-    width: 200px;
-    padding: 10px;
-    border: none;
-    background: #222;
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    opacity: 0.7;
+	width: 200px;
+	padding: 10px;
+	border: none;
+	background: #222;
+	color: #fff;
+	cursor: pointer;
+	float: right;
+	opacity: 0.7;
 }
 
 .home-view-skip button:hover {
-    color: #fff;
-    background: #222;
-    opacity: 1;
+	color: #fff;
+	background: #222;
+	opacity: 1;
 }

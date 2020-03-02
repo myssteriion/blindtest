@@ -14,7 +14,7 @@ export interface Game {
 	effects: Effect[],
 	connectionMode: ConnectionMode,
 	listenedMusics?: ListenedMusics,
-
+	
 	nbMusicsPlayed: number,
 	nbMusicsPlayedInRound: number,
 	round: Round,

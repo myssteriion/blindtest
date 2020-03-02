@@ -15,74 +15,74 @@ import {ToolsService} from "../../../tools/tools.service";
 	]
 })
 export class CustomCountdownComponent implements OnInit {
-
+	
 	/**
 	 * The countdown config.
 	 */
 	@Input()
 	public countdownConfig: CountdownConfig;
-
+	
 	/**
 	 * The animation.
 	 */
 	@Input()
 	private animation: string;
-
+	
 	/**
 	 * Play sound on countdown.
 	 */
 	@Input()
 	private sound: boolean;
-
+	
 	/**
 	 * On event of the countdown.
 	 */
 	@Output()
 	private onEvent = new EventEmitter();
-
+	
 	/**
 	 * On end of the countdown.
 	 */
 	@Output()
 	private onEnd = new EventEmitter();
-
+	
 	/**
 	 * The countdown.
 	 */
 	@ViewChild("countdown", { static: false })
 	private countdown: CountdownComponent;
-
+	
 	/**
 	 * Countdown animation.
 	 */
 	public animationTriggerValue: string;
-
+	
 	/**
 	 * Show view.
 	 */
 	public show: boolean;
-
+	
 	/**
 	 * Css color.
 	 */
 	public color: string;
-
+	
 	public static BLUE_COLOR = "custom-countdown-frame-blue";
 	public static GREEN_COLOR = "custom-countdown-frame-green";
 	public static YELLOW_COLOR = "custom-countdown-frame-yellow";
 	public static RED_COLOR = "custom-countdown-frame-red";
-
-
-
+	
+	
+	
 	constructor() { }
-
+	
 	ngOnInit(): void {
 		this.show = false;
 		this.color = CustomCountdownComponent.BLUE_COLOR;
 	}
-
-
-
+	
+	
+	
 	/**
 	 * Sets show.
 	 *
@@ -91,7 +91,7 @@ export class CustomCountdownComponent implements OnInit {
 	public setShow(show: boolean): void {
 		this.show = show;
 	}
-
+	
 	/**
 	 * Start the countdown.
 	 */
@@ -99,42 +99,42 @@ export class CustomCountdownComponent implements OnInit {
 		this.countdown.restart();
 		this.countdown.begin();
 	}
-
+	
 	/**
 	 * Stop the countdown.
 	 */
 	public stop(): void {
 		this.countdown.stop();
 	}
-
+	
 	/**
 	 * The event callback. Send event on done.
 	 */
 	public async countdownEvent(event) {
-
+		
 		if (event.action === "done") {
 			this.onEnd.emit();
 		}
 		else if (event.action !== "restart") {
-
+			
 			this.onEvent.emit(event.text);
-
+			
 			if (this.animation === "reduction") {
 				this.animationTriggerValue = "big";
 				await ToolsService.sleep(100);
 			}
-
+			
 			if (this.sound) {
 				let audio = new Audio();
 				audio.src = COUNTDOWN_SOUND;
 				audio.load();
 				audio.play();
 			}
-
+			
 			this.animationTriggerValue = "normal";
 		}
 	}
-
+	
 	/**
 	 * Set color (default blue).
 	 *
@@ -143,5 +143,5 @@ export class CustomCountdownComponent implements OnInit {
 	public setColor(color: string) {
 		this.color = ( ToolsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
 	}
-
+	
 }

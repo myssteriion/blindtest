@@ -1,64 +1,64 @@
 .game-new-view-part {
-    padding: 0.5em 0;
-    margin: 0.5em 0;
+	padding: 0.5em 0;
+	margin: 0.5em 0;
 }
 
 .game-new-view-label {
-    margin: auto;
-    text-decoration: underline;
+	margin: auto;
+	text-decoration: underline;
 }
 
 .game-new-view-themes {
-    display: inline-block;
+	display: inline-block;
 }
 
 .game-new-view-theme-info {
-    margin:  10px 5px 0 5px;
-    border-radius: 10px;
-    box-shadow: 8px 8px 4px silver;
+	margin:  10px 5px 0 5px;
+	border-radius: 10px;
+	box-shadow: 8px 8px 4px silver;
 }
 
 .game-new-view-theme-info-img {
-    height: 6em;
-    width: 6em;
-    border: 1px solid black;
-    border-radius: 10px 10px 0 0;
-    background-color: white;
+	height: 6em;
+	width: 6em;
+	border: 1px solid black;
+	border-radius: 10px 10px 0 0;
+	background-color: white;
 }
 
 .game-new-view-effect-img {
-    height: 6em;
-    width: 6em;
-    margin: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 8px 8px 4px silver;
+	height: 6em;
+	width: 6em;
+	margin: 5px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 8px 8px 4px silver;
 }
 
 .game-new-view-theme-info-img:hover, .game-new-view-effect-img:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .game-new-view-theme-info-percent {
-    background-color: white;
-    border: 1px solid black;
-    border-top: none;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-    color: gray;
+	background-color: white;
+	border: 1px solid black;
+	border-top: none;
+	border-radius: 0 0 10px 10px;
+	text-align: center;
+	color: gray;
 }
 
 .game-new-view-inactive {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 .game-new-view-launch {
-    padding: 1em 0;
-    margin: 1em 0;
-    text-align: center;
+	padding: 1em 0;
+	margin: 1em 0;
+	text-align: center;
 }
 
 .game-new-view-profile-card, .game-new-view-profile-card-empty {
-    padding: 10px;
+	padding: 10px;
 }

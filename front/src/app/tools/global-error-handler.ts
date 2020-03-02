@@ -6,14 +6,14 @@ import {Injectable} from '@angular/core';
  */
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-
-    /**
-     * Catch all throw.
-     *
-     * @param error the error
-     */
-    handleError(error: any): void {
-        console.log("myError", error);
-    }
-
+	
+	/**
+	 * Catch all throw.
+	 *
+	 * @param error the error
+	 */
+	handleError(error: any): void {
+		console.log("myError", error);
+	}
+	
 }

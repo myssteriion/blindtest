@@ -9,15 +9,15 @@ import {Component, Input} from '@angular/core';
 	styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+	
 	/**
 	 * Title.
 	 */
 	@Input()
 	public title: string;
-
-
-
+	
+	
+	
 	constructor() { }
-
+	
 }

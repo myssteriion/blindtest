@@ -12,25 +12,25 @@ import {Page} from "../interfaces/base/page.interface";
  */
 @Injectable()
 export class MusicResource {
-
+	
 	/**
 	 * Rest path.
 	 */
 	private path = environment.baseBackendUrl + "/musics";
-
-
-
+	
+	
+	
 	constructor(private _http: HttpClient) { }
-
-
-
+	
+	
+	
 	/**
 	 * Compute themes info.
 	 */
 	public computeThemesInfo(): Observable< Page<ThemeInfo> > {
 		return this._http.get< Page<ThemeInfo> >(this.path + "/compute-themes-info");
 	}
-
+	
 	/**
 	 * Get random musics.
 	 *
@@ -40,12 +40,12 @@ export class MusicResource {
 	 * @param connectionMode  the connectionMode
 	 */
 	public random(sameProbability: boolean, themes: Theme[], effects: Effect[], connectionMode: ConnectionMode): Observable<Music> {
-
+		
 		let queryParam = "?connectionMode=" + connectionMode + "&sameProbability=" + sameProbability;
 		if ( !ToolsService.isNull(themes) )	queryParam += "&themes=" + themes;
 		if ( !ToolsService.isNull(effects) ) queryParam += "&effects=" + effects;
-
+		
 		return this._http.get<Music>(this.path + "/random" + queryParam);
 	}
-
+	
 }

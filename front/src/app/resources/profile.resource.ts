@@ -10,18 +10,18 @@ import {environment} from 'src/environments/environment';
  */
 @Injectable()
 export class ProfileResource {
-
+	
 	/**
 	 * Rest path.
 	 */
 	private path = environment.baseBackendUrl + "/profiles";
-
-
-
+	
+	
+	
 	constructor(private _http: HttpClient) { }
-
-
-
+	
+	
+	
 	/**
 	 * Create profile.
 	 *
@@ -30,7 +30,7 @@ export class ProfileResource {
 	public create(profile: Profile): Observable<Profile> {
 		return this._http.post<Profile>(this.path , profile);
 	}
-
+	
 	/**
 	 * Update profile.
 	 *
@@ -39,7 +39,7 @@ export class ProfileResource {
 	public update(profile: Profile): Observable<Profile> {
 		return this._http.put<Profile>(this.path + "/" + profile.id, profile);
 	}
-
+	
 	/**
 	 * Gets profiles pageable filtered by prefix name.
 	 *
@@ -47,15 +47,15 @@ export class ProfileResource {
 	 * @param pageNumber the page number
 	 */
 	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Profile> > {
-
+		
 		let params = new HttpParams();
 		params = params.set('prefixName', prefixName);
 		params = params.set('pageNumber', pageNumber.toString());
 		params = params.set('itemPerPage', environment.itemPerPageProfiles.toString());
-
+		
 		return this._http.get< Page<Profile> >( this.path, { params: params } );
 	}
-
+	
 	/**
 	 * Delete profile.
 	 *
@@ -64,5 +64,5 @@ export class ProfileResource {
 	public delete(profile: Profile): Observable<void> {
 		return this._http.delete<void>(this.path + "/" + profile.id);
 	}
-
+	
 }

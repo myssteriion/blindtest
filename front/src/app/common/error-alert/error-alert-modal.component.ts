@@ -10,115 +10,115 @@ import {ToolsService} from "../../tools/tools.service";
 	styleUrls: ['./error-alert-modal.component.css']
 })
 export class ErrorAlertModalComponent implements OnInit {
-
+	
 	/**
 	 * Text to show.
 	 */
 	@Input()
 	public text: string;
-
+	
 	/**
 	 * Suggestion to show.
 	 */
 	@Input()
 	private suggestions: string[];
-
+	
 	/**
 	 * The error.
 	 */
 	@Input()
 	private error: ErrorAlert;
-
+	
 	/**
 	 * Alert level (ERROR, WARN).
 	 */
 	@Input()
 	private level: string;
-
+	
 	/**
 	 * Show retry button.
 	 */
 	@Input()
 	public showRetry: boolean;
-
+	
 	/**
 	 * Button label for close.
 	 */
 	@Input()
 	public closeLabel: string;
-
+	
 	/**
 	 * Show error.
 	 */
 	public showError: boolean;
-
+	
 	/**
 	 * Error level.
 	 */
 	public static ERROR: string = "ERROR";
-
+	
 	/**
 	 * Warning level.
 	 */
 	public static WARNING: string = "WARNING";
-
-
-
+	
+	
+	
 	constructor(private _ngbActiveModal: NgbActiveModal,
 				private _translate: TranslateService) { }
-
+	
 	ngOnInit(): void {
 		this.showError = this.error.status === 0;
 	}
-
-
-
+	
+	
+	
 	/**
 	 * Gets css class for text.
 	 */
 	public getAlertClass(): string {
-
+		
 		let css = "";
-
+		
 		if (this.level === ErrorAlertModalComponent.ERROR)
 			css = "alert alert-danger";
 		else if (this.level === ErrorAlertModalComponent.WARNING)
 			css = "alert alert-warning";
-
+		
 		return css;
 	}
-
+	
 	/**
 	 * If show suggestions.
 	 */
 	public showSuggestions(): boolean {
 		return !ToolsService.isNull(this.suggestions) && this.suggestions.length > 0;
 	}
-
+	
 	/**
 	 * Gets label.
 	 */
 	public getShowMoreShowLessLabel(): string {
-
+		
 		let label = "COMMON.";
-
+		
 		label += (this.showError) ? "HIDE_DETAIL" : "SHOW_DETAIL";
-
+		
 		return this._translate.instant(label);
 	}
-
+	
 	/**
 	 * On retry.
 	 */
 	private retry(): void {
 		this._ngbActiveModal.close();
 	}
-
+	
 	/**
 	 * On close.
 	 */
 	public close(): void {
 		this._ngbActiveModal.dismiss();
 	}
-
+	
 }

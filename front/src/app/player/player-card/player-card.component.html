@@ -1,57 +1,57 @@
 <div class="row" [ngClass]="{'justify-content-start': rankOnRight, 'justify-content-end': !rankOnRight, 'player-card-player-opacity': displayOpacity}">
-
-    <!-- rank -->
-    <div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
-        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" matTooltip="{{ 'RANK.LAST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" matTooltip="{{ 'RANK.FOURTH' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" matTooltip="{{ 'RANK.THIRD' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" matTooltip="{{ 'RANK.SECOND' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" matTooltip="{{ 'RANK.FIRST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-    </div>
-
-    <!-- score -->
-    <div *ngIf="!rankOnRight" class="col-2 p-0 player-card-score">
-        <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
-             [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
-            {{ scoreToAdd }}
-        </div>
-        <ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
-    </div>
-
-    <!-- team -->
-    <fa-icon *ngIf="rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
-             @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
-    </fa-icon>
-
-
-
-    <!-- profile -->
-    <profile-card class="col-6 player-card-profile-card" [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
-
-
-
-    <!-- team -->
-    <fa-icon *ngIf="!rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
-             @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
-    </fa-icon>
-
-    <!-- score -->
-    <div *ngIf="rankOnRight" class="col-2 p-0 player-card-score">
-        <div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
-             [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
-            {{ scoreToAdd }}
-        </div>
-        <ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
-    </div>
-
-    <!-- rank -->
-    <div *ngIf="rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
-        <fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" matTooltip="{{ 'RANK.FIRST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" matTooltip="{{ 'RANK.SECOND' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" matTooltip="{{ 'RANK.THIRD' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" matTooltip="{{ 'RANK.FOURTH' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-        <fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" matTooltip="{{ 'RANK.LAST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
-    </div>
+	
+	<!-- rank -->
+	<div *ngIf="!rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
+		<fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" matTooltip="{{ 'RANK.LAST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" matTooltip="{{ 'RANK.FOURTH' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" matTooltip="{{ 'RANK.THIRD' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" matTooltip="{{ 'RANK.SECOND' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" matTooltip="{{ 'RANK.FIRST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+	</div>
+	
+	<!-- score -->
+	<div *ngIf="!rankOnRight" class="col-2 p-0 player-card-score">
+		<div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
+			 [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
+			{{ scoreToAdd }}
+		</div>
+		<ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+	</div>
+	
+	<!-- team -->
+	<fa-icon *ngIf="rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
+			 @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
+	</fa-icon>
+	
+	
+	
+	<!-- profile -->
+	<profile-card class="col-6 player-card-profile-card" [profile]="player.profile" [canEdit]="false" [canSelect]="false" [canDeselect]="false"></profile-card>
+	
+	
+	
+	<!-- team -->
+	<fa-icon *ngIf="!rankOnRight && showTeam()" class="col-1 player-card-team font-size-normal"
+			 @rankIconTrigger [ngClass]="getTeamClass()" [icon]="faUserFriends">
+	</fa-icon>
+	
+	<!-- score -->
+	<div *ngIf="rankOnRight" class="col-2 p-0 player-card-score">
+		<div *ngIf="showAddScore" class="player-card-add-score" @addScoreTrigger
+			 [ngClass]="{ 'player-card-add-score-green': scoreToAdd > 0, 'player-card-add-score-red': scoreToAdd < 0 }">
+			{{ scoreToAdd }}
+		</div>
+		<ng2-odometer class="font-size-normal" [number]="player.score" [format]="'( ddd)'"></ng2-odometer>
+	</div>
+	
+	<!-- rank -->
+	<div *ngIf="rankOnRight && showIcon()" class="col-3 p-0 font-size-normal player-card-rank">
+		<fa-icon *ngIf="showFirstMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-gold" matTooltip="{{ 'RANK.FIRST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showSecondMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-silver" matTooltip="{{ 'RANK.SECOND' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showThirdMedal()" @rankIconTrigger [icon]="faMedal" class="player-card-rank-bronze" matTooltip="{{ 'RANK.THIRD' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showCookie()" @rankIconTrigger [icon]="faCookieBite" class="player-card-rank-chocolate" matTooltip="{{ 'RANK.FOURTH' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+		<fa-icon *ngIf="showPoop()" @rankIconTrigger [icon]="faPoo" class="player-card-rank-poop" matTooltip="{{ 'RANK.LAST' | translate }}" matTooltipShowDelay="500" size="2x"></fa-icon>
+	</div>
 
 </div>
 

@@ -49,24 +49,24 @@ export const SPOTIFY_CONNECTION_PDF = "assets/docs/" + SPOTIFY_CONNECTION_PDF_NA
  * Path to "themes" in assets folder.
  */
 export const THEMES = [
-    {srcImg: "assets/images/themes/60.png", enumVal: Theme.ANNEES_60, tooltip: "THEMES.ANNEES_60"},
-    {srcImg: "assets/images/themes/70.png", enumVal: Theme.ANNEES_70, tooltip: "THEMES.ANNEES_70"},
-    {srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80, tooltip: "THEMES.ANNEES_80"},
-    {srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90, tooltip: "THEMES.ANNEES_90"},
-    {srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000, tooltip: "THEMES.ANNEES_2000"},
-    {srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010, tooltip: "THEMES.ANNEES_2010"},
-    {srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY, tooltip: "THEMES.DISNEY"},
-    {srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS"}
+	{srcImg: "assets/images/themes/60.png", enumVal: Theme.ANNEES_60, tooltip: "THEMES.ANNEES_60"},
+	{srcImg: "assets/images/themes/70.png", enumVal: Theme.ANNEES_70, tooltip: "THEMES.ANNEES_70"},
+	{srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80, tooltip: "THEMES.ANNEES_80"},
+	{srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90, tooltip: "THEMES.ANNEES_90"},
+	{srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000, tooltip: "THEMES.ANNEES_2000"},
+	{srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010, tooltip: "THEMES.ANNEES_2010"},
+	{srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY, tooltip: "THEMES.DISNEY"},
+	{srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS"}
 ];
 
 /**
  * Path to "effect" in assets folder.
  */
 export const EFFECTS = [
-    {srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE, tooltip: "EFFECTS.NONE"},
-    {srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW, tooltip: "EFFECTS.SLOW"},
-    {srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED, tooltip: "EFFECTS.SPEED"},
-    {srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX, tooltip: "EFFECTS.MIX"}
+	{srcImg: "assets/images/effects/cross.png", enumVal: Effect.NONE, tooltip: "EFFECTS.NONE"},
+	{srcImg: "assets/images/effects/slow.png", enumVal: Effect.SLOW, tooltip: "EFFECTS.SLOW"},
+	{srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED, tooltip: "EFFECTS.SPEED"},
+	{srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX, tooltip: "EFFECTS.MIX"}
 ];
 
 /**
@@ -98,35 +98,35 @@ export const RANKS_THIRD = "assets/images/ranks/third.png";
  * Translation animation.
  */
 export const SLIDE_ANIMATION =
-    trigger('flyInOut', [
-        state('in', style({transform: 'translateX(0)'})),
-        transition('void => *', [
-            style({transform: 'translateX(100%)'}),
-            animate(750)
-        ])
-    ]);
+	trigger('flyInOut', [
+		state('in', style({transform: 'translateX(0)'})),
+		transition('void => *', [
+			style({transform: 'translateX(100%)'}),
+			animate(750)
+		])
+	]);
 
 /**
  * Opacity animation.
  */
 export const OPACITY_ANIMATION =
-    trigger('opacityTrigger', [
-        transition(':enter', [
-            style({opacity: 0}),
-            animate('1s', style({opacity: 1})),
-        ])
-    ]);
+	trigger('opacityTrigger', [
+		transition(':enter', [
+			style({opacity: 0}),
+			animate('1s', style({opacity: 1})),
+		])
+	]);
 
 /**
  * Rank icon animation.
  */
 export const RANK_ICON_ANIMATION =
-    trigger('rankIconTrigger', [
-        transition(':enter', [
-            style({opacity: 0}),
-            animate('1s', style({opacity: 1})),
-        ])
-    ]);
+	trigger('rankIconTrigger', [
+		transition(':enter', [
+			style({opacity: 0}),
+			animate('1s', style({opacity: 1})),
+		])
+	]);
 
 /**
  * Add score during.
@@ -137,31 +137,31 @@ export const ADD_SCORE_DURING = 2000;
  * Rank icon animation.
  */
 export const ADD_SCORE_ANIMATION =
-    trigger('addScoreTrigger', [
-        transition(':leave', [
-            style({}),
-            animate('2s', style({opacity: 0, top: '-3em'})),
-        ])
-    ]);
+	trigger('addScoreTrigger', [
+		transition(':leave', [
+			style({}),
+			animate('2s', style({opacity: 0, top: '-3em'})),
+		])
+	]);
 
 /**
  * Reduction animation.
  */
 export const REDUCTION_ANIMATION =
-    trigger('reductionTrigger', [
-        state('big', style({transform: 'scale(3)'})),
-        state('normal', style({transform: 'scale(1)'})),
-        transition('big => normal', [animate(250)])
-    ]);
+	trigger('reductionTrigger', [
+		state('big', style({transform: 'scale(3)'})),
+		state('normal', style({transform: 'scale(1)'})),
+		transition('big => normal', [animate(250)])
+	]);
 
 /**
  * Route for the menu (button in view).
  */
 export const ROUTES_WITHOUT_HOME = [
-    {path: '/game/new', name: 'GAME.NEW_VIEW.TITLE'},
-    {path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE'},
-    {path: '/profiles', name: 'PROFILE.VIEW.TITLE'},
-    {path: '/statistics', name: 'STATISTICS.TITLE'},
+	{path: '/game/new', name: 'GAME.NEW_VIEW.TITLE'},
+	{path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE'},
+	{path: '/profiles', name: 'PROFILE.VIEW.TITLE'},
+	{path: '/statistics', name: 'STATISTICS.TITLE'},
 	{path: '/params', name: 'PARAMS_VIEW.TITLE'}
 ];
 

@@ -1,25 +1,25 @@
 <div class="container-fluid container-fluid-forced-marge" @flyInOut>
-
-    <!-- header -->
-    <header [title]="'HOME_VIEW.TITLE' | translate"></header>
-
-    <div class="row">
-
-        <!-- logo -->
-        <div class="col-4 home-view-logo">
-            <img src="{{ getLogo() }}">
-        </div>
-
-        <!-- links -->
-        <div class="col-8">
-            <div class="row justify-content-center">
-                <div class="col-5 home-view-link" *ngFor="let route of routes" [routerLink]="route.path">
-                    <button class="btn font-size-normal">{{ route.name | translate }}</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
+	
+	<!-- header -->
+	<header [title]="'HOME_VIEW.TITLE' | translate"></header>
+	
+	<div class="row">
+		
+		<!-- logo -->
+		<div class="col-4 home-view-logo">
+			<img src="{{ getLogo() }}">
+		</div>
+		
+		<!-- links -->
+		<div class="col-8">
+			<div class="row justify-content-center">
+				<div class="col-5 home-view-link" *ngFor="let route of routes" [routerLink]="route.path">
+					<button class="btn font-size-normal">{{ route.name | translate }}</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
 
 </div>
 

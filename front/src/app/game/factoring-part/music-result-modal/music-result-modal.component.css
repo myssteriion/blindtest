@@ -1,71 +1,71 @@
 .music-result-modal-header, .music-result-modal-body, .music-result-modal-footer {
-    margin: 1em;
+	margin: 1em;
 }
 
 .music-result-modal-header {
-    border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver;
 }
 
 .music-result-modal-footer {
-    border-top: 1px solid silver;
-    text-align: center;
+	border-top: 1px solid silver;
+	text-align: center;
 }
 
 .music-result-modal-footer button {
-    margin-top: 10px;
-    margin-left: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .music-result-modal-check-icon {
-    color: green;
+	color: green;
 }
 
 .music-result-modal-cross-icon {
-    color: red;
+	color: red;
 }
 
 
 
 .music-result-modal-table-div {
-    max-height: 45em;
+	max-height: 45em;
 }
 
 .music-result-modal-table-div table {
-    min-width: 100%;
+	min-width: 100%;
 }
 
 .music-result-modal-table-div table th {
-    text-align: center;
-    height: 3em;
-    background-color: #ffc066;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+	text-align: center;
+	height: 3em;
+	background-color: #ffc066;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }
 
 .music-result-modal-table-div table td {
-    text-align: center;
-    height: 2.4em;
+	text-align: center;
+	height: 2.4em;
 }
 
 .music-result-modal-table-odd {
-    background-color: #e6e6e6;
+	background-color: #e6e6e6;
 }
 
 
 
 .music-result-modal-music-name {
-    text-align: center;
-    font-weight: bold;
+	text-align: center;
+	font-weight: bold;
 }
 
 .music-result-modal-select {
-    margin-left: 25%;
-    width: 50%;
-    height: 75%;
-    font-size: 0.7em;
+	margin-left: 25%;
+	width: 50%;
+	height: 75%;
+	font-size: 0.7em;
 }
 
 .music-result-modal-lose-header {
-    min-width: 7em;
+	min-width: 7em;
 }

@@ -1,66 +1,66 @@
 .player-card-player-opacity {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 .player-card-add-score {
-    position: absolute;
-    z-index: 1;
-    top: -1em;
-    right: -0.1em;
-    font-size: 3em;
+	position: absolute;
+	z-index: 1;
+	top: -1em;
+	right: -0.1em;
+	font-size: 3em;
 }
 
 .player-card-add-score-green {
-    color: #11cd10;
+	color: #11cd10;
 }
 
 .player-card-add-score-red {
-    color: #ff430f;
+	color: #ff430f;
 }
 
 .player-card-rank {
-    margin: auto;
-    text-align: center;
+	margin: auto;
+	text-align: center;
 }
 
 .player-card-rank-gold {
-    color: gold;
+	color: gold;
 }
 
 .player-card-rank-silver {
-    color: silver;
+	color: silver;
 }
 
 .player-card-rank-bronze {
-    color: #ff9529;
+	color: #ff9529;
 }
 
 .player-card-rank-chocolate {
-    color: #7a3b1f;
+	color: #7a3b1f;
 }
 
 .player-card-rank-poop {
-    color: #c17920;
+	color: #c17920;
 }
 
 .player-card-rank-gold:hover, .player-card-rank-silver:hover, .player-card-rank-bronze:hover, .player-card-rank-chocolate:hover,
 .player-card-rank-poop:hover, .player-card-team {
-    cursor: auto;
+	cursor: auto;
 }
 
 .player-card-score {
-    border: 1px solid black;
-    background-color: white;
-    border-radius: 20px;
-    text-align: center;
-    margin: auto 0;
-    color: #17a2b8;
-    font-weight: bold;
-    box-shadow: 8px 8px 4px silver;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 20px;
+	text-align: center;
+	margin: auto 0;
+	color: #17a2b8;
+	font-weight: bold;
+	box-shadow: 8px 8px 4px silver;
 }
 
 .player-card-profile-card {
-    padding: 10px;
+	padding: 10px;
 }
 
 .player-card-team-0 { color: #00c900; }

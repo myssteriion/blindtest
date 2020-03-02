@@ -18,29 +18,29 @@ import {TranslateService} from '@ngx-translate/core';
 	]
 })
 export class GameResumeViewComponent implements OnInit {
-
+	
 	/**
 	 * The game id.
 	 */
 	public numGame: string;
-
-
-
+	
+	
+	
 	constructor(private _gameResource: GameResource,
 				private _router: Router,
 				private _toasterService: ToasterService,
 				private _translate: TranslateService) { }
-
+	
 	ngOnInit(): void {
 	}
-
-
-
+	
+	
+	
 	/**
 	 * Search game.
 	 */
 	public search(): void {
-
+		
 		if ( !this.gameNumIsNaN() ) {
 			this._gameResource.findById( Number(this.numGame) ).subscribe(
 				response => { this._router.navigateByUrl(GAME_PREFIX_PATH + response.id); },
@@ -48,7 +48,7 @@ export class GameResumeViewComponent implements OnInit {
 			);
 		}
 	}
-
+	
 	/**
 	 * Test if the numGame is a positive number.
 	 *
@@ -57,5 +57,5 @@ export class GameResumeViewComponent implements OnInit {
 	public gameNumIsNaN(): boolean {
 		return ToolsService.isNullOrEmpty(this.numGame) || isNaN( Number(this.numGame) ) || Number(this.numGame) < 0;
 	}
-
+	
 }

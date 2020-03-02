@@ -7,25 +7,25 @@ import {ToolsService} from "../../tools/tools.service";
 	styleUrls: ['./profile-card-empty.component.css']
 })
 export class ProfileCardEmptyComponent implements OnInit {
-
+	
 	/**
 	 * Name.
 	 */
 	@Input()
 	public name: string;
-
+	
 	/**
 	 * Event after click.
 	 */
 	@Output()
 	public onClick = new EventEmitter();
-
-
-
+	
+	
+	
 	constructor() { }
-
+	
 	ngOnInit(): void {
 		ToolsService.verifyStringValue("name", this.name);
 	}
-
+	
 }

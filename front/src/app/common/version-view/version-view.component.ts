@@ -10,14 +10,14 @@ import {environment} from "../../../environments/environment";
 	styleUrls: ['./version-view.component.css']
 })
 export class VersionViewComponent {
-
+	
 	/**
 	 * The version.
 	 */
 	public version: string = environment.version;
-
-
-
+	
+	
+	
 	constructor() { }
-
+	
 }

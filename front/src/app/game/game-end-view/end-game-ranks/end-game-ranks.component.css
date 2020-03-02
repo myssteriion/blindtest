@@ -1,14 +1,14 @@
 .end-game-ranks-first-second-third {
-    text-align: center;
+	text-align: center;
 }
 
 .end-game-ranks-first-second-third img {
-    height: 7em;
-    width: 7em;
+	height: 7em;
+	width: 7em;
 }
 
 .end-game-ranks-other-ranks {
-    border-top: 2px solid black;
-    margin-top: 1.5em;
-    padding-top: 1.5em;
+	border-top: 2px solid black;
+	margin-top: 1.5em;
+	padding-top: 1.5em;
 }

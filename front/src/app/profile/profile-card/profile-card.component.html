@@ -1,20 +1,20 @@
 <div class="row m-0 profile-card-profile-frame" [ngClass]="getBackgroundClass()" (click)="select()">
-
-    <!-- image -->
-    <div class="profile-card-avatar" [ngClass]="{'col-3': showIcons(), 'col-2': !showIcons()}">
-        <img src="{{ getFluxForImg() }}" />
-    </div>
-
-    <!-- name -->
-    <div class="profile-card-name font-size-small" [ngClass]="{'col-6': showIcons(), 'col-8': !showIcons()}">{{profile.name}}</div>
-
-    <!-- update/delete/deselect icons -->
-    <div *ngIf="showIcons()" class="col-3 profile-card-action-button">
-        <div>
-            <fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faEdit" (click)="edit()" matTooltip="{{ 'PROFILE.CARD.EDIT_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
-            <fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faTrashAlt" (click)="delete()" matTooltip="{{ 'PROFILE.CARD.DELETE_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
-            <fa-icon *ngIf="canDeselect" class="fa-icon-custom-hover-1" [icon]="faTimes" (click)="onDeselect.emit()" matTooltip="{{ 'PROFILE.CARD.DESELECT_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
-        </div>
-    </div>
+	
+	<!-- image -->
+	<div class="profile-card-avatar" [ngClass]="{'col-3': showIcons(), 'col-2': !showIcons()}">
+		<img src="{{ getFluxForImg() }}" />
+	</div>
+	
+	<!-- name -->
+	<div class="profile-card-name font-size-small" [ngClass]="{'col-6': showIcons(), 'col-8': !showIcons()}">{{profile.name}}</div>
+	
+	<!-- update/delete/deselect icons -->
+	<div *ngIf="showIcons()" class="col-3 profile-card-action-button">
+		<div>
+			<fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faEdit" (click)="edit()" matTooltip="{{ 'PROFILE.CARD.EDIT_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+			<fa-icon *ngIf="canEdit" class="fa-icon-custom-hover-1" [icon]="faTrashAlt" (click)="delete()" matTooltip="{{ 'PROFILE.CARD.DELETE_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+			<fa-icon *ngIf="canDeselect" class="fa-icon-custom-hover-1" [icon]="faTimes" (click)="onDeselect.emit()" matTooltip="{{ 'PROFILE.CARD.DESELECT_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+		</div>
+	</div>
 
 </div>

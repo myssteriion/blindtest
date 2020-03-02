@@ -13,23 +13,23 @@ import {LOGO, ROUTES_WITHOUT_HOME, SLIDE_ANIMATION} from "../tools/constant";
 	]
 })
 export class HomeViewComponent {
-
+	
 	/**
 	 * Routes (without home).
 	 */
 	public routes = ROUTES_WITHOUT_HOME;
-
-
-
+	
+	
+	
 	constructor() { }
-
-
-
+	
+	
+	
 	/**
 	 * Gets logo.
 	 */
 	public getLogo(): string {
 		return LOGO;
 	}
-
+	
 }

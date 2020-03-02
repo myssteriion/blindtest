@@ -10,28 +10,28 @@ import {TranslateService} from '@ngx-translate/core';
 	styleUrls: ['./end-game-ranks.component.css']
 })
 export class EndGameRanksComponent implements OnInit {
-
+	
 	/**
 	 * The game.
 	 */
 	@Input()
 	private game: Game;
-
+	
 	/**
 	 * The podium ranks.
 	 */
 	public podiumRank: number[];
-
-
-
+	
+	
+	
 	constructor(private _translate: TranslateService) { }
-
+	
 	ngOnInit(): void {
 		this.podiumRank = [1, 2, 3];
 	}
-
-
-
+	
+	
+	
 	/**
 	 * If rank had player.
 	 *
@@ -40,7 +40,7 @@ export class EndGameRanksComponent implements OnInit {
 	private hadPlayerByRank(rank: number): boolean {
 		return (this.game.players.filter(player => player.rank === rank).length) > 0;
 	}
-
+	
 	/**
 	 * Gets rank logo.
 	 *
@@ -55,7 +55,7 @@ export class EndGameRanksComponent implements OnInit {
 			default:    return ""
 		}
 	}
-
+	
 	/**
 	 * Gets rank tooltip.
 	 *
@@ -65,7 +65,7 @@ export class EndGameRanksComponent implements OnInit {
 	private getTooltipByRank(rank: number): string {
 		return this._translate.instant("RANK." + rank);
 	}
-
+	
 	/**
 	 * Gets players by ranks.
 	 *
@@ -75,25 +75,25 @@ export class EndGameRanksComponent implements OnInit {
 	private getPlayersByRank(rank: number): Player[] {
 		return this.game.players.filter(player => player.rank === rank);
 	}
-
+	
 	/**
 	 * Gets no-podium players.
 	 *
 	 * @return players list
 	 */
 	public getNoPodiumPlayers(): Player[] {
-
+		
 		let players: Player[] = [];
-
-        let noPodiumRank: number[] = [];
+		
+		let noPodiumRank: number[] = [];
 		for (let i: number = 4; i <= this.game.players.length; i++) {
-            noPodiumRank.push(i);
-        }
-
+			noPodiumRank.push(i);
+		}
+		
 		for (let rank of noPodiumRank)
 			players = players.concat( this.getPlayersByRank(rank) );
-
+		
 		return players;
 	}
-
+	
 }

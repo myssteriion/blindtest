@@ -11,23 +11,23 @@ import {Router} from '@angular/router';
 	styleUrls: ['./generic-view.component.css']
 })
 export class GenericViewComponent {
-
+	
 	constructor(private _router: Router) { }
-
-
-
+	
+	
+	
 	/**
 	 * Gets generic.
 	 */
 	public getGeneric(): string {
 		return GENERIC;
 	}
-
+	
 	/**
 	 * Stop generic.
 	 */
 	public stopGeneric(): void {
 		this._router.navigateByUrl(HOME_PATH);
 	}
-
+	
 }

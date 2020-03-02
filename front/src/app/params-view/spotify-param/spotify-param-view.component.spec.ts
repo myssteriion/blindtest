@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SpotifyParamViewComponent } from './spotify-param-view.component';
+import {SpotifyParamViewComponent} from './spotify-param-view.component';
 
 describe('SpotifyParamComponent', () => {
 	let component: SpotifyParamViewComponent;

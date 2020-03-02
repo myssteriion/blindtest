@@ -1,38 +1,38 @@
 .spotify-param-view-part, .spotify-param-view-buttons {
-    padding: 0.5em 0;
-    margin: 0.5em 0;
+	padding: 0.5em 0;
+	margin: 0.5em 0;
 }
 
 .spotify-param-view-label {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .spotify-param-view-no-padding {
-    padding: 0;
+	padding: 0;
 }
 
 .spotify-param-view-theme {
-    text-align: right;
+	text-align: right;
 }
 
 .spotify-param-view-theme-img {
-    height: 4em;
-    width: 4em;
-    margin: 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 8px 8px 4px silver;
+	height: 4em;
+	width: 4em;
+	margin: 5px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 8px 8px 4px silver;
 }
 
 .spotify-param-view-theme-img:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .spotify-param-view-buttons {
-    text-align: right;
+	text-align: right;
 }
 
 .spotify-param-view-buttons button {
-    margin-left: 1em;
+	margin-left: 1em;
 }

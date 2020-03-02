@@ -1,13 +1,13 @@
 .theme-effect-frame {
-    text-align: center;
+	text-align: center;
 }
 
 .theme-effect-frame img {
-    height: 8em;
-    width: 8em;
-    margin: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 8px 8px 4px silver;
+	height: 8em;
+	width: 8em;
+	margin: 10px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 8px 8px 4px silver;
 }

@@ -11,18 +11,18 @@ import {MusicResult} from '../interfaces/game/music.result.interface';
  */
 @Injectable()
 export class GameResource {
-
+	
 	/**
 	 * Rest path.
 	 */
 	private path = environment.baseBackendUrl + "/game";
-
-
-
+	
+	
+	
 	constructor(private _http: HttpClient) { }
-
-
-
+	
+	
+	
 	/**
 	 * Create new game.
 	 * @param newGame the new game
@@ -30,7 +30,7 @@ export class GameResource {
 	public newGame(newGame: NewGame): Observable<Game> {
 		return this._http.post<Game>(this.path, newGame);
 	}
-
+	
 	/**
 	 * Apply music result.
 	 * @param musicResult the music result
@@ -38,7 +38,7 @@ export class GameResource {
 	public apply(musicResult: MusicResult): Observable<Game> {
 		return this._http.post<Game>(this.path + "/apply", musicResult);
 	}
-
+	
 	/**
 	 * Find game by id.
 	 * @param id the id
@@ -46,5 +46,5 @@ export class GameResource {
 	public findById(id: number): Observable<Game> {
 		return this._http.get<Game>(this.path + "/" + id);
 	}
-
+	
 }

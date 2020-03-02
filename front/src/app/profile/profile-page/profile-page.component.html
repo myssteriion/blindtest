@@ -1,35 +1,35 @@
 <div *ngIf="isLoaded">
-
-    <!-- 1st line -> create button ; filter input ; pagination -->
-    <div class="row justify-content-center profile-page-line-one">
-        <div [ngClass]="{'col-3': canEdit, 'col-0': !canEdit}">
-            <button *ngIf="canEdit" class="btn btn-info font-size-normal box-shadow" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
-        </div>
-        <div [ngClass]="{'col-3': canEdit, 'col-6': !canEdit}">
-            <input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
-                   (ngModelChange)="loadProfiles(true)" maxlength="15">
-        </div>
-        <div *ngIf="showPageable" class="col-3">
-            <ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
-                            [collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5"
-                            (pageChange)="currentPage = $event; loadProfiles(false)" [(page)]="currentPage">
-            </ngb-pagination>
-        </div>
-    </div>
-
-    <!-- profiles page -->
-    <div *ngIf="showProfiles && !page.empty" class="row" @opacityTrigger>
-        <profile-card class="col-4 profile-page-profile-card" *ngFor="let profile of page.content" [profile]="profile"
-                      [canEdit]="canEdit" (onEdit)="loadProfiles(true)"
-                      [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)"
-                      [canDeselect]="false">
-        </profile-card>
-    </div>
-
-    <!-- no result -->
-    <div *ngIf="page.empty" class="row justify-content-center">
-        <div class="col-4 no-result-label font-size-normal alert alert-info">
-            <div>{{ 'COMMON.NO_RESULT' | translate }}</div>
-        </div>
-    </div>
+	
+	<!-- 1st line -> create button ; filter input ; pagination -->
+	<div class="row justify-content-center profile-page-line-one">
+		<div [ngClass]="{'col-3': canEdit, 'col-0': !canEdit}">
+			<button *ngIf="canEdit" class="btn btn-info font-size-normal box-shadow" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
+		</div>
+		<div [ngClass]="{'col-3': canEdit, 'col-6': !canEdit}">
+			<input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
+				   (ngModelChange)="loadProfiles(true)" maxlength="15">
+		</div>
+		<div *ngIf="showPageable" class="col-3">
+			<ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
+							[collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5"
+							(pageChange)="currentPage = $event; loadProfiles(false)" [(page)]="currentPage">
+			</ngb-pagination>
+		</div>
+	</div>
+	
+	<!-- profiles page -->
+	<div *ngIf="showProfiles && !page.empty" class="row" @opacityTrigger>
+		<profile-card class="col-4 profile-page-profile-card" *ngFor="let profile of page.content" [profile]="profile"
+					  [canEdit]="canEdit" (onEdit)="loadProfiles(true)"
+					  [canSelect]="canSelect" (onSelect)="onSelect.emit(profile)"
+					  [canDeselect]="false">
+		</profile-card>
+	</div>
+	
+	<!-- no result -->
+	<div *ngIf="page.empty" class="row justify-content-center">
+		<div class="col-4 no-result-label font-size-normal alert alert-info">
+			<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
+		</div>
+	</div>
 </div>

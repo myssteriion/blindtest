@@ -1,21 +1,21 @@
 <!-- modal header -->
 <div class="row choice-theme-modal-header">
-    <div class="col modal-title" [innerHTML]="'GAME.CHOICE_THEME_MODAL.TITLE' | translate : { 'playerName': playerName }"></div>
+	<div class="col modal-title" [innerHTML]="'GAME.CHOICE_THEME_MODAL.TITLE' | translate : { 'playerName': playerName }"></div>
 </div>
 
 
 <!-- modal body -->
 <div class="row choice-theme-modal-body">
-    <div class="col choice-theme-modal-themes">
-        <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="choice-theme-modal-img" [ngClass]="{ 'choice-theme-modal-img-active': (selectedTheme == theme.enumVal) }"
-             (click)="selectedTheme = theme.enumVal">
-    </div>
+	<div class="col choice-theme-modal-themes">
+		<img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="choice-theme-modal-img" [ngClass]="{ 'choice-theme-modal-img-active': (selectedTheme == theme.enumVal) }"
+			 (click)="selectedTheme = theme.enumVal">
+	</div>
 </div>
 
 
 <!-- modal footer -->
 <div class="row justify-content-center choice-theme-modal-footer">
-    <div class="col">
-        <button class="btn btn-success font-size-normal box-shadow" [disabled]="closeIsDisabled()" (click)="close()">{{ 'COMMON.VALID' | translate }}</button>
-    </div>
+	<div class="col">
+		<button class="btn btn-success font-size-normal box-shadow" [disabled]="closeIsDisabled()" (click)="close()">{{ 'COMMON.VALID' | translate }}</button>
+	</div>
 </div>
