@@ -27,19 +27,19 @@ import java.util.List;
  */
 @Service
 public class SpotifyService {
-
+    
     /**
      * The constant LOGGER.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SpotifyService.class);
-
+    
     /**
      * The spotify properties.
      */
     private SpotifyParamService spotifyParamService;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Spotify service.
      *
@@ -49,26 +49,28 @@ public class SpotifyService {
     public SpotifyService(SpotifyParamService spotifyParamService) {
         this.spotifyParamService = spotifyParamService;
     }
-
-
-
+    
+    
+    
     /**
      * Gets spotify api.
+     *
+     * @throws SpotifyException the spotify exception
      */
     private SpotifyApi getSpotifyApi() throws SpotifyException {
-
+        
         try {
-
+    
             SpotifyParamDTO spotifyParam = spotifyParamService.find();
-
+            
             SpotifyApi spotifyApi = new SpotifyApi.Builder()
                     .setClientId( spotifyParam.getClientId() )
                     .setClientSecret( spotifyParam.getClientSecret() )
                     .build();
-
+            
             ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
             spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
-
+            
             return spotifyApi;
         }
         catch (IOException | SpotifyWebApiException e) {
@@ -76,14 +78,14 @@ public class SpotifyService {
             throw new SpotifyException("Can't create spotify connection.", e);
         }
     }
-
+    
     /**
      * If the connection is ok.
      *
      * @return TRUE if the connection is ok, FALSE otherwise.
      */
     public boolean isConnected() {
-
+        
         try {
             return !CommonUtils.isNullOrEmpty( getSpotifyApi() );
         }
@@ -91,14 +93,16 @@ public class SpotifyService {
             return false;
         }
     }
-
+    
     /**
      * Test the connection.
+     *
+     * @throws SpotifyException the spotify exception
      */
     public void testConnection() throws SpotifyException {
         getSpotifyApi();
     }
-
+    
     /**
      * Gets musics by theme.
      *
@@ -107,44 +111,44 @@ public class SpotifyService {
      * @throws SpotifyException the spotify exception
      */
     public List<SpotifyMusic> getMusicsByTheme(Theme theme) throws SpotifyException {
-
+        
         try {
-
+            
             List<SpotifyMusic> spotifyMusics = new ArrayList<>();
-
+            
             String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             SpotifyApi spotifyApi = getSpotifyApi();
-
+            
             boolean hasNext = true;
             int currentOffset = 0;
             while (hasNext) {
-
+                
                 Paging<PlaylistTrack> page = spotifyApi.getPlaylistsTracks(playlistId).offset(currentOffset).limit(Constant.LIMIT).build().execute();
                 hasNext = !CommonUtils.isNullOrEmpty( page.getNext() );
                 currentOffset += Constant.LIMIT;
-
+                
                 for ( PlaylistTrack playlistTrack : page.getItems() ) {
-
+                    
                     Track track = playlistTrack.getTrack();
-
+                    
                     StringBuilder artists = new StringBuilder(track.getArtists()[0].getName());
                     for (int i = 1; i < track.getArtists().length; i++)
                         artists.append(Constant.FEAT).append(track.getArtists()[i].getName());
-
+                    
                     if ( CommonUtils.isNullOrEmpty(track.getPreviewUrl()) )
                         LOGGER.warn("The music haven't preview ('" + track.getId() + "', '" + theme + "'" + "', '" + track.getName() + "', '" + artists.toString() + "')");
                     else
                         spotifyMusics.add( new SpotifyMusic(track.getId(), track.getPreviewUrl(), artists.toString(), track.getName()) );
                 }
             }
-
+            
             return spotifyMusics;
         }
         catch (IOException | SpotifyWebApiException e) {
             throw new SpotifyException("Can't get tracks.", e);
         }
     }
-
+    
     /**
      * Test if the track exists in theme.
      *
@@ -154,26 +158,26 @@ public class SpotifyService {
      * @throws SpotifyException the spotify exception
      */
     public boolean trackExistsInTheme(String trackId, Theme theme) throws SpotifyException {
-
+        
         try {
-
+            
             boolean isFound = false;
-
+            
             String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             SpotifyApi spotifyApi = getSpotifyApi();
-
+            
             boolean hasNext = true;
             int currentOffset = 0;
             while (hasNext && !isFound) {
-
+                
                 Paging<PlaylistTrack> page = spotifyApi.getPlaylistsTracks(playlistId).offset(currentOffset).limit(Constant.LIMIT).build().execute();
                 hasNext = !CommonUtils.isNullOrEmpty( page.getNext() );
                 currentOffset += Constant.LIMIT;
-
+                
                 List<PlaylistTrack> list = Arrays.asList( page.getItems() );
                 isFound = list.stream().anyMatch( track -> track.getTrack().getId().equals(trackId) );
             }
-
+            
             return isFound;
         }
         catch (NotFoundException e) {
@@ -183,6 +187,64 @@ public class SpotifyService {
             throw new SpotifyException("Can't get track.", e);
         }
     }
-
+    
+    
+    
+    /**
+     * Test the connection with the param.
+     *
+     * @throws SpotifyException the spotify exception
+     */
+    public void testSpotifyParamConnection(SpotifyParamDTO spotifyParam) throws SpotifyException {
+        
+        CommonUtils.verifyValue("spotifyParam", spotifyParam);
+        
+        SpotifyApi spotifyApi = credentialTest(spotifyParam);
+        
+        for ( Theme theme : Theme.getSortedTheme() ) {
+            
+            if ( !spotifyParam.getPlaylistIds().containsKey(theme) )
+                throw new SpotifyException("playlist id is mandatory (theme: '" + theme + "').");
+                
+            String playlistId = spotifyParam.getPlaylistIds().get(theme);
+            if ( CommonUtils.isNullOrEmpty(playlistId) )
+                throw new SpotifyException("playlist id is mandatory (theme: '" + theme + "').");
+            
+            try {
+                spotifyApi.getPlaylist(playlistId).build().execute();
+            }
+            catch (IOException | SpotifyWebApiException e) {
+                throw new SpotifyException("Playlist id is not found (theme: '" + theme + "', id: '" + playlistId +"').", e);
+            }
+        }
+    }
+    
+    /**
+     * Credentials test.
+     *
+     * @param spotifyParam the spotifyParam
+     * @return the SpotifyApi if credentials are valid, throw otherwise.
+     * @throws SpotifyException the spotify exception
+     */
+    private SpotifyApi credentialTest(SpotifyParamDTO spotifyParam) throws SpotifyException {
+    
+        try {
+    
+            SpotifyApi spotifyApi = new SpotifyApi.Builder()
+                    .setClientId( spotifyParam.getClientId() )
+                    .setClientSecret( spotifyParam.getClientSecret() )
+                    .build();
+        
+            ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
+            spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
+            
+            return spotifyApi;
+        }
+        catch (IOException | SpotifyWebApiException e) {
+            LOGGER.warn("Can't create spotify connection.");
+            throw new SpotifyException("Login or password are incorrect.", e);
+        }
+    }
+    
 }
 

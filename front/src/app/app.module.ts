@@ -78,6 +78,7 @@ import {ProfileStatisticsResource} from "./resources/profile-statistics.resource
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
 import {SpotifyParamResource} from "./resources/spotify-param.resource";
+import {SpotifyResource} from "./resources/spotify.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -183,7 +184,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ToolsService,
 		ToasterService,
 		MusicResource,
-		SpotifyParamResource
+		SpotifyParamResource,
+        SpotifyResource
 	],
 	bootstrap: [AppComponent]
 })
