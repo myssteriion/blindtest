@@ -11,8 +11,8 @@
     padding: 0;
 }
 
-.spotify-param-view-themes {
-    display: inline-block;
+.spotify-param-view-theme {
+    text-align: right;
 }
 
 .spotify-param-view-theme-img {
@@ -27,4 +27,12 @@
 
 .spotify-param-view-theme-img:hover {
     cursor: pointer;
+}
+
+.spotify-param-view-buttons {
+    text-align: right;
+}
+
+.spotify-param-view-buttons button {
+    margin-left: 1em;
 }

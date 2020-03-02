@@ -22,30 +22,41 @@
 
 
     <!-- themes -->
-    <div class="row">
+    <div class="row spotify-param-view-part">
 
+        <!-- left column theme -->
         <div class="col">
             <div *ngFor="let theme of getSubListThemes(true)" class="row">
-                <div class="col-3">
+                <div class="col-3 spotify-param-view-theme">
                     <img src="{{ theme.srcImg }}" class="spotify-param-view-theme-img" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500">
                 </div>
-                <div class="col-8 spotify-param-view-no-padding">
+                <div class="col-7 spotify-param-view-no-padding">
                     <input class="form-control font-size-normal" [(ngModel)]="spotifyParams.playlistIds[theme.enumVal]">
                 </div>
             </div>
         </div>
 
+        <!-- right column theme -->
         <div class="col">
             <div *ngFor="let theme of getSubListThemes(false)" class="row">
-                <div class="col-3">
+                <div class="col-3 spotify-param-view-theme">
                     <img src="{{ theme.srcImg }}" class="spotify-param-view-theme-img" matTooltip="{{ theme.tooltip | translate }}" matTooltipShowDelay="500">
                 </div>
-                <div class="col-8 spotify-param-view-no-padding">
+                <div class="col-7 spotify-param-view-no-padding">
                     <input class="form-control font-size-normal" [(ngModel)]="spotifyParams.playlistIds[theme.enumVal]">
                 </div>
             </div>
         </div>
 
+    </div>
+
+
+    <!-- button -->
+    <div class="row spotify-param-view-buttons">
+        <div class="col-12">
+            <button class="btn btn-success font-size-normal box-shadow" (click)="save()">{{ 'COMMON.SAVE' | translate }} </button>
+            <button class="btn btn-info font-size-normal box-shadow" (click)="connectionTest()">{{ 'PARAMS_VIEW.SPOTIFY_PARAM_VIEW.TEST_LABEL' | translate }} </button>
+        </div>
     </div>
 
 </div>

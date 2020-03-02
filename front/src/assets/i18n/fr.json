@@ -37,9 +37,14 @@
         "SPOTIFY_PARAM_VIEW": {
             "TITLE": "Connexion Spotify",
             "FIND_SPOTIFY_PARAM_ERROR": "Impossible de récupérer le paramétrage Spotify.",
+            "SAVE_SPOTIFY_PARAM_ERROR": "Impossible d'enregsitrer le paramétrage Spotify.",
             "CLIENT_ID": "Login :",
             "CLIENT_SECRET": "Phrase secrète :",
-            "THEMES_LABEL": "Thèmes :"
+            "SAVE_LABEL": "Le paramétrage Spotify a été enregistré.",
+            "TEST_LABEL": "Tester la connexion",
+            "TEST_OK_LABEL": "Connection et playlists OK.",
+            "TEST_KO_LABEL": "Le test de connection a échoué.",
+            "TEST_KO_SUGGEST_LABEL": "Vérifier d'abord les login et phrase secrète, puis les Id des différentes playlist."
         }
     },
     "GAME": {
