@@ -20,7 +20,7 @@
     </div>
 
     <!-- tabs (rank & stats) -->
-    <mat-tab-group mat-stretch-tabs class="" (selectedTabChange)="onChangeTab($event)">
+    <mat-tab-group mat-stretch-tabs (selectedTabChange)="onChangeTab($event)">
 
         <mat-tab label="{{ 'GAME.END_VIEW.RANK_TAB_TITLE' | translate }}">
             <end-game-ranks [game]="game"></end-game-ranks>
