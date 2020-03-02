@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {SpotifyParam} from "../interfaces/dto/spotify-param.interface";
+import {SpotifyParam} from "../../interfaces/dto/spotify-param.interface";
 
 /**
  * SpotifyParam resource.

@@ -77,7 +77,7 @@ import {AvatarResource} from "./resources/avatar.resource";
 import {ProfileStatisticsResource} from "./resources/profile-statistics.resource";
 import {GameResource} from "./resources/game.resource";
 import {MusicResource} from "./resources/music.resource";
-import {SpotifyParamResource} from "./resources/spotify-param.resource";
+import {SpotifyParamResource} from "./resources/params/spotify-param.resource";
 import {SpotifyResource} from "./resources/spotify.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";

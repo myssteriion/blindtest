@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileResource} from "../../resources/profile.resource";
-import {SpotifyParamResource} from "../../resources/spotify-param.resource";
+import {SpotifyParamResource} from "../../resources/params/spotify-param.resource";
 import {SpotifyParam} from "../../interfaces/dto/spotify-param.interface";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
