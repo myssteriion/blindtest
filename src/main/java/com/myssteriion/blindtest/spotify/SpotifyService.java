@@ -53,33 +53,6 @@ public class SpotifyService {
     
     
     /**
-     * Gets spotify api.
-     *
-     * @throws SpotifyException the spotify exception
-     */
-    private SpotifyApi getSpotifyApi() throws SpotifyException {
-        
-        try {
-            
-            SpotifyParamDTO spotifyParam = spotifyParamService.find();
-            
-            SpotifyApi spotifyApi = new SpotifyApi.Builder()
-                    .setClientId( spotifyParam.getClientId() )
-                    .setClientSecret( spotifyParam.getClientSecret() )
-                    .build();
-            
-            ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
-            spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
-            
-            return spotifyApi;
-        }
-        catch (IOException | SpotifyWebApiException e) {
-            LOGGER.warn("Can't create spotify connection.");
-            throw new SpotifyException("Can't create spotify connection.", e);
-        }
-    }
-    
-    /**
      * If the connection is ok.
      *
      * @return TRUE if the connection is ok, FALSE otherwise.
@@ -116,8 +89,9 @@ public class SpotifyService {
             
             List<SpotifyMusic> spotifyMusics = new ArrayList<>();
             
-            String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             SpotifyApi spotifyApi = getSpotifyApi();
+            
+            String playlistId = spotifyParamService.find().getPlaylistIds().get(theme);
             
             boolean hasNext = true;
             int currentOffset = 0;
@@ -188,6 +162,45 @@ public class SpotifyService {
         }
     }
     
+    /**
+     * Gets spotify api.
+     *
+     * @throws SpotifyException the spotify exception
+     */
+    private SpotifyApi getSpotifyApi() throws SpotifyException {
+        return getSpotifyApi(null);
+    }
+    
+    /**
+     * Gets spotify api with param, or with the param in DB if param is null.
+     *
+     * @param spotifyParam the spotify param (can be null).
+     * @throws SpotifyException the spotify exception
+     */
+    private SpotifyApi getSpotifyApi(SpotifyParamDTO spotifyParam) throws SpotifyException {
+        
+        try {
+            
+            SpotifyParamDTO sParam = ( CommonUtils.isNullOrEmpty(spotifyParam) ) ? spotifyParamService.find() : spotifyParam;
+            
+            CommonUtils.verifyValue( "clientId", sParam.getClientId() );
+            CommonUtils.verifyValue( "clientSecret", sParam.getClientSecret() );
+            
+            SpotifyApi spotifyApi = new SpotifyApi.Builder()
+                    .setClientId( sParam.getClientId() )
+                    .setClientSecret( sParam.getClientSecret() )
+                    .build();
+            
+            ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
+            spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
+            
+            return spotifyApi;
+        }
+        catch (IOException | SpotifyWebApiException | IllegalArgumentException e) {
+            LOGGER.warn("Can't create spotify connection.");
+            throw new SpotifyException("Can't create spotify connection.", e);
+        }
+    }
     
     
     /**
@@ -199,7 +212,7 @@ public class SpotifyService {
         
         CommonUtils.verifyValue("spotifyParam", spotifyParam);
         
-        SpotifyApi spotifyApi = credentialTest(spotifyParam);
+        SpotifyApi spotifyApi = getSpotifyApi(spotifyParam);
         
         for ( Theme theme : Theme.getSortedTheme() ) {
             
@@ -216,33 +229,6 @@ public class SpotifyService {
             catch (IOException | SpotifyWebApiException e) {
                 throw new SpotifyException("Playlist id is not found (theme: '" + theme + "', id: '" + playlistId +"').", e);
             }
-        }
-    }
-    
-    /**
-     * Credentials test.
-     *
-     * @param spotifyParam the spotifyParam
-     * @return the SpotifyApi if credentials are valid, throw otherwise.
-     * @throws SpotifyException the spotify exception
-     */
-    private SpotifyApi credentialTest(SpotifyParamDTO spotifyParam) throws SpotifyException {
-        
-        try {
-            
-            SpotifyApi spotifyApi = new SpotifyApi.Builder()
-                    .setClientId( spotifyParam.getClientId() )
-                    .setClientSecret( spotifyParam.getClientSecret() )
-                    .build();
-            
-            ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
-            spotifyApi.setAccessToken( clientCredentialsRequest.execute().getAccessToken() );
-            
-            return spotifyApi;
-        }
-        catch (IOException | SpotifyWebApiException e) {
-            LOGGER.warn("Can't create spotify connection.");
-            throw new SpotifyException("Login or password are incorrect.", e);
         }
     }
     
