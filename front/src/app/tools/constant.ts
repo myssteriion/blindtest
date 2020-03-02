@@ -36,6 +36,16 @@ export const OLYMPIA_ANTHEM_SOUND = "assets/sounds/olympia_anthem.mp3";
 export const GENERIC = "assets/videos/generic.mp4";
 
 /**
+ * Name of "connexion-spotify" pdf.
+ */
+export const SPOTIFY_CONNECTION_PDF_NAME = "connexion-spotify-V1.0.pdf";
+
+/**
+ * Path to "connexion-spotify" pdf in assets folder.
+ */
+export const SPOTIFY_CONNECTION_PDF = "assets/docs/" + SPOTIFY_CONNECTION_PDF_NAME;
+
+/**
  * Path to "themes" in assets folder.
  */
 export const THEMES = [

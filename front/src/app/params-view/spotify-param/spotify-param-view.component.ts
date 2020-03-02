@@ -6,11 +6,14 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateService} from "@ngx-translate/core";
-import {HOME_PATH, THEMES} from "../../tools/constant";
+import {HOME_PATH, SPOTIFY_CONNECTION_PDF, SPOTIFY_CONNECTION_PDF_NAME, THEMES} from "../../tools/constant";
 import {Router} from "@angular/router";
 import {faEye, faEyeSlash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {ToasterService} from "../../services/toaster.service";
 import {SpotifyResource} from "../../resources/spotify.resource";
+
+declare var require: any;
+const FileSaver = require('file-saver');
 
 @Component({
     selector: 'spotify-param-view',
@@ -175,6 +178,13 @@ export class SpotifyParamViewComponent implements OnInit {
             }
         );
         
+    }
+    
+    /**
+     * Download the "connection spotify" pdf.
+     */
+    public downloadSpotifyConnectionDoc() {
+        FileSaver.saveAs(SPOTIFY_CONNECTION_PDF, SPOTIFY_CONNECTION_PDF_NAME);
     }
     
 }
