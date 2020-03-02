@@ -61,8 +61,8 @@ export class ProfileResource {
 	 *
 	 * @param profile the profile
 	 */
-	public delete(profile: Profile): Observable<Page<Profile>> {
-		return this._http.delete< Page<Profile> >(this.path + "/" + profile.id);
+	public delete(profile: Profile): Observable<void> {
+		return this._http.delete<void>(this.path + "/" + profile.id);
 	}
 
 }

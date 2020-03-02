@@ -26,7 +26,7 @@ export class ProfileStatisticsResource {
      *
      * @param profiles list of profiles
      */
-    public getStatisticsForProfile(profiles): Observable<Page<ProfileStatistics>> {
+    public getStatisticsForProfile(profiles): Observable< Page<ProfileStatistics> > {
         let query = "";
         profiles.forEach(profile => {
             query = query + profile.id + ',';
