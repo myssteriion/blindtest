@@ -36,3 +36,8 @@
 .spotify-param-view-buttons button {
 	margin-left: 1em;
 }
+
+.spotify-param-view-remember-record {
+    color: orangered;
+    text-align: center;
+}

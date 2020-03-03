@@ -25,7 +25,8 @@
         "GO_HOME": "Retour au menu",
         "CANCEL_MODIFICATION": "Annuler la modification en cours",
         "RANK": "n° rang",
-        "HELP_DL": "Télécharger l'aide"
+        "HELP_DL": "Télécharger l'aide",
+        "REMEMBER_TO_RECORD": "Pensez à enregistrer les modifications."
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"
