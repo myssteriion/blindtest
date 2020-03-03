@@ -69,27 +69,33 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
     
     
     private SpotifyParamDTO encrypt(SpotifyParamDTO dto) {
+    
+        SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO();
+        spotifyParamEncrypted.setId( dto.getId() );
         
-        dto.setClientId( CommonUtils.STRING_CIPHER.encrypt(dto.getClientId()) );
-        dto.setClientSecret( CommonUtils.STRING_CIPHER.encrypt(dto.getClientSecret()) );
+        spotifyParamEncrypted.setClientId( CommonUtils.STRING_CIPHER.encrypt(dto.getClientId()) );
+        spotifyParamEncrypted.setClientSecret( CommonUtils.STRING_CIPHER.encrypt(dto.getClientSecret()) );
         
         Map<Theme, String> map = dto.getPlaylistIds();
         for ( Theme theme : map.keySet() )
-            map.put( theme, CommonUtils.STRING_CIPHER.encrypt(map.get(theme)) );
+            spotifyParamEncrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.encrypt(map.get(theme)) );
         
-        return dto;
+        return spotifyParamEncrypted;
     }
     
     private SpotifyParamDTO decrypt(SpotifyParamDTO dto) {
+    
+        SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO();
+        spotifyParamDecrypted.setId( dto.getId() );
         
-        dto.setClientId( CommonUtils.STRING_CIPHER.decrypt(dto.getClientId()) );
-        dto.setClientSecret( CommonUtils.STRING_CIPHER.decrypt(dto.getClientSecret()) );
+        spotifyParamDecrypted.setClientId( CommonUtils.STRING_CIPHER.decrypt(dto.getClientId()) );
+        spotifyParamDecrypted.setClientSecret( CommonUtils.STRING_CIPHER.decrypt(dto.getClientSecret()) );
         
         Map<Theme, String> map = dto.getPlaylistIds();
         for ( Theme theme : map.keySet() )
-            map.put( theme, CommonUtils.STRING_CIPHER.decrypt(map.get(theme)) );
+            spotifyParamDecrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.decrypt(map.get(theme)) );
         
-        return dto;
+        return spotifyParamDecrypted;
     }
     
 }
