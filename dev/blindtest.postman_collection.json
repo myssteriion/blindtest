@@ -2304,103 +2304,103 @@
 	],
 	"variable": [
 		{
-			"id": "d24fb084-37f2-4a11-9f3f-b7df10341152",
+			"id": "344cb429-0c84-46f3-b023-756111d910c4",
 			"key": "port",
-			"value": "9501",
+			"value": "9500",
 			"type": "string"
 		},
 		{
-			"id": "a559c5b5-0b40-47ce-859e-a3d5274b1904",
+			"id": "89e61680-4399-4902-a0ff-33f4e62c9803",
 			"key": "applicationContext",
 			"value": "musics-blindtest",
 			"type": "string"
 		},
 		{
-			"id": "1a79cf14-6d4b-4a9a-b48f-c961c1d404f1",
+			"id": "811c9db3-eac6-4ded-93d5-a9509dbdd476",
 			"key": "gameId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "06316940-15b4-4100-a494-6cde160abfc0",
+			"id": "9acb1104-e291-490d-9724-d653df2c84ed",
 			"key": "60s",
 			"value": "ANNEES_60",
 			"type": "string"
 		},
 		{
-			"id": "9ebbba73-2bcc-4ae7-ae25-69b4b7ac0485",
+			"id": "2d350aef-1b2f-4924-88ce-eaaa132e28d2",
 			"key": "70s",
 			"value": "ANNEES_70",
 			"type": "string"
 		},
 		{
-			"id": "53a2640d-1441-4c27-8a8d-ca748030edef",
+			"id": "9b4207e1-d0bb-4efa-840e-c77a107f53b4",
 			"key": "80s",
 			"value": "ANNEES_80",
 			"type": "string"
 		},
 		{
-			"id": "e993df01-3d8b-411e-bb83-fa4c3621dd4d",
+			"id": "839840e6-885b-4bf9-99a6-ecd1ed564f2e",
 			"key": "90s",
 			"value": "ANNEES_90",
 			"type": "string"
 		},
 		{
-			"id": "678fe7c7-2712-4cb3-9830-4f9c7154f90d",
+			"id": "456aab34-8ec2-4ef3-b738-75827ae2d7e7",
 			"key": "00s",
 			"value": "ANNEES_2000",
 			"type": "string"
 		},
 		{
-			"id": "268dfb98-1c2d-45ed-a0e8-b3109d66dfc1",
+			"id": "d1f91553-da87-4122-a48f-644b8ae7ea95",
 			"key": "10s",
 			"value": "ANNEES_2010",
 			"type": "string"
 		},
 		{
-			"id": "d7a53abe-5fc6-4828-92cb-b025980b4d61",
+			"id": "2939afac-de57-45b2-9112-bd8ab7372d0f",
 			"key": "cinema",
 			"value": "SERIES_CINEMAS",
 			"type": "string"
 		},
 		{
-			"id": "2d01f0d1-8572-4822-8d1a-29aa08873b42",
+			"id": "05816fc0-1694-40a7-9296-54cd1d590c13",
 			"key": "disney",
 			"value": "DISNEY",
 			"type": "string"
 		},
 		{
-			"id": "06c709e8-d765-4676-a0c3-6492f3e5862a",
+			"id": "2267c617-c34d-4870-bfba-83fe1b777473",
 			"key": "player1",
 			"value": "Darkana",
 			"type": "string"
 		},
 		{
-			"id": "fe763d57-c846-44f0-b0a7-16f417051451",
+			"id": "72319e52-97bd-424a-b6cb-37652b2b4e3e",
 			"key": "player2",
 			"value": "Despacito",
 			"type": "string"
 		},
 		{
-			"id": "d019ce9f-0262-4cd3-8470-1f2181334972",
+			"id": "8bbdf083-a541-4461-b4f3-081a89639050",
 			"key": "player3",
 			"value": "Myssteriion",
 			"type": "string"
 		},
 		{
-			"id": "99f0ee93-7d76-4b67-89e5-00cf2582a004",
+			"id": "650a00ac-bbfd-49cb-bbef-e9bd8821ad12",
 			"key": "player4",
 			"value": "LinC",
 			"type": "string"
 		},
 		{
-			"id": "c0b2356d-ffaf-45ee-a0e4-b000a1d08a50",
+			"id": "93f9f6f7-b355-48b7-9675-09ed9b38822e",
 			"key": "music",
 			"value": "Taxi.mp3",
 			"type": "string"
 		},
 		{
-			"id": "9086e1ea-2222-4f31-87f2-5c2fe23ca2df",
+			"id": "3a5bd8fe-d4f1-4c0b-9e8a-bf066fc514e3",
 			"key": "onlineMode",
 			"value": "OFFLINE",
 			"type": "string"
