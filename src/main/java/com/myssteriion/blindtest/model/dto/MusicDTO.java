@@ -4,10 +4,13 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
+import com.myssteriion.blindtest.persistence.converter.ConnectionModeConverter;
+import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -35,6 +38,7 @@ public class MusicDTO extends AbstractDTO {
      * The theme.
      */
     @Column(name = "theme", nullable = false)
+    @Convert(converter = ThemeConverter.class)
     private Theme theme;
     
     /**
@@ -47,6 +51,7 @@ public class MusicDTO extends AbstractDTO {
      * The connection mode.
      */
     @Column(name = "connection_mode", nullable = false)
+    @Convert(converter = ConnectionModeConverter.class)
     private ConnectionMode connectionMode;
     
     /**
