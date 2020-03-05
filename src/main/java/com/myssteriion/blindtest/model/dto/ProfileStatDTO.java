@@ -49,7 +49,10 @@ public class ProfileStatDTO extends AbstractDTO {
     private Map<Duration, Integer> bestScores;
     
     /**
-     * The number of game won. (the key is Integer).
+     * The number of game won by rank.
+     */
+    /*
+     * La clé est un String car en JSON ca ne peut pas être un Integer -> mais ca reste parsable.
      */
     @Column(name = "won_games", nullable = false, length = 500)
     @Convert(converter = StringIntegerMapConverter.class)
