@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
 /**
@@ -32,6 +33,7 @@ public class ProfileDTO extends AbstractDTO {
      * The background (card color).
      */
     @Column(name = "background", nullable = false)
+    @PositiveOrZero(message = "Background can't be negative.")
     private Integer background;
     
     /**

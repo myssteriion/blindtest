@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
 /**
@@ -45,6 +46,7 @@ public class MusicDTO extends AbstractDTO {
      * The number of played.
      */
     @Column(name = "played", nullable = false)
+    @PositiveOrZero(message = "Played can't be negative.")
     private int played;
     
     /**
