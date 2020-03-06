@@ -2,7 +2,7 @@
  * NewGame.
  */
 export interface NewGame {
-	playersNames: string[],
+	profilesId: number[],
 	duration: Duration,
 	sameProbability: boolean,
 	themes: Theme[],

@@ -48,9 +48,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     );
     
     protected static final List<ProfileDTO> PROFILES_LIST = Arrays.asList(
-            new ProfileDTO("name1"),
-            new ProfileDTO("name2"),
-            new ProfileDTO("name3")
+            (ProfileDTO) new ProfileDTO("name1").setId(0),
+            (ProfileDTO) new ProfileDTO("name2").setId(1),
+            (ProfileDTO) new ProfileDTO("name3").setId(2)
     );
     
     

@@ -40,13 +40,13 @@ public class GameControllerTest extends AbstractTest {
     @Test
     public void newGame() throws NotFoundException, SpotifyException {
         
-        String playerName = "name";
+        Integer profileId = 0;
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
         Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
         
-        NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(playerName)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(profileId)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         
         ResponseEntity<Game> re = gameController.newGame(newGame);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );

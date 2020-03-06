@@ -74,7 +74,7 @@ public class GameService {
         if ( newGame.getConnectionMode().isNeedConnection() )
             spotifyService.testConnection();
         
-        Game game = new Game( cratePlayersList(newGame.getPlayersNames()), newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
+        Game game = new Game( cratePlayersList(newGame.getProfilesId()), newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
         game.setId( findNextId() );
         
         games.add(game);
@@ -101,19 +101,19 @@ public class GameService {
     /**
      * Create players list.
      *
-     * @param playersNames the players names list
+     * @param profilesId the profiles id
      * @return the players list
      * @throws NotFoundException the not found exception
      */
-    private Set<Player> cratePlayersList(Set<String> playersNames) throws NotFoundException {
+    private Set<Player> cratePlayersList(Set<Integer> profilesId) throws NotFoundException {
         
         Set<Player> players = new HashSet<>();
         
-        for (String playerName : playersNames) {
+        for (Integer profileId : profilesId) {
             
-            ProfileDTO profile = profileService.find(new ProfileDTO(playerName));
+            ProfileDTO profile = profileService.find( (ProfileDTO) new ProfileDTO().setId(profileId) );
             if (profile == null)
-                throw new NotFoundException("Player '" + playerName + "' must have a profile.");
+                throw new NotFoundException("Profile '" + profileId + "' not found.");
             
             players.add( new Player(profile) );
         }

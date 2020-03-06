@@ -50,14 +50,16 @@ public class GameServiceTest extends AbstractTest {
     @Test
     public void newGame() throws NotFoundException, SpotifyException {
         
-        ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
-        ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
-        Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(null, profileDto);
-        Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
+        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("name", "avatarName").setId(0);
+        ProfileDTO profileDto1 = (ProfileDTO) new ProfileDTO("name1", "avatarName").setId(1);
+        Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenReturn(null).thenAnswer(invocation -> {
+            ProfileDTO p = invocation.getArgument(0);
+            return ( p.getId().equals(0) ) ? profileDto : profileDto1;
+        });
         Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(0, 10);
         
-        List<String> playersNames = Arrays.asList("name", "name1");
+        List<Integer> profilesId = Arrays.asList(0, 1);
         
         try {
             gameService.newGame(null);
@@ -68,7 +70,7 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, Collections.singletonList(Theme.ANNEES_60), null, ConnectionMode.OFFLINE) );
+            gameService.newGame( new NewGame(new HashSet<>(profilesId), Duration.NORMAL, false, Collections.singletonList(Theme.ANNEES_60), null, ConnectionMode.OFFLINE) );
             Assert.fail("Doit lever une NotFoundException car un mock (musicService) return 0.");
         }
         catch (NotFoundException e) {
@@ -76,23 +78,23 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
+            gameService.newGame( new NewGame(new HashSet<>(profilesId), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
             Assert.fail("Doit lever une NotFoundException car un param est KO.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Player 'name' must have a profile."), e);
+            TestUtils.verifyException(new NotFoundException("Profile '0' not found."), e);
         }
         
         
         
-        Game game = gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
-        Assert.assertEquals( playersNames.size(), game.getPlayers().size() );
+        Game game = gameService.newGame( new NewGame(new HashSet<>(profilesId), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
+        Assert.assertEquals( profilesId.size(), game.getPlayers().size() );
         
-        game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
+        game = gameService.newGame( new NewGame(new HashSet<>(Arrays.asList(0, 1)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
         Assert.assertEquals( 2, game.getPlayers().size() );
         
         try {
-            gameService.newGame( new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.ONLINE) );
+            gameService.newGame( new NewGame(new HashSet<>(Arrays.asList(0, 1)), Duration.NORMAL, false, null, null, ConnectionMode.ONLINE) );
             Assert.fail("Doit lever une car la connection spotify est KO.");
         }
         catch (SpotifyException e) {
@@ -116,11 +118,20 @@ public class GameServiceTest extends AbstractTest {
         Mockito.doNothing().when(musicService).refresh();
         Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, music2, music);
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
-        Mockito.when(profileService.find( new ProfileDTO("name") )).thenReturn(profile);
-        Mockito.when(profileService.find( new ProfileDTO("name1") )).thenReturn(profile1);
-        Mockito.when(profileService.find( new ProfileDTO("name2") )).thenReturn(profile2);
+    
+        ProfileDTO finalProfile = profile;
+        ProfileDTO finalProfile1 = profile1;
+        ProfileDTO finalProfile2 = profile2;
+        Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenAnswer(invocation -> {
+            ProfileDTO p = invocation.getArgument(0);
+            switch ( p.getId() ) {
+                case 1: return finalProfile;
+                case 2: return finalProfile1;
+                default: return finalProfile2;
+            }
+        });
         
-        List<String> playersNames = Arrays.asList("name", "name1", "name2");
+        List<Integer> profilesId = Arrays.asList(0, 1, 2);
         MusicResult musicResult = new MusicResult( 0, music,
                 Collections.singletonList(profile.getName()), null,
                 Collections.singletonList(profile.getName()), null);
@@ -143,7 +154,7 @@ public class GameServiceTest extends AbstractTest {
         }
         
         
-        gameService.newGame( new NewGame(new HashSet<>(playersNames), Duration.NORMAL, false, Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE) );
+        gameService.newGame( new NewGame(new HashSet<>(profilesId), Duration.NORMAL, false, Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE) );
         
         
         try {
@@ -394,13 +405,15 @@ public class GameServiceTest extends AbstractTest {
         }
         
         
-        ProfileDTO profileDto = new ProfileDTO("name", "avatarName");
-        ProfileDTO profileDto1 = new ProfileDTO("name1", "avatarName");
-        Mockito.when(profileService.find(new ProfileDTO("name"))).thenReturn(profileDto);
-        Mockito.when(profileService.find(new ProfileDTO("name1"))).thenReturn(profileDto1);
+        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("name", "avatarName").setId(1);
+        ProfileDTO profileDto1 = (ProfileDTO) new ProfileDTO("name1", "avatarName").setId(2);
+        Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenAnswer(invocation -> {
+            ProfileDTO p = invocation.getArgument(0);
+            return ( p.getId().equals(1) ) ? profileDto : profileDto1;
+        });
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
         
-        NewGame ng = new NewGame(new HashSet<>(Arrays.asList("name", "name1")), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        NewGame ng = new NewGame(new HashSet<>(Arrays.asList(0, 1)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         Game expected = gameService.newGame(ng);
         
         Game actual = gameService.findGame(expected.getId());

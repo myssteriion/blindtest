@@ -366,14 +366,14 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	public launchGame(): void {
 		
-		let playersNames: string[] = [];
+		let profilesId: number[] = [];
 		this.playersProfiles.forEach( function (profile) {
-			playersNames.push(profile.name);
+			profilesId.push(profile.id);
 		});
 		
 		let newGame: NewGame = {
 			duration: this.selectedDuration,
-			playersNames: playersNames,
+			profilesId: profilesId,
 			sameProbability: this.sameProbability,
 			themes: this.selectedThemes,
 			effects: this.selectedEffect,

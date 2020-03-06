@@ -50,10 +50,10 @@ public class IntegrationTest extends AbstractIntegrationTest {
     @Test
     public void testShortGame() throws NotFoundException, SpotifyException, ConflictException {
         
-        Set<String> playersNames = PROFILES_LIST.stream().map(ProfileDTO::getName).collect(Collectors.toSet());
+        Set<Integer> profilesId = PROFILES_LIST.stream().map(ProfileDTO::getId).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
         
-        NewGame newGame = new NewGame(playersNames, duration, false, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), Arrays.asList(Effect.NONE, Effect.SPEED), ConnectionMode.OFFLINE);
+        NewGame newGame = new NewGame(profilesId, duration, false, Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000), Arrays.asList(Effect.NONE, Effect.SPEED), ConnectionMode.OFFLINE);
         Game game = gameService.newGame(newGame);
         
         

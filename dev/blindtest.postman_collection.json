@@ -283,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playersNames\": [ \"Darkana\", \"Jean\", \"Despacito\" ],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": false,\n\t\"themes\": [\"ANNEES_60\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
+							"raw": "{\n\t\"profilesId\": [ 4, 1, 12 ],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": false,\n\t\"themes\": [\"ANNEES_60\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2304,103 +2304,103 @@
 	],
 	"variable": [
 		{
-			"id": "344cb429-0c84-46f3-b023-756111d910c4",
+			"id": "a5088e64-6fed-40bf-ab55-3a0c5e1b8873",
 			"key": "port",
 			"value": "9500",
 			"type": "string"
 		},
 		{
-			"id": "89e61680-4399-4902-a0ff-33f4e62c9803",
+			"id": "76fa6986-d91c-4fc8-95b7-ca8ebb71272a",
 			"key": "applicationContext",
 			"value": "musics-blindtest",
 			"type": "string"
 		},
 		{
-			"id": "811c9db3-eac6-4ded-93d5-a9509dbdd476",
+			"id": "a8455090-194c-49dd-9042-629d99c65092",
 			"key": "gameId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "9acb1104-e291-490d-9724-d653df2c84ed",
+			"id": "86909952-6ff8-4ff0-a397-ac211b566820",
 			"key": "60s",
 			"value": "ANNEES_60",
 			"type": "string"
 		},
 		{
-			"id": "2d350aef-1b2f-4924-88ce-eaaa132e28d2",
+			"id": "49c3828d-e6a8-429d-a418-bf9d9fdb400c",
 			"key": "70s",
 			"value": "ANNEES_70",
 			"type": "string"
 		},
 		{
-			"id": "9b4207e1-d0bb-4efa-840e-c77a107f53b4",
+			"id": "b0d3e11f-6a22-451e-a424-522c8bba45c5",
 			"key": "80s",
 			"value": "ANNEES_80",
 			"type": "string"
 		},
 		{
-			"id": "839840e6-885b-4bf9-99a6-ecd1ed564f2e",
+			"id": "ed9cbc3e-cb0b-44eb-bfa7-a7b46a1da9f3",
 			"key": "90s",
 			"value": "ANNEES_90",
 			"type": "string"
 		},
 		{
-			"id": "456aab34-8ec2-4ef3-b738-75827ae2d7e7",
+			"id": "875acf2d-171b-4aca-a53f-c87ac6865a42",
 			"key": "00s",
 			"value": "ANNEES_2000",
 			"type": "string"
 		},
 		{
-			"id": "d1f91553-da87-4122-a48f-644b8ae7ea95",
+			"id": "ffdfedab-74ec-4de4-b9a2-9e5a6d0c31a2",
 			"key": "10s",
 			"value": "ANNEES_2010",
 			"type": "string"
 		},
 		{
-			"id": "2939afac-de57-45b2-9112-bd8ab7372d0f",
+			"id": "5f790497-671b-4e6b-9932-8772c0c8a3af",
 			"key": "cinema",
 			"value": "SERIES_CINEMAS",
 			"type": "string"
 		},
 		{
-			"id": "05816fc0-1694-40a7-9296-54cd1d590c13",
+			"id": "2f9b1f1d-d24e-4e8f-a05c-6dc90c547add",
 			"key": "disney",
 			"value": "DISNEY",
 			"type": "string"
 		},
 		{
-			"id": "2267c617-c34d-4870-bfba-83fe1b777473",
+			"id": "354e1551-8e77-48e6-ad75-2bc20863d557",
 			"key": "player1",
 			"value": "Darkana",
 			"type": "string"
 		},
 		{
-			"id": "72319e52-97bd-424a-b6cb-37652b2b4e3e",
+			"id": "ee7b4bb0-0828-4f78-9ea7-c9fb41b75ada",
 			"key": "player2",
 			"value": "Despacito",
 			"type": "string"
 		},
 		{
-			"id": "8bbdf083-a541-4461-b4f3-081a89639050",
+			"id": "1edf4fc2-b08c-4286-9ab6-0c91087afdf2",
 			"key": "player3",
 			"value": "Myssteriion",
 			"type": "string"
 		},
 		{
-			"id": "650a00ac-bbfd-49cb-bbef-e9bd8821ad12",
+			"id": "8a8bb328-c89b-4f40-9d35-59d3f04eb05f",
 			"key": "player4",
 			"value": "LinC",
 			"type": "string"
 		},
 		{
-			"id": "93f9f6f7-b355-48b7-9675-09ed9b38822e",
+			"id": "7781f71d-633d-4b20-a95f-0cf7e1402a86",
 			"key": "music",
 			"value": "Taxi.mp3",
 			"type": "string"
 		},
 		{
-			"id": "3a5bd8fe-d4f1-4c0b-9e8a-bf066fc514e3",
+			"id": "7dd0fe8a-f766-4f39-be65-328dd4243a88",
 			"key": "onlineMode",
 			"value": "OFFLINE",
 			"type": "string"
