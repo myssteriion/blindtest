@@ -18,36 +18,36 @@
 			<div class="col">
 				
 				<div class="table-responsive music-result-modal-table-div">
-					<table class="music-result-modal-table box-shadow font-size-normal">
+					<table class="box-shadow font-size-normal">
 						<thead>
-						<tr>
-							<th>{{ headers[0] | translate }}</th>
-							<th>{{ headers[1] | translate }}</th>
-							<th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
-							<th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
-							<th *ngIf="showLoserColumn()" class="music-result-modal-lose-header">{{ headers[4] | translate }}</th>
-							<th>{{ headers[5] | translate }}</th>
-						</tr>
+							<tr>
+								<th>{{ headers[0] | translate }}</th>
+								<th>{{ headers[1] | translate }}</th>
+								<th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
+								<th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
+								<th *ngIf="showLoserColumn()" class="music-result-modal-lose-header">{{ headers[4] | translate }}</th>
+								<th>{{ headers[5] | translate }}</th>
+							</tr>
 						</thead>
 						<tbody>
-						<tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'music-result-modal-table-odd': odd }">
-							<td>{{ line.name }}</td>
-							<td>{{ line.score }}</td>
-							<td *ngIf="showAuthorColumn()">
-								<mat-checkbox color="warn" [(ngModel)]="line.authorWinner"></mat-checkbox>
-							</td>
-							<td *ngIf="showTitleColumn()">
-								<mat-checkbox color="warn" [(ngModel)]="line.titleWinner"></mat-checkbox>
-							</td>
-							<td *ngIf="showLoserColumn()">
-								<select class="form-control music-result-modal-select" (change)="line.loser = $event.target.value">
-									<option *ngFor="let nbLoseChoice of nbLoseChoices" [value]="nbLoseChoice.id">{{ nbLoseChoice.label }}</option>
-								</select>
-							</td>
-							<td>
-								<mat-checkbox color="warn" [(ngModel)]="line.wronglyPass"></mat-checkbox>
-							</td>
-						</tr>
+							<tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'music-result-modal-table-odd': odd }">
+								<td>{{ line.name }}</td>
+								<td>{{ line.score }}</td>
+								<td *ngIf="showAuthorColumn()">
+									<mat-checkbox color="warn" [(ngModel)]="line.authorWinner"></mat-checkbox>
+								</td>
+								<td *ngIf="showTitleColumn()">
+									<mat-checkbox color="warn" [(ngModel)]="line.titleWinner"></mat-checkbox>
+								</td>
+								<td *ngIf="showLoserColumn()">
+									<select class="form-control music-result-modal-select" (change)="line.loser = $event.target.value">
+										<option *ngFor="let nbLoseChoice of nbLoseChoices" [value]="nbLoseChoice.id">{{ nbLoseChoice.label }}</option>
+									</select>
+								</td>
+								<td>
+									<mat-checkbox color="warn" [(ngModel)]="line.wronglyPass"></mat-checkbox>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
