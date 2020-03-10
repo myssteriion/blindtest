@@ -44,7 +44,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * The avatars page.
 	 */
-	private page: Page<Avatar>;
+	private avatarsPage: Page<Avatar>;
 	
 	/**
 	 * Show/hide avatars page.
@@ -116,9 +116,9 @@ export class ProfileEditModalComponent implements OnInit {
 		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
 			response => {
 				
-				this.page = response;
+				this.avatarsPage = response;
 				this.showAvatars = true;
-				this.showPageable = this.page.totalPages > 1;
+				this.showPageable = this.avatarsPage.totalPages > 1;
 			},
 			error => {
 				

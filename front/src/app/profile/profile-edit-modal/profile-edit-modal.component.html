@@ -36,11 +36,11 @@
 		<div *ngIf="showAvatars">
 			<div *ngIf="showPageable">
 				<ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
-								[collectionSize]="page.totalElements" [pageSize]="page.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
+								[collectionSize]="avatarsPage.totalElements" [pageSize]="avatarsPage.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
 				</ngb-pagination>
 			</div>
 			<div class="profile-edit-avatars">
-				<img *ngFor="let avatar of page.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
+				<img *ngFor="let avatar of avatarsPage.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
 			</div>
 		</div>
 	
