@@ -385,10 +385,10 @@ public class GameServiceTest extends AbstractTest {
     }
     
     @Test
-    public void findGame() throws NotFoundException, SpotifyException {
+    public void findById() throws NotFoundException, SpotifyException {
         
         try {
-            gameService.findGame(null);
+            gameService.findById(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -397,7 +397,7 @@ public class GameServiceTest extends AbstractTest {
         
         
         try {
-            gameService.findGame(10);
+            gameService.findById(10);
             Assert.fail("Doit lever une NotFoundException car le dto n'existe pas.");
         }
         catch (NotFoundException e) {
@@ -416,7 +416,7 @@ public class GameServiceTest extends AbstractTest {
         NewGame ng = new NewGame(new HashSet<>(Arrays.asList(0, 1)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         Game expected = gameService.newGame(ng);
         
-        Game actual = gameService.findGame(expected.getId());
+        Game actual = gameService.findById(expected.getId());
         Assert.assertSame(expected, actual);
     }
     

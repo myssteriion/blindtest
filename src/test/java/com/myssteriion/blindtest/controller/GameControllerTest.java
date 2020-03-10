@@ -79,7 +79,7 @@ public class GameControllerTest extends AbstractTest {
         
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         game.setId(11);
-        Mockito.when(gameService.findGame( Mockito.anyInt())).thenReturn(game);
+        Mockito.when(gameService.findById( Mockito.anyInt())).thenReturn(game);
         
         ResponseEntity<Game> re = gameController.findById(game.getId());
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );

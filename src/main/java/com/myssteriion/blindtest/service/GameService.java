@@ -241,7 +241,7 @@ public class GameService {
      * @return the game
      * @throws NotFoundException the not found exception
      */
-    public Game findGame(Integer id) throws NotFoundException {
+    public Game findById(Integer id) throws NotFoundException {
         
         CommonUtils.verifyValue("id", id);
         

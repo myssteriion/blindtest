@@ -11,6 +11,7 @@ import com.myssteriion.utils.rest.RestUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -83,10 +85,25 @@ public class GameController {
     @GetMapping(path = CommonConstant.ID_PATH_PARAM)
     public ResponseEntity<Game> findById(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
 
-        Game game = gameService.findGame(id);
+        Game game = gameService.findById(id);
         return RestUtils.create200(game);
     }
-
+    
+    /**
+     * Find all current games.
+     *
+     * @param pageNumber  the page number
+     * @param itemPerPage the item per page
+     * @return the pageable of games
+     */
+    @GetMapping()
+    public ResponseEntity<Page<Game>> findAll(@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+                                              @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
+    
+        Page<Game> page = gameService.findAll(pageNumber, itemPerPage);
+        return RestUtils.create200(page);
+    }
+    
     /**
      * Load game.
      *
