@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController
-@RequestMapping(path = "game")
+@RequestMapping(path = "games")
 public class GameController {
 
     private GameService gameService;

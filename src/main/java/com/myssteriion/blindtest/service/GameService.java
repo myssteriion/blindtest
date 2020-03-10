@@ -11,10 +11,16 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.ConflictException;
 import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -249,6 +255,36 @@ public class GameService {
                 .filter( game -> game.getId().equals(id) )
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("Game not found."));
+    }
+    
+    /**
+     * Find a page of Game.
+     *
+     * @param pageNumber  the page number
+     * @param itemPerPage the item per page
+     * @return the pageable of game
+     */
+    public Page<Game> findAll(int pageNumber, int itemPerPage) {
+        
+        itemPerPage = Math.max(itemPerPage, 1);
+        itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
+        
+        Sort.Order order = new Sort.Order(Sort.Direction.ASC, "id").ignoreCase();
+        Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
+    
+        int start = itemPerPage * pageNumber;
+        int end = start + itemPerPage;
+        
+        Page<Game> page;
+        
+        if ( start > games.size() )
+            page = new PageImpl<>( new ArrayList<>(), pageable, games.size());
+        else if ( end > games.size() )
+            page = new PageImpl<>( games.subList(start, games.size()), pageable, games.size());
+        else
+            page = new PageImpl<>( games.subList(start, end), pageable, games.size());
+        
+        return page;
     }
     
     /**
