@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GAME_PREFIX_PATH, HOME_PATH, SLIDE_ANIMATION} from "../../tools/constant";
+import {GAME_PREFIX_PATH, HOME_PATH, OPACITY_ANIMATION, SLIDE_ANIMATION} from "../../tools/constant";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
 import {ToasterService} from "../../services/toaster.service";
@@ -18,7 +18,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 	templateUrl: './game-resume-view.component.html',
 	styleUrls: ['./game-resume-view.component.css'],
 	animations: [
-		SLIDE_ANIMATION
+		SLIDE_ANIMATION,
+		OPACITY_ANIMATION
 	]
 })
 export class GameResumeViewComponent implements OnInit {
@@ -39,6 +40,11 @@ export class GameResumeViewComponent implements OnInit {
 	public showGames: boolean;
 	
 	/**
+	 * The current page.
+	 */
+	private currentPage: number;
+	
+	/**
 	 * Show/hide pageable.
 	 */
 	private showPageable: boolean;
@@ -54,14 +60,14 @@ export class GameResumeViewComponent implements OnInit {
 	ngOnInit(): void {
 		
 		this.showGames = false;
-		this.showPageable = false;
+		this.currentPage = 1;
 		
 		this.headers = [];
 		this.headers.push( this._translate.instant("GAME.RESUME_VIEW.PLAYERS_NAMES_HEADER") );
 		this.headers.push( this._translate.instant("GAME.RESUME_VIEW.DURATION_HEADER") );
 		this.headers.push( this._translate.instant("GAME.RESUME_VIEW.CONNECTION_MODE_HEADER") );
 		
-		this.loadGames(1);
+		this.loadGames(true);
 	}
 	
 	
@@ -69,11 +75,15 @@ export class GameResumeViewComponent implements OnInit {
 	/**
 	 * Load games page.
 	 *
-	 * @param pageNumber the page number
+	 * @param initPageNumber TRUE for force page number to 1
 	 */
-	public loadGames(pageNumber: number): void {
+	public loadGames(initPageNumber: boolean): void {
 		
-		this._gameResource.findAll(pageNumber-1).subscribe(
+		this.showGames = false;
+		if (initPageNumber)
+			this.currentPage = 1;
+		
+		this._gameResource.findAll(this.currentPage-1).subscribe(
 			response => {
 				
 				this.gamesPage = response;
@@ -93,7 +103,7 @@ export class GameResumeViewComponent implements OnInit {
 				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 				
 				modalRef.result.then(
-					() => { this.loadGames(1); },
+					() => { this.loadGames(true); },
 					() => { this._router.navigateByUrl(HOME_PATH); }
 				);
 			}

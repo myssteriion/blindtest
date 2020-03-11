@@ -3,34 +3,24 @@
 	<!-- header -->
 	<header [title]="'GAME.RESUME_VIEW.TITLE' | translate"></header>
 	
-	<!-- no result OR pagination + table -->
-	<div *ngIf="showGames">
-		
-		<!-- no result -->
-		<div *ngIf="gamesPage.empty" class="row justify-content-center">
-			<div class="col-4 no-result-label font-size-normal alert alert-info">
-				<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
-			</div>
-		</div>
-		
-		
-		<!-- pagination + cards -->
-		<div *ngIf="!gamesPage.empty">
-			
-			<!-- pagination -->
-			<div *ngIf="showPageable" class="row justify-content-center">
-				<ngb-pagination class="font-size-normal" [ellipses]="false" [rotate]="true"
-								[collectionSize]="gamesPage.totalElements" [pageSize]="gamesPage.size" [maxSize]="5" (pageChange)="loadGames($event)">
-				</ngb-pagination>
-			</div>
-			
-			<!-- cards -->
-			<div class="row">
-				<game-card class="col-4 game-resume-view-game-card" *ngFor="let game of gamesPage.content" [game]="game" (onSelect)="selectGame($event)"></game-card>
-			</div>
-			
-		</div>
-		
+	<!-- pagination -->
+	<div *ngIf="showPageable" class="row justify-content-center">
+		<ngb-pagination class="font-size-normal" [ellipses]="false" [rotate]="true"
+						[collectionSize]="gamesPage.totalElements" [pageSize]="gamesPage.size" [maxSize]="5"
+						(pageChange)="currentPage = $event; loadGames(false)" [(page)]="currentPage">
+		</ngb-pagination>
 	</div>
-
+	
+	<!-- cards -->
+	<div *ngIf="showGames && !gamesPage.empty" class="row" @opacityTrigger>
+		<game-card class="col-4 game-resume-view-game-card" *ngFor="let game of gamesPage.content" [game]="game" (onSelect)="selectGame($event)"></game-card>
+	</div>
+	
+	<!-- no result -->
+	<div *ngIf="gamesPage.empty" class="row justify-content-center">
+		<div class="col-4 no-result-label font-size-normal alert alert-info">
+			<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
+		</div>
+	</div>
+		
 </div>
