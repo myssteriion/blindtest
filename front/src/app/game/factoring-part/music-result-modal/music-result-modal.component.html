@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col">
 				
-				<div class="table-responsive music-result-modal-table-div">
+				<div class="table-responsive container-table music-result-modal-table-div">
 					<table class="box-shadow font-size-normal">
 						<thead>
 							<tr>
@@ -30,7 +30,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'music-result-modal-table-odd': odd }">
+							<tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'container-table-odd': odd }">
 								<td>{{ line.name }}</td>
 								<td>{{ line.score }}</td>
 								<td *ngIf="showAuthorColumn()">

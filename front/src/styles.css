@@ -169,3 +169,27 @@ fa-icon:hover {
 .graph-frame g text {
     font-size: 1.2em !important;
 }
+
+/*************** table ***************/
+.container-table table {
+    min-width: 100%;
+    background-color: white;
+}
+
+.container-table table th {
+    text-align: center;
+    height: 3em;
+    background-color: #ffc066;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.container-table table td {
+    text-align: center;
+    height: 2.4em;
+}
+
+.container-table-odd {
+    background-color: #e6e6e6;
+}
