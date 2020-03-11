@@ -384,11 +384,6 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_2") +
 			"</div></div>";
 		
-		body +=
-			"<div class='row'><div class='col alert alert-info'>" +
-			this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_3", { game_id: this.game.id } ) +
-			"</div></div>";
-		
 		return body;
 	}
 	
