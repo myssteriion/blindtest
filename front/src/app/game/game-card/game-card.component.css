@@ -41,3 +41,7 @@
     background-color: white;
     margin: 0.25em;
 }
+
+.game-card-finished-game-line {
+	text-align: center;
+}

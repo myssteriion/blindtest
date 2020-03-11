@@ -26,7 +26,8 @@
         "CANCEL_MODIFICATION": "Annuler la modification en cours",
         "RANK": "n° rang",
         "HELP_DL": "Télécharger l'aide",
-        "REMEMBER_TO_RECORD": "Pensez à enregistrer les modifications."
+        "REMEMBER_TO_RECORD": "Pensez à enregistrer les modifications.",
+        "FINISHED_GAME": "Partie terminée"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"
