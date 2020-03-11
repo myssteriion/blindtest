@@ -204,7 +204,6 @@ export class GameNewViewComponent implements OnInit {
 	 * @param theme the theme
 	 */
 	public getThemeInfo(theme: Theme): string {
-		console.log("ici", this.sameProbability);
 		return (this.sameProbability) ? this.getNumberOfMusicsInTheme(theme) : this.getThemePercent(theme);
 	}
 	

@@ -105,7 +105,9 @@
             "TITLE_WINNER_HEADER": "Titre",
             "VICTIM_HEADER": "Victime",
             "WRONGLY_PASS_HEADER": "Pénalité",
-            "SAVE_ERROR": "Impossible d'appliquer les résultats."
+            "SAVE_ERROR": "Impossible d'appliquer les résultats.",
+            "CHECK_ALL": "Tout cocher",
+            "UNCHECK_ALL": "Tout décocher"
         },
         "ROUND_INFO_MODAL": {
             "TITLE": "Info manche",

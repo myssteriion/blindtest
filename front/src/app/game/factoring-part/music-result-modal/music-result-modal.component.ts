@@ -216,6 +216,22 @@ export class MusicResultModalComponent implements OnInit {
 		);
 	}
 	
+	/**
+	 * Check or uncheck all.
+	 *
+	 * @param check TRUE for check all, FALSE for uncheck all
+	 */
+	public checkUncheckAll(check: boolean): void {
+		
+		this.lines.forEach( line => {
+			if ( this.showAuthorColumn() )
+				line.authorWinner = check;
+			
+			if ( this.showTitleColumn() )
+				line.titleWinner = check;
+		});
+	}
+	
 }
 
 /**
