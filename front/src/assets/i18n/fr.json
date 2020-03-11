@@ -53,19 +53,13 @@
         "NEW_VIEW": {
             "TITLE": "Commencer",
             "DURATIONS_LABEL": "Durée de la partie :",
-            "MODE_LABEL": "Mode de la partie :",
+            "CONNECTION_MODE_LABEL": "Mode de la partie :",
             "THEMES_SAME_PROBABILITY_LABEL": "Thèmes: mode équipropable :",
             "THEMES_LABEL": "Choix des thèmes :",
             "COMPUTE_THEMES_INFO_ERROR": "Impossible de calculer les pourcentages d'apparations des thèmes sélectionnés.",
             "COMPUTE_THEMES_INFO_REFRESH_HELP": "Synchroniser les musiques.",
             "EFFECTS_LABEL": "Choix des effets :",
             "PLAYERS_LIST_LABEL": "Liste des joueurs (de {{minPlayers}} à {{maxPlayers}}):",
-            "ONLINE_MODE": "En ligne (avec Spotify)",
-            "OFFLINE_MODE": "Hors ligne",
-            "BOTH_MODE": "Les deux",
-            "SHORT": "Rapide",
-            "NORMAL": "Normale",
-            "LONG": "Longue",
             "PLAYERS_LABEL": "Rechercher les profils :",
             "PLAYER": "Joueur",
             "MAX_PLAYERS_ERROR": "Le maximum de {{max_players}} joueurs est atteint.",
@@ -207,6 +201,16 @@
         "VIEW": {
             "TITLE": "Profils"
         }
+    },
+    "DURATION": {
+        "SHORT": "Rapide",
+        "NORMAL": "Normale",
+        "LONG": "Longue"
+    },
+    "CONNECTION_MODE": {
+        "ONLINE": "En ligne (avec Spotify)",
+        "OFFLINE": "Hors ligne",
+        "BOTH": "Les deux"
     },
     "THEMES": {
         "ANNEES_60": "Années 1960",

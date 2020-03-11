@@ -10,7 +10,7 @@
 			<mat-radio-group class="font-size-normal">
 				<mat-radio-button *ngFor="let duration of durations" value="{{ duration }}" color="warn"
 								  (change)="selectedDuration = duration" [checked]="duration === selectedDuration">
-					{{ 'GAME.NEW_VIEW.' + duration | translate }}
+					{{ 'DURATION.' + duration | translate }}
 				</mat-radio-button>
 			</mat-radio-group>
 		</div>
@@ -18,12 +18,12 @@
 	
 	<!-- connection mode -->
 	<div class="row game-new-view-part">
-		<div class="col-4 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.MODE_LABEL' | translate }}</div>
+		<div class="col-4 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.CONNECTION_MODE_LABEL' | translate }}</div>
 		<div class="col-8">
 			<mat-radio-group class="font-size-normal">
 				<mat-radio-button *ngFor="let connectionMode of connectionModes" value="{{ connectionMode }}" color="warn"
 								  (change)="selectedConnectionMode = connectionMode" [checked]="connectionMode === selectedConnectionMode">
-					{{ 'GAME.NEW_VIEW.' + connectionMode + '_MODE' | translate }}
+					{{ 'CONNECTION_MODE.' + connectionMode | translate }}
 				</mat-radio-button>
 			</mat-radio-group>
 		</div>
