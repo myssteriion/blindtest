@@ -103,7 +103,7 @@ export class ProfileCardComponent implements OnInit {
 		let backgroundClass = "profile-card-background-" + this.profile.background;
 		
 		if (this.canSelect)
-			backgroundClass += " profile-card-profile-frame-can-select";
+			backgroundClass += " profile-card-frame-can-select";
 		
 		return backgroundClass;
 	}
