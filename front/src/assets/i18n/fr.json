@@ -75,11 +75,11 @@
         },
         "RESUME_VIEW": {
             "TITLE": "Continuer",
-            "RESUME_INFO": "Tant que le jeu n'a pas été arrêté, vous pouvez retrouver une partie en cours grâce à son N° qui est fourni lorsque la partie est quittée.",
-            "GAME_NUM_PLACE_HOLDER": "Entrez le N°",
-            "SEARCH_BUTTON": "Chercher",
-            "MUST_BE_POSITIVE_NUMBER": "Le N° doit être un nombre entier positif ou nul.",
-            "GAME_NOT_FOUND": "La partie n'existe pas."
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "GAMES_LOAD_ERROR": "Impossible de charger les parties.",
+            "PLAYERS_NAMES_HEADER": "Joueurs",
+            "DURATION_HEADER": "Durée",
+            "CONNECTION_MODE_HEADER": "Mode"
         },
         "CURRENT_VIEW": {
             "TITLE": "Manche '{{name_round}}' ({{current_music}}/{{total_musics}})",
@@ -132,6 +132,14 @@
             "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
             "STATISTICS_TAB_TITLE": "Statistiques",
             "RANK_TAB_TITLE": "Classement"
+        },
+        "GAME_CARD": {
+            "NB_PLAYERS_LABEL": "Nombre de joueur :",
+            "DURATION_LABEL": "Durée :",
+            "CONNECTION_MODE_LABEL": "Mode :",
+            "THEMES_LABEL": "Thèmes :",
+            "EFFECTS_LABEL": "Effets :",
+            "ROUND_LABEL": "Manche :"
         }
     },
     "ROUND": {

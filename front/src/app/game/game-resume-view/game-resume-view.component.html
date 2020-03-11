@@ -3,24 +3,34 @@
 	<!-- header -->
 	<header [title]="'GAME.RESUME_VIEW.TITLE' | translate"></header>
 	
-	<!-- resume info -->
-	<div class="row">
-		<div class="col alert alert-info font-size-normal">{{ 'GAME.RESUME_VIEW.RESUME_INFO' | translate }}</div>
-	</div>
-	
-	<!-- num game -->
-	<div class="row justify-content-center game-resume-view-num-game">
-		<div class="col-2">
-			<input class="form-control font-size-normal" (keyup.enter)="search()" [(ngModel)]="numGame" placeholder="{{ 'GAME.RESUME_VIEW.GAME_NUM_PLACE_HOLDER' | translate }}">
+	<!-- no result OR pagination + table -->
+	<div *ngIf="showGames">
+		
+		<!-- no result -->
+		<div *ngIf="gamesPage.empty" class="row justify-content-center">
+			<div class="col-4 no-result-label font-size-normal alert alert-info">
+				<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
+			</div>
 		</div>
-		<div class="col-2">
-			<button class="btn btn-info font-size-normal box-shadow" (click)="search()" [disabled]="gameNumIsNaN()">{{ 'GAME.RESUME_VIEW.SEARCH_BUTTON' | translate }}</button>
+		
+		
+		<!-- pagination + cards -->
+		<div *ngIf="!gamesPage.empty">
+			
+			<!-- pagination -->
+			<div *ngIf="showPageable" class="row justify-content-center">
+				<ngb-pagination class="font-size-normal" [ellipses]="false" [rotate]="true"
+								[collectionSize]="gamesPage.totalElements" [pageSize]="gamesPage.size" [maxSize]="5" (pageChange)="loadGames($event)">
+				</ngb-pagination>
+			</div>
+			
+			<!-- cards -->
+			<div class="row">
+				<game-card class="col-4 game-resume-view-game-card" *ngFor="let game of gamesPage.content" [game]="game" (onSelect)="selectGame($event)"></game-card>
+			</div>
+			
 		</div>
-	</div>
-	
-	<!-- alert -->
-	<div *ngIf="gameNumIsNaN()" class="row">
-		<div class="col font-size-normal alert alert-danger">{{ 'GAME.RESUME_VIEW.MUST_BE_POSITIVE_NUMBER' | translate }}</div>
+		
 	</div>
 
 </div>
