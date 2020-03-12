@@ -260,11 +260,12 @@ public class GameService {
     /**
      * Find a page of Game.
      *
-     * @param pageNumber  the page number
-     * @param itemPerPage the item per page
+     * @param pageNumber        the page number
+     * @param itemPerPage       the item per page
+     * @param showFinishedGames TRUE if show finished game, FALSE otherwise
      * @return the pageable of game
      */
-    public Page<Game> findAll(int pageNumber, int itemPerPage) {
+    public Page<Game> findAll(int pageNumber, int itemPerPage, boolean showFinishedGames) {
         
         itemPerPage = Math.max(itemPerPage, 1);
         itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
@@ -275,14 +276,16 @@ public class GameService {
         int start = itemPerPage * pageNumber;
         int end = start + itemPerPage;
         
+        List<Game> filteredGames = games.stream().filter( g -> g.isFinished() == showFinishedGames ).collect( Collectors.toList() );
+        
         Page<Game> page;
         
-        if ( start > games.size() )
-            page = new PageImpl<>( new ArrayList<>(), pageable, games.size());
-        else if ( end > games.size() )
-            page = new PageImpl<>( games.subList(start, games.size()), pageable, games.size());
+        if ( start > filteredGames.size() )
+            page = new PageImpl<>( new ArrayList<>(), pageable, filteredGames.size());
+        else if ( end > filteredGames.size() )
+            page = new PageImpl<>( filteredGames.subList(start, filteredGames.size()), pageable, filteredGames.size());
         else
-            page = new PageImpl<>( games.subList(start, end), pageable, games.size());
+            page = new PageImpl<>( filteredGames.subList(start, end), pageable, filteredGames.size());
         
         return page;
     }

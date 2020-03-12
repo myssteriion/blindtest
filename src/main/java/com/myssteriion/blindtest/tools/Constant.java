@@ -23,6 +23,8 @@ public class Constant {
     public static final String PREFIX_NAME_DEFAULT_VALUE	= "";
     public static final String PROFILES_IDS					= "profilesIds";
     public static final String PROFILES_IDS_DEFAULT_VALUE	= "";
+    public static final String SHOW_FINISHED_GAMES                  = "showFinishedGames";
+    public static final String SHOW_FINISHED_GAMES_DEFAULT_VALUE    = "false";
     
     private Constant() {}
     

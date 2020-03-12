@@ -80,7 +80,8 @@
             "GAMES_LOAD_ERROR": "Impossible de charger les parties.",
             "PLAYERS_NAMES_HEADER": "Joueurs",
             "DURATION_HEADER": "Durée",
-            "CONNECTION_MODE_HEADER": "Mode"
+            "CONNECTION_MODE_HEADER": "Mode",
+            "SHOW_FINISHED_GAMES_LABEL": "Afficher uniquement les parties termnées"
         },
         "CURRENT_VIEW": {
             "TITLE": "Manche '{{name_round}}' ({{current_music}}/{{total_musics}})",

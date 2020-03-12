@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.model.SingleValue;
 import com.myssteriion.utils.rest.RestUtils;
@@ -97,10 +98,12 @@ public class GameController {
      * @return the pageable of games
      */
     @GetMapping()
-    public ResponseEntity<Page<Game>> findAll(@RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
-                                              @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
+    public ResponseEntity<Page<Game>> findAll(
+            @RequestParam(value = Constant.SHOW_FINISHED_GAMES, required = false, defaultValue = Constant.SHOW_FINISHED_GAMES_DEFAULT_VALUE) boolean showFinishedGames,
+            @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
     
-        Page<Game> page = gameService.findAll(pageNumber, itemPerPage);
+        Page<Game> page = gameService.findAll(pageNumber, itemPerPage, showFinishedGames);
         return RestUtils.create200(page);
     }
     

@@ -49,6 +49,11 @@ export class GameResumeViewComponent implements OnInit {
 	 */
 	private showPageable: boolean;
 	
+	/**
+	 * Show/hide finished games.
+	 */
+	private showFinishedGames: boolean;
+	
 	
 	
 	constructor(private _gameResource: GameResource,
@@ -61,6 +66,7 @@ export class GameResumeViewComponent implements OnInit {
 		
 		this.showGames = false;
 		this.currentPage = 1;
+		this.showFinishedGames = false;
 		
 		this.headers = [];
 		this.headers.push( this._translate.instant("GAME.RESUME_VIEW.PLAYERS_NAMES_HEADER") );
@@ -83,7 +89,7 @@ export class GameResumeViewComponent implements OnInit {
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._gameResource.findAll(this.currentPage-1).subscribe(
+		this._gameResource.findAll(this.currentPage-1, this.showFinishedGames).subscribe(
 			response => {
 				
 				this.gamesPage = response;
@@ -109,25 +115,6 @@ export class GameResumeViewComponent implements OnInit {
 			}
 		);
 	}
-	
-	
-	/**
-	 * Get players names.
-	 */
-	public getPlayersNames(game: Game): string {
-	
-		let playersNames = "";
-		
-		for (let i = 0; i < game.players.length; i++) {
-			
-			playersNames += game.players[i].profile.name;
-			if (i !== game.players.length -1)
-				playersNames += ", ";
-		}
-		
-		return playersNames;
-	}
-	
 	
 	/**
 	 * Select game.

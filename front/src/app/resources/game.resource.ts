@@ -52,13 +52,15 @@ export class GameResource {
 	/**
 	 * Gets games pageable.
 	 *
-	 * @param pageNumber the page number
+	 * @param pageNumber 		the page number
+	 * @param showFinishedGames TRUE for show finished games, FALSE otherwise
 	 */
-	public findAll(pageNumber: number): Observable< Page<Game> > {
+	public findAll(pageNumber: number, showFinishedGames: boolean): Observable< Page<Game> > {
 		
 		let params = new HttpParams();
 		params = params.set("pageNumber", pageNumber.toString());
 		params = params.set("itemPerPage", environment.itemPerPageGames.toString());
+		params = params.set("showFinishedGames", showFinishedGames + '');
 		
 		return this._http.get< Page<Game> >( this.path, { params: params } );
 	}

@@ -3,12 +3,24 @@
 	<!-- header -->
 	<header [title]="'GAME.RESUME_VIEW.TITLE' | translate"></header>
 	
-	<!-- pagination -->
-	<div *ngIf="showPageable" class="row justify-content-center">
-		<ngb-pagination class="font-size-normal" [ellipses]="false" [rotate]="true"
-						[collectionSize]="gamesPage.totalElements" [pageSize]="gamesPage.size" [maxSize]="5"
-						(pageChange)="currentPage = $event; loadGames(false)" [(page)]="currentPage">
-		</ngb-pagination>
+	
+	<!-- toggle + pagination -->
+	<div class="row">
+		
+		<!-- toggle -->
+		<div class="col-4">
+			<span class="game-resume-view-toggle-label font-size-normal">{{ 'GAME.RESUME_VIEW.SHOW_FINISHED_GAMES_LABEL' | translate }}</span>
+			<mat-slide-toggle [(ngModel)]="showFinishedGames" (change)="loadGames(true)" color="warn"></mat-slide-toggle>
+		</div>
+		
+		<!-- pagination -->
+		<div *ngIf="showPageable" class="col-4 d-flex justify-content-center">
+			<ngb-pagination class="font-size-normal" [ellipses]="false" [rotate]="true"
+							[collectionSize]="gamesPage.totalElements" [pageSize]="gamesPage.size" [maxSize]="5"
+							(pageChange)="currentPage = $event; loadGames(false)" [(page)]="currentPage">
+			</ngb-pagination>
+		</div>
+		
 	</div>
 	
 	<!-- cards -->

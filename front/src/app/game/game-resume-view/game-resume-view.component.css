@@ -2,6 +2,10 @@
 	padding-bottom: 1em;
 }
 
+.game-resume-view-toggle-label {
+    padding-right: 1em;
+}
+
 .game-resume-view-game-card {
     padding: 10px;
 }
