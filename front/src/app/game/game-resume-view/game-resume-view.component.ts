@@ -47,12 +47,12 @@ export class GameResumeViewComponent implements OnInit {
 	/**
 	 * Show/hide pageable.
 	 */
-	private showPageable: boolean;
+	public showPageable: boolean;
 	
 	/**
 	 * Show/hide finished games.
 	 */
-	private showFinishedGames: boolean;
+	public showFinishedGames: boolean;
 	
 	
 	
