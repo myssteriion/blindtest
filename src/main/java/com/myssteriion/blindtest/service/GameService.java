@@ -290,23 +290,4 @@ public class GameService {
         return page;
     }
     
-    /**
-     * Load game.
-     *
-     * @param game the game
-     */
-    public Integer load(Game game) {
-        
-        CommonUtils.verifyValue("game", game);
-        game.setId( findNextId() );
-        game.generateRoundContent();
-        
-        for ( Player player : game.getPlayers() )
-            profileService.createProfileAvatarFlux( player.getProfile() );
-        
-        games.add(game);
-        
-        return game.getId();
-    }
-    
 }

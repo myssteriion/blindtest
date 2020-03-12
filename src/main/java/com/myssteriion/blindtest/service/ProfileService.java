@@ -111,7 +111,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
      *
      * @param dto the dto
      */
-    public void createProfileAvatarFlux(ProfileDTO dto) {
+    private void createProfileAvatarFlux(ProfileDTO dto) {
         
         // setter is useful for create avatar inside profile
         dto.setAvatarName( dto.getAvatarName() );

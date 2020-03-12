@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -114,7 +114,7 @@ public class Game implements IModel {
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
-        this.generateRoundContent();
+        this.roundContent = this.round.createRoundContent(this);
     }
     
     private void checkNbPlayers(Set<Player> players) {
@@ -276,13 +276,6 @@ public class Game implements IModel {
             roundContent = (round == null) ? null : round.createRoundContent(this);
             nbMusicsPlayedInRound = INIT;
         }
-    }
-    
-    /**
-     * Generate round content.
-     */
-    public void generateRoundContent() {
-        this.roundContent = this.round.createRoundContent(this);
     }
     
     /**

@@ -291,7 +291,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/game",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -299,7 +299,7 @@
 							"port": "{{port}}",
 							"path": [
 								"{{applicationContext}}",
-								"game"
+								"games"
 							]
 						}
 					},
@@ -322,7 +322,7 @@
 							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/apply",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games/apply",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -330,7 +330,7 @@
 							"port": "{{port}}",
 							"path": [
 								"{{applicationContext}}",
-								"game",
+								"games",
 								"apply"
 							]
 						}
@@ -350,7 +350,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/0",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -358,7 +358,7 @@
 							"port": "{{port}}",
 							"path": [
 								"{{applicationContext}}",
-								"game",
+								"games",
 								"0"
 							]
 						}
@@ -366,23 +366,12 @@
 					"response": []
 				},
 				{
-					"name": "load",
+					"name": "find all",
 					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\": 1,\n\t\"players\": [\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 98,\n\t\t\t\t\"name\": \"Aedoox\",\n\t\t\t\t\"background\": 4,\n\t\t\t\t\"avatarName\": \"fry.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"fry.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1450,\n\t\t\t\"rank\": 7,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 4,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 6,\n\t\t\t\t\"name\": \"Darkana\",\n\t\t\t\t\"background\": 0,\n\t\t\t\t\"avatarName\": \"harryPotter.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"harryPotter.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 3025,\n\t\t\t\"rank\": 2,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 1,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 97,\n\t\t\t\t\"name\": \"Lorène\",\n\t\t\t\t\"background\": 4,\n\t\t\t\t\"avatarName\": \"girafe.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"girafe.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 2200,\n\t\t\t\"rank\": 4,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 3,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 4\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 100,\n\t\t\t\t\"name\": \"Léo\",\n\t\t\t\t\"background\": 1,\n\t\t\t\t\"avatarName\": \"ff7_01.jpeg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"ff7_01.jpeg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 950,\n\t\t\t\"rank\": 9,\n\t\t\t\"last\": true,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 1,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"name\": \"Myssteriion\",\n\t\t\t\t\"background\": 1,\n\t\t\t\t\"avatarName\": \"mysterion.jpeg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"mysterion.jpeg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 3525,\n\t\t\t\"rank\": 1,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 0,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 4\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 3,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 99,\n\t\t\t\t\"name\": \"Ninouille\",\n\t\t\t\t\"background\": 3,\n\t\t\t\t\"avatarName\": \"godzilla.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"godzilla.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1950,\n\t\t\t\"rank\": 5,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 2,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"AUTHOR\": 3\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 5,\n\t\t\t\t\"name\": \"O2\",\n\t\t\t\t\"background\": 2,\n\t\t\t\t\"avatarName\": \"elephant.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"elephant.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1825,\n\t\t\t\"rank\": 6,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 4,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 2,\n\t\t\t\t\"name\": \"Stanouch\",\n\t\t\t\t\"background\": 3,\n\t\t\t\t\"avatarName\": \"girafe.png\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"girafe.png\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 1250,\n\t\t\t\"rank\": 8,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 3,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"ANNEES_2010\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 1,\n\t\t\t\t\t\"TITLE\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"profile\": {\n\t\t\t\t\"id\": 4,\n\t\t\t\t\"name\": \"Sylvain\",\n\t\t\t\t\"background\": 0,\n\t\t\t\t\"avatarName\": \"wolwerine.jpg\",\n\t\t\t\t\"avatar\": {\n\t\t\t\t\t\"id\": null,\n\t\t\t\t\t\"name\": \"wolwerine.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"score\": 2750,\n\t\t\t\"rank\": 3,\n\t\t\t\"last\": false,\n\t\t\t\"turnToChoose\": false,\n\t\t\t\"teamNumber\": 2,\n\t\t\t\"foundMusics\": {\n\t\t\t\t\"SERIES_CINEMAS\": {\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_80\": {\n\t\t\t\t\t\"BOTH\": 4\n\t\t\t\t},\n\t\t\t\t\"ANNEES_2000\": {\n\t\t\t\t\t\"TITLE\": 1,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"ANNEES_90\": {\n\t\t\t\t\t\"BOTH\": 2,\n\t\t\t\t\t\"AUTHOR\": 1\n\t\t\t\t},\n\t\t\t\t\"DISNEY\": {\n\t\t\t\t\t\"AUTHOR\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": true,\n\t\"themes\": [\n\t\t\"ANNEES_80\",\n\t\t\"ANNEES_90\",\n\t\t\"ANNEES_2000\",\n\t\t\"ANNEES_2010\",\n\t\t\"DISNEY\",\n\t\t\"SERIES_CINEMAS\"\n\t],\n\t\"effects\": [\n\t\t\"NONE\",\n\t\t\"SLOW\",\n\t\t\"SPEED\",\n\t\t\"MIX\"\n\t],\n\t\"connectionMode\": \"OFFLINE\",\n\t\"listenedMusics\": {\n\t\t\"ANNEES_2010\": 2,\n\t\t\"SERIES_CINEMAS\": 6,\n\t\t\"ANNEES_80\": 4,\n\t\t\"ANNEES_2000\": 6,\n\t\t\"ANNEES_90\": 5,\n\t\t\"DISNEY\": 5\n\t},\n\t\"nbMusicsPlayed\": 28,\n\t\"nbMusicsPlayedInRound\": 0,\n\t\"round\": \"FRIENDSHIP\",\n\t\"firstStep\": false,\n\t\"lastStep\": false,\n\t\"finished\": false\n}"
-						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/game/load",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games?pageNumber=0&itemPerPage=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -390,8 +379,17 @@
 							"port": "{{port}}",
 							"path": [
 								"{{applicationContext}}",
-								"game",
-								"load"
+								"games"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "itemPerPage",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -2304,103 +2302,103 @@
 	],
 	"variable": [
 		{
-			"id": "a5088e64-6fed-40bf-ab55-3a0c5e1b8873",
+			"id": "c1e71b13-1063-44d2-9dab-12e7cbf38022",
 			"key": "port",
 			"value": "9500",
 			"type": "string"
 		},
 		{
-			"id": "76fa6986-d91c-4fc8-95b7-ca8ebb71272a",
+			"id": "9325bdf9-3290-47e2-9e6b-fa04f3a8ae3f",
 			"key": "applicationContext",
 			"value": "musics-blindtest",
 			"type": "string"
 		},
 		{
-			"id": "a8455090-194c-49dd-9042-629d99c65092",
+			"id": "f5f160fd-bbc6-40be-871c-58f9801d07ae",
 			"key": "gameId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "86909952-6ff8-4ff0-a397-ac211b566820",
+			"id": "f99d598d-07b9-4214-b973-4f620b92b593",
 			"key": "60s",
 			"value": "ANNEES_60",
 			"type": "string"
 		},
 		{
-			"id": "49c3828d-e6a8-429d-a418-bf9d9fdb400c",
+			"id": "d5f0b6fb-40e2-4291-a125-0044eda14439",
 			"key": "70s",
 			"value": "ANNEES_70",
 			"type": "string"
 		},
 		{
-			"id": "b0d3e11f-6a22-451e-a424-522c8bba45c5",
+			"id": "b0efd28a-ce5e-4d09-9da9-e6d2c2470196",
 			"key": "80s",
 			"value": "ANNEES_80",
 			"type": "string"
 		},
 		{
-			"id": "ed9cbc3e-cb0b-44eb-bfa7-a7b46a1da9f3",
+			"id": "660cca95-adee-4262-95c5-c2d75ba500c3",
 			"key": "90s",
 			"value": "ANNEES_90",
 			"type": "string"
 		},
 		{
-			"id": "875acf2d-171b-4aca-a53f-c87ac6865a42",
+			"id": "7223f1c7-9e0b-42c6-8e46-d2c4aa24bfb4",
 			"key": "00s",
 			"value": "ANNEES_2000",
 			"type": "string"
 		},
 		{
-			"id": "ffdfedab-74ec-4de4-b9a2-9e5a6d0c31a2",
+			"id": "2af097f2-437a-4ee9-a25f-196d08787a9a",
 			"key": "10s",
 			"value": "ANNEES_2010",
 			"type": "string"
 		},
 		{
-			"id": "5f790497-671b-4e6b-9932-8772c0c8a3af",
+			"id": "2dd20898-c3ad-4402-a6a9-027a2c6a4dd2",
 			"key": "cinema",
 			"value": "SERIES_CINEMAS",
 			"type": "string"
 		},
 		{
-			"id": "2f9b1f1d-d24e-4e8f-a05c-6dc90c547add",
+			"id": "5b48c747-e0e8-47ba-835f-e9128d8f796f",
 			"key": "disney",
 			"value": "DISNEY",
 			"type": "string"
 		},
 		{
-			"id": "354e1551-8e77-48e6-ad75-2bc20863d557",
+			"id": "d93a9c19-12fa-4b8d-9a6f-c63142e0ed46",
 			"key": "player1",
 			"value": "Darkana",
 			"type": "string"
 		},
 		{
-			"id": "ee7b4bb0-0828-4f78-9ea7-c9fb41b75ada",
+			"id": "4be48eac-0584-4a5f-a044-d2d3852aafb8",
 			"key": "player2",
 			"value": "Despacito",
 			"type": "string"
 		},
 		{
-			"id": "1edf4fc2-b08c-4286-9ab6-0c91087afdf2",
+			"id": "6a1e4df2-6a01-4101-a8f0-9c9db26fe41a",
 			"key": "player3",
 			"value": "Myssteriion",
 			"type": "string"
 		},
 		{
-			"id": "8a8bb328-c89b-4f40-9d35-59d3f04eb05f",
+			"id": "7ee604e4-5130-4868-8d08-03837c570bff",
 			"key": "player4",
 			"value": "LinC",
 			"type": "string"
 		},
 		{
-			"id": "7781f71d-633d-4b20-a95f-0cf7e1402a86",
+			"id": "52e30550-2cd0-42c1-a643-770b01761620",
 			"key": "music",
 			"value": "Taxi.mp3",
 			"type": "string"
 		},
 		{
-			"id": "7dd0fe8a-f766-4f39-be65-328dd4243a88",
+			"id": "3753990d-1053-43e6-9235-180123b9a90a",
 			"key": "onlineMode",
 			"value": "OFFLINE",
 			"type": "string"
