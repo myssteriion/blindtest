@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -79,12 +81,29 @@ public class GameControllerTest extends AbstractTest {
         
         Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         game.setId(11);
-        Mockito.when(gameService.findById( Mockito.anyInt())).thenReturn(game);
+        Mockito.when(gameService.findById( Mockito.anyInt()) ).thenReturn(game);
         
         ResponseEntity<Game> re = gameController.findById(game.getId());
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertNotNull( re.getBody() );
         Assert.assertSame( game, re.getBody() );
+    }
+    
+    @Test
+    public void findAll() {
+        
+        List<Player> players = Arrays.asList(
+                new Player(new ProfileDTO("name")),
+                new Player(new ProfileDTO("name1")));
+        
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        game.setId(11);
+        Mockito.when(gameService.findAll( Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean() )).thenReturn( new PageImpl<>(Collections.singletonList(game)) );
+        
+        ResponseEntity< Page<Game> > re = gameController.findAll(0, 1, false);
+        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assert.assertNotNull( re.getBody() );
+        Assert.assertSame( game, re.getBody().getContent().get(0) );
     }
     
 }

@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -418,6 +419,38 @@ public class GameServiceTest extends AbstractTest {
         
         Game actual = gameService.findById(expected.getId());
         Assert.assertSame(expected, actual);
+    }
+    
+    @Test
+    public void findAll() throws NotFoundException, SpotifyException {
+        
+        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("name", "avatarName").setId(1);
+        ProfileDTO profileDto1 = (ProfileDTO) new ProfileDTO("name1", "avatarName").setId(2);
+        Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenAnswer(invocation -> {
+            ProfileDTO p = invocation.getArgument(0);
+            return ( p.getId().equals(1) ) ? profileDto : profileDto1;
+        });
+        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
+        
+        NewGame ng = new NewGame(new HashSet<>(Arrays.asList(0, 1)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game expected = gameService.newGame(ng);
+        gameService.newGame(ng);
+        gameService.newGame(ng);
+        
+        Page<Game> actual = gameService.findAll(0, 2, false);
+        Assert.assertEquals( 2, actual.getTotalPages() );
+        Assert.assertEquals( 0, actual.getNumber() );
+        Assert.assertEquals( 3, actual.getTotalElements() );
+    
+        actual = gameService.findAll(3, 2, false);
+        Assert.assertEquals( 2, actual.getTotalPages() );
+        Assert.assertEquals( 3, actual.getNumber() );
+        Assert.assertEquals( 3, actual.getTotalElements() );
+        
+        actual = gameService.findAll(0, 2, true);
+        Assert.assertEquals( 0, actual.getTotalPages() );
+        Assert.assertEquals( 0, actual.getNumber() );
+        Assert.assertEquals( 0, actual.getTotalElements() );
     }
     
 }

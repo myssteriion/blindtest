@@ -99,9 +99,9 @@ public class GameController {
      */
     @GetMapping()
     public ResponseEntity<Page<Game>> findAll(
-            @RequestParam(value = Constant.SHOW_FINISHED_GAMES, required = false, defaultValue = Constant.SHOW_FINISHED_GAMES_DEFAULT_VALUE) boolean showFinishedGames,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
-            @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
+            @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage,
+            @RequestParam(value = Constant.SHOW_FINISHED_GAMES, required = false, defaultValue = Constant.SHOW_FINISHED_GAMES_DEFAULT_VALUE) boolean showFinishedGames) {
     
         Page<Game> page = gameService.findAll(pageNumber, itemPerPage, showFinishedGames);
         return RestUtils.create200(page);
