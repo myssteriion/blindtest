@@ -137,9 +137,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
             List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
             for (SpotifyMusic spotifyMusic : spotifyMusics) {
                 
-                MusicDTO musicDto = new MusicDTO( spotifyMusic.getName(), theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
-                Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode(musicDto.getName(), musicDto.getTheme(), ConnectionMode.ONLINE);
-                if (!optionalMusic.isPresent())
+                String musicName = spotifyMusic.getArtists() + CommonConstant.HYPHEN_WITH_SPACE + spotifyMusic.getName();
+                MusicDTO musicDto = new MusicDTO( musicName, theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
+                Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
+                if ( !optionalMusic.isPresent() )
                     dao.save(musicDto);
             }
         }

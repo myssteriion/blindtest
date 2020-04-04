@@ -18,7 +18,7 @@ apply plugin: "io.spring.dependency-management"
 apply plugin: "war"
 
 def currentVersion = "2.0.1-SNAPSHOT"
-def myssteriionUtilsVersion = "1.0.0"
+def myssteriionUtilsVersion = "1.1.0"
 
 def deliveryFolder = "delivery"
 def env = project.hasProperty("env") ? project.env : "dev"
