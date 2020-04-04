@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    version: "2.0.0",
+    version: "2.0.1-SNAPSHOT",
     baseBackendUrl: "http://localhost:8085/musics-blindtest",
     
     maxPlayers: 16,
