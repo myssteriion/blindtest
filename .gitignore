@@ -1,15 +1,16 @@
-####### back #######
+####### IDE #######
 .idea
 .project
 .classpath
 .settings/
 bin/
+out/
 
 *.iml
 
+####### back #######
 .gradle/
 build/
-out/
 
 delivery/
 logs/
