@@ -8,6 +8,10 @@
 	text-decoration: underline;
 }
 
+.game-new-view-sub-label {
+	color: orangered;
+}
+
 .game-new-view-themes {
 	display: inline-block;
 }
@@ -51,6 +55,10 @@
 
 .game-new-view-inactive {
 	opacity: 0.2;
+}
+
+.game-new-view-forced-inactive {
+	cursor: not-allowed !important;
 }
 
 .game-new-view-launch {
