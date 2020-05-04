@@ -9,15 +9,11 @@
 
 .home-view-link {
 	text-align: center;
-	border: 2px solid #ffb500;
-	border-radius: 20px;
-	margin: 0.5em auto;
-	padding: 1em;
-	background: radial-gradient(#ffe300, #ffb500);
-	box-shadow: 8px 8px 4px silver;
+	margin-top: 8%;
+	color: #ffb500;
 }
 
 .home-view-link:hover {
-	border: 2px solid black;
 	cursor: pointer;
+	color: orangered;
 }

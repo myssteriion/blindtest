@@ -1,4 +1,5 @@
 import {trigger, state, style, transition, animate} from '@angular/animations';
+import {faGamepad, faAngleDoubleRight, faAddressCard, faChartBar, faCog} from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Path to "logo" image in assets folder.
@@ -158,11 +159,11 @@ export const REDUCTION_ANIMATION =
  * Route for the menu (button in view).
  */
 export const ROUTES_WITHOUT_HOME = [
-	{path: '/game/new', name: 'GAME.NEW_VIEW.TITLE'},
-	{path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE'},
-	{path: '/profiles', name: 'PROFILE.VIEW.TITLE'},
-	{path: '/statistics', name: 'STATISTICS.TITLE'},
-	{path: '/params', name: 'PARAMS_VIEW.TITLE'}
+	{path: '/game/new', name: 'GAME.NEW_VIEW.TITLE', icon: faGamepad},
+	{path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE', icon: faAngleDoubleRight},
+	{path: '/profiles', name: 'PROFILE.VIEW.TITLE', icon: faAddressCard},
+	{path: '/statistics', name: 'STATISTICS.TITLE', icon: faChartBar},
+	{path: '/params', name: 'PARAMS_VIEW.TITLE', icon: faCog}
 ];
 
 /**
