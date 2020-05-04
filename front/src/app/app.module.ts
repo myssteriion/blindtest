@@ -17,6 +17,7 @@ import {NgHttpLoaderModule} from "ng-http-loader";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {NavbarModule, WavesModule, ButtonsModule, IconsModule} from 'angular-bootstrap-md'
 
 import {AppComponent} from "./app.component";
 import {NgxChartsModule} from "@swimlane/ngx-charts"
@@ -175,7 +176,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NgSelectModule,
 		MatTabsModule,
 		MatSlideToggleModule,
-		MatTooltipModule
+		MatTooltipModule,
+		NavbarModule,
+		WavesModule,
+		ButtonsModule,
+		IconsModule
 	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
