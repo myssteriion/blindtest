@@ -38,7 +38,7 @@ export const GENERIC = "assets/videos/generic.mp4";
 /**
  * Name of "connexion-spotify" pdf.
  */
-export const SPOTIFY_CONNECTION_PDF_NAME = "connexion-spotify-V1.0.pdf";
+export const SPOTIFY_CONNECTION_PDF_NAME = "connexion-spotify-V1.1.pdf";
 
 /**
  * Path to "connexion-spotify" pdf in assets folder.
