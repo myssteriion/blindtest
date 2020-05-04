@@ -284,19 +284,61 @@ export class GameNewViewComponent implements OnInit {
 	
 	
 	/**
+	 * On ConnectionMode change.
+	 * @param connectionMode the new connectionMode
+	 */
+	public changeConnectionMode(connectionMode: ConnectionMode): void {
+		
+		this.selectedConnectionMode = connectionMode;
+		
+		this.selectedEffect = [];
+		if ( this.isOnlineMode() )
+			this.selectedEffect.push(Effect.NONE);
+		else
+			EFFECTS.forEach(effect => { this.selectedEffect.push(effect.enumVal); } );
+		
+	}
+	
+	/**
+	 * Test if the selected mode is ONLINE.
+	 */
+	public isOnlineMode(): boolean {
+		return this.selectedConnectionMode === ConnectionMode.ONLINE;
+	}
+	
+	/**
+	 * Test if the selected mode is BOTH.
+	 */
+	public isBothMode(): boolean {
+		return this.selectedConnectionMode === ConnectionMode.BOTH;
+	}
+	
+	/**
+	 * Test if the selected mode is ONLINE or BOTH mode.
+	 */
+	public isOnlineOrBothMode(): boolean {
+		return this.isOnlineMode() || this.isBothMode();
+	}
+	
+	
+	/**
 	 * Select/deselect effect.
 	 *
 	 * @param effect the effect
 	 */
 	public selectDeselectEffect(effect: Effect): void {
 		
-		let index = this.selectedEffect.findIndex(eff => eff === effect);
-		if (index !== -1) {
-			if (this.selectedEffect.length > 1)
-				this.selectedEffect.splice(index, 1);
+		// en mode ONLINE, seul l'effet NONE est autorisé
+		if ( !this.isOnlineMode() ) {
+			
+			let index = this.selectedEffect.findIndex(eff => eff === effect);
+			if (index !== -1) {
+				if (this.selectedEffect.length > 1)
+					this.selectedEffect.splice(index, 1);
+			}
+			else
+				this.selectedEffect.push(effect);
 		}
-		else
-			this.selectedEffect.push(effect);
 	}
 	
 	/**
