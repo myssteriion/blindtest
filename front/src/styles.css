@@ -95,6 +95,15 @@ mat-radio-button {
 }
 
 
+/****************** nav ******************/
+.navbar-menu-theme {
+	background-color: #343a40;
+}
+
+.sticky-top {
+	z-index: 1;
+}
+
 /****************** tabs ******************/
 .mat-tab-label {
     font-size: 2.4em;
