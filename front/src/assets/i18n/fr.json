@@ -36,7 +36,7 @@
         "TITLE": "Menu principal"
     },
     "PARAMS_VIEW": {
-        "TITLE": "Paramètre",
+        "TITLE": "Paramètres",
         "SPOTIFY_PARAM_VIEW": {
             "TITLE": "Connexion Spotify",
             "FIND_SPOTIFY_PARAM_ERROR": "Impossible de récupérer le paramétrage Spotify.",
