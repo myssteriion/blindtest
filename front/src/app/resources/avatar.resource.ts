@@ -14,7 +14,7 @@ export class AvatarResource {
 	/**
 	 * Rest path.
 	 */
-	private path = environment.baseBackendUrl + "/avatars";
+	private path = environment.backendPath + "/avatars";
 	
 	
 	

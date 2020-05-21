@@ -13,7 +13,7 @@ export class SpotifyResource {
 	/**
 	 * Rest path.
 	 */
-	private path = environment.baseBackendUrl + "/spotify";
+	private path = environment.backendPath + "/spotify";
 	
 	
 	

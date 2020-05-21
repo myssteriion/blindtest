@@ -14,7 +14,7 @@ export class ProfileStatisticsResource {
 	/**
 	 * Rest path.
 	 */
-	private _statisticsPath = environment.baseBackendUrl + "/profilestats";
+	private _statisticsPath = environment.backendPath + "/profilestats";
 	
 	
 	constructor(private _http: HttpClient) {
