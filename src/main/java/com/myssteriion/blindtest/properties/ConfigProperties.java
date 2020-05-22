@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with config.properties.
  */
 @Configuration
-@PropertySource("${SPRING_CONFIG_LOCATION}/config.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/config.properties")
 public class ConfigProperties {
     
     @Value("${maxPlayers}")

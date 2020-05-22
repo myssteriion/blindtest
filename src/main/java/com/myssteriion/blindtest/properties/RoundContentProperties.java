@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.properties;
 
+import com.myssteriion.blindtest.tools.Constant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with round-content.properties.
  */
 @Configuration
-@PropertySource("${SPRING_CONFIG_LOCATION}/round-content.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/round-content.properties")
 public class RoundContentProperties {
     
     @Value("${classic.nbMusics}")

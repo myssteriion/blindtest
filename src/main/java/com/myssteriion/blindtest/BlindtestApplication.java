@@ -14,7 +14,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootApplication
 @Import( {BeanFactory.class, RestUtils.class} )
-@PropertySource("${SPRING_CONFIG_LOCATION}/application.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/application.properties")
 public class BlindtestApplication extends SpringBootServletInitializer {
     
     @Override
