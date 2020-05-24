@@ -73,12 +73,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     }
     
     private void initFolderPath() {
-        
-        Path musicsFolderPath = Paths.get( configProperties.getMusicsFolderPath() );
-        CommonUtils.verifyValue("musicsFolderPath", musicsFolderPath);
-        CommonUtils.verifyValue("musicsFolderPath", musicsFolderPath.toFile() );
-        
-        MusicService.musicsFolderPath = musicsFolderPath.toFile().getAbsolutePath();
+        MusicService.musicsFolderPath = Paths.get( configProperties.getMusicsFolderPath() ).toFile().getAbsolutePath();
     }
     
     

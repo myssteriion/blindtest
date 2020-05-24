@@ -37,7 +37,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
     @Before
     public void before() throws ConflictException, NotFoundException {
         
-        musicService = Mockito.spy( new MusicService(musicDAO, spotifyService) );
+        musicService = Mockito.spy( new MusicService(musicDAO, spotifyService, configProperties) );
         Mockito.doNothing().when(musicService).refresh();
         
         gameService = new GameService(musicService, profileService, profileStatService, spotifyService);

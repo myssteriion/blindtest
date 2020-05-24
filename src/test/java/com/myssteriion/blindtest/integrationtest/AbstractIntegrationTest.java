@@ -1,11 +1,12 @@
 package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.persistence.dao.MusicDAO;
+import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
@@ -29,6 +30,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     
     @Mock
     protected SpotifyService spotifyService;
+    
+    @Autowired
+    protected ConfigProperties configProperties;
     
     @Autowired
     protected ProfileService profileService;

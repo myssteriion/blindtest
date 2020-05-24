@@ -54,12 +54,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     }
     
     private void initFolderPath() {
-        
-        Path avatarFolderPath = Paths.get( configProperties.getAvatarsFolderPath() );
-        CommonUtils.verifyValue("avatarFolderPath", avatarFolderPath);
-        CommonUtils.verifyValue("avatarFolderPath", avatarFolderPath.toFile() );
-        
-        avatarsFolderPath = avatarFolderPath.toFile().getAbsolutePath();
+        avatarsFolderPath = Paths.get( configProperties.getAvatarsFolderPath() ).toFile().getAbsolutePath();
     }
     
     
