@@ -25,6 +25,11 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class GameResumeViewComponent implements OnInit {
 	
 	/**
+	 * If view is loaded.
+	 */
+	public isLoaded: boolean;
+	
+	/**
 	 * The table headers.
 	 */
 	public headers: string[];
@@ -64,6 +69,7 @@ export class GameResumeViewComponent implements OnInit {
 	
 	ngOnInit(): void {
 		
+		this.isLoaded = false;
 		this.showGames = false;
 		this.currentPage = 1;
 		this.showFinishedGames = false;
@@ -95,6 +101,8 @@ export class GameResumeViewComponent implements OnInit {
 				this.gamesPage = response;
 				this.showGames = true;
 				this.showPageable = this.gamesPage.totalPages > 1;
+				
+				this.isLoaded = true;
 			},
 			error => {
 				

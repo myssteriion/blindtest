@@ -1,4 +1,4 @@
-<div class="container-fluid container-fluid-forced-marge" @flyInOut>
+<div *ngIf="isLoaded" class="container-fluid container-fluid-forced-marge" @flyInOut>
 	
 	<!-- header -->
 	<header [title]="'GAME.RESUME_VIEW.TITLE' | translate"></header>
@@ -34,5 +34,5 @@
 			<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
 		</div>
 	</div>
-		
+	
 </div>
