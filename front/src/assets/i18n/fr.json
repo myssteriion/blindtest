@@ -1,7 +1,7 @@
 {
     "COMMON": {
-        "START_MUSIC_TOOLTIP": "Couper la musique.",
-        "STOP_MUSIC_TOOLTIP": "Allumer la musique.",
+        "START_MUSIC_TOOLTIP": "Allumer la musique.",
+        "STOP_MUSIC_TOOLTIP": "Couper la musique.",
         "VERSION_VIEW": {
             "VERSION": "version"
         },
