@@ -9,5 +9,5 @@ export interface MusicResult {
 	authorWinners: string[],
 	titleWinners: string[],
 	losers: string[],
-	wronglyPass: string[]
+	penalties: string[]
 }
