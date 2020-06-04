@@ -5,7 +5,7 @@ export const environment = {
     
     maxPlayers: 16,
     minPlayers: 2,
-    itemPerPageAvatars: 24,
+    itemPerPageAvatars: 18,
     itemPerPageProfiles: 15,
 	itemPerPageGames: 3,
     

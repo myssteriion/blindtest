@@ -61,6 +61,11 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	public backgroundIds = [0, 1, 2, 3, 4];
 	
+	/**
+	 * The search name filter.
+	 */
+	private searchName: string;
+	
 	
 	
 	constructor(private _avatarResource: AvatarResource,
@@ -76,6 +81,7 @@ export class ProfileEditModalComponent implements OnInit {
 		
 		this.showAvatars = false;
 		this.showPageable = false;
+		this.searchName = "";
 		
 		if (this.create) {
 			
@@ -113,7 +119,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private loadAvatars(pageNumber: number): void {
 		
-		this._avatarResource.findAllBySearchName("", pageNumber-1).subscribe(
+		this._avatarResource.findAllBySearchName(this.searchName, pageNumber-1).subscribe(
 			response => {
 				
 				this.avatarsPage = response;
