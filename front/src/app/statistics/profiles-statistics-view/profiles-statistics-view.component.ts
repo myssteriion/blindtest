@@ -55,7 +55,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
      * @param page
      */
     private getAllPlayers(page) {
-        this._profileResource.findAllByNameStartingWith('', page).subscribe(response => {
+        this._profileResource.findAllBySearchName('', page).subscribe(response => {
             response.content.forEach(user => {
                 this.users.push(user)
             });

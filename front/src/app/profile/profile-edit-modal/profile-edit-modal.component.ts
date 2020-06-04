@@ -113,7 +113,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private loadAvatars(pageNumber: number): void {
 		
-		this._avatarResource.findAllByNameStartingWith("", pageNumber-1).subscribe(
+		this._avatarResource.findAllBySearchName("", pageNumber-1).subscribe(
 			response => {
 				
 				this.avatarsPage = response;

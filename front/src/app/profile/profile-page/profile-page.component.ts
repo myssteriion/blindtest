@@ -67,9 +67,9 @@ export class ProfilePageComponent implements OnInit {
 	private showPageable: boolean;
 	
 	/**
-	 * The prefix name filter.
+	 * The search name filter.
 	 */
-	private prefixName: string;
+	private searchName: string;
 	
 	
 	
@@ -82,7 +82,7 @@ export class ProfilePageComponent implements OnInit {
 		
 		this.isLoaded = false;
 		this.showProfiles = false;
-		this.prefixName = "";
+		this.searchName = "";
 		this.loadProfiles(true);
 	}
 	
@@ -99,7 +99,7 @@ export class ProfilePageComponent implements OnInit {
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._profileResource.findAllByNameStartingWith(this.prefixName, this.currentPage-1).subscribe(
+		this._profileResource.findAllBySearchName(this.searchName, this.currentPage-1).subscribe(
 			response => {
 				this.page = response;
 				this.showProfiles = true;

@@ -6,7 +6,7 @@
 			<button *ngIf="canEdit" class="btn btn-info font-size-normal box-shadow" (click)="createProfile()">{{ 'PROFILE.PAGE.CREATE_BUTTON' | translate }}</button>
 		</div>
 		<div [ngClass]="{'col-3': canEdit, 'col-6': !canEdit}">
-			<input class="form-control font-size-normal" [(ngModel)]="prefixName" placeholder="{{ 'PROFILE.PAGE.PREFIX_PLACE_HOLDER' | translate }}"
+			<input class="form-control font-size-normal" [(ngModel)]="searchName" placeholder="{{ 'COMMON.SEARCH' | translate }}"
 				   (ngModelChange)="loadProfiles(true)" maxlength="15">
 		</div>
 		<div *ngIf="showPageable" class="col-3">

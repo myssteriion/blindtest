@@ -41,15 +41,15 @@ export class ProfileResource {
 	}
 	
 	/**
-	 * Gets profiles pageable filtered by prefix name.
+	 * Gets profiles pageable filtered by search name.
 	 *
-	 * @param prefixName the prefix name filter
+	 * @param searchName the search name filter
 	 * @param pageNumber the page number
 	 */
-	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Profile> > {
+	public findAllBySearchName(searchName: string, pageNumber: number): Observable< Page<Profile> > {
 		
 		let params = new HttpParams();
-		params = params.set("prefixName", prefixName);
+		params = params.set("searchName", searchName);
 		params = params.set("pageNumber", pageNumber.toString());
 		params = params.set("itemPerPage", environment.itemPerPageProfiles.toString());
 		
