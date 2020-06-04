@@ -192,10 +192,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	public disabledSave(): boolean {
 		return ToolsService.isNullOrEmpty(this.newProfile.name) ||
-			ToolsService.isNull(this.newProfile.avatar) ||
-			ToolsService.isNullOrEmpty(this.newProfile.avatar.name) ||
-			ToolsService.isNull(this.newProfile.avatar.flux) ||
-			!this.newProfile.avatar.flux.fileExists;
+			ToolsService.isNull(this.newProfile.background);
 	}
 	
 	/**

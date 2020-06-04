@@ -40,7 +40,6 @@ public class ProfileDTO extends AbstractDTO {
      * The avatar name.
      */
     @Column(name = "avatar_name", nullable = false)
-    @NotEmpty(message = "AvatarName can't be empty.")
     private String avatarName;
     
     /**
@@ -88,7 +87,7 @@ public class ProfileDTO extends AbstractDTO {
         
         this.name = CommonUtils.isNullOrEmpty(name) ? "" : name.trim();
         this.background = Math.max(background, 0);
-        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
+        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? "" : avatarName;
         this.avatar = new AvatarDTO(this.avatarName);
     }
     
@@ -161,7 +160,7 @@ public class ProfileDTO extends AbstractDTO {
      * @return this
      */
     public ProfileDTO setAvatarName(String avatarName) {
-        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? Constant.DEFAULT_AVATAR : avatarName;
+        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? "" : avatarName;
         this.avatar = new AvatarDTO(this.avatarName);
         return this;
     }
