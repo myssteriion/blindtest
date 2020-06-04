@@ -98,7 +98,7 @@ public class FriendshipContent extends AbstractRoundContent {
         
         // le super n'est pas appelé dans cette redéfinition
         game.getPlayers().stream()
-                .filter( player -> musicResult.hadWronglyPass(player.getProfile().getName()) )
+                .filter( player -> musicResult.hadPenalty(player.getProfile().getName()) )
                 .forEach( player -> player.addScore(nbPointWon * -2) );
         
         

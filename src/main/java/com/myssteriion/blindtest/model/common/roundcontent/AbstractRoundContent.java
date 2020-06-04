@@ -59,9 +59,10 @@ public abstract class AbstractRoundContent {
      * @param game the game
      */
     public void prepare(Game game) {
+    
+        CommonUtils.verifyValue("game", game);
         
         game.getPlayers().forEach( player -> {
-            
             player.setTurnToChoose(false);
             player.setTeamNumber(-1);
         });
@@ -88,7 +89,7 @@ public abstract class AbstractRoundContent {
                 .forEach( player -> player.addScore(nbPointWon) );
         
         game.getPlayers().stream()
-                .filter( player -> musicResult.hadWronglyPass(player.getProfile().getName()) )
+                .filter( player -> musicResult.hadPenalty(player.getProfile().getName()) )
                 .forEach( player -> player.addScore(nbPointWon * -2) );
         
         return game;

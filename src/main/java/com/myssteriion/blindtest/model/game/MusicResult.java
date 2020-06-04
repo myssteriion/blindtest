@@ -38,9 +38,9 @@ public class MusicResult {
     private List<String> losers;
     
     /**
-     * The losers list.
+     * The penalties list.
      */
-    private List<String> wronglyPass;
+    private List<String> penalties;
     
     
     
@@ -54,7 +54,7 @@ public class MusicResult {
      * @param losers  		the losers
      */
     @JsonCreator
-    public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers, List<String> wronglyPass) {
+    public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers, List<String> penalties) {
         
         CommonUtils.verifyValue("gameId", gameId);
         CommonUtils.verifyValue("music", music);
@@ -65,7 +65,7 @@ public class MusicResult {
         this.authorWinners = (authorWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(authorWinners);
         this.titleWinners = (titleWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(titleWinners);
         this.losers = (losers == null) ? new ArrayList<>() : losers;
-        this.wronglyPass = (wronglyPass == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(wronglyPass);
+        this.penalties = (penalties == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(penalties);
     }
     
     
@@ -116,12 +116,12 @@ public class MusicResult {
     }
     
     /**
-     * Gets wronglyPass.
+     * Gets penalties.
      *
-     * @return The wronglyPass.
+     * @return The penalties
      */
-    public List<String> getWronglyPass() {
-        return wronglyPass;
+    public List<String> getPenalties() {
+        return penalties;
     }
     
     
@@ -178,16 +178,16 @@ public class MusicResult {
     }
     
     /**
-     * Test if "name" is a looser.
+     * Test if "name" had penalty.
      *
      * @param name the name
-     * @return TRUE if "name" is a looser, FALSE otherwise
+     * @return TRUE if "name" had penalty, FALSE otherwise
      */
-    public boolean hadWronglyPass(String name) {
+    public boolean hadPenalty(String name) {
         
         CommonUtils.verifyValue("name", name);
         
-        return wronglyPass.stream().anyMatch(playerName -> playerName.equals(name));
+        return penalties.stream().anyMatch(playerName -> playerName.equals(name));
     }
     
     
@@ -198,7 +198,7 @@ public class MusicResult {
                 ", authorWinners=" + authorWinners +
                 ", titleWinners=" + titleWinners +
                 ", losers=" + losers +
-                ", wronglyPass=" + wronglyPass;
+                ", penalties=" + penalties;
     }
     
 }

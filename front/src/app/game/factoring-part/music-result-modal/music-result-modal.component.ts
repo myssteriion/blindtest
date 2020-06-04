@@ -115,7 +115,7 @@ export class MusicResultModalComponent implements OnInit {
 	private fillRows(): void {
 		this.lines = [];
 		for (let player of this.players)
-			this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0, wronglyPass: false } );
+			this.lines.push( { name: player.profile.name, score: player.score, authorWinner: false, titleWinner: false, loser: 0, penalty: false } );
 		
 		this.lines.sort( (line1, line2) => {
 			return line2.score - line1.score;
@@ -166,13 +166,13 @@ export class MusicResultModalComponent implements OnInit {
 		let authorWinners: string[] = [];
 		let titleWinners: string[] = [];
 		let losers: string[] = [];
-		let wronglyPass: string[] = [];
+		let penalties: string[] = [];
 		
 		for (let playerLine of this.lines) {
 			
 			if (playerLine.authorWinner)    authorWinners.push(playerLine.name);
 			if (playerLine.titleWinner)     titleWinners.push(playerLine.name);
-			if (playerLine.wronglyPass) wronglyPass.push(playerLine.name);
+			if (playerLine.penalty) 		penalties.push(playerLine.name);
 			for (let i = 0; i < playerLine.loser; i++)
 				losers.push(playerLine.name);
 		}
@@ -189,7 +189,7 @@ export class MusicResultModalComponent implements OnInit {
 			authorWinners: authorWinners,
 			titleWinners: titleWinners,
 			losers: losers,
-			wronglyPass: wronglyPass
+			penalties: penalties
 		};
 		
 		this._gameResource.apply(musicResult).subscribe(
@@ -243,7 +243,7 @@ interface PLayerLine {
 	authorWinner: boolean;
 	titleWinner: boolean;
 	loser: number,
-	wronglyPass: boolean;
+	penalty: boolean;
 }
 
 /**
