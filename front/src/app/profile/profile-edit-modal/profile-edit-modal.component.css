@@ -24,7 +24,7 @@
 	margin: auto;
 }
 
-.profile-edit-avatar img, .profile-edit-avatars img {
+.profile-edit-avatar img {
 	height: 4em;
 	width: 4em;
 	border-radius: 50%;
@@ -40,6 +40,10 @@
 
 .profile-edit-avatars img {
 	cursor: pointer;
+	height: 5.75em;
+	width: 5.75em;
+	border-radius: 50%;
+	margin: 10px;
 }
 
 .profile-edit-background {
@@ -57,4 +61,8 @@
 
 .profile-edit-background-active {
 	opacity: 1;
+}
+
+.profile-edit-avatar-line-one {
+	padding-bottom: 1em;
 }
