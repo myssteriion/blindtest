@@ -35,23 +35,23 @@ public class AvatarController {
 
 
     /**
-     * Find pageable of avatar filtered by prefix name.
+     * Find pageable of avatar filtered by search name.
      *
-     * @param prefixName  the prefix name
+     * @param searchName  the search name
      * @param pageNumber  the page number
      * @param itemPerPage the item per page
      * @return the pageable of avatars
      */
     @GetMapping
-    public ResponseEntity< Page<AvatarDTO> > findAllByNameStartingWith(
-            @RequestParam(value = Constant.PREFIX_NAME, required = false, defaultValue = Constant.PREFIX_NAME_DEFAULT_VALUE) String prefixName,
+    public ResponseEntity< Page<AvatarDTO> > findAllBySearchName(
+            @RequestParam(value = Constant.SEARCH_NAME, required = false, defaultValue = Constant.SEARCH_NAME_DEFAULT_VALUE) String searchName,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
 
-        Page<AvatarDTO> page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
+        Page<AvatarDTO> page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
         if ( avatarService.needRefresh() ) {
             avatarService.refresh();
-            page = avatarService.findAllByNameStartingWith(prefixName, pageNumber, itemPerPage);
+            page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
         }
 
         return RestUtils.create200(page);

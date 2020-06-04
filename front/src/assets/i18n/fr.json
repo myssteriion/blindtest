@@ -27,7 +27,8 @@
         "RANK": "n° rang",
         "HELP_DL": "Télécharger l'aide",
         "REMEMBER_TO_RECORD": "Pensez à enregistrer les modifications.",
-        "FINISHED_GAME": "Partie terminée"
+        "FINISHED_GAME": "Partie terminée",
+        "SEARCH": "Rechercher"
     },
     "GENERIC_VIEW": {
         "STOP_BUTTON": "Passer le générique"
@@ -204,7 +205,6 @@
         },
         "PAGE": {
             "CREATE_BUTTON": "Nouveau profil",
-            "PREFIX_PLACE_HOLDER": "Chercher un profil",
             "LOAD_PROFILES_ERROR": "Impossible de recupérer les profils."
         },
         "PAGE_MODAL": {

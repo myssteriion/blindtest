@@ -71,17 +71,17 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     }
     
     /**
-     * Find a pageNumber of Profile filtered by a prefix name.
+     * Find a pageNumber of Profile filtered by a search name.
      *
-     * @param namePrefix  the name prefix
+     * @param searchName  the search name
      * @param pageNumber  the page number
      * @param itemPerPage the item per page
-     * @return the page of profiles
+     * @return the page of profiles filtered by search name
      */
-    public Page<ProfileDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
+    public Page<ProfileDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
-        if (namePrefix == null)
-            namePrefix = "";
+        if (searchName == null)
+            searchName = "";
         
         itemPerPage = Math.max(itemPerPage, 1);
         itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
@@ -89,7 +89,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
         Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
         
-        Page<ProfileDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
+        Page<ProfileDTO> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
         page.forEach(this::createProfileAvatarFlux);
         
         return page;

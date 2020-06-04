@@ -23,12 +23,12 @@ public interface ProfileDAO extends IDAO<ProfileDTO> {
     Optional<ProfileDTO> findByName(String name);
     
     /**
-     * Find a page of profile filtered by prefix name.
+     * Find a page of profile filtered by search name.
      *
-     * @param prefixName the prefix name
+     * @param searchName the search name
      * @param pageable   the page
-     * @return a page of profile filtered by prefix name
+     * @return a page of profile filtered by search name
      */
-    Page<ProfileDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
+    Page<ProfileDTO> findAllByNameContainingIgnoreCase(String searchName, Pageable pageable);
     
 }

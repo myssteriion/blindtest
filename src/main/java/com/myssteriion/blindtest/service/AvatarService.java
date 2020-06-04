@@ -148,17 +148,17 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     }
     
     /**
-     * Find a page of Avatar filtered by a prefix name.
+     * Find a page of Avatar filtered by a search name.
      *
-     * @param namePrefix  the name prefix
+     * @param searchName  the search name
      * @param pageNumber  the page number
      * @param itemPerPage the item per page
-     * @return the page of avatars
+     * @return the page of avatars filtered by search name
      */
-    public Page<AvatarDTO> findAllByNameStartingWith(String namePrefix, int pageNumber, int itemPerPage) {
+    public Page<AvatarDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
-        if (namePrefix == null)
-            namePrefix = "";
+        if (searchName == null)
+            searchName = "";
         
         itemPerPage = Math.max(itemPerPage, 1);
         itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
@@ -166,7 +166,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
         Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
         
-        Page<AvatarDTO> page = dao.findAllByNameStartingWithIgnoreCase(namePrefix, pageable);
+        Page<AvatarDTO> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
         page.forEach(this::createAvatarFlux);
         
         return page;

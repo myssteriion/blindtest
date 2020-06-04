@@ -23,15 +23,15 @@ export class AvatarResource {
 	
 	
 	/**
-	 * Gets avatars pageable filtered by prefix name.
+	 * Gets avatars pageable filtered by search name.
 	 *
-	 * @param prefixName the prefix name filter
+	 * @param searchName the search name filter
 	 * @param pageNumber the page number
 	 */
-	public findAllByNameStartingWith(prefixName: string, pageNumber: number): Observable< Page<Avatar> > {
+	public findAllBySearchName(searchName: string, pageNumber: number): Observable< Page<Avatar> > {
 		
 		let params = new HttpParams();
-		params = params.set("prefixName", prefixName);
+		params = params.set("searchName", searchName);
 		params = params.set("pageNumber", pageNumber.toString());
 		params = params.set("itemPerPage", environment.itemPerPageAvatars.toString());
 		

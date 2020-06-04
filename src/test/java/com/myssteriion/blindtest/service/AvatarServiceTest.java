@@ -210,13 +210,13 @@ public class AvatarServiceTest extends AbstractTest {
     }
     
     @Test
-    public void findAllByNameStartingWith() {
+    public void findAllBySearchName() {
         
         AvatarDTO avatarDto = new AvatarDTO("name");
-        Mockito.when(dao.findAllByNameStartingWithIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
+        Mockito.when(dao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
         
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith(null, 0, 1) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllByNameStartingWith("", 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllBySearchName(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllBySearchName("", 0, 1) );
     }
     
     @Test

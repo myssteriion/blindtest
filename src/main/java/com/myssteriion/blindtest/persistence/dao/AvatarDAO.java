@@ -23,12 +23,12 @@ public interface AvatarDAO extends IDAO<AvatarDTO> {
     Optional<AvatarDTO> findByName(String name);
     
     /**
-     * Find a page of Avatar filtered by prefix name.
+     * Find a page of Avatar filtered by search name.
      *
-     * @param prefixName the prefix name
+     * @param searchName the search name
      * @param pageable   the page
-     * @return a page of Avatar filtered by prefix name
+     * @return a page of Avatar filtered by search name
      */
-    Page<AvatarDTO> findAllByNameStartingWithIgnoreCase(String prefixName, Pageable pageable);
+    Page<AvatarDTO> findAllByNameContainingIgnoreCase(String searchName, Pageable pageable);
     
 }
