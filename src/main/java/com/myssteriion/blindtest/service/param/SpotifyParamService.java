@@ -68,30 +68,30 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
     }
     
     
-    private SpotifyParamDTO encrypt(SpotifyParamDTO dto) {
+    private SpotifyParamDTO encrypt(SpotifyParamDTO spotifyParam) {
     
         SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO();
-        spotifyParamEncrypted.setId( dto.getId() );
+        spotifyParamEncrypted.setId( spotifyParam.getId() );
         
-        spotifyParamEncrypted.setClientId( CommonUtils.STRING_CIPHER.encrypt(dto.getClientId()) );
-        spotifyParamEncrypted.setClientSecret( CommonUtils.STRING_CIPHER.encrypt(dto.getClientSecret()) );
+        spotifyParamEncrypted.setClientId( CommonUtils.STRING_CIPHER.encrypt(spotifyParam.getClientId()) );
+        spotifyParamEncrypted.setClientSecret( CommonUtils.STRING_CIPHER.encrypt(spotifyParam.getClientSecret()) );
         
-        Map<Theme, String> map = dto.getPlaylistIds();
+        Map<Theme, String> map = spotifyParam.getPlaylistIds();
         for ( Theme theme : map.keySet() )
             spotifyParamEncrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.encrypt(map.get(theme)) );
         
         return spotifyParamEncrypted;
     }
     
-    private SpotifyParamDTO decrypt(SpotifyParamDTO dto) {
+    private SpotifyParamDTO decrypt(SpotifyParamDTO spotifyParam) {
     
         SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO();
-        spotifyParamDecrypted.setId( dto.getId() );
+        spotifyParamDecrypted.setId( spotifyParam.getId() );
         
-        spotifyParamDecrypted.setClientId( CommonUtils.STRING_CIPHER.decrypt(dto.getClientId()) );
-        spotifyParamDecrypted.setClientSecret( CommonUtils.STRING_CIPHER.decrypt(dto.getClientSecret()) );
+        spotifyParamDecrypted.setClientId( CommonUtils.STRING_CIPHER.decrypt(spotifyParam.getClientId()) );
+        spotifyParamDecrypted.setClientSecret( CommonUtils.STRING_CIPHER.decrypt(spotifyParam.getClientSecret()) );
         
-        Map<Theme, String> map = dto.getPlaylistIds();
+        Map<Theme, String> map = spotifyParam.getPlaylistIds();
         for ( Theme theme : map.keySet() )
             spotifyParamDecrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.decrypt(map.get(theme)) );
         

@@ -187,16 +187,16 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     /**
      * Create avatar flux on avatar.
      *
-     * @param dto the dto
+     * @param avatar the avatar
      */
-    public void createAvatarFlux(AvatarDTO dto) {
+    public void createAvatarFlux(AvatarDTO avatar) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue("avatar", avatar);
         
         try {
             
-            Path path = Paths.get(avatarsFolderPath, dto.getName() );
-            dto.setFlux( new Flux(path.toFile()) );
+            Path path = Paths.get(avatarsFolderPath, avatar.getName() );
+            avatar.setFlux( new Flux(path.toFile()) );
         }
         catch (IOException e) {
             throw new CustomRuntimeException("Can't create avatar flux.", e);

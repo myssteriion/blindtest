@@ -36,16 +36,16 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
     /**
      * Find profile stat dto by profileId.
      *
-     * @param profileDto the profile dto
+     * @param profile the profile dto
      * @return the profile stat dto
      * @throws NotFoundException the not found exception
      */
-    public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws NotFoundException {
+    public ProfileStatDTO findByProfile(ProfileDTO profile) throws NotFoundException {
         
-        CommonUtils.verifyValue("profile", profileDto);
-        CommonUtils.verifyValue("profile -> id", profileDto.getId());
+        CommonUtils.verifyValue("profile", profile);
+        CommonUtils.verifyValue("profile -> id", profile.getId());
         
-        ProfileStatDTO profileStatDto = new ProfileStatDTO( profileDto.getId() );
+        ProfileStatDTO profileStatDto = new ProfileStatDTO( profile.getId() );
         ProfileStatDTO foundProfileStatDTO = find(profileStatDto);
         
         if ( CommonUtils.isNullOrEmpty(foundProfileStatDTO) )

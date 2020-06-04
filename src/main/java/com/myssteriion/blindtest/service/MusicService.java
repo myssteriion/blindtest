@@ -245,10 +245,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     /**
      * Randomly choose a music.
      *
-     * @param sameProbability if themes probability are same
-     * @param themes     	 the themes filter (optional)
-     * @param effects     	 the effects filter (optional)
-     * @param connectionMode the online mode
+     * @param sameProbability   if themes probability are same
+     * @param themes     	    the themes filter (optional)
+     * @param effects     	    the effects filter (optional)
+     * @param connectionMode    the connection mode
      * @return the music dto
      * @throws NotFoundException the not found exception
      * @throws IOException       the io exception
@@ -259,9 +259,8 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         
         List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
         List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
-        
-        List<MusicDTO> allMusics = new ArrayList<>();
-        dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes).forEach(allMusics::add);
+    
+        List<MusicDTO> allMusics = new ArrayList<>( dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes) );
         
         if ( CommonUtils.isNullOrEmpty(allMusics) )
             throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");

@@ -225,7 +225,7 @@ public class AvatarServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
         }
         
         AvatarDTO avatarDtoMock = new AvatarDTO("name");
