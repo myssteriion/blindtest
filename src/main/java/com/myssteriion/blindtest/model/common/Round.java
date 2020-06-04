@@ -49,7 +49,10 @@ public enum Round {
      * @return the next round, NULL if there isn't next
      */
     public Round nextRound() {
-        return Arrays.stream(Round.values()).filter(round -> round.roundNumber == this.roundNumber+1).findFirst().orElse(null);
+        return Arrays.stream( Round.values() )
+                .filter(round -> round.roundNumber == this.roundNumber+1)
+                .findFirst()
+                .orElse(null);
     }
     
     /**
@@ -123,7 +126,7 @@ public enum Round {
      * @return TRUE if it's the last round, FALSE otherwise
      */
     public boolean isLast() {
-        return Arrays.stream(Round.values()).noneMatch(round -> round.roundNumber == this.roundNumber+1);
+        return CommonUtils.isNullOrEmpty( nextRound() );
     }
     
     /**
@@ -132,7 +135,8 @@ public enum Round {
      * @return the first round
      */
     public static Round getFirst() {
-        return Arrays.stream(Round.values()).filter(round -> round.roundNumber == 0)
+        return Arrays.stream( Round.values() )
+                .filter(round -> round.roundNumber == 0)
                 .findFirst()
                 .orElseThrow( () -> new IllegalArgumentException("Round n°0 not found.") );
     }
