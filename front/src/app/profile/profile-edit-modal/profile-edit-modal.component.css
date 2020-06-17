@@ -3,17 +3,17 @@
 }
 
 .profile-edit-header {
-	border-bottom: 1px solid silver;
+	border-bottom: 0.07em solid silver;
 }
 
 .profile-edit-footer {
-	border-top: 1px solid silver;
+	border-top: 0.07em solid silver;
 	text-align: right;
 }
 
 .profile-edit-footer button {
-	margin-top: 10px;
-	margin-left: 10px;
+	margin-top: 0.67em;
+	margin-left: 0.67em;
 }
 
 .profile-edit-avatar, .profile-edit-name, .profile-edit-backgrounds {
@@ -28,13 +28,13 @@
 	height: 2.7em;
 	width: 2.7em;
 	border-radius: 50%;
-	margin: 10px;
+	margin: 0.67em;
 }
 
 .profile-edit-avatars {
-	border: 2px solid silver;
-	border-radius: 20px;
-	margin-bottom: 10px;
+	border: 0.15em solid silver;
+	border-radius: 1.35em;
+	margin-bottom: 0.67em;
 	text-align: center;
 }
 
@@ -43,13 +43,13 @@
 	height: 3.85em;
 	width: 3.85em;
 	border-radius: 50%;
-	margin: 10px;
+	margin: 0.67em;
 }
 
 .profile-edit-background {
-	border: 1px solid black;
-	border-radius: 30px;
-	margin: 10px 5px !important;
+	border: 0.07em solid black;
+	border-radius: 2em;
+	margin: 0.7em 0.35em !important;
 	height: 2em;
 	opacity: 0.2;
 }

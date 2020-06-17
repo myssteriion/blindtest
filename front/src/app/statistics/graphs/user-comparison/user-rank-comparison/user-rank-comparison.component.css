@@ -1,5 +1,5 @@
 .theme-list {
-    margin-bottom: 30px;
+    margin-bottom: 2em;
     text-align: center;
 }
 
@@ -9,15 +9,15 @@
     background-color: lightgray;
     text-align: center;
     vertical-align: middle;
-    box-shadow: 1px 5px 10px lightgrey;
-    border: 1px solid gray;
-    border-radius: 7px;
-    margin: 5px;
-    padding: 5px;
+    box-shadow: 0.07em 0.33em 0.7em lightgrey;
+    border: 0.07em solid gray;
+    border-radius: 0.45em;
+    margin: 0.33em;
+    padding: 0.33em;
 }
 
 .theme:hover {
-    box-shadow: 3px 7px 8px grey;
+    box-shadow: 0.2em 0.4em 0.53em grey;
 }
 
 .selected-theme {

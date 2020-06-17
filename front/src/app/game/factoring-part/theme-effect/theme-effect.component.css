@@ -5,9 +5,9 @@
 .theme-effect-frame img {
 	height: 5.35em;
 	width: 5.35em;
-	margin: 10px;
-	border: 1px solid black;
-	border-radius: 10px;
+	margin: 0.67em;
+	border: 0.07em solid black;
+	border-radius: 0.67em;
 	background-color: white;
-	box-shadow: 8px 8px 4px silver;
+	box-shadow: 0.53em 0.53em 0.27em silver;
 }

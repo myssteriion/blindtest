@@ -9,7 +9,7 @@
 }
 
 input, .pagination, .alert, .box-shadow {
-    box-shadow: 8px 8px 4px silver;
+    box-shadow: 0.53em 0.53em 0.27em silver;
 }
 
 .no-box-shadow {
@@ -115,7 +115,7 @@ mat-radio-button {
 
 /****************** icon ******************/
 fa-icon {
-    padding: 5px;
+    padding: 0.33em;
 }
 
 fa-icon:hover {
@@ -154,8 +154,8 @@ fa-icon:hover {
 /*************** graphs ***************/
 .graph-frame {
     background-color: #f2f2f2;
-    border: 1px solid black;
-    border-radius: 20px;
+    border: 0.07em solid black;
+    border-radius: 1.35em;
 }
 
 .graph-frame .graph-title {
@@ -166,9 +166,9 @@ fa-icon:hover {
     padding: 0.65em;
 
     background-color: #cbc7cc;
-    border-bottom: 1px solid black;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-bottom: 0.07em solid black;
+    border-top-left-radius: 1.35em;
+    border-top-right-radius: 1.35em;
 }
 
 .graph-frame .graph-content {

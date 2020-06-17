@@ -1,13 +1,13 @@
 .profile-card-frame {
 	min-height: 3.35em;
-	border: 2px solid black;
-	border-radius: 30px;
-	box-shadow: 8px 8px 4px silver;
+	border: 0.15em solid black;
+	border-radius: 2em;
+	box-shadow: 0.53em 0.53em 0.27em silver;
 }
 
 .profile-card-frame-can-select:hover {
 	cursor: pointer;
-	border: 4px solid black;
+	border: 0.27em solid black;
 }
 
 .profile-card-name, .profile-card-avatar, .profile-card-action-button {

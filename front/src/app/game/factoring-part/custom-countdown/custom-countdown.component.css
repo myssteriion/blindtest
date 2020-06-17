@@ -1,6 +1,6 @@
 .custom-countdown-frame {
 	text-align: center;
-	text-shadow: 2px 0 0 #555, 0 2px 0 #555, -2px 0 0 #555, 0 -2px 0 #555, 2px 2px 0 #555, -2px -2px 0 #555, 2px -2px 0 #555, -2px 2px 0 #555;
+	text-shadow: 0.15em 0 0 #555, 0 0.15em 0 #555, -0.15em 0 0 #555, 0 -0.15em 0 #555, 0.15em 0.15em 0 #555, -0.15em -0.15em 0 #555, 0.15em -0.15em 0 #555, -0.15em 0.15em 0 #555;
 	font-weight: bold;
 	font-size: 3.35em;
 }
