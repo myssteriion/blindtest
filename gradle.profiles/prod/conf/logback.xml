@@ -1,6 +1,6 @@
 <configuration>
 	
-	<property name="LOG_PATH" value="D:/FYAC/Serveurs/tomcat/logs/musics-blindtest"/>
+	<property name="LOG_PATH" value="C:/Users/mouto/Serveurs/tomcat/logs/musics-blindtest"/>
 	<property name="LOG_FILE_NAME" value="musics-blindtest"/>
 	
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
