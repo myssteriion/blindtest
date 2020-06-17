@@ -113,7 +113,7 @@ export class ProfileCardComponent implements OnInit {
 	 */
 	private edit(): void {
 		
-		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.profile = this.profile;
 		modalRef.componentInstance.create = false;
 		
