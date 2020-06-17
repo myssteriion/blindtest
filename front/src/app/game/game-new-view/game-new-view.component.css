@@ -19,7 +19,7 @@
 .game-new-view-theme-info {
 	margin: 0.65em 0.3em 0 0.3em;
 	border-radius: 0.67em;
-	box-shadow: 0.5em 0.5em 0.27em silver;
+	box-shadow: 0.27em 0.27em 0.15em silver;
 }
 
 .game-new-view-theme-info-img {
@@ -37,7 +37,7 @@
 	border: 0.07em solid black;
 	border-radius: 0.67em;
 	background-color: white;
-	box-shadow: 0.53em 0.53em 0.27em silver;
+	box-shadow: 0.27em 0.27em 0.15em silver;
 }
 
 .game-new-view-theme-info-img:hover, .game-new-view-effect-img:hover {

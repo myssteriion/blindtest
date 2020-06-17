@@ -9,7 +9,7 @@
 }
 
 input, .pagination, .alert, .box-shadow {
-    box-shadow: 0.53em 0.53em 0.27em silver;
+    box-shadow: 0.27em 0.27em 0.15em silver;
 }
 
 .no-box-shadow {
