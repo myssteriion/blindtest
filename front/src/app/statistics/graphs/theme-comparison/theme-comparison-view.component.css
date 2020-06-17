@@ -7,8 +7,8 @@
 }
 
 .theme-comparison-img {
-    height: 6em;
-    width: 6em;
+    height: 4em;
+    width: 4em;
     margin: 10px;
     border: 1px solid black;
     border-radius: 10px;
@@ -27,5 +27,5 @@
 }
 
 .theme-comparison-graphs {
-    padding: 2em 0;
+    padding: 1.35em 0;
 }

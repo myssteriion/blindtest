@@ -1,5 +1,5 @@
 .profile-edit-header, .profile-edit-body, .profile-edit-footer {
-	margin: 1em;
+	margin: 0.65em;
 }
 
 .profile-edit-header {
@@ -17,7 +17,7 @@
 }
 
 .profile-edit-avatar, .profile-edit-name, .profile-edit-backgrounds {
-	margin-bottom: 1em;
+	margin-bottom: 0.65em;
 }
 
 .profile-edit-avatar div, .profile-edit-name div, .profile-edit-backgrounds div {
@@ -25,8 +25,8 @@
 }
 
 .profile-edit-avatar img {
-	height: 4em;
-	width: 4em;
+	height: 2.7em;
+	width: 2.7em;
 	border-radius: 50%;
 	margin: 10px;
 }
@@ -40,8 +40,8 @@
 
 .profile-edit-avatars img {
 	cursor: pointer;
-	height: 5.75em;
-	width: 5.75em;
+	height: 3.85em;
+	width: 3.85em;
 	border-radius: 50%;
 	margin: 10px;
 }
@@ -50,7 +50,7 @@
 	border: 1px solid black;
 	border-radius: 30px;
 	margin: 10px 5px !important;
-	height: 3em;
+	height: 2em;
 	opacity: 0.2;
 }
 
@@ -64,5 +64,5 @@
 }
 
 .profile-edit-avatar-line-one {
-	padding-bottom: 1em;
+	padding-bottom: 0.65em;
 }

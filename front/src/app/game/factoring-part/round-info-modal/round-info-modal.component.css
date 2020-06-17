@@ -1,5 +1,5 @@
 .round-info-modal-header, .round-info-modal-body, .round-info-modal-footer {
-	margin: 1em;
+	margin: 0.65em;
 }
 
 .round-info-modal-header {
@@ -17,6 +17,6 @@
 }
 
 .round-info-modal-round-description, .round-info-modal-round-nb-point-won {
-	padding-bottom: 2em;
+	padding-bottom: 1.35em;
 	text-align: justify;
 }

@@ -1,5 +1,5 @@
 .error-alert-modal-header, .error-alert-modal-body, .error-alert-modal-footer {
-    margin: 1em;
+    margin: 0.65em;
 }
 
 .error-alert-modal-header {
@@ -20,12 +20,12 @@
 }
 
 .error-alert-text {
-    margin-top: 1em;
-    margin-bottom: 2em;
+    margin-top: 0.65em;
+    margin-bottom: 1.35em;
 }
 
 .error-alert-suggestion {
-    margin-bottom: 2em;
+    margin-bottom: 1.35em;
 }
 
 .error-alert-show a:hover {
@@ -36,7 +36,7 @@
 
 
 .error-alert-causes {
-    max-height: 18em;
+    max-height: 12em;
     overflow: auto;
 }
 

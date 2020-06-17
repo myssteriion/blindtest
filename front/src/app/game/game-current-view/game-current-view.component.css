@@ -1,5 +1,5 @@
 .game-current-view-exit {
-	margin: auto auto 2em auto;
+	margin: auto auto 1.35em auto;
 }
 
 .game-current-view-players-padding-5 { padding-top: 5%; }
@@ -8,7 +8,7 @@
 .game-current-view-players-padding-20 { padding-top: 20%; }
 
 .game-current-view-next-music, .game-current-view-offline-audio, .game-current-view-online-audio {
-	padding-top: 2em;
+	padding-top: 1.35em;
 	text-align: center;
 }
 

@@ -32,12 +32,12 @@ body {
 }
 
 mat-radio-button {
-    padding-right: 1em;
+    padding-right: 0.65em;
 }
 
 .container-fluid-forced-marge {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 6.7em;
+    padding-right: 6.7em;
 }
 
 .pagination .page-item .page-link {
@@ -70,28 +70,28 @@ mat-radio-button {
     font-weight: bold;
 }
 
-.font-size-very-very-very-small { font-size: 1.0em; }
-.font-size-very-very-small { font-size: 1.2em; }
-.font-size-very-small, .toast-container { font-size: 1.6em; }
-.font-size-small { font-size: 1.8em; }
-.font-size-normal { font-size: 2.0em; }
-.font-size-large { font-size: 2.4em; }
-.font-size-title { font-size: 3.7em; }
+.font-size-very-very-very-small { font-size: 0.65em; }
+.font-size-very-very-small { font-size: 0.8em; }
+.font-size-very-small, .toast-container { font-size: 1em; }
+.font-size-small { font-size: 1.2em; }
+.font-size-normal { font-size: 1.35em; }
+.font-size-large { font-size: 1.6em; }
+.font-size-title { font-size: 2.5em; }
 
 .modal-title {
-    font-size: 2.6em;
+    font-size: 1.7em;
     color: orangered;
 }
 
 .mat-tooltip {
-    font-size: 1.2em !important;
-    max-width: 40em !important;
+    font-size: 0.8em !important;
+    max-width: 27em !important;
     background-color: #515151;
     opacity: 1;
 }
 
 .padding-bottom-1em {
-    padding-bottom: 1em;
+    padding-bottom: 0.65em;
 }
 
 
@@ -106,11 +106,11 @@ mat-radio-button {
 
 /****************** tabs ******************/
 .mat-tab-label {
-    font-size: 2.4em;
+    font-size: 1.6em;
 }
 
 .mat-tab-body {
-    padding-top: 2em;
+    padding-top: 1.65em;
 }
 
 /****************** icon ******************/
@@ -162,8 +162,8 @@ fa-icon:hover {
     font-weight: bold;
     margin: auto;
     text-align: center;
-    font-size: 1.2em;
-    padding: 1em;
+    font-size: 0.8em;
+    padding: 0.65em;
 
     background-color: #cbc7cc;
     border-bottom: 1px solid black;
@@ -172,11 +172,11 @@ fa-icon:hover {
 }
 
 .graph-frame .graph-content {
-    height: 22em;
+    height: 14.75em;
 }
 
 .graph-frame g text {
-    font-size: 1.2em !important;
+    font-size: 0.8em !important;
 }
 
 /*************** table ***************/
@@ -187,7 +187,7 @@ fa-icon:hover {
 
 .container-table table th {
     text-align: center;
-    height: 3em;
+    height: 2em;
     background-color: #ffc066;
     position: sticky;
     top: 0;
@@ -196,7 +196,7 @@ fa-icon:hover {
 
 .container-table table td {
     text-align: center;
-    height: 2.4em;
+    height: 1.6em;
 }
 
 .container-table-odd {

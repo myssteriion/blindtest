@@ -1,6 +1,6 @@
 .theme {
-    height: 3em;
-    width: 10em;
+    height: 2em;
+    width: 6.7em;
     background-color: lightgray;
     text-align: center;
     vertical-align: middle;
@@ -21,8 +21,8 @@
 }
 
 .theme-selection-img {
-    height: 6em;
-    width: 6em;
+    height: 4em;
+    width: 4em;
     margin: 5px;
     border: 1px solid black;
     border-radius: 10px;

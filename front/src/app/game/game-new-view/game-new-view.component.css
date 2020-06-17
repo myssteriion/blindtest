@@ -1,6 +1,6 @@
 .game-new-view-part {
-	padding: 0.5em 0;
-	margin: 0.5em 0;
+	padding: 0.3em 0;
+	margin: 0.3em 0;
 }
 
 .game-new-view-label {
@@ -23,16 +23,16 @@
 }
 
 .game-new-view-theme-info-img {
-	height: 6em;
-	width: 6em;
+	height: 4em;
+	width: 4em;
 	border: 1px solid black;
 	border-radius: 10px 10px 0 0;
 	background-color: white;
 }
 
 .game-new-view-effect-img {
-	height: 6em;
-	width: 6em;
+	height: 4em;
+	width: 4em;
 	margin: 5px;
 	border: 1px solid black;
 	border-radius: 10px;
@@ -62,8 +62,8 @@
 }
 
 .game-new-view-launch {
-	padding: 1em 0;
-	margin: 1em 0;
+	padding: 0.65em 0;
+	margin: 0.65em 0;
 	text-align: center;
 }
 

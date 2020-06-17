@@ -1,5 +1,5 @@
 .choice-theme-modal-header, .choice-theme-modal-body, .choice-theme-modal-footer {
-	margin: 1em;
+	margin: 0.65em;
 }
 
 .choice-theme-modal-header {
@@ -21,8 +21,8 @@
 }
 
 .choice-theme-modal-img {
-	height: 6em;
-	width: 6em;
+	height: 4em;
+	width: 4em;
 	margin: 10px;
 	border: 1px solid black;
 	border-radius: 10px;

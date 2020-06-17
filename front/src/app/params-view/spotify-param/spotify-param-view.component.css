@@ -1,6 +1,6 @@
 .spotify-param-view-part, .spotify-param-view-buttons {
-	padding: 0.5em 0;
-	margin: 0.5em 0;
+	padding: 0.35em 0;
+	margin: 0.35em 0;
 }
 
 .spotify-param-view-label {
@@ -16,8 +16,8 @@
 }
 
 .spotify-param-view-theme-img {
-	height: 4em;
-	width: 4em;
+	height: 2.7em;
+	width: 2.7em;
 	margin: 5px;
 	border: 1px solid black;
 	border-radius: 10px;
@@ -34,7 +34,7 @@
 }
 
 .spotify-param-view-buttons button {
-	margin-left: 1em;
+	margin-left: 0.65em;
 }
 
 .spotify-param-view-remember-record {
