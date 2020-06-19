@@ -128,9 +128,9 @@ export class ProfileEditModalComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 				modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.AVATAR_LOAD_ERROR");
 				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;
@@ -236,14 +236,14 @@ export class ProfileEditModalComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
 				if (errorAlert.status === HTTP_CONFLICT) {
 					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' });
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.CREATE_ERROR");
 					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;
@@ -276,14 +276,14 @@ export class ProfileEditModalComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
 				if (errorAlert.status === HTTP_CONFLICT) {
 					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' });
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.UPDATE_ERROR");
 					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;

@@ -268,7 +268,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					},
 					error => {
 						
-						let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+						let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 						
 						if (errorAlert.status === HTTP_NOT_FOUND) {
 							this._toasterService.error( this._translate.instant("GAME.CURRENT_VIEW.GAME_NOT_FOUND") );
@@ -276,7 +276,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 						}
 						else {
 							
-							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
+							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 							modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.FOUND_GAME_ERROR");
 							modalRef.componentInstance.suggestions = undefined;
 							modalRef.componentInstance.error = errorAlert;
@@ -468,9 +468,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 				modalRef.componentInstance.text = this._translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
 				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;

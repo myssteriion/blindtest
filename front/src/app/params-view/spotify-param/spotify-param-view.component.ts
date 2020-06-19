@@ -74,10 +74,10 @@ export class SpotifyParamViewComponent implements OnInit {
                 this.isLoaded = true;
             },
             error => {
-                
-                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
-                
-                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
+	
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+	
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
                 modalRef.componentInstance.text = this._translate.instant("PARAMS_VIEW.SPOTIFY_PARAM_VIEW.FIND_SPOTIFY_PARAM_ERROR");
                 modalRef.componentInstance.suggestions = undefined;
                 modalRef.componentInstance.error = errorAlert;
@@ -141,10 +141,10 @@ export class SpotifyParamViewComponent implements OnInit {
                 this.spotifyParamsBeforeUpdate = JSON.parse( JSON.stringify(this.spotifyParams) );
             },
             error => {
-                
-                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
-                
-                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
+	
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+	
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
                 modalRef.componentInstance.text = this._translate.instant("PARAMS_VIEW.SPOTIFY_PARAM_VIEW.SAVE_SPOTIFY_PARAM_ERROR");
                 modalRef.componentInstance.suggestions = undefined;
                 modalRef.componentInstance.error = errorAlert;
@@ -170,13 +170,13 @@ export class SpotifyParamViewComponent implements OnInit {
                 this._toasterService.success( this._translate.instant("PARAMS_VIEW.SPOTIFY_PARAM_VIEW.TEST_OK_LABEL") );
             },
             error => {
-                
-                let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+	
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
                 
                 let suggestions = [];
                 suggestions.push( this._translate.instant("PARAMS_VIEW.SPOTIFY_PARAM_VIEW.TEST_KO_SUGGEST_LABEL") );
-                
-                const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
+	
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
                 modalRef.componentInstance.text = this._translate.instant("PARAMS_VIEW.SPOTIFY_PARAM_VIEW.TEST_KO_LABEL");
                 modalRef.componentInstance.suggestions = suggestions;
                 modalRef.componentInstance.error = errorAlert;
