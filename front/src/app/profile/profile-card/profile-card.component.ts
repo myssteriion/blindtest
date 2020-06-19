@@ -157,7 +157,7 @@ export class ProfileCardComponent implements OnInit {
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' });
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.CARD.DELETE_ERROR");
 					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;

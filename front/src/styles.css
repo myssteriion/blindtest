@@ -61,7 +61,7 @@ mat-radio-button {
 }
 
 .mat-checkbox .mat-checkbox-frame, .mat-checkbox-checked .mat-checkbox-background {
-    transform: scale(1.5);
+    transform: scale(1);
 }
 
 .inner-html-special-text {

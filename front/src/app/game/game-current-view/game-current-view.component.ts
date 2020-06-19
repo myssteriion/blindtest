@@ -276,7 +276,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 						}
 						else {
 							
-							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
 							modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.FOUND_GAME_ERROR");
 							modalRef.componentInstance.suggestions = undefined;
 							modalRef.componentInstance.error = errorAlert;
@@ -357,7 +357,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private exit(): void {
 		
-		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
 		modalRef.componentInstance.body = this.getFormattedLabel();
 		
@@ -408,7 +408,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		
 		if (this.game.round === Round.CHOICE) {
 			
-			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
+			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'md', keyboard: false } );
 			modalRef.componentInstance.filteredThemes = this.game.themes;
 			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose ).profile.name;
 			
@@ -625,7 +625,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private fillResult(): void {
 		
-		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'xl', keyboard: false } );
+		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
 		modalRef.componentInstance.gameId = this.game.id;
 		modalRef.componentInstance.round = this.game.round;
 		modalRef.componentInstance.players = this.game.players;
@@ -706,7 +706,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private openRoundInfoModal(): void {
 		
-		const modalRef = this._ngbModal.open(RoundInfoModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open(RoundInfoModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.game = this.game;
 		
 		modalRef.result.then(

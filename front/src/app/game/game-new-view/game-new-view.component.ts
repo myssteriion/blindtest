@@ -142,7 +142,7 @@ export class GameNewViewComponent implements OnInit {
 				
 				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
 				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.COMPUTE_THEMES_INFO_ERROR");
 				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;
@@ -433,7 +433,7 @@ export class GameNewViewComponent implements OnInit {
 				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION") );
 				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION_2") );
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
 				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
 				modalRef.componentInstance.suggestions = suggestions;
 				modalRef.componentInstance.error = errorAlert;
