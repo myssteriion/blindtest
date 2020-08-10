@@ -7,10 +7,10 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
+import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyMusic;
 import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.rest.exception.NotFoundException;
@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,14 +42,19 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicService.class);
     
     /**
-     * The music folder path.
+     * The ConfigProperties.
      */
-    private static final String MUSIC_FOLDER_PATH = Paths.get(CommonConstant.BASE_DIR, Constant.MUSICS_FOLDER).toFile().getAbsolutePath();
+    private ConfigProperties configProperties;
     
     /**
      * The spotify service.
      */
     private SpotifyService spotifyService;
+    
+    /**
+     * The music folder path.
+     */
+    private static String musicsFolderPath;
     
     
     
@@ -61,9 +65,15 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param spotifyService   the spotify service
      */
     @Autowired
-    public MusicService(MusicDAO musicDao, SpotifyService spotifyService) {
+    public MusicService(MusicDAO musicDao, SpotifyService spotifyService, ConfigProperties configProperties) {
         super(musicDao);
         this.spotifyService = spotifyService;
+        this.configProperties = configProperties;
+        initFolderPath();
+    }
+    
+    private void initFolderPath() {
+        MusicService.musicsFolderPath = Paths.get( configProperties.getMusicsFolderPath() ).toFile().getAbsolutePath();
     }
     
     
@@ -103,7 +113,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     private void offlineInit(Theme theme) {
         
         String themeFolder = theme.getFolderName();
-        Path path = Paths.get(MUSIC_FOLDER_PATH, themeFolder);
+        Path path = Paths.get(musicsFolderPath, themeFolder);
         
         File themeDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(themeDirectory) ) {
@@ -122,7 +132,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @return TRUE if the music match with an existing file, FALSE otherwise
      */
     private boolean offlineMusicExists(MusicDTO music) {
-        return Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName()).toFile().exists();
+        return Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName()).toFile().exists();
     }
     
     
@@ -280,7 +290,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         }
         else {
             
-            Path path = Paths.get(MUSIC_FOLDER_PATH, music.getTheme().getFolderName(), music.getName());
+            Path path = Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName());
             music.setFlux( new Flux(path.toFile()) );
             
             List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);

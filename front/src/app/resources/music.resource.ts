@@ -16,7 +16,7 @@ export class MusicResource {
 	/**
 	 * Rest path.
 	 */
-	private path = environment.baseBackendUrl + "/musics";
+	private path = environment.backendPath + "/musics";
 	
 	
 	

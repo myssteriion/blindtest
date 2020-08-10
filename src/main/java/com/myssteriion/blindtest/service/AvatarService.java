@@ -3,8 +3,8 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
+import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.rest.exception.ConflictException;
@@ -30,9 +30,14 @@ import java.nio.file.Paths;
 public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     
     /**
-     * The avatar folder path.
+     * The ConfigProperties.
      */
-    public static final String AVATAR_FOLDER_PATH = Paths.get(CommonConstant.BASE_DIR, Constant.AVATAR_FOLDER).toFile().getAbsolutePath();
+    private ConfigProperties configProperties;
+    
+    /**
+     * The avatars folder path.
+     */
+    private static String avatarsFolderPath;
     
     
     
@@ -42,8 +47,14 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      * @param avatarDAO the dao
      */
     @Autowired
-    public AvatarService(AvatarDAO avatarDAO) {
+    public AvatarService(AvatarDAO avatarDAO, ConfigProperties configProperties) {
         super(avatarDAO);
+        this.configProperties = configProperties;
+        initFolderPath();
+    }
+    
+    private void initFolderPath() {
+        avatarsFolderPath = Paths.get( configProperties.getAvatarsFolderPath() ).toFile().getAbsolutePath();
     }
     
     
@@ -51,7 +62,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     @PostConstruct
     private void init() {
         
-        Path path = Paths.get(AVATAR_FOLDER_PATH);
+        Path path = Paths.get(avatarsFolderPath);
         
         File avatarDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
@@ -74,7 +85,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      * @return TRUE if the avatar match with an existing file, FALSE otherwise
      */
     private boolean avatarFileExists(AvatarDTO avatar) {
-        return avatar != null && Paths.get(AVATAR_FOLDER_PATH, avatar.getName()).toFile().exists();
+        return avatar != null && Paths.get(avatarsFolderPath, avatar.getName()).toFile().exists();
     }
     
     /**
@@ -91,7 +102,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      */
     public boolean needRefresh() {
         
-        File avatarDirectory = Paths.get(AVATAR_FOLDER_PATH).toFile();
+        File avatarDirectory = Paths.get(avatarsFolderPath).toFile();
         if ( CommonUtils.getChildren(avatarDirectory).size() != dao.count() )
             return true;
         
@@ -184,7 +195,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         
         try {
             
-            Path path = Paths.get( AVATAR_FOLDER_PATH, dto.getName() );
+            Path path = Paths.get(avatarsFolderPath, dto.getName() );
             dto.setFlux( new Flux(path.toFile()) );
         }
         catch (IOException e) {

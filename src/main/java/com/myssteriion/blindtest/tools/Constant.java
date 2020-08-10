@@ -6,9 +6,6 @@ package com.myssteriion.blindtest.tools;
  */
 public class Constant {
     
-    public static final String MUSICS_FOLDER	= "musiques";
-    public static final String AVATAR_FOLDER	= "avatar";
-    
     public static final String FEAT 			= " feat ";
     public static final Integer LIMIT 			= 100;
     

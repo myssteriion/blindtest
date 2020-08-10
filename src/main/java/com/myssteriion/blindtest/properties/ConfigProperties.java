@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
  * The mapping with config.properties.
  */
 @Configuration
-@PropertySource("${SPRING_CONFIG_LOCATION}/config.properties")
+@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/config.properties")
 public class ConfigProperties {
     
     @Value("${maxPlayers}")
@@ -16,6 +16,12 @@ public class ConfigProperties {
     
     @Value("${minPlayers}")
     private Integer minPlayers;
+    
+    @Value("${avatars.folderPath}")
+    private String avatarsFolderPath;
+    
+    @Value("${musics.folderPath}")
+    private String musicsFolderPath;
     
     
     
@@ -35,6 +41,24 @@ public class ConfigProperties {
      */
     public Integer getMinPlayers() {
         return minPlayers;
+    }
+    
+    /**
+     * Gets avatarsFolderPath.
+     *
+     * @return The avatarsFolderPath
+     */
+    public String getAvatarsFolderPath() {
+        return avatarsFolderPath;
+    }
+    
+    /**
+     * Gets musicsFolderPath.
+     *
+     * @return The musicsFolderPath
+     */
+    public String getMusicsFolderPath() {
+        return musicsFolderPath;
     }
     
 }

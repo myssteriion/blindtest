@@ -14,7 +14,7 @@ export class ProfileResource {
 	/**
 	 * Rest path.
 	 */
-	private path = environment.baseBackendUrl + "/profiles";
+	private path = environment.backendPath + "/profiles";
 	
 	
 	

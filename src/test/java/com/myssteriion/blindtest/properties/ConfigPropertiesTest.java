@@ -22,4 +22,14 @@ public class ConfigPropertiesTest extends AbstractTest {
         Assert.assertEquals( new Integer(2), props.getMinPlayers() );
     }
     
+    @Test
+    public void getAvatarsFolder() {
+        Assert.assertEquals( "avatarsFolder", props.getAvatarsFolderPath() );
+    }
+    
+    @Test
+    public void getMusicsFolder() {
+        Assert.assertEquals( "musicsFolder", props.getMusicsFolderPath() );
+    }
+    
 }

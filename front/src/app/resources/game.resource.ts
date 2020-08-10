@@ -17,7 +17,7 @@ export class GameResource {
 	/**
 	 * Rest path.
 	 */
-	private path = environment.baseBackendUrl + "/games";
+	private path = environment.backendPath + "/games";
 	
 	
 	

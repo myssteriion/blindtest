@@ -1,13 +1,13 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.12.RELEASE"
-    }
+	repositories {
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.14.RELEASE"
+	}
 }
 
 
@@ -36,21 +36,24 @@ repositories {
 }
 
 dependencies {
-	implementation "org.springframework.boot:spring-boot-starter:2.1.12.RELEASE"
-	implementation "org.springframework.boot:spring-boot-starter-web:2.1.12.RELEASE"
-	implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.1.12.RELEASE"
-	implementation "com.h2database:h2:1.4.199"
-	implementation "ch.qos.logback:logback-core:1.2.3"
-	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.9"
-
-	implementation "com.myssteriion:com.myssteriion.utils:" + myssteriionUtilsVersion
-
+	compile "org.springframework.boot:spring-boot-starter:2.1.14.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-web:2.1.14.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-data-jpa:2.1.14.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-jdbc:2.1.14.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-security:2.1.14.RELEASE"
+	
+	compile "org.postgresql:postgresql:42.2.12"
+	compile "ch.qos.logback:logback-core:1.2.3"
+	compile "com.fasterxml.jackson.core:jackson-databind:2.9.9"
+	
+	compile "com.myssteriion:com.myssteriion.utils:" + myssteriionUtilsVersion
+	
 	compile "se.michaelthelin.spotify:spotify-web-api-java:4.2.0"
 	
-	testImplementation "org.springframework.boot:spring-boot-starter-test:2.1.12.RELEASE"
-	testImplementation "com.googlecode.junit-toolbox:junit-toolbox:2.4"
-	testImplementation "org.powermock:powermock-module-junit4:2.0.5"
-	testImplementation "org.powermock:powermock-api-mockito2:2.0.5"
+	testCompile "org.springframework.boot:spring-boot-starter-test:2.1.14.RELEASE"
+	testCompile "com.googlecode.junit-toolbox:junit-toolbox:2.4"
+	testCompile "org.powermock:powermock-module-junit4:2.0.5"
+	testCompile "org.powermock:powermock-api-mockito2:2.0.5"
 }
 
 clean {
@@ -60,9 +63,9 @@ clean {
 build {
 	doLast {
 		copy {
-		    from "gradle.profiles/common"
-	    	include "**/*"
-		    into deliveryFolder
+			from "gradle.profiles/common"
+			include "**/*"
+			into deliveryFolder
 		}
 		copy {
 			from "gradle.profiles/" + env
@@ -70,17 +73,17 @@ build {
 			into deliveryFolder
 		}
 		copy {
-		    from "build/libs"
-		    include "*"
-		    into deliveryFolder + "/libs"
+			from "build/libs"
+			include "*"
+			into deliveryFolder + "/libs"
 		}
 		copy {
-		    from "front/dist"
-		    include "**/*"
-		    into deliveryFolder + "/libs"
+			from "front/dist"
+			include "**/*"
+			into deliveryFolder + "/libs"
 		}
 		
-		delete "logs"		
+		delete "logs"
 		mkdir deliveryFolder + "/musiques/annees_60"
 		mkdir deliveryFolder + "/musiques/annees_70"
 		mkdir deliveryFolder + "/musiques/annees_80"
@@ -94,5 +97,5 @@ build {
 
 test {
 	environment "SPRING_CONFIG_LOCATION", "file:///" + "${projectDir}" + "/src/test/resources/"
-    exclude "**/TestSuite.class"
+	exclude "**/TestSuite.class"
 }

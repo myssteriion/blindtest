@@ -11,7 +11,6 @@ import com.myssteriion.utils.rest.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller for ProfileDTO.
  */
-@CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController
 @RequestMapping(path = "profiles")
 public class ProfileController {

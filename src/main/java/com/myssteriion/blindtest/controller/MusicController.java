@@ -3,8 +3,8 @@ package com.myssteriion.blindtest.controller;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,6 @@ import java.util.List;
 /**
  * Controller for MusicDTO.
  */
-@CrossOrigin( origins = {"http://localhost:8085"} )
 @RestController
 @RequestMapping(path = "musics")
 public class MusicController {
