@@ -12,8 +12,8 @@ import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.spotify.SpotifyService;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 

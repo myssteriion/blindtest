@@ -11,9 +11,10 @@ import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyMusic;
 import com.myssteriion.blindtest.spotify.SpotifyService;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -259,7 +260,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         
         List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
         List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
-    
+        
         List<MusicDTO> allMusics = new ArrayList<>( dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes) );
         
         if ( CommonUtils.isNullOrEmpty(allMusics) )
@@ -300,7 +301,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     }
     
     private Theme foundTheme(List<Theme> themes) {
-        return themes.get( CommonUtils.RANDOM.nextInt(themes.size()) );
+        return themes.get( Constant.RANDOM.nextInt(themes.size()) );
     }
     
     private List<Double> calculateCoefList(List<MusicDTO> allMusics) {
@@ -337,7 +338,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         
         Theme foundTheme = null;
         
-        double random = CommonUtils.RANDOM.nextDouble() * 100;
+        double random = Constant.RANDOM.nextDouble() * 100;
         int index = 0;
         
         while (foundTheme == null) {
@@ -367,12 +368,12 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
                 .filter(music -> music.getPlayed() == min)
                 .collect( Collectors.toList() );
         
-        int random = CommonUtils.RANDOM.nextInt( potentialMusics.size() );
+        int random = Constant.RANDOM.nextInt( potentialMusics.size() );
         return potentialMusics.get(random);
     }
     
     private Effect foundEffect(List<Effect> effects) {
-        return effects.get( CommonUtils.RANDOM.nextInt(effects.size()) );
+        return effects.get( Constant.RANDOM.nextInt(effects.size()) );
     }
     
 }

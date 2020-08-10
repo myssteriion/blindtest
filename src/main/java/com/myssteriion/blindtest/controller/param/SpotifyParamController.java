@@ -2,9 +2,9 @@ package com.myssteriion.blindtest.controller.param;
 
 import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
+import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.rest.RestUtils;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

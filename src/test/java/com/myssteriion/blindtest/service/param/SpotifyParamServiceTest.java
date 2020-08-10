@@ -2,14 +2,10 @@ package com.myssteriion.blindtest.service.param;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
-import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.persistence.dao.SpotifyParamDAO;
-import com.myssteriion.blindtest.service.AvatarService;
-import com.myssteriion.blindtest.service.ProfileService;
-import com.myssteriion.blindtest.service.ProfileStatService;
-import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.cipher.StringCipher;
+import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,9 +17,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
-
 public class SpotifyParamServiceTest extends AbstractTest {
+    
+    @Autowired
+    private StringCipher stringCipher;
     
     @Mock
     private SpotifyParamDAO spotifyParamDAO;
@@ -36,8 +33,8 @@ public class SpotifyParamServiceTest extends AbstractTest {
     @Test
     public void update() throws NotFoundException, ConflictException {
     
-        String encryptedId = CommonUtils.STRING_CIPHER.encrypt("id");
-        String encryptedPwd = CommonUtils.STRING_CIPHER.encrypt("pwd");
+        String encryptedId = stringCipher.encrypt("id");
+        String encryptedPwd = stringCipher.encrypt("pwd");
     
         SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
         spotifyParamEncrypted.setId(0);
@@ -54,8 +51,8 @@ public class SpotifyParamServiceTest extends AbstractTest {
     @Test
     public void find() {
     
-        String encryptedId = CommonUtils.STRING_CIPHER.encrypt("id");
-        String encryptedPwd = CommonUtils.STRING_CIPHER.encrypt("pwd");
+        String encryptedId = stringCipher.encrypt("id");
+        String encryptedPwd = stringCipher.encrypt("pwd");
     
         SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
         SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO( "id", "pwd", new HashMap<>() );
@@ -89,8 +86,8 @@ public class SpotifyParamServiceTest extends AbstractTest {
     @Test
     public void findWithParam() {
         
-        String encryptedId = CommonUtils.STRING_CIPHER.encrypt("id");
-        String encryptedPwd = CommonUtils.STRING_CIPHER.encrypt("pwd");
+        String encryptedId = stringCipher.encrypt("id");
+        String encryptedPwd = stringCipher.encrypt("pwd");
         
         SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
         SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO( "id", "pwd", new HashMap<>() );

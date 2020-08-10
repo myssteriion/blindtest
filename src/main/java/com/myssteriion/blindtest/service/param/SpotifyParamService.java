@@ -4,8 +4,9 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
 import com.myssteriion.blindtest.persistence.dao.SpotifyParamDAO;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.cipher.StringCipher;
+import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,22 @@ import java.util.Map;
 public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, SpotifyParamDAO> {
     
     /**
+     * The stringCipher.
+     */
+    private StringCipher stringCipher;
+    
+    
+    
+    /**
      * Instantiates a new Abstract service.
      *
      * @param spotifyParamDAO the dao
+     * @param stringCipher    the stringCipher
      */
     @Autowired
-    public SpotifyParamService(SpotifyParamDAO spotifyParamDAO) {
+    public SpotifyParamService(SpotifyParamDAO spotifyParamDAO, StringCipher stringCipher) {
         super(spotifyParamDAO);
+        this.stringCipher = stringCipher;
     }
     
     
@@ -69,31 +79,31 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
     
     
     private SpotifyParamDTO encrypt(SpotifyParamDTO spotifyParam) {
-    
+        
         SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO();
         spotifyParamEncrypted.setId( spotifyParam.getId() );
         
-        spotifyParamEncrypted.setClientId( CommonUtils.STRING_CIPHER.encrypt(spotifyParam.getClientId()) );
-        spotifyParamEncrypted.setClientSecret( CommonUtils.STRING_CIPHER.encrypt(spotifyParam.getClientSecret()) );
+        spotifyParamEncrypted.setClientId( stringCipher.encrypt(spotifyParam.getClientId()) );
+        spotifyParamEncrypted.setClientSecret( stringCipher.encrypt(spotifyParam.getClientSecret()) );
         
         Map<Theme, String> map = spotifyParam.getPlaylistIds();
         for ( Theme theme : map.keySet() )
-            spotifyParamEncrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.encrypt(map.get(theme)) );
+            spotifyParamEncrypted.getPlaylistIds().put( theme, stringCipher.encrypt(map.get(theme)) );
         
         return spotifyParamEncrypted;
     }
     
     private SpotifyParamDTO decrypt(SpotifyParamDTO spotifyParam) {
-    
+        
         SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO();
         spotifyParamDecrypted.setId( spotifyParam.getId() );
         
-        spotifyParamDecrypted.setClientId( CommonUtils.STRING_CIPHER.decrypt(spotifyParam.getClientId()) );
-        spotifyParamDecrypted.setClientSecret( CommonUtils.STRING_CIPHER.decrypt(spotifyParam.getClientSecret()) );
+        spotifyParamDecrypted.setClientId( stringCipher.decrypt(spotifyParam.getClientId()) );
+        spotifyParamDecrypted.setClientSecret( stringCipher.decrypt(spotifyParam.getClientSecret()) );
         
         Map<Theme, String> map = spotifyParam.getPlaylistIds();
         for ( Theme theme : map.keySet() )
-            spotifyParamDecrypted.getPlaylistIds().put( theme, CommonUtils.STRING_CIPHER.decrypt(map.get(theme)) );
+            spotifyParamDecrypted.getPlaylistIds().put( theme, stringCipher.decrypt(map.get(theme)) );
         
         return spotifyParamDecrypted;
     }

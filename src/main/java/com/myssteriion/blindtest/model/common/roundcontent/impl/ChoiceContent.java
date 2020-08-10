@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.utils.CommonUtils;
+import com.myssteriion.blindtest.tools.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class ChoiceContent extends AbstractRoundContent {
         
         for (int i = 0; i < this.nbMusics; i++) {
             
-            int indexToAdd = CommonUtils.RANDOM.nextInt( currentIndexPlayers.size() );
+            int indexToAdd = Constant.RANDOM.nextInt( currentIndexPlayers.size() );
             order.add( currentIndexPlayers.remove(indexToAdd) );
             
             if ( currentIndexPlayers.isEmpty() )

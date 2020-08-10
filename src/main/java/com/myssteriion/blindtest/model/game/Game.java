@@ -6,8 +6,6 @@ import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.utils.BeanFactory;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
@@ -101,8 +99,6 @@ public class Game implements IModel {
         CommonUtils.verifyValue("duration", duration);
         CommonUtils.verifyValue("gameMode", connectionMode);
         
-        checkNbPlayers(players);
-        
         this.players = players.stream().sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
         this.duration = duration;
         this.sameProbability = sameProbability;
@@ -115,17 +111,6 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         this.roundContent = this.round.createRoundContent(this);
-    }
-    
-    private void checkNbPlayers(Set<Player> players) {
-        
-        ConfigProperties configProperties = BeanFactory.getBean(ConfigProperties.class);
-        
-        if ( players.size() < configProperties.getMinPlayers() )
-            throw new IllegalArgumentException(configProperties.getMinPlayers() + " players at minimum");
-        
-        if ( players.size() > configProperties.getMaxPlayers() )
-            throw new IllegalArgumentException(configProperties.getMaxPlayers() + " players at maximum");
     }
     
     
