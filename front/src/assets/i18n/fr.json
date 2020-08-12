@@ -83,7 +83,7 @@
             "PLAYERS_NAMES_HEADER": "Joueurs",
             "DURATION_HEADER": "Durée",
             "CONNECTION_MODE_HEADER": "Mode",
-            "SHOW_FINISHED_GAMES_LABEL": "Afficher uniquement les parties termnées"
+            "SHOW_FINISHED_GAMES_LABEL": "Afficher uniquement les parties terminées"
         },
         "CURRENT_VIEW": {
             "TITLE": "Manche '{{name_round}}' ({{current_music}}/{{total_musics}})",

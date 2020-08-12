@@ -3,12 +3,12 @@
 }
 
 .end-game-ranks-first-second-third img {
-	height: 7em;
-	width: 7em;
+	height: 4.7em;
+	width: 4.7em;
 }
 
 .end-game-ranks-other-ranks {
-	border-top: 2px solid black;
-	margin-top: 1.5em;
-	padding-top: 1.5em;
+	border-top: 0.15em solid black;
+	margin-top: 1em;
+	padding-top: 1em;
 }

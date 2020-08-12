@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.model.common.roundcontent.impl;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
-import com.myssteriion.utils.CommonUtils;
+import com.myssteriion.blindtest.tools.Constant;
 
 /**
  * The Lucky round content.
@@ -68,7 +68,7 @@ public class LuckyContent extends AbstractRoundContent {
         game = super.apply(game, musicResult);
         
         for (int i = 0; i < nbPlayers; i++)
-            game.getPlayers().get( CommonUtils.RANDOM.nextInt(game.getPlayers().size() ) ).addScore(nbPointBonus);
+            game.getPlayers().get( Constant.RANDOM.nextInt(game.getPlayers().size() ) ).addScore(nbPointBonus);
         
         return game;
     }

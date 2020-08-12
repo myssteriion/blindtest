@@ -1,13 +1,13 @@
 .profile-card-empty-frame {
 	text-align: center;
-	min-height: 5em;
-	border: 2px dashed darkgray;
-	border-radius: 30px;
+	min-height: 3.35em;
+	border: 0.15em dashed darkgray;
+	border-radius: 2em;
 	color: darkgray;
 }
 
 .profile-card-empty-frame:hover {
-	border: 2px solid black;
+	border: 0.15em solid black;
 	color: black;
 	cursor: pointer;
 }

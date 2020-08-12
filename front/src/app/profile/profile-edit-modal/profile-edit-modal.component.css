@@ -1,23 +1,23 @@
 .profile-edit-header, .profile-edit-body, .profile-edit-footer {
-	margin: 1em;
+	margin: 0.65em;
 }
 
 .profile-edit-header {
-	border-bottom: 1px solid silver;
+	border-bottom: 0.07em solid silver;
 }
 
 .profile-edit-footer {
-	border-top: 1px solid silver;
+	border-top: 0.07em solid silver;
 	text-align: right;
 }
 
 .profile-edit-footer button {
-	margin-top: 10px;
-	margin-left: 10px;
+	margin-top: 0.67em;
+	margin-left: 0.67em;
 }
 
 .profile-edit-avatar, .profile-edit-name, .profile-edit-backgrounds {
-	margin-bottom: 1em;
+	margin-bottom: 0.65em;
 }
 
 .profile-edit-avatar div, .profile-edit-name div, .profile-edit-backgrounds div {
@@ -25,32 +25,32 @@
 }
 
 .profile-edit-avatar img {
-	height: 4em;
-	width: 4em;
+	height: 3.4em;
+	width: 3.4em;
 	border-radius: 50%;
-	margin: 10px;
+	margin: 0.67em;
 }
 
 .profile-edit-avatars {
-	border: 2px solid silver;
-	border-radius: 20px;
-	margin-bottom: 10px;
+	border: 0.15em solid silver;
+	border-radius: 1.35em;
+	margin-bottom: 0.67em;
 	text-align: center;
 }
 
 .profile-edit-avatars img {
 	cursor: pointer;
-	height: 5.75em;
-	width: 5.75em;
+	height: 3.4em;
+	width: 3.4em;
 	border-radius: 50%;
-	margin: 10px;
+	margin: 0.67em;
 }
 
 .profile-edit-background {
-	border: 1px solid black;
-	border-radius: 30px;
-	margin: 10px 5px !important;
-	height: 3em;
+	border: 0.07em solid black;
+	border-radius: 2em;
+	margin: 0.7em 0.35em !important;
+	height: 2em;
 	opacity: 0.2;
 }
 
@@ -64,5 +64,5 @@
 }
 
 .profile-edit-avatar-line-one {
-	padding-bottom: 1em;
+	padding-bottom: 0.65em;
 }

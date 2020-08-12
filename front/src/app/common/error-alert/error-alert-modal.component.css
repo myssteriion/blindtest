@@ -1,13 +1,13 @@
 .error-alert-modal-header, .error-alert-modal-body, .error-alert-modal-footer {
-    margin: 1em;
+    margin: 0.65em;
 }
 
 .error-alert-modal-header {
-	border-bottom: 1px solid silver;
+	border-bottom: 0.07em solid silver;
 }
 
 .error-alert-modal-footer {
-    border-top: 1px solid silver;
+    border-top: 0.07em solid silver;
 }
 
 .error-alert-modal-footer div {
@@ -15,17 +15,17 @@
 }
 
 .error-alert-modal-footer button {
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 0.67em;
+    margin-left: 0.67em;
 }
 
 .error-alert-text {
-    margin-top: 1em;
-    margin-bottom: 2em;
+    margin-top: 0.65em;
+    margin-bottom: 1.35em;
 }
 
 .error-alert-suggestion {
-    margin-bottom: 2em;
+    margin-bottom: 1.35em;
 }
 
 .error-alert-show a:hover {
@@ -36,7 +36,7 @@
 
 
 .error-alert-causes {
-    max-height: 18em;
+    max-height: 12em;
     overflow: auto;
 }
 

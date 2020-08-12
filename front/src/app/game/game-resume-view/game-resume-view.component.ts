@@ -106,9 +106,9 @@ export class GameResumeViewComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 				modalRef.componentInstance.text = this._translate.instant("GAME.RESUME_VIEW.GAMES_LOAD_ERROR");
 				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;

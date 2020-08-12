@@ -1,10 +1,14 @@
 package com.myssteriion.blindtest.tools;
 
 
+import java.util.Random;
+
 /**
  * Constant class.
  */
 public class Constant {
+    
+    public static final Random RANDOM = new Random();
     
     public static final String FEAT 			= " feat ";
     public static final Integer LIMIT 			= 100;

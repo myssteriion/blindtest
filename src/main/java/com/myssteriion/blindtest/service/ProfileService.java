@@ -4,9 +4,10 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     @Override
     public ProfileDTO find(ProfileDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         ProfileDTO profile;
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
@@ -109,13 +110,13 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     /**
      * Create profile avatar flux.
      *
-     * @param dto the dto
+     * @param profile the profile
      */
-    private void createProfileAvatarFlux(ProfileDTO dto) {
+    private void createProfileAvatarFlux(ProfileDTO profile) {
         
         // setter is useful for create avatar inside profile
-        dto.setAvatarName( dto.getAvatarName() );
-        avatarService.createAvatarFlux( dto.getAvatar() );
+        profile.setAvatarName( profile.getAvatarName() );
+        avatarService.createAvatarFlux( profile.getAvatar() );
     }
     
 }

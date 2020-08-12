@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -51,14 +51,14 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep();
+            game.nextStep(roundContentProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
         ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
@@ -86,19 +86,19 @@ public class ThiefContentTest extends AbstractTest {
         
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = thiefContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = thiefContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertEquals( -300, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
         musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
         actual = thiefContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertEquals( -500, actual.getPlayers().get(0).getScore() );
     }
     
@@ -108,10 +108,10 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep();
+            game.nextStep(roundContentProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
         ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
@@ -133,10 +133,10 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep();
+            game.nextStep(roundContentProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
         ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
@@ -144,14 +144,14 @@ public class ThiefContentTest extends AbstractTest {
         Assert.assertFalse( thiefContent.isLastMusic(game) );
         
         for (int i = 0; i < 18; i++) {
-            game.nextStep();
+            game.nextStep(roundContentProperties);
             Assert.assertFalse( thiefContent.isLastMusic(game) );
         }
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( thiefContent.isLastMusic(game) );
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertFalse( thiefContent.isLastMusic(game) );
     }
     

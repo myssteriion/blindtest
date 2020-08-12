@@ -9,12 +9,14 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.properties.ConfigProperties;
+import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -45,19 +47,35 @@ public class GameService {
     
     private SpotifyService spotifyService;
     
+    private ConfigProperties configProperties;
+    
+    // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+    private RoundContentProperties prop;
+    
     /**
      * The game list.
      */
     private List<Game> games = new ArrayList<>();
     
     
-    
+    /**
+     * Instantiates a new Game service
+     *
+     * @param musicService       the musicService
+     * @param profileService     the profileService
+     * @param profileStatService the profileStatService
+     * @param spotifyService     the spotifyService
+     * @param configProperties   the configProperties
+     */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService) {
+    public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService,
+                       ConfigProperties configProperties, RoundContentProperties prop) {
         this.musicService = musicService;
         this.profileService = profileService;
         this.profileStatService = profileStatService;
         this.spotifyService = spotifyService;
+        this.configProperties = configProperties;
+        this.prop = prop;
     }
     
     
@@ -80,7 +98,11 @@ public class GameService {
         if ( newGame.getConnectionMode().isNeedConnection() )
             spotifyService.testConnection();
         
-        Game game = new Game( cratePlayersList(newGame.getProfilesId()), newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
+        Set<Player> players = cratePlayersList( newGame.getProfilesId() );
+        checkNbPlayers(players);
+        
+        // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+        Game game = new Game(players , newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
         game.setId( findNextId() );
         
         games.add(game);
@@ -102,6 +124,20 @@ public class GameService {
             if (nbMusic == 0)
                 throw new NotFoundException("Zero music found ('" + theme + "' ; '" + newGame.getConnectionMode().transformForSearchMusic() + "')");
         }
+    }
+    
+    /**
+     * Check if the players size is between MIN and MAX.
+     *
+     * @param players the players
+     */
+    private void checkNbPlayers(Set<Player> players) {
+        
+        if ( players.size() < configProperties.getMinPlayers() )
+            throw new IllegalArgumentException(configProperties.getMinPlayers() + " players at minimum");
+        
+        if ( players.size() > configProperties.getMaxPlayers() )
+            throw new IllegalArgumentException(configProperties.getMaxPlayers() + " players at maximum");
     }
     
     /**
@@ -200,7 +236,8 @@ public class GameService {
                 profileStatService.update(profileStatDto);
             }
             
-            game.nextStep();
+            // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+            game.nextStep(prop);
         }
         
         return game;
@@ -272,7 +309,7 @@ public class GameService {
         
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, "id").ignoreCase();
         Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
-    
+        
         int start = itemPerPage * pageNumber;
         int end = start + itemPerPage;
         

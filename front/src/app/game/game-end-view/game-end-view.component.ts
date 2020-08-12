@@ -126,7 +126,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 					},
 					error => {
 						
-						let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+						let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 						
 						if (errorAlert.status === HTTP_NOT_FOUND) {
 							this._toasterService.error( this._translate.instant("GAME.END_VIEW.GAME_NOT_FOUND") );
@@ -134,7 +134,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 						}
 						else {
 							
-							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' } );
+							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 							modalRef.componentInstance.text = this._translate.instant("GAME.END_VIEW.FOUND_GAME_ERROR");
 							modalRef.componentInstance.suggestions = undefined;
 							modalRef.componentInstance.error = errorAlert;
@@ -169,7 +169,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 */
 	private exit(): void {
 		
-		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
 		modalRef.componentInstance.body = this._translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
 		

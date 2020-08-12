@@ -24,12 +24,12 @@ public class ConfigPropertiesTest extends AbstractTest {
     
     @Test
     public void getAvatarsFolder() {
-        Assert.assertEquals( "avatarsFolder", props.getAvatarsFolderPath() );
+        Assert.assertEquals( "avatars", props.getAvatarsFolderPath() );
     }
     
     @Test
     public void getMusicsFolder() {
-        Assert.assertEquals( "musicsFolder", props.getMusicsFolderPath() );
+        Assert.assertEquals( "musics", props.getMusicsFolderPath() );
     }
     
 }

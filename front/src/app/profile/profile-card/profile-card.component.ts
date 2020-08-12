@@ -113,7 +113,7 @@ export class ProfileCardComponent implements OnInit {
 	 */
 	private edit(): void {
 		
-		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.profile = this.profile;
 		modalRef.componentInstance.create = false;
 		
@@ -150,14 +150,14 @@ export class ProfileCardComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
 				if (errorAlert.status === HTTP_CONFLICT) {
 					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'lg' });
+					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
 					modalRef.componentInstance.text = this._translate.instant("PROFILE.CARD.DELETE_ERROR");
 					modalRef.componentInstance.suggestions = undefined;
 					modalRef.componentInstance.error = errorAlert;

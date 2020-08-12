@@ -3,6 +3,7 @@ import {ErrorAlert} from 'src/app/interfaces/base/error.alert.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from "../../tools/tools.service";
+import {HOME_PATH, HTTP_GATEWAY_TIMEOUT, HTTP_NOT_FOUND} from "../../tools/constant";
 
 @Component({
 	selector: 'error-alert-modal',
@@ -119,6 +120,28 @@ export class ErrorAlertModalComponent implements OnInit {
 	 */
 	public close(): void {
 		this._ngbActiveModal.dismiss();
+	}
+	
+	
+	/**
+	 * Parse http error to ErrorAlert.
+	 * @param error the http error
+	 *
+	 * @return the ErrorAlert
+	 */
+	public static parseError(error: any): ErrorAlert {
+		
+		let status = (error.status === HTTP_GATEWAY_TIMEOUT) ? 0 :error.status;
+		return { status: status, name: error.name, error: error.error };
+	}
+	
+	/**
+	 * Get the modal options.
+	 *
+	 * @return the model options
+	 */
+	public static getModalOptions(): Object {
+		return { backdrop: 'static', size: 'md' };
 	}
 	
 }

@@ -1,10 +1,11 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
     @Override
     public ProfileStatDTO find(ProfileStatDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
             return dao.findByProfileId(dto.getProfileId()).orElse(null);
@@ -36,16 +37,16 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
     /**
      * Find profile stat dto by profileId.
      *
-     * @param profileDto the profile dto
+     * @param profile the profile dto
      * @return the profile stat dto
      * @throws NotFoundException the not found exception
      */
-    public ProfileStatDTO findByProfile(ProfileDTO profileDto) throws NotFoundException {
+    public ProfileStatDTO findByProfile(ProfileDTO profile) throws NotFoundException {
         
-        CommonUtils.verifyValue("profile", profileDto);
-        CommonUtils.verifyValue("profile -> id", profileDto.getId());
+        CommonUtils.verifyValue("profile", profile);
+        CommonUtils.verifyValue("profile -> id", profile.getId());
         
-        ProfileStatDTO profileStatDto = new ProfileStatDTO( profileDto.getId() );
+        ProfileStatDTO profileStatDto = new ProfileStatDTO( profile.getId() );
         ProfileStatDTO foundProfileStatDTO = find(profileStatDto);
         
         if ( CommonUtils.isNullOrEmpty(foundProfileStatDTO) )

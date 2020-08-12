@@ -195,3 +195,8 @@ export const HTTP_NOT_FOUND = 404;
  * 409 http code.
  */
 export const HTTP_CONFLICT = 409;
+
+/**
+ * 504 http code.
+ */
+export const HTTP_GATEWAY_TIMEOUT = 504;

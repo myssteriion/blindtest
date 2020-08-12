@@ -1,7 +1,7 @@
 .header-frame {
-	min-height: 5em;
-	margin-bottom: 2em;
-	border-bottom: 2px solid silver;
+	min-height: 3.4em;
+	margin-bottom: 1.35em;
+	border-bottom: 0.15em solid silver;
 }
 
 .header-title {
@@ -9,7 +9,7 @@
 	font-weight: bold;
 	
 	color: orangered;
-	text-shadow: 4px 4px 4px silver;
+	text-shadow: 0.27em 0.27em 0.27em silver;
 	
 	text-align: center;
 	margin: auto;

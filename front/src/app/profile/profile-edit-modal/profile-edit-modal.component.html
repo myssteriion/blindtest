@@ -42,7 +42,8 @@
 				</div>
 				<div *ngIf="showPageable" class="col-6">
 					<ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
-									[collectionSize]="avatarsPage.totalElements" [pageSize]="avatarsPage.size" [maxSize]="5" (pageChange)="loadAvatars($event)">
+									[collectionSize]="avatarsPage.totalElements" [pageSize]="avatarsPage.size" [maxSize]="3"
+									(pageChange)="loadAvatars($event)">
 					</ngb-pagination>
 				</div>
 			</div>

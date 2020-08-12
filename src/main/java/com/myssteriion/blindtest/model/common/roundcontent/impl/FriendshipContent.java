@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 
 import java.util.ArrayList;
@@ -77,11 +78,11 @@ public class FriendshipContent extends AbstractRoundContent {
             
             while ( !playersCopied.isEmpty() ) {
                 
-                int index = CommonUtils.RANDOM.nextInt( playersCopied.size() );
+                int index = Constant.RANDOM.nextInt( playersCopied.size() );
                 playersCopied.get(index).setTeamNumber(currentTeamNumber);
                 playersCopied.remove(index);
                 
-                index = CommonUtils.RANDOM.nextInt( playersCopied.size() );
+                index = Constant.RANDOM.nextInt( playersCopied.size() );
                 playersCopied.get(index).setTeamNumber(currentTeamNumber);
                 playersCopied.remove(index);
                 

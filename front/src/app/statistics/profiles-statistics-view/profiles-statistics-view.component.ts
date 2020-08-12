@@ -55,35 +55,40 @@ export class ProfilesStatisticsViewComponent implements OnInit {
      * @param page
      */
     private getAllPlayers(page) {
-        this._profileResource.findAllBySearchName('', page).subscribe(response => {
-            response.content.forEach(user => {
-                this.users.push(user)
-            });
-            if (!response.last) {
-                this.getAllPlayers(page + 1);
-            } else {
-                this.isLoading = false;
-            }
-        }, error => {
-            let errorAlert: ErrorAlert = {status: error.status, name: error.name, error: error.error};
-
-            const modalRef = this._ngbModal.open(ErrorAlertModalComponent, {backdrop: 'static', size: 'lg'});
-            modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
-            modalRef.componentInstance.suggestion = undefined;
-            modalRef.componentInstance.error = errorAlert;
-            modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-            modalRef.componentInstance.showRetry = true;
-            modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
-
-            modalRef.result.then(
-                (result) => {
-                    this.getAllPlayers(page);
-                },
-                (reason) => {
-                    this._router.navigateByUrl(HOME_PATH);
-                }
-            );
-        })
+        this._profileResource.findAllBySearchName('', page).subscribe(
+        	response => {
+        	
+				response.content.forEach(user => {
+					this.users.push(user)
+				});
+				if (!response.last) {
+					this.getAllPlayers(page + 1);
+				} else {
+					this.isLoading = false;
+				}
+			},
+			error => {
+	
+				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+		
+				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
+				modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
+				modalRef.componentInstance.suggestion = undefined;
+				modalRef.componentInstance.error = errorAlert;
+				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
+				modalRef.componentInstance.showRetry = true;
+				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
+	
+				modalRef.result.then(
+					(result) => {
+						this.getAllPlayers(page);
+					},
+					(reason) => {
+						this._router.navigateByUrl(HOME_PATH);
+					}
+				);
+        	}
+        )
     }
 
     /**

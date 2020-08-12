@@ -1,6 +1,6 @@
 .spotify-param-view-part, .spotify-param-view-buttons {
-	padding: 0.5em 0;
-	margin: 0.5em 0;
+	padding: 0.35em 0;
+	margin: 0.35em 0;
 }
 
 .spotify-param-view-label {
@@ -16,13 +16,13 @@
 }
 
 .spotify-param-view-theme-img {
-	height: 4em;
-	width: 4em;
-	margin: 5px;
-	border: 1px solid black;
-	border-radius: 10px;
+	height: 2.7em;
+	width: 2.7em;
+	margin: 0.33em;
+	border: 0.07em solid black;
+	border-radius: 0.67em;
 	background-color: white;
-	box-shadow: 8px 8px 4px silver;
+	box-shadow: 0.27em 0.27em 0.15em silver;
 }
 
 .spotify-param-view-theme-img:hover {
@@ -34,7 +34,7 @@
 }
 
 .spotify-param-view-buttons button {
-	margin-left: 1em;
+	margin-left: 0.65em;
 }
 
 .spotify-param-view-remember-record {

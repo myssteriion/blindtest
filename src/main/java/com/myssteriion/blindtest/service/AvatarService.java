@@ -5,10 +5,11 @@ import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
+import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.CustomRuntimeException;
-import com.myssteriion.utils.rest.exception.ConflictException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -144,7 +145,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     @Override
     public AvatarDTO find(AvatarDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         AvatarDTO avatar;
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
@@ -187,16 +188,16 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     /**
      * Create avatar flux on avatar.
      *
-     * @param dto the dto
+     * @param avatar the avatar
      */
-    public void createAvatarFlux(AvatarDTO dto) {
+    public void createAvatarFlux(AvatarDTO avatar) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue("avatar", avatar);
         
         try {
             
-            Path path = Paths.get(avatarsFolderPath, dto.getName() );
-            dto.setFlux( new Flux(path.toFile()) );
+            Path path = Paths.get(avatarsFolderPath, avatar.getName() );
+            avatar.setFlux( new Flux(path.toFile()) );
         }
         catch (IOException e) {
             throw new CustomRuntimeException("Can't create avatar flux.", e);

@@ -6,7 +6,7 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.utils.exception.CustomRuntimeException;
-import com.myssteriion.utils.rest.exception.NotFoundException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;

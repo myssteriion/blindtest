@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class GameTest extends AbstractTest {
         List<Effect> effects = Arrays.asList(Effect.NONE, Effect.SPEED);
         
         try {
-            new Game(null, duration, false, null, null, ConnectionMode.OFFLINE);
+            new Game(null, duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -40,7 +39,7 @@ public class GameTest extends AbstractTest {
         }
         
         try {
-            new Game(new HashSet<>(players), null, false, null, null, ConnectionMode.OFFLINE);
+            new Game(new HashSet<>(players), null, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -48,38 +47,15 @@ public class GameTest extends AbstractTest {
         }
         
         try {
-            new Game(new HashSet<>(), duration, false, null, null, ConnectionMode.OFFLINE);
+            new Game(new HashSet<>(), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'players' est obligatoire."), e);
         }
         
-        try {
-            new Game(new HashSet<>(Collections.singletonList(new Player(new ProfileDTO("name")))), duration, false, null, null, ConnectionMode.OFFLINE);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("2 players at minimum"), e);
-        }
         
-        try {
-            new Game(new HashSet<>(
-                    Arrays.asList(
-                            new Player(new ProfileDTO("name")),
-                            new Player(new ProfileDTO("name1")),
-                            new Player(new ProfileDTO("name2")),
-                            new Player(new ProfileDTO("name3")),
-                            new Player(new ProfileDTO("name4"))
-                    )
-            ), duration, false, null, null, ConnectionMode.OFFLINE);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("4 players at maximum"), e);
-        }
-        
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
@@ -96,7 +72,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name3")),
                 new Player(new ProfileDTO("name2")));
         
-        game = new Game(new HashSet<>(players), duration, false, themes, effects, ConnectionMode.OFFLINE);
+        game = new Game(new HashSet<>(players), duration, false, themes, effects, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertEquals( players.get(1), game.getPlayers().get(0) );
         Assert.assertEquals( players.get(3), game.getPlayers().get(1) );
         Assert.assertEquals( players.get(2), game.getPlayers().get(2) );
@@ -113,7 +89,7 @@ public class GameTest extends AbstractTest {
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
         List<Effect> effects = Arrays.asList(Effect.NONE, Effect.SPEED);
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertFalse( game.isSameProbability() );
@@ -124,7 +100,7 @@ public class GameTest extends AbstractTest {
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
         Assert.assertEquals( Theme.getSortedTheme(), game.getThemes() );
         
-        game = new Game(new HashSet<>(players), duration, true, themes, effects, ConnectionMode.ONLINE);
+        game = new Game(new HashSet<>(players), duration, true, themes, effects, ConnectionMode.ONLINE, roundContentProperties);
         Assert.assertEquals( players, game.getPlayers() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertTrue( game.isSameProbability() );
@@ -146,7 +122,7 @@ public class GameTest extends AbstractTest {
         List<Theme> themes = Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70);
         List<Effect> effects = Arrays.asList(Effect.NONE, Effect.SPEED);
         
-        Game gameUn = new Game(new HashSet<>(players), duration, false, themes, effects, ConnectionMode.OFFLINE);
+        Game gameUn = new Game(new HashSet<>(players), duration, false, themes, effects, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertEquals( "players=[" + players.get(0) + ", "+ players.get(1) + "], duration=NORMAL, sameProbability=false, themes=[ANNEES_60, ANNEES_70], effects=[NONE, SPEED]" +
                 ", connectionMode=OFFLINE, listenedMusics={}, nbMusicsPlayed=0, nbMusicsPlayedInRound=0, round=CLASSIC, roundContent={nbMusics=20, nbPointWon=100}", gameUn.toString() );
     }
@@ -159,7 +135,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         game.incrementListenedMusics(Theme.ANNEES_60);
         Map<Theme, Integer> foundMusics = game.getListenedMusics();
@@ -178,7 +154,7 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertEquals( players.size(), game.getPlayers().size() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
@@ -186,7 +162,7 @@ public class GameTest extends AbstractTest {
         Assert.assertEquals( Round.CLASSIC, game.getRound() );
         Assert.assertEquals( ClassicContent.class, game.getRoundContent().getClass() );
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertEquals( players.size(), game.getPlayers().size() );
         Assert.assertEquals( duration, game.getDuration() );
         Assert.assertEquals( 1, game.getNbMusicsPlayed() );
@@ -195,7 +171,7 @@ public class GameTest extends AbstractTest {
         Assert.assertEquals( ClassicContent.class, game.getRoundContent().getClass() );
         
         while ( !game.isFinished() )
-            game.nextStep();
+            game.nextStep(roundContentProperties);
         
         Assert.assertEquals( players.size(), game.getPlayers().size() );
         Assert.assertEquals( duration, game.getDuration() );
@@ -213,11 +189,11 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertTrue( game.isFirstStep() );
         
         while ( !game.isFinished() ) {
-            game.nextStep();
+            game.nextStep(roundContentProperties);
             Assert.assertFalse( game.isFirstStep() );
         }
         
@@ -232,18 +208,18 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         Assert.assertFalse( game.isLastStep() );
         
         for (int i = 0; i < 80; i++) {
-            game.nextStep();
+            game.nextStep(roundContentProperties);
             Assert.assertFalse( game.isLastStep() );
         }
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( game.isLastStep() );
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertFalse( game.isLastStep() );
     }
     
@@ -255,15 +231,15 @@ public class GameTest extends AbstractTest {
                 new Player(new ProfileDTO("name1")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         int nbMusic = 0;
         
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         nbMusic++;
         Assert.assertFalse( game.isFinished() );
         
         while (game.getRound() != null) {
-            game.nextStep();
+            game.nextStep(roundContentProperties);
             nbMusic++;
         }
         
