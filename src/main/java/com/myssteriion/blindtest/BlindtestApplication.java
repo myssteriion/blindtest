@@ -1,22 +1,22 @@
 package com.myssteriion.blindtest;
 
 import com.myssteriion.utils.cipher.StringCipher;
-import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 /**
  * The Blindtest application.
  */
 @SpringBootApplication
-@Import( {RestUtils.class} )
-@ComponentScan( basePackages = {"com.myssteriion.utils"} )
+@ComponentScan({
+        "com.myssteriion.blindtest",
+        "com.myssteriion.utils"
+})
 @PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/application.properties")
 public class BlindtestApplication extends SpringBootServletInitializer {
     
