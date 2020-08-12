@@ -9,7 +9,6 @@ export interface Game {
 	id: number,
 	players: Player[],
 	duration: Duration,
-	sameProbability: boolean,
 	themes: Theme[],
 	effects: Effect[],
 	connectionMode: ConnectionMode,

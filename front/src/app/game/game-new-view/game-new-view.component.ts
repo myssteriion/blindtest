@@ -50,11 +50,6 @@ export class GameNewViewComponent implements OnInit {
 	public selectedConnectionMode: ConnectionMode;
 	
 	/**
-	 * TRUE if themes are same probability, FALSE otherwise.
-	 */
-	public sameProbability: boolean = false;
-	
-	/**
 	 * Themes list.
 	 */
 	public themes = THEMES;
@@ -204,7 +199,7 @@ export class GameNewViewComponent implements OnInit {
 	 * @param theme the theme
 	 */
 	public getThemeInfo(theme: Theme): string {
-		return (this.sameProbability) ? this.getNumberOfMusicsInTheme(theme) : this.getThemePercent(theme);
+		return this.getThemePercent(theme);
 	}
 	
 	/**
@@ -415,7 +410,6 @@ export class GameNewViewComponent implements OnInit {
 		let newGame: NewGame = {
 			duration: this.selectedDuration,
 			profilesId: profilesId,
-			sameProbability: this.sameProbability,
 			themes: this.selectedThemes,
 			effects: this.selectedEffect,
 			connectionMode: this.selectedConnectionMode

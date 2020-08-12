@@ -58,7 +58,6 @@
             "CONNECTION_MODE_LABEL": "Mode de la partie :",
             "LOGIN_TO_SPOTIFY_SUB_LABEL": " - Pensez à vous connecter à Spotify dans un autre onglet.",
             "EFFECTS_HAVE_NO_EFFECT_SUB_LABEL": " - Les effets ne sont pas appliqués sur les musiques Spotify.",
-            "THEMES_SAME_PROBABILITY_LABEL": "Thèmes: mode équipropable :",
             "THEMES_LABEL": "Choix des thèmes :",
             "COMPUTE_THEMES_INFO_ERROR": "Impossible de calculer les pourcentages d'apparations des thèmes sélectionnés.",
             "COMPUTE_THEMES_INFO_REFRESH_HELP": "Synchroniser les musiques.",
@@ -73,7 +72,6 @@
             "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
             "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les identifiants soient corrects.",
             "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y ait bien au moins 1 musique pour chacun des thèmes selectionés.",
-            "THEMES_SAME_PROBABILITY_HELP": "Pour éviter au maximum que des musiques déjà jouées ne reviennent, les thèmes ont une chance d'être choisis en fonction du nombre de musiques qu'ils contiennent. Les chances ne sont donc pas équipropable (cela arrive si un thème ne possède pas beaucoup de musiques). Si chaque thème possède au moins {{nb_musics_min_label_help}} musiques chacuns, le mode équiprobable est conseillé.",
             "THEMES_HELP": "Le thème 1960 regroupe également des musiques des années 1940 et 1950."
         },
         "RESUME_VIEW": {

@@ -34,14 +34,13 @@ export class MusicResource {
 	/**
 	 * Get random musics.
 	 *
-	 * @param sameProbability TRUE if themes are same probability, FALSE otherwise.
 	 * @param themes 	 	  the themes
 	 * @param effects 	 	  the effects
 	 * @param connectionMode  the connectionMode
 	 */
-	public random(sameProbability: boolean, themes: Theme[], effects: Effect[], connectionMode: ConnectionMode): Observable<Music> {
+	public random(themes: Theme[], effects: Effect[], connectionMode: ConnectionMode): Observable<Music> {
 		
-		let queryParam = "?connectionMode=" + connectionMode + "&sameProbability=" + sameProbability;
+		let queryParam = "?connectionMode=" + connectionMode;
 		if ( !ToolsService.isNull(themes) )	queryParam += "&themes=" + themes;
 		if ( !ToolsService.isNull(effects) ) queryParam += "&effects=" + effects;
 		
