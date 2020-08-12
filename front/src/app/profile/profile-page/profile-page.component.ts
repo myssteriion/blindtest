@@ -132,7 +132,7 @@ export class ProfilePageComponent implements OnInit {
 	 */
 	private createProfile(): void {
 		
-		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'lg' } );
+		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.create = true;
 		
 		modalRef.result.then(
