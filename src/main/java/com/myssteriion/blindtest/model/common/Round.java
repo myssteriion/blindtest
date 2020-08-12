@@ -60,14 +60,13 @@ public enum Round {
      * @param game the game
      * @return the round content
      */
-    public AbstractRoundContent createRoundContent(Game game) {
+    // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+    public AbstractRoundContent createRoundContent(Game game, RoundContentProperties prop) {
         
         CommonUtils.verifyValue("game", game);
         
         double durationRatio = game.getDuration().getRatio();
         
-        //TODO refactor
-        RoundContentProperties prop = new RoundContentProperties();
         
         AbstractRoundContent roundContent;
         

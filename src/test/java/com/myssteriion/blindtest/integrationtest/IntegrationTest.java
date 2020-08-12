@@ -15,16 +15,12 @@ import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
-import com.myssteriion.blindtest.service.GameService;
-import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,19 +29,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class IntegrationTest extends AbstractIntegrationTest {
-    
-    @Before
-    public void before() throws ConflictException, NotFoundException {
-        
-        musicService = Mockito.spy( new MusicService(musicDAO, spotifyService, configProperties) );
-        Mockito.doNothing().when(musicService).refresh();
-        
-        gameService = new GameService(musicService, profileService, profileStatService, spotifyService, configProperties);
-        
-        clearDataBase();
-        insertData();
-    }
-    
     
     @Test
     public void testShortGame() throws NotFoundException, SpotifyException, ConflictException {

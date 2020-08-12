@@ -10,6 +10,7 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.properties.ConfigProperties;
+import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
@@ -48,6 +49,9 @@ public class GameService {
     
     private ConfigProperties configProperties;
     
+    // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+    private RoundContentProperties prop;
+    
     /**
      * The game list.
      */
@@ -64,12 +68,14 @@ public class GameService {
      * @param configProperties   the configProperties
      */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService, ConfigProperties configProperties) {
+    public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService,
+                       ConfigProperties configProperties, RoundContentProperties prop) {
         this.musicService = musicService;
         this.profileService = profileService;
         this.profileStatService = profileStatService;
         this.spotifyService = spotifyService;
         this.configProperties = configProperties;
+        this.prop = prop;
     }
     
     
@@ -95,7 +101,8 @@ public class GameService {
         Set<Player> players = cratePlayersList( newGame.getProfilesId() );
         checkNbPlayers(players);
         
-        Game game = new Game(players , newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode() );
+        // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+        Game game = new Game(players , newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
         game.setId( findNextId() );
         
         games.add(game);
@@ -229,7 +236,8 @@ public class GameService {
                 profileStatService.update(profileStatDto);
             }
             
-            game.nextStep();
+            // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+            game.nextStep(prop);
         }
         
         return game;

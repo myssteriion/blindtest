@@ -194,7 +194,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     @Override
     public MusicDTO find(MusicDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
             return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);

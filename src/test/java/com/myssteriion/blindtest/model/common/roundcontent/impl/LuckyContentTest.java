@@ -12,7 +12,6 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -55,7 +54,7 @@ public class LuckyContentTest extends AbstractTest {
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name3")),
                 new Player(new ProfileDTO("name2")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         LuckyContent luckyContent = new LuckyContent(10, 100, 50);
         luckyContent.prepare(game);
@@ -69,14 +68,14 @@ public class LuckyContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
         
         for (int i = 0; i < 32; i++)
-            game.nextStep();
+            game.nextStep(roundContentProperties);
         
         Assert.assertSame( Round.LUCKY, game.getRound() );
         LuckyContent recoveryContent = (LuckyContent) game.getRoundContent();
@@ -99,27 +98,27 @@ public class LuckyContentTest extends AbstractTest {
         
         
         Game actual = recoveryContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 150 && actual.getPlayers().get(0).getScore() <= 250);
         
         musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 500);
         
         musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
         actual = recoveryContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
         
         musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
         actual = recoveryContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
         
         musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
         actual = recoveryContent.apply(game, musicResult);
-        game.nextStep();
+        game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 700);
     }
     

@@ -20,13 +20,13 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/application.properties")
 public class BlindtestApplication extends SpringBootServletInitializer {
     
-    @Value("cipher.algorithm")
+    @Value("${cipher.algorithm}")
     private String cipherAlgorithm;
     
-    @Value("cipher.key_algorithm")
+    @Value("${cipher.key_algorithm}")
     private String cipherKeyAlgorithm;
     
-    @Value("cipher.secret_key")
+    @Value("${cipher.secret_key}")
     private String cipherSecretKey;
     
     

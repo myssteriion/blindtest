@@ -6,6 +6,7 @@ import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
@@ -93,7 +94,7 @@ public class Game implements IModel {
      * @param themes   the themes
      * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) {
+    public Game(Set<Player> players, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
         
         CommonUtils.verifyValue("players", players);
         CommonUtils.verifyValue("duration", duration);
@@ -110,7 +111,8 @@ public class Game implements IModel {
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
-        this.roundContent = this.round.createRoundContent(this);
+        // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+        this.roundContent = this.round.createRoundContent(this, prop);
     }
     
     
@@ -251,14 +253,16 @@ public class Game implements IModel {
     /**
      * Pass to the next step.
      */
-    public void nextStep() {
+    public void nextStep(RoundContentProperties prop) {
         
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
         
         if ( roundContent.isFinished(this) ) {
             round = round.nextRound();
-            roundContent = (round == null) ? null : round.createRoundContent(this);
+            
+            // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
+            roundContent = (round == null) ? null : round.createRoundContent(this, prop);
             nbMusicsPlayedInRound = INIT;
         }
     }

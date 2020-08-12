@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -56,7 +57,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     @Override
     public ProfileDTO find(ProfileDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         ProfileDTO profile;
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )

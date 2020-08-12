@@ -17,13 +17,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PrepareForTest({ MusicService.class, CommonUtils.class })
 public class MusicServiceTest extends AbstractTest {
     
@@ -42,7 +44,6 @@ public class MusicServiceTest extends AbstractTest {
     @Mock
     private SpotifyService spotifyService;
     
-    @InjectMocks
     private MusicService musicService;
     
     
@@ -134,7 +135,7 @@ public class MusicServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
         }
         
         
@@ -176,7 +177,7 @@ public class MusicServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
         }
         
         
@@ -186,7 +187,7 @@ public class MusicServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity -> id' est obligatoire."), e);
         }
         
         
@@ -225,7 +226,7 @@ public class MusicServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
         }
         
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);

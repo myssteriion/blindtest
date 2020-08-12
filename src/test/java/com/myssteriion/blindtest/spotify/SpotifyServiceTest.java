@@ -1,14 +1,37 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import java.util.HashMap;
 
 public class SpotifyServiceTest extends AbstractTest {
     
-    @Autowired
+    @Mock
+    private SpotifyParamService spotifyParamService;
+    
+    @InjectMocks
     private SpotifyService spotifyService;
+    
+    
+    
+    @Before
+    public void before() {
+        
+        SpotifyParamDTO sParam = new SpotifyParamDTO()
+                .setClientId("id")
+                .setClientSecret("secret")
+                .setPlaylistIds( new HashMap<>() );
+        
+        Mockito.when( spotifyParamService.find() ).thenReturn(sParam);
+    }
     
     
     

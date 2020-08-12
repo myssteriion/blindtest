@@ -18,8 +18,8 @@ import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
@@ -43,19 +43,25 @@ public class GameServiceTest extends AbstractTest {
     @Mock
     private SpotifyService spotifyService;
     
-    @InjectMocks
     private GameService gameService;
+    
+    
+    
+    @Before
+    public void before() {
+        gameService = new GameService(musicService, profileService, profileStatService, spotifyService, configProperties, roundContentProperties);
+    }
     
     
     
     @Test
     public void newGame() throws NotFoundException, SpotifyException {
         
-        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("name", "avatarName").setId(0);
-        ProfileDTO profileDto1 = (ProfileDTO) new ProfileDTO("name1", "avatarName").setId(1);
         Mockito.when(profileService.find( Mockito.any(ProfileDTO.class) )).thenReturn(null).thenAnswer(invocation -> {
             ProfileDTO p = invocation.getArgument(0);
-            return ( p.getId().equals(0) ) ? profileDto : profileDto1;
+            return ((ProfileDTO) new ProfileDTO().setId( p.getId() ))
+                    .setName( "name" + p.getId() )
+                    .setAvatarName("avatarName");
         });
         Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(0, 10);
@@ -86,6 +92,21 @@ public class GameServiceTest extends AbstractTest {
             TestUtils.verifyException(new NotFoundException("Profile '0' not found."), e);
         }
         
+        try {
+            gameService.newGame( new NewGame(new HashSet<>(Collections.singletonList(1)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("2 players at minimum"), e);
+        }
+        
+        try {
+            gameService.newGame( new NewGame(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("4 players at maximum"), e);
+        }
         
         
         Game game = gameService.newGame( new NewGame(new HashSet<>(profilesId), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE) );
@@ -119,7 +140,7 @@ public class GameServiceTest extends AbstractTest {
         Mockito.doNothing().when(musicService).refresh();
         Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, music2, music);
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
-    
+        
         ProfileDTO finalProfile = profile;
         ProfileDTO finalProfile1 = profile1;
         ProfileDTO finalProfile2 = profile2;
@@ -441,7 +462,7 @@ public class GameServiceTest extends AbstractTest {
         Assert.assertEquals( 2, actual.getTotalPages() );
         Assert.assertEquals( 0, actual.getNumber() );
         Assert.assertEquals( 3, actual.getTotalElements() );
-    
+        
         actual = gameService.findAll(3, 2, false);
         Assert.assertEquals( 2, actual.getTotalPages() );
         Assert.assertEquals( 3, actual.getNumber() );

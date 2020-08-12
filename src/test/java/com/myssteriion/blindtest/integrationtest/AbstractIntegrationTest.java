@@ -5,8 +5,11 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
-import com.myssteriion.blindtest.properties.ConfigProperties;
+import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
+import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
+import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
@@ -14,7 +17,9 @@ import com.myssteriion.blindtest.service.ProfileStatService;
 import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
+import org.junit.Before;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -23,25 +28,50 @@ import java.util.List;
 public abstract class AbstractIntegrationTest extends AbstractTest {
     
     @Autowired
+    protected AvatarDAO avatarDAO;
+    
+    @Autowired
     protected MusicDAO musicDAO;
     
-    @Mock
+    @Autowired
+    protected ProfileStatDAO profileStatDAO;
+    
+    @Autowired
+    protected ProfileDAO profileDAO;
+    
+    
+    protected AvatarService avatarService;
+    
     protected MusicService musicService;
+    
+    protected ProfileStatService profileStatService;
+    
+    protected ProfileService profileService;
     
     @Mock
     protected SpotifyService spotifyService;
     
-    @Autowired
-    protected ConfigProperties configProperties;
-    
-    @Autowired
-    protected ProfileService profileService;
-    
-    @Autowired
-    protected ProfileStatService profileStatService;
-    
-    @Autowired
     protected GameService gameService;
+    
+    
+    
+    @Before
+    public void before() throws ConflictException, NotFoundException {
+        
+        avatarService = new AvatarService(avatarDAO, configProperties);
+        
+        musicService = Mockito.spy( new MusicService(musicDAO, spotifyService, configProperties) );
+        Mockito.doNothing().when(musicService).refresh();
+        
+        profileStatService = new ProfileStatService(profileStatDAO);
+        
+        profileService = new ProfileService(profileDAO, profileStatService, avatarService);
+        
+        gameService = new GameService(musicService, profileService, profileStatService, spotifyService, configProperties, roundContentProperties);
+        
+        clearDataBase();
+        insertData();
+    }
     
     
     

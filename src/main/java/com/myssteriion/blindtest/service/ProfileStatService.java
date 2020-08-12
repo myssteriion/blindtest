@@ -1,8 +1,9 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
@@ -25,7 +26,7 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
     @Override
     public ProfileStatDTO find(ProfileStatDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
             return dao.findByProfileId(dto.getProfileId()).orElse(null);

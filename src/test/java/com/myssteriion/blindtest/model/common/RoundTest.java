@@ -41,25 +41,25 @@ public class RoundTest extends AbstractTest {
                 new Player(new ProfileDTO("name2")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), duration, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         
-        Assert.assertTrue( Round.CLASSIC.createRoundContent(game) instanceof ClassicContent );
+        Assert.assertTrue( Round.CLASSIC.createRoundContent(game, roundContentProperties) instanceof ClassicContent );
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.CHOICE.createRoundContent(game) instanceof ChoiceContent);
+        Assert.assertTrue( Round.CHOICE.createRoundContent(game, roundContentProperties) instanceof ChoiceContent);
         Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() ^ game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.LUCKY.createRoundContent(game) instanceof LuckyContent);
+        Assert.assertTrue( Round.LUCKY.createRoundContent(game, roundContentProperties) instanceof LuckyContent);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.THIEF.createRoundContent(game) instanceof ThiefContent);
+        Assert.assertTrue( Round.THIEF.createRoundContent(game, roundContentProperties) instanceof ThiefContent);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.RECOVERY.createRoundContent(game) instanceof RecoveryContent);
+        Assert.assertTrue( Round.RECOVERY.createRoundContent(game, roundContentProperties) instanceof RecoveryContent);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
     }

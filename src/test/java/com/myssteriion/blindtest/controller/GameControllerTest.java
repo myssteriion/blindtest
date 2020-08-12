@@ -1,8 +1,8 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
+import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -46,7 +46,7 @@ public class GameControllerTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
+        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties));
         
         NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(profileId)), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
         
@@ -61,7 +61,7 @@ public class GameControllerTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
-        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE));
+        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties));
         
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
         MusicResult musicResult = new MusicResult(0, musicDto, null, null, null, null);
@@ -79,7 +79,7 @@ public class GameControllerTest extends AbstractTest {
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
         
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         game.setId(11);
         Mockito.when(gameService.findById( Mockito.anyInt()) ).thenReturn(game);
         
@@ -96,7 +96,7 @@ public class GameControllerTest extends AbstractTest {
                 new Player(new ProfileDTO("name")),
                 new Player(new ProfileDTO("name1")));
         
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE);
+        Game game = new Game(new HashSet<>(players), Duration.NORMAL, false, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         game.setId(11);
         Mockito.when(gameService.findAll( Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean() )).thenReturn( new PageImpl<>(Collections.singletonList(game)) );
         

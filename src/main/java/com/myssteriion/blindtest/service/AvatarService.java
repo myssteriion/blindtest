@@ -5,6 +5,7 @@ import com.myssteriion.blindtest.model.dto.AvatarDTO;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.tools.Constant;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.CustomRuntimeException;
@@ -144,7 +145,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     @Override
     public AvatarDTO find(AvatarDTO dto) {
         
-        CommonUtils.verifyValue("entity", dto);
+        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         AvatarDTO avatar;
         if ( CommonUtils.isNullOrEmpty(dto.getId()) )
