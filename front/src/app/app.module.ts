@@ -33,7 +33,7 @@ import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component";
 import {HeaderComponent} from "./common/header/header.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
-import {VersionViewComponent} from "./common/version-view/version-view.component";
+import {SignatureViewComponent} from "./common/signature-view/signature-view.component";
 import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
 import {GameResumeViewComponent} from "./game/game-resume-view/game-resume-view.component";
 import {PlayerCardComponent} from "./player/player-card/player-card.component";
@@ -103,7 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameNewViewComponent,
 		NavbarMenuComponent,
 		HomeViewComponent,
-		VersionViewComponent,
+		SignatureViewComponent,
 		GameCurrentViewComponent,
 		GameResumeViewComponent,
 		PlayerCardComponent,

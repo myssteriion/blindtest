@@ -1,0 +1,16 @@
+.signature-view-author, .signature-view-version {
+	color: gray;
+	font-style: italic;
+	position: fixed;
+	bottom: 0;
+	font-size: 0.75em;
+	z-index: 1;
+}
+
+.signature-view-author {
+	left: 0.67em;
+}
+
+.signature-view-version {
+	right: 0.67em;
+}

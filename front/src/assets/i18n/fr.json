@@ -2,8 +2,8 @@
     "COMMON": {
         "START_MUSIC_TOOLTIP": "Allumer la musique.",
         "STOP_MUSIC_TOOLTIP": "Couper la musique.",
-        "VERSION_VIEW": {
-            "VERSION": "version"
+        "SIGNATURE_VIEW": {
+            "AUTHOR": "By Myssteriion"
         },
         "ERROR_MODAL": {
             "TITLE": "Une erreur est survenue.",
