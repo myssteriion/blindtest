@@ -32,11 +32,6 @@ export const COUNTDOWN_SOUND = "assets/sounds/countdown.mp3";
 export const OLYMPIA_ANTHEM_SOUND = "assets/sounds/olympia_anthem.mp3";
 
 /**
- * Path to "generic" video in assets folder.
- */
-export const GENERIC = "assets/videos/generic.mp4";
-
-/**
  * Name of "connexion-spotify" pdf.
  */
 export const SPOTIFY_CONNECTION_PDF_NAME = "connexion-spotify-V1.1.pdf";

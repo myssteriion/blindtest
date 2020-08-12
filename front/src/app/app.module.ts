@@ -34,7 +34,6 @@ import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component
 import {HeaderComponent} from "./common/header/header.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
 import {VersionViewComponent} from "./common/version-view/version-view.component";
-import {GenericViewComponent} from "./generic-view/generic-view.component";
 import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
 import {GameResumeViewComponent} from "./game/game-resume-view/game-resume-view.component";
 import {PlayerCardComponent} from "./player/player-card/player-card.component";
@@ -105,7 +104,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NavbarMenuComponent,
 		HomeViewComponent,
 		VersionViewComponent,
-		GenericViewComponent,
 		GameCurrentViewComponent,
 		GameResumeViewComponent,
 		PlayerCardComponent,
