@@ -102,7 +102,7 @@ public class GameService {
         checkNbPlayers(players);
         
         // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-        Game game = new Game(players , newGame.getDuration(), newGame.isSameProbability(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
+        Game game = new Game(players , newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
         game.setId( findNextId() );
         
         games.add(game);

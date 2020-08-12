@@ -6,11 +6,9 @@ import com.myssteriion.utils.cipher.StringCipher;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest(classes = BlindtestApplication.class)
-@ContextConfiguration( classes = { BlindtestApplication.class, ConfigProperties.class, RoundContentProperties.class } )
+@SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class AbstractTest {
     

@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
@@ -36,6 +37,7 @@ import java.util.Optional;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PrepareForTest({ MusicService.class, CommonUtils.class })
+@PowerMockIgnore({ "javax.crypto.*" })
 public class MusicServiceTest extends AbstractTest {
     
     @Mock
@@ -245,7 +247,7 @@ public class MusicServiceTest extends AbstractTest {
         allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE) );
         
         try {
-            musicService.random(false, null, null, ConnectionMode.OFFLINE);
+            musicService.random(null, null, ConnectionMode.OFFLINE);
             Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
         }
         catch (NotFoundException e) {
@@ -253,7 +255,7 @@ public class MusicServiceTest extends AbstractTest {
         }
         
         try {
-            musicService.random(false, Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
+            musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
             Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
         }
         catch (NotFoundException e) {
@@ -277,10 +279,10 @@ public class MusicServiceTest extends AbstractTest {
         Flux fluxMock = Mockito.mock(Flux.class);
         PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
         
-        MusicDTO music = musicService.random(false, null, null, ConnectionMode.OFFLINE);
+        MusicDTO music = musicService.random(null, null, ConnectionMode.OFFLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
-        music = musicService.random(false, Collections.singletonList(Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
+        music = musicService.random(Collections.singletonList(Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
         
@@ -293,17 +295,17 @@ public class MusicServiceTest extends AbstractTest {
         Mockito.doThrow(new SpotifyException("se")).doNothing().when(spotifyService).testConnection();
         
         try {
-            musicService.random(false, null, null, ConnectionMode.ONLINE);
+            musicService.random(null, null, ConnectionMode.ONLINE);
             Assert.fail("Doit lever une SpotifyException car le mock throw.");
         }
         catch (SpotifyException e) {
             TestUtils.verifyException(new SpotifyException("se"), e);
         }
         
-        music = musicService.random(false, null, null, ConnectionMode.ONLINE);
+        music = musicService.random(null, null, ConnectionMode.ONLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
-        music = musicService.random(true, null, null, ConnectionMode.ONLINE);
+        music = musicService.random(null, null, ConnectionMode.ONLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
     }
     

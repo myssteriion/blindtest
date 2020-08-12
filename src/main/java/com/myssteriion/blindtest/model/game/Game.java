@@ -40,11 +40,6 @@ public class Game implements IModel {
     private Duration duration;
     
     /**
-     * If the themes are same probability.
-     */
-    private boolean sameProbability;
-    
-    /**
      * The themes.
      */
     private List<Theme> themes;
@@ -94,7 +89,7 @@ public class Game implements IModel {
      * @param themes   the themes
      * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, boolean sameProbability, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
+    public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
         
         CommonUtils.verifyValue("players", players);
         CommonUtils.verifyValue("duration", duration);
@@ -102,7 +97,6 @@ public class Game implements IModel {
         
         this.players = players.stream().sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
         this.duration = duration;
-        this.sameProbability = sameProbability;
         this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
         this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
         this.connectionMode = connectionMode;
@@ -151,15 +145,6 @@ public class Game implements IModel {
      */
     public Duration getDuration() {
         return duration;
-    }
-    
-    /**
-     * Gets sameProbability.
-     *
-     * @return The sameProbability.
-     */
-    public boolean isSameProbability() {
-        return sameProbability;
     }
     
     /**
@@ -299,7 +284,6 @@ public class Game implements IModel {
     public String toString() {
         return "players=" + players +
                 ", duration=" + duration +
-                ", sameProbability=" + sameProbability +
                 ", themes=" + themes +
                 ", effects=" + effects +
                 ", connectionMode=" + connectionMode +

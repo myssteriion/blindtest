@@ -46,20 +46,6 @@
 		</div>
 	</div>
 	
-	<!-- themes same probability -->
-	<div class="row game-new-view-part">
-		<div class="col-4 game-new-view-label font-size-normal">
-			<span>{{ 'GAME.NEW_VIEW.THEMES_SAME_PROBABILITY_LABEL' | translate }}</span>
-			<fa-icon class="fa-icon-custom-hover-2" [icon]="faQuestionCircle"
-					 matTooltip="{{ 'GAME.NEW_VIEW.THEMES_SAME_PROBABILITY_HELP' | translate: {'nb_musics_min_label_help': nbMusicsMinLabelHelp} }}"
-					 matTooltipShowDelay="500">
-			</fa-icon>
-		</div>
-		<div class="col-8">
-			<mat-slide-toggle [(ngModel)]="sameProbability" color="warn"></mat-slide-toggle>
-		</div>
-	</div>
-	
 	<!-- themes -->
 	<div class="row game-new-view-part">
 		<div class="col-4 game-new-view-label font-size-normal">
