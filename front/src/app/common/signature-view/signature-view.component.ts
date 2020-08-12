@@ -5,11 +5,11 @@ import {environment} from "../../../environments/environment";
  * The version part.
  */
 @Component({
-	selector: 'version-view',
-	templateUrl: './version-view.component.html',
-	styleUrls: ['./version-view.component.css']
+	selector: 'signature-view',
+	templateUrl: './signature-view.component.html',
+	styleUrls: ['./signature-view.component.css']
 })
-export class VersionViewComponent {
+export class SignatureViewComponent {
 	
 	/**
 	 * The version.
