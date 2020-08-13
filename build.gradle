@@ -1,4 +1,9 @@
 buildscript {
+	ext {
+		currentVersion = "3.0.0-SNAPSHOT"
+		springBootVersion = "2.1.14.RELEASE"
+		myssteriionUtilsVersion = "2.0.0-SNAPSHOT"
+	}
 	repositories {
 		mavenCentral()
 		maven {
@@ -6,7 +11,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.14.RELEASE"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
 	}
 }
 
@@ -17,16 +22,13 @@ apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "war"
 
-def currentVersion = "3.0.0-SNAPSHOT"
-def myssteriionUtilsVersion = "2.0.0-SNAPSHOT"
-
 def deliveryFolder = "delivery"
 def env = project.hasProperty("env") ? project.env : "dev"
 
 group = "com.myssteriion"
-version = currentVersion
-sourceCompatibility = 1.8
+version = "$currentVersion"
 
+sourceCompatibility = 11
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
@@ -36,21 +38,21 @@ repositories {
 }
 
 dependencies {
-	compile "org.springframework.boot:spring-boot-starter:2.1.14.RELEASE"
-	compile "org.springframework.boot:spring-boot-starter-web:2.1.14.RELEASE"
-	compile "org.springframework.boot:spring-boot-starter-data-jpa:2.1.14.RELEASE"
-	compile "org.springframework.boot:spring-boot-starter-jdbc:2.1.14.RELEASE"
-	compile "org.springframework.boot:spring-boot-starter-security:2.1.14.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
 	
 	compile "org.postgresql:postgresql:42.2.12"
 	compile "ch.qos.logback:logback-core:1.2.3"
 	compile "com.fasterxml.jackson.core:jackson-databind:2.9.9"
 	
-	compile "com.myssteriion:com.myssteriion.utils:" + myssteriionUtilsVersion
+	compile "com.myssteriion:com.myssteriion.utils:$myssteriionUtilsVersion"
 	
 	compile "se.michaelthelin.spotify:spotify-web-api-java:4.2.0"
 	
-	testCompile "org.springframework.boot:spring-boot-starter-test:2.1.14.RELEASE"
+	testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 	testCompile "com.googlecode.junit-toolbox:junit-toolbox:2.4"
 	testCompile "org.powermock:powermock-module-junit4:2.0.5"
 	testCompile "org.powermock:powermock-api-mockito2:2.0.5"
