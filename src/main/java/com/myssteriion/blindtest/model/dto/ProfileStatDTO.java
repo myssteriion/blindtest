@@ -264,7 +264,7 @@ public class ProfileStatDTO extends AbstractDTO {
         
         CommonUtils.verifyValue("rank", rank);
         
-        String strRank = new Integer(rank).toString();
+        String strRank = Integer.valueOf(rank).toString();
         
         if (wonGames == null)
             wonGames = new HashMap<>();
