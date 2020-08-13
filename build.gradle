@@ -1,26 +1,16 @@
-buildscript {
-	ext {
-		currentVersion = "3.0.0-SNAPSHOT"
-		springBootVersion = "2.1.14.RELEASE"
-		myssteriionUtilsVersion = "2.0.0-SNAPSHOT"
-	}
-	repositories {
-		mavenCentral()
-		maven {
-			url "https://plugins.gradle.org/m2/"
-		}
-	}
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
-	}
+ext {
+	currentVersion = "3.0.0-SNAPSHOT"
+	springBootVersion = "2.1.14.RELEASE"
+	myssteriionUtilsVersion = "2.0.0-SNAPSHOT"
 }
 
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
 
-apply plugin: "java"
-apply plugin: "idea"
-apply plugin: "org.springframework.boot"
-apply plugin: "io.spring.dependency-management"
 apply plugin: "war"
+apply plugin: "idea"
 
 group = "com.myssteriion"
 version = "$currentVersion"
@@ -28,11 +18,6 @@ version = "$currentVersion"
 sourceCompatibility = 11
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
-
-repositories {
-	mavenCentral()
-	mavenLocal()
-}
 
 dependencies {
 	compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
