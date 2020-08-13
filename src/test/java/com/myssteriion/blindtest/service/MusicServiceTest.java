@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.AbstractPowerMockTest;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -16,16 +16,11 @@ import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,11 +29,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(PowerMockRunner.class)
-@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PrepareForTest({ MusicService.class, CommonUtils.class })
-@PowerMockIgnore({ "javax.crypto.*" })
-public class MusicServiceTest extends AbstractTest {
+public class MusicServiceTest extends AbstractPowerMockTest {
     
     @Mock
     private MusicDAO dao;
