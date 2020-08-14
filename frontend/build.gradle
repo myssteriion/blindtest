@@ -13,8 +13,8 @@ apply plugin: "base"
 apply plugin: "com.github.node-gradle.node"
 
 node {
-	version = "10.16.0"
-	npmVersion = "6.9.0"
+	version = "13.9.0"
+	npmVersion = "6.13.7"
 	download = true
 }
 
