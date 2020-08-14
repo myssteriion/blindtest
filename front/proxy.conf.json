@@ -1,6 +1,0 @@
-{
-    "/musics-blindtest": {
-        "target": "http://localhost:9500",
-        "secure": false
-    }
-}

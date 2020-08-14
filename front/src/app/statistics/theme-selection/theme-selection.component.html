@@ -1,9 +1,0 @@
-<div class="row">
-    <div class="col">
-        <img *ngFor="let theme of themes" src="{{ getTheme(theme).srcImg }}"
-             class="theme-selection-img"
-             [ngClass]="{ 'theme-selection-img-active': (isSelectedTheme(getTheme(theme).enumVal)) }"
-             (click)="selectTheme(getTheme(theme).enumVal)"
-             matTooltip="{{ getTheme(theme).tooltip | translate }}" matTooltipShowDelay="500">
-    </div>
-</div>
