@@ -1,0 +1,31 @@
+.theme-comparison-total-musics-in-theme-value, .theme-comparison-total-musics-in-theme-label {
+    text-align: center;
+}
+
+.theme-comparison-themes {
+    text-align: center;
+}
+
+.theme-comparison-img {
+    height: 4em;
+    width: 4em;
+    margin: 0.67em;
+    border: 0.07em solid black;
+    border-radius: 0.67em;
+    background-color: white;
+    box-shadow: 0.27em 0.27em 0.15em silver;
+    opacity: 0.2;
+}
+
+.theme-comparison-img:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.theme-comparison-img-active {
+    opacity: 1;
+}
+
+.theme-comparison-graphs {
+    padding: 1.35em 0;
+}

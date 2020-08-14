@@ -1,0 +1,69 @@
+<!-- modal header -->
+<div class="row music-result-modal-header">
+	<div class="col modal-title">{{ 'GAME.MUSIC_RESULT_MODAL.TITLE' | translate }}</div>
+</div>
+
+
+<!-- modal body -->
+<div class="row music-result-modal-body">
+	<div class="col">
+		
+		<!-- music response-->
+		<div class="row alert alert-info font-size-normal music-result-modal-music-name">
+			<div class="col">{{ getMusicName() }}</div>
+		</div>
+		
+		<!-- table -->
+		<div class="row">
+			<div class="col">
+				
+				<div class="table-responsive container-table music-result-modal-table-div">
+					<table class="box-shadow font-size-normal">
+						<thead>
+							<tr>
+								<th>{{ headers[0] | translate }}</th>
+								<th>{{ headers[1] | translate }}</th>
+								<th *ngIf="showAuthorColumn()">{{ headers[2] | translate }}</th>
+								<th *ngIf="showTitleColumn()">{{ headers[3] | translate }}</th>
+								<th *ngIf="showLoserColumn()" class="music-result-modal-lose-header">{{ headers[4] | translate }}</th>
+								<th>{{ headers[5] | translate }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let line of lines; let odd = odd" [ngClass]="{ 'container-table-odd': odd }">
+								<td>{{ line.name }}</td>
+								<td>{{ line.score }}</td>
+								<td *ngIf="showAuthorColumn()">
+									<mat-checkbox color="warn" [(ngModel)]="line.authorWinner"></mat-checkbox>
+								</td>
+								<td *ngIf="showTitleColumn()">
+									<mat-checkbox color="warn" [(ngModel)]="line.titleWinner"></mat-checkbox>
+								</td>
+								<td *ngIf="showLoserColumn()">
+									<select class="form-control music-result-modal-select" (change)="line.loser = $event.target.value">
+										<option *ngFor="let nbLoseChoice of nbLoseChoices" [value]="nbLoseChoice.id">{{ nbLoseChoice.label }}</option>
+									</select>
+								</td>
+								<td>
+									<mat-checkbox color="warn" [(ngModel)]="line.penalty"></mat-checkbox>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+
+<!-- modal footer -->
+<div class="row justify-content-center music-result-modal-footer">
+	<div class="col">
+		<button class="btn btn-success font-size-normal box-shadow" (click)="save()">{{ 'COMMON.SAVE' | translate }}</button>
+		<button class="btn btn-info font-size-normal box-shadow" (click)="checkUncheckAll(true)">{{ 'GAME.MUSIC_RESULT_MODAL.CHECK_ALL' | translate }}</button>
+		<button class="btn btn-info font-size-normal box-shadow" (click)="checkUncheckAll(false)">{{ 'GAME.MUSIC_RESULT_MODAL.UNCHECK_ALL' | translate }}</button>
+	</div>
+</div>

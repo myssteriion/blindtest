@@ -1,0 +1,11 @@
+/**
+ * Round.
+ */
+const enum Round {
+	CLASSIC = "CLASSIC",
+	CHOICE = "CHOICE",
+	LUCKY = "LUCKY",
+	FRIENDSHIP = "FRIENDSHIP",
+	THIEF = "THIEF",
+	RECOVERY = "RECOVERY"
+}

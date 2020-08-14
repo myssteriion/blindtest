@@ -1,0 +1,29 @@
+apply plugin: "base"
+
+def deliveryFolder = "delivery"
+
+clean {
+	doLast {
+		delete deliveryFolder
+	}
+}
+
+task delivery {
+	doLast {
+		copy {
+			from "backend/build/libs"
+			include "**/*"
+			into deliveryFolder
+		}
+		copy {
+			from "frontend/dist"
+			include "**/*"
+			into deliveryFolder
+		}
+		copy {
+			from "conf/dist"
+			include "**/*"
+			into deliveryFolder + "/conf"
+		}
+	}
+}

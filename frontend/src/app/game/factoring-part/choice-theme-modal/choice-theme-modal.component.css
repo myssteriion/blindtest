@@ -1,0 +1,41 @@
+.choice-theme-modal-header, .choice-theme-modal-body, .choice-theme-modal-footer {
+	margin: 0.65em;
+}
+
+.choice-theme-modal-header {
+	border-bottom: 0.07em solid silver;
+}
+
+.choice-theme-modal-footer {
+	border-top: 0.07em solid silver;
+	text-align: center;
+}
+
+.choice-theme-modal-footer button {
+	margin-top: 0.67em;
+	margin-left: 0.67em;
+}
+
+.choice-theme-modal-themes {
+	text-align: center;
+}
+
+.choice-theme-modal-img {
+	height: 4em;
+	width: 4em;
+	margin: 0.67em;
+	border: 0.07em solid black;
+	border-radius: 0.67em;
+	background-color: white;
+	box-shadow: 0.27em 0.27em 0.15em silver;
+	opacity: 0.2;
+}
+
+.choice-theme-modal-img:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+.choice-theme-modal-img-active {
+	opacity: 1;
+}

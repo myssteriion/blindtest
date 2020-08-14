@@ -1,0 +1,30 @@
+<div class="container-fluid">
+
+    <!-- themes -->
+    <div class="row">
+        <div class="col theme-comparison-themes">
+            <img *ngFor="let theme of themes" src="{{ theme.srcImg }}" class="theme-comparison-img"
+                 [ngClass]="{ 'theme-comparison-img-active': (selectedTheme == theme.enumVal) }"
+                 (click)="selectedTheme = theme.enumVal">
+        </div>
+    </div>
+
+
+    <!-- total musics in theme value -->
+    <div class="row">
+        <ng2-odometer class="col font-size-normal theme-comparison-total-musics-in-theme-value" [number]="getNbMusicsInTheme()" [format]="'( ddd)'"></ng2-odometer>
+    </div>
+
+    <!-- total musics in theme  label -->
+    <div class="row">
+        <div class="col font-size-very-very-small theme-comparison-total-musics-in-theme-label">{{ 'STATISTICS.LISTENED_IN_THEME' | translate }}</div>
+    </div>
+
+
+    <!-- graphs -->
+    <div class="row theme-comparison-graphs">
+        <theme-comparison-question-number class="col-6" [theme]="selectedTheme" [game]="game"></theme-comparison-question-number>
+        <theme-comparison-question-detail class="col-6" [theme]="selectedTheme" [game]="game"></theme-comparison-question-detail>
+    </div>
+
+</div>

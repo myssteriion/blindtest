@@ -1,48 +1,15 @@
 ####### IDE #######
-.idea
-.project
-.classpath
-.settings/
-bin/
-out/
-
+.idea/
 *.iml
 
-####### back #######
-.gradle/
-build/
+####### Gradle #######
+**/.gradle/
 
+####### Node #######
+frontend/node_modules/*
+
+####### Dist #######
 delivery/
-logs/
-data/
-
-####### front #######
-
-# compiled output
-front/dist
-/tmp
-/out-tsc
-
-# dependencies
-front/node_modules/*
-
-# node / npm
-/libs/
-
-# IDE - VSCode
-.vscode/*
-.history/*
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
-
-# System Files
-.DS_Store
-Thumbs.db
+backend/build/
+frontend/dist/
+conf/dist/

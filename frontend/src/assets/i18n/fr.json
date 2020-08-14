@@ -1,0 +1,316 @@
+{
+    "COMMON": {
+        "START_MUSIC_TOOLTIP": "Allumer la musique.",
+        "STOP_MUSIC_TOOLTIP": "Couper la musique.",
+        "SIGNATURE_VIEW": {
+            "AUTHOR": "By Myssteriion"
+        },
+        "ERROR_MODAL": {
+            "TITLE": "Une erreur est survenue.",
+            "RETRY": "Réssayer",
+            "SUGGESTION_LABEL": "Suggestion :",
+            "MAYBE_SERVER_OFF": "Le serveur est injoignable, vérifier que celui-ci est bien allumé."
+        },
+        "SAVE": "Enregistrer",
+        "VALID": "Valider",
+        "CANCEL": "Annuler",
+        "CLOSE": "Fermer",
+        "YES": "Oui",
+        "NO": "Non",
+        "WARNING": "Attention",
+        "NO_RESULT": "Pas de résultat.",
+        "MANY_TIMES": " fois",
+        "SHOW_DETAIL": "Voir détail",
+        "HIDE_DETAIL": "Masquer détail",
+        "GO_HOME": "Retour au menu",
+        "CANCEL_MODIFICATION": "Annuler la modification en cours",
+        "RANK": "n° rang",
+        "HELP_DL": "Télécharger l'aide",
+        "REMEMBER_TO_RECORD": "Pensez à enregistrer les modifications.",
+        "FINISHED_GAME": "Partie terminée",
+        "SEARCH": "Rechercher"
+    },
+    "GENERIC_VIEW": {
+        "STOP_BUTTON": "Passer le générique"
+    },
+    "HOME_VIEW": {
+        "TITLE": "Menu principal"
+    },
+    "PARAMS_VIEW": {
+        "TITLE": "Paramètres",
+        "SPOTIFY_PARAM_VIEW": {
+            "TITLE": "Connexion Spotify",
+            "FIND_SPOTIFY_PARAM_ERROR": "Impossible de récupérer le paramétrage Spotify.",
+            "SAVE_SPOTIFY_PARAM_ERROR": "Impossible d'enregsitrer le paramétrage Spotify.",
+            "CLIENT_ID": "Login :",
+            "CLIENT_SECRET": "Phrase secrète :",
+            "SAVE_LABEL": "Le paramétrage Spotify a été enregistré.",
+            "TEST_LABEL": "Tester la connexion",
+            "TEST_OK_LABEL": "Connection et playlists OK.",
+            "TEST_KO_LABEL": "Le test de connection a échoué.",
+            "TEST_KO_SUGGEST_LABEL": "Vérifier d'abord les login et phrase secrète, puis les Id des différentes playlist."
+        }
+    },
+    "GAME": {
+        "NEW_VIEW": {
+            "TITLE": "Commencer",
+            "DURATIONS_LABEL": "Durée de la partie :",
+            "CONNECTION_MODE_LABEL": "Mode de la partie :",
+            "LOGIN_TO_SPOTIFY_SUB_LABEL": " - Pensez à vous connecter à Spotify dans un autre onglet.",
+            "EFFECTS_HAVE_NO_EFFECT_SUB_LABEL": " - Les effets ne sont pas appliqués sur les musiques Spotify.",
+            "THEMES_LABEL": "Choix des thèmes :",
+            "COMPUTE_THEMES_INFO_ERROR": "Impossible de calculer les pourcentages d'apparations des thèmes sélectionnés.",
+            "COMPUTE_THEMES_INFO_REFRESH_HELP": "Synchroniser les musiques.",
+            "EFFECTS_LABEL": "Choix des effets :",
+            "PLAYERS_LIST_LABEL": "Liste des joueurs (de {{minPlayers}} à {{maxPlayers}}):",
+            "PLAYERS_LABEL": "Rechercher les profils :",
+            "PLAYER": "Joueur",
+            "MAX_PLAYERS_ERROR": "Le maximum de {{max_players}} joueurs est atteint.",
+            "DUPLICATE_PLAYERS_ERROR": "{{player_name}} est déjà dans la partie.",
+            "PLAYERS_ADDED": "{{player_name}} a été ajouté à la partie.",
+            "LAUNCH_GAME": "Lancer la partie !",
+            "LAUNCH_GAME_ERROR": "Impossible de créer la partie.",
+            "LAUNCH_GAME_SUGGESTION": "Si la partie se joue avec Spotify, vérifier que les identifiants soient corrects.",
+            "LAUNCH_GAME_SUGGESTION_2": "Vérifier qu'il y ait bien au moins 1 musique pour chacun des thèmes selectionés.",
+            "THEMES_HELP": "Le thème 1960 regroupe également des musiques des années 1940 et 1950."
+        },
+        "RESUME_VIEW": {
+            "TITLE": "Continuer",
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "GAMES_LOAD_ERROR": "Impossible de charger les parties.",
+            "PLAYERS_NAMES_HEADER": "Joueurs",
+            "DURATION_HEADER": "Durée",
+            "CONNECTION_MODE_HEADER": "Mode",
+            "SHOW_FINISHED_GAMES_LABEL": "Afficher uniquement les parties terminées"
+        },
+        "CURRENT_VIEW": {
+            "TITLE": "Manche '{{name_round}}' ({{current_music}}/{{total_musics}})",
+            "EXIT": "Quitter le jeu",
+            "ROUND_INFO": "Info manche",
+            "EXIT_BODY_MODAL_1": "Etes-vous sûr de vouloir quitter la partie ?",
+            "EXIT_BODY_MODAL_2": "Tant que le jeu n'est pas arrêté, vous pouvez y revenir à tout moment.",
+            "LISTEN": "Ecoutez !",
+            "FINISH": "C'est fini !",
+            "NEXT_MUSIC": "Musique suivante !",
+            "PASS_MUSIC": "J'attends pas la fin du chrono !",
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
+            "RETRY_IN_OFFLINE_MODE_ERROR": "Passer en mode OFFLINE pour la prochaine musique uniquement."
+        },
+        "MUSIC_RESULT_MODAL": {
+            "TITLE": "Résultat",
+            "NAME_HEADER": "Joueur",
+            "SCORE_HEADER": "Score",
+            "AUTHOR_WINNER_HEADER": "Artiste(s)",
+            "MOVIE_TITLE_HEADER": "Titre film",
+            "TITLE_WINNER_HEADER": "Titre",
+            "VICTIM_HEADER": "Victime",
+            "WRONGLY_PASS_HEADER": "Pénalité",
+            "SAVE_ERROR": "Impossible d'appliquer les résultats.",
+            "CHECK_ALL": "Tout cocher",
+            "UNCHECK_ALL": "Tout décocher"
+        },
+        "ROUND_INFO_MODAL": {
+            "TITLE": "Info manche",
+            "NB_POINTS_WON": "Points par bonne réponse :",
+            "CHOICE_ROUND": {
+                "NB_POINTS_BONUS": "Points bonus :",
+                "NB_POINTS_MALUS": "Points malus :"
+            },
+            "LUCKY_ROUND": {
+                "NB_POINTS_BONUS": "Points de la chance :"
+            },
+            "THIEF_ROUND": {
+                "NB_POINTS_LOSE": "Victime d'un vol :"
+            }
+        },
+        "CHOICE_THEME_MODAL": {
+            "TITLE": "<span class=\"inner-html-special-text\">{{playerName}}</span>, choisit un thème"
+        },
+        "END_VIEW": {
+            "TITLE": "Fin de la partie",
+            "BACK_TO_HOME": "Retourner au menu principal",
+            "BACK_TO_HOME_BODY_MODAL": "Retourner vers le menu principal ?",
+            "GAME_NOT_FOUND": "La partie n'existe pas.",
+            "FOUND_GAME_ERROR": "Impossible de retrouver la partie.",
+            "STATISTICS_TAB_TITLE": "Statistiques",
+            "RANK_TAB_TITLE": "Classement"
+        },
+        "GAME_CARD": {
+            "NB_PLAYERS_LABEL": "Nombre de joueur :",
+            "DURATION_LABEL": "Durée :",
+            "CONNECTION_MODE_LABEL": "Mode :",
+            "THEMES_LABEL": "Thèmes :",
+            "EFFECTS_LABEL": "Effets :",
+            "ROUND_LABEL": "Manche :"
+        }
+    },
+    "ROUND": {
+        "CLASSIC": {
+            "NAME": "Classique",
+            "DESCRIPTION": "Rien de mieux que la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, pour commencer tranquillement. Ici, tout est à gagner et rien n'est à perdre, à vos cordes vocales !"
+        },
+        "CHOICE": {
+            "NAME": "Je choisis donc je suis",
+            "DESCRIPTION": "Dans la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, vous allez à tour de rôle imposer un thème à tous les autres, et ce, pour un total de (<span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>). Pour celui qui choisi, ce sont des points bonus s'il trouve, sinon ce sont des points en moins. Tout le monde a le droit de répondre."
+        },
+        "LUCKY": {
+            "NAME": "Coup d'chance",
+            "DESCRIPTION": "Les maitres mots de la <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> sont karma et jalousie. Composée de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, <span class=\"inner-html-special-text\">{{nbPlayers}} joueur(s)</span> aléatoirement choisit se verra attribuer des points. Comme ça. C'est gratuit. Cadeau d'la maison."
+        },
+        "FRIENDSHIP": {
+            "NAME": "Amitié passagère",
+            "DESCRIPTION": "L'union fait la force ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> va vous rapprocher. <span class=\"inner-html-special-text\">{{nbTeams}} équipes</span> de 2 joueurs (et si impair, un des 1er est seul) vont s'affronter sur <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>. Mais les équipes sont-elles vraiment équitables ?"
+        },
+        "THIEF": {
+            "NAME": "Voleur ou Volé",
+            "DESCRIPTION": "C'est ici que vous allez vous faire des ennemis ! Prendre aux riches pour donner au pauvres ! La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span>, avec un total de <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, va permettre de gagner des points tout en en faisant perdre à ses adversaires. Que les cris commencent !"
+        },
+        "RECOVERY": {
+            "NAME": "Rattrapage",
+            "DESCRIPTION": "La disparité, c'est mal, l'équilibre c'est mieux. La <span class=\"inner-html-special-text\">manche '{{roundName}}'</span> est là pour aider les lanternes rouges à remonter. Avec ces <span class=\"inner-html-special-text\">{{nbMusics}} musiques</span>, vous marquez des points en fonction de votre rang ! Et oui, nous n'avons pas les mêmes valeurs."
+        }
+    },
+    "RANK": {
+        "1": "Médaillé d'or",
+        "2": "Médaillé d'argent",
+        "3": "Médaillé de bronze",
+        "4": "Bon pour un cookie",
+        "LAST": "Petit caca mignon"
+    },
+    "PROFILE": {
+        "CARD": {
+            "EDIT_TOOLTIP": "Modifier le profil.",
+            "DELETE_TOOLTIP": "Supprimer le profil.",
+            "DESELECT_TOOLTIP": "Retirer le profil.",
+            "DELETE_BODY": "Etes-vous sûr de vouloir supprimer le profil de <span class=\"inner-html-special-text\">{{profile_name}}</span> ?",
+            "DELETED_TOASTER": "Profil '{{profile_name}}' supprimé.",
+            "DELETE_ERROR": "Impossible de supprimer le profil."
+        },
+        "EDIT_MODAL": {
+            "CREATION_TITLE": "Création du profil",
+            "UPDATE_TITLE": "Modification du profil",
+            "NAME_LABEL": "Pseudo :",
+            "BACKGROUND_LABEL": "Couleur :",
+            "NAME_PLACE_HOLDER": "Entrez votre pseudo",
+            "AVATAR_LABEL": "Avatar :",
+            "CREATED_TOASTER": "Profil '{{profile_name}}' créé.",
+            "UPDATED_TOASTER": "Profil '{{profile_name}}' mis à jour.",
+            "AVATAR_LOAD_ERROR": "Impossible de charger les avatars.",
+            "CREATE_ERROR": "Impossible de créer le profil.",
+            "UPDATE_ERROR": "Impossible de sauvegarder le profil.",
+            "PROFILE_ALREADY_EXISTS_ERROR": "Ce pseudo est déjà pris."
+        },
+        "PAGE": {
+            "CREATE_BUTTON": "Nouveau profil",
+            "LOAD_PROFILES_ERROR": "Impossible de recupérer les profils."
+        },
+        "PAGE_MODAL": {
+            "TITLE": "Qui joue ?"
+        },
+        "VIEW": {
+            "TITLE": "Profils"
+        }
+    },
+    "DURATION": {
+        "SHORT": "Rapide",
+        "NORMAL": "Normale",
+        "LONG": "Longue"
+    },
+    "CONNECTION_MODE": {
+        "ONLINE": "En ligne (avec Spotify)",
+        "OFFLINE": "Hors ligne",
+        "BOTH": "Les deux"
+    },
+    "THEMES": {
+        "ANNEES_60": "Années 1960",
+        "ANNEES_70": "Années 1970",
+        "ANNEES_80": "Années 1980",
+        "ANNEES_90": "Années 1990",
+        "ANNEES_2000": "Années 2000",
+        "ANNEES_2010": "Années 2010",
+        "DISNEY": "Disney",
+        "SERIES_CINEMAS": "Séries & Cinéma"
+    },
+    "EFFECTS": {
+        "NONE": "Musique sans effet.",
+        "SLOW": "Musique au ralenti.",
+        "SPEED": "Musique en accéléré.",
+        "MIX": "Alternance entre ralenti et accéléré."
+    },
+    "STATISTICS": {
+        "TITLE": "Statistiques",
+        "SELECT_PLAYERS": "Sélectionner des utilisateurs",
+        "ERROR": {
+            "USER_STATISTICS_BINDING_KO": "Erreur lors du rapprochement des statistiques à l'utilisateur {{user}}."
+        },
+        "NO_THEME_AVAILABLE": "Aucun thème disponible",
+        "LISTENED_IN_THEME": "Musiques écoutées dans ce thème",
+        "CATEGORIES": {
+            "PLAYED_GAMES": {
+                "GRAPH_TITLE": "Nombre de parties jouées par type de partie",
+                "NUMBER_PLAYED_GAMES": "Nombre de parties jouées",
+                "GAME_TYPE": "Type de partie",
+                "SHORT": "Rapide",
+                "NORMAL": "Normale",
+                "LONG": "Longue"
+            },
+            "BEST_SCORE": {
+                "SCORE": "Score",
+                "GRAPH_TITLE": "Meilleur score par type de partie",
+                "GAME_TYPE": "Type de partie",
+                "SHORT": "Rapide",
+                "NORMAL": "Normale",
+                "LONG": "Longue"
+            },
+            "FOUND_MUSICS_BY_THEME": {
+                "GRAPH_TITLE_PERCENTAGE": "Pourcentage de musiques trouvées par thème",
+                "TITLE": "Titre uniquement",
+                "AUTHOR": "Artiste uniquement",
+                "LEGEND": "Musiques trouvées par thème",
+                "BOTH": "Titre et artiste",
+                "PERCENTAGE": "Pourcentage"
+            },
+            "LISTENED_MUSICS_BY_THEME": {
+                "NUMBER_LISTENED_MUSICS_IN_THEME": "Musiques écoutées dans ce thème",
+                "NUMBER_LISTENED_MUSICS_BY_THEME": "Nombre de musiques écoutées par thème",
+                "GRAPH_TITLE_NUMBER": "Nombre de musiques trouvées par thème"
+            },
+            "RATIO_FOUND_LISTENED_MUSICS": "Ratio de musiques trouvées / écoutées",
+            "TOTAL_LISTENED_MUSICS": "Musiques écoutées dans la partie",
+            "ANSWER_TYPES": {
+                "GRAPH_TITLE": "Type de réponses les plus données",
+                "ANSWER_TYPES_TITLE": "Type de réponses",
+                "ANSWER_TYPES_NUMBER": "Nombre de réponses",
+                "AUTHOR": "Artiste uniquement",
+                "TITLE": "Titre uniquement",
+                "BOTH": "Les deux"
+            },
+            "FOUND_MUSICS": {
+                "GRAPH_TITLE": "Pourcentage de musiques trouvées",
+                "PERCENTAGE": "Pourcentage"
+            }
+        },
+        "TABS": {
+            "GENERAL_STATISTICS": "Statistiques générales",
+            "THEME_STATISTICS": "Statistiques par thème"
+        }
+    },
+    "RANK_OCCUPIED": {
+        "GRAPH_TITLE": "Rang occupé",
+        "PERCENTAGE": "Pourcentage",
+        "TITLE": "Rang occupé",
+        "TWELFTH": "Douzième",
+        "ELEVENTH": "Onzième",
+        "TENTH": "Dizième",
+        "NINTH": "Neuvième",
+        "EIGHTH": "Huitième",
+        "SEVENTH": "Septième",
+        "SIXTH": "Sizième",
+        "FIFTH": "Cinquième",
+        "FOURTH": "Quatrième",
+        "THIRD": "Troisième",
+        "SECOND": "Second",
+        "FIRST": "Premier"
+    }
+}

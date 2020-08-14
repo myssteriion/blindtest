@@ -1,0 +1,45 @@
+.music-result-modal-header, .music-result-modal-body, .music-result-modal-footer {
+	margin: 0.65em;
+}
+
+.music-result-modal-header {
+	border-bottom: 0.07em solid silver;
+}
+
+.music-result-modal-footer {
+	border-top: 0.07em solid silver;
+	text-align: center;
+}
+
+.music-result-modal-footer button {
+	margin-top: 0.67em;
+	margin-left: 0.67em;
+}
+
+.music-result-modal-check-icon {
+	color: green;
+}
+
+.music-result-modal-cross-icon {
+	color: red;
+}
+
+.music-result-modal-table-div {
+	max-height: 30em;
+}
+
+.music-result-modal-music-name {
+	text-align: center;
+	font-weight: bold;
+}
+
+.music-result-modal-select {
+	margin-left: 25%;
+	width: 50%;
+	height: 75%;
+	font-size: 0.45em;
+}
+
+.music-result-modal-lose-header {
+	min-width: 4.7em;
+}

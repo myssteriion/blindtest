@@ -1,0 +1,88 @@
+
+<div *ngIf="true" @flyInOut>
+    <div class="row">
+        <div class="col font-size-normal"
+             style="color: orangered; text-align: center; margin: auto; font-weight: bold; font-style: italic; padding-top: 4em">
+            Un peu de patience, cette page n'est pas encore prête.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="false">
+<div class="container-fluid-forced-marge profiles-statistics-view-margin-bottom-5" @flyInOut *ngIf="!isLoading">
+
+    <header [title]="'STATISTICS.TITLE' | translate"></header>
+
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <ng-select
+                    placeholder="{{'STATISTICS.SELECT_PLAYERS' | translate}}"
+                    (change)="getPlayersStatistics()"
+                    [items]="users"
+                    [multiple]="true"
+                    bindLabel="name"
+                    notFoundText="{{'COMMON.NO_RESULT'|translate}}"
+                    [closeOnSelect]="false"
+                    [(ngModel)]="selectedUsers">
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>
+                    <img class="example-option-img" aria-hidden [src]="getFluxForImg(item)" height="25">
+                    {{item.name}}
+                </ng-template>
+            </ng-select>
+        </div>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs class="profiles-statistics-view-width100" (selectedTabChange)="onTabClick($event)"
+                   *ngIf="isLoaded">
+        <mat-tab label="{{'STATISTICS.TABS.GENERAL_STATISTICS'|translate}}">
+            <div class="profiles-statistics-view-margin-top-4 profiles-statistics-view-side-2" *ngIf="showGeneralGraph">
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Number played games -->
+                    <div class="col">
+                        <played-games [players]="selectedUsers"></played-games>
+                    </div>
+
+                    <!-- Score by game type -->
+                    <div class="col">
+                        <score-by-game-type [players]="selectedUsers"></score-by-game-type>
+                    </div>
+                </div>
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Answer types -->
+                    <div class="col">
+                        <answer-types [players]="selectedUsers"></answer-types>
+                    </div>
+
+                    <!-- User rank -->
+                    <div class="col">
+                        <user-rank-comparison [players]="selectedUsers"></user-rank-comparison>
+                    </div>
+                </div>
+
+                <div class="row profiles-statistics-margin-top-3">
+                    <!-- Global percentages -->
+                    <div class="col">
+                        <global-percentages-view [players]="selectedUsers"></global-percentages-view>
+                    </div>
+
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="{{'STATISTICS.TABS.THEME_STATISTICS'|translate}}">
+            <div class="profiles-statistics-view-margin-top-4 profiles-statistics-view-side-2"
+                 *ngIf="!showGeneralGraph">
+                <div class="row">
+                    <div class="col">
+                        <profiles-comparison-view [selectedUsers]="selectedUsers"></profiles-comparison-view>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
+</div>

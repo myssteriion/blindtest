@@ -1,0 +1,3 @@
+rootProject.name = "musics-blindtest"
+include "backend", "frontend", "conf"
+

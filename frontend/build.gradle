@@ -1,0 +1,27 @@
+buildscript {
+	repositories {
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "com.github.node-gradle:gradle-node-plugin:2.2.4"
+	}
+}
+
+apply plugin: "base"
+apply plugin: "com.github.node-gradle.node"
+
+node {
+	version = "10.16.0"
+	npmVersion = "6.9.0"
+	download = true
+}
+
+clean {
+	doLast {
+		delete "dist"
+	}
+}
+
+assemble.dependsOn "npm_run_buildp"

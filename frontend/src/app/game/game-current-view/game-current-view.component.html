@@ -1,0 +1,89 @@
+<div *ngIf="isLoaded" class="container-fluid" @flyInOut>
+	
+	<!-- header & exit -->
+	<div class="row m-auto">
+		<div class="offset-2 col-8">
+			<header [title]="getTitle()"></header>
+		</div>
+		<div class="col-2 game-current-view-exit">
+			<fa-icon [icon]="faQuestionCircle" class="fa-icon-custom-hover-2" size="2x" (click)="openRoundInfoModal()"
+					 matTooltip="{{ 'GAME.CURRENT_VIEW.ROUND_INFO' | translate }}" matTooltipShowDelay="500">
+			</fa-icon>
+			<fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
+					 (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
+					 matTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" matTooltipShowDelay="500">
+			</fa-icon>
+		</div>
+	</div>
+	
+	<!-- players and theme and effect -->
+	<div class="row m-auto justify-content-center game-current-view-current-theme-effect">
+		
+		<!-- left players -->
+		<div class="col game-current-view-players" [ngClass]="addPaddingClass()">
+			<player-card #leftPlayers *ngFor="let player of getPlayers(true);" [displayOpacity]="addOpacityOnPlayer(player)"
+						 [player]="player" [rankOnRight]="true" [displayMedal]="true">
+			</player-card>
+		</div>
+		
+		
+		<!-- middle -->
+		<div class="col game-current-view-middle">
+			
+			<theme-effect #themeEffect></theme-effect>
+			<custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEvent)="undefined" (onEnd)="onPreCountdownEnd()"></custom-countdown>
+			<custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEvent)="onCountdownEvent($event)" (onEnd)="onCountdownEnd()"></custom-countdown>
+			<custom-countdown #postCountdown [animation]="''" [sound]="false" [countdownConfig]="postCountdownConfig" (onEvent)="undefined" (onEnd)="onPostCountdownEnd()"></custom-countdown>
+			
+			<!-- next music -->
+			<div *ngIf="showNextMusic" class="row game-current-view-next-music">
+				<div class="col">
+					<button class="btn btn-info font-size-normal box-shadow" (click)="nextMusic()">{{ 'GAME.CURRENT_VIEW.NEXT_MUSIC' | translate }}</button>
+				</div>
+			</div>
+			
+			<!-- pass music -->
+			<div *ngIf="showPassMusic" class="row game-current-view-next-music">
+				<div class="col">
+					<button class="btn btn-info font-size-normal box-shadow" (click)="passMusic()">{{ 'GAME.CURRENT_VIEW.PASS_MUSIC' | translate }}</button>
+				</div>
+			</div>
+			
+			<!-- offline mode - audio -->
+			<div [hidden]="!showOfflineAudio" class="row game-current-view-offline-audio">
+				<div class="col">
+					<audio #offlineAudio class="box-shadow"></audio>
+				</div>
+			</div>
+			
+			<!-- online mode - preview audio -->
+			<div *ngIf="showOnlinePreviewAudio" class="row">
+				<div class="col">
+					<iframe [src]="onlinePreviewAudio" width="0" height="0" frameborder="0"
+							allowtransparency="true" allow="encrypted-media">
+					</iframe>
+				</div>
+			</div>
+			
+			<!-- online mode - audio -->
+			<div *ngIf="showOnlineAudio" class="row game-current-view-online-audio">
+				<div class="col">
+					<iframe [src]="onlineAudio" width="300" height="380" frameborder="0"
+							allowtransparency="true" allow="encrypted-media">
+					</iframe>
+				</div>
+			</div>
+		
+		</div>
+		
+		
+		<!-- right players -->
+		<div class="col game-current-view-players" [ngClass]="addPaddingClass()">
+			<player-card #rightPlayers *ngFor="let player of getPlayers(false);" [displayOpacity]="addOpacityOnPlayer(player)"
+						 [player]="player" [rankOnRight]="false" [displayMedal]="true">
+			</player-card>
+		</div>
+	
+	</div>
+
+</div>

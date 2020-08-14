@@ -1,0 +1,22 @@
+<div class="container-fluid graph-frame">
+
+    <div class="row">
+        <div class="col graph-title">{{ 'STATISTICS.CATEGORIES.LISTENED_MUSICS_BY_THEME.GRAPH_TITLE_NUMBER' | translate }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col graph-content">
+            <ngx-charts-bar-horizontal class="chart-container"
+                                       [animations]="true"
+                                       [results]="questionsAnswered"
+                                       [scheme]="colorScheme"
+                                       [showXAxisLabel]="true"
+                                       [tooltipDisabled]="false"
+                                       [xAxis]="true"
+                                       [xScaleMax]="getMaximum()"
+                                       [yAxis]="true">
+            </ngx-charts-bar-horizontal>
+        </div>
+    </div>
+
+</div>

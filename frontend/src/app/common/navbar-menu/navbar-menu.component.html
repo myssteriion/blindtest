@@ -1,0 +1,25 @@
+<mdb-navbar SideClass="navbar navbar-expand-md navbar-dark sticky-top navbar-menu-theme font-size-small" [containerInside]="false">
+	
+	<mdb-navbar-brand>
+		<a class="nav-item navbar-menu-logo" [routerLink]="'/home'"> <img src="{{ getLogo() }}" alt="logo"></a>
+	</mdb-navbar-brand>
+	
+	<links>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item" *ngFor="let route of routes" [ngClass]="isActive(route.path)">
+				<a class="nav-link" [routerLink]="route.path">{{ route.name | translate }}</a>
+			</li>
+		</ul>
+		
+		<ul class="navbar-nav ml-auto nav-flex-icons">
+			<li class="nav-item">
+				<a class="nav-link navbar-menu-icons">
+					<fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faMusic" (click)="stopMusic()" matTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+					<fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faVolumeMute" (click)="playMusic()" matTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+				</a>
+			</li>
+		</ul>
+		
+	</links>
+
+</mdb-navbar>

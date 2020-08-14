@@ -1,0 +1,14 @@
+<div class="row confirm-modal-header">
+	<div class="col modal-title">{{ title }}</div>
+</div>
+
+<div class="row confirm-modal-body">
+	<div class="col font-size-normal" [innerHTML]="body"></div>
+</div>
+
+<div class="row confirm-modal-footer">
+	<div class="col">
+		<button class="btn btn-success box-shadow font-size-normal" (click)="yes()">{{ 'COMMON.YES' | translate }}</button>
+		<button class="btn btn-danger box-shadow font-size-normal" (click)="no()">{{ 'COMMON.NO' | translate }}</button>
+	</div>
+</div>

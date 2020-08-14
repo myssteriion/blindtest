@@ -1,0 +1,47 @@
+.game-card-frame {
+    min-height: 3.35em;
+    border: 0.27em solid #a5a5a5;
+    border-radius: 2em;
+    box-shadow: 0.27em 0.27em 0.15em silver;
+    background-color: white;
+}
+
+.game-card-frame:hover {
+    cursor: pointer;
+    border: 0.27em solid black;
+}
+
+.game-card-line {
+    padding-bottom: 0.65em;
+}
+
+.game-card-labels {
+    text-decoration: underline;
+    padding-right: 0.65em;
+}
+
+.game-card-icon {
+    padding-left: 1.35em;
+}
+
+.game-card-content-img {
+    background-color: white;
+    max-height: 2.70em;
+    overflow-y: auto;
+    display: inline-block;
+    border-radius: 0.67em;
+    padding: 0.2em;
+}
+
+.game-card-img {
+    height: 2em;
+    width: 2em;
+    border: 0.07em solid black;
+    border-radius: 0.67em;
+    background-color: white;
+    margin: 0.15em;
+}
+
+.game-card-finished-game-line {
+	text-align: center;
+}
