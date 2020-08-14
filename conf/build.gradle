@@ -1,0 +1,24 @@
+apply plugin: "base"
+
+def env = project.hasProperty("env") ? project.env : "dev"
+
+clean {
+	doLast {
+		delete "dist"
+	}
+}
+
+build {
+	doLast {
+		copy {
+			from "src/common"
+			include "**/*"
+			into "dist/musics-blindtest"
+		}
+		copy {
+			from "src/" + env
+			include "**/*"
+			into "dist/musics-blindtest"
+		}
+	}
+}

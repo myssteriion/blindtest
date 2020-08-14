@@ -1,1 +1,0 @@
-CREATE DATABASE musics_blindtest;

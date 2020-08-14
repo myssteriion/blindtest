@@ -1,88 +1,29 @@
-ext {
-	currentVersion = "3.0.0-SNAPSHOT"
-	springBootVersion = "2.3.2.RELEASE"
-	myssteriionUtilsVersion = "2.0.0-SNAPSHOT"
-}
-
-repositories {
-	mavenCentral()
-	mavenLocal()
-}
-
-apply plugin: "war"
-apply plugin: "idea"
-
-group = "com.myssteriion"
-version = "$currentVersion"
-
-sourceCompatibility = 11
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
-
-dependencies {
-	compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-	compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
-	compile "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
-	compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
-	
-	compile "com.myssteriion:com.myssteriion.utils:$myssteriionUtilsVersion"
-	compile "org.postgresql:postgresql:42.2.12"
-	compile "ch.qos.logback:logback-core:1.2.3"
-	compile "com.fasterxml.jackson.core:jackson-databind:2.11.2"
-	compile "org.hibernate.validator:hibernate-validator:6.1.5.Final"
-	compile "javax.xml.bind:jaxb-api:2.3.1"
-	compile "se.michaelthelin.spotify:spotify-web-api-java:4.2.0"
-	
-	
-	testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-	testCompile "com.googlecode.junit-toolbox:junit-toolbox:2.4"
-	testCompile "org.powermock:powermock-module-junit4:2.0.7"
-	testCompile "org.powermock:powermock-api-mockito2:2.0.7"
-}
+apply plugin: "base"
 
 def deliveryFolder = "delivery"
-def env = project.hasProperty("env") ? project.env : "dev"
 
 clean {
-	delete deliveryFolder
-}
-
-build {
 	doLast {
-		copy {
-			from "gradle.profiles/common"
-			include "**/*"
-			into deliveryFolder
-		}
-		copy {
-			from "gradle.profiles/" + env
-			include "**/*"
-			into deliveryFolder
-		}
-		copy {
-			from "build/libs"
-			include "*"
-			into deliveryFolder + "/libs"
-		}
-		copy {
-			from "front/dist"
-			include "**/*"
-			into deliveryFolder + "/libs"
-		}
-		
-		delete "logs"
-		mkdir deliveryFolder + "/musiques/annees_60"
-		mkdir deliveryFolder + "/musiques/annees_70"
-		mkdir deliveryFolder + "/musiques/annees_80"
-		mkdir deliveryFolder + "/musiques/annees_90"
-		mkdir deliveryFolder + "/musiques/annees_2000"
-		mkdir deliveryFolder + "/musiques/annees_2010"
-		mkdir deliveryFolder + "/musiques/series-cinemas"
-		mkdir deliveryFolder + "/musiques/disney"
+		delete deliveryFolder
 	}
 }
 
-test {
-	environment "SPRING_CONFIG_LOCATION", "file:///" + "${projectDir}" + "/src/test/resources/"
-	exclude "**/TestSuite.class"
+task delivery {
+	doLast {
+		copy {
+			from "backend/build/libs"
+			include "**/*"
+			into deliveryFolder
+		}
+		copy {
+			from "frontend/dist"
+			include "**/*"
+			into deliveryFolder
+		}
+		copy {
+			from "conf/dist"
+			include "**/*"
+			into deliveryFolder + "/conf"
+		}
+	}
 }
