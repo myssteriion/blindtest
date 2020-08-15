@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "games")
 public class GameController {
-
+    
     private GameService gameService;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Game controller.
      *
@@ -41,9 +41,9 @@ public class GameController {
     public GameController(GameService gameService) {
         this.gameService = gameService;
     }
-
-
-
+    
+    
+    
     /**
      * Initialize the new game.
      *
@@ -53,11 +53,11 @@ public class GameController {
      */
     @PostMapping
     public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException, SpotifyException {
-
+        
         Game game = gameService.newGame(newGame);
         return RestUtils.create200(game);
     }
-
+    
     /**
      * Apply the result on the game.
      *
@@ -68,11 +68,11 @@ public class GameController {
      */
     @PostMapping(path = "/apply")
     public ResponseEntity<Game> apply(@RequestBody MusicResult musicResult) throws NotFoundException, ConflictException {
-
+        
         Game game = gameService.apply(musicResult);
         return RestUtils.create200(game);
     }
-
+    
     /**
      * Gets the game by id.
      *
@@ -82,7 +82,7 @@ public class GameController {
      */
     @GetMapping(path = CommonConstant.ID_PATH_PARAM)
     public ResponseEntity<Game> findById(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
-
+        
         Game game = gameService.findById(id);
         return RestUtils.create200(game);
     }
@@ -99,9 +99,9 @@ public class GameController {
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage,
             @RequestParam(value = Constant.SHOW_FINISHED_GAMES, required = false, defaultValue = Constant.SHOW_FINISHED_GAMES_DEFAULT_VALUE) boolean showFinishedGames) {
-    
+        
         Page<Game> page = gameService.findAll(pageNumber, itemPerPage, showFinishedGames);
         return RestUtils.create200(page);
     }
-
+    
 }

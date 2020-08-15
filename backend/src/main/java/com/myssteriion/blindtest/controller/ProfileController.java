@@ -5,9 +5,9 @@ import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.exception.ConflictException;
+import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.model.Empty;
 import com.myssteriion.utils.rest.RestUtils;
-import com.myssteriion.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "profiles")
 public class ProfileController {
-
+    
     private ProfileService profileService;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Profile controller.
      *
@@ -41,9 +41,9 @@ public class ProfileController {
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
-
-
-
+    
+    
+    
     /**
      * Save a new ProfileDTO.
      *
@@ -55,7 +55,7 @@ public class ProfileController {
     public ResponseEntity<ProfileDTO> save(@RequestBody ProfileDTO profileDto) throws ConflictException {
         return RestUtils.create201( profileService.save(profileDto) );
     }
-
+    
     /**
      * Update an existing ProfileDTO.
      *
@@ -67,11 +67,11 @@ public class ProfileController {
      */
     @PutMapping(path = CommonConstant.ID_PATH_PARAM)
     public ResponseEntity<ProfileDTO> update(@PathVariable(CommonConstant.ID) Integer id, @RequestBody ProfileDTO profileDto) throws NotFoundException, ConflictException {
-
+        
         profileDto.setId(id);
         return RestUtils.create200( profileService.update(profileDto) );
     }
-
+    
     /**
      * Find pageable of profile filtered by search name.
      *
@@ -85,10 +85,10 @@ public class ProfileController {
             @RequestParam(value = Constant.SEARCH_NAME, required = false, defaultValue = Constant.SEARCH_NAME_DEFAULT_VALUE) String searchName,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
-
+        
         return RestUtils.create200( profileService.findAllBySearchName(searchName, pageNumber, itemPerPage) );
     }
-
+    
     /**
      * Delete response entity.
      *
@@ -98,12 +98,12 @@ public class ProfileController {
      */
     @DeleteMapping(path = CommonConstant.ID_PATH_PARAM)
     public ResponseEntity<Empty> delete(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
-
+        
         ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("ANY").setId(id);
-
+        
         profileService.delete(profileDto);
-
+        
         return RestUtils.create204();
     }
-
+    
 }

@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.dto;
 
-import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
