@@ -22,13 +22,31 @@ import {ToolsService} from "../../tools/tools.service";
         SLIDE_ANIMATION
     ]
 })
+/**
+ * Global statistics.
+ */
 export class ProfilesStatisticsViewComponent implements OnInit {
 
-    public isLoaded: boolean = false;
-    public users: Profile[] = [];
-    public isLoading: boolean = true;
+    /**
+     * If view is loaded.
+     */
+    public isLoaded: boolean;
+
+    /**
+     * Profiles list.
+     */
+    public users: Profile[];
+
+    /**
+     * Selected profiles list.
+     */
     public selectedUsers: Profile[] = [];
+
+    public isLoading: boolean = true;
+
     public showGeneralGraph: boolean = true;
+
+
 
     constructor(private _profileStatisticsResource: ProfileStatisticsResource,
                 private _translate: TranslateService,
@@ -39,6 +57,10 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.isLoaded = false;
+        this.users = [];
+
         this.getAllPlayers(0);
     }
 
@@ -57,6 +79,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
      * @param pageNumber
      */
     private getAllPlayers(pageNumber) {
+    	
         this._profileResource.findAllBySearchName('', pageNumber, ProfilesPerPage.FIFTEEN).subscribe(
         	response => {
         	
