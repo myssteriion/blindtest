@@ -40,7 +40,7 @@ public class RoundTest extends AbstractTest {
                 new Player(new ProfileEntity().setName("name2")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(players, duration, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, duration, null, null, roundContentProperties);
         
         
         Assert.assertTrue( Round.CLASSIC.createRoundContent(game, roundContentProperties) instanceof ClassicContent );

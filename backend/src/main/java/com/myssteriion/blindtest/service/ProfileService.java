@@ -69,30 +69,6 @@ public class ProfileService extends AbstractCRUDService<ProfileEntity, ProfileDA
     }
     
     /**
-     * Find profile with profileStat.
-     *
-     * @param entity the entity
-     * @return the found avatar, or NULL if it's not found
-     */
-//    public ProfileEntity findWithProfileStat(ProfileEntity entity) {
-//
-//        super.checkEntity(entity);
-//
-//        ProfileEntity foundProfile;
-//        if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
-//            checkEntity(entity);
-//            foundProfile = dao.findByName(entity.getName()).orElse(null);
-//        }
-//        else
-//            foundProfile = dao.findById( entity.getId() ).orElse(null);
-//
-//        if (foundProfile != null)
-//            createAvatarFlux(foundProfile);
-//
-//        return foundProfile;
-//    }
-    
-    /**
      * Find a pageNumber of Profile filtered by a search name.
      *
      * @param searchName  the search name

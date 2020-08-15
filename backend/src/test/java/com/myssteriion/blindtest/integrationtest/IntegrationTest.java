@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.integrationtest;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
@@ -15,7 +14,6 @@ import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
-import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -31,14 +29,14 @@ import java.util.stream.Collectors;
 public class IntegrationTest extends AbstractIntegrationTest {
     
     @Test
-    public void testShortGame() throws NotFoundException, SpotifyException, ConflictException {
+    public void testShortGame() throws NotFoundException, ConflictException {
         
         Set<Integer> profilesId = PROFILES_LIST.stream().map(ProfileEntity::getId).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
         
         NewGame newGame = new NewGame().setProfilesId(profilesId).setDuration(duration)
                 .setThemes(Arrays.asList(Theme.ANNEES_80, Theme.ANNEES_90, Theme.ANNEES_2000))
-                .setEffects(Arrays.asList(Effect.NONE, Effect.SPEED)).setConnectionMode(ConnectionMode.OFFLINE);
+                .setEffects(Arrays.asList(Effect.NONE, Effect.SPEED));
         Game game = gameService.newGame(newGame);
         
         

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -47,7 +46,7 @@ public class ClassicContentTest extends AbstractTest {
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name3")),
                 new Player(new ProfileEntity().setName("name2")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         ClassicContent classicContent = new ClassicContent(10, 100);
         classicContent.prepare(game);
@@ -64,10 +63,10 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         Integer gameId = 1;
-        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );
@@ -121,7 +120,7 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();
@@ -152,7 +151,7 @@ public class ClassicContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();

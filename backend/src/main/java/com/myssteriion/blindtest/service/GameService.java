@@ -12,8 +12,6 @@ import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
-import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
@@ -45,8 +43,6 @@ public class GameService {
     
     private ProfileService profileService;
     
-    private SpotifyService spotifyService;
-    
     private ConfigProperties configProperties;
     
     // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
@@ -64,14 +60,12 @@ public class GameService {
      *
      * @param musicService       the musicService
      * @param profileService     the profileService
-     * @param spotifyService     the spotifyService
      * @param configProperties   the configProperties
      */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, SpotifyService spotifyService, ConfigProperties configProperties, RoundContentProperties prop) {
+    public GameService(MusicService musicService, ProfileService profileService, ConfigProperties configProperties, RoundContentProperties prop) {
         this.musicService = musicService;
         this.profileService = profileService;
-        this.spotifyService = spotifyService;
         this.configProperties = configProperties;
         this.prop = prop;
     }
@@ -84,21 +78,17 @@ public class GameService {
      * @param newGame the new game
      * @return the game
      * @throws NotFoundException if a theme no have musics or if a profile is not found
-     * @throws SpotifyException  the spotify exception
      */
-    public Game newGame(NewGame newGame) throws NotFoundException, SpotifyException {
+    public Game newGame(NewGame newGame) throws NotFoundException {
         
         checkAndFillNewGame(newGame);
         
         musicService.refresh();
         
-        if ( newGame.getConnectionMode().isNeedConnection() )
-            spotifyService.testConnection();
-        
         List<Player> players = cratePlayersList( newGame.getProfilesId() );
         
         // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-        Game game = new Game(players , newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
+        Game game = new Game(players , newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), prop );
         game.setId( findNextId() );
         
         games.add(game);
@@ -117,7 +107,6 @@ public class GameService {
         CommonUtils.verifyValue("newGame", newGame);
         CommonUtils.verifyValue("newGame -> players", newGame.getProfilesId() );
         CommonUtils.verifyValue("newGame -> duration", newGame.getDuration() );
-        CommonUtils.verifyValue("newGame -> connectionMode", newGame.getConnectionMode() );
         
         
         if ( CommonUtils.isNullOrEmpty(newGame.getEffects()) )
@@ -127,9 +116,9 @@ public class GameService {
             newGame.setThemes( Theme.getSortedTheme() );
         
         for ( Theme theme : newGame.getThemes() ) {
-            Integer nbMusic = musicService.getMusicNumber( theme, newGame.getConnectionMode() );
+            Integer nbMusic = musicService.getMusicNumber(theme);
             if (nbMusic == 0)
-                throw new NotFoundException("Zero music found ('" + theme + "' ; '" + newGame.getConnectionMode().transformForSearchMusic() + "')");
+                throw new NotFoundException("Zero music found ('" + theme + "')");
         }
         
         

@@ -4,7 +4,6 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.service.GameService;
-import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.exception.ConflictException;
@@ -52,7 +51,7 @@ public class GameController {
      * @throws NotFoundException NotFound exception
      */
     @PostMapping
-    public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException, SpotifyException {
+    public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException {
         
         Game game = gameService.newGame(newGame);
         return RestUtils.create200(game);

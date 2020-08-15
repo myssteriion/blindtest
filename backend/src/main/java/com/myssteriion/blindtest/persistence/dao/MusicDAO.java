@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.persistence.dao;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.utils.persistence.dao.IDAO;
@@ -16,31 +15,28 @@ import java.util.Optional;
 public interface MusicDAO extends IDAO<MusicEntity> {
     
     /**
-     * Find by name, theme and connection mode.
+     * Find by name and theme.
      *
-     * @param name           the name
-     * @param theme          the theme
-     * @param connectionMode the connection mode
+     * @param name  the name
+     * @param theme the theme
      * @return the optional
      */
-    Optional<MusicEntity> findByNameAndThemeAndConnectionMode(String name, Theme theme, ConnectionMode connectionMode);
+    Optional<MusicEntity> findByNameAndTheme(String name, Theme theme);
     
     /**
-     * Find by themes and connection modes.
+     * Find by themes.
      *
-     * @param themes          the themes
-     * @param connectionModes the connection modes
+     * @param themes the themes
      * @return the musics list
      */
-    List<MusicEntity> findByThemeInAndConnectionModeIn(List<Theme> themes, List<ConnectionMode> connectionModes);
+    List<MusicEntity> findByThemeIn(List<Theme> themes);
     
     /**
-     * Count by theme and connection mode.
+     * Count by theme.
      *
-     * @param theme          the theme
-     * @param connectionMode the connection mode
+     * @param theme the theme
      * @return the number of music
      */
-    int countByThemeAndConnectionMode(Theme theme, ConnectionMode connectionMode);
+    int countByTheme(Theme theme);
     
 }

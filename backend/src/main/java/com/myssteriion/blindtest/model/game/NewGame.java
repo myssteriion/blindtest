@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -33,15 +32,10 @@ public class NewGame {
      */
     private List<Effect> effects;
     
-    /**
-     * The connection mode.
-     */
-    private ConnectionMode connectionMode;
-    
     
     
     /**
-     * Instantiates a new New game.
+     * Instantiates a new NewGame.
      */
     public NewGame() {
     }
@@ -49,27 +43,17 @@ public class NewGame {
     
     
     /**
-     * Get profilesId.
+     * Gets profiles id.
      *
-     * @return the profilesId
+     * @return the players names
      */
     public Set<Integer> getProfilesId() {
         return profilesId;
     }
     
-    /**
-     * Set profilesId.
-     *
-     * @param profilesId the profilesId
-     * @return this
-     */
-    public NewGame setProfilesId(Set<Integer> profilesId) {
-        this.profilesId = profilesId;
-        return this;
-    }
     
     /**
-     * Get duration.
+     * Gets duration.
      *
      * @return the duration
      */
@@ -78,73 +62,40 @@ public class NewGame {
     }
     
     /**
-     * Set duration.
+     * Gets themes.
      *
-     * @param duration the duration
-     * @return this
-     */
-    public NewGame setDuration(Duration duration) {
-        this.duration = duration;
-        return this;
-    }
-    
-    /**
-     * Get themes.
-     *
-     * @return the themes
+     * @return The themes.
      */
     public List<Theme> getThemes() {
         return themes;
     }
     
     /**
-     * Set themes.
+     * Gets effects.
      *
-     * @param themes the themes
-     * @return this
-     */
-    public NewGame setThemes(List<Theme> themes) {
-        this.themes = themes;
-        return this;
-    }
-    
-    /**
-     * Get effects.
-     *
-     * @return the effects
+     * @return The effects.
      */
     public List<Effect> getEffects() {
         return effects;
     }
     
-    /**
-     * Set effects.
-     *
-     * @param effects the effects
-     * @return this
-     */
-    public NewGame setEffects(List<Effect> effects) {
-        this.effects = effects;
+    public NewGame setProfilesId(Set<Integer> profilesId) {
+        this.profilesId = profilesId;
         return this;
     }
     
-    /**
-     * Get connectionMode.
-     *
-     * @return the connectionMode
-     */
-    public ConnectionMode getConnectionMode() {
-        return connectionMode;
+    public NewGame setDuration(Duration duration) {
+        this.duration = duration;
+        return this;
     }
     
-    /**
-     * Set connectionMode.
-     *
-     * @param connectionMode the connectionMode
-     * @return this
-     */
-    public NewGame setConnectionMode(ConnectionMode connectionMode) {
-        this.connectionMode = connectionMode;
+    public NewGame setThemes(List<Theme> themes) {
+        this.themes = themes;
+        return this;
+    }
+    
+    public NewGame setEffects(List<Effect> effects) {
+        this.effects = effects;
         return this;
     }
     
@@ -154,8 +105,7 @@ public class NewGame {
         return "profilesId=" + profilesId +
                 ", duration=" + duration +
                 ", themes=" + themes +
-                ", effects=" + effects +
-                ", connectionMode=" + connectionMode;
+                ", effects=" + effects;
     }
     
 }
