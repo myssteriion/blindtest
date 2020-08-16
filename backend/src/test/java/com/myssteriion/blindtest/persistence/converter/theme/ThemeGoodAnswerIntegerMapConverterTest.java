@@ -66,8 +66,8 @@ public class ThemeGoodAnswerIntegerMapConverterTest extends AbstractTest {
         
         Map<Theme, Map<GoodAnswer, Integer>> actual = converter.convertToEntityAttribute("{\"ANNEES_90\":{\"AUTHOR\":2,\"TITLE\":4}}");
         Assert.assertEquals( 1, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
-        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
         
         try {
             converter.convertToEntityAttribute("{\"name\":\"pouet\",\"number\":4}");
@@ -85,8 +85,8 @@ public class ThemeGoodAnswerIntegerMapConverterTest extends AbstractTest {
         
         Map<Theme, Map<GoodAnswer, Integer>> actual = converter.convertToMap("{\"ANNEES_90\":{\"AUTHOR\":2,\"TITLE\":4}}");
         Assert.assertEquals( 1, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
-        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Theme.ANNEES_90).get(GoodAnswer.AUTHOR) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Theme.ANNEES_90).get(GoodAnswer.TITLE) );
     }
     
 }

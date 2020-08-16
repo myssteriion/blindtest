@@ -31,7 +31,7 @@ public class ProfileControllerTest extends AbstractTest {
     @Test
     public void save() throws ConflictException {
         
-        ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+        ProfileDTO profileDto = new ProfileDTO().setName("name").setAvatarName("avatar");
         Mockito.when(profileService.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
         
         ResponseEntity<ProfileDTO> actual = profileController.save(profileDto);
@@ -43,7 +43,7 @@ public class ProfileControllerTest extends AbstractTest {
     @Test
     public void update() throws NotFoundException, ConflictException {
         
-        ProfileDTO profileDto = new ProfileDTO("name", "avatar");
+        ProfileDTO profileDto = new ProfileDTO().setName("name").setAvatarName("avatar");
         Mockito.when(profileService.update(Mockito.any(ProfileDTO.class))).thenReturn(profileDto);
         
         ResponseEntity<ProfileDTO> actual = profileController.update(1, profileDto);
@@ -57,7 +57,7 @@ public class ProfileControllerTest extends AbstractTest {
         
         IllegalArgumentException iae = new IllegalArgumentException("iae");
         Page<ProfileDTO> pageMock = Mockito.mock(Page.class);
-        Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileDTO("name", "avatar")));
+        Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileDTO().setName("name").setAvatarName("avatar")));
         Mockito.when(profileService.findAllBySearchName(Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(iae).thenReturn(pageMock);
         
         try {

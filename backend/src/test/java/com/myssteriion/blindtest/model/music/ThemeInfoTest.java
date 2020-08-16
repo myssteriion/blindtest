@@ -2,35 +2,10 @@ package com.myssteriion.blindtest.model.music;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.utils.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ThemeInfoTest extends AbstractTest {
-    
-    @Test
-    public void constructor() {
-        
-        Theme theme = Theme.ANNEES_80;
-        
-        try {
-            new ThemeInfo(null, 10, 10);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
-        }
-        
-        ThemeInfo themeInfo = new ThemeInfo(theme, 5, 10);
-        Assert.assertEquals( theme, themeInfo.getTheme() );
-        Assert.assertEquals( new Integer(5), themeInfo.getOfflineNbMusics() );
-        Assert.assertEquals( new Integer(10), themeInfo.getOnlineNbMusics() );
-        
-        themeInfo = new ThemeInfo(theme, -2, -4);
-        Assert.assertEquals( theme, themeInfo.getTheme() );
-        Assert.assertEquals( new Integer(0), themeInfo.getOfflineNbMusics() );
-        Assert.assertEquals( new Integer(0), themeInfo.getOnlineNbMusics() );
-    }
     
     @Test
     public void getterSetter() {
@@ -39,8 +14,8 @@ public class ThemeInfoTest extends AbstractTest {
         
         ThemeInfo themeInfo = new ThemeInfo(theme, 5, 10);
         Assert.assertEquals( theme, themeInfo.getTheme() );
-        Assert.assertEquals( new Integer(5), themeInfo.getOfflineNbMusics() );
-        Assert.assertEquals( new Integer(10), themeInfo.getOnlineNbMusics() );
+        Assert.assertEquals( Integer.valueOf(5), themeInfo.getOfflineNbMusics() );
+        Assert.assertEquals( Integer.valueOf(10), themeInfo.getOnlineNbMusics() );
     }
     
     @Test

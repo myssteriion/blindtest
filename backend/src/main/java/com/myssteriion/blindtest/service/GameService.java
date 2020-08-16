@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.service;
 
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,6 +60,7 @@ public class GameService {
     private List<Game> games = new ArrayList<>();
     
     
+    
     /**
      * Instantiates a new Game service
      *
@@ -85,21 +88,19 @@ public class GameService {
      *
      * @param newGame the new game
      * @return the game
-     * @throws NotFoundException the not found exception
+     * @throws NotFoundException if a theme no have musics or if a profile is not found
      * @throws SpotifyException  the spotify exception
      */
     public Game newGame(NewGame newGame) throws NotFoundException, SpotifyException {
         
-        CommonUtils.verifyValue("newGame", newGame);
+        checkAndFillNewGame(newGame);
         
         musicService.refresh();
-        verifyContentTheme(newGame);
         
         if ( newGame.getConnectionMode().isNeedConnection() )
             spotifyService.testConnection();
         
-        Set<Player> players = cratePlayersList( newGame.getProfilesId() );
-        checkNbPlayers(players);
+        List<Player> players = cratePlayersList( newGame.getProfilesId() );
         
         // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
         Game game = new Game(players , newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), newGame.getConnectionMode(), prop );
@@ -111,32 +112,38 @@ public class GameService {
     }
     
     /**
-     * Check if all theme have one music at least.
+     * Check and fill the NewGame.
      *
      * @param newGame the new game
-     * @throws NotFoundException the not found exception
+     * @throws NotFoundException if a theme no have musics
      */
-    private void verifyContentTheme(NewGame newGame) throws NotFoundException {
+    private void checkAndFillNewGame(NewGame newGame) throws NotFoundException {
+        
+        CommonUtils.verifyValue("newGame", newGame);
+        
+        CommonUtils.verifyValue("newGame -> players", newGame.getProfilesId() );
+        CommonUtils.verifyValue("newGame -> duration", newGame.getDuration() );
+        CommonUtils.verifyValue("newGame -> connectionMode", newGame.getConnectionMode() );
+        
+        
+        if ( CommonUtils.isNullOrEmpty(newGame.getEffects()) )
+            newGame.setEffects( Effect.getSortedEffect() );
+        
+        if ( CommonUtils.isNullOrEmpty(newGame.getThemes()) )
+            newGame.setThemes( Theme.getSortedTheme() );
         
         for ( Theme theme : newGame.getThemes() ) {
-            
             Integer nbMusic = musicService.getMusicNumber( theme, newGame.getConnectionMode() );
             if (nbMusic == 0)
                 throw new NotFoundException("Zero music found ('" + theme + "' ; '" + newGame.getConnectionMode().transformForSearchMusic() + "')");
         }
-    }
-    
-    /**
-     * Check if the players size is between MIN and MAX.
-     *
-     * @param players the players
-     */
-    private void checkNbPlayers(Set<Player> players) {
         
-        if ( players.size() < configProperties.getMinPlayers() )
+        
+        Set<Integer> profilesId = newGame.getProfilesId();
+        if ( profilesId.size() < configProperties.getMinPlayers() )
             throw new IllegalArgumentException(configProperties.getMinPlayers() + " players at minimum");
         
-        if ( players.size() > configProperties.getMaxPlayers() )
+        if ( profilesId.size() > configProperties.getMaxPlayers() )
             throw new IllegalArgumentException(configProperties.getMaxPlayers() + " players at maximum");
     }
     
@@ -145,24 +152,31 @@ public class GameService {
      *
      * @param profilesId the profiles id
      * @return the players list
-     * @throws NotFoundException the not found exception
+     * @throws NotFoundException if a profile is not found
      */
-    private Set<Player> cratePlayersList(Set<Integer> profilesId) throws NotFoundException {
+    private List<Player> cratePlayersList(Set<Integer> profilesId) throws NotFoundException {
         
         Set<Player> players = new HashSet<>();
         
         for (Integer profileId : profilesId) {
             
-            ProfileDTO profile = profileService.find( (ProfileDTO) new ProfileDTO().setId(profileId) );
+            ProfileDTO profile = profileService.find( new ProfileDTO().setId(profileId) );
             if (profile == null)
                 throw new NotFoundException("Profile '" + profileId + "' not found.");
             
             players.add( new Player(profile) );
         }
         
-        return players;
+        return players.stream()
+                .sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER))
+                .collect( Collectors.toList() );
     }
     
+    /**
+     * Find the next id game.
+     *
+     * @return the id game
+     */
     private Integer findNextId() {
         OptionalInt optionalInt = games.stream().mapToInt(Game::getId).max();
         return ( optionalInt.isPresent() ) ? optionalInt.getAsInt() + 1 : 0;
@@ -174,12 +188,13 @@ public class GameService {
      *
      * @param musicResult the music result
      * @return the game
-     * @throws NotFoundException the not found exception
+     * @throws NotFoundException if the game, music or profile is not found
      * @throws ConflictException the conflict exception
      */
     public Game apply(MusicResult musicResult) throws NotFoundException, ConflictException {
         
-        CommonUtils.verifyValue("musicResult", musicResult);
+        checkAndFillMusicResult(musicResult);
+        
         Game game = games.stream()
                 .filter( g -> g.getId().equals(musicResult.getGameId()) )
                 .findFirst()
@@ -244,6 +259,24 @@ public class GameService {
     }
     
     /**
+     * Check the MusicResult. Fill the MusicResult for prepare Game.apply.
+     *
+     * @param musicResult the musicResult
+     */
+    private void checkAndFillMusicResult(MusicResult musicResult) {
+        
+        CommonUtils.verifyValue("musicResult", musicResult);
+        
+        CommonUtils.verifyValue("gameId", musicResult.getGameId() );
+        musicService.checkAndFillDTO( musicResult.getMusic() );
+        
+        musicResult.setAuthorWinners( CommonUtils.removeDuplicate(musicResult.getAuthorWinners()) );
+        musicResult.setTitleWinners( CommonUtils.removeDuplicate(musicResult.getTitleWinners()) );
+        musicResult.setLosers( Objects.requireNonNullElse(musicResult.getTitleWinners(), new ArrayList<>()) );
+        musicResult.setPenalties( CommonUtils.removeDuplicate(musicResult.getPenalties()) );
+    }
+    
+    /**
      * Update players ranks.
      *
      * @param players the players
@@ -276,6 +309,7 @@ public class GameService {
         int lastRank = currentRank;
         players.forEach( player -> player.setLast(player.getRank() == lastRank) );
     }
+    
     
     /**
      * Find the game by id.

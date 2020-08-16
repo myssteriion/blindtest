@@ -51,7 +51,7 @@ public class ProfileStatServiceTest extends AbstractTest {
         profileStatService = Mockito.spy( new ProfileStatService(profileStatDao) );
         MockitoAnnotations.initMocks(profileStatService);
         
-        ProfileDTO profileDTOMock = new ProfileDTO("name", "avatarName");
+        ProfileDTO profileDTOMock = new ProfileDTO().setName("name").setAvatarName("avatarName");
         profileDTOMock.setId(1);
         
         ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(profileStatId);
@@ -71,7 +71,7 @@ public class ProfileStatServiceTest extends AbstractTest {
         }
         
         ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
-        Assert.assertEquals( new Integer(1), profileStatDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), profileStatDtoSaved.getId() );
         Assert.assertEquals( profileStatId, profileStatDtoSaved.getProfileId() );
         Assert.assertEquals( new HashMap<>(), profileStatDtoSaved.getPlayedGames() );
     }
@@ -120,7 +120,7 @@ public class ProfileStatServiceTest extends AbstractTest {
         
         profileStatDto.setId(1);
         ProfileStatDTO profileDtoSaved = profileStatService.update(profileStatDto);
-        Assert.assertEquals( new Integer(1), profileDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), profileDtoSaved.getId() );
     }
     
     @Test
@@ -150,7 +150,7 @@ public class ProfileStatServiceTest extends AbstractTest {
     @Test
     public void findByProfile() throws NotFoundException {
         
-        ProfileDTO profileDto = new ProfileDTO("name");
+        ProfileDTO profileDto = new ProfileDTO().setName("name");
         profileDto.setId(1);
         
         ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);

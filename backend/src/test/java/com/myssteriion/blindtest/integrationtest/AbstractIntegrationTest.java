@@ -82,9 +82,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     );
     
     protected static final List<ProfileDTO> PROFILES_LIST = Arrays.asList(
-            (ProfileDTO) new ProfileDTO("name1").setId(0),
-            (ProfileDTO) new ProfileDTO("name2").setId(1),
-            (ProfileDTO) new ProfileDTO("name3").setId(2)
+            new ProfileDTO().setId(0).setName("name1").setAvatarName("avatarName").setBackground(0),
+            new ProfileDTO().setId(1).setName("name2").setAvatarName("avatarName").setBackground(0),
+            new ProfileDTO().setId(2).setName("name3").setAvatarName("avatarName").setBackground(0)
     );
     
     

@@ -68,7 +68,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         File avatarDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
             
-            AvatarDTO avatarDTO = new AvatarDTO( file.getName() );
+            AvatarDTO avatarDTO = new AvatarDTO(file.getName() );
             if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
                 dao.save(avatarDTO);
         }
@@ -148,8 +148,10 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         AvatarDTO avatar;
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkAndFillDTO(dto);
             avatar = dao.findByName(dto.getName()).orElse(null);
+        }
         else
             avatar = super.find(dto);
         
@@ -158,6 +160,14 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         
         return avatar;
     }
+    
+    @Override
+    public void checkAndFillDTO(AvatarDTO dto) {
+        
+        super.checkAndFillDTO(dto);
+        CommonUtils.verifyValue("avatar -> name", dto.getName() );
+    }
+    
     
     /**
      * Find a page of Avatar filtered by a search name.

@@ -72,9 +72,9 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'connectionMode' est obligatoire."), e);
         }
         
-        Assert.assertEquals( new Integer(2), musicService.getMusicNumber(theme, ConnectionMode.OFFLINE) );
-        Assert.assertEquals( new Integer(3), musicService.getMusicNumber(theme, ConnectionMode.ONLINE) );
-        Assert.assertEquals( new Integer(5+7), musicService.getMusicNumber(theme, ConnectionMode.BOTH) );
+        Assert.assertEquals( Integer.valueOf(2), musicService.getMusicNumber(theme, ConnectionMode.OFFLINE) );
+        Assert.assertEquals( Integer.valueOf(3), musicService.getMusicNumber(theme, ConnectionMode.ONLINE) );
+        Assert.assertEquals( Integer.valueOf(5+7), musicService.getMusicNumber(theme, ConnectionMode.BOTH) );
     }
     
     @Test
@@ -153,7 +153,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         MusicDTO musicSaved = musicService.save(musicDto);
-        Assert.assertEquals( new Integer(1), musicSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), musicSaved.getId() );
         Assert.assertEquals( name, musicSaved.getName() );
         Assert.assertEquals( theme, musicSaved.getTheme() );
         Assert.assertEquals( 0, musicSaved.getPlayed() );
@@ -204,7 +204,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         music.setId(1);
         MusicDTO musicDtoSaved = musicService.update(music);
-        Assert.assertEquals( new Integer(1), musicDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), musicDtoSaved.getId() );
         Assert.assertEquals( "name", musicDtoSaved.getName() );
     }
     

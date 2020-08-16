@@ -26,7 +26,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "profile_stat_sequence", allocationSize = 1)
-public class ProfileStatDTO extends AbstractDTO {
+public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
     
     /**
      * The profileId.
@@ -78,7 +78,6 @@ public class ProfileStatDTO extends AbstractDTO {
      * Instantiates a new Profile stat dto.
      */
     public ProfileStatDTO() {
-        this(null);
     }
     
     /**

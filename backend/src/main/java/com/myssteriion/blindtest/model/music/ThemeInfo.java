@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.music;
 
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
 import java.util.Objects;
@@ -29,6 +28,12 @@ public class ThemeInfo implements IModel {
     
     
     /**
+     * Instantiates a new Theme info.
+     */
+    public ThemeInfo() {
+    }
+    
+    /**
      * Instantiate a new ThemeInfo.
      *
      * @param theme           the theme
@@ -37,40 +42,71 @@ public class ThemeInfo implements IModel {
      */
     public ThemeInfo(Theme theme, Integer offlineNbMusics, Integer onlineNbMusics) {
         
-        CommonUtils.verifyValue("theme", theme);
-        
         this.theme = theme;
-        this.offlineNbMusics = Math.max(offlineNbMusics, 0);
-        this.onlineNbMusics = Math.max(onlineNbMusics, 0);
+        this.offlineNbMusics = offlineNbMusics;
+        this.onlineNbMusics = onlineNbMusics;
     }
     
     
     
     /**
-     * Gets theme.
+     * Get theme.
      *
-     * @return The theme.
+     * @return the theme
      */
     public Theme getTheme() {
         return theme;
     }
     
     /**
-     * Gets offlineNbMusics.
+     * Set theme.
      *
-     * @return The offlineNbMusics.
+     * @param theme the theme
+     * @return this
+     */
+    public ThemeInfo setTheme(Theme theme) {
+        this.theme = theme;
+        return this;
+    }
+    
+    /**
+     * Get offlineNbMusics.
+     *
+     * @return the offlineNbMusics
      */
     public Integer getOfflineNbMusics() {
         return offlineNbMusics;
     }
     
     /**
-     * Gets onlineNbMusics.
+     * Set offlineNbMusics.
      *
-     * @return The onlineNbMusics.
+     * @param offlineNbMusics the offlineNbMusics
+     * @return this
+     */
+    public ThemeInfo setOfflineNbMusics(Integer offlineNbMusics) {
+        this.offlineNbMusics = offlineNbMusics;
+        return this;
+    }
+    
+    /**
+     * Get onlineNbMusics.
+     *
+     * @return the onlineNbMusics
      */
     public Integer getOnlineNbMusics() {
         return onlineNbMusics;
+    }
+    
+    /**
+     * Set onlineNbMusics.
+     *
+     * @param onlineNbMusics the onlineNbMusics
+     * @return this
+     */
+    public ThemeInfo setOnlineNbMusics(Integer onlineNbMusics) {
+        this.onlineNbMusics = onlineNbMusics;
+        return this;
     }
     
     

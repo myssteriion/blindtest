@@ -62,8 +62,8 @@ public class ThemeIntegerConverterTest extends AbstractTest {
         
         Map<Theme, Integer> actual = converter.convertToEntityAttribute("{\"ANNEES_90\":2,\"ANNEES_80\":4}");
         Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90) );
-        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_80) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Theme.ANNEES_90) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Theme.ANNEES_80) );
         
         try {
             converter.convertToEntityAttribute("{\"name\":\"pouet\",\"number\":4}");
@@ -81,8 +81,8 @@ public class ThemeIntegerConverterTest extends AbstractTest {
         
         Map<Theme, Integer> actual = converter.convertToMap("{\"ANNEES_90\":2,\"ANNEES_80\":4}");
         Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Theme.ANNEES_90) );
-        Assert.assertEquals( new Integer(4), actual.get(Theme.ANNEES_80) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Theme.ANNEES_90) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Theme.ANNEES_80) );
     }
     
 }

@@ -10,6 +10,9 @@ import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 /**
  * Service for ProfileStatDTO.
  */
@@ -28,11 +31,28 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
         
         CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkAndFillDTO(dto);
             return dao.findByProfileId(dto.getProfileId()).orElse(null);
+        }
         else
             return super.find(dto);
     }
+    
+    @Override
+    public void checkAndFillDTO(ProfileStatDTO profileStat) {
+        
+        super.checkAndFillDTO(profileStat);
+        
+        CommonUtils.verifyValue("profileStat -> profileId", profileStat.getProfileId() );
+    
+        profileStat.setPlayedGames(Objects.requireNonNullElse(profileStat.getPlayedGames(), new HashMap<>()) );
+        profileStat.setBestScores(Objects.requireNonNullElse(profileStat.getBestScores(), new HashMap<>()) );
+        profileStat.setWonGames(Objects.requireNonNullElse(profileStat.getWonGames(), new HashMap<>()) );
+        profileStat.setListenedMusics(Objects.requireNonNullElse(profileStat.getListenedMusics(), new HashMap<>()) );
+        profileStat.setFoundMusics(Objects.requireNonNullElse(profileStat.getFoundMusics(), new HashMap<>()) );
+    }
+    
     
     /**
      * Find profile stat dto by profileId.

@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.dto;
 
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
@@ -19,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "profile", uniqueConstraints={ @UniqueConstraint(name = "profile__name__unique", columnNames={"name"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "profile_sequence", allocationSize = 1)
-public class ProfileDTO extends AbstractDTO {
+public class ProfileDTO extends AbstractDTO<ProfileDTO> {
     
     /**
      * The name.
@@ -53,44 +52,29 @@ public class ProfileDTO extends AbstractDTO {
      * Instantiates a new Profile dto.
      */
     public ProfileDTO() {
-        this("");
+    }
+    
+    
+    
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
     
     /**
-     * Instantiates a new Profile dto.
+     * Sets name.
      *
      * @param name the name
+     * @return this
      */
-    public ProfileDTO(String name) {
-        this(name, "");
+    public ProfileDTO setName(String name) {
+        this.name = name;
+        return this;
     }
-    
-    /**
-     * Instantiates a new Profile dto.
-     *
-     * @param name       the name
-     * @param avatarName the avatar name
-     */
-    public ProfileDTO(String name, String avatarName) {
-        this(name, avatarName, 0);
-    }
-    
-    /**
-     * Instantiates a new Profile dto.
-     *
-     * @param name       the name
-     * @param avatarName the avatar name
-     * @param background the background
-     */
-    public ProfileDTO(String name, String avatarName, Integer background) {
-        
-        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name.trim();
-        this.background = Math.max(background, 0);
-        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? "" : avatarName;
-        this.avatar = new AvatarDTO(this.avatarName);
-    }
-    
-    
     
     /**
      * Gets background.
@@ -113,37 +97,6 @@ public class ProfileDTO extends AbstractDTO {
     }
     
     /**
-     * Set avatar.
-     *
-     * @param avatar the avatar.
-     * @return this
-     */
-    public ProfileDTO setAvatar(AvatarDTO avatar) {
-        this.avatar = avatar;
-        return this;
-    }
-    
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-    
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     * @return this
-     */
-    public ProfileDTO setName(String name) {
-        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name.trim();
-        return this;
-    }
-    
-    /**
      * Gets avatar name.
      *
      * @return the avatar name
@@ -159,8 +112,8 @@ public class ProfileDTO extends AbstractDTO {
      * @return this
      */
     public ProfileDTO setAvatarName(String avatarName) {
-        this.avatarName = CommonUtils.isNullOrEmpty(avatarName) ? "" : avatarName;
-        this.avatar = new AvatarDTO(this.avatarName);
+        this.avatarName = avatarName;
+        this.avatar = new AvatarDTO(avatarName);
         return this;
     }
     
@@ -171,6 +124,17 @@ public class ProfileDTO extends AbstractDTO {
      */
     public AvatarDTO getAvatar() {
         return avatar;
+    }
+    
+    /**
+     * Set avatar.
+     *
+     * @param avatar the avatar.
+     * @return this
+     */
+    public ProfileDTO setAvatar(AvatarDTO avatar) {
+        this.avatar = avatar;
+        return this;
     }
     
     
@@ -195,8 +159,8 @@ public class ProfileDTO extends AbstractDTO {
     @Override
     public String toString() {
         return super.toString() +
-                ", background=" + background +
                 ", name=" + name +
+                ", background=" + background +
                 ", avatarName=" + avatarName +
                 ", avatar={" + avatar + "}";
     }

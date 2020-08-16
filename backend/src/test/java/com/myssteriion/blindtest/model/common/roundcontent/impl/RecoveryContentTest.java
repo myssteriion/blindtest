@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 public class RecoveryContentTest extends AbstractTest {
@@ -46,13 +45,13 @@ public class RecoveryContentTest extends AbstractTest {
         
         List<String> playersNames = Collections.singletonList("name");
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name1")));
+        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(gameId, musicDto, playersNames, null, null, null);
+        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 72; i++)
             game.nextStep(roundContentProperties);
@@ -81,22 +80,22 @@ public class RecoveryContentTest extends AbstractTest {
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 30, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult(gameId, musicDto, null, playersNames, null, null);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setTitleWinners(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult(gameId, musicDto, playersNames, playersNames, null, null);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames).setTitleWinners(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult(gameId, musicDto, null, null, playersNames, null);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult(gameId, musicDto, null, null, null, playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setPenalties(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );

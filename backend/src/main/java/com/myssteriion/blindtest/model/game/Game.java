@@ -83,24 +83,27 @@ public class Game implements IModel {
     
     /**
      * Instantiates a new Game.
+     */
+    public Game() {
+    }
+    
+    
+    /**
+     * Instantiates a new Game.
      *
-     * @param players  the players
-     * @param duration the duration
-     * @param themes   the themes
+     * @param players        the players
+     * @param duration       the duration
+     * @param themes         the themes
+     * @param effects        the effects
      * @param connectionMode the connection mode
      */
-    public Game(Set<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
+    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
         
-        CommonUtils.verifyValue("players", players);
-        CommonUtils.verifyValue("duration", duration);
-        CommonUtils.verifyValue("gameMode", connectionMode);
-        
-        this.players = players.stream().sorted(Comparator.comparing(player -> player.getProfile().getName(), String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
+        this.players = players;
         this.duration = duration;
-        this.themes = CommonUtils.isNullOrEmpty(themes) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
-        this.effects = CommonUtils.isNullOrEmpty(effects) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
+        this.themes = themes;
+        this.effects = effects;
         this.connectionMode = connectionMode;
-        this.listenedMusics = new HashMap<>();
         
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
@@ -139,12 +142,34 @@ public class Game implements IModel {
     }
     
     /**
+     * Sets players.
+     *
+     * @param players the players
+     * @return the players
+     */
+    public Game setPlayers(List<Player> players) {
+        this.players = players;
+        return this;
+    }
+    
+    /**
      * Gets duration.
      *
      * @return the duration
      */
     public Duration getDuration() {
         return duration;
+    }
+    
+    /**
+     * Sets duration.
+     *
+     * @param duration the duration
+     * @return the duration
+     */
+    public Game setDuration(Duration duration) {
+        this.duration = duration;
+        return this;
     }
     
     /**
@@ -157,12 +182,34 @@ public class Game implements IModel {
     }
     
     /**
+     * Sets themes.
+     *
+     * @param themes the themes
+     * @return the themes
+     */
+    public Game setThemes(List<Theme> themes) {
+        this.themes = themes;
+        return this;
+    }
+    
+    /**
      * Gets effects.
      *
      * @return The effects.
      */
     public List<Effect> getEffects() {
         return effects;
+    }
+    
+    /**
+     * Sets effects.
+     *
+     * @param effects the effects
+     * @return the effects
+     */
+    public Game setEffects(List<Effect> effects) {
+        this.effects = effects;
+        return this;
     }
     
     /**
@@ -175,12 +222,34 @@ public class Game implements IModel {
     }
     
     /**
+     * Sets connection mode.
+     *
+     * @param connectionMode the connection mode
+     * @return the connection mode
+     */
+    public Game setConnectionMode(ConnectionMode connectionMode) {
+        this.connectionMode = connectionMode;
+        return this;
+    }
+    
+    /**
      * Gets listenedMusics.
      *
      * @return The listenedMusics.
      */
     public Map<Theme, Integer> getListenedMusics() {
         return listenedMusics;
+    }
+    
+    /**
+     * Sets listened musics.
+     *
+     * @param listenedMusics the listened musics
+     * @return the listened musics
+     */
+    public Game setListenedMusics(Map<Theme, Integer> listenedMusics) {
+        this.listenedMusics = listenedMusics;
+        return this;
     }
     
     /**
@@ -193,12 +262,34 @@ public class Game implements IModel {
     }
     
     /**
+     * Sets nb musics played.
+     *
+     * @param nbMusicsPlayed the nb musics played
+     * @return the nb musics played
+     */
+    public Game setNbMusicsPlayed(int nbMusicsPlayed) {
+        this.nbMusicsPlayed = nbMusicsPlayed;
+        return this;
+    }
+    
+    /**
      * Gets nbMusicsPlayed.
      *
      * @return the nbMusicsPlayed
      */
     public int getNbMusicsPlayedInRound() {
         return nbMusicsPlayedInRound;
+    }
+    
+    /**
+     * Sets nb musics played in round.
+     *
+     * @param nbMusicsPlayedInRound the nb musics played in round
+     * @return the nb musics played in round
+     */
+    public Game setNbMusicsPlayedInRound(int nbMusicsPlayedInRound) {
+        this.nbMusicsPlayedInRound = nbMusicsPlayedInRound;
+        return this;
     }
     
     /**
@@ -211,12 +302,34 @@ public class Game implements IModel {
     }
     
     /**
+     * Sets round.
+     *
+     * @param round the round
+     * @return the round
+     */
+    public Game setRound(Round round) {
+        this.round = round;
+        return this;
+    }
+    
+    /**
      * Gets roundContent.
      *
      * @return the roundContent
      */
     public AbstractRoundContent getRoundContent() {
         return roundContent;
+    }
+    
+    /**
+     * Sets round content.
+     *
+     * @param roundContent the round content
+     * @return the round content
+     */
+    public Game setRoundContent(AbstractRoundContent roundContent) {
+        this.roundContent = roundContent;
+        return this;
     }
     
     
@@ -228,6 +341,9 @@ public class Game implements IModel {
     public void incrementListenedMusics(Theme theme) {
         
         CommonUtils.verifyValue("theme", theme);
+        
+        if (listenedMusics == null)
+            listenedMusics = new HashMap<>();
         
         if ( !listenedMusics.containsKey(theme) )
             listenedMusics.put(theme, 0);
@@ -243,7 +359,7 @@ public class Game implements IModel {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
         
-        if ( roundContent.isFinished(this) ) {
+        if ( roundContent != null && roundContent.isFinished(this) ) {
             round = round.nextRound();
             
             // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND

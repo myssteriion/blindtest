@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -119,7 +120,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         File themeDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(themeDirectory) ) {
             
-            MusicDTO musicDto = new MusicDTO(file.getName(), theme, ConnectionMode.OFFLINE);
+            MusicDTO musicDto = new MusicDTO().setName( file.getName() ).setTheme(theme).setConnectionMode(ConnectionMode.OFFLINE);
             Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
             if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
                 dao.save(musicDto);
@@ -196,12 +197,25 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         
         CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkAndFillDTO(dto);
             return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
+        }
         else
             return super.find(dto);
     }
     
+    @Override
+    public void checkAndFillDTO(MusicDTO music) {
+        
+        super.checkAndFillDTO(music);
+        
+        CommonUtils.verifyValue("music -> name", music.getName() );
+        CommonUtils.verifyValue("music -> theme", music.getTheme() );
+        CommonUtils.verifyValue("music -> connectionMode", music.getConnectionMode() );
+        
+        music.setPlayed(Objects.requireNonNullElse(music.getPlayed(), 0) );
+    }
     
     
     /**

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.dto;
 
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
@@ -19,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "avatar_sequence", allocationSize = 1)
-public class AvatarDTO extends AbstractDTO {
+public class AvatarDTO extends AbstractDTO<AvatarDTO> {
     
     /**
      * The name.
@@ -40,7 +39,6 @@ public class AvatarDTO extends AbstractDTO {
      * Instantiates a new Avatar dto.
      */
     public AvatarDTO() {
-        this("");
     }
     
     /**
@@ -49,7 +47,7 @@ public class AvatarDTO extends AbstractDTO {
      * @param name the name
      */
     public AvatarDTO(String name) {
-        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name;
+        this.name = name;
     }
     
     

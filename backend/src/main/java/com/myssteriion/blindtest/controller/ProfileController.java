@@ -99,7 +99,7 @@ public class ProfileController {
     @DeleteMapping(path = CommonConstant.ID_PATH_PARAM)
     public ResponseEntity<Empty> delete(@PathVariable(CommonConstant.ID) Integer id) throws NotFoundException {
         
-        ProfileDTO profileDto = (ProfileDTO) new ProfileDTO("ANY").setId(id);
+        ProfileDTO profileDto = new ProfileDTO().setId(id);
         
         profileService.delete(profileDto);
         

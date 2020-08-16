@@ -122,7 +122,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         AvatarDTO avatarDtoSaved = avatarService.save(avatarDto);
-        Assert.assertEquals( new Integer(1), avatarDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
         Assert.assertEquals( name, avatarDtoSaved.getName() );
     }
     
@@ -169,7 +169,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         
         avatarDto.setId(1);
         AvatarDTO avatarDtoSaved = avatarService.update(avatarDto);
-        Assert.assertEquals( new Integer(1), avatarDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
         Assert.assertEquals( "name", avatarDtoSaved.getName() );
     }
     
@@ -192,7 +192,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         Assert.assertNull( avatarService.find(avatarDto) );
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
         
-        avatarDto = (AvatarDTO) new AvatarDTO("name").setId(1);
+        avatarDto = new AvatarDTO("name").setId(1);
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
     }
     

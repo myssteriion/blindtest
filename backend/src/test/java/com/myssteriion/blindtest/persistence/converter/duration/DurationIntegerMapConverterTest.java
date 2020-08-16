@@ -62,8 +62,8 @@ public class DurationIntegerMapConverterTest extends AbstractTest {
         
         Map<Duration, Integer> actual = converter.convertToEntityAttribute("{\"SHORT\":2,\"LONG\":4}");
         Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Duration.SHORT) );
-        Assert.assertEquals( new Integer(4), actual.get(Duration.LONG) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Duration.SHORT) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Duration.LONG) );
         
         try {
             converter.convertToEntityAttribute("{\"name\":\"pouet\",\"number\":4}");
@@ -81,8 +81,8 @@ public class DurationIntegerMapConverterTest extends AbstractTest {
         
         Map<Duration, Integer> actual = converter.convertToMap("{\"SHORT\":2,\"LONG\":4}");
         Assert.assertEquals( 2, actual.size() );
-        Assert.assertEquals( new Integer(2), actual.get(Duration.SHORT) );
-        Assert.assertEquals( new Integer(4), actual.get(Duration.LONG) );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(Duration.SHORT) );
+        Assert.assertEquals( Integer.valueOf(4), actual.get(Duration.LONG) );
     }
     
 }

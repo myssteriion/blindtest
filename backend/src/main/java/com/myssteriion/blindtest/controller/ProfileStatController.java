@@ -65,7 +65,7 @@ public class ProfileStatController {
             
             try {
                 
-                ProfileDTO profile = (ProfileDTO) new ProfileDTO().setId(id);
+                ProfileDTO profile = new ProfileDTO().setId(id);
                 profile = profileService.find(profile);
                 if (profile == null)
                     throw new NotFoundException("Profile not found.");

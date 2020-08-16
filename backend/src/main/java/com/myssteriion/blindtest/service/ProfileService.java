@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * Service for ProfileDTO.
  */
@@ -60,8 +62,10 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
         CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
         
         ProfileDTO profile;
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkAndFillDTO(dto);
             profile = dao.findByName(dto.getName()).orElse(null);
+        }
         else
             profile = super.find(dto);
         
@@ -104,6 +108,17 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
         
         profileStatService.delete( profileStatService.findByProfile(profile) );
         super.delete(profile);
+    }
+    
+    @Override
+    public void checkAndFillDTO(ProfileDTO profile) {
+        
+        super.checkAndFillDTO(profile);
+        
+        CommonUtils.verifyValue("profile -> name", profile.getName() );
+        
+        profile.setBackground(Objects.requireNonNullElse(profile.getBackground(), 0) );
+        profile.setAvatarName(Objects.requireNonNullElse(profile.getAvatarName(), "") );
     }
     
     
