@@ -120,7 +120,6 @@ public class GameService {
     private void checkAndFillNewGame(NewGame newGame) throws NotFoundException {
         
         CommonUtils.verifyValue("newGame", newGame);
-        
         CommonUtils.verifyValue("newGame -> players", newGame.getProfilesId() );
         CommonUtils.verifyValue("newGame -> duration", newGame.getDuration() );
         CommonUtils.verifyValue("newGame -> connectionMode", newGame.getConnectionMode() );
@@ -266,9 +265,8 @@ public class GameService {
     private void checkAndFillMusicResult(MusicResult musicResult) {
         
         CommonUtils.verifyValue("musicResult", musicResult);
-        
-        CommonUtils.verifyValue("gameId", musicResult.getGameId() );
-        musicService.checkAndFillDTO( musicResult.getMusic() );
+        CommonUtils.verifyValue("musicResult -> gameId", musicResult.getGameId() );
+        musicService.checkDTO( musicResult.getMusic() );
         
         musicResult.setAuthorWinners( CommonUtils.removeDuplicate(musicResult.getAuthorWinners()) );
         musicResult.setTitleWinners( CommonUtils.removeDuplicate(musicResult.getTitleWinners()) );

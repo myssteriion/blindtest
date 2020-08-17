@@ -28,7 +28,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -68,7 +67,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      */
     @Autowired
     public MusicService(MusicDAO musicDao, SpotifyService spotifyService, ConfigProperties configProperties) {
-        super(musicDao);
+        super(musicDao, "music");
         this.spotifyService = spotifyService;
         this.configProperties = configProperties;
         initFolderPath();
@@ -191,30 +190,17 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     }
     
     
-    
     @Override
     public MusicDTO find(MusicDTO dto) {
-        
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
+    
+        super.checkDTO(dto);
         
         if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkAndFillDTO(dto);
+            checkDTO(dto);
             return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
         }
         else
             return super.find(dto);
-    }
-    
-    @Override
-    public void checkAndFillDTO(MusicDTO music) {
-        
-        super.checkAndFillDTO(music);
-        
-        CommonUtils.verifyValue("music -> name", music.getName() );
-        CommonUtils.verifyValue("music -> theme", music.getTheme() );
-        CommonUtils.verifyValue("music -> connectionMode", music.getConnectionMode() );
-        
-        music.setPlayed(Objects.requireNonNullElse(music.getPlayed(), 0) );
     }
     
     
@@ -402,6 +388,16 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      */
     private Effect foundEffect(List<Effect> effects) {
         return effects.get( Constant.RANDOM.nextInt(effects.size()) );
+    }
+    
+    
+    @Override
+    public void checkDTO(MusicDTO music) {
+    
+        super.checkDTO(music);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), music.getName() );
+        CommonUtils.verifyValue(dtoName + " -> theme", music.getTheme() );
+        CommonUtils.verifyValue(dtoName + " -> connectionMode", music.getConnectionMode() );
     }
     
 }

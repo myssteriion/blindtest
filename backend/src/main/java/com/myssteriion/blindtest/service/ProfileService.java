@@ -32,7 +32,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     
     @Autowired
     public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService) {
-        super(profileDao);
+        super(profileDao, "profile");
         this.profileStatService = profileStatService;
         this.avatarService = avatarService;
     }
@@ -58,12 +58,12 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     
     @Override
     public ProfileDTO find(ProfileDTO dto) {
-        
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
+    
+        super.checkDTO(dto);
         
         ProfileDTO profile;
         if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkAndFillDTO(dto);
+            checkDTO(dto);
             profile = dao.findByName(dto.getName()).orElse(null);
         }
         else
@@ -85,8 +85,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
      */
     public Page<ProfileDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
-        if (searchName == null)
-            searchName = "";
+        searchName = Objects.requireNonNullElse(searchName, "");
         
         itemPerPage = Math.max(itemPerPage, 1);
         itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
@@ -102,23 +101,12 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
     
     @Override
     public void delete(ProfileDTO profile) throws NotFoundException {
-        
-        CommonUtils.verifyValue("profile", profile);
-        CommonUtils.verifyValue("profile -> id", profile.getId());
+    
+        super.checkDTO(profile);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_ID), profile.getId() );
         
         profileStatService.delete( profileStatService.findByProfile(profile) );
         super.delete(profile);
-    }
-    
-    @Override
-    public void checkAndFillDTO(ProfileDTO profile) {
-        
-        super.checkAndFillDTO(profile);
-        
-        CommonUtils.verifyValue("profile -> name", profile.getName() );
-        
-        profile.setBackground(Objects.requireNonNullElse(profile.getBackground(), 0) );
-        profile.setAvatarName(Objects.requireNonNullElse(profile.getAvatarName(), "") );
     }
     
     
@@ -132,6 +120,12 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
         // setter is useful for create avatar inside profile
         profile.setAvatarName( profile.getAvatarName() );
         avatarService.createAvatarFlux( profile.getAvatar() );
+    }
+    
+    @Override
+    public void checkDTO(ProfileDTO profile) {
+        super.checkDTO(profile);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), profile.getName() );
     }
     
 }

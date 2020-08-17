@@ -51,6 +51,7 @@ public class GameServiceTest extends AbstractTest {
     @Before
     public void before() {
         gameService = new GameService(musicService, profileService, profileStatService, spotifyService, configProperties, roundContentProperties);
+        Mockito.doNothing().when(musicService).refresh();
     }
     
     
@@ -76,6 +77,30 @@ public class GameServiceTest extends AbstractTest {
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame' est obligatoire."), e);
+        }
+        
+        try {
+            gameService.newGame(new NewGame());
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame -> players' est obligatoire."), e);
+        }
+        
+        try {
+            gameService.newGame(new NewGame().setProfilesId(profilesId));
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame -> duration' est obligatoire."), e);
+        }
+        
+        try {
+            gameService.newGame(new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL));
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame -> connectionMode' est obligatoire."), e);
         }
         
         try {
@@ -140,7 +165,6 @@ public class GameServiceTest extends AbstractTest {
         ProfileStatDTO profileStat1;
         ProfileStatDTO profileStat2;
         
-        Mockito.doNothing().when(musicService).refresh();
         Mockito.when(musicService.find( Mockito.any(MusicDTO.class) )).thenReturn(null, music2, music);
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
         
@@ -161,13 +185,20 @@ public class GameServiceTest extends AbstractTest {
                 .setAuthorWinners(Collections.singletonList(profile.getName()))
                 .setLosers(Collections.singletonList(profile.getName()));
         
-        
         try {
             gameService.apply(null);
-            Assert.fail("Doit lever une IllegalArgumentException le gameDto n'est pas retrouvée.");
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'musicResult' est obligatoire."), e);
+        }
+        
+        try {
+            gameService.apply(new MusicResult());
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'musicResult -> gameId' est obligatoire."), e);
         }
         
         try {
@@ -177,7 +208,6 @@ public class GameServiceTest extends AbstractTest {
         catch (NotFoundException e) {
             TestUtils.verifyException(new NotFoundException("Game not found."), e);
         }
-        
         
         gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL)
                 .setThemes(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70)).setConnectionMode(ConnectionMode.OFFLINE) );

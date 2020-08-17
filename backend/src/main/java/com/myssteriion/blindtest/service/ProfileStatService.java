@@ -3,15 +3,11 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
 import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
-import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Service for ProfileStatDTO.
@@ -21,50 +17,35 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
     
     @Autowired
     public ProfileStatService(ProfileStatDAO profileStatDao) {
-        super(profileStatDao);
+        super(profileStatDao, "profileStat");
     }
     
     
     
     @Override
     public ProfileStatDTO find(ProfileStatDTO dto) {
-        
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
+    
+        super.checkDTO(dto);
         
         if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkAndFillDTO(dto);
+            checkDTO(dto);
             return dao.findByProfileId(dto.getProfileId()).orElse(null);
         }
         else
             return super.find(dto);
     }
     
-    @Override
-    public void checkAndFillDTO(ProfileStatDTO profileStat) {
-        
-        super.checkAndFillDTO(profileStat);
-        
-        CommonUtils.verifyValue("profileStat -> profileId", profileStat.getProfileId() );
-    
-        profileStat.setPlayedGames(Objects.requireNonNullElse(profileStat.getPlayedGames(), new HashMap<>()) );
-        profileStat.setBestScores(Objects.requireNonNullElse(profileStat.getBestScores(), new HashMap<>()) );
-        profileStat.setWonGames(Objects.requireNonNullElse(profileStat.getWonGames(), new HashMap<>()) );
-        profileStat.setListenedMusics(Objects.requireNonNullElse(profileStat.getListenedMusics(), new HashMap<>()) );
-        profileStat.setFoundMusics(Objects.requireNonNullElse(profileStat.getFoundMusics(), new HashMap<>()) );
-    }
-    
-    
     /**
      * Find profile stat dto by profileId.
      *
      * @param profile the profile dto
      * @return the profile stat dto
-     * @throws NotFoundException the not found exception
+     * @throws NotFoundException if its not found
      */
     public ProfileStatDTO findByProfile(ProfileDTO profile) throws NotFoundException {
         
         CommonUtils.verifyValue("profile", profile);
-        CommonUtils.verifyValue("profile -> id", profile.getId());
+        CommonUtils.verifyValue( "profile -> id", profile.getId() );
         
         ProfileStatDTO profileStatDto = new ProfileStatDTO( profile.getId() );
         ProfileStatDTO foundProfileStatDTO = find(profileStatDto);
@@ -73,6 +54,13 @@ public class ProfileStatService extends AbstractCRUDService<ProfileStatDTO, Prof
             throw new NotFoundException("Profile stat not found.");
         
         return foundProfileStatDTO;
+    }
+    
+    
+    @Override
+    public void checkDTO(ProfileStatDTO profileStat) {
+        super.checkDTO(profileStat);
+        CommonUtils.verifyValue(dtoName + " -> profileId", profileStat.getProfileId() );
     }
     
 }

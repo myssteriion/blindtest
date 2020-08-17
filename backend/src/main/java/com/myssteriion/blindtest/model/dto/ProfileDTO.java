@@ -32,6 +32,7 @@ public class ProfileDTO extends AbstractDTO<ProfileDTO> {
      */
     @Column(name = "background", nullable = false)
     @PositiveOrZero(message = "Background can't be negative.")
+//    @ColumnDefault("0")
     private Integer background;
     
     /**

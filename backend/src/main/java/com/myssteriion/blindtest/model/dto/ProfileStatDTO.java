@@ -39,6 +39,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      */
     @Column(name = "played_games", nullable = false, length = 500)
     @Convert(converter = DurationIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> playedGames;
     
     /**
@@ -46,6 +47,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      */
     @Column(name = "best_scores", nullable = false, length = 500)
     @Convert(converter = DurationIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> bestScores;
     
     /**
@@ -56,6 +58,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      */
     @Column(name = "won_games", nullable = false, length = 500)
     @Convert(converter = StringIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<String, Integer> wonGames;
     
     /**
@@ -63,6 +66,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      */
     @Column(name = "listened_musics", nullable = false, length = 500)
     @Convert(converter = ThemeIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Theme, Integer> listenedMusics;
     
     /**
@@ -70,6 +74,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      */
     @Column(name = "found_musics", nullable = false, length = 1000)
     @Convert(converter = ThemeGoodAnswerIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
     
     

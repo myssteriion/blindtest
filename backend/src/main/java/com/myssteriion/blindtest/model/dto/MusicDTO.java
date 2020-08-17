@@ -46,6 +46,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      */
     @Column(name = "played", nullable = false)
     @PositiveOrZero(message = "Played can't be negative.")
+//    @ColumnDefault("0")
     private int played;
     
     /**

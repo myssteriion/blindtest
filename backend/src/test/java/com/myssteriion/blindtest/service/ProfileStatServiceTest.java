@@ -45,7 +45,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         profileStatService = Mockito.spy( new ProfileStatService(profileStatDao) );
@@ -67,7 +67,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
-            TestUtils.verifyException(new ConflictException("Entity already exists."), e);
+            TestUtils.verifyException(new ConflictException("profileStat already exists."), e);
         }
         
         ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
@@ -87,7 +87,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         
@@ -97,7 +97,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat -> id' est obligatoire."), e);
         }
         
         
@@ -115,7 +115,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Entity not found."), e);
+            TestUtils.verifyException(new NotFoundException("profileStat not found."), e);
         }
         
         profileStatDto.setId(1);
@@ -136,7 +136,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         ProfileStatDTO profileStatDTO = new ProfileStatDTO(1);
@@ -176,6 +176,28 @@ public class ProfileStatServiceTest extends AbstractTest {
         ProfileStatDTO actual = profileStatService.findByProfile(profileDto);
         Assert.assertNotNull(actual);
         Assert.assertSame(profileStatDtoMock, actual);
+    }
+    
+    @Test
+    public void checkDTO() {
+        
+        try {
+            profileStatService.checkDTO(null);
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
+        }
+        
+        try {
+            profileStatService.checkDTO(new ProfileStatDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat -> profileId' est obligatoire."), e);
+        }
+        
+        profileStatService.checkDTO(new ProfileStatDTO().setProfileId(0));
     }
     
 }

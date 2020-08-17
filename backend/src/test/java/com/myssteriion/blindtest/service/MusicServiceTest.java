@@ -129,7 +129,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
         }
         
         
@@ -149,7 +149,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
-            TestUtils.verifyException(new ConflictException("Entity already exists."), e);
+            TestUtils.verifyException(new ConflictException("music already exists."), e);
         }
         
         MusicDTO musicSaved = musicService.save(musicDto);
@@ -171,7 +171,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
         }
         
         
@@ -181,7 +181,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> id' est obligatoire."), e);
         }
         
         
@@ -199,7 +199,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Entity not found."), e);
+            TestUtils.verifyException(new NotFoundException("music not found."), e);
         }
         
         music.setId(1);
@@ -220,7 +220,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
         }
         
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
@@ -299,6 +299,44 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         music = musicService.random(null, null, ConnectionMode.ONLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
+    }
+    
+    @Test
+    public void checkDTO() {
+        
+        try {
+            musicService.checkDTO(null);
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
+        }
+        
+        try {
+            musicService.checkDTO(new MusicDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> name' est obligatoire."), e);
+        }
+    
+        try {
+            musicService.checkDTO(new MusicDTO("name", null, null));
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> theme' est obligatoire."), e);
+        }
+    
+        try {
+            musicService.checkDTO(new MusicDTO("name", Theme.ANNEES_60, null));
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> connectionMode' est obligatoire."), e);
+        }
+        
+        musicService.checkDTO(new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE));
     }
     
 }
