@@ -3,8 +3,6 @@ package com.myssteriion.blindtest.service.param;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
 import com.myssteriion.blindtest.persistence.dao.SpotifyParamDAO;
-import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.cipher.StringCipher;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -36,7 +34,7 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
      */
     @Autowired
     public SpotifyParamService(SpotifyParamDAO spotifyParamDAO, StringCipher stringCipher) {
-        super(spotifyParamDAO);
+        super(spotifyParamDAO, "spotifyParam");
         this.stringCipher = stringCipher;
     }
     
@@ -45,7 +43,7 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
     @Override
     public SpotifyParamDTO update(SpotifyParamDTO dto) throws NotFoundException, ConflictException {
         
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
+        checkDTO(dto);
         dto.setId(null);
         
         /*

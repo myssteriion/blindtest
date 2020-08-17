@@ -6,7 +6,6 @@ import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.ConnectionModeConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.dto.AbstractDTO;
 
 import javax.persistence.Column;
@@ -26,7 +25,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "music__name_theme_spotify_track_id__unique", columnNames={"name", "theme", "spotify_track_id"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "music_sequence", allocationSize = 1)
-public class MusicDTO extends AbstractDTO {
+public class MusicDTO extends AbstractDTO<MusicDTO> {
     
     /**
      * The name.
@@ -47,6 +46,7 @@ public class MusicDTO extends AbstractDTO {
      */
     @Column(name = "played", nullable = false)
     @PositiveOrZero(message = "Played can't be negative.")
+//    @ColumnDefault("0")
     private int played;
     
     /**
@@ -92,7 +92,6 @@ public class MusicDTO extends AbstractDTO {
      * Instantiates a new Music dto.
      */
     public MusicDTO() {
-        this("", null, null);
     }
     
     /**
@@ -118,7 +117,7 @@ public class MusicDTO extends AbstractDTO {
      */
     public MusicDTO(String name, Theme theme, ConnectionMode connectionMode, String spotifyTrackId, String spotifyPreviewUrl, String spotifyTrackUrl) {
         
-        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name;
+        this.name = name;
         this.theme = theme;
         this.connectionMode = connectionMode;
         this.spotifyTrackId = spotifyTrackId;
@@ -144,7 +143,7 @@ public class MusicDTO extends AbstractDTO {
      * @return this name
      */
     public MusicDTO setName(String name) {
-        this.name = CommonUtils.isNullOrEmpty(name) ? "" : name;
+        this.name = name;
         return this;
     }
     

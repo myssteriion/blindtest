@@ -1,10 +1,8 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.dto.MusicDTO;
 import com.myssteriion.utils.CommonUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,41 +44,34 @@ public class MusicResult {
     
     /**
      * Instantiates a new Music result.
-     *
-     * @param gameId   		the game id
-     * @param music 		the music
-     * @param authorWinners	the author winners
-     * @param titleWinners	the title winners
-     * @param losers  		the losers
      */
-    @JsonCreator
-    public MusicResult(Integer gameId, MusicDTO music, List<String> authorWinners, List<String> titleWinners, List<String> losers, List<String> penalties) {
-        
-        CommonUtils.verifyValue("gameId", gameId);
-        CommonUtils.verifyValue("music", music);
-        
-        this.gameId = gameId;
-        this.music = music;
-        
-        this.authorWinners = (authorWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(authorWinners);
-        this.titleWinners = (titleWinners == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(titleWinners);
-        this.losers = (losers == null) ? new ArrayList<>() : losers;
-        this.penalties = (penalties == null) ? new ArrayList<>() : CommonUtils.removeDuplicate(penalties);
+    public MusicResult() {
     }
     
     
     
     /**
-     * Gets game id.
+     * Get gameId.
      *
-     * @return the game id
+     * @return the gameId
      */
     public Integer getGameId() {
         return gameId;
     }
     
     /**
-     * Gets music.
+     * Set gameId.
+     *
+     * @param gameId the gameId
+     * @return this
+     */
+    public MusicResult setGameId(Integer gameId) {
+        this.gameId = gameId;
+        return this;
+    }
+    
+    /**
+     * Get music.
      *
      * @return the music
      */
@@ -89,25 +80,58 @@ public class MusicResult {
     }
     
     /**
-     * Gets author winners.
+     * Set music.
      *
-     * @return the winners
+     * @param music the music
+     * @return this
+     */
+    public MusicResult setMusic(MusicDTO music) {
+        this.music = music;
+        return this;
+    }
+    
+    /**
+     * Get authorWinners.
+     *
+     * @return the authorWinners
      */
     public List<String> getAuthorWinners() {
         return authorWinners;
     }
     
     /**
-     * Gets title winners.
+     * Set authorWinners.
      *
-     * @return the winners
+     * @param authorWinners the authorWinners
+     * @return this
+     */
+    public MusicResult setAuthorWinners(List<String> authorWinners) {
+        this.authorWinners = authorWinners;
+        return this;
+    }
+    
+    /**
+     * Get titleWinners.
+     *
+     * @return the titleWinners
      */
     public List<String> getTitleWinners() {
         return titleWinners;
     }
     
     /**
-     * Gets losers.
+     * Set titleWinners.
+     *
+     * @param titleWinners the titleWinners
+     * @return this
+     */
+    public MusicResult setTitleWinners(List<String> titleWinners) {
+        this.titleWinners = titleWinners;
+        return this;
+    }
+    
+    /**
+     * Get losers.
      *
      * @return the losers
      */
@@ -116,13 +140,36 @@ public class MusicResult {
     }
     
     /**
-     * Gets penalties.
+     * Set losers.
      *
-     * @return The penalties
+     * @param losers the losers
+     * @return this
+     */
+    public MusicResult setLosers(List<String> losers) {
+        this.losers = losers;
+        return this;
+    }
+    
+    /**
+     * Get penalties.
+     *
+     * @return the penalties
      */
     public List<String> getPenalties() {
         return penalties;
     }
+    
+    /**
+     * Set penalties.
+     *
+     * @param penalties the penalties
+     * @return this
+     */
+    public MusicResult setPenalties(List<String> penalties) {
+        this.penalties = penalties;
+        return this;
+    }
+    
     
     
     /**
@@ -135,7 +182,7 @@ public class MusicResult {
         
         CommonUtils.verifyValue("name", name);
         
-        return authorWinners.stream().anyMatch(playerName -> playerName.equals(name));
+        return authorWinners != null && authorWinners.stream().anyMatch(playerName -> playerName.equals(name));
     }
     
     /**
@@ -148,7 +195,7 @@ public class MusicResult {
         
         CommonUtils.verifyValue("name", name);
         
-        return titleWinners.stream().anyMatch(playerName -> playerName.equals(name));
+        return titleWinners != null && titleWinners.stream().anyMatch(playerName -> playerName.equals(name));
     }
     
     /**
@@ -158,9 +205,6 @@ public class MusicResult {
      * @return TRUE if "name" is a author and title winner, FALSE otherwise
      */
     public boolean isAuthorAndTitleWinner(String name) {
-        
-        CommonUtils.verifyValue("name", name);
-        
         return isAuthorWinner(name) && isTitleWinner(name);
     }
     
@@ -174,7 +218,7 @@ public class MusicResult {
         
         CommonUtils.verifyValue("name", name);
         
-        return losers.stream().anyMatch(playerName -> playerName.equals(name));
+        return losers != null && losers.stream().anyMatch(playerName -> playerName.equals(name));
     }
     
     /**
@@ -187,7 +231,7 @@ public class MusicResult {
         
         CommonUtils.verifyValue("name", name);
         
-        return penalties.stream().anyMatch(playerName -> playerName.equals(name));
+        return penalties != null && penalties.stream().anyMatch(playerName -> playerName.equals(name));
     }
     
     

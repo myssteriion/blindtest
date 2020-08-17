@@ -67,7 +67,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      */
     @Autowired
     public MusicService(MusicDAO musicDao, SpotifyService spotifyService, ConfigProperties configProperties) {
-        super(musicDao);
+        super(musicDao, "music");
         this.spotifyService = spotifyService;
         this.configProperties = configProperties;
         initFolderPath();
@@ -119,7 +119,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         File themeDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(themeDirectory) ) {
             
-            MusicDTO musicDto = new MusicDTO(file.getName(), theme, ConnectionMode.OFFLINE);
+            MusicDTO musicDto = new MusicDTO().setName( file.getName() ).setTheme(theme).setConnectionMode(ConnectionMode.OFFLINE);
             Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
             if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
                 dao.save(musicDto);
@@ -190,18 +190,18 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     }
     
     
-    
     @Override
     public MusicDTO find(MusicDTO dto) {
+    
+        super.checkDTO(dto);
         
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
-        
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkDTO(dto);
             return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
+        }
         else
             return super.find(dto);
     }
-    
     
     
     /**
@@ -388,6 +388,16 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      */
     private Effect foundEffect(List<Effect> effects) {
         return effects.get( Constant.RANDOM.nextInt(effects.size()) );
+    }
+    
+    
+    @Override
+    public void checkDTO(MusicDTO music) {
+    
+        super.checkDTO(music);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), music.getName() );
+        CommonUtils.verifyValue(dtoName + " -> theme", music.getTheme() );
+        CommonUtils.verifyValue(dtoName + " -> connectionMode", music.getConnectionMode() );
     }
     
 }

@@ -14,12 +14,12 @@ public class ConfigPropertiesTest extends AbstractTest {
     
     @Test
     public void getMaxPlayers() {
-        Assert.assertEquals( new Integer(4), props.getMaxPlayers() );
+        Assert.assertEquals( Integer.valueOf(4), props.getMaxPlayers() );
     }
     
     @Test
     public void getMinPlayers() {
-        Assert.assertEquals( new Integer(2), props.getMinPlayers() );
+        Assert.assertEquals( Integer.valueOf(2), props.getMinPlayers() );
     }
     
     @Test

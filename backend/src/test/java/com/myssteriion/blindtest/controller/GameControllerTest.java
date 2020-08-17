@@ -44,11 +44,14 @@ public class GameControllerTest extends AbstractTest {
         
         Integer profileId = 0;
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties));
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name1")));
+        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties));
         
-        NewGame newGame = new NewGame(new HashSet<>(Collections.singletonList(profileId)), Duration.NORMAL, null, null, ConnectionMode.OFFLINE);
+        NewGame newGame = new NewGame()
+            .setProfilesId( new HashSet<>(Collections.singletonList(profileId)) )
+            .setDuration(Duration.NORMAL)
+            .setConnectionMode(ConnectionMode.OFFLINE);
         
         ResponseEntity<Game> re = gameController.newGame(newGame);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
@@ -59,12 +62,12 @@ public class GameControllerTest extends AbstractTest {
     public void apply() throws NotFoundException, ConflictException {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
-        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties));
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name1")));
+        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties));
         
         MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult(0, musicDto, null, null, null, null);
+        MusicResult musicResult = new MusicResult().setGameId(0).setMusic(musicDto);
         
         ResponseEntity<Game> re = gameController.apply(musicResult);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
@@ -76,10 +79,10 @@ public class GameControllerTest extends AbstractTest {
     public void findById() throws NotFoundException {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name1")));
         
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         game.setId(11);
         Mockito.when(gameService.findById( Mockito.anyInt()) ).thenReturn(game);
         
@@ -93,10 +96,10 @@ public class GameControllerTest extends AbstractTest {
     public void findAll() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name1")));
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name1")));
         
-        Game game = new Game(new HashSet<>(players), Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         game.setId(11);
         Mockito.when(gameService.findAll( Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean() )).thenReturn( new PageImpl<>(Collections.singletonList(game)) );
         

@@ -26,7 +26,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "profile_stat_sequence", allocationSize = 1)
-public class ProfileStatDTO extends AbstractDTO {
+public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
     
     /**
      * The profileId.
@@ -39,6 +39,7 @@ public class ProfileStatDTO extends AbstractDTO {
      */
     @Column(name = "played_games", nullable = false, length = 500)
     @Convert(converter = DurationIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> playedGames;
     
     /**
@@ -46,6 +47,7 @@ public class ProfileStatDTO extends AbstractDTO {
      */
     @Column(name = "best_scores", nullable = false, length = 500)
     @Convert(converter = DurationIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> bestScores;
     
     /**
@@ -56,6 +58,7 @@ public class ProfileStatDTO extends AbstractDTO {
      */
     @Column(name = "won_games", nullable = false, length = 500)
     @Convert(converter = StringIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<String, Integer> wonGames;
     
     /**
@@ -63,6 +66,7 @@ public class ProfileStatDTO extends AbstractDTO {
      */
     @Column(name = "listened_musics", nullable = false, length = 500)
     @Convert(converter = ThemeIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Theme, Integer> listenedMusics;
     
     /**
@@ -70,6 +74,7 @@ public class ProfileStatDTO extends AbstractDTO {
      */
     @Column(name = "found_musics", nullable = false, length = 1000)
     @Convert(converter = ThemeGoodAnswerIntegerMapConverter.class)
+//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
     
     
@@ -78,7 +83,6 @@ public class ProfileStatDTO extends AbstractDTO {
      * Instantiates a new Profile stat dto.
      */
     public ProfileStatDTO() {
-        this(null);
     }
     
     /**

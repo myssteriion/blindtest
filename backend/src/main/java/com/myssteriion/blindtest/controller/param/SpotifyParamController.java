@@ -3,8 +3,8 @@ package com.myssteriion.blindtest.controller.param;
 import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import com.myssteriion.utils.exception.ConflictException;
-import com.myssteriion.utils.rest.RestUtils;
 import com.myssteriion.utils.exception.NotFoundException;
+import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "params/spotify-param")
 public class SpotifyParamController {
-
+    
     private SpotifyParamService spotifyParamService;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new SpotifyParam controller.
      *
@@ -33,9 +33,9 @@ public class SpotifyParamController {
     public SpotifyParamController(SpotifyParamService spotifyParamService) {
         this.spotifyParamService = spotifyParamService;
     }
-
-
-
+    
+    
+    
     /**
      * Update the only SpotifyParamDTO.
      *
@@ -48,7 +48,7 @@ public class SpotifyParamController {
     public ResponseEntity<SpotifyParamDTO> update(@RequestBody SpotifyParamDTO spotifyParamDTO) throws NotFoundException, ConflictException {
         return RestUtils.create200( spotifyParamService.update(spotifyParamDTO) );
     }
-
+    
     /**
      * Get the only SpotifyParamDTO.
      *
@@ -58,5 +58,5 @@ public class SpotifyParamController {
     public ResponseEntity<SpotifyParamDTO> find() {
         return RestUtils.create200( spotifyParamService.find() );
     }
-
+    
 }

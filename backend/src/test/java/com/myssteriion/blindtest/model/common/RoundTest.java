@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class RoundTest extends AbstractTest {
@@ -37,11 +36,11 @@ public class RoundTest extends AbstractTest {
     public void createRoundContent(){
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO("name")),
-                new Player(new ProfileDTO("name2")));
+                new Player(new ProfileDTO().setName("name")),
+                new Player(new ProfileDTO().setName("name2")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(new HashSet<>(players), duration, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, duration, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         
         Assert.assertTrue( Round.CLASSIC.createRoundContent(game, roundContentProperties) instanceof ClassicContent );

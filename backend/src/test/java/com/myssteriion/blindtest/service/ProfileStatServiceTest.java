@@ -1,9 +1,9 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
 import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.persistence.dao.ProfileStatDAO;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
@@ -45,13 +45,13 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         profileStatService = Mockito.spy( new ProfileStatService(profileStatDao) );
         MockitoAnnotations.initMocks(profileStatService);
         
-        ProfileDTO profileDTOMock = new ProfileDTO("name", "avatarName");
+        ProfileDTO profileDTOMock = new ProfileDTO().setName("name").setAvatarName("avatarName");
         profileDTOMock.setId(1);
         
         ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(profileStatId);
@@ -67,11 +67,11 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
-            TestUtils.verifyException(new ConflictException("Entity already exists."), e);
+            TestUtils.verifyException(new ConflictException("profileStat already exists."), e);
         }
         
         ProfileStatDTO profileStatDtoSaved = profileStatService.save(profileStatDto);
-        Assert.assertEquals( new Integer(1), profileStatDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), profileStatDtoSaved.getId() );
         Assert.assertEquals( profileStatId, profileStatDtoSaved.getProfileId() );
         Assert.assertEquals( new HashMap<>(), profileStatDtoSaved.getPlayedGames() );
     }
@@ -87,7 +87,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         
@@ -97,7 +97,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat -> id' est obligatoire."), e);
         }
         
         
@@ -115,12 +115,12 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Entity not found."), e);
+            TestUtils.verifyException(new NotFoundException("profileStat not found."), e);
         }
         
         profileStatDto.setId(1);
         ProfileStatDTO profileDtoSaved = profileStatService.update(profileStatDto);
-        Assert.assertEquals( new Integer(1), profileDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), profileDtoSaved.getId() );
     }
     
     @Test
@@ -136,7 +136,7 @@ public class ProfileStatServiceTest extends AbstractTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
         }
         
         ProfileStatDTO profileStatDTO = new ProfileStatDTO(1);
@@ -150,7 +150,7 @@ public class ProfileStatServiceTest extends AbstractTest {
     @Test
     public void findByProfile() throws NotFoundException {
         
-        ProfileDTO profileDto = new ProfileDTO("name");
+        ProfileDTO profileDto = new ProfileDTO().setName("name");
         profileDto.setId(1);
         
         ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
@@ -176,6 +176,28 @@ public class ProfileStatServiceTest extends AbstractTest {
         ProfileStatDTO actual = profileStatService.findByProfile(profileDto);
         Assert.assertNotNull(actual);
         Assert.assertSame(profileStatDtoMock, actual);
+    }
+    
+    @Test
+    public void checkDTO() {
+        
+        try {
+            profileStatService.checkDTO(null);
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat' est obligatoire."), e);
+        }
+        
+        try {
+            profileStatService.checkDTO(new ProfileStatDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'profileStat -> profileId' est obligatoire."), e);
+        }
+        
+        profileStatService.checkDTO(new ProfileStatDTO().setProfileId(0));
     }
     
 }

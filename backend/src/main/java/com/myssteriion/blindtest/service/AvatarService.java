@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * Service for Avatar.
@@ -49,7 +50,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      */
     @Autowired
     public AvatarService(AvatarDAO avatarDAO, ConfigProperties configProperties) {
-        super(avatarDAO);
+        super(avatarDAO, "avatar");
         this.configProperties = configProperties;
         initFolderPath();
     }
@@ -68,7 +69,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         File avatarDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
             
-            AvatarDTO avatarDTO = new AvatarDTO( file.getName() );
+            AvatarDTO avatarDTO = new AvatarDTO(file.getName() );
             if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
                 dao.save(avatarDTO);
         }
@@ -144,12 +145,14 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     
     @Override
     public AvatarDTO find(AvatarDTO dto) {
-        
-        CommonUtils.verifyValue(CommonConstant.ENTITY, dto);
+    
+        super.checkDTO(dto);
         
         AvatarDTO avatar;
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) )
+        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
+            checkDTO(dto);
             avatar = dao.findByName(dto.getName()).orElse(null);
+        }
         else
             avatar = super.find(dto);
         
@@ -169,8 +172,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      */
     public Page<AvatarDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
-        if (searchName == null)
-            searchName = "";
+        searchName = Objects.requireNonNullElse(searchName, CommonConstant.EMPTY);
         
         itemPerPage = Math.max(itemPerPage, 1);
         itemPerPage = Math.min(itemPerPage, Constant.ITEM_PER_PAGE_MAX);
@@ -191,17 +193,23 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      * @param avatar the avatar
      */
     public void createAvatarFlux(AvatarDTO avatar) {
-        
-        CommonUtils.verifyValue("avatar", avatar);
+    
+        super.checkDTO(avatar);
         
         try {
             
-            Path path = Paths.get(avatarsFolderPath, avatar.getName() );
+            Path path = Paths.get( avatarsFolderPath, avatar.getName() );
             avatar.setFlux( new Flux(path.toFile()) );
         }
         catch (IOException e) {
             throw new CustomRuntimeException("Can't create avatar flux.", e);
         }
+    }
+    
+    @Override
+    public void checkDTO(AvatarDTO avatar) {
+        super.checkDTO(avatar);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), avatar.getName() );
     }
     
 }

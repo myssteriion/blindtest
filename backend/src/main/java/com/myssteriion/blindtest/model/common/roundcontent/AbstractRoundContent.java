@@ -59,7 +59,7 @@ public abstract class AbstractRoundContent {
      * @param game the game
      */
     public void prepare(Game game) {
-    
+        
         CommonUtils.verifyValue("game", game);
         
         game.getPlayers().forEach( player -> {

@@ -30,7 +30,7 @@ public class SpotifyParamControllerTest extends AbstractTest {
         
         SpotifyParamDTO spotifyParam = new SpotifyParamDTO("id", "pwd", new HashMap<>());
         Mockito.when(spotifyParamService.update(Mockito.any(SpotifyParamDTO.class))).thenReturn(spotifyParam);
-    
+        
         ResponseEntity<SpotifyParamDTO> actual = spotifyParamController.update(spotifyParam);
         Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
         Assert.assertEquals( "id", actual.getBody().getClientId() );
@@ -39,10 +39,10 @@ public class SpotifyParamControllerTest extends AbstractTest {
     
     @Test
     public void find() {
-    
+        
         SpotifyParamDTO spotifyParam = new SpotifyParamDTO("id", "pwd", new HashMap<>());
         Mockito.when(spotifyParamService.find()).thenReturn(spotifyParam);
-    
+        
         ResponseEntity<SpotifyParamDTO> actual = spotifyParamController.find();
         Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
         Assert.assertEquals( "id", actual.getBody().getClientId() );

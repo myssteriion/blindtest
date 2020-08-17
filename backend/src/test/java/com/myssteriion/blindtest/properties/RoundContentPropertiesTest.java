@@ -15,24 +15,24 @@ public class RoundContentPropertiesTest extends AbstractTest {
     @Test
     public void getterSetter() {
         
-        Assert.assertEquals( new Integer(20), props.getClassicNbMusics() );
-        Assert.assertEquals( new Integer(100), props.getClassicNbPointWon() );
+        Assert.assertEquals( Integer.valueOf(20), props.getClassicNbMusics() );
+        Assert.assertEquals( Integer.valueOf(100), props.getClassicNbPointWon() );
         
-        Assert.assertEquals( new Integer(12), props.getChoiceNbMusics() );
-        Assert.assertEquals( new Integer(100), props.getChoiceNbPointWon() );
-        Assert.assertEquals( new Integer(50), props.getChoiceNbPointBonus() );
-        Assert.assertEquals( new Integer(-50), props.getChoiceNbPointMalus() );
+        Assert.assertEquals( Integer.valueOf(12), props.getChoiceNbMusics() );
+        Assert.assertEquals( Integer.valueOf(100), props.getChoiceNbPointWon() );
+        Assert.assertEquals( Integer.valueOf(50), props.getChoiceNbPointBonus() );
+        Assert.assertEquals( Integer.valueOf(-50), props.getChoiceNbPointMalus() );
         
-        Assert.assertEquals( new Integer(10), props.getLuckyNbMusics() );
-        Assert.assertEquals( new Integer(150), props.getLuckyNbPointWon() );
-        Assert.assertEquals( new Integer(100), props.getLuckyNbPointBonus() );
+        Assert.assertEquals( Integer.valueOf(10), props.getLuckyNbMusics() );
+        Assert.assertEquals( Integer.valueOf(150), props.getLuckyNbPointWon() );
+        Assert.assertEquals( Integer.valueOf(100), props.getLuckyNbPointBonus() );
         
-        Assert.assertEquals( new Integer(20), props.getThiefNbMusics() );
-        Assert.assertEquals( new Integer(100), props.getThiefNbPointWon() );
-        Assert.assertEquals( new Integer(-100), props.getThiefNbPointLoose() );
+        Assert.assertEquals( Integer.valueOf(20), props.getThiefNbMusics() );
+        Assert.assertEquals( Integer.valueOf(100), props.getThiefNbPointWon() );
+        Assert.assertEquals( Integer.valueOf(-100), props.getThiefNbPointLoose() );
         
-        Assert.assertEquals( new Integer(10), props.getRecoveryNbMusics() );
-        Assert.assertEquals( new Integer(30), props.getRecoveryNbPointWon() );
+        Assert.assertEquals( Integer.valueOf(10), props.getRecoveryNbMusics() );
+        Assert.assertEquals( Integer.valueOf(30), props.getRecoveryNbPointWon() );
     }
     
 }

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.common;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.After;

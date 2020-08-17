@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.dto.ProfileDTO;
@@ -54,10 +53,15 @@ public class Player {
     
     /**
      * Instantiates a new Player.
+     */
+    public Player() {
+    }
+    
+    /**
+     * Instantiates a new Player.
      *
      * @param profile the profile
      */
-    @JsonCreator
     public Player(ProfileDTO profile) {
         
         CommonUtils.verifyValue("profile", profile);
@@ -74,7 +78,7 @@ public class Player {
     
     
     /**
-     * Gets profile.
+     * Get profile.
      *
      * @return the profile
      */
@@ -83,13 +87,136 @@ public class Player {
     }
     
     /**
-     * Gets score.
+     * Set profile.
+     *
+     * @param profile the profile
+     * @return this
+     */
+    public Player setProfile(ProfileDTO profile) {
+        this.profile = profile;
+        return this;
+    }
+    
+    /**
+     * Get score.
      *
      * @return the score
      */
     public int getScore() {
         return score;
     }
+    
+    /**
+     * Set score.
+     *
+     * @param score the score
+     * @return this
+     */
+    public Player setScore(int score) {
+        this.score = score;
+        return this;
+    }
+    
+    /**
+     * Get rank.
+     *
+     * @return the rank
+     */
+    public int getRank() {
+        return rank;
+    }
+    
+    /**
+     * Set rank.
+     *
+     * @param rank the rank
+     * @return this
+     */
+    public Player setRank(int rank) {
+        this.rank = rank;
+        return this;
+    }
+    
+    /**
+     * Get last.
+     *
+     * @return the last
+     */
+    public boolean isLast() {
+        return last;
+    }
+    
+    /**
+     * Set last.
+     *
+     * @param last the last
+     * @return this
+     */
+    public Player setLast(boolean last) {
+        this.last = last;
+        return this;
+    }
+    
+    /**
+     * Get turnToChoose.
+     *
+     * @return the turnToChoose
+     */
+    public boolean isTurnToChoose() {
+        return turnToChoose;
+    }
+    
+    /**
+     * Set turnToChoose.
+     *
+     * @param turnToChoose the turnToChoose
+     * @return this
+     */
+    public Player setTurnToChoose(boolean turnToChoose) {
+        this.turnToChoose = turnToChoose;
+        return this;
+    }
+    
+    /**
+     * Get teamNumber.
+     *
+     * @return the teamNumber
+     */
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+    
+    /**
+     * Set teamNumber.
+     *
+     * @param teamNumber the teamNumber
+     * @return this
+     */
+    public Player setTeamNumber(int teamNumber) {
+        this.teamNumber = teamNumber;
+        return this;
+    }
+    
+    /**
+     * Get foundMusics.
+     *
+     * @return the foundMusics
+     */
+    public Map<Theme, Map<GoodAnswer, Integer>> getFoundMusics() {
+        return foundMusics;
+    }
+    
+    /**
+     * Set foundMusics.
+     *
+     * @param foundMusics the foundMusics
+     * @return this
+     */
+    public Player setFoundMusics(Map<Theme, Map<GoodAnswer, Integer>> foundMusics) {
+        this.foundMusics = foundMusics;
+        return this;
+    }
+    
     
     /**
      * Add score.
@@ -101,90 +228,6 @@ public class Player {
     }
     
     /**
-     * Gets rank.
-     *
-     * @return The rank.
-     */
-    public int getRank() {
-        return rank;
-    }
-    
-    /**
-     * Gets last.
-     *
-     * @return The last.
-     */
-    public boolean isLast() {
-        return last;
-    }
-    
-    /**
-     * Set last.
-     *
-     * @param last The last.
-     */
-    public Player setLast(boolean last) {
-        this.last = last;
-        return this;
-    }
-    
-    /**
-     * Set rank.
-     *
-     * @param rank The rank.
-     */
-    public Player setRank(int rank) {
-        this.rank = rank;
-        return this;
-    }
-    
-    /**
-     * Is turn to choose boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isTurnToChoose() {
-        return turnToChoose;
-    }
-    
-    /**
-     * Sets turn to choose.
-     *
-     * @param turnToChoose the turn to choose
-     */
-    public void setTurnToChoose(boolean turnToChoose) {
-        this.turnToChoose = turnToChoose;
-    }
-    
-    /**
-     * Gets teamNumber.
-     *
-     * @return The teamNumber.
-     */
-    public int getTeamNumber() {
-        return teamNumber;
-    }
-    
-    /**
-     * Set teamNumber.
-     *
-     * @param teamNumber The teamNumber.
-     */
-    public Player setTeamNumber(int teamNumber) {
-        this.teamNumber = teamNumber;
-        return this;
-    }
-    
-    /**
-     * Gets found musics.
-     *
-     * @return the found musics
-     */
-    public Map< Theme, Map<GoodAnswer, Integer> > getFoundMusics() {
-        return foundMusics;
-    }
-    
-    /**
      * Increment foundMusics.
      *
      * @param theme 	the theme
@@ -193,7 +236,10 @@ public class Player {
     public void incrementFoundMusics(Theme theme, GoodAnswer goodAnswer) {
         
         CommonUtils.verifyValue("theme", theme);
-        CommonUtils.verifyValue("winMode", goodAnswer);
+        CommonUtils.verifyValue("goodAnswer", goodAnswer);
+        
+        if (foundMusics == null)
+            foundMusics = new HashMap<>();
         
         if ( !foundMusics.containsKey(theme) )
             foundMusics.put(theme, new HashMap<>());
@@ -203,7 +249,6 @@ public class Player {
         
         foundMusics.get(theme).put(goodAnswer, foundMusics.get(theme).get(goodAnswer) + 1);
     }
-    
     
     
     @Override

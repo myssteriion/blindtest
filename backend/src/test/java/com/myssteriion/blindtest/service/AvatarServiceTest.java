@@ -101,7 +101,15 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
+        }
+        
+        try {
+            avatarService.save(new AvatarDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> name' est obligatoire."), e);
         }
         
         
@@ -118,11 +126,11 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
-            TestUtils.verifyException(new ConflictException("Entity already exists."), e);
+            TestUtils.verifyException(new ConflictException("avatar already exists."), e);
         }
         
         AvatarDTO avatarDtoSaved = avatarService.save(avatarDto);
-        Assert.assertEquals( new Integer(1), avatarDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
         Assert.assertEquals( name, avatarDtoSaved.getName() );
     }
     
@@ -136,7 +144,15 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
+        }
+        
+        try {
+            avatarService.update(new AvatarDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> name' est obligatoire."), e);
         }
         
         
@@ -146,7 +162,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity -> id' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> id' est obligatoire."), e);
         }
         
         
@@ -164,12 +180,12 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Entity not found."), e);
+            TestUtils.verifyException(new NotFoundException("avatar not found."), e);
         }
         
         avatarDto.setId(1);
         AvatarDTO avatarDtoSaved = avatarService.update(avatarDto);
-        Assert.assertEquals( new Integer(1), avatarDtoSaved.getId() );
+        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
         Assert.assertEquals( "name", avatarDtoSaved.getName() );
     }
     
@@ -185,15 +201,26 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'Entity' est obligatoire."), e);
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
         }
+        
+        try {
+            avatarService.find(new AvatarDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> name' est obligatoire."), e);
+        }
+        
         
         AvatarDTO avatarDto = new AvatarDTO("name");
         Assert.assertNull( avatarService.find(avatarDto) );
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
+        Mockito.verify(dao, Mockito.times(2)).findByName(Mockito.anyString());
         
-        avatarDto = (AvatarDTO) new AvatarDTO("name").setId(1);
+        avatarDto = new AvatarDTO().setId(1);
         Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
+        Mockito.verify(dao, Mockito.times(1)).findById(Mockito.anyInt());
     }
     
     @Test
@@ -220,6 +247,28 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         AvatarDTO avatarDtoMock = new AvatarDTO("name");
         avatarService.createAvatarFlux(avatarDtoMock);
         Assert.assertNotNull( avatarDtoMock.getFlux() );
+    }
+    
+    @Test
+    public void checkDTO() {
+    
+        try {
+            avatarService.checkDTO(null);
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
+        }
+    
+        try {
+            avatarService.checkDTO(new AvatarDTO());
+            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
+        }
+        catch (IllegalArgumentException e) {
+            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> name' est obligatoire."), e);
+        }
+        
+        avatarService.checkDTO(new AvatarDTO("name"));
     }
     
 }

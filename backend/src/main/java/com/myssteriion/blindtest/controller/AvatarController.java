@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "avatars")
 public class AvatarController {
-
+    
     private AvatarService avatarService;
-
-
-
+    
+    
+    
     /**
      * Instantiates a new Avatar controller.
      *
@@ -33,9 +33,9 @@ public class AvatarController {
     public AvatarController(AvatarService avatarService) {
         this.avatarService = avatarService;
     }
-
-
-
+    
+    
+    
     /**
      * Find pageable of avatar filtered by search name.
      *
@@ -49,14 +49,14 @@ public class AvatarController {
             @RequestParam(value = Constant.SEARCH_NAME, required = false, defaultValue = Constant.SEARCH_NAME_DEFAULT_VALUE) String searchName,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
-
+        
         Page<AvatarDTO> page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
         if ( avatarService.needRefresh() ) {
             avatarService.refresh();
             page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
         }
-
+        
         return RestUtils.create200(page);
     }
-
+    
 }
