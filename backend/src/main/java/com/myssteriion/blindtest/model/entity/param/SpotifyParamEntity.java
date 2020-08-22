@@ -1,9 +1,9 @@
-package com.myssteriion.blindtest.model.dto.param;
+package com.myssteriion.blindtest.model.entity.param;
 
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.theme.ThemeStringMapConverter;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.model.dto.AbstractDTO;
+import com.myssteriion.utils.model.entity.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -15,12 +15,12 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * The spotify dto.
+ * The spotifyParam.
  */
 @Entity
 @Table(name = "spotify_param")
 @SequenceGenerator(name = "sequence_id", sequenceName = "spotify_param_sequence", allocationSize = 1)
-public class SpotifyParamDTO extends AbstractDTO {
+public class SpotifyParamEntity extends AbstractEntity<SpotifyParamEntity> {
     
     @Column(name = "client_id")
     private String clientId;
@@ -35,20 +35,20 @@ public class SpotifyParamDTO extends AbstractDTO {
     
     
     /**
-     * Instantiate a new SpotifyParam dto.
+     * Instantiate a new SpotifyParamEntity.
      */
-    public SpotifyParamDTO() {
+    public SpotifyParamEntity() {
         this( "", "", new HashMap<>() );
     }
     
     /**
-     * Instantiate a new SpotifyParam dto.
+     * Instantiate a new SpotifyParamEntity.
      *
      * @param clientId     the client id
      * @param clientSecret the client secret
      * @param playlistIds  the playlist ids
      */
-    public SpotifyParamDTO(String clientId, String clientSecret, Map<Theme, String> playlistIds) {
+    public SpotifyParamEntity(String clientId, String clientSecret, Map<Theme, String> playlistIds) {
         
         this.clientId = CommonUtils.isNullOrEmpty(clientId) ? "" : clientId;
         this.clientSecret = CommonUtils.isNullOrEmpty(clientSecret) ? "" : clientSecret;
@@ -61,7 +61,7 @@ public class SpotifyParamDTO extends AbstractDTO {
         return clientId;
     }
     
-    public SpotifyParamDTO setClientId(String clientId) {
+    public SpotifyParamEntity setClientId(String clientId) {
         this.clientId = clientId;
         return this;
     }
@@ -70,7 +70,7 @@ public class SpotifyParamDTO extends AbstractDTO {
         return clientSecret;
     }
     
-    public SpotifyParamDTO setClientSecret(String clientSecret) {
+    public SpotifyParamEntity setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
         return this;
     }
@@ -79,7 +79,7 @@ public class SpotifyParamDTO extends AbstractDTO {
         return playlistIds;
     }
     
-    public SpotifyParamDTO setPlaylistIds(Map<Theme, String> playlistIds) {
+    public SpotifyParamEntity setPlaylistIds(Map<Theme, String> playlistIds) {
         this.playlistIds = playlistIds;
         return this;
     }
@@ -94,7 +94,7 @@ public class SpotifyParamDTO extends AbstractDTO {
         if (o == null || getClass() != o.getClass())
             return false;
         
-        SpotifyParamDTO that = (SpotifyParamDTO) o;
+        SpotifyParamEntity that = (SpotifyParamEntity) o;
         return Objects.equals(clientId, that.clientId);
     }
     

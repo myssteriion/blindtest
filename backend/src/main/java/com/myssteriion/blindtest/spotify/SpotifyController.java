@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.spotify;
 
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.utils.model.Empty;
 import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +36,14 @@ public class SpotifyController {
     /**
      * Test the Spotify connection.
      *
-     * @param spotifyParamDTO the 'new' SpotifyParamDTO
+     * @param spotifyParam the 'new' spotifyParam
      * @return the pageable of avatars
      * @throws SpotifyException the spotify exception
      */
     @PostMapping(path = "connection-test")
-    public ResponseEntity<Empty> connectionTest(@RequestBody SpotifyParamDTO spotifyParamDTO) throws SpotifyException {
+    public ResponseEntity<Empty> connectionTest(@RequestBody SpotifyParamEntity spotifyParam) throws SpotifyException {
         
-        spotifyService.testSpotifyParamConnection(spotifyParamDTO);
+        spotifyService.testSpotifyParamConnection(spotifyParam);
         return RestUtils.create204();
     }
     

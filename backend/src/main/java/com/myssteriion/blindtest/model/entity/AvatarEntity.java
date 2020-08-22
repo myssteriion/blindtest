@@ -1,7 +1,7 @@
-package com.myssteriion.blindtest.model.dto;
+package com.myssteriion.blindtest.model.entity;
 
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.utils.model.dto.AbstractDTO;
+import com.myssteriion.utils.model.entity.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "avatar_sequence", allocationSize = 1)
-public class AvatarDTO extends AbstractDTO<AvatarDTO> {
+public class AvatarEntity extends AbstractEntity<AvatarEntity> {
     
     /**
      * The name.
@@ -38,7 +38,7 @@ public class AvatarDTO extends AbstractDTO<AvatarDTO> {
     /**
      * Instantiates a new Avatar dto.
      */
-    public AvatarDTO() {
+    public AvatarEntity() {
     }
     
     /**
@@ -46,7 +46,7 @@ public class AvatarDTO extends AbstractDTO<AvatarDTO> {
      *
      * @param name the name
      */
-    public AvatarDTO(String name) {
+    public AvatarEntity(String name) {
         this.name = name;
     }
     
@@ -67,7 +67,7 @@ public class AvatarDTO extends AbstractDTO<AvatarDTO> {
      * @param name The name.
      * @return the name
      */
-    public AvatarDTO setName(String name) {
+    public AvatarEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -87,7 +87,7 @@ public class AvatarDTO extends AbstractDTO<AvatarDTO> {
      * @param flux The flux.
      * @return this
      */
-    public AvatarDTO setFlux(Flux flux) {
+    public AvatarEntity setFlux(Flux flux) {
         this.flux = flux;
         return this;
     }
@@ -107,7 +107,7 @@ public class AvatarDTO extends AbstractDTO<AvatarDTO> {
         if(obj == null || obj.getClass()!= this.getClass())
             return false;
         
-        AvatarDTO other = (AvatarDTO) obj;
+        AvatarEntity other = (AvatarEntity) obj;
         return Objects.equals(this.name, other.name);
     }
     

@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.controller.param;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -28,10 +28,10 @@ public class SpotifyParamControllerTest extends AbstractTest {
     @Test
     public void update() throws NotFoundException, ConflictException {
         
-        SpotifyParamDTO spotifyParam = new SpotifyParamDTO("id", "pwd", new HashMap<>());
-        Mockito.when(spotifyParamService.update(Mockito.any(SpotifyParamDTO.class))).thenReturn(spotifyParam);
+        SpotifyParamEntity spotifyParam = new SpotifyParamEntity("id", "pwd", new HashMap<>());
+        Mockito.when(spotifyParamService.update(Mockito.any(SpotifyParamEntity.class))).thenReturn(spotifyParam);
         
-        ResponseEntity<SpotifyParamDTO> actual = spotifyParamController.update(spotifyParam);
+        ResponseEntity<SpotifyParamEntity> actual = spotifyParamController.update(spotifyParam);
         Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
         Assert.assertEquals( "id", actual.getBody().getClientId() );
         Assert.assertEquals( "pwd", actual.getBody().getClientSecret() );
@@ -40,10 +40,10 @@ public class SpotifyParamControllerTest extends AbstractTest {
     @Test
     public void find() {
         
-        SpotifyParamDTO spotifyParam = new SpotifyParamDTO("id", "pwd", new HashMap<>());
+        SpotifyParamEntity spotifyParam = new SpotifyParamEntity("id", "pwd", new HashMap<>());
         Mockito.when(spotifyParamService.find()).thenReturn(spotifyParam);
         
-        ResponseEntity<SpotifyParamDTO> actual = spotifyParamController.find();
+        ResponseEntity<SpotifyParamEntity> actual = spotifyParamController.find();
         Assert.assertEquals( HttpStatus.OK, actual.getStatusCode() );
         Assert.assertEquals( "id", actual.getBody().getClientId() );
         Assert.assertEquals( "pwd", actual.getBody().getClientSecret() );

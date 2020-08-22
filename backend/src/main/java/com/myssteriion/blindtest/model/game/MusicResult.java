@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.utils.CommonUtils;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class MusicResult {
     /**
      * The music.
      */
-    private MusicDTO music;
+    private MusicEntity music;
     
     /**
      * The author winners list.
@@ -75,7 +75,7 @@ public class MusicResult {
      *
      * @return the music
      */
-    public MusicDTO getMusic() {
+    public MusicEntity getMusic() {
         return music;
     }
     
@@ -85,7 +85,7 @@ public class MusicResult {
      * @param music the music
      * @return this
      */
-    public MusicResult setMusic(MusicDTO music) {
+    public MusicResult setMusic(MusicEntity music) {
         this.music = music;
         return this;
     }

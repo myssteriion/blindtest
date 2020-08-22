@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.controller.param;
 
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller for SpotifyParamDTO.
+ * Controller for SpotifyParam.
  */
 @RestController
 @RequestMapping(path = "params/spotify-param")
@@ -37,25 +37,25 @@ public class SpotifyParamController {
     
     
     /**
-     * Update the only SpotifyParamDTO.
+     * Update the only SpotifyParam.
      *
-     * @param spotifyParamDTO the 'new' SpotifyParamDTO
-     * @return the SpotifyParamDTO modified
+     * @param spotifyParam the 'new' SpotifyParam
+     * @return the spotifyParam modified
      * @throws NotFoundException the not found exception
      * @throws ConflictException the conflict exception
      */
     @PutMapping
-    public ResponseEntity<SpotifyParamDTO> update(@RequestBody SpotifyParamDTO spotifyParamDTO) throws NotFoundException, ConflictException {
-        return RestUtils.create200( spotifyParamService.update(spotifyParamDTO) );
+    public ResponseEntity<SpotifyParamEntity> update(@RequestBody SpotifyParamEntity spotifyParam) throws NotFoundException, ConflictException {
+        return RestUtils.create200( spotifyParamService.update(spotifyParam) );
     }
     
     /**
-     * Get the only SpotifyParamDTO.
+     * Get the only SpotifyParam.
      *
-     * @return the SpotifyParamDTO modified
+     * @return the SpotifyParam modified
      */
     @GetMapping
-    public ResponseEntity<SpotifyParamDTO> find() {
+    public ResponseEntity<SpotifyParamEntity> find() {
         return RestUtils.create200( spotifyParamService.find() );
     }
     

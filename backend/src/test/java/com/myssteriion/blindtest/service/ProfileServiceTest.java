@@ -1,8 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -27,9 +26,6 @@ public class ProfileServiceTest extends AbstractTest {
     private ProfileDAO profileDao;
     
     @Mock
-    private ProfileStatService profileStatService;
-    
-    @Mock
     private AvatarService avatarService;
     
     @InjectMocks
@@ -39,7 +35,7 @@ public class ProfileServiceTest extends AbstractTest {
     
     @Before
     public void before() {
-        profileService = new ProfileService(profileDao, profileStatService, avatarService);
+        profileService = new ProfileService(profileDao, avatarService);
     }
     
     
@@ -48,7 +44,6 @@ public class ProfileServiceTest extends AbstractTest {
     public void save() throws ConflictException {
         
         String name = "name";
-        String avatarName = "avatarName";
         
         
         try {
@@ -59,31 +54,28 @@ public class ProfileServiceTest extends AbstractTest {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'profile' est obligatoire."), e);
         }
         
-        profileService = Mockito.spy( new ProfileService(profileDao, profileStatService, avatarService) );
+        profileService = Mockito.spy( new ProfileService(profileDao, avatarService) );
         MockitoAnnotations.initMocks(profileService);
         
-        ProfileStatDTO profileStatDtoMock = new ProfileStatDTO(1);
-        Mockito.when(profileStatService.save(Mockito.any(ProfileStatDTO.class))).thenReturn(profileStatDtoMock);
+        ProfileEntity profileMock = new ProfileEntity().setName(name);
+        profileMock.setId(1);
+        Mockito.doReturn(null).doReturn(profileMock).doReturn(null).when(profileService).find(Mockito.any(ProfileEntity.class));
+        Mockito.when(profileDao.save(Mockito.any(ProfileEntity.class))).thenReturn(profileMock);
         
-        ProfileDTO profileDtoMock = new ProfileDTO().setName(name).setAvatarName(avatarName);
-        profileDtoMock.setId(1);
-        Mockito.doReturn(null).doReturn(profileDtoMock).doReturn(null).when(profileService).find(Mockito.any(ProfileDTO.class));
-        Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenReturn(profileDtoMock);
-        
-        ProfileDTO profileDto = new ProfileDTO().setName(name).setAvatarName(avatarName);
-        Assert.assertSame( profileDtoMock, profileService.save(profileDto) );
+        ProfileEntity profile = new ProfileEntity().setName(name);
+        Assert.assertSame(profileMock, profileService.save(profile) );
         
         try {
-            profileService.save(profileDto);
+            profileService.save(profile);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
             TestUtils.verifyException(new ConflictException("profile already exists."), e);
         }
         
-        ProfileDTO profileDtoSaved = profileService.save(profileDto);
-        Assert.assertEquals( Integer.valueOf(1), profileDtoSaved.getId() );
-        Assert.assertEquals( name, profileDtoSaved.getName() );
+        ProfileEntity profileSaved = profileService.save(profile);
+        Assert.assertEquals( Integer.valueOf(1), profileSaved.getId() );
+        Assert.assertEquals( name, profileSaved.getName() );
     }
     
     @Test
@@ -102,9 +94,9 @@ public class ProfileServiceTest extends AbstractTest {
         }
         
         
-        ProfileDTO profileDto = new ProfileDTO().setName(name).setAvatarName(avatarName);
+        ProfileEntity profile = new ProfileEntity().setName(name);
         try {
-            profileService.update(profileDto);
+            profileService.update(profile);
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -112,18 +104,18 @@ public class ProfileServiceTest extends AbstractTest {
         }
         
         
-        ProfileDTO profileStatDtoMockNotSame = new ProfileDTO().setName(name).setAvatarName(avatarName);
-        profileStatDtoMockNotSame.setId(2);
-        ProfileDTO profileStatDtoMockSame = new ProfileDTO().setName(name).setAvatarName(avatarName);
-        profileStatDtoMockSame.setId(1);
+        ProfileEntity profileStatMockNotSame = new ProfileEntity().setName(name);
+        profileStatMockNotSame.setId(2);
+        ProfileEntity profileStatMockSame = new ProfileEntity().setName(name);
+        profileStatMockSame.setId(1);
         DataIntegrityViolationException dive = new DataIntegrityViolationException("dive");
-        Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileStatDtoMockNotSame),
-                Optional.of(profileStatDtoMockNotSame), Optional.of(profileStatDtoMockSame));
-        Mockito.when(profileDao.save(Mockito.any(ProfileDTO.class))).thenThrow(dive).thenReturn(profileDto);
+        Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileStatMockNotSame),
+                Optional.of(profileStatMockNotSame), Optional.of(profileStatMockSame));
+        Mockito.when(profileDao.save(Mockito.any(ProfileEntity.class))).thenThrow(dive).thenReturn(profile);
         
         try {
-            profileDto.setId(1);
-            profileService.update(profileDto);
+            profile.setId(1);
+            profileService.update(profile);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
@@ -131,28 +123,26 @@ public class ProfileServiceTest extends AbstractTest {
         }
         
         try {
-            profileDto.setId(1);
-            profileService.update(profileDto);
+            profile.setId(1);
+            profileService.update(profile);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
             TestUtils.verifyException(new ConflictException("profile already exists.", dive), e);
         }
         
-        profileDto.setId(1);
-        profileDto.setName("pouet");
-        profileDto.setAvatarName("avapouet");
-        ProfileDTO profileDtoSaved = profileService.update(profileDto);
-        Assert.assertEquals( Integer.valueOf(1), profileDtoSaved.getId() );
-        Assert.assertEquals( "pouet", profileDtoSaved.getName() );
-        Assert.assertEquals( "avapouet", profileDtoSaved.getAvatar().getName() );
+        profile.setId(1);
+        profile.setName("pouet");
+        ProfileEntity profileSaved = profileService.update(profile);
+        Assert.assertEquals( Integer.valueOf(1), profileSaved.getId() );
+        Assert.assertEquals( "pouet", profileSaved.getName() );
     }
     
     @Test
     public void find() {
         
-        ProfileDTO profileDtoMock = new ProfileDTO().setName("name").setAvatarName("avatarName");
-        Mockito.when(profileDao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(profileDtoMock));
+        ProfileEntity profileMock = new ProfileEntity().setName("name");
+        Mockito.when(profileDao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(profileMock));
         
         
         try {
@@ -163,27 +153,23 @@ public class ProfileServiceTest extends AbstractTest {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'profile' est obligatoire."), e);
         }
         
-        ProfileDTO profileDto = new ProfileDTO().setName("name").setAvatarName("avatarName");
-        Assert.assertNull( profileService.find(profileDto) );
-        Assert.assertNotNull( profileService.find(profileDto) );
+        ProfileEntity profile = new ProfileEntity().setName("name");
+        Assert.assertNull( profileService.find(profile) );
+        Assert.assertNotNull( profileService.find(profile) );
     }
     
     @Test
     public void findAllBySearchName() {
         
-        ProfileDTO profileDto = new ProfileDTO().setName("name").setAvatarName("avatarName");
-        Mockito.when(profileDao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profileDto)));
+        ProfileEntity profile = new ProfileEntity().setName("name");
+        Mockito.when(profileDao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profile)));
         
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllBySearchName(null, 0, 1) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profileDto)),  profileService.findAllBySearchName("", 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllBySearchName(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllBySearchName("", 0, 1) );
     }
     
     @Test
     public void delete() throws NotFoundException {
-        
-        ProfileStatDTO profileStatDtoMock = new ProfileStatDTO();
-        Mockito.when(profileStatService.findByProfile(Mockito.any(ProfileDTO.class))).thenReturn(profileStatDtoMock);
-        
         
         try {
             profileService.delete(null);
@@ -194,35 +180,35 @@ public class ProfileServiceTest extends AbstractTest {
         }
         
         
-        ProfileDTO profileDto = new ProfileDTO().setName("name").setAvatarName("avatarName");
+        ProfileEntity profile = new ProfileEntity().setName("name");
         
         try {
-            profileService.delete(profileDto);
+            profileService.delete(profile);
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'profile -> id' est obligatoire."), e);
         }
         
-        Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profileDto));
-        profileDto.setId(1);
+        Mockito.when(profileDao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(profile));
+        profile.setId(1);
         
         try {
-            profileService.delete(profileDto);
+            profileService.delete(profile);
             Assert.fail("Doit lever une NotFoundException car le mock throw.");
         }
         catch (NotFoundException e) {
             TestUtils.verifyException(new NotFoundException("profile not found."), e);
         }
         
-        profileService.delete(profileDto);
+        profileService.delete(profile);
     }
     
     @Test
-    public void checkDTO() {
+    public void checkEntity() {
         
         try {
-            profileService.checkDTO(null);
+            profileService.checkEntity(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -230,14 +216,14 @@ public class ProfileServiceTest extends AbstractTest {
         }
         
         try {
-            profileService.checkDTO(new ProfileDTO());
+            profileService.checkEntity(new ProfileEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'profile -> name' est obligatoire."), e);
         }
         
-        profileService.checkDTO(new ProfileDTO().setName("name"));
+        profileService.checkEntity(new ProfileEntity().setName("name"));
     }
     
 }

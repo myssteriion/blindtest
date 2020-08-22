@@ -9,9 +9,9 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
+import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
@@ -33,7 +33,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
     @Test
     public void testShortGame() throws NotFoundException, SpotifyException, ConflictException {
         
-        Set<Integer> profilesId = PROFILES_LIST.stream().map(ProfileDTO::getId).collect(Collectors.toSet());
+        Set<Integer> profilesId = PROFILES_LIST.stream().map(ProfileEntity::getId).collect(Collectors.toSet());
         Duration duration = Duration.SHORT;
         
         NewGame newGame = new NewGame().setProfilesId(profilesId).setDuration(duration)
@@ -331,25 +331,25 @@ public class IntegrationTest extends AbstractIntegrationTest {
         Assert.assertTrue( game.getPlayers().get(1).getScore() >= scoreName2 );
         Assert.assertTrue( game.getPlayers().get(2).getScore() >= scoreName3 );
         
-        ProfileStatDTO profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(0)) );
+        ProfileStatEntity profileStat = profileService.find(PROFILES_LIST.get(0)).getProfileStat();
         Assert.assertEquals( Integer.valueOf(1), profileStat.getPlayedGames().get( game.getDuration() ) );
         Assert.assertEquals( Integer.valueOf(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( Integer.valueOf(foundName1), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
         Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName1);
         
-        profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(1)) );
+        profileStat = profileService.find(PROFILES_LIST.get(1)).getProfileStat();
         Assert.assertEquals( Integer.valueOf(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( Integer.valueOf(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( Integer.valueOf(foundName2), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
         Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName2);
         
-        profileStat = profileStatService.findByProfile( profileService.find(PROFILES_LIST.get(2)) );
+        profileStat = profileService.find(PROFILES_LIST.get(2)).getProfileStat();
         Assert.assertEquals( Integer.valueOf(1), profileStat.getPlayedGames().get(game.getDuration()) );
         Assert.assertEquals( Integer.valueOf(game.getNbMusicsPlayed()), profileStat.getListenedMusics().get(Theme.ANNEES_80) );
         Assert.assertEquals( Integer.valueOf(foundName3), profileStat.getFoundMusics().get(Theme.ANNEES_80).get(GoodAnswer.AUTHOR) );
         Assert.assertTrue(profileStat.getBestScores().get(duration) >= scoreName3);
         
-        MusicDTO music = musicService.find( MUSICS_LIST.get(0) );
+        MusicEntity music = musicService.find( MUSICS_LIST.get(0) );
         Assert.assertEquals( nbMusicPlayed, music.getPlayed() );
         
         Assert.assertTrue( game.isFinished() );

@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -48,13 +48,13 @@ public class ThiefContentTest extends AbstractTest {
         
         List<String> playersNames = Collections.singletonList("name");
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 52; i++)
             game.nextStep(roundContentProperties);
@@ -83,19 +83,19 @@ public class ThiefContentTest extends AbstractTest {
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
         
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( -300, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setPenalties(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
         actual = thiefContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( -500, actual.getPlayers().get(0).getScore() );
@@ -105,8 +105,8 @@ public class ThiefContentTest extends AbstractTest {
     public void isFinished() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         for (int i = 0; i < 52; i++)
@@ -130,8 +130,8 @@ public class ThiefContentTest extends AbstractTest {
     public void isLast() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         for (int i = 0; i < 52; i++)

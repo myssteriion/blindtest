@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.persistence.dao;
 
-import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.utils.persistence.dao.IDAO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * DAO for AvatarDTO.
+ * DAO for Avatar.
  */
 @Repository
-public interface AvatarDAO extends IDAO<AvatarDTO> {
+public interface AvatarDAO extends IDAO<AvatarEntity> {
     
     /**
      * Find by name.
@@ -20,7 +20,7 @@ public interface AvatarDAO extends IDAO<AvatarDTO> {
      * @param name the name
      * @return the optional
      */
-    Optional<AvatarDTO> findByName(String name);
+    Optional<AvatarEntity> findByName(String name);
     
     /**
      * Find a page of Avatar filtered by search name.
@@ -29,6 +29,6 @@ public interface AvatarDAO extends IDAO<AvatarDTO> {
      * @param pageable   the page
      * @return a page of Avatar filtered by search name
      */
-    Page<AvatarDTO> findAllByNameContainingIgnoreCase(String searchName, Pageable pageable);
+    Page<AvatarEntity> findAllByNameContainingIgnoreCase(String searchName, Pageable pageable);
     
 }

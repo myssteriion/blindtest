@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -53,9 +53,9 @@ public class ChoiceContentTest extends AbstractTest {
     public void prepareRound() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name3")),
-                new Player(new ProfileDTO().setName("name2")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name3")),
+                new Player(new ProfileEntity().setName("name2")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         ChoiceContent choiceContent = new ChoiceContent(10, 100, 50, 50);
@@ -72,14 +72,14 @@ public class ChoiceContentTest extends AbstractTest {
         
         List<String> playersNames = Arrays.asList("name", "name3", "name2");
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name3")),
-                new Player(new ProfileDTO().setName("name2")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name3")),
+                new Player(new ProfileEntity().setName("name2")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 20; i++)
             game.nextStep(roundContentProperties);
@@ -121,7 +121,7 @@ public class ChoiceContentTest extends AbstractTest {
         game.getPlayers().get(1).setTurnToChoose(true);
         game.getPlayers().get(2).setTurnToChoose(false);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 150, actual.getPlayers().get(0).getScore() );
@@ -131,7 +131,7 @@ public class ChoiceContentTest extends AbstractTest {
         game.getPlayers().get(1).setTurnToChoose(false);
         game.getPlayers().get(2).setTurnToChoose(true);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 150+100, actual.getPlayers().get(0).getScore() );
@@ -141,7 +141,7 @@ public class ChoiceContentTest extends AbstractTest {
         game.getPlayers().get(1).setTurnToChoose(false);
         game.getPlayers().get(2).setTurnToChoose(false);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setTitleWinners(playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 250+150, actual.getPlayers().get(0).getScore() );
@@ -151,7 +151,7 @@ public class ChoiceContentTest extends AbstractTest {
         game.getPlayers().get(1).setTurnToChoose(true);
         game.getPlayers().get(2).setTurnToChoose(false);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames).setTitleWinners(playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 400+200, actual.getPlayers().get(0).getScore() );
@@ -161,7 +161,7 @@ public class ChoiceContentTest extends AbstractTest {
         game.getPlayers().get(1).setTurnToChoose(false);
         game.getPlayers().get(2).setTurnToChoose(true);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setPenalties(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
         actual = choiceContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 600-200, actual.getPlayers().get(0).getScore() );

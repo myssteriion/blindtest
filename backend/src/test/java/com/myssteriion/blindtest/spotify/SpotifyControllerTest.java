@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.utils.model.Empty;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,9 +26,9 @@ public class SpotifyControllerTest extends AbstractTest {
     @Test
     public void connectionTest() throws SpotifyException {
         
-        SpotifyParamDTO spotifyParam = new SpotifyParamDTO("id", "pwd", new HashMap<>());
+        SpotifyParamEntity spotifyParam = new SpotifyParamEntity("id", "pwd", new HashMap<>());
         
-        Mockito.doNothing().when(spotifyService).testSpotifyParamConnection(Mockito.any(SpotifyParamDTO.class));
+        Mockito.doNothing().when(spotifyService).testSpotifyParamConnection(Mockito.any(SpotifyParamEntity.class));
         
         ResponseEntity<Empty> re = spotifyController.connectionTest(spotifyParam);
         Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );

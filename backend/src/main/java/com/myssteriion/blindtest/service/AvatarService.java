@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
 import com.myssteriion.blindtest.tools.Constant;
@@ -29,7 +29,7 @@ import java.util.Objects;
  * Service for Avatar.
  */
 @Service
-public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
+public class AvatarService extends AbstractCRUDService<AvatarEntity, AvatarDAO> {
     
     /**
      * The ConfigProperties.
@@ -69,12 +69,12 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         File avatarDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
             
-            AvatarDTO avatarDTO = new AvatarDTO(file.getName() );
+            AvatarEntity avatar = new AvatarEntity(file.getName() );
             if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
-                dao.save(avatarDTO);
+                dao.save(avatar);
         }
         
-        for ( AvatarDTO avatar : dao.findAll() ) {
+        for ( AvatarEntity avatar : dao.findAll() ) {
             if ( !avatarFileExists(avatar) )
                 dao.deleteById( avatar.getId() );
         }
@@ -86,12 +86,12 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      * @param avatar the avatar
      * @return TRUE if the avatar match with an existing file, FALSE otherwise
      */
-    private boolean avatarFileExists(AvatarDTO avatar) {
+    private boolean avatarFileExists(AvatarEntity avatar) {
         return avatar != null && Paths.get(avatarsFolderPath, avatar.getName()).toFile().exists();
     }
     
     /**
-     * Refresh avatarDTOS list (cache).
+     * Refresh avatars list.
      */
     public void refresh() {
         init();
@@ -111,12 +111,12 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         
         boolean needRefresh = false;
         
-        Page<AvatarDTO> page = dao.findAll(Pageable.unpaged());
+        Page<AvatarEntity> page = dao.findAll(Pageable.unpaged());
         int i = 0;
         while (!needRefresh && i < page.getContent().size()) {
             
-            AvatarDTO avatar = page.getContent().get(i);
-            createAvatarFlux(avatar);
+            AvatarEntity avatar = page.getContent().get(i);
+            createFlux(avatar);
             if (!avatar.getFlux().isFileExists())
                 needRefresh = true;
             
@@ -128,36 +128,36 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
     
     
     @Override
-    public AvatarDTO save(AvatarDTO dto) throws ConflictException {
+    public AvatarEntity save(AvatarEntity entity) throws ConflictException {
         
-        AvatarDTO avatar = super.save(dto);
-        createAvatarFlux(avatar);
+        AvatarEntity avatar = super.save(entity);
+        createFlux(avatar);
         return avatar;
     }
     
     @Override
-    public AvatarDTO update(AvatarDTO dto) throws NotFoundException, ConflictException {
+    public AvatarEntity update(AvatarEntity entity) throws NotFoundException, ConflictException {
         
-        AvatarDTO avatar = super.update(dto);
-        createAvatarFlux(avatar);
+        AvatarEntity avatar = super.update(entity);
+        createFlux(avatar);
         return avatar;
     }
     
     @Override
-    public AvatarDTO find(AvatarDTO dto) {
-    
-        super.checkDTO(dto);
+    public AvatarEntity find(AvatarEntity entity) {
         
-        AvatarDTO avatar;
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkDTO(dto);
-            avatar = dao.findByName(dto.getName()).orElse(null);
+        super.checkEntity(entity);
+        
+        AvatarEntity avatar;
+        if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
+            checkEntity(entity);
+            avatar = dao.findByName(entity.getName()).orElse(null);
         }
         else
-            avatar = super.find(dto);
+            avatar = super.find(entity);
         
         if (avatar != null)
-            createAvatarFlux(avatar);
+            createFlux(avatar);
         
         return avatar;
     }
@@ -170,7 +170,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      * @param itemPerPage the item per page
      * @return the page of avatars filtered by search name
      */
-    public Page<AvatarDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
+    public Page<AvatarEntity> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
         searchName = Objects.requireNonNullElse(searchName, CommonConstant.EMPTY);
         
@@ -180,8 +180,8 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
         Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
         
-        Page<AvatarDTO> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
-        page.forEach(this::createAvatarFlux);
+        Page<AvatarEntity> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
+        page.forEach(this::createFlux);
         
         return page;
     }
@@ -192,9 +192,7 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
      *
      * @param avatar the avatar
      */
-    public void createAvatarFlux(AvatarDTO avatar) {
-    
-        super.checkDTO(avatar);
+    private void createFlux(AvatarEntity avatar) {
         
         try {
             
@@ -202,14 +200,14 @@ public class AvatarService extends AbstractCRUDService<AvatarDTO, AvatarDAO> {
             avatar.setFlux( new Flux(path.toFile()) );
         }
         catch (IOException e) {
-            throw new CustomRuntimeException("Can't create avatar flux.", e);
+            throw new CustomRuntimeException("Can't create flux.", e);
         }
     }
     
     @Override
-    public void checkDTO(AvatarDTO avatar) {
-        super.checkDTO(avatar);
-        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), avatar.getName() );
+    public void checkEntity(AvatarEntity avatar) {
+        super.checkEntity(avatar);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.ENTITY_NAME), avatar.getName() );
     }
     
 }

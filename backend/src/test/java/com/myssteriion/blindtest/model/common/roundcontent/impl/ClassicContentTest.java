@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -44,9 +44,9 @@ public class ClassicContentTest extends AbstractTest {
     public void prepareRound() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name3")),
-                new Player(new ProfileDTO().setName("name2")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name3")),
+                new Player(new ProfileEntity().setName("name2")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         ClassicContent classicContent = new ClassicContent(10, 100);
@@ -62,13 +62,13 @@ public class ClassicContentTest extends AbstractTest {
         
         List<String> playersNames = Collections.singletonList("name");
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );
         ClassicContent classicContent = (ClassicContent) game.getRoundContent();
@@ -94,22 +94,22 @@ public class ClassicContentTest extends AbstractTest {
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setTitleWinners(playersNames);
         actual = classicContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 200, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames).setTitleWinners(playersNames);
         actual = classicContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 400, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
         actual = classicContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 400, actual.getPlayers().get(0).getScore() );
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setPenalties(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
         actual = classicContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertEquals( 200, actual.getPlayers().get(0).getScore() );
@@ -119,8 +119,8 @@ public class ClassicContentTest extends AbstractTest {
     public void isFinished() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );
@@ -150,8 +150,8 @@ public class ClassicContentTest extends AbstractTest {
     public void isLast() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Assert.assertSame( Round.CLASSIC, game.getRound() );

@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.service.param;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.persistence.dao.SpotifyParamDAO;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -37,16 +37,16 @@ public class SpotifyParamServiceTest extends AbstractTest {
         String encryptedId = stringCipher.encrypt("id");
         String encryptedPwd = stringCipher.encrypt("pwd");
         
-        SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
+        SpotifyParamEntity spotifyParamEncrypted = new SpotifyParamEntity( encryptedId, encryptedPwd, new HashMap<>() );
         spotifyParamEncrypted.setId(0);
-        SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO( "id", "pwd", new HashMap<>() );
+        SpotifyParamEntity spotifyParamDecrypted = new SpotifyParamEntity( "id", "pwd", new HashMap<>() );
         spotifyParamDecrypted.setId(0);
         
         Mockito.when(dao.findById(Mockito.anyInt())).thenReturn( Optional.of(spotifyParamEncrypted) );
         Mockito.when(dao.findAll()).thenReturn( Collections.singletonList(spotifyParamEncrypted) );
-        Mockito.when(dao.save(Mockito.any(SpotifyParamDTO.class))).thenReturn(spotifyParamEncrypted);
+        Mockito.when(dao.save(Mockito.any(SpotifyParamEntity.class))).thenReturn(spotifyParamEncrypted);
         
-        SpotifyParamDTO actual = spotifyParamService.update(spotifyParamDecrypted);
+        SpotifyParamEntity actual = spotifyParamService.update(spotifyParamDecrypted);
         Assert.assertEquals(spotifyParamDecrypted, actual);
     }
     
@@ -56,22 +56,22 @@ public class SpotifyParamServiceTest extends AbstractTest {
         String encryptedId = stringCipher.encrypt("id");
         String encryptedPwd = stringCipher.encrypt("pwd");
         
-        SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
-        SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO( "id", "pwd", new HashMap<>() );
+        SpotifyParamEntity spotifyParamEncrypted = new SpotifyParamEntity( encryptedId, encryptedPwd, new HashMap<>() );
+        SpotifyParamEntity spotifyParamDecrypted = new SpotifyParamEntity( "id", "pwd", new HashMap<>() );
         
         
-        Iterator<SpotifyParamDTO> iterator = Mockito.mock(Iterator.class);
+        Iterator<SpotifyParamEntity> iterator = Mockito.mock(Iterator.class);
         Mockito.when(iterator.hasNext()).thenReturn(false, true);
         Mockito.when(iterator.next()).thenReturn(spotifyParamEncrypted);
         
-        Iterable<SpotifyParamDTO> iterable = Mockito.mock(Iterable.class);
+        Iterable<SpotifyParamEntity> iterable = Mockito.mock(Iterable.class);
         Mockito.when(iterable.iterator()).thenReturn(iterator);
         
         Mockito.when(dao.findAll()).thenReturn(iterable);
-        Mockito.when(dao.save(Mockito.any(SpotifyParamDTO.class))).thenReturn(spotifyParamEncrypted);
+        Mockito.when(dao.save(Mockito.any(SpotifyParamEntity.class))).thenReturn(spotifyParamEncrypted);
         
         
-        SpotifyParamDTO actual = spotifyParamService.find();
+        SpotifyParamEntity actual = spotifyParamService.find();
         Assert.assertEquals(spotifyParamDecrypted, actual);
         
         actual = spotifyParamService.find();
@@ -91,31 +91,31 @@ public class SpotifyParamServiceTest extends AbstractTest {
         String encryptedId = stringCipher.encrypt("id");
         String encryptedPwd = stringCipher.encrypt("pwd");
         
-        SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO( encryptedId, encryptedPwd, new HashMap<>() );
-        SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO( "id", "pwd", new HashMap<>() );
+        SpotifyParamEntity spotifyParamEncrypted = new SpotifyParamEntity( encryptedId, encryptedPwd, new HashMap<>() );
+        SpotifyParamEntity spotifyParamDecrypted = new SpotifyParamEntity( "id", "pwd", new HashMap<>() );
         
         
-        Iterator<SpotifyParamDTO> iterator = Mockito.mock(Iterator.class);
+        Iterator<SpotifyParamEntity> iterator = Mockito.mock(Iterator.class);
         Mockito.when(iterator.hasNext()).thenReturn(false, true);
         Mockito.when(iterator.next()).thenReturn(spotifyParamEncrypted);
         
-        Iterable<SpotifyParamDTO> iterable = Mockito.mock(Iterable.class);
+        Iterable<SpotifyParamEntity> iterable = Mockito.mock(Iterable.class);
         Mockito.when(iterable.iterator()).thenReturn(iterator);
         
         Mockito.when(dao.findAll()).thenReturn(iterable);
-        Mockito.when(dao.save(Mockito.any(SpotifyParamDTO.class))).thenReturn(spotifyParamEncrypted);
+        Mockito.when(dao.save(Mockito.any(SpotifyParamEntity.class))).thenReturn(spotifyParamEncrypted);
         
         
-        SpotifyParamDTO actual = spotifyParamService.find(null);
+        SpotifyParamEntity actual = spotifyParamService.find(null);
         Assert.assertEquals(spotifyParamDecrypted, actual);
         
         actual = spotifyParamService.find(null);
         Assert.assertEquals(spotifyParamDecrypted, actual);
         
-        actual = spotifyParamService.find(new SpotifyParamDTO());
+        actual = spotifyParamService.find(new SpotifyParamEntity());
         Assert.assertEquals(spotifyParamDecrypted, actual);
         
-        actual = spotifyParamService.find(new SpotifyParamDTO("osef", "osef", new HashMap<>()));
+        actual = spotifyParamService.find(new SpotifyParamEntity("osef", "osef", new HashMap<>()));
         Assert.assertEquals(spotifyParamDecrypted, actual);
     }
     

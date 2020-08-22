@@ -3,7 +3,7 @@ package com.myssteriion.blindtest.controller;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.spotify.SpotifyException;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Controller for MusicDTO.
+ * Controller for music.
  */
 @RestController
 @RequestMapping(path = "musics")
@@ -65,16 +65,16 @@ public class MusicController {
      * @param themes     	  the themes filter (optional)
      * @param effects     	  the effects filter (optional)
      * @param connectionMode  the online mode
-     * @return a MusicDTO
+     * @return a music
      * @throws NotFoundException NotFound exception
      */
     @GetMapping(path = "/random")
-    public ResponseEntity<MusicDTO> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-                                           @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
-                                           @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
+    public ResponseEntity<MusicEntity> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
+                                              @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
+                                              @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
             throws NotFoundException, IOException, SpotifyException {
         
-        MusicDTO music = musicService.random(themes, effects, connectionMode);
+        MusicEntity music = musicService.random(themes, effects, connectionMode);
         if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
             musicService.refresh();
             music = musicService.random(themes, effects, connectionMode);

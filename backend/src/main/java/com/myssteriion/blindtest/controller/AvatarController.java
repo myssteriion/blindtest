@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
@@ -45,12 +45,12 @@ public class AvatarController {
      * @return the pageable of avatars
      */
     @GetMapping
-    public ResponseEntity< Page<AvatarDTO> > findAllBySearchName(
+    public ResponseEntity< Page<AvatarEntity> > findAllBySearchName(
             @RequestParam(value = Constant.SEARCH_NAME, required = false, defaultValue = Constant.SEARCH_NAME_DEFAULT_VALUE) String searchName,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
         
-        Page<AvatarDTO> page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
+        Page<AvatarEntity> page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
         if ( avatarService.needRefresh() ) {
             avatarService.refresh();
             page = avatarService.findAllBySearchName(searchName, pageNumber, itemPerPage);
