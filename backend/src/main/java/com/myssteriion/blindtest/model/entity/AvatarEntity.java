@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.utils.model.entity.AbstractEntity;
 
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "avatar_sequence", allocationSize = 1)
+@JsonIgnoreProperties(value = "flux", allowGetters = true)
 public class AvatarEntity extends AbstractEntity<AvatarEntity> {
     
     /**
