@@ -77,8 +77,6 @@ export class ProfileEditModalComponent implements OnInit {
 	
 	public ngOnInit(): void {
 		
-		ToolsService.verifyValue("create", this.create);
-		
 		this.showAvatars = false;
 		this.showPageable = false;
 		this.searchName = "";
@@ -89,20 +87,15 @@ export class ProfileEditModalComponent implements OnInit {
 				id: null,
 				background: 0,
 				name: "",
-				avatarName: "",
-				avatar: { id: null, name: "", flux: { name: "", fileExists: false, contentFlux: "", contentType: "" } }
+				avatar: { id: null, name: "" }
 			};
 		}
 		else {
-			
-			ToolsService.verifyValue("profile", this.profile);
-			ToolsService.verifyValue("profile.avatar", this.profile.avatar);
 			
 			this.newProfile = {
 				id: this.profile.id,
 				background: this.profile.background,
 				name: this.profile.name,
-				avatarName: this.profile.avatarName,
 				avatar: this.profile.avatar
 			};
 		}
@@ -147,22 +140,12 @@ export class ProfileEditModalComponent implements OnInit {
 	}
 	
 	/**
-	 * Gets the new avatar flux.
-	 */
-	public getCurrentFluxForImg(): string {
-		return ToolsService.getFluxForImg(this.newProfile.avatar.flux);
-	}
-	
-	/**
-	 * Gets the flux for avatar.
+	 * Gets image from avatar.
 	 *
 	 * @param avatar the avatar
 	 */
-	private getFluxForImg(avatar: Avatar): string {
-		
-		ToolsService.verifyValue("avatar", avatar);
-		
-		return ToolsService.getFluxForImg(avatar.flux);
+	private getImgFromAvatar(avatar: Avatar): string {
+		return ToolsService.getImgFromAvatar(avatar);
 	}
 	
 	/**
@@ -186,19 +169,14 @@ export class ProfileEditModalComponent implements OnInit {
 	 * @param avatar the avatar selected
 	 */
 	private selectAvatar(avatar: Avatar): void {
-		
-		ToolsService.verifyValue("avatar", avatar);
-		
 		this.newProfile.avatar = avatar;
-		this.newProfile.avatarName = avatar.name;
 	}
 	
 	/**
 	 * Test if the save button is disabled.
 	 */
 	public disabledSave(): boolean {
-		return ToolsService.isNullOrEmpty(this.newProfile.name) ||
-			ToolsService.isNull(this.newProfile.background);
+		return ToolsService.isNullOrEmpty(this.newProfile.name) || ToolsService.isNull(this.newProfile.background);
 	}
 	
 	/**
@@ -206,11 +184,11 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	public save(): void {
 		
-		let profileTmp = {
+		let profileTmp: Profile = {
 			id: this.newProfile.id,
 			background: this.newProfile.background,
 			name: this.newProfile.name,
-			avatarName: this.newProfile.avatarName,
+			avatar: this.newProfile.avatar
 		};
 		
 		

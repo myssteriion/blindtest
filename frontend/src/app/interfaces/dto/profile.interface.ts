@@ -8,7 +8,6 @@ export interface Profile {
 	id: number,
 	background: number,
 	name: string,
-	avatarName: string,
 	avatar?: Avatar,
 	statistics?: ProfileStatistics
 }

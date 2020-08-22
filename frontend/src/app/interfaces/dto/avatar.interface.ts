@@ -6,5 +6,5 @@ import {Flux} from '../common/flux.interface';
 export interface Avatar {
 	id?: number,
 	name: string,
-	flux: Flux
+	flux?: Flux
 }
