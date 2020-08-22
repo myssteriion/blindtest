@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
@@ -19,61 +18,79 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
- * Service for ProfileDTO.
+ * Service for profile.
  */
 @Service
-public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> {
-    
-    private ProfileStatService profileStatService;
+public class ProfileService extends AbstractCRUDService<ProfileEntity, ProfileDAO> {
     
     private AvatarService avatarService;
     
-    
-    
     @Autowired
-    public ProfileService(ProfileDAO profileDao, ProfileStatService profileStatService, AvatarService avatarService) {
+    public ProfileService(ProfileDAO profileDao, AvatarService avatarService) {
         super(profileDao, "profile");
-        this.profileStatService = profileStatService;
         this.avatarService = avatarService;
     }
     
     
     
     @Override
-    public ProfileDTO save(ProfileDTO dto) throws ConflictException {
+    public ProfileEntity save(ProfileEntity entity) throws ConflictException {
         
-        ProfileDTO profile = super.save(dto);
-        createProfileAvatarFlux(profile);
-        profileStatService.save( new ProfileStatDTO(profile.getId()) );
+        ProfileEntity profile = super.save(entity);
+        createAvatarFlux(profile);
         return profile;
     }
     
     @Override
-    public ProfileDTO update(ProfileDTO dto) throws NotFoundException, ConflictException {
+    public ProfileEntity update(ProfileEntity entity) throws NotFoundException, ConflictException {
         
-        ProfileDTO profile = super.update(dto);
-        createProfileAvatarFlux(profile);
+        ProfileEntity profile = super.update(entity);
+        createAvatarFlux(profile);
         return profile;
     }
     
     @Override
-    public ProfileDTO find(ProfileDTO dto) {
-    
-        super.checkDTO(dto);
+    public ProfileEntity find(ProfileEntity entity) {
         
-        ProfileDTO profile;
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkDTO(dto);
-            profile = dao.findByName(dto.getName()).orElse(null);
+        super.checkEntity(entity);
+        
+        ProfileEntity profile;
+        if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
+            checkEntity(entity);
+            profile = dao.findByName(entity.getName()).orElse(null);
         }
         else
-            profile = super.find(dto);
+            profile = super.find(entity);
         
         if (profile != null)
-            createProfileAvatarFlux(profile);
+            createAvatarFlux(profile);
         
         return profile;
     }
+    
+    /**
+     * Find profile with profileStat.
+     *
+     * @param entity the entity
+     * @return the found avatar, or NULL if it's not found
+     */
+//    public ProfileEntity findWithProfileStat(ProfileEntity entity) {
+//
+//        super.checkEntity(entity);
+//
+//        ProfileEntity foundProfile;
+//        if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
+//            checkEntity(entity);
+//            foundProfile = dao.findByName(entity.getName()).orElse(null);
+//        }
+//        else
+//            foundProfile = dao.findById( entity.getId() ).orElse(null);
+//
+//        if (foundProfile != null)
+//            createAvatarFlux(foundProfile);
+//
+//        return foundProfile;
+//    }
     
     /**
      * Find a pageNumber of Profile filtered by a search name.
@@ -83,7 +100,7 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
      * @param itemPerPage the item per page
      * @return the page of profiles filtered by search name
      */
-    public Page<ProfileDTO> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
+    public Page<ProfileEntity> findAllBySearchName(String searchName, int pageNumber, int itemPerPage) {
         
         searchName = Objects.requireNonNullElse(searchName, "");
         
@@ -93,20 +110,10 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
         Pageable pageable = PageRequest.of( pageNumber, itemPerPage, Sort.by(order) );
         
-        Page<ProfileDTO> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
-        page.forEach(this::createProfileAvatarFlux);
+        Page<ProfileEntity> page = dao.findAllByNameContainingIgnoreCase(searchName, pageable);
+        page.forEach(this::createAvatarFlux);
         
         return page;
-    }
-    
-    @Override
-    public void delete(ProfileDTO profile) throws NotFoundException {
-    
-        super.checkDTO(profile);
-        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_ID), profile.getId() );
-        
-        profileStatService.delete( profileStatService.findByProfile(profile) );
-        super.delete(profile);
     }
     
     
@@ -115,17 +122,15 @@ public class ProfileService extends AbstractCRUDService<ProfileDTO, ProfileDAO> 
      *
      * @param profile the profile
      */
-    private void createProfileAvatarFlux(ProfileDTO profile) {
-        
-        // setter is useful for create avatar inside profile
-        profile.setAvatarName( profile.getAvatarName() );
-        avatarService.createAvatarFlux( profile.getAvatar() );
+    private void createAvatarFlux(ProfileEntity profile) {
+        if ( !CommonUtils.isNullOrEmpty(profile.getAvatar()) )
+            profile.setAvatar( avatarService.find(profile.getAvatar()) );
     }
     
     @Override
-    public void checkDTO(ProfileDTO profile) {
-        super.checkDTO(profile);
-        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), profile.getName() );
+    public void checkEntity(ProfileEntity profile) {
+        super.checkEntity(profile);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.ENTITY_NAME), profile.getName() );
     }
     
 }

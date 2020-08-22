@@ -3,9 +3,9 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
-import com.myssteriion.blindtest.model.dto.ProfileStatDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
+import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
@@ -45,8 +45,6 @@ public class GameService {
     
     private ProfileService profileService;
     
-    private ProfileStatService profileStatService;
-    
     private SpotifyService spotifyService;
     
     private ConfigProperties configProperties;
@@ -66,16 +64,13 @@ public class GameService {
      *
      * @param musicService       the musicService
      * @param profileService     the profileService
-     * @param profileStatService the profileStatService
      * @param spotifyService     the spotifyService
      * @param configProperties   the configProperties
      */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, ProfileStatService profileStatService, SpotifyService spotifyService,
-                       ConfigProperties configProperties, RoundContentProperties prop) {
+    public GameService(MusicService musicService, ProfileService profileService, SpotifyService spotifyService, ConfigProperties configProperties, RoundContentProperties prop) {
         this.musicService = musicService;
         this.profileService = profileService;
-        this.profileStatService = profileStatService;
         this.spotifyService = spotifyService;
         this.configProperties = configProperties;
         this.prop = prop;
@@ -159,7 +154,7 @@ public class GameService {
         
         for (Integer profileId : profilesId) {
             
-            ProfileDTO profile = profileService.find( new ProfileDTO().setId(profileId) );
+            ProfileEntity profile = profileService.find( new ProfileEntity().setId(profileId) );
             if (profile == null)
                 throw new NotFoundException("Profile '" + profileId + "' not found.");
             
@@ -201,53 +196,53 @@ public class GameService {
         
         if ( !game.isFinished() ) {
             
-            // update musicDto
-            MusicDTO musicDto = musicService.find( musicResult.getMusic() );
-            if (musicDto == null)
+            // update music
+            MusicEntity music = musicService.find( musicResult.getMusic() );
+            if (music == null)
                 throw new NotFoundException("Music not found.");
             
-            if ( !game.getThemes().contains(musicDto.getTheme()) )
-                throw new NotFoundException("'" + musicDto.getTheme() + "' not found for this game (" + game.getThemes() + ").");
+            if ( !game.getThemes().contains(music.getTheme()) )
+                throw new NotFoundException("'" + music.getTheme() + "' not found for this game (" + game.getThemes() + ").");
             
-            musicDto.incrementPlayed();
-            musicService.update(musicDto);
+            music.incrementPlayed();
+            musicService.update(music);
             
             game.incrementListenedMusics( musicResult.getMusic().getTheme() );
             
             // apply score
             game = game.getRoundContent().apply(game, musicResult);
             
-            // update profileStatDto
+            // update profileStat
             List<Player> players = game.getPlayers();
             
             updatePlayersRanks(players);
             
             for (Player player : players) {
                 
-                ProfileDTO profileDto = player.getProfile();
-                ProfileStatDTO profileStatDto = profileStatService.findByProfile(profileDto);
-                profileStatDto.incrementListenedMusics( musicResult.getMusic().getTheme() );
+                ProfileEntity profile = profileService.find( player.getProfile() );
+                ProfileStatEntity profileStat = profile.getProfileStat();
+                profileStat.incrementListenedMusics( musicResult.getMusic().getTheme() );
                 
-                if ( musicResult.isAuthorAndTitleWinner(profileDto.getName()) ) {
-                    profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.BOTH );
+                if ( musicResult.isAuthorAndTitleWinner(profile.getName()) ) {
+                    profileStat.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.BOTH );
                     player.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.BOTH );
                 }
-                else if ( musicResult.isAuthorWinner(profileDto.getName()) ) {
-                    profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.AUTHOR );
+                else if ( musicResult.isAuthorWinner(profile.getName()) ) {
+                    profileStat.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.AUTHOR );
                     player.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.AUTHOR );
                 }
-                else if ( musicResult.isTitleWinner(profileDto.getName()) ) {
-                    profileStatDto.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.TITLE );
+                else if ( musicResult.isTitleWinner(profile.getName()) ) {
+                    profileStat.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.TITLE );
                     player.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.TITLE );
                 }
                 
                 if ( game.isLastStep() ) {
-                    profileStatDto.incrementPlayedGames( game.getDuration() );
-                    profileStatDto.addBestScoreIfBetter( game.getDuration(), player.getScore() );
-                    profileStatDto.incrementWonGames( player.getRank() );
+                    profileStat.incrementPlayedGames( game.getDuration() );
+                    profileStat.addBestScoreIfBetter( game.getDuration(), player.getScore() );
+                    profileStat.incrementWonGames( player.getRank() );
                 }
                 
-                profileStatService.update(profileStatDto);
+                profileService.update(profile);
             }
             
             // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
@@ -266,7 +261,7 @@ public class GameService {
         
         CommonUtils.verifyValue("musicResult", musicResult);
         CommonUtils.verifyValue("musicResult -> gameId", musicResult.getGameId() );
-        musicService.checkDTO( musicResult.getMusic() );
+        musicService.checkEntity( musicResult.getMusic() );
         
         musicResult.setAuthorWinners( CommonUtils.removeDuplicate(musicResult.getAuthorWinners()) );
         musicResult.setTitleWinners( CommonUtils.removeDuplicate(musicResult.getTitleWinners()) );

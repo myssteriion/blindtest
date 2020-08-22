@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
@@ -177,11 +177,11 @@ public class SpotifyService {
      * @param spotifyParam the spotify param (can be null).
      * @throws SpotifyException the spotify exception
      */
-    private SpotifyApi getSpotifyApi(SpotifyParamDTO spotifyParam) throws SpotifyException {
+    private SpotifyApi getSpotifyApi(SpotifyParamEntity spotifyParam) throws SpotifyException {
         
         try {
             
-            SpotifyParamDTO sParam = ( CommonUtils.isNullOrEmpty(spotifyParam) ) ? spotifyParamService.find() : spotifyParam;
+            SpotifyParamEntity sParam = ( CommonUtils.isNullOrEmpty(spotifyParam) ) ? spotifyParamService.find() : spotifyParam;
             
             CommonUtils.verifyValue( "clientId", sParam.getClientId() );
             CommonUtils.verifyValue( "clientSecret", sParam.getClientSecret() );
@@ -208,7 +208,7 @@ public class SpotifyService {
      *
      * @throws SpotifyException the spotify exception
      */
-    public void testSpotifyParamConnection(SpotifyParamDTO spotifyParam) throws SpotifyException {
+    public void testSpotifyParamConnection(SpotifyParamEntity spotifyParam) throws SpotifyException {
         
         CommonUtils.verifyValue("spotifyParam", spotifyParam);
         

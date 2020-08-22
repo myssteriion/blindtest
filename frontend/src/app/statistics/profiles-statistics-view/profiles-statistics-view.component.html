@@ -26,7 +26,7 @@
                     [(ngModel)]="selectedUsers">
                 <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/>
-                    <img class="example-option-img" aria-hidden [src]="getFluxForImg(item)" height="25">
+                    <img class="example-option-img" aria-hidden [src]="getImgFromAvatar(item)" height="25">
                     {{item.name}}
                 </ng-template>
             </ng-select>

@@ -5,8 +5,8 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -50,9 +50,9 @@ public class LuckyContentTest extends AbstractTest {
     public void prepareRound() {
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name3")),
-                new Player(new ProfileDTO().setName("name2")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name3")),
+                new Player(new ProfileEntity().setName("name2")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         LuckyContent luckyContent = new LuckyContent(10, 100, 50);
@@ -65,13 +65,13 @@ public class LuckyContentTest extends AbstractTest {
         
         List<String> playersNames = Collections.singletonList("name");
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name1")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name1")));
         Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
         
         Integer gameId = 1;
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 32; i++)
             game.nextStep(roundContentProperties);
@@ -100,22 +100,22 @@ public class LuckyContentTest extends AbstractTest {
         game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 150 && actual.getPlayers().get(0).getScore() <= 250);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setTitleWinners(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 500);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setAuthorWinners(playersNames).setTitleWinners(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames).setTitleWinners(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setLosers(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 600 && actual.getPlayers().get(0).getScore() <= 1000);
         
-        musicResult = new MusicResult().setGameId(gameId).setMusic(musicDto).setPenalties(playersNames);
+        musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
         actual = recoveryContent.apply(game, musicResult);
         game.nextStep(roundContentProperties);
         Assert.assertTrue( actual.getPlayers().get(0).getScore() >= 300 && actual.getPlayers().get(0).getScore() <= 700);

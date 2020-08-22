@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.dto;
+package com.myssteriion.blindtest.model.entity;
 
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
@@ -6,7 +6,10 @@ import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.ConnectionModeConverter;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
-import com.myssteriion.utils.model.dto.AbstractDTO;
+import com.myssteriion.utils.CommonConstant;
+import com.myssteriion.utils.CommonUtils;
+import com.myssteriion.utils.model.entity.AbstractEntity;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -25,7 +28,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "music", uniqueConstraints={ @UniqueConstraint(name = "music__name_theme_spotify_track_id__unique", columnNames={"name", "theme", "spotify_track_id"}) })
 @SequenceGenerator(name = "sequence_id", sequenceName = "music_sequence", allocationSize = 1)
-public class MusicDTO extends AbstractDTO<MusicDTO> {
+public class MusicEntity extends AbstractEntity<MusicEntity> {
     
     /**
      * The name.
@@ -38,6 +41,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * The theme.
      */
     @Column(name = "theme", nullable = false)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = ThemeConverter.class)
     private Theme theme;
     
@@ -45,8 +49,8 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * The number of played.
      */
     @Column(name = "played", nullable = false)
+    @ColumnDefault("0")
     @PositiveOrZero(message = "Played can't be negative.")
-//    @ColumnDefault("0")
     private int played;
     
     /**
@@ -91,7 +95,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
     /**
      * Instantiates a new Music dto.
      */
-    public MusicDTO() {
+    public MusicEntity() {
     }
     
     /**
@@ -101,7 +105,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param theme          the theme
      * @param connectionMode the connection mode
      */
-    public MusicDTO(String name, Theme theme, ConnectionMode connectionMode) {
+    public MusicEntity(String name, Theme theme, ConnectionMode connectionMode) {
         this(name, theme, connectionMode, null, null, null);
     }
     
@@ -115,7 +119,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param spotifyPreviewUrl the spotify preview url
      * @param spotifyTrackUrl   the spotify track url
      */
-    public MusicDTO(String name, Theme theme, ConnectionMode connectionMode, String spotifyTrackId, String spotifyPreviewUrl, String spotifyTrackUrl) {
+    public MusicEntity(String name, Theme theme, ConnectionMode connectionMode, String spotifyTrackId, String spotifyPreviewUrl, String spotifyTrackUrl) {
         
         this.name = name;
         this.theme = theme;
@@ -142,7 +146,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param name the name
      * @return this name
      */
-    public MusicDTO setName(String name) {
+    public MusicEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -162,7 +166,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param theme the theme
      * @return this theme
      */
-    public MusicDTO setTheme(Theme theme) {
+    public MusicEntity setTheme(Theme theme) {
         this.theme = theme;
         return this;
     }
@@ -182,7 +186,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param played the played
      * @return this played
      */
-    public MusicDTO setPlayed(int played) {
+    public MusicEntity setPlayed(int played) {
         this.played = played;
         return this;
     }
@@ -202,7 +206,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param connectionMode the game mode
      * @return this connection mode
      */
-    public MusicDTO setConnectionMode(ConnectionMode connectionMode) {
+    public MusicEntity setConnectionMode(ConnectionMode connectionMode) {
         this.connectionMode = connectionMode;
         return this;
     }
@@ -222,7 +226,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param spotifyTrackId the spotify track id
      * @return this spotify track id
      */
-    public MusicDTO setSpotifyTrackId(String spotifyTrackId) {
+    public MusicEntity setSpotifyTrackId(String spotifyTrackId) {
         this.spotifyTrackId = spotifyTrackId;
         return this;
     }
@@ -242,7 +246,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param spotifyPreviewUrl the spotify preview url
      * @return this spotify preview url
      */
-    public MusicDTO setSpotifyPreviewUrl(String spotifyPreviewUrl) {
+    public MusicEntity setSpotifyPreviewUrl(String spotifyPreviewUrl) {
         this.spotifyPreviewUrl = spotifyPreviewUrl;
         return this;
     }
@@ -262,7 +266,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param spotifyTrackUrl the spotify track url
      * @return this spotify track url
      */
-    public MusicDTO setSpotifyTrackUrl(String spotifyTrackUrl) {
+    public MusicEntity setSpotifyTrackUrl(String spotifyTrackUrl) {
         this.spotifyTrackUrl = spotifyTrackUrl;
         return this;
     }
@@ -282,7 +286,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param flux The flux.
      * @return this flux
      */
-    public MusicDTO setFlux(Flux flux) {
+    public MusicEntity setFlux(Flux flux) {
         this.flux = flux;
         return this;
     }
@@ -302,7 +306,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
      * @param effect The effect.
      * @return this effect
      */
-    public MusicDTO setEffect(Effect effect) {
+    public MusicEntity setEffect(Effect effect) {
         this.effect = effect;
         return this;
     }
@@ -329,7 +333,7 @@ public class MusicDTO extends AbstractDTO<MusicDTO> {
         if(obj == null || obj.getClass()!= this.getClass())
             return false;
         
-        MusicDTO other = (MusicDTO) obj;
+        MusicEntity other = (MusicEntity) obj;
         return Objects.equals(this.name, other.name) &&
                 Objects.equals(this.theme, other.theme) &&
                 Objects.equals(this.connectionMode, other.connectionMode);

@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.AbstractPowerMockTest;
 import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.spotify.SpotifyException;
@@ -108,13 +108,13 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         musicService = Mockito.spy( new MusicService(dao, spotifyService, configProperties) );
         MockitoAnnotations.initMocks(musicService);
-        Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicDTO.class));
+        Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicEntity.class));
         
-        MusicDTO musicMock = new MusicDTO();
+        MusicEntity musicMock = new MusicEntity();
         Mockito.when(dao.findByNameAndThemeAndConnectionMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
         
         musicService.refresh();
-        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicDTO.class));
+        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicEntity.class));
     }
     
     @Test
@@ -136,23 +136,23 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         musicService = Mockito.spy( new MusicService(dao, spotifyService, configProperties) );
         MockitoAnnotations.initMocks(musicService);
         
-        MusicDTO musicDtoMock = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
-        musicDtoMock.setId(1);
-        Mockito.doReturn(null).doReturn(musicDtoMock).doReturn(null).when(musicService).find(Mockito.any(MusicDTO.class));
-        Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(musicDtoMock);
+        MusicEntity musicMock = new MusicEntity(name, theme, ConnectionMode.OFFLINE);
+        musicMock.setId(1);
+        Mockito.doReturn(null).doReturn(musicMock).doReturn(null).when(musicService).find(Mockito.any(MusicEntity.class));
+        Mockito.when(dao.save(Mockito.any(MusicEntity.class))).thenReturn(musicMock);
         
-        MusicDTO musicDto = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
-        Assert.assertSame( musicDtoMock, musicService.save(musicDto) );
+        MusicEntity music = new MusicEntity(name, theme, ConnectionMode.OFFLINE);
+        Assert.assertSame(musicMock, musicService.save(music) );
         
         try {
-            musicService.save(musicDto);
+            musicService.save(music);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
             TestUtils.verifyException(new ConflictException("music already exists."), e);
         }
         
-        MusicDTO musicSaved = musicService.save(musicDto);
+        MusicEntity musicSaved = musicService.save(music);
         Assert.assertEquals( Integer.valueOf(1), musicSaved.getId() );
         Assert.assertEquals( name, musicSaved.getName() );
         Assert.assertEquals( theme, musicSaved.getTheme() );
@@ -175,7 +175,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         
-        MusicDTO music = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
+        MusicEntity music = new MusicEntity(name, theme, ConnectionMode.OFFLINE);
         try {
             musicService.update(music);
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
@@ -185,13 +185,13 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         
-        MusicDTO musicStatMockNotSame = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
+        MusicEntity musicStatMockNotSame = new MusicEntity(name, theme, ConnectionMode.OFFLINE);
         musicStatMockNotSame.setId(2);
-        MusicDTO musicStatMockSame = new MusicDTO(name, theme, ConnectionMode.OFFLINE);
+        MusicEntity musicStatMockSame = new MusicEntity(name, theme, ConnectionMode.OFFLINE);
         musicStatMockSame.setId(1);
         Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(musicStatMockNotSame),
                 Optional.of(musicStatMockNotSame), Optional.of(musicStatMockSame));
-        Mockito.when(dao.save(Mockito.any(MusicDTO.class))).thenReturn(music);
+        Mockito.when(dao.save(Mockito.any(MusicEntity.class))).thenReturn(music);
         
         try {
             music.setId(1);
@@ -203,15 +203,15 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         music.setId(1);
-        MusicDTO musicDtoSaved = musicService.update(music);
-        Assert.assertEquals( Integer.valueOf(1), musicDtoSaved.getId() );
-        Assert.assertEquals( "name", musicDtoSaved.getName() );
+        MusicEntity musicSaved = musicService.update(music);
+        Assert.assertEquals( Integer.valueOf(1), musicSaved.getId() );
+        Assert.assertEquals( "name", musicSaved.getName() );
     }
     
     @Test
     public void find() {
         
-        MusicDTO musicMock = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicEntity musicMock = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
         Mockito.when(dao.findByNameAndThemeAndConnectionMode(Mockito.anyString(), Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
         
         
@@ -223,20 +223,20 @@ public class MusicServiceTest extends AbstractPowerMockTest {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
         }
         
-        MusicDTO musicDto = new MusicDTO("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
-        Assert.assertNull( musicService.find(musicDto) );
-        Assert.assertNotNull( musicService.find(musicDto) );
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        Assert.assertNull( musicService.find(music) );
+        Assert.assertNotNull( musicService.find(music) );
     }
     
     @SuppressWarnings("unchecked")
     @Test
     public void random() throws Exception {
         
-        MusicDTO expected = new MusicDTO("60_a", Theme.ANNEES_60, ConnectionMode.OFFLINE);
+        MusicEntity expected = new MusicEntity("60_a", Theme.ANNEES_60, ConnectionMode.OFFLINE);
         
-        List<MusicDTO> allMusics = new ArrayList<>();
+        List<MusicEntity> allMusics = new ArrayList<>();
         allMusics.add(expected);
-        allMusics.add( new MusicDTO("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE) );
+        allMusics.add( new MusicEntity("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE) );
         
         try {
             musicService.random(null, null, ConnectionMode.OFFLINE);
@@ -255,8 +255,8 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         
-        MusicDTO expected2 = new MusicDTO("60_a", Theme.ANNEES_60, ConnectionMode.OFFLINE);
-        expected = new MusicDTO("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE);
+        MusicEntity expected2 = new MusicEntity("60_a", Theme.ANNEES_60, ConnectionMode.OFFLINE);
+        expected = new MusicEntity("70_a", Theme.ANNEES_70, ConnectionMode.OFFLINE);
         
         allMusics = new ArrayList<>();
         allMusics.add(expected2);
@@ -265,13 +265,13 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         
         musicService = PowerMockito.spy( new MusicService(dao, spotifyService, configProperties) );
-        PowerMockito.doReturn(true).when(musicService, "offlineMusicExists", Mockito.any(MusicDTO.class));
-        PowerMockito.doReturn(true).when(musicService, "onlineMusicExists", Mockito.any(MusicDTO.class));
+        PowerMockito.doReturn(true).when(musicService, "offlineMusicExists", Mockito.any(MusicEntity.class));
+        PowerMockito.doReturn(true).when(musicService, "onlineMusicExists", Mockito.any(MusicEntity.class));
         
         Flux fluxMock = Mockito.mock(Flux.class);
         PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
         
-        MusicDTO music = musicService.random(null, null, ConnectionMode.OFFLINE);
+        MusicEntity music = musicService.random(null, null, ConnectionMode.OFFLINE);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
         music = musicService.random(Collections.singletonList(Theme.ANNEES_70), null, ConnectionMode.OFFLINE);
@@ -279,7 +279,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         
         
-        expected = new MusicDTO("70_a", Theme.ANNEES_70, ConnectionMode.ONLINE);
+        expected = new MusicEntity("70_a", Theme.ANNEES_70, ConnectionMode.ONLINE);
         allMusics = new ArrayList<>();
         allMusics.add(expected);
         
@@ -302,10 +302,10 @@ public class MusicServiceTest extends AbstractPowerMockTest {
     }
     
     @Test
-    public void checkDTO() {
+    public void checkEntity() {
         
         try {
-            musicService.checkDTO(null);
+            musicService.checkEntity(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -313,7 +313,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
         
         try {
-            musicService.checkDTO(new MusicDTO());
+            musicService.checkEntity(new MusicEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -321,7 +321,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
     
         try {
-            musicService.checkDTO(new MusicDTO("name", null, null));
+            musicService.checkEntity(new MusicEntity("name", null, null));
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -329,14 +329,14 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         }
     
         try {
-            musicService.checkDTO(new MusicDTO("name", Theme.ANNEES_60, null));
+            musicService.checkEntity(new MusicEntity("name", Theme.ANNEES_60, null));
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> connectionMode' est obligatoire."), e);
         }
         
-        musicService.checkDTO(new MusicDTO("name", Theme.ANNEES_60, ConnectionMode.OFFLINE));
+        musicService.checkEntity(new MusicEntity("name", Theme.ANNEES_60, ConnectionMode.OFFLINE));
     }
     
 }

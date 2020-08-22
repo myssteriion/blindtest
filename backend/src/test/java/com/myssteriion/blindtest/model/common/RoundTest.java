@@ -6,7 +6,7 @@ import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
 import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.Player;
 import org.junit.Assert;
@@ -36,8 +36,8 @@ public class RoundTest extends AbstractTest {
     public void createRoundContent(){
         
         List<Player> players = Arrays.asList(
-                new Player(new ProfileDTO().setName("name")),
-                new Player(new ProfileDTO().setName("name2")));
+                new Player(new ProfileEntity().setName("name")),
+                new Player(new ProfileEntity().setName("name2")));
         Duration duration = Duration.NORMAL;
         
         Game game = new Game(players, duration, null, null, ConnectionMode.OFFLINE, roundContentProperties);

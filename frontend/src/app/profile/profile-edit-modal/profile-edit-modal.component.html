@@ -29,7 +29,7 @@
 		<!-- avatar -->
 		<div class="row profile-edit-avatar">
 			<div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.AVATAR_LABEL' | translate }}</div>
-			<div class="col-8"><img src="{{ getCurrentFluxForImg() }}"/></div>
+			<div class="col-8"><img src="{{ getImgFromAvatar(newProfile.avatar) }}"/></div>
 		</div>
 		
 		<!-- avatars page -->
@@ -50,7 +50,7 @@
 			
 			<!-- avatars page -->
 			<div class="row justify-content-center profile-edit-avatars">
-				<img *ngFor="let avatar of avatarsPage.content" src="{{ getFluxForImg(avatar) }}" (click)="selectAvatar(avatar)"/>
+				<img *ngFor="let avatar of avatarsPage.content" src="{{ getImgFromAvatar(avatar) }}" (click)="selectAvatar(avatar)"/>
 			</div>
 		</div>
 	

@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.ProfileDTO;
+import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.utils.CommonUtils;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Player {
     /**
      * The profile.
      */
-    private ProfileDTO profile;
+    private ProfileEntity profile;
     
     /**
      * The current score.
@@ -62,7 +62,7 @@ public class Player {
      *
      * @param profile the profile
      */
-    public Player(ProfileDTO profile) {
+    public Player(ProfileEntity profile) {
         
         CommonUtils.verifyValue("profile", profile);
         
@@ -82,7 +82,7 @@ public class Player {
      *
      * @return the profile
      */
-    public ProfileDTO getProfile() {
+    public ProfileEntity getProfile() {
         return profile;
     }
     
@@ -92,7 +92,7 @@ public class Player {
      * @param profile the profile
      * @return this
      */
-    public Player setProfile(ProfileDTO profile) {
+    public Player setProfile(ProfileEntity profile) {
         this.profile = profile;
         return this;
     }

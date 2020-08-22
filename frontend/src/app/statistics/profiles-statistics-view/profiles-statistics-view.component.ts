@@ -43,11 +43,11 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     /**
-     * Get flux for avatar image
+     * Get image from avatar.
      * @param profile
      */
-    private getFluxForImg(profile): string {
-        return ToolsService.getFluxForImg(profile.avatar.flux);
+    private getImgFromAvatar(profile): string {
+        return ToolsService.getImgFromAvatar(profile.avatar);
     }
 
     /**

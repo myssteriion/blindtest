@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.spotify;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.service.param.SpotifyParamService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class SpotifyServiceTest extends AbstractTest {
     @Before
     public void before() {
         
-        SpotifyParamDTO sParam = new SpotifyParamDTO()
+        SpotifyParamEntity sParam = new SpotifyParamEntity()
                 .setClientId("id")
                 .setClientSecret("secret")
                 .setPlaylistIds( new HashMap<>() );

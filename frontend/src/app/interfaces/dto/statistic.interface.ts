@@ -2,10 +2,9 @@
  * Statistic.
  */
 export interface Statistic {
-	id: number,
-	profileId: number,
 	playedGames: number,
+	bestScores: object,
+	wonGames: object,
 	listenedMusics: object,
-	foundMusics: object,
-	bestScores: object
+	foundMusics: object
 }

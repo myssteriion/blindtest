@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Flux} from '../interfaces/common/flux.interface';
 import {AVATAR_NOT_FOUND} from "./constant";
+import {Avatar} from "../interfaces/dto/avatar.interface";
+import {Music} from "../interfaces/dto/music.interface";
 
 /**
  * Tools service.
@@ -44,18 +45,6 @@ export class ToolsService {
 	}
 	
 	/**
-	 * Throw error if value is undefined or null.
-	 *
-	 * @param key   the key label
-	 * @param value the value
-	 */
-	public static verifyValue(key: string, value: any): void {
-		
-		if (!ToolsService.isNullOrEmpty(key) && ToolsService.isNull(value))
-			throw new Error("Le champ '" + key + "' est obligatoire.");
-	}
-	
-	/**
 	 * Throw error if value is undefined, null or empty.
 	 *
 	 * @param key   the key label
@@ -68,43 +57,36 @@ export class ToolsService {
 	}
 	
 	/**
-	 * Transform the flux in value for a 'img' tag. If the flux is empty, 'not-found' image is used.
+	 * Get the 'image' from avatar. If the avatar is null, 'not-found' image is used.
 	 *
-	 * @param flux the flux
+	 * @param avatar the avatar
 	 */
-	public static getFluxForImg(flux: Flux): string {
+	public static getImgFromAvatar(avatar: Avatar): string {
 		
-		this.verifyValue("flux", flux);
+		if (ToolsService.isNull(avatar) || ToolsService.isNull(avatar.flux) || !avatar.flux.fileExists)
+			return AVATAR_NOT_FOUND;
 		
 		let imageSrc: string;
-		
-		if (flux.fileExists) {
+		imageSrc = ToolsService.DATA;
+		imageSrc += avatar.flux.contentType;
+		imageSrc += ToolsService.BASE64;
+		imageSrc += avatar.flux.contentFlux;
 			
-			imageSrc = ToolsService.DATA;
-			imageSrc += flux.contentType;
-			imageSrc += ToolsService.BASE64;
-			imageSrc += flux.contentFlux;
-		} else {
-			imageSrc = AVATAR_NOT_FOUND;
-		}
-		
 		return imageSrc;
 	}
 	
 	/**
-	 * Transform the flux in value for a 'audio'.
+	 * Get the 'audio' from music.
 	 *
-	 * @param flux the flux
+	 * @param music the music
 	 */
-	public static getFluxForAudio(flux: Flux): string {
-		
-		this.verifyValue("flux", flux);
+	public static getAudioFromMusic(music: Music): string {
 		
 		let audioSrc: string;
 		audioSrc = ToolsService.DATA;
-		audioSrc += flux.contentType;
+		audioSrc += music.flux.contentType;
 		audioSrc += ToolsService.BASE64;
-		audioSrc += flux.contentFlux;
+		audioSrc += music.flux.contentFlux;
 		
 		return audioSrc;
 	}

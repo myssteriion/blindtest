@@ -47,10 +47,10 @@ public class Flux {
             throw new IllegalArgumentException("Le champ 'file' est obligatoire.");
         
         this.name = file.getName();
-        fileExists = file.exists() && file.isFile();
+        this.fileExists = file.exists() && file.isFile();
         
-        if (fileExists) {
-            this.contentFlux = Files.readAllBytes(file.toPath());
+        if (this.fileExists) {
+            this.contentFlux = Files.readAllBytes( file.toPath() );
             this.contentType = determinateContentType(file);
         }
     }

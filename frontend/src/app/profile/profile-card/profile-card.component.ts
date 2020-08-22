@@ -20,7 +20,7 @@ import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-mod
 	templateUrl: './profile-card.component.html',
 	styleUrls: ['./profile-card.component.css']
 })
-export class ProfileCardComponent implements OnInit {
+export class ProfileCardComponent {
 	
 	/**
 	 * The profile.
@@ -77,22 +77,13 @@ export class ProfileCardComponent implements OnInit {
 		
 	}
 	
-	ngOnInit(): void {
-		
-		ToolsService.verifyValue("profile", this.profile);
-		ToolsService.verifyValue("profile.avatar", this.profile.avatar);
-		ToolsService.verifyValue("canUpdate", this.canEdit);
-		ToolsService.verifyValue("canSelect", this.canSelect);
-		ToolsService.verifyValue("canDeselect", this.canDeselect);
-	}
-	
 	
 	
 	/**
-	 * Gets the avatar flux.
+	 * Get image from avatar.
 	 */
-	public getFluxForImg(): string {
-		return ToolsService.getFluxForImg(this.profile.avatar.flux);
+	public getImgFromAvatar(): string {
+		return ToolsService.getImgFromAvatar(this.profile.avatar);
 	}
 	
 	/**

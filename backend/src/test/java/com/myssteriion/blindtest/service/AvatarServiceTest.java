@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractPowerMockTest;
 import com.myssteriion.blindtest.model.common.Flux;
-import com.myssteriion.blindtest.model.dto.AvatarDTO;
+import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
@@ -56,17 +56,17 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         PowerMockito.when(CommonUtils.hadImageExtension(Mockito.anyString())).thenReturn(true);
         
         
-        Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarDTO.class));
+        Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarEntity.class));
         
-        AvatarDTO avatarMock = new AvatarDTO();
+        AvatarEntity avatarMock = new AvatarEntity();
         Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarMock));
         
         avatarService.refresh();
-        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarDTO.class));
+        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarEntity.class));
     }
     
     @Test
-    public void needRefresh() {
+    public void needRefresh() throws Exception {
         
         File mockFile = Mockito.mock(File.class);
         
@@ -77,14 +77,14 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
-        AvatarDTO avatarMock = Mockito.mock(AvatarDTO.class);
+        AvatarEntity avatarMock = Mockito.mock(AvatarEntity.class);
         Mockito.when(avatarMock.getFlux()).thenReturn(fluxMock);
         
-        Page<AvatarDTO> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
+        Page<AvatarEntity> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
         Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn(pageMock);
         
-        avatarService = Mockito.spy( new AvatarService(dao, configProperties));
-        Mockito.doNothing().when(avatarService).createAvatarFlux(Mockito.any(AvatarDTO.class));
+        avatarService = PowerMockito.spy( new AvatarService(dao, configProperties));
+        PowerMockito.doNothing().when(avatarService, "createFlux", Mockito.any(AvatarEntity.class));
         
         Assert.assertTrue( avatarService.needRefresh() );
         Assert.assertTrue( avatarService.needRefresh() );
@@ -105,7 +105,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         try {
-            avatarService.save(new AvatarDTO());
+            avatarService.save(new AvatarEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -113,25 +113,25 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         
-        AvatarDTO avatarDtoMock = new AvatarDTO(name);
-        avatarDtoMock.setId(1);
-        Mockito.doReturn(null).doReturn(avatarDtoMock).doReturn(null).when(avatarService).find(Mockito.any(AvatarDTO.class));
-        Mockito.when(dao.save(Mockito.any(AvatarDTO.class))).thenReturn(avatarDtoMock);
+        AvatarEntity avatarMock = new AvatarEntity(name);
+        avatarMock.setId(1);
+        Mockito.doReturn(null).doReturn(avatarMock).doReturn(null).when(avatarService).find(Mockito.any(AvatarEntity.class));
+        Mockito.when(dao.save(Mockito.any(AvatarEntity.class))).thenReturn(avatarMock);
         
-        AvatarDTO avatarDto = new AvatarDTO(name);
-        Assert.assertSame( avatarDtoMock, avatarService.save(avatarDto) );
+        AvatarEntity avatar = new AvatarEntity(name);
+        Assert.assertSame(avatarMock, avatarService.save(avatar) );
         
         try {
-            avatarService.save(avatarDto);
+            avatarService.save(avatar);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (ConflictException e) {
             TestUtils.verifyException(new ConflictException("avatar already exists."), e);
         }
         
-        AvatarDTO avatarDtoSaved = avatarService.save(avatarDto);
-        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
-        Assert.assertEquals( name, avatarDtoSaved.getName() );
+        AvatarEntity avatarSaved = avatarService.save(avatar);
+        Assert.assertEquals( Integer.valueOf(1), avatarSaved.getId() );
+        Assert.assertEquals( name, avatarSaved.getName() );
     }
     
     @Test
@@ -148,7 +148,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         try {
-            avatarService.update(new AvatarDTO());
+            avatarService.update(new AvatarEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -156,9 +156,9 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         
-        AvatarDTO avatarDto = new AvatarDTO(name);
+        AvatarEntity avatar = new AvatarEntity(name);
         try {
-            avatarService.update(avatarDto);
+            avatarService.update(avatar);
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -166,35 +166,35 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         
-        AvatarDTO avatarStatDtoMockNotSame = new AvatarDTO(name);
-        avatarStatDtoMockNotSame.setId(2);
-        AvatarDTO avatarStatDtoMockSame = new AvatarDTO(name);
-        avatarStatDtoMockSame.setId(1);
-        Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(avatarStatDtoMockNotSame),
-                Optional.of(avatarStatDtoMockNotSame), Optional.of(avatarStatDtoMockSame));
-        Mockito.when(dao.save(Mockito.any(AvatarDTO.class))).thenReturn(avatarDto);
+        AvatarEntity avatarStatMockNotSame = new AvatarEntity(name);
+        avatarStatMockNotSame.setId(2);
+        AvatarEntity avatarStatMockSame = new AvatarEntity(name);
+        avatarStatMockSame.setId(1);
+        Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.empty(), Optional.of(avatarStatMockNotSame),
+                Optional.of(avatarStatMockNotSame), Optional.of(avatarStatMockSame));
+        Mockito.when(dao.save(Mockito.any(AvatarEntity.class))).thenReturn(avatar);
         
         try {
-            avatarDto.setId(1);
-            avatarService.update(avatarDto);
+            avatar.setId(1);
+            avatarService.update(avatar);
             Assert.fail("Doit lever une DaoException car le mock throw.");
         }
         catch (NotFoundException e) {
             TestUtils.verifyException(new NotFoundException("avatar not found."), e);
         }
         
-        avatarDto.setId(1);
-        AvatarDTO avatarDtoSaved = avatarService.update(avatarDto);
-        Assert.assertEquals( Integer.valueOf(1), avatarDtoSaved.getId() );
-        Assert.assertEquals( "name", avatarDtoSaved.getName() );
+        avatar.setId(1);
+        AvatarEntity avatarSaved = avatarService.update(avatar);
+        Assert.assertEquals( Integer.valueOf(1), avatarSaved.getId() );
+        Assert.assertEquals( "name", avatarSaved.getName() );
     }
     
     @Test
     public void find() {
         
-        AvatarDTO avatarDtoMock = new AvatarDTO("name");
-        Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarDtoMock));
-        Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.of(avatarDtoMock));
+        AvatarEntity avatarMock = new AvatarEntity("name");
+        Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarMock));
+        Mockito.when(dao.findById(Mockito.anyInt())).thenReturn(Optional.of(avatarMock));
         
         try {
             avatarService.find(null);
@@ -205,7 +205,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         try {
-            avatarService.find(new AvatarDTO());
+            avatarService.find(new AvatarEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -213,62 +213,46 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         }
         
         
-        AvatarDTO avatarDto = new AvatarDTO("name");
-        Assert.assertNull( avatarService.find(avatarDto) );
-        Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
+        AvatarEntity avatar = new AvatarEntity("name");
+        Assert.assertNull( avatarService.find(avatar) );
+        Assert.assertEquals(avatarMock, avatarService.find(avatar) );
         Mockito.verify(dao, Mockito.times(2)).findByName(Mockito.anyString());
         
-        avatarDto = new AvatarDTO().setId(1);
-        Assert.assertEquals( avatarDtoMock, avatarService.find(avatarDto) );
+        avatar = new AvatarEntity().setId(1);
+        Assert.assertEquals(avatarMock, avatarService.find(avatar) );
         Mockito.verify(dao, Mockito.times(1)).findById(Mockito.anyInt());
     }
     
     @Test
     public void findAllBySearchName() {
         
-        AvatarDTO avatarDto = new AvatarDTO("name");
-        Mockito.when(dao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatarDto)));
+        AvatarEntity avatar = new AvatarEntity("name");
+        Mockito.when(dao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatar)));
         
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllBySearchName(null, 0, 1) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatarDto)), avatarService.findAllBySearchName("", 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllBySearchName(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllBySearchName("", 0, 1) );
     }
     
     @Test
-    public void createFlux() {
+    public void checkEntity() {
         
         try {
-            avatarService.createAvatarFlux(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
-        }
-        
-        AvatarDTO avatarDtoMock = new AvatarDTO("name");
-        avatarService.createAvatarFlux(avatarDtoMock);
-        Assert.assertNotNull( avatarDtoMock.getFlux() );
-    }
-    
-    @Test
-    public void checkDTO() {
-    
-        try {
-            avatarService.checkDTO(null);
+            avatarService.checkEntity(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar' est obligatoire."), e);
         }
-    
+        
         try {
-            avatarService.checkDTO(new AvatarDTO());
+            avatarService.checkEntity(new AvatarEntity());
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'avatar -> name' est obligatoire."), e);
         }
         
-        avatarService.checkDTO(new AvatarDTO("name"));
+        avatarService.checkEntity(new AvatarEntity("name"));
     }
     
 }

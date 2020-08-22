@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.dto;
+package com.myssteriion.blindtest.model.entity;
 
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
@@ -6,48 +6,42 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.duration.DurationIntegerMapConverter;
 import com.myssteriion.blindtest.persistence.converter.theme.ThemeGoodAnswerIntegerMapConverter;
 import com.myssteriion.blindtest.persistence.converter.theme.ThemeIntegerMapConverter;
+import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.model.dto.AbstractDTO;
+import com.myssteriion.utils.model.entity.AbstractEntity;
 import com.myssteriion.utils.persistence.converter.impl.StringIntegerMapConverter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
- * The ProfileStatDTO.
+ * The ProfileStat.
  */
 @Entity
-@Table(name = "profile_stat", uniqueConstraints={ @UniqueConstraint(name = "profile_stat__profile_id__unique", columnNames={"profile_id"}) })
+@Table(name = "profile_stat")
 @SequenceGenerator(name = "sequence_id", sequenceName = "profile_stat_sequence", allocationSize = 1)
-public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
-    
-    /**
-     * The profileId.
-     */
-    @Column(name = "profile_id", nullable = false)
-    private Integer profileId;
+public class ProfileStatEntity extends AbstractEntity<ProfileStatEntity> {
     
     /**
      * The number of game played.
      */
-    @Column(name = "played_games", nullable = false, length = 500)
+    @Column(name = "played_games", nullable = false, length = 1000)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = DurationIntegerMapConverter.class)
-//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> playedGames;
     
     /**
      * The bests scores by durations.
      */
-    @Column(name = "best_scores", nullable = false, length = 500)
+    @Column(name = "best_scores", nullable = false, length = 1000)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = DurationIntegerMapConverter.class)
-//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Duration, Integer> bestScores;
     
     /**
@@ -56,71 +50,36 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
     /*
      * La clé est un String car en JSON ca ne peut pas être un Integer -> mais ca reste parsable.
      */
-    @Column(name = "won_games", nullable = false, length = 500)
+    @Column(name = "won_games", nullable = false, length = 1000)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = StringIntegerMapConverter.class)
-//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<String, Integer> wonGames;
     
     /**
      * The number of listened musics by themes.
      */
-    @Column(name = "listened_musics", nullable = false, length = 500)
+    @Column(name = "listened_musics", nullable = false, length = 1000)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = ThemeIntegerMapConverter.class)
-//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map<Theme, Integer> listenedMusics;
     
     /**
      * The number of found musics by themes by WinMode.
      */
     @Column(name = "found_musics", nullable = false, length = 1000)
+    @ColumnDefault(CommonConstant.EMPTY_JSON_WITH_QUOTE)
     @Convert(converter = ThemeGoodAnswerIntegerMapConverter.class)
-//    @ColumnDefault(CommonConstant.EMPTY_JSON)
     private Map< Theme, Map<GoodAnswer, Integer> > foundMusics;
     
     
     
     /**
-     * Instantiates a new Profile stat dto.
+     * Instantiates a new ProfileStatEntity.
      */
-    public ProfileStatDTO() {
-    }
-    
-    /**
-     * Instantiates a new Profile stat dto.
-     *
-     * @param profileId the profile id
-     */
-    public ProfileStatDTO(Integer profileId) {
-        
-        this.profileId = profileId;
-        this.playedGames = new HashMap<>();
-        this.bestScores = new HashMap<>();
-        this.wonGames = new HashMap<>();
-        this.listenedMusics = new HashMap<>();
-        this.foundMusics = new HashMap<>();
+    public ProfileStatEntity() {
     }
     
     
-    
-    /**
-     * Gets profile id.
-     *
-     * @return the profile id
-     */
-    public Integer getProfileId() {
-        return profileId;
-    }
-    
-    /**
-     * Sets profile id.
-     *
-     * @param profileId the profile id
-     * @return this
-     */
-    public ProfileStatDTO setProfileId(Integer profileId) {
-        this.profileId = profileId;
-        return this;
-    }
     
     /**
      * Gets played games.
@@ -137,7 +96,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      * @param playedGames the played games
      * @return this
      */
-    public ProfileStatDTO setPlayedGames(Map<Duration, Integer> playedGames) {
+    public ProfileStatEntity setPlayedGames(Map<Duration, Integer> playedGames) {
         this.playedGames = playedGames;
         return this;
     }
@@ -157,7 +116,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      * @param bestScores the best scores
      * @return this
      */
-    public ProfileStatDTO setBestScores(Map<Duration, Integer> bestScores) {
+    public ProfileStatEntity setBestScores(Map<Duration, Integer> bestScores) {
         this.bestScores = bestScores;
         return this;
     }
@@ -177,7 +136,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      * @param wonGames the wonGames
      * @return this
      */
-    public ProfileStatDTO setWonGames(Map<String, Integer> wonGames) {
+    public ProfileStatEntity setWonGames(Map<String, Integer> wonGames) {
         this.wonGames = wonGames;
         return this;
     }
@@ -197,7 +156,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      * @param listenedMusics the listened musics
      * @return this
      */
-    public ProfileStatDTO setListenedMusics(Map<Theme, Integer> listenedMusics) {
+    public ProfileStatEntity setListenedMusics(Map<Theme, Integer> listenedMusics) {
         this.listenedMusics = listenedMusics;
         return this;
     }
@@ -217,7 +176,7 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
      * @param foundMusics the found musics
      * @return this
      */
-    public ProfileStatDTO setFoundMusics(Map< Theme, Map<GoodAnswer, Integer> > foundMusics) {
+    public ProfileStatEntity setFoundMusics(Map< Theme, Map<GoodAnswer, Integer> > foundMusics) {
         this.foundMusics = foundMusics;
         return this;
     }
@@ -322,27 +281,8 @@ public class ProfileStatDTO extends AbstractDTO<ProfileStatDTO> {
     
     
     @Override
-    public int hashCode() {
-        return Objects.hash(profileId);
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        
-        if (this == obj)
-            return true;
-        
-        if(obj == null || obj.getClass()!= this.getClass())
-            return false;
-        
-        ProfileStatDTO other = (ProfileStatDTO) obj;
-        return Objects.equals(this.profileId, other.profileId);
-    }
-    
-    @Override
     public String toString() {
         return super.toString() +
-                ", profileId=" + profileId +
                 ", playedGames=" + playedGames +
                 ", bestScores=" + bestScores +
                 ", wonGames=" + wonGames +

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller for GameDTO.
+ * Controller for game.
  */
 @RestController
 @RequestMapping(path = "games")
@@ -47,8 +47,8 @@ public class GameController {
     /**
      * Initialize the new game.
      *
-     * @param newGame the NewGameDTO
-     * @return a GameDTO
+     * @param newGame the newGame
+     * @return a game
      * @throws NotFoundException NotFound exception
      */
     @PostMapping
@@ -61,8 +61,8 @@ public class GameController {
     /**
      * Apply the result on the game.
      *
-     * @param musicResult the MusicResultDTO
-     * @return the GameDTO after apply
+     * @param musicResult the musicResult
+     * @return the game after apply
      * @throws NotFoundException NotFound exception
      * @throws ConflictException the conflict exception
      */
@@ -77,7 +77,7 @@ public class GameController {
      * Gets the game by id.
      *
      * @param id the id
-     * @return a GameDTO
+     * @return a game
      * @throws NotFoundException NotFound exception
      */
     @GetMapping(path = CommonConstant.ID_PATH_PARAM)

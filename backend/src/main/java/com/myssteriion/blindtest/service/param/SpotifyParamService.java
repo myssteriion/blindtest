@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.service.param;
 
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.param.SpotifyParamDTO;
+import com.myssteriion.blindtest.model.entity.param.SpotifyParamEntity;
 import com.myssteriion.blindtest.persistence.dao.SpotifyParamDAO;
 import com.myssteriion.utils.cipher.StringCipher;
 import com.myssteriion.utils.exception.ConflictException;
@@ -14,10 +14,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Service for SpotifyParamDTO.
+ * Service for SpotifyParam.
  */
 @Service
-public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, SpotifyParamDAO> {
+public class SpotifyParamService extends AbstractCRUDService<SpotifyParamEntity, SpotifyParamDAO> {
     
     /**
      * The stringCipher.
@@ -41,19 +41,19 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
     
     
     @Override
-    public SpotifyParamDTO update(SpotifyParamDTO dto) throws NotFoundException, ConflictException {
+    public SpotifyParamEntity update(SpotifyParamEntity entity) throws NotFoundException, ConflictException {
         
-        checkDTO(dto);
-        dto.setId(null);
+        checkEntity(entity);
+        entity.setId(null);
         
         /*
          * le paramétrage est unique
          * peut importe le IN on récupère d'abord le seul de la DB pour ensuite le mettre à jour
          */
-        SpotifyParamDTO paramInDb = find();
-        dto.setId( paramInDb.getId() );
+        SpotifyParamEntity paramInDb = find();
+        entity.setId( paramInDb.getId() );
         
-        return decrypt( super.update(encrypt(dto)) );
+        return decrypt( super.update(encrypt(entity)) );
     }
     
     /**
@@ -61,25 +61,25 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
      *
      * @return the SpotifyParam
      */
-    public SpotifyParamDTO find() {
+    public SpotifyParamEntity find() {
         return find(null);
     }
     
     @Override
-    public SpotifyParamDTO find(SpotifyParamDTO dto) {
+    public SpotifyParamEntity find(SpotifyParamEntity entity) {
         
         /*
          * le paramétrage est unique
          * peu importe le IN, on récupère le seul de la DB
          */
-        Iterator<SpotifyParamDTO> ite = dao.findAll().iterator();
-        return ( ite.hasNext() ) ? decrypt(ite.next()) : decrypt( dao.save( encrypt(new SpotifyParamDTO()) ) );
+        Iterator<SpotifyParamEntity> ite = dao.findAll().iterator();
+        return ( ite.hasNext() ) ? decrypt(ite.next()) : decrypt( dao.save( encrypt(new SpotifyParamEntity()) ) );
     }
     
     
-    private SpotifyParamDTO encrypt(SpotifyParamDTO spotifyParam) {
+    private SpotifyParamEntity encrypt(SpotifyParamEntity spotifyParam) {
         
-        SpotifyParamDTO spotifyParamEncrypted = new SpotifyParamDTO();
+        SpotifyParamEntity spotifyParamEncrypted = new SpotifyParamEntity();
         spotifyParamEncrypted.setId( spotifyParam.getId() );
         
         spotifyParamEncrypted.setClientId( stringCipher.encrypt(spotifyParam.getClientId()) );
@@ -92,9 +92,9 @@ public class SpotifyParamService extends AbstractCRUDService<SpotifyParamDTO, Sp
         return spotifyParamEncrypted;
     }
     
-    private SpotifyParamDTO decrypt(SpotifyParamDTO spotifyParam) {
+    private SpotifyParamEntity decrypt(SpotifyParamEntity spotifyParam) {
         
-        SpotifyParamDTO spotifyParamDecrypted = new SpotifyParamDTO();
+        SpotifyParamEntity spotifyParamDecrypted = new SpotifyParamEntity();
         spotifyParamDecrypted.setId( spotifyParam.getId() );
         
         spotifyParamDecrypted.setClientId( stringCipher.decrypt(spotifyParam.getClientId()) );

@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.dto.MusicDTO;
+import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -32,10 +32,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Service for MusicDTO.
+ * Service for music.
  */
 @Service
-public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
+public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     
     /**
      * The constant LOGGER.
@@ -96,7 +96,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
                 onlineInit(theme);
         }
         
-        for ( MusicDTO music : dao.findAll() ) {
+        for ( MusicEntity music : dao.findAll() ) {
             
             if ( (onlineMode && music.getConnectionMode() == ConnectionMode.ONLINE && !onlineMusicExists(music))
                     || (music.getConnectionMode() == ConnectionMode.OFFLINE && !offlineMusicExists(music)) ) {
@@ -119,10 +119,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         File themeDirectory = path.toFile();
         for ( File file : CommonUtils.getChildren(themeDirectory) ) {
             
-            MusicDTO musicDto = new MusicDTO().setName( file.getName() ).setTheme(theme).setConnectionMode(ConnectionMode.OFFLINE);
-            Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
+            MusicEntity music = new MusicEntity().setName( file.getName() ).setTheme(theme).setConnectionMode(ConnectionMode.OFFLINE);
+            Optional<MusicEntity> optionalMusic = dao.findByNameAndThemeAndConnectionMode( music.getName(), music.getTheme(), music.getConnectionMode() );
             if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
-                dao.save(musicDto);
+                dao.save(music);
         }
     }
     
@@ -132,7 +132,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param music the music
      * @return TRUE if the music match with an existing file, FALSE otherwise
      */
-    private boolean offlineMusicExists(MusicDTO music) {
+    private boolean offlineMusicExists(MusicEntity music) {
         return Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName()).toFile().exists();
     }
     
@@ -149,10 +149,10 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
             for (SpotifyMusic spotifyMusic : spotifyMusics) {
                 
                 String musicName = spotifyMusic.getArtists() + CommonConstant.HYPHEN_WITH_SPACE + spotifyMusic.getName();
-                MusicDTO musicDto = new MusicDTO( musicName, theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
-                Optional<MusicDTO> optionalMusic = dao.findByNameAndThemeAndConnectionMode( musicDto.getName(), musicDto.getTheme(), musicDto.getConnectionMode() );
+                MusicEntity music = new MusicEntity( musicName, theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
+                Optional<MusicEntity> optionalMusic = dao.findByNameAndThemeAndConnectionMode( music.getName(), music.getTheme(), music.getConnectionMode() );
                 if ( !optionalMusic.isPresent() )
-                    dao.save(musicDto);
+                    dao.save(music);
             }
         }
         catch (SpotifyException e) {
@@ -166,7 +166,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param music the music
      * @return TRUE if the music match with an existing file OR the connection is KO, OR the test is KO, FALSE otherwise
      */
-    private boolean onlineMusicExists(MusicDTO music) {
+    private boolean onlineMusicExists(MusicEntity music) {
         
         boolean exists;
         
@@ -191,16 +191,16 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     
     
     @Override
-    public MusicDTO find(MusicDTO dto) {
-    
-        super.checkDTO(dto);
+    public MusicEntity find(MusicEntity entity) {
         
-        if ( CommonUtils.isNullOrEmpty(dto.getId()) ) {
-            checkDTO(dto);
-            return dao.findByNameAndThemeAndConnectionMode(dto.getName(), dto.getTheme(), dto.getConnectionMode()).orElse(null);
+        super.checkEntity(entity);
+        
+        if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
+            checkEntity(entity);
+            return dao.findByNameAndThemeAndConnectionMode(entity.getName(), entity.getTheme(), entity.getConnectionMode()).orElse(null);
         }
         else
-            return super.find(dto);
+            return super.find(entity);
     }
     
     
@@ -249,18 +249,18 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param themes     	    the themes filter (optional)
      * @param effects     	    the effects filter (optional)
      * @param connectionMode    the connection mode
-     * @return the music dto
+     * @return the music
      * @throws NotFoundException the not found exception
      * @throws IOException       the io exception
      */
-    public MusicDTO random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
+    public MusicEntity random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
         
         CommonUtils.verifyValue("connectionMode", connectionMode);
         
         List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
         List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
         
-        List<MusicDTO> allMusics = new ArrayList<>( dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes) );
+        List<MusicEntity> allMusics = new ArrayList<>( dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes) );
         
         if ( CommonUtils.isNullOrEmpty(allMusics) )
             throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
@@ -269,7 +269,7 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
         double ratio = 100 / (coefficients.stream().mapToDouble(Double::doubleValue).sum());
         List<Double> cumulativePercent = computeCumulativePercentByCoefficients(coefficients, ratio);
         Theme foundTheme = foundThemeByCumulativePercent(cumulativePercent);
-        MusicDTO music = foundMusic(allMusics, foundTheme);
+        MusicEntity music = foundMusic(allMusics, foundTheme);
         
         if ( music.getConnectionMode().isNeedConnection() ) {
             spotifyService.testConnection();
@@ -292,18 +292,18 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param allMusics all musics
      * @return coefficients by themes
      */
-    private List<Double> computeCoefficients(List<MusicDTO> allMusics) {
+    private List<Double> computeCoefficients(List<MusicEntity> allMusics) {
         
         List<Double> coefficients = new ArrayList<>();
         
         for ( Theme theme : Theme.getSortedTheme() ) {
             
-            List<MusicDTO> allMusicsInTheme = allMusics.stream()
+            List<MusicEntity> allMusicsInTheme = allMusics.stream()
                     .filter(music -> music.getTheme() == theme)
                     .collect( Collectors.toList() );
             
             double nbMusics = allMusicsInTheme.size();
-            double nbPlayedSum = allMusicsInTheme.stream().mapToDouble(MusicDTO::getPlayed).sum();
+            double nbPlayedSum = allMusicsInTheme.stream().mapToDouble(MusicEntity::getPlayed).sum();
             nbPlayedSum = (nbPlayedSum == 0) ? 1 : nbPlayedSum;
             coefficients.add(nbMusics / nbPlayedSum);
         }
@@ -361,18 +361,18 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
      * @param theme     the theme
      * @return a music int the theme
      */
-    private MusicDTO foundMusic(List<MusicDTO> allMusics, Theme theme) {
+    private MusicEntity foundMusic(List<MusicEntity> allMusics, Theme theme) {
         
-        List<MusicDTO> allMusicsTheme = allMusics.stream()
+        List<MusicEntity> allMusicsTheme = allMusics.stream()
                 .filter(music -> music.getTheme() == theme)
                 .collect( Collectors.toList() );
         
         int min = allMusicsTheme.stream()
-                .mapToInt(MusicDTO::getPlayed)
+                .mapToInt(MusicEntity::getPlayed)
                 .min()
                 .getAsInt();
         
-        List<MusicDTO> potentialMusics = allMusicsTheme.stream()
+        List<MusicEntity> potentialMusics = allMusicsTheme.stream()
                 .filter(music -> music.getPlayed() == min)
                 .collect( Collectors.toList() );
         
@@ -392,12 +392,12 @@ public class MusicService extends AbstractCRUDService<MusicDTO, MusicDAO> {
     
     
     @Override
-    public void checkDTO(MusicDTO music) {
-    
-        super.checkDTO(music);
-        CommonUtils.verifyValue( formatMessage(CommonConstant.DTO_NAME), music.getName() );
-        CommonUtils.verifyValue(dtoName + " -> theme", music.getTheme() );
-        CommonUtils.verifyValue(dtoName + " -> connectionMode", music.getConnectionMode() );
+    public void checkEntity(MusicEntity music) {
+        
+        super.checkEntity(music);
+        CommonUtils.verifyValue( formatMessage(CommonConstant.ENTITY_NAME), music.getName() );
+        CommonUtils.verifyValue(entityName + " -> theme", music.getTheme() );
+        CommonUtils.verifyValue(entityName + " -> connectionMode", music.getConnectionMode() );
     }
     
 }
