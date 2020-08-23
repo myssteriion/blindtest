@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.model.entity.AbstractEntity;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -43,9 +44,9 @@ public class ProfileEntity extends AbstractEntity<ProfileEntity> {
      * The background (card color).
      */
     @Column(name = "background", nullable = false)
-    @ColumnDefault("0")
-    @PositiveOrZero(message = "Background can't be negative.")
-    private Integer background;
+    @ColumnDefault(Constant.DEFAULT_BACKGROUND)
+    @NotEmpty(message = "Background can't be empty.")
+    private String background;
     
     /**
      * The avatar.
@@ -97,7 +98,7 @@ public class ProfileEntity extends AbstractEntity<ProfileEntity> {
      *
      * @return the background.
      */
-    public Integer getBackground() {
+    public String getBackground() {
         return background;
     }
     
@@ -107,7 +108,7 @@ public class ProfileEntity extends AbstractEntity<ProfileEntity> {
      * @param background the background.
      * @return this
      */
-    public ProfileEntity setBackground(Integer background) {
+    public ProfileEntity setBackground(String background) {
         this.background = background;
         return this;
     }

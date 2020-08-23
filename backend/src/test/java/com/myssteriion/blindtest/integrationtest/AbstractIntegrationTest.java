@@ -12,6 +12,7 @@ import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
+import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import org.junit.Before;
@@ -68,9 +69,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     );
     
     protected static final List<ProfileEntity> PROFILES_LIST = Arrays.asList(
-            new ProfileEntity().setName("name1").setBackground(0).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() )),
-            new ProfileEntity().setName("name2").setBackground(0).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() )),
-            new ProfileEntity().setName("name3").setBackground(0).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() ))
+            new ProfileEntity().setName("name1").setBackground(Constant.DEFAULT_BACKGROUND).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() )),
+            new ProfileEntity().setName("name2").setBackground(Constant.DEFAULT_BACKGROUND).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() )),
+            new ProfileEntity().setName("name3").setBackground(Constant.DEFAULT_BACKGROUND).setProfileStat(new ProfileStatEntity().setBestScores(new HashMap<>() ).setWonGames( new HashMap<>() ).setFoundMusics( new HashMap<>() ).setListenedMusics( new HashMap<>() ).setPlayedGames( new HashMap<>() ))
     );
     
     
