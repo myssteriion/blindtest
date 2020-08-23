@@ -7,11 +7,10 @@
 .game-current-view-players-padding-15 { padding-top: 15%; }
 .game-current-view-players-padding-20 { padding-top: 20%; }
 
-.game-current-view-next-music, .game-current-view-offline-audio, .game-current-view-online-audio {
+.game-current-view-next-music, .game-current-view-audio {
 	padding-top: 1.35em;
 	text-align: center;
 }
-
 
 .game-current-view-players {
 	width: 37%;

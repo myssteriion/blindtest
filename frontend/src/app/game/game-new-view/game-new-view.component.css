@@ -57,10 +57,6 @@
 	opacity: 0.2;
 }
 
-.game-new-view-forced-inactive {
-	cursor: not-allowed !important;
-}
-
 .game-new-view-launch {
 	padding: 0.65em 0;
 	margin: 0.65em 0;

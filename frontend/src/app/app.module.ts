@@ -65,7 +65,6 @@ import {AnswerTypesComponent} from "./statistics/graphs/comparison/answer-types/
 import {ThemeSelectionComponent} from "./statistics/theme-selection/theme-selection.component";
 import {EndGameRanksComponent} from "./game/game-end-view/end-game-ranks/end-game-ranks.component";
 import {ParamsViewComponent} from './params-view/params-view.component';
-import {SpotifyParamViewComponent} from './params-view/spotify-param/spotify-param-view.component';
 import {GameCardComponent} from './game/game-card/game-card.component';
 
 import {GlobalErrorHandler} from "./tools/global-error-handler";
@@ -136,7 +135,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ThemeSelectionComponent,
 		EndGameRanksComponent,
 		ParamsViewComponent,
-		SpotifyParamViewComponent,
 		GameCardComponent
 	],
 	entryComponents: [
