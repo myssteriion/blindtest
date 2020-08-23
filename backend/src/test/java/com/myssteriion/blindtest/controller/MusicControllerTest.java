@@ -1,14 +1,12 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
-import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.utils.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -40,9 +38,9 @@ public class MusicControllerTest extends AbstractTest {
         Mockito.doNothing().when(musicService).refresh();
         
         List<ThemeInfo> themesInfo = Arrays.asList(
-                new ThemeInfo(Theme.ANNEES_60, 2, 4),
-                new ThemeInfo(Theme.ANNEES_70, 12, 14),
-                new ThemeInfo(Theme.ANNEES_80, 22, 24)
+                new ThemeInfo(Theme.ANNEES_60, 2),
+                new ThemeInfo(Theme.ANNEES_70, 12),
+                new ThemeInfo(Theme.ANNEES_80, 22)
         );
         
         Mockito.when(musicService.computeThemesInfo()).thenReturn(themesInfo);
@@ -53,23 +51,23 @@ public class MusicControllerTest extends AbstractTest {
     }
     
     @Test
-    public void random() throws NotFoundException, IOException, SpotifyException {
+    public void random() throws NotFoundException, IOException {
         
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
-        MusicEntity music = new MusicEntity("name", Theme.ANNEES_60, ConnectionMode.OFFLINE).setFlux(fluxMock);
-        Mockito.when(musicService.random(null, null, ConnectionMode.OFFLINE)).thenReturn(music);
-        Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE)).thenReturn(music);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_60).setFlux(fluxMock);
+        Mockito.when(musicService.random(null, null)).thenReturn(music);
+        Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE))).thenReturn(music);
         
-        ResponseEntity<MusicEntity> re = musicController.random(null, null, ConnectionMode.OFFLINE);
+        ResponseEntity<MusicEntity> re = musicController.random(null, null);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
         
-        re = musicController.random(null, null, ConnectionMode.OFFLINE);
+        re = musicController.random(null, null);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
         
-        re = musicController.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE), ConnectionMode.OFFLINE);
+        re = musicController.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE));
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
     }

@@ -180,7 +180,6 @@ export class MusicResultModalComponent implements OnInit {
 		let copyMusic: Music = {
 			name: this.music.name,
 			theme: this.music.theme,
-			connectionMode: this.music.connectionMode
 		};
 		
 		let musicResult: MusicResult = {

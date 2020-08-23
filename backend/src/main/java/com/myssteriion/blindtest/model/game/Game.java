@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.model.game;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Round;
@@ -10,12 +9,9 @@ import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Represents a current game.
@@ -48,11 +44,6 @@ public class Game implements IModel {
      * The effects.
      */
     private List<Effect> effects;
-    
-    /**
-     * The connection mode.
-     */
-    private ConnectionMode connectionMode;
     
     /**
      * The number of listened musics by themes.
@@ -88,6 +79,7 @@ public class Game implements IModel {
     }
     
     
+    
     /**
      * Instantiates a new Game.
      *
@@ -95,15 +87,13 @@ public class Game implements IModel {
      * @param duration       the duration
      * @param themes         the themes
      * @param effects        the effects
-     * @param connectionMode the connection mode
      */
-    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode, RoundContentProperties prop) {
+    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, RoundContentProperties prop) {
         
         this.players = players;
         this.duration = duration;
         this.themes = themes;
         this.effects = effects;
-        this.connectionMode = connectionMode;
         
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
@@ -209,26 +199,6 @@ public class Game implements IModel {
      */
     public Game setEffects(List<Effect> effects) {
         this.effects = effects;
-        return this;
-    }
-    
-    /**
-     * Gets the game mode.
-     *
-     * @return the game mode
-     */
-    public ConnectionMode getConnectionMode() {
-        return connectionMode;
-    }
-    
-    /**
-     * Sets connection mode.
-     *
-     * @param connectionMode the connection mode
-     * @return the connection mode
-     */
-    public Game setConnectionMode(ConnectionMode connectionMode) {
-        this.connectionMode = connectionMode;
         return this;
     }
     
@@ -402,7 +372,6 @@ public class Game implements IModel {
                 ", duration=" + duration +
                 ", themes=" + themes +
                 ", effects=" + effects +
-                ", connectionMode=" + connectionMode +
                 ", listenedMusics=" + listenedMusics +
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +

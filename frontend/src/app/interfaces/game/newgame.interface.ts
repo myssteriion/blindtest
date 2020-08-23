@@ -5,6 +5,5 @@ export interface NewGame {
 	profilesId: number[],
 	duration: Duration,
 	themes: Theme[],
-	effects: Effect[],
-	connectionMode: ConnectionMode
+	effects: Effect[]
 }

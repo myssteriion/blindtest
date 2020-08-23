@@ -40,16 +40,6 @@ export class GameNewViewComponent implements OnInit {
 	public selectedDuration: Duration;
 	
 	/**
-	 * ConnectionModes list.
-	 */
-	public connectionModes = [ConnectionMode.OFFLINE, ConnectionMode.ONLINE, ConnectionMode.BOTH];
-	
-	/**
-	 * Selected connection mode.
-	 */
-	public selectedConnectionMode: ConnectionMode;
-	
-	/**
 	 * Themes list.
 	 */
 	public themes = THEMES;
@@ -116,8 +106,6 @@ export class GameNewViewComponent implements OnInit {
 		
 		this.selectedEffect = [];
 		EFFECTS.forEach(effect => { this.selectedEffect.push(effect.enumVal); } );
-		
-		this.selectedConnectionMode = ConnectionMode.OFFLINE;
 		
 		this.computeThemesInfo();
 	}
@@ -212,13 +200,8 @@ export class GameNewViewComponent implements OnInit {
 		let nbMusics: number = 0;
 		
 		let index = this.themesInfo.findIndex(thm => thm.theme === theme);
-		if (index != -1) {
-			switch (this.selectedConnectionMode) {
-				case ConnectionMode.OFFLINE:	nbMusics = this.themesInfo[index].offlineNbMusics; break;
-				case ConnectionMode.ONLINE:		nbMusics = this.themesInfo[index].onlineNbMusics; break;
-				default: 						nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
-			}
-		}
+		if (index != -1)
+			nbMusics = this.themesInfo[index].nbMusics;
 		
 		return nbMusics.toString();
 	}
@@ -248,17 +231,8 @@ export class GameNewViewComponent implements OnInit {
 		let nbMusics: number = 0;
 		
 		let index = this.themesInfo.findIndex( thm => thm.theme === theme);
-		if ( index != -1 && this.themeIsSelected(theme) ) {
-			
-			switch (this.selectedConnectionMode) {
-				
-				case ConnectionMode.OFFLINE:	nbMusics = this.themesInfo[index].offlineNbMusics; break;
-				case ConnectionMode.ONLINE:		nbMusics = this.themesInfo[index].onlineNbMusics; break;
-				
-				default:
-					nbMusics = this.themesInfo[index].offlineNbMusics + this.themesInfo[index].onlineNbMusics;
-			}
-		}
+		if ( index != -1 && this.themeIsSelected(theme) )
+			nbMusics = this.themesInfo[index].nbMusics;
 		
 		return nbMusics;
 	}
@@ -279,61 +253,19 @@ export class GameNewViewComponent implements OnInit {
 	
 	
 	/**
-	 * On ConnectionMode change.
-	 * @param connectionMode the new connectionMode
-	 */
-	public changeConnectionMode(connectionMode: ConnectionMode): void {
-		
-		this.selectedConnectionMode = connectionMode;
-		
-		this.selectedEffect = [];
-		if ( this.isOnlineMode() )
-			this.selectedEffect.push(Effect.NONE);
-		else
-			EFFECTS.forEach(effect => { this.selectedEffect.push(effect.enumVal); } );
-		
-	}
-	
-	/**
-	 * Test if the selected mode is ONLINE.
-	 */
-	public isOnlineMode(): boolean {
-		return this.selectedConnectionMode === ConnectionMode.ONLINE;
-	}
-	
-	/**
-	 * Test if the selected mode is BOTH.
-	 */
-	public isBothMode(): boolean {
-		return this.selectedConnectionMode === ConnectionMode.BOTH;
-	}
-	
-	/**
-	 * Test if the selected mode is ONLINE or BOTH mode.
-	 */
-	public isOnlineOrBothMode(): boolean {
-		return this.isOnlineMode() || this.isBothMode();
-	}
-	
-	
-	/**
 	 * Select/deselect effect.
 	 *
 	 * @param effect the effect
 	 */
 	public selectDeselectEffect(effect: Effect): void {
 		
-		// en mode ONLINE, seul l'effet NONE est autorisé
-		if ( !this.isOnlineMode() ) {
-			
-			let index = this.selectedEffect.findIndex(eff => eff === effect);
-			if (index !== -1) {
-				if (this.selectedEffect.length > 1)
-					this.selectedEffect.splice(index, 1);
-			}
-			else
-				this.selectedEffect.push(effect);
+		let index = this.selectedEffect.findIndex(eff => eff === effect);
+		if (index !== -1) {
+			if (this.selectedEffect.length > 1)
+				this.selectedEffect.splice(index, 1);
 		}
+		else
+			this.selectedEffect.push(effect);
 	}
 	
 	/**
@@ -411,8 +343,7 @@ export class GameNewViewComponent implements OnInit {
 			duration: this.selectedDuration,
 			profilesId: profilesId,
 			themes: this.selectedThemes,
-			effects: this.selectedEffect,
-			connectionMode: this.selectedConnectionMode
+			effects: this.selectedEffect
 		};
 		
 		this._gameResource.newGame(newGame).subscribe(
@@ -424,8 +355,6 @@ export class GameNewViewComponent implements OnInit {
 				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
 				
 				let suggestions = [];
-				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION") );
-				suggestions.push( this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_SUGGESTION_2") );
 				
 				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
 				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
@@ -447,7 +376,7 @@ export class GameNewViewComponent implements OnInit {
 	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedDuration) || ToolsService.isNull(this.selectedConnectionMode) || this.playersProfiles.length < GameNewViewComponent.MIN_PLAYERS;
+		return ToolsService.isNull(this.selectedDuration) || this.playersProfiles.length < GameNewViewComponent.MIN_PLAYERS;
 	}
 	
 	/**

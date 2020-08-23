@@ -16,36 +16,6 @@
 		</div>
 	</div>
 	
-	<!-- connection mode -->
-	<div class="row game-new-view-part">
-		<div class="col-4 game-new-view-label font-size-normal">{{ 'GAME.NEW_VIEW.CONNECTION_MODE_LABEL' | translate }}</div>
-		<div class="col-8">
-			
-			<!-- radio buttons -->
-			<div class="row">
-				<div class="col-sm">
-					<mat-radio-group class="font-size-normal">
-						<mat-radio-button *ngFor="let connectionMode of connectionModes" value="{{ connectionMode }}" color="warn"
-										  (change)="changeConnectionMode(connectionMode)" [checked]="connectionMode === selectedConnectionMode">
-							{{ 'CONNECTION_MODE.' + connectionMode | translate }}
-						</mat-radio-button>
-					</mat-radio-group>
-				</div>
-			</div>
-			
-			<!-- login to Spotify label -->
-			<div *ngIf="isOnlineOrBothMode()" class="row">
-				<div class="col-sm font-size-very-very-small game-new-view-sub-label">{{ 'GAME.NEW_VIEW.LOGIN_TO_SPOTIFY_SUB_LABEL' | translate }}</div>
-			</div>
-			
-			<!-- effects have no effect on spotify mode label -->
-			<div *ngIf="isOnlineOrBothMode()" class="row">
-				<div class="col-sm font-size-very-very-small game-new-view-sub-label">{{ 'GAME.NEW_VIEW.EFFECTS_HAVE_NO_EFFECT_SUB_LABEL' | translate }}</div>
-			</div>
-			
-		</div>
-	</div>
-	
 	<!-- themes -->
 	<div class="row game-new-view-part">
 		<div class="col-4 game-new-view-label font-size-normal">
@@ -78,8 +48,7 @@
 		</div>
 		<div class="col-8">
 			<img *ngFor="let effect of effects" src="{{ effect.srcImg }}" class="game-new-view-effect-img"
-				 [ngClass]="{ 'game-new-view-inactive': !effectIsSelected(effect.enumVal),
-				  			  'game-new-view-forced-inactive': isOnlineMode() }"
+				 [ngClass]="{ 'game-new-view-inactive': !effectIsSelected(effect.enumVal) }"
 				 (click)="selectDeselectEffect(effect.enumVal)" matTooltip="{{ effect.tooltip | translate }}">
 		</div>
 	</div>

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.integrationtest;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
@@ -13,11 +12,9 @@ import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
-import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import org.junit.Before;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,9 +40,6 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     
     protected ProfileService profileService;
     
-    @Mock
-    protected SpotifyService spotifyService;
-    
     protected GameService gameService;
     
     
@@ -55,12 +49,12 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
         
         avatarService = new AvatarService(avatarDAO, configProperties);
         
-        musicService = Mockito.spy( new MusicService(musicDAO, spotifyService, configProperties) );
+        musicService = Mockito.spy( new MusicService(musicDAO, configProperties) );
         Mockito.doNothing().when(musicService).refresh();
         
         profileService = new ProfileService(profileDAO, avatarService);
         
-        gameService = new GameService(musicService, profileService, spotifyService, configProperties, roundContentProperties);
+        gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
         
         clearDataBase();
         insertData();
@@ -69,9 +63,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     
     
     protected static final List<MusicEntity> MUSICS_LIST = Arrays.asList(
-            new MusicEntity("musicName80", Theme.ANNEES_80, ConnectionMode.OFFLINE),
-            new MusicEntity("musicName90", Theme.ANNEES_90, ConnectionMode.OFFLINE),
-            new MusicEntity("musicName00", Theme.ANNEES_2000, ConnectionMode.OFFLINE)
+            new MusicEntity("musicName80", Theme.ANNEES_80),
+            new MusicEntity("musicName90", Theme.ANNEES_90),
+            new MusicEntity("musicName00", Theme.ANNEES_2000)
     );
     
     protected static final List<ProfileEntity> PROFILES_LIST = Arrays.asList(

@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.model.common.roundcontent.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -53,7 +52,7 @@ public class LuckyContentTest extends AbstractTest {
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name3")),
                 new Player(new ProfileEntity().setName("name2")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         LuckyContent luckyContent = new LuckyContent(10, 100, 50);
         luckyContent.prepare(game);
@@ -67,10 +66,10 @@ public class LuckyContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, ConnectionMode.OFFLINE, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
         
         Integer gameId = 1;
-        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 32; i++)

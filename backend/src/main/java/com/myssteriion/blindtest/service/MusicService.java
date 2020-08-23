@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
@@ -8,9 +7,6 @@ import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.spotify.SpotifyMusic;
-import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
@@ -48,11 +44,6 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     private ConfigProperties configProperties;
     
     /**
-     * The spotify service.
-     */
-    private SpotifyService spotifyService;
-    
-    /**
      * The music folder path.
      */
     private static String musicsFolderPath;
@@ -62,13 +53,11 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     /**
      * Instantiates a new Music service.
      *
-     * @param musicDao         the music dao
-     * @param spotifyService   the spotify service
+     * @param musicDao the music dao
      */
     @Autowired
-    public MusicService(MusicDAO musicDao, SpotifyService spotifyService, ConfigProperties configProperties) {
+    public MusicService(MusicDAO musicDao, ConfigProperties configProperties) {
         super(musicDao, "music");
-        this.spotifyService = spotifyService;
         this.configProperties = configProperties;
         initFolderPath();
     }
@@ -80,107 +69,31 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     
     
     /**
-     * Scan offline and online musics and insert musics in DB.
+     * Scan musics and insert musics in DB.
      */
     @PostConstruct
     private void init() {
         
-        boolean onlineMode = spotifyService.isConnected();
-        if (!onlineMode)
-            LOGGER.warn("Can't load online musics.");
-        
         for ( Theme theme : Theme.values() ) {
-            
-            offlineInit(theme);
-            if (onlineMode)
-                onlineInit(theme);
-        }
-        
-        for ( MusicEntity music : dao.findAll() ) {
-            
-            if ( (onlineMode && music.getConnectionMode() == ConnectionMode.ONLINE && !onlineMusicExists(music))
-                    || (music.getConnectionMode() == ConnectionMode.OFFLINE && !offlineMusicExists(music)) ) {
-                
-                dao.deleteById( music.getId() );
-            }
-        }
-    }
     
-    /**
-     * Scan offline musics and insert musics in DB.
-     *
-     * @param theme the theme
-     */
-    private void offlineInit(Theme theme) {
-        
-        String themeFolder = theme.getFolderName();
-        Path path = Paths.get(musicsFolderPath, themeFolder);
-        
-        File themeDirectory = path.toFile();
-        for ( File file : CommonUtils.getChildren(themeDirectory) ) {
-            
-            MusicEntity music = new MusicEntity().setName( file.getName() ).setTheme(theme).setConnectionMode(ConnectionMode.OFFLINE);
-            Optional<MusicEntity> optionalMusic = dao.findByNameAndThemeAndConnectionMode( music.getName(), music.getTheme(), music.getConnectionMode() );
-            if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !optionalMusic.isPresent() )
-                dao.save(music);
-        }
-    }
+            String themeFolder = theme.getFolderName();
+            Path path = Paths.get(musicsFolderPath, themeFolder);
     
-    /**
-     * Test if the music match with an existing file.
-     *
-     * @param music the music
-     * @return TRUE if the music match with an existing file, FALSE otherwise
-     */
-    private boolean offlineMusicExists(MusicEntity music) {
-        return Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName()).toFile().exists();
-    }
-    
-    
-    /**
-     * Scan online musics and insert musics in DB.
-     *
-     * @param theme the theme
-     */
-    private void onlineInit(Theme theme) {
+            File themeDirectory = path.toFile();
+            for ( File file : CommonUtils.getChildren(themeDirectory) ) {
         
-        try {
-            List<SpotifyMusic> spotifyMusics = spotifyService.getMusicsByTheme(theme);
-            for (SpotifyMusic spotifyMusic : spotifyMusics) {
-                
-                String musicName = spotifyMusic.getArtists() + CommonConstant.HYPHEN_WITH_SPACE + spotifyMusic.getName();
-                MusicEntity music = new MusicEntity( musicName, theme, ConnectionMode.ONLINE, spotifyMusic.getTrackId(), spotifyMusic.getPreviewUrl(), spotifyMusic.getTrackUrl() );
-                Optional<MusicEntity> optionalMusic = dao.findByNameAndThemeAndConnectionMode( music.getName(), music.getTheme(), music.getConnectionMode() );
-                if ( !optionalMusic.isPresent() )
+                MusicEntity music = new MusicEntity().setName( file.getName() ).setTheme(theme);
+                Optional<MusicEntity> optionalMusic = dao.findByNameAndTheme( music.getName(), music.getTheme() );
+                if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && optionalMusic.isEmpty())
                     dao.save(music);
             }
         }
-        catch (SpotifyException e) {
-            LOGGER.warn("Can't load online musics.", e);
+        
+        for ( MusicEntity music : dao.findAll() ) {
+            if ( !Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName()).toFile().exists() )
+                dao.deleteById( music.getId() );
         }
     }
-    
-    /**
-     * Test if the music match with an online track.
-     *
-     * @param music the music
-     * @return TRUE if the music match with an existing file OR the connection is KO, OR the test is KO, FALSE otherwise
-     */
-    private boolean onlineMusicExists(MusicEntity music) {
-        
-        boolean exists;
-        
-        try {
-            exists = spotifyService.trackExistsInTheme( music.getSpotifyTrackId(), music.getTheme() );
-        }
-        catch (SpotifyException e) {
-            exists = true;
-            LOGGER.warn("Can't test if the track exists.", e);
-        }
-        
-        return exists;
-    }
-    
     
     /**
      * Scan music folder and refresh the DB.
@@ -197,7 +110,7 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
         
         if ( CommonUtils.isNullOrEmpty(entity.getId()) ) {
             checkEntity(entity);
-            return dao.findByNameAndThemeAndConnectionMode(entity.getName(), entity.getTheme(), entity.getConnectionMode()).orElse(null);
+            return dao.findByNameAndTheme(entity.getName(), entity.getTheme()).orElse(null);
         }
         else
             return super.find(entity);
@@ -205,22 +118,15 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     
     
     /**
-     * Count by theme and connection mode
+     * Count by theme.
      *
-     * @param theme          the theme
-     * @param connectionMode the connection mode
+     * @param theme the theme
      * @return the number of music
      */
-    public Integer getMusicNumber(Theme theme, ConnectionMode connectionMode) {
+    public Integer getMusicNumber(Theme theme) {
         
         CommonUtils.verifyValue("theme", theme);
-        CommonUtils.verifyValue("connectionMode", connectionMode);
-        
-        Integer nbMusic = 0;
-        for (ConnectionMode mode : connectionMode.transformForSearchMusic() )
-            nbMusic += dao.countByThemeAndConnectionMode(theme, mode);
-        
-        return nbMusic;
+        return dao.countByTheme(theme);
     }
     
     /**
@@ -233,11 +139,8 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
         List<ThemeInfo> themesInfo = new ArrayList<>();
         
         for ( Theme theme : Theme.getSortedTheme() ) {
-            
-            Integer offlineNbMusics = getMusicNumber(theme, ConnectionMode.OFFLINE);
-            Integer onlineNbMusics = getMusicNumber(theme, ConnectionMode.ONLINE);
-            
-            themesInfo.add( new ThemeInfo(theme, offlineNbMusics, onlineNbMusics) );
+            Integer nbMusics = getMusicNumber(theme);
+            themesInfo.add( new ThemeInfo(theme, nbMusics) );
         }
         
         return themesInfo;
@@ -246,21 +149,17 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     /**
      * Randomly choose a music.
      *
-     * @param themes     	    the themes filter (optional)
-     * @param effects     	    the effects filter (optional)
-     * @param connectionMode    the connection mode
+     * @param themes  the themes filter (optional)
+     * @param effects the effects filter (optional)
      * @return the music
      * @throws NotFoundException the not found exception
      * @throws IOException       the io exception
      */
-    public MusicEntity random(List<Theme> themes, List<Effect> effects, ConnectionMode connectionMode) throws NotFoundException, IOException, SpotifyException {
-        
-        CommonUtils.verifyValue("connectionMode", connectionMode);
+    public MusicEntity random(List<Theme> themes, List<Effect> effects) throws NotFoundException, IOException {
         
         List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
-        List<ConnectionMode> connectionModes = connectionMode.transformForSearchMusic();
         
-        List<MusicEntity> allMusics = new ArrayList<>( dao.findByThemeInAndConnectionModeIn(searchThemes, connectionModes) );
+        List<MusicEntity> allMusics = new ArrayList<>( dao.findByThemeIn(searchThemes) );
         
         if ( CommonUtils.isNullOrEmpty(allMusics) )
             throw new NotFoundException("No music found for themes (" + searchThemes.toString() + ").");
@@ -271,17 +170,11 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
         Theme foundTheme = foundThemeByCumulativePercent(cumulativePercent);
         MusicEntity music = foundMusic(allMusics, foundTheme);
         
-        if ( music.getConnectionMode().isNeedConnection() ) {
-            spotifyService.testConnection();
-        }
-        else {
-            
-            Path path = Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName());
-            music.setFlux( new Flux(path.toFile()) );
-            
-            List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
-            music.setEffect( foundEffect(searchEffects) );
-        }
+        Path path = Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName());
+        music.setFlux( new Flux(path.toFile()) );
+        
+        List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
+        music.setEffect( foundEffect(searchEffects) );
         
         return music;
     }
@@ -397,7 +290,6 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
         super.checkEntity(music);
         CommonUtils.verifyValue( formatMessage(CommonConstant.ENTITY_NAME), music.getName() );
         CommonUtils.verifyValue(entityName + " -> theme", music.getTheme() );
-        CommonUtils.verifyValue(entityName + " -> connectionMode", music.getConnectionMode() );
     }
     
 }

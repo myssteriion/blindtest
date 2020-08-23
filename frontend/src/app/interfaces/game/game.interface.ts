@@ -11,7 +11,6 @@ export interface Game {
 	duration: Duration,
 	themes: Theme[],
 	effects: Effect[],
-	connectionMode: ConnectionMode,
 	listenedMusics?: ListenedMusics,
 	
 	nbMusicsPlayed: number,

@@ -1,12 +1,10 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
-import com.myssteriion.blindtest.spotify.SpotifyException;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.rest.RestUtils;
@@ -62,22 +60,20 @@ public class MusicController {
     /**
      * Randomly choose a music.
      *
-     * @param themes     	  the themes filter (optional)
-     * @param effects     	  the effects filter (optional)
-     * @param connectionMode  the online mode
+     * @param themes  the themes filter (optional)
+     * @param effects the effects filter (optional)
      * @return a music
      * @throws NotFoundException NotFound exception
      */
     @GetMapping(path = "/random")
     public ResponseEntity<MusicEntity> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-                                              @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects,
-                                              @RequestParam(value = Constant.CONNECTION_MODE) ConnectionMode connectionMode)
-            throws NotFoundException, IOException, SpotifyException {
+                                              @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects)
+            throws NotFoundException, IOException {
         
-        MusicEntity music = musicService.random(themes, effects, connectionMode);
-        if ( connectionMode == ConnectionMode.OFFLINE && !music.getFlux().isFileExists() ) {
+        MusicEntity music = musicService.random(themes, effects);
+        if ( !music.getFlux().isFileExists() ) {
             musicService.refresh();
-            music = musicService.random(themes, effects, connectionMode);
+            music = musicService.random(themes, effects);
         }
         
         return RestUtils.create200(music);

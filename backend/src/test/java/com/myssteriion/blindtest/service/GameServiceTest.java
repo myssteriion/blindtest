@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.ConnectionMode;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
 import com.myssteriion.blindtest.model.common.Round;
@@ -12,8 +11,6 @@ import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
-import com.myssteriion.blindtest.spotify.SpotifyException;
-import com.myssteriion.blindtest.spotify.SpotifyService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
@@ -38,23 +35,20 @@ public class GameServiceTest extends AbstractTest {
     @Mock
     private ProfileService profileService;
     
-    @Mock
-    private SpotifyService spotifyService;
-    
     private GameService gameService;
     
     
     
     @Before
     public void before() {
-        gameService = new GameService(musicService, profileService, spotifyService, configProperties, roundContentProperties);
+        gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
         Mockito.doNothing().when(musicService).refresh();
     }
     
     
     
     @Test
-    public void newGame() throws NotFoundException, SpotifyException {
+    public void newGame() throws NotFoundException {
         
         Mockito.when(profileService.find( Mockito.any(ProfileEntity.class) )).thenReturn(null).thenAnswer(invocation -> {
             ProfileEntity p = invocation.getArgument(0);
@@ -62,8 +56,7 @@ public class GameServiceTest extends AbstractTest {
                     .setId( p.getId() )
                     .setName( "name" + p.getId() );
         });
-        Mockito.doThrow(new SpotifyException("se")).when(spotifyService).testConnection();
-        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(0, 10);
+        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class))).thenReturn(0, 10);
         
         Set<Integer> profilesId = new HashSet<>( Arrays.asList(0, 1) );
         
@@ -92,24 +85,16 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame(new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL));
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'newGame -> connectionMode' est obligatoire."), e);
-        }
-        
-        try {
             gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL)
-                    .setThemes(Collections.singletonList(Theme.ANNEES_60)).setConnectionMode(ConnectionMode.OFFLINE) );
+                    .setThemes(Collections.singletonList(Theme.ANNEES_60)) );
             Assert.fail("Doit lever une NotFoundException car un mock (musicService) return 0.");
         }
         catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("Zero music found ('ANNEES_60' ; '[OFFLINE]')"), e);
+            TestUtils.verifyException(new NotFoundException("Zero music found ('ANNEES_60')"), e);
         }
         
         try {
-            gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE) );
+            gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL) );
             Assert.fail("Doit lever une NotFoundException car un param est KO.");
         }
         catch (NotFoundException e) {
@@ -117,7 +102,7 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Collections.singletonList(1))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE) );
+            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Collections.singletonList(1))).setDuration(Duration.NORMAL) );
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -125,7 +110,7 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE));
+            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5))).setDuration(Duration.NORMAL));
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -133,26 +118,18 @@ public class GameServiceTest extends AbstractTest {
         }
         
         
-        Game game = gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE) );
+        Game game = gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL) );
         Assert.assertEquals( profilesId.size(), game.getPlayers().size() );
         
-        game = gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE) );
+        game = gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL) );
         Assert.assertEquals( 2, game.getPlayers().size() );
-        
-        try {
-            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.ONLINE) );
-            Assert.fail("Doit lever une car la connection spotify est KO.");
-        }
-        catch (SpotifyException e) {
-            TestUtils.verifyException( new SpotifyException("se"), e);
-        }
     }
     
     @Test
-    public void apply() throws NotFoundException, SpotifyException, ConflictException {
+    public void apply() throws NotFoundException, ConflictException {
         
-        MusicEntity music = new MusicEntity("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
-        MusicEntity music2 = new MusicEntity("name", Theme.ANNEES_80, ConnectionMode.OFFLINE);
+        MusicEntity music = new MusicEntity("name", Theme.ANNEES_60);
+        MusicEntity music2 = new MusicEntity("name", Theme.ANNEES_80);
         
         ProfileStatEntity profileStat = new ProfileStatEntity();
         ProfileStatEntity profileStat1 = new ProfileStatEntity();
@@ -162,7 +139,7 @@ public class GameServiceTest extends AbstractTest {
         ProfileEntity profile2 = new ProfileEntity().setName("name2").setId(3).setProfileStat(profileStat2);
         
         Mockito.when(musicService.find( Mockito.any(MusicEntity.class) )).thenReturn(null, music2, music);
-        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
+        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class))).thenReturn(10);
         
         ProfileEntity finalProfile = profile;
         ProfileEntity finalProfile1 = profile1;
@@ -206,7 +183,7 @@ public class GameServiceTest extends AbstractTest {
         }
         
         gameService.newGame( new NewGame().setProfilesId(profilesId).setDuration(Duration.NORMAL)
-                .setThemes(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70)).setConnectionMode(ConnectionMode.OFFLINE) );
+                .setThemes(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70)) );
         
         
         try {
@@ -230,7 +207,7 @@ public class GameServiceTest extends AbstractTest {
             TestUtils.verifyException(new NotFoundException("'ANNEES_80' not found for this game ([ANNEES_60, ANNEES_70])."), e);
         }
         
-        music = new MusicEntity("name", Theme.ANNEES_60, ConnectionMode.OFFLINE);
+        music = new MusicEntity("name", Theme.ANNEES_60);
         profile = new ProfileEntity().setName("name").setId(1).setProfileStat(profileStat);
         profile1 = new ProfileEntity().setName("name1").setId(2).setProfileStat(profileStat1);
         profile2 = new ProfileEntity().setName("name2").setId(3).setProfileStat(profileStat2);
@@ -429,7 +406,7 @@ public class GameServiceTest extends AbstractTest {
     }
     
     @Test
-    public void findById() throws NotFoundException, SpotifyException {
+    public void findById() throws NotFoundException {
         
         try {
             gameService.findById(null);
@@ -455,9 +432,9 @@ public class GameServiceTest extends AbstractTest {
             ProfileEntity p = invocation.getArgument(0);
             return ( p.getId().equals(1) ) ? profile : profile1;
         });
-        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
+        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class))).thenReturn(10);
         
-        NewGame ng = new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE);
+        NewGame ng = new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL);
         Game expected = gameService.newGame(ng);
         
         Game actual = gameService.findById(expected.getId());
@@ -465,7 +442,7 @@ public class GameServiceTest extends AbstractTest {
     }
     
     @Test
-    public void findAll() throws NotFoundException, SpotifyException {
+    public void findAll() throws NotFoundException {
         
         ProfileEntity profile = new ProfileEntity().setName("name").setId(1);
         ProfileEntity profile1 = new ProfileEntity().setName("name1").setId(2);
@@ -473,9 +450,9 @@ public class GameServiceTest extends AbstractTest {
             ProfileEntity p = invocation.getArgument(0);
             return ( p.getId().equals(1) ) ? profile : profile1;
         });
-        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class), Mockito.any(ConnectionMode.class))).thenReturn(10);
+        Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class))).thenReturn(10);
         
-        NewGame ng = new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL).setConnectionMode(ConnectionMode.OFFLINE);
+        NewGame ng = new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL);
         Game expected = gameService.newGame(ng);
         gameService.newGame(ng);
         gameService.newGame(ng);

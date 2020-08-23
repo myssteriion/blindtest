@@ -49,28 +49,10 @@
 				</div>
 			</div>
 			
-			<!-- offline mode - audio -->
-			<div [hidden]="!showOfflineAudio" class="row game-current-view-offline-audio">
+			<!-- audio -->
+			<div [hidden]="!showAudio" class="row game-current-view-audio">
 				<div class="col">
-					<audio #offlineAudio class="box-shadow"></audio>
-				</div>
-			</div>
-			
-			<!-- online mode - preview audio -->
-			<div *ngIf="showOnlinePreviewAudio" class="row">
-				<div class="col">
-					<iframe [src]="onlinePreviewAudio" width="0" height="0" frameborder="0"
-							allowtransparency="true" allow="encrypted-media">
-					</iframe>
-				</div>
-			</div>
-			
-			<!-- online mode - audio -->
-			<div *ngIf="showOnlineAudio" class="row game-current-view-online-audio">
-				<div class="col">
-					<iframe [src]="onlineAudio" width="300" height="380" frameborder="0"
-							allowtransparency="true" allow="encrypted-media">
-					</iframe>
+					<audio #audio class="box-shadow"></audio>
 				</div>
 			</div>
 		

@@ -157,8 +157,8 @@ export const ROUTES_WITHOUT_HOME = [
 	{path: '/game/new', name: 'GAME.NEW_VIEW.TITLE', icon: faGamepad},
 	{path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE', icon: faAngleDoubleRight},
 	{path: '/profiles', name: 'PROFILE.VIEW.TITLE', icon: faAddressCard},
-	{path: '/statistics', name: 'STATISTICS.TITLE', icon: faChartBar},
-	{path: '/params', name: 'PARAMS_VIEW.TITLE', icon: faCog}
+	{path: '/statistics', name: 'STATISTICS.TITLE', icon: faChartBar}
+	// {path: '/params', name: 'PARAMS_VIEW.TITLE', icon: faCog}
 ];
 
 /**

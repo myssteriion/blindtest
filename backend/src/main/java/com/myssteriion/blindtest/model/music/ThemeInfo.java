@@ -16,14 +16,9 @@ public class ThemeInfo implements IModel {
     private Theme theme;
     
     /**
-     * Nb musics for OFFLINE mode.
+     * Nb musics.
      */
-    private Integer offlineNbMusics;
-    
-    /**
-     * Nb musics for ONLINE mode.
-     */
-    private Integer onlineNbMusics;
+    private Integer nbMusics;
     
     
     
@@ -36,15 +31,13 @@ public class ThemeInfo implements IModel {
     /**
      * Instantiate a new ThemeInfo.
      *
-     * @param theme           the theme
-     * @param offlineNbMusics offline nb musics
-     * @param onlineNbMusics  online nb musics
+     * @param theme    the theme
+     * @param nbMusics the nb musics
      */
-    public ThemeInfo(Theme theme, Integer offlineNbMusics, Integer onlineNbMusics) {
+    public ThemeInfo(Theme theme, Integer nbMusics) {
         
         this.theme = theme;
-        this.offlineNbMusics = offlineNbMusics;
-        this.onlineNbMusics = onlineNbMusics;
+        this.nbMusics = nbMusics;
     }
     
     
@@ -74,38 +67,18 @@ public class ThemeInfo implements IModel {
      *
      * @return the offlineNbMusics
      */
-    public Integer getOfflineNbMusics() {
-        return offlineNbMusics;
+    public Integer getNbMusics() {
+        return nbMusics;
     }
     
     /**
      * Set offlineNbMusics.
      *
-     * @param offlineNbMusics the offlineNbMusics
+     * @param nbMusics the offlineNbMusics
      * @return this
      */
-    public ThemeInfo setOfflineNbMusics(Integer offlineNbMusics) {
-        this.offlineNbMusics = offlineNbMusics;
-        return this;
-    }
-    
-    /**
-     * Get onlineNbMusics.
-     *
-     * @return the onlineNbMusics
-     */
-    public Integer getOnlineNbMusics() {
-        return onlineNbMusics;
-    }
-    
-    /**
-     * Set onlineNbMusics.
-     *
-     * @param onlineNbMusics the onlineNbMusics
-     * @return this
-     */
-    public ThemeInfo setOnlineNbMusics(Integer onlineNbMusics) {
-        this.onlineNbMusics = onlineNbMusics;
+    public ThemeInfo setNbMusics(Integer nbMusics) {
+        this.nbMusics = nbMusics;
         return this;
     }
     
@@ -120,19 +93,18 @@ public class ThemeInfo implements IModel {
             return false;
         
         ThemeInfo themeInfo = (ThemeInfo) o;
-        return theme == themeInfo.theme && Objects.equals(offlineNbMusics, themeInfo.offlineNbMusics) && Objects.equals(onlineNbMusics, themeInfo.onlineNbMusics);
+        return theme == themeInfo.theme && Objects.equals(nbMusics, themeInfo.nbMusics);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(theme, offlineNbMusics, onlineNbMusics);
+        return Objects.hash(theme, nbMusics);
     }
     
     @Override
     public String toString() {
         return "theme=" + theme +
-                ", offlineNbMusics=" + offlineNbMusics +
-                ", onlineNbMusics=" + onlineNbMusics;
+                ", offlineNbMusics=" + nbMusics;
     }
     
 }
