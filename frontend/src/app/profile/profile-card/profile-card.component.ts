@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Profile} from 'src/app/interfaces/dto/profile.interface';
 import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -84,19 +84,6 @@ export class ProfileCardComponent {
 	 */
 	public getImgFromAvatar(): string {
 		return ToolsService.getImgFromAvatar(this.profile.avatar);
-	}
-	
-	/**
-	 * Gets background class.
-	 */
-	public getBackgroundClass(): string {
-		
-		let backgroundClass = "profile-card-background-" + this.profile.background;
-		
-		if (this.canSelect)
-			backgroundClass += " profile-card-frame-can-select";
-		
-		return backgroundClass;
 	}
 	
 	/**

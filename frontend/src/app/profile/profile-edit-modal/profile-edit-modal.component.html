@@ -21,8 +21,8 @@
 		<!-- background -->
 		<div class="row profile-edit-backgrounds">
 			<div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.BACKGROUND_LABEL' | translate }}</div>
-			<div *ngFor="let backgroundId of backgroundIds" class="col profile-edit-background box-shadow" [ngClass]="getBackgroundClass(backgroundId)"
-				 (click)="newProfile.background = backgroundId">
+			<div class="col-8">
+				<input class="profile-edit-background box-shadow" [(colorPicker)]="newProfile.background" [style.background]="newProfile.background">
 			</div>
 		</div>
 		
