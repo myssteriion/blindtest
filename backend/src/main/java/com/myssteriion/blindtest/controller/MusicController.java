@@ -7,12 +7,14 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.NotFoundException;
+import com.myssteriion.utils.model.Empty;
 import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,17 +46,24 @@ public class MusicController {
     
     
     /**
+     * Refresh musics.
+     *
+     * @return empty response
+     */
+    @PostMapping(path = "/refresh")
+    public ResponseEntity<Empty> refresh() {
+        musicService.init();
+        return RestUtils.create204();
+    }
+    
+    /**
      * Get nb musics by themes by connection mode.
      *
      * @return the themesInfo
      */
     @GetMapping(path = "/compute-themes-info")
     public ResponseEntity< Page<ThemeInfo> > computeThemesInfo() {
-        
-        musicService.refresh();
-        
-        List<ThemeInfo> themesInfo = musicService.computeThemesInfo();
-        return RestUtils.create200( new PageImpl<>(themesInfo) );
+        return RestUtils.create200( new PageImpl<>(musicService.computeThemesInfo()) );
     }
     
     /**
@@ -70,13 +79,7 @@ public class MusicController {
                                               @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects)
             throws NotFoundException, IOException {
         
-        MusicEntity music = musicService.random(themes, effects);
-        if ( !music.getFlux().isFileExists() ) {
-            musicService.refresh();
-            music = musicService.random(themes, effects);
-        }
-        
-        return RestUtils.create200(music);
+        return RestUtils.create200(  musicService.random(themes, effects) );
     }
     
 }

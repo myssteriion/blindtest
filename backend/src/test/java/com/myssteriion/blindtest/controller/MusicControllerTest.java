@@ -8,6 +8,7 @@ import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.utils.exception.NotFoundException;
+import com.myssteriion.utils.model.Empty;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -33,9 +34,16 @@ public class MusicControllerTest extends AbstractTest {
     
     
     @Test
-    public void computeThemesInfo() {
+    public void refresh() {
         
-        Mockito.doNothing().when(musicService).refresh();
+        Mockito.doNothing().when(musicService).init();
+        
+        ResponseEntity<Empty> re = musicController.refresh();
+        Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
+    }
+    
+    @Test
+    public void computeThemesInfo() {
         
         List<ThemeInfo> themesInfo = Arrays.asList(
                 new ThemeInfo(Theme.ANNEES_60, 2),

@@ -12,8 +12,6 @@ import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.service.AbstractCRUDService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -32,11 +29,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
-    
-    /**
-     * The constant LOGGER.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MusicService.class);
     
     /**
      * The ConfigProperties.
@@ -72,35 +64,31 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
      * Scan musics and insert musics in DB.
      */
     @PostConstruct
-    private void init() {
+    public void init() {
         
-        for ( Theme theme : Theme.values() ) {
-    
-            String themeFolder = theme.getFolderName();
-            Path path = Paths.get(musicsFolderPath, themeFolder);
-    
-            File themeDirectory = path.toFile();
-            for ( File file : CommonUtils.getChildren(themeDirectory) ) {
-        
-                MusicEntity music = new MusicEntity().setName( file.getName() ).setTheme(theme);
-                Optional<MusicEntity> optionalMusic = dao.findByNameAndTheme( music.getName(), music.getTheme() );
-                if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && optionalMusic.isEmpty())
-                    dao.save(music);
-            }
-        }
+        List<MusicEntity> musics = new ArrayList<>();
         
         for ( MusicEntity music : dao.findAll() ) {
+            
+            musics.add(music);
             if ( !Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName()).toFile().exists() )
                 dao.deleteById( music.getId() );
         }
+        
+        for ( Theme theme : Theme.values() ) {
+            
+            String themeFolder = theme.getFolderName();
+            Path path = Paths.get(musicsFolderPath, themeFolder);
+            
+            for ( File file : CommonUtils.getChildren(path.toFile()) ) {
+                
+                MusicEntity music = new MusicEntity().setName( file.getName() ).setTheme(theme);
+                if ( file.isFile() && CommonUtils.hadAudioExtension(file.getName()) && !musics.contains(music) )
+                    dao.save(music);
+            }
+        }
     }
     
-    /**
-     * Scan music folder and refresh the DB.
-     */
-    public void refresh() {
-        init();
-    }
     
     
     @Override
