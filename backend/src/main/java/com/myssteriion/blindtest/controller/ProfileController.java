@@ -73,20 +73,20 @@ public class ProfileController {
     }
     
     /**
-     * Find pageable of profile filtered by search name.
+     * Find pageable of profile filtered by name.
      *
-     * @param searchName  the search name
+     * @param name        the name
      * @param pageNumber  the page number
      * @param itemPerPage the item per page
      * @return the pageable of profiles filtered by search name
      */
     @GetMapping
-    public ResponseEntity< Page<ProfileEntity> > findAllBySearchName(
-            @RequestParam(value = Constant.SEARCH_NAME, required = false, defaultValue = Constant.SEARCH_NAME_DEFAULT_VALUE) String searchName,
+    public ResponseEntity< Page<ProfileEntity> > findAllByName(
+            @RequestParam(value = Constant.NAME, required = false, defaultValue = Constant.NAME_DEFAULT_VALUE) String name,
             @RequestParam(value = CommonConstant.PAGE_NUMBER) Integer pageNumber,
             @RequestParam(value = CommonConstant.ITEM_PER_PAGE) Integer itemPerPage) {
         
-        return RestUtils.create200( profileService.findAllBySearchName(searchName, pageNumber, itemPerPage) );
+        return RestUtils.create200( profileService.findAllByName(name, pageNumber, itemPerPage) );
     }
     
     /**
