@@ -159,13 +159,13 @@ public class ProfileServiceTest extends AbstractTest {
     }
     
     @Test
-    public void findAllBySearchName() {
+    public void findAllByName() {
         
         ProfileEntity profile = new ProfileEntity().setName("name");
         Mockito.when(profileDao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(profile)));
         
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllBySearchName(null, 0, 1) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllBySearchName("", 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllByName(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(profile)),  profileService.findAllByName("", 0, 1) );
     }
     
     @Test

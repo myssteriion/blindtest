@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class AvatarControllerTest extends AbstractTest {
     
@@ -27,21 +28,21 @@ public class AvatarControllerTest extends AbstractTest {
     
     
     @Test
-    public void findAllBySearchName() {
+    public void findAllByName() {
         
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
         AvatarEntity avatar = new AvatarEntity("name").setFlux(fluxMock);
-        Mockito.when(avatarService.findAllBySearchName(Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn( new PageImpl<>(Arrays.asList(avatar)) );
+        Mockito.when(avatarService.findAllByName(Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn( new PageImpl<>(Collections.singletonList(avatar)) );
         Mockito.when(avatarService.needRefresh()).thenReturn(true, false);
         
-        ResponseEntity< Page<AvatarEntity> > re = avatarController.findAllBySearchName("", 0, 1);
+        ResponseEntity< Page<AvatarEntity> > re = avatarController.findAllByName("", 0, 1);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals( new PageImpl<>(Arrays.asList(avatar)), re.getBody() );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), re.getBody() );
         
-        re = avatarController.findAllBySearchName("", 0, 1);
+        re = avatarController.findAllByName("", 0, 1);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals( new PageImpl<>(Arrays.asList(avatar)), re.getBody() );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), re.getBody() );
     }
     
 }

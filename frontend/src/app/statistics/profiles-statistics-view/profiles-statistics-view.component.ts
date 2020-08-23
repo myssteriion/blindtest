@@ -44,6 +44,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
 
     /**
      * Get image from avatar.
+	 *
      * @param profile
      */
     private getImgFromAvatar(profile): string {
@@ -51,18 +52,19 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     /**
-     * Get all existing players
-     * @param page
+     * Get all existing players.
+	 *
+     * @param pageNumber
      */
-    private getAllPlayers(page) {
-        this._profileResource.findAllBySearchName('', page).subscribe(
+    private getAllPlayers(pageNumber) {
+        this._profileResource.findAllBySearchName('', pageNumber).subscribe(
         	response => {
         	
 				response.content.forEach(user => {
 					this.users.push(user)
 				});
 				if (!response.last) {
-					this.getAllPlayers(page + 1);
+					this.getAllPlayers(pageNumber + 1);
 				} else {
 					this.isLoading = false;
 				}
@@ -81,7 +83,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
 	
 				modalRef.result.then(
 					(result) => {
-						this.getAllPlayers(page);
+						this.getAllPlayers(pageNumber);
 					},
 					(reason) => {
 						this._router.navigateByUrl(HOME_PATH);
@@ -92,7 +94,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     /**
-     * Get all players statistics
+     * Get all players statistics.
      */
     public getPlayersStatistics() {
         this.isLoaded = false;
@@ -110,7 +112,8 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     /**
-     * Display graphs on appropriata tab
+     * Display graphs on appropriata tab.
+	 *
      * @param event
      */
     public onTabClick(event) {
@@ -118,7 +121,8 @@ export class ProfilesStatisticsViewComponent implements OnInit {
     }
 
     /**
-     * Map profile with statistics
+     * Map profile with statistics.
+	 *
      * @param statistics
      */
     private mapProfile(statistics) {

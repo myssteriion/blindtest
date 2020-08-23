@@ -224,13 +224,13 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
     }
     
     @Test
-    public void findAllBySearchName() {
+    public void findAllByName() {
         
         AvatarEntity avatar = new AvatarEntity("name");
         Mockito.when(dao.findAllByNameContainingIgnoreCase(Mockito.anyString(), Mockito.any(Pageable.class))).thenReturn( new PageImpl<>(Collections.singletonList(avatar)));
         
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllBySearchName(null, 0, 1) );
-        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllBySearchName("", 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllByName(null, 0, 1) );
+        Assert.assertEquals( new PageImpl<>(Collections.singletonList(avatar)), avatarService.findAllByName("", 0, 1) );
     }
     
     @Test

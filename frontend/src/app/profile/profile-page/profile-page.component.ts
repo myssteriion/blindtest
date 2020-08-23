@@ -69,7 +69,7 @@ export class ProfilePageComponent implements OnInit {
 	/**
 	 * The search name filter.
 	 */
-	private searchName: string;
+	private name: string;
 	
 	
 	
@@ -82,7 +82,7 @@ export class ProfilePageComponent implements OnInit {
 		
 		this.isLoaded = false;
 		this.showProfiles = false;
-		this.searchName = "";
+		this.name = "";
 		this.loadProfiles(true);
 	}
 	
@@ -99,7 +99,7 @@ export class ProfilePageComponent implements OnInit {
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._profileResource.findAllBySearchName(this.searchName, this.currentPage-1).subscribe(
+		this._profileResource.findAllBySearchName(this.name, this.currentPage-1).subscribe(
 			response => {
 				this.page = response;
 				this.showProfiles = true;

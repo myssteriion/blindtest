@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class ProfileControllerTest extends AbstractTest {
     
@@ -51,22 +52,22 @@ public class ProfileControllerTest extends AbstractTest {
     }
     
     @Test
-    public void findAllBySearchName() {
+    public void findAllByName() {
         
         IllegalArgumentException iae = new IllegalArgumentException("iae");
         Page<ProfileEntity> pageMock = Mockito.mock(Page.class);
-        Mockito.when(pageMock.getContent()).thenReturn(Arrays.asList(new ProfileEntity().setName("name")));
-        Mockito.when(profileService.findAllBySearchName(Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(iae).thenReturn(pageMock);
+        Mockito.when(pageMock.getContent()).thenReturn(Collections.singletonList(new ProfileEntity().setName("name")));
+        Mockito.when(profileService.findAllByName(Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(iae).thenReturn(pageMock);
         
         try {
-            profileController.findAllBySearchName("", 0, 1);
+            profileController.findAllByName("", 0, 1);
             Assert.fail("Doit lever une IllegalArgumentException car le mock throw.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(iae, e);
         }
         
-        ResponseEntity< Page<ProfileEntity> > re = profileController.findAllBySearchName("", 0, 1);
+        ResponseEntity< Page<ProfileEntity> > re = profileController.findAllByName("", 0, 1);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Page<ProfileEntity> actual = re.getBody();
         Assert.assertEquals( 1, actual.getContent().size() );
