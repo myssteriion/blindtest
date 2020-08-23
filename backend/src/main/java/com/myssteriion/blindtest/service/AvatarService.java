@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -62,69 +64,25 @@ public class AvatarService extends AbstractCRUDService<AvatarEntity, AvatarDAO> 
     
     
     @PostConstruct
-    private void init() {
+    public void init() {
         
-        Path path = Paths.get(avatarsFolderPath);
-        
-        File avatarDirectory = path.toFile();
-        for ( File file : CommonUtils.getChildren(avatarDirectory) ) {
-            
-            AvatarEntity avatar = new AvatarEntity(file.getName() );
-            if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !dao.findByName(file.getName()).isPresent() )
-                dao.save(avatar);
-        }
+        List<AvatarEntity> avatars = new ArrayList<>();
         
         for ( AvatarEntity avatar : dao.findAll() ) {
-            if ( !avatarFileExists(avatar) )
+            
+            avatars.add(avatar);
+            if ( !Paths.get(avatarsFolderPath, avatar.getName()).toFile().exists() )
                 dao.deleteById( avatar.getId() );
         }
-    }
-    
-    /**
-     * Test if the avatar match with an existing file.
-     *
-     * @param avatar the avatar
-     * @return TRUE if the avatar match with an existing file, FALSE otherwise
-     */
-    private boolean avatarFileExists(AvatarEntity avatar) {
-        return avatar != null && Paths.get(avatarsFolderPath, avatar.getName()).toFile().exists();
-    }
-    
-    /**
-     * Refresh avatars list.
-     */
-    public void refresh() {
-        init();
-    }
-    
-    /**
-     * Test if the repo needs to be refresh.
-     *
-     * @return TRUE if the repo needs to be refresh, FALSE otherwise
-     */
-    public boolean needRefresh() {
         
-        File avatarDirectory = Paths.get(avatarsFolderPath).toFile();
-        if ( CommonUtils.getChildren(avatarDirectory).size() != dao.count() )
-            return true;
-        
-        
-        boolean needRefresh = false;
-        
-        Page<AvatarEntity> page = dao.findAll(Pageable.unpaged());
-        int i = 0;
-        while (!needRefresh && i < page.getContent().size()) {
+        for ( File file : CommonUtils.getChildren(Paths.get(avatarsFolderPath).toFile()) ) {
             
-            AvatarEntity avatar = page.getContent().get(i);
-            createFlux(avatar);
-            if (!avatar.getFlux().isFileExists())
-                needRefresh = true;
-            
-            i++;
+            AvatarEntity avatar = new AvatarEntity( file.getName() );
+            if ( file.isFile() && CommonUtils.hadImageExtension(file.getName()) && !avatars.contains(avatar) )
+                dao.save(avatar);
         }
-        
-        return needRefresh;
     }
+    
     
     
     @Override
