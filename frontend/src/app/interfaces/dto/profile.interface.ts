@@ -6,7 +6,7 @@ import {ProfileStatistics} from '../common/profile-statistics.interface';
  */
 export interface Profile {
 	id: number,
-	background: number,
+	background: string,
 	name: string,
 	avatar?: Avatar,
 	statistics?: ProfileStatistics

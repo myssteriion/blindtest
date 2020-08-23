@@ -49,14 +49,11 @@
 .profile-edit-background {
 	border: 0.07em solid black;
 	border-radius: 2em;
-	margin: 0.7em 0.35em !important;
 	height: 2em;
-	opacity: 0.2;
 }
 
 .profile-edit-background:hover {
 	cursor: pointer;
-	opacity: 1;
 }
 
 .profile-edit-background-active {

@@ -18,6 +18,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {NavbarModule, WavesModule, ButtonsModule, IconsModule} from 'angular-bootstrap-md'
+import {ColorPickerModule} from 'ngx-color-picker';
 
 import {AppComponent} from "./app.component";
 import {NgxChartsModule} from "@swimlane/ngx-charts"
@@ -176,7 +177,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NavbarModule,
 		WavesModule,
 		ButtonsModule,
-		IconsModule
+		IconsModule,
+		ColorPickerModule
 	],
 	providers: [
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],

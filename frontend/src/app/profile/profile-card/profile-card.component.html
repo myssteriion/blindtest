@@ -1,4 +1,4 @@
-<div class="row m-0 profile-card-frame" [ngClass]="getBackgroundClass()" (click)="select()">
+<div class="row m-0 profile-card-frame" [style.background]="profile.background" (click)="select()">
 	
 	<!-- image -->
 	<div class="profile-card-avatar" [ngClass]="{'col-3': showIcons(), 'col-2': !showIcons()}">

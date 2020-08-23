@@ -130,27 +130,6 @@ fa-icon:hover {
     color: orangered;
 }
 
-/*************** background ***************/
-.profile-card-background-0 {
-    background: radial-gradient(seashell, silver);
-}
-
-.profile-card-background-1 {
-    background: radial-gradient(skyblue, dodgerblue);
-}
-
-.profile-card-background-2 {
-    background: radial-gradient(pink, hotpink);
-}
-
-.profile-card-background-3 {
-    background: radial-gradient(yellow, orangered);
-}
-
-.profile-card-background-4 {
-    background: radial-gradient(yellowgreen, green);
-}
-
 /*************** graphs ***************/
 .graph-frame {
     background-color: #f2f2f2;

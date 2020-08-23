@@ -32,16 +32,6 @@ export const COUNTDOWN_SOUND = "assets/sounds/countdown.mp3";
 export const OLYMPIA_ANTHEM_SOUND = "assets/sounds/olympia_anthem.mp3";
 
 /**
- * Name of "connexion-spotify" pdf.
- */
-export const SPOTIFY_CONNECTION_PDF_NAME = "connexion-spotify-V1.1.pdf";
-
-/**
- * Path to "connexion-spotify" pdf in assets folder.
- */
-export const SPOTIFY_CONNECTION_PDF = "assets/docs/" + SPOTIFY_CONNECTION_PDF_NAME;
-
-/**
  * Path to "themes" in assets folder.
  */
 export const THEMES = [
@@ -64,6 +54,11 @@ export const EFFECTS = [
 	{srcImg: "assets/images/effects/speed.png", enumVal: Effect.SPEED, tooltip: "EFFECTS.SPEED"},
 	{srcImg: "assets/images/effects/reverse.png", enumVal: Effect.MIX, tooltip: "EFFECTS.MIX"}
 ];
+
+/**
+ * The default value for the background.
+ */
+export const DEFAULT_BACKGROUND = "#cccccc";
 
 /**
  * Good answers list

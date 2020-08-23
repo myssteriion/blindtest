@@ -11,6 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {HTTP_CONFLICT} from "../../tools/constant";
+import {DEFAULT_BACKGROUND} from "../../tools/constant";
 
 declare var $: any;
 
@@ -57,11 +58,6 @@ export class ProfileEditModalComponent implements OnInit {
 	private showPageable: boolean;
 	
 	/**
-	 * Background ids.
-	 */
-	public backgroundIds = [0, 1, 2, 3, 4];
-	
-	/**
 	 * The search name filter.
 	 */
 	private searchName: string;
@@ -85,7 +81,7 @@ export class ProfileEditModalComponent implements OnInit {
 			
 			this.newProfile = {
 				id: null,
-				background: 0,
+				background: DEFAULT_BACKGROUND,
 				name: "",
 				avatar: { id: null, name: "" }
 			};
@@ -146,21 +142,6 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private getImgFromAvatar(avatar: Avatar): string {
 		return ToolsService.getImgFromAvatar(avatar);
-	}
-	
-	/**
-	 * Gets background dynamic class.
-	 *
-	 * @param index the background id
-	 */
-	private getBackgroundClass(index: number): string {
-		
-		let cssClass = "profile-card-background-" + index;
-		
-		if (index === this.newProfile.background)
-			cssClass += " profile-edit-background-active";
-		
-		return cssClass;
 	}
 	
 	/**
