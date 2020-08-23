@@ -1,7 +1,6 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractPowerMockTest;
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.utils.CommonUtils;
@@ -15,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -42,7 +40,7 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
     
     
     @Test
-    public void refresh() throws Exception {
+    public void init() throws Exception {
         
         File mockFile = Mockito.mock(File.class);
         Mockito.when(mockFile.isFile()).thenReturn(true);
@@ -61,34 +59,8 @@ public class AvatarServiceTest extends AbstractPowerMockTest {
         AvatarEntity avatarMock = new AvatarEntity();
         Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarMock));
         
-        avatarService.refresh();
+        avatarService.init();
         Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarEntity.class));
-    }
-    
-    @Test
-    public void needRefresh() throws Exception {
-        
-        File mockFile = Mockito.mock(File.class);
-        
-        PowerMockito.mockStatic(CommonUtils.class);
-        PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile));
-        
-        Mockito.when(dao.count()).thenReturn(0l, 1l);
-        
-        Flux fluxMock = Mockito.mock(Flux.class);
-        Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
-        AvatarEntity avatarMock = Mockito.mock(AvatarEntity.class);
-        Mockito.when(avatarMock.getFlux()).thenReturn(fluxMock);
-        
-        Page<AvatarEntity> pageMock = new PageImpl<>( Arrays.asList(avatarMock));
-        Mockito.when(dao.findAll(Mockito.any(Pageable.class))).thenReturn(pageMock);
-        
-        avatarService = PowerMockito.spy( new AvatarService(dao, configProperties));
-        PowerMockito.doNothing().when(avatarService, "createFlux", Mockito.any(AvatarEntity.class));
-        
-        Assert.assertTrue( avatarService.needRefresh() );
-        Assert.assertTrue( avatarService.needRefresh() );
-        Assert.assertFalse( avatarService.needRefresh() );
     }
     
     @Test

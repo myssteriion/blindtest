@@ -83,8 +83,6 @@ public class GameService {
         
         checkAndFillNewGame(newGame);
         
-        musicService.refresh();
-        
         List<Player> players = cratePlayersList( newGame.getProfilesId() );
         
         // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND

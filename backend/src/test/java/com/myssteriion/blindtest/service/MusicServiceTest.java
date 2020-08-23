@@ -75,32 +75,6 @@ public class MusicServiceTest extends AbstractPowerMockTest {
     }
     
     @Test
-    public void refresh() throws ConflictException {
-        
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.isFile()).thenReturn(true);
-        Mockito.when(mockFile.getName()).thenReturn("file.mp3");
-        
-        File mockDirectory = Mockito.mock(File.class);
-        Mockito.when(mockDirectory.isFile()).thenReturn(false);
-        
-        PowerMockito.mockStatic(CommonUtils.class);
-        PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-        PowerMockito.when(CommonUtils.hadAudioExtension(Mockito.anyString())).thenReturn(true);
-        
-        
-        musicService = Mockito.spy( new MusicService(dao, configProperties) );
-        MockitoAnnotations.initMocks(musicService);
-        Mockito.doReturn(null).when(musicService).save(Mockito.any(MusicEntity.class));
-        
-        MusicEntity musicMock = new MusicEntity();
-        Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
-        
-        musicService.refresh();
-        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(MusicEntity.class));
-    }
-    
-    @Test
     public void save() throws ConflictException {
         
         String name = "name";

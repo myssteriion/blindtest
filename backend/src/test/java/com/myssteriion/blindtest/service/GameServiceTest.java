@@ -42,7 +42,6 @@ public class GameServiceTest extends AbstractTest {
     @Before
     public void before() {
         gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
-        Mockito.doNothing().when(musicService).refresh();
     }
     
     

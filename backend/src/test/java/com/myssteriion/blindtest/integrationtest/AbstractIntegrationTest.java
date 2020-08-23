@@ -50,7 +50,6 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
         avatarService = new AvatarService(avatarDAO, configProperties);
         
         musicService = Mockito.spy( new MusicService(musicDAO, configProperties) );
-        Mockito.doNothing().when(musicService).refresh();
         
         profileService = new ProfileService(profileDAO, avatarService);
         

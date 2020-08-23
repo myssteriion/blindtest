@@ -1,24 +1,37 @@
 <configuration>
 	
-	<property name="LOG_PATH" value="C:/Users/mouto/Serveurs/tomcat/logs/musics-blindtest"/>
-	<property name="LOG_FILE_NAME" value="musics-blindtest"/>
+	<property name="PATH" value="C:/Users/mouto/Serveurs/tomcat/logs/musics-blindtest"/>
+	<property name="LOG_FILE" value="musics-blindtest"/>
+	<property name="JPA_LOG_FILE" value="musics-blindtest-query"/>
 	
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-		</encoder>
-	</appender>
 	
-	<appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="LOG_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		
-		<file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+		<file>${PATH}/${LOG_FILE}.log</file>
 		
 		<encoder>
-			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d [%thread] %-5level %logger - %msg%n</pattern>
 		</encoder>
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_PATH}/archived/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<fileNamePattern>${PATH}/archived/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<totalSizeCap>100MB</totalSizeCap>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+	
+	</appender>
+	
+	<appender name="JPA_LOG_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		<file>${PATH}/${JPA_LOG_FILE}.log</file>
+		
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${PATH}/archived/${JPA_LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxFileSize>10MB</maxFileSize>
 			<totalSizeCap>100MB</totalSizeCap>
 			<maxHistory>60</maxHistory>
@@ -28,17 +41,24 @@
 	
 	
 	<logger name="com.myssteriion" level="DEBUG" additivity="false">
-		<appender-ref ref="FILE-ROLLING"/>
+		<appender-ref ref="LOG_FILE_APPENDER"/>
 	</logger>
 	
 	<logger name="com.myssteriion.blindtest.BlindtestApplication" level="INFO" additivity="false">
-		<appender-ref ref="FILE-ROLLING"/>
-		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="LOG_FILE_APPENDER"/>
+	</logger>
+	
+	<logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+		<appender-ref ref="JPA_LOG_FILE_APPENDER"/>
+	</logger>
+	
+	<logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+		<appender-ref ref="JPA_LOG_FILE_APPENDER"/>
 	</logger>
 	
 	
 	<root level="WARN">
-		<appender-ref ref="FILE-ROLLING"/>
+		<appender-ref ref="LOG_FILE_APPENDER"/>
 	</root>
 
 </configuration>
