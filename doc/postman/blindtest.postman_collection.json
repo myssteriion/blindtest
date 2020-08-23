@@ -9,12 +9,33 @@
 			"name": "avatar",
 			"item": [
 				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/avatars/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"avatars",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "find all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/avatars?prefixName&pageNumber=0&itemPerPage=18",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/avatars?name=&pageNumber=0&itemPerPage=18",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -26,8 +47,8 @@
 							],
 							"query": [
 								{
-									"key": "prefixName",
-									"value": null
+									"key": "name",
+									"value": ""
 								},
 								{
 									"key": "pageNumber",
@@ -114,6 +135,27 @@
 			"name": "profile",
 			"item": [
 				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/avatars/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"avatars",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "save",
 					"request": {
 						"method": "POST",
@@ -182,7 +224,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles?prefixName=&pageNumber=0&itemPerPage=16",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles?name=&pageNumber=0&itemPerPage=16",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -194,7 +236,7 @@
 							],
 							"query": [
 								{
-									"key": "prefixName",
+									"key": "name",
 									"value": ""
 								},
 								{
@@ -226,38 +268,6 @@
 								"{{applicationContext}}",
 								"profiles",
 								"0"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "profilestat",
-			"item": [
-				{
-					"name": "find all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/profilestats?profilesIds=4, 1, 12",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{applicationContext}}",
-								"profilestats"
-							],
-							"query": [
-								{
-									"key": "profilesIds",
-									"value": "4, 1, 12"
-								}
 							]
 						}
 					},
@@ -319,7 +329,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\",\n\t\t\"connectionMode\": \"OFFLINE\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/games/apply",
@@ -369,6 +379,79 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "param",
+			"item": [
+				{
+					"name": "spotify param",
+					"item": [
+						{
+							"name": "find",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{applicationContext}}",
+										"params",
+										"spotify-param"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "insert profiles",
 			"item": [
 				{
@@ -385,7 +468,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Jean\",\n    \"background\": \"0\",\n    \"avatarName\": \"deadpool.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Jean\",\n    \"background\": \"#d18383\",\n    \"avatar\": {\n        \"id\": 1\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -416,7 +499,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Paul\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
+							"raw": "{\n    \"name\": \"Paul\",\n    \"background\": \"#4daa6d\",\n    \"avatar\": {\n        \"id\": 2\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -447,7 +530,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Kurby\",\n    \"background\": \"4\",\n    \"avatarName\": \"elephant.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Kurby\",\n    \"background\": \"#5b91dd\",\n    \"avatar\": {\n        \"id\": 3\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -478,7 +561,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Darkana\",\n    \"background\": \"3\",\n    \"avatarName\": \"harryPotter.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Darkana\",\n    \"background\": \"#a584c9\",\n    \"avatar\": {\n        \"id\": 4\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -509,7 +592,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Myssteriion\",\n    \"background\": \"1\",\n    \"avatarName\": \"licorne.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Myssteriion\",\n    \"background\": \"#fcdc5c\",\n    \"avatar\": {\n        \"id\": 5\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -540,7 +623,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Tooms\",\n    \"background\": \"2\",\n    \"avatarName\": \"doctorwho.png\"\n}"
+							"raw": "{\n    \"name\": \"Tooms\",\n    \"background\": \"#ae0505\",\n    \"avatar\": {\n        \"id\": 6\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -571,7 +654,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Mouton\",\n    \"background\": \"3\",\n    \"avatarName\": \"ronflex.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Mouton\",\n    \"background\": \"#3a8f8d\",\n    \"avatar\": {\n        \"id\": 7\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -602,7 +685,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Stanouch\",\n    \"background\": \"0\",\n    \"avatarName\": \"lapin.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Stanouch\",\n    \"background\": \"#a20f96\",\n    \"avatar\": {\n        \"id\": 8\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -633,7 +716,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Menencia\",\n    \"background\": \"1\",\n    \"avatarName\": \"sangoku.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Menencia\",\n    \"background\": \"#538b16\",\n    \"avatar\": {\n        \"id\": 9\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -664,7 +747,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"O2\",\n    \"background\": \"3\",\n    \"avatarName\": \"pinguin.jpg\"\n}"
+							"raw": "{\n    \"name\": \"O2\",\n    \"background\": \"#cff5a7\",\n    \"avatar\": {\n        \"id\": 10\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -695,7 +778,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"LinC\",\n    \"background\": \"4\",\n    \"avatarName\": \"spiderman.jpg\"\n}"
+							"raw": "{\n    \"name\": \"LinC\",\n    \"background\": \"#e37daf\",\n    \"avatar\": {\n        \"id\": 11\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -726,7 +809,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Despacito\",\n    \"background\": \"4\",\n    \"avatarName\": \"wolwerine.jpg\"\n}"
+							"raw": "{\n    \"name\": \"Despacito\",\n    \"background\": \"#c7d9fc\",\n    \"avatar\": {\n        \"id\": 12\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -757,7 +840,224 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Ricard'o\",\n    \"background\": \"4\",\n    \"avatarName\": \"licorne.png\"\n}"
+							"raw": "{\n    \"name\": \"Ricard'o\",\n    \"background\": \"#d5a33e\",\n    \"avatar\": {\n        \"id\": 13\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save014",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Seb\",\n    \"background\": \"#e2eb39\",\n    \"avatar\": {\n        \"id\": 14\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save015",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Igor\",\n    \"background\": \"#46a89e\",\n    \"avatar\": {\n        \"id\": 15\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save016",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pikapi\",\n    \"background\": \"#49cfc1\",\n    \"avatar\": {\n        \"id\": 16\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save017",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lalo\",\n    \"background\": \"#49cf65\",\n    \"avatar\": {\n        \"id\": 17\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save018",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Zazou\",\n    \"background\": \"#55147f\",\n    \"avatar\": {\n        \"id\": 18\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save019",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Simba\",\n    \"background\": \"#d15899\",\n    \"avatar\": {\n        \"id\": 19\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save020",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nala\",\n    \"background\": \"#a79cb4\",\n    \"avatar\": {\n        \"id\": 20\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/profiles",
@@ -2123,122 +2423,6 @@
 								"{{applicationContext}}",
 								"game",
 								"apply"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "param",
-			"item": [
-				{
-					"name": "spotify param",
-					"item": [
-						{
-							"name": "find",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}"
-								},
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "spotify",
-			"item": [
-				{
-					"name": "connection test",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeika\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/spotify/connection-test",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{applicationContext}}",
-								"spotify",
-								"connection-test"
 							]
 						}
 					},
