@@ -2,6 +2,16 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 import {faGamepad, faAngleDoubleRight, faAddressCard, faChartBar, faCog} from '@fortawesome/free-solid-svg-icons';
 
 /**
+ * The max players number.
+ */
+export const MAX_PLAYERS = 16;
+
+/**
+ * The min players number.
+ */
+export const MIN_PLAYERS = 2;
+
+/**
  * Path to "logo" image in assets folder.
  */
 export const LOGO = "assets/images/logo.png";

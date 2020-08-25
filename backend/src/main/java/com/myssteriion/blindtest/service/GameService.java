@@ -121,11 +121,11 @@ public class GameService {
         
         
         Set<Integer> profilesId = newGame.getProfilesId();
-        if ( profilesId.size() < configProperties.getMinPlayers() )
-            throw new IllegalArgumentException(configProperties.getMinPlayers() + " players at minimum");
+        if (profilesId.size() < Constant.MIN_PLAYERS)
+            throw new IllegalArgumentException(Constant.MIN_PLAYERS + " players at minimum");
         
-        if ( profilesId.size() > configProperties.getMaxPlayers() )
-            throw new IllegalArgumentException(configProperties.getMaxPlayers() + " players at maximum");
+        if (profilesId.size() > Constant.MAX_PLAYERS)
+            throw new IllegalArgumentException(Constant.MAX_PLAYERS + " players at maximum");
     }
     
     /**

@@ -5,7 +5,7 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {EFFECTS, GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
+import {EFFECTS, GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES, MAX_PLAYERS, MIN_PLAYERS} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
@@ -68,16 +68,6 @@ export class GameNewViewComponent implements OnInit {
 	 * Players profiles and empty names.
 	 */
 	public playersProfiles: Profile[];
-	
-	/**
-	 * The max players number.
-	 */
-	private static MAX_PLAYERS: number = environment.maxPlayers;
-	
-	/**
-	 * The min players number.
-	 */
-	private static MIN_PLAYERS: number = environment.minPlayers;
 	
 	/**
 	 * The min musics number for the same probability mode (tooltip).
@@ -148,8 +138,8 @@ export class GameNewViewComponent implements OnInit {
 	public getPlayersLabel(): string {
 		
 		let params = {
-			minPlayers: GameNewViewComponent.MIN_PLAYERS,
-			maxPlayers: GameNewViewComponent.MAX_PLAYERS
+			minPlayers: MIN_PLAYERS,
+			maxPlayers: MAX_PLAYERS
 		};
 		
 		return this._translate.instant("GAME.NEW_VIEW.PLAYERS_LIST_LABEL", params);
@@ -286,7 +276,7 @@ export class GameNewViewComponent implements OnInit {
 		let index = this.playersProfiles.length + 1;
 		var emptyNames = [];
 		
-		while (index <= GameNewViewComponent.MAX_PLAYERS) {
+		while (index <= MAX_PLAYERS) {
 			emptyNames.push( this._translate.instant("GAME.NEW_VIEW.PLAYER") + " " + index );
 			index++;
 		}
@@ -314,8 +304,8 @@ export class GameNewViewComponent implements OnInit {
 		
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 		
-		if ( this.playersProfiles.length >= GameNewViewComponent.MAX_PLAYERS ) {
-			let message = this._translate.instant( "GAME.NEW_VIEW.MAX_PLAYERS_ERROR", { max_players: GameNewViewComponent.MAX_PLAYERS}  );
+		if ( this.playersProfiles.length >= MAX_PLAYERS ) {
+			let message = this._translate.instant( "GAME.NEW_VIEW.MAX_PLAYERS_ERROR", { max_players: MAX_PLAYERS}  );
 			this._toasterService.error(message);
 		}
 		else if (index !== -1) {
@@ -376,7 +366,7 @@ export class GameNewViewComponent implements OnInit {
 	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedDuration) || this.playersProfiles.length < GameNewViewComponent.MIN_PLAYERS;
+		return ToolsService.isNull(this.selectedDuration) || this.playersProfiles.length < MIN_PLAYERS;
 	}
 	
 	/**
