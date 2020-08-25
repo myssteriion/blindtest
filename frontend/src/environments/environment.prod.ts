@@ -3,8 +3,6 @@ export const environment = {
     version: "3.0.0-SNAPSHOT",
 	backendPath: "/musics-blindtest",
     
-    maxPlayers: 16,
-    minPlayers: 2,
     itemPerPageAvatars: 12,
     itemPerPageProfiles: 15,
 	itemPerPageGames: 3,

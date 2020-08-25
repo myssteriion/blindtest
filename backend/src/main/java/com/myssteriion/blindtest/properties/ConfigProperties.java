@@ -11,12 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/config.properties")
 public class ConfigProperties {
     
-    @Value("${maxPlayers}")
-    private Integer maxPlayers;
-    
-    @Value("${minPlayers}")
-    private Integer minPlayers;
-    
     @Value("${avatars.folderPath}")
     private String avatarsFolderPath;
     
@@ -24,24 +18,6 @@ public class ConfigProperties {
     private String musicsFolderPath;
     
     
-    
-    /**
-     * Gets maxPlayers.
-     *
-     * @return The maxPlayers.
-     */
-    public Integer getMaxPlayers() {
-        return maxPlayers;
-    }
-    
-    /**
-     * Gets minPlayers.
-     *
-     * @return The minPlayers.
-     */
-    public Integer getMinPlayers() {
-        return minPlayers;
-    }
     
     /**
      * Gets avatarsFolderPath.

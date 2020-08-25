@@ -10,6 +10,10 @@ public class Constant {
     
     public static final Random RANDOM = new Random();
     
+    public static final Integer MAX_PLAYERS     = 16;
+    public static final Integer MIN_PLAYERS     = 2;
+    
+    
     public static final Integer ITEM_PER_PAGE_MAX       = 50;
     
     public static final String NAME                     = "name";
