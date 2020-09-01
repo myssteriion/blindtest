@@ -22,12 +22,25 @@
 		<div class="row profile-edit-backgrounds">
 			<div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.BACKGROUND_LABEL' | translate }}</div>
 			<div class="col-8">
-				<input class="profile-edit-background box-shadow" [(colorPicker)]="newProfile.background" [style.background]="newProfile.background">
+				<input class="profile-edit-background box-shadow" [(colorPicker)]="newProfile.background" [style.background]="newProfile.background"
+					   [cpCloseClickOutside]="false"
+					   
+					   (colorPickerOpen)="colorPickerIsOpen = true"
+					   (colorPickerClose)="colorPickerIsOpen = false"
+					   
+					   [cpOKButton]="true"
+					   cpOKButtonText="{{ 'COMMON.VALID'|translate }}"
+					   [cpOKButtonClass]="'btn btn-success'"
+					
+					   [cpCancelButton]="true"
+					   cpCancelButtonText="{{ 'COMMON.CANCEL'|translate }}"
+					   [cpCancelButtonClass]="'btn btn-danger'"
+				>
 			</div>
 		</div>
 		
 		<!-- avatar -->
-		<div class="row profile-edit-avatar">
+		<div *ngIf="showAvatars" class="row profile-edit-avatar">
 			<div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.AVATAR_LABEL' | translate }}</div>
 			<div class="col-8"><img src="{{ getImgFromAvatar(newProfile.avatar) }}"/></div>
 		</div>

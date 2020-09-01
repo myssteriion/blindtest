@@ -62,6 +62,11 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private searchName: string;
 	
+	/**
+	 * If the color picker is open.
+	 */
+	private colorPickerIsOpen: boolean;
+	
 	
 	
 	constructor(private _avatarResource: AvatarResource,
@@ -76,6 +81,7 @@ export class ProfileEditModalComponent implements OnInit {
 		this.showAvatars = false;
 		this.showPageable = false;
 		this.searchName = "";
+		this.colorPickerIsOpen = false;
 		
 		if (this.create) {
 			
@@ -83,7 +89,7 @@ export class ProfileEditModalComponent implements OnInit {
 				id: null,
 				background: DEFAULT_BACKGROUND,
 				name: "",
-				avatar: { id: null, name: "" }
+				avatar: null
 			};
 		}
 		else {
@@ -112,7 +118,7 @@ export class ProfileEditModalComponent implements OnInit {
 			response => {
 				
 				this.avatarsPage = response;
-				this.showAvatars = true;
+				this.showAvatars = this.avatarsPage.totalElements > 0;
 				this.showPageable = this.avatarsPage.totalPages > 1;
 			},
 			error => {
@@ -157,7 +163,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 * Test if the save button is disabled.
 	 */
 	public disabledSave(): boolean {
-		return ToolsService.isNullOrEmpty(this.newProfile.name) || ToolsService.isNull(this.newProfile.background);
+		return this.colorPickerIsOpen || ToolsService.isNullOrEmpty(this.newProfile.name) || ToolsService.isNull(this.newProfile.background);
 	}
 	
 	/**
