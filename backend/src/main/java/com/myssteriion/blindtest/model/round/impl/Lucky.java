@@ -1,14 +1,14 @@
-package com.myssteriion.blindtest.model.common.roundcontent.impl;
+package com.myssteriion.blindtest.model.round.impl;
 
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.tools.Constant;
 
 /**
- * The Lucky round content.
+ * The Lucky round.
  */
-public class LuckyContent extends AbstractRoundContent {
+public class Lucky extends AbstractRound {
     
     /**
      * The number of bonus points.
@@ -23,13 +23,13 @@ public class LuckyContent extends AbstractRoundContent {
     
     
     /**
-     * Instantiates a new Lucky content.
+     * Instantiates a new Lucky.
      *
      * @param nbMusics     the nb musics
      * @param nbPointWon   the nb point won
      * @param nbPointBonus the nb bonus point
      */
-    public LuckyContent(int nbMusics, int nbPointWon, int nbPointBonus) {
+    public Lucky(int nbMusics, int nbPointWon, int nbPointBonus) {
         super(nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
     }

@@ -17,29 +17,29 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ThiefContentTest extends AbstractTest {
+public class ThiefTest extends AbstractTest {
     
     @Test
     public void constructors() {
         
-        ThiefContent thiefContent = new ThiefContent(-1,  -2, 3);
-        Assert.assertEquals( 0, thiefContent.getNbMusics() );
-        Assert.assertEquals( 0, thiefContent.getNbPointWon() );
-        Assert.assertEquals( 0, thiefContent.getNbPointLoose() );
+        Thief thief = new Thief(-1,  -2, 3);
+        Assert.assertEquals( 0, thief.getNbMusics() );
+        Assert.assertEquals( 0, thief.getNbPointWon() );
+        Assert.assertEquals( 0, thief.getNbPointLoose() );
     }
     
     @Test
     public void getterSetter() {
         
-        ThiefContent thiefContent = new ThiefContent(-1,  -2, 3);
-        Assert.assertEquals( 0, thiefContent.getNbMusics() );
-        Assert.assertEquals( 0, thiefContent.getNbPointWon() );
-        Assert.assertEquals( 0, thiefContent.getNbPointLoose() );
+        Thief thief = new Thief(-1,  -2, 3);
+        Assert.assertEquals( 0, thief.getNbMusics() );
+        Assert.assertEquals( 0, thief.getNbPointWon() );
+        Assert.assertEquals( 0, thief.getNbPointLoose() );
         
-        thiefContent = new ThiefContent(5,  100, -100);
-        Assert.assertEquals( 5, thiefContent.getNbMusics() );
-        Assert.assertEquals( 100, thiefContent.getNbPointWon() );
-        Assert.assertEquals( -100, thiefContent.getNbPointLoose() );
+        thief = new Thief(5,  100, -100);
+        Assert.assertEquals( 5, thief.getNbMusics() );
+        Assert.assertEquals( 100, thief.getNbPointWon() );
+        Assert.assertEquals( -100, thief.getNbPointLoose() );
     }
     
     @Test
@@ -49,20 +49,20 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         
         Integer gameId = 1;
         MusicEntity music = new MusicEntity("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep(roundContentProperties);
+            game.nextStep(roundProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
-        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
+        Thief thief = (Thief) game.getRoundContent();
         
         try {
-            thiefContent.apply(null, musicResult);
+            thief.apply(null, musicResult);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -70,7 +70,7 @@ public class ThiefContentTest extends AbstractTest {
         }
         
         try {
-            thiefContent.apply(game, null);
+            thief.apply(game, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -78,25 +78,25 @@ public class ThiefContentTest extends AbstractTest {
         }
         
         
-        Game actual = thiefContent.apply(game, musicResult);
+        Game actual = thief.apply(game, musicResult);
         Assert.assertEquals( 100, actual.getPlayers().get(0).getScore() );
         
         
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
-        actual = thiefContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = thief.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 0, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
-        actual = thiefContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = thief.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( -300, actual.getPlayers().get(0).getScore() );
         
         playersNames = Arrays.asList("name", "name", "name");
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
-        actual = thiefContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = thief.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( -500, actual.getPlayers().get(0).getScore() );
     }
     
@@ -106,23 +106,23 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep(roundContentProperties);
+            game.nextStep(roundProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
-        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
+        Thief thief = (Thief) game.getRoundContent();
         
         try {
-            thiefContent.isFinished(null);
+            thief.isFinished(null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
         }
         
-        Assert.assertFalse( thiefContent.isFinished(game) );
+        Assert.assertFalse( thief.isFinished(game) );
     }
     
     @Test
@@ -131,33 +131,33 @@ public class ThiefContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         
         for (int i = 0; i < 52; i++)
-            game.nextStep(roundContentProperties);
+            game.nextStep(roundProperties);
         
         Assert.assertSame( Round.THIEF, game.getRound() );
-        ThiefContent thiefContent = (ThiefContent) game.getRoundContent();
+        Thief thief = (Thief) game.getRoundContent();
         
-        Assert.assertFalse( thiefContent.isLastMusic(game) );
+        Assert.assertFalse( thief.isLastMusic(game) );
         
         for (int i = 0; i < 18; i++) {
-            game.nextStep(roundContentProperties);
-            Assert.assertFalse( thiefContent.isLastMusic(game) );
+            game.nextStep(roundProperties);
+            Assert.assertFalse( thief.isLastMusic(game) );
         }
         
-        game.nextStep(roundContentProperties);
-        Assert.assertTrue( thiefContent.isLastMusic(game) );
+        game.nextStep(roundProperties);
+        Assert.assertTrue( thief.isLastMusic(game) );
         
-        game.nextStep(roundContentProperties);
-        Assert.assertFalse( thiefContent.isLastMusic(game) );
+        game.nextStep(roundProperties);
+        Assert.assertFalse( thief.isLastMusic(game) );
     }
     
     @Test
     public void toStringAndEquals() {
         
-        ThiefContent thiefContent = new ThiefContent(5,  100, -100);
-        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointLoose=-100", thiefContent.toString() );
+        Thief thief = new Thief(5,  100, -100);
+        Assert.assertEquals( "nbMusics=5, nbPointWon=100, nbPointLoose=-100", thief.toString() );
     }
     
 }

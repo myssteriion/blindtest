@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * The mapping with round-content.properties.
+ * The mapping with round.properties.
  */
 @Configuration
-@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/round-content.properties")
-public class RoundContentProperties {
+@PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/round.properties")
+public class RoundProperties {
     
     @Value("${classic.nbMusics}")
     private Integer classicNbMusics;

@@ -5,10 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RoundContentPropertiesTest extends AbstractTest {
+public class RoundPropertiesTest extends AbstractTest {
     
     @Autowired
-    private RoundContentProperties props;
+    private RoundProperties props;
     
     
     

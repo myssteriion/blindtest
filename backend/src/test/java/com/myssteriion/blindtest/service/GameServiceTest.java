@@ -41,7 +41,7 @@ public class GameServiceTest extends AbstractTest {
     
     @Before
     public void before() {
-        gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
+        gameService = new GameService(musicService, profileService, configProperties, roundProperties);
     }
     
     

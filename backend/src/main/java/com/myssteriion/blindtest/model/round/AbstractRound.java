@@ -5,9 +5,9 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.utils.CommonUtils;
 
 /**
- * Abstract class for all round content.
+ * Abstract class for all round.
  */
-public abstract class AbstractRoundContent {
+public abstract class AbstractRound {
     
     /**
      * The musics number.
@@ -22,12 +22,12 @@ public abstract class AbstractRoundContent {
     
     
     /**
-     * Instantiates a new Abstract round content.
+     * Instantiates a new AbstractRound.
      *
      * @param nbMusics   the nb musics
      * @param nbPointWon the nb point won
      */
-    public AbstractRoundContent(int nbMusics, int nbPointWon) {
+    public AbstractRound(int nbMusics, int nbPointWon) {
         this.nbMusics = Math.max(nbMusics, 0);
         this.nbPointWon = Math.max(nbPointWon, 0);
     }
@@ -69,7 +69,7 @@ public abstract class AbstractRoundContent {
     }
     
     /**
-     * Update the game from music result and this round content.
+     * Update the game from music result and this round.
      *
      * @param game        the game
      * @param musicResult the music result
@@ -97,10 +97,10 @@ public abstract class AbstractRoundContent {
     
     
     /**
-     * Test if the round content is finished.
+     * Test if the round is finished.
      *
      * @param game the game
-     * @return TRUE if the round content is finished, FALSE otherwise
+     * @return TRUE if the round is finished, FALSE otherwise
      */
     public boolean isFinished(Game game) {
         
@@ -110,10 +110,10 @@ public abstract class AbstractRoundContent {
     }
     
     /**
-     * Test if the round content is last step.
+     * Test if the round is last step.
      *
      * @param game the game
-     * @return TRUE if the round content is last step, FALSE otherwise
+     * @return TRUE if the round is last step, FALSE otherwise
      */
     public boolean isLastMusic(Game game) {
         

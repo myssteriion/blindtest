@@ -3,11 +3,6 @@ package com.myssteriion.blindtest.model.round.impl;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.round.Round;
-import com.myssteriion.blindtest.model.round.impl.ChoiceContent;
-import com.myssteriion.blindtest.model.round.impl.ClassicContent;
-import com.myssteriion.blindtest.model.round.impl.LuckyContent;
-import com.myssteriion.blindtest.model.round.impl.RecoveryContent;
-import com.myssteriion.blindtest.model.round.impl.ThiefContent;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.Player;
@@ -35,32 +30,32 @@ public class RoundTest extends AbstractTest {
     }
     
     @Test
-    public void createRoundContent(){
+    public void createRound(){
         
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name2")));
         Duration duration = Duration.NORMAL;
         
-        Game game = new Game(players, duration, null, null, roundContentProperties);
+        Game game = new Game(players, duration, null, null, roundProperties);
         
         
-        Assert.assertTrue( Round.CLASSIC.createRoundContent(game, roundContentProperties) instanceof ClassicContent );
+        Assert.assertTrue( Round.CLASSIC.createRound(game, roundProperties) instanceof Classic);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.CHOICE.createRoundContent(game, roundContentProperties) instanceof ChoiceContent);
+        Assert.assertTrue( Round.CHOICE.createRound(game, roundProperties) instanceof Choice);
         Assert.assertTrue( game.getPlayers().get(0).isTurnToChoose() ^ game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.LUCKY.createRoundContent(game, roundContentProperties) instanceof LuckyContent);
+        Assert.assertTrue( Round.LUCKY.createRound(game, roundProperties) instanceof Lucky);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.THIEF.createRoundContent(game, roundContentProperties) instanceof ThiefContent);
+        Assert.assertTrue( Round.THIEF.createRound(game, roundProperties) instanceof Thief);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
         
-        Assert.assertTrue( Round.RECOVERY.createRoundContent(game, roundContentProperties) instanceof RecoveryContent);
+        Assert.assertTrue( Round.RECOVERY.createRound(game, roundProperties) instanceof Recovery);
         Assert.assertFalse( game.getPlayers().get(0).isTurnToChoose() );
         Assert.assertFalse( game.getPlayers().get(1).isTurnToChoose() );
     }

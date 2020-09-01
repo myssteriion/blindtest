@@ -1,13 +1,13 @@
 package com.myssteriion.blindtest.model.round;
 
-import com.myssteriion.blindtest.model.round.impl.ChoiceContent;
-import com.myssteriion.blindtest.model.round.impl.ClassicContent;
-import com.myssteriion.blindtest.model.round.impl.FriendshipContent;
-import com.myssteriion.blindtest.model.round.impl.LuckyContent;
-import com.myssteriion.blindtest.model.round.impl.RecoveryContent;
-import com.myssteriion.blindtest.model.round.impl.ThiefContent;
+import com.myssteriion.blindtest.model.round.impl.Choice;
+import com.myssteriion.blindtest.model.round.impl.Classic;
+import com.myssteriion.blindtest.model.round.impl.Friendship;
+import com.myssteriion.blindtest.model.round.impl.Lucky;
+import com.myssteriion.blindtest.model.round.impl.Recovery;
+import com.myssteriion.blindtest.model.round.impl.Thief;
 import com.myssteriion.blindtest.model.game.Game;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.properties.RoundProperties;
 import com.myssteriion.utils.CommonUtils;
 
 import java.util.Arrays;
@@ -54,26 +54,26 @@ public enum Round {
     }
     
     /**
-     * Create round content from game.
+     * Create round from game.
      *
      * @param game the game
-     * @return the round content
+     * @return the round
      */
     // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-    public AbstractRoundContent createRoundContent(Game game, RoundContentProperties prop) {
+    public AbstractRound createRound(Game game, RoundProperties prop) {
         
         CommonUtils.verifyValue("game", game);
         
         double durationRatio = game.getDuration().getRatio();
         
         
-        AbstractRoundContent roundContent;
+        AbstractRound round;
         
         switch (this) {
             case CLASSIC:
                 int nbMusics = prop.getClassicNbMusics();
                 int nbPointWon = prop.getClassicNbPointWon();
-                roundContent = new ClassicContent((int) (nbMusics * durationRatio), nbPointWon);
+                round = new Classic((int) (nbMusics * durationRatio), nbPointWon);
                 break;
             
             case CHOICE:
@@ -81,41 +81,41 @@ public enum Round {
                 nbPointWon = prop.getChoiceNbPointWon();
                 int nbPointBonusWon = prop.getChoiceNbPointBonus();
                 int nbPointMalusLoose = prop.getChoiceNbPointMalus();
-                roundContent = new ChoiceContent((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
+                round = new Choice((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon, nbPointMalusLoose);
                 break;
             
             case LUCKY:
                 nbMusics = prop.getLuckyNbMusics();
                 nbPointWon = prop.getLuckyNbPointWon();
                 nbPointBonusWon = prop.getLuckyNbPointBonus();
-                roundContent = new LuckyContent((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
+                round = new Lucky((int) (nbMusics * durationRatio), nbPointWon, nbPointBonusWon);
                 break;
             
             case FRIENDSHIP:
                 nbMusics = prop.getFriendshipNbMusics();
                 nbPointWon = prop.getFriendshipNbPointWon();
-                roundContent = new FriendshipContent((int) (nbMusics * durationRatio), nbPointWon);
+                round = new Friendship((int) (nbMusics * durationRatio), nbPointWon);
                 break;
             
             case THIEF:
                 nbMusics = prop.getThiefNbMusics();
                 nbPointWon = prop.getThiefNbPointWon();
                 int nbPointLoose = prop.getThiefNbPointLoose();
-                roundContent = new ThiefContent( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
+                round = new Thief( (int) (nbMusics * durationRatio), nbPointWon, nbPointLoose);
                 break;
             
             case RECOVERY:
                 nbMusics = prop.getRecoveryNbMusics();
                 nbPointWon = prop.getRecoveryNbPointWon();
-                roundContent = new RecoveryContent((int) (nbMusics * durationRatio), nbPointWon);
+                round = new Recovery((int) (nbMusics * durationRatio), nbPointWon);
                 break;
             
             
             default: throw new IllegalArgumentException("Il manque un case ('" + this + "').");
         }
         
-        roundContent.prepare(game);
-        return roundContent;
+        round.prepare(game);
+        return round;
     }
     
     /**

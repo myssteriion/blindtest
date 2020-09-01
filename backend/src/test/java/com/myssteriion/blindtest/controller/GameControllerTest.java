@@ -44,7 +44,7 @@ public class GameControllerTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, roundContentProperties));
+        Mockito.when(gameService.newGame( Mockito.any(NewGame.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, roundProperties));
         
         NewGame newGame = new NewGame()
                 .setProfilesId( new HashSet<>(Collections.singletonList(profileId)) )
@@ -61,7 +61,7 @@ public class GameControllerTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, roundContentProperties));
+        Mockito.when(gameService.apply( Mockito.any(MusicResult.class) )).thenReturn(new Game(players, Duration.NORMAL, null, null, roundProperties));
         
         MusicEntity music = new MusicEntity("name", Theme.ANNEES_60);
         MusicResult musicResult = new MusicResult().setGameId(0).setMusic(music);
@@ -79,7 +79,7 @@ public class GameControllerTest extends AbstractTest {
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
         
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         game.setId(11);
         Mockito.when(gameService.findById( Mockito.anyInt()) ).thenReturn(game);
         
@@ -96,7 +96,7 @@ public class GameControllerTest extends AbstractTest {
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
         
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         game.setId(11);
         Mockito.when(gameService.findAll( Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean() )).thenReturn( new PageImpl<>(Collections.singletonList(game)) );
         

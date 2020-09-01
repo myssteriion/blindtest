@@ -17,26 +17,26 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class RecoveryContentTest extends AbstractTest {
+public class RecoveryTest extends AbstractTest {
     
     @Test
     public void constructors() {
         
-        RecoveryContent recoveryContent = new RecoveryContent(-1,  -2);
-        Assert.assertEquals( 0, recoveryContent.getNbMusics() );
-        Assert.assertEquals( 0, recoveryContent.getNbPointWon() );
+        Recovery recovery = new Recovery(-1,  -2);
+        Assert.assertEquals( 0, recovery.getNbMusics() );
+        Assert.assertEquals( 0, recovery.getNbPointWon() );
     }
     
     @Test
     public void getterSetter() {
         
-        RecoveryContent recoveryContent = new RecoveryContent(-1,  -2);
-        Assert.assertEquals( 0, recoveryContent.getNbMusics() );
-        Assert.assertEquals( 0, recoveryContent.getNbPointWon() );
+        Recovery recovery = new Recovery(-1,  -2);
+        Assert.assertEquals( 0, recovery.getNbMusics() );
+        Assert.assertEquals( 0, recovery.getNbPointWon() );
         
-        recoveryContent = new RecoveryContent(5,  100);
-        Assert.assertEquals( 5, recoveryContent.getNbMusics() );
-        Assert.assertEquals( 100, recoveryContent.getNbPointWon() );
+        recovery = new Recovery(5,  100);
+        Assert.assertEquals( 5, recovery.getNbMusics() );
+        Assert.assertEquals( 100, recovery.getNbPointWon() );
     }
     
     @Test
@@ -46,20 +46,20 @@ public class RecoveryContentTest extends AbstractTest {
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
                 new Player(new ProfileEntity().setName("name1")));
-        Game game = new Game(players, Duration.NORMAL, null, null, roundContentProperties);
+        Game game = new Game(players, Duration.NORMAL, null, null, roundProperties);
         
         Integer gameId = 1;
         MusicEntity music = new MusicEntity("name", Theme.ANNEES_80);
         MusicResult musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames);
         
         for (int i = 0; i < 72; i++)
-            game.nextStep(roundContentProperties);
+            game.nextStep(roundProperties);
         
         Assert.assertSame( Round.RECOVERY, game.getRound() );
-        RecoveryContent recoveryContent = (RecoveryContent) game.getRoundContent();
+        Recovery recovery = (Recovery) game.getRoundContent();
         
         try {
-            recoveryContent.apply(null, musicResult);
+            recovery.apply(null, musicResult);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -67,7 +67,7 @@ public class RecoveryContentTest extends AbstractTest {
         }
         
         try {
-            recoveryContent.apply(game, null);
+            recovery.apply(game, null);
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
@@ -75,28 +75,28 @@ public class RecoveryContentTest extends AbstractTest {
         }
         
         
-        Game actual = recoveryContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        Game actual = recovery.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 30, actual.getPlayers().get(0).getScore() );
         
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setTitleWinners(playersNames);
-        actual = recoveryContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = recovery.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
         
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setAuthorWinners(playersNames).setTitleWinners(playersNames);
-        actual = recoveryContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = recovery.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
         
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setLosers(playersNames);
-        actual = recoveryContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = recovery.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 120, actual.getPlayers().get(0).getScore() );
         
         musicResult = new MusicResult().setGameId(gameId).setMusic(music).setPenalties(playersNames);
-        actual = recoveryContent.apply(game, musicResult);
-        game.nextStep(roundContentProperties);
+        actual = recovery.apply(game, musicResult);
+        game.nextStep(roundProperties);
         Assert.assertEquals( 60, actual.getPlayers().get(0).getScore() );
     }
     

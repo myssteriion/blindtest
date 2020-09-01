@@ -1,13 +1,13 @@
-package com.myssteriion.blindtest.model.common.roundcontent.impl;
+package com.myssteriion.blindtest.model.round.impl;
 
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 
 /**
- * The Thief round content.
+ * The Thief round.
  */
-public class ThiefContent extends AbstractRoundContent {
+public class Thief extends AbstractRound {
     
     /**
      * The number of lose points.
@@ -17,13 +17,13 @@ public class ThiefContent extends AbstractRoundContent {
     
     
     /**
-     * Instantiates a new Thief content.
+     * Instantiates a new Thief.
      *
      * @param nbMusics     the nb musics
      * @param nbPointWon   the nb point won
      * @param nbPointLoose the nb point loose
      */
-    public ThiefContent(int nbMusics, int nbPointWon, int nbPointLoose) {
+    public Thief(int nbMusics, int nbPointWon, int nbPointLoose) {
         
         super(nbMusics, nbPointWon);
         this.nbPointLoose = Math.min(nbPointLoose, 0);

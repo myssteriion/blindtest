@@ -54,7 +54,7 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
         
         profileService = new ProfileService(profileDAO, avatarService);
         
-        gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
+        gameService = new GameService(musicService, profileService, configProperties, roundProperties);
         
         clearDataBase();
         insertData();

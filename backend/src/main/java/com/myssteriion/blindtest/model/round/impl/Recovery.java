@@ -1,21 +1,21 @@
-package com.myssteriion.blindtest.model.common.roundcontent.impl;
+package com.myssteriion.blindtest.model.round.impl;
 
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 
 /**
- * The Recovery round content.
+ * The Recovery round.
  */
-public class RecoveryContent extends AbstractRoundContent {
+public class Recovery extends AbstractRound {
     
     /**
-     * Instantiates a new Recovery content.
+     * Instantiates a new Recovery.
      *
      * @param nbMusics     the nb musics
      * @param nbPointWon   the nb point won
      */
-    public RecoveryContent(int nbMusics, int nbPointWon) {
+    public Recovery(int nbMusics, int nbPointWon) {
         super(nbMusics, nbPointWon);
     }
     

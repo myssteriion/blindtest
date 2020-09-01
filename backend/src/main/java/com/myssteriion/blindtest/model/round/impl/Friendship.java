@@ -1,6 +1,6 @@
-package com.myssteriion.blindtest.model.common.roundcontent.impl;
+package com.myssteriion.blindtest.model.round.impl;
 
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Friendship round content.
+ * The Friendship round.
  */
-public class FriendshipContent extends AbstractRoundContent {
+public class Friendship extends AbstractRound {
     
     /**
      * Teams number.
@@ -23,12 +23,12 @@ public class FriendshipContent extends AbstractRoundContent {
     
     
     /**
-     * Instantiates a new Friendship content.
+     * Instantiates a new Friendship.
      *
      * @param nbMusics   the nb musics
      * @param nbPointWon the nb point won
      */
-    public FriendshipContent(int nbMusics, int nbPointWon) {
+    public Friendship(int nbMusics, int nbPointWon) {
         super(nbMusics, nbPointWon);
     }
     

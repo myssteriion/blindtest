@@ -4,8 +4,8 @@ import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.round.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.round.AbstractRoundContent;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.model.round.AbstractRound;
+import com.myssteriion.blindtest.properties.RoundProperties;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
@@ -68,7 +68,7 @@ public class Game implements IModel {
     /**
      * The implementation of the current round.
      */
-    private AbstractRoundContent roundContent;
+    private AbstractRound roundContent;
     
     
     
@@ -88,7 +88,7 @@ public class Game implements IModel {
      * @param themes         the themes
      * @param effects        the effects
      */
-    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, RoundContentProperties prop) {
+    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, RoundProperties prop) {
         
         this.players = players;
         this.duration = duration;
@@ -99,7 +99,7 @@ public class Game implements IModel {
         this.nbMusicsPlayedInRound = INIT;
         this.round = Round.getFirst();
         // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-        this.roundContent = this.round.createRoundContent(this, prop);
+        this.roundContent = this.round.createRound(this, prop);
     }
     
     
@@ -287,18 +287,18 @@ public class Game implements IModel {
      *
      * @return the roundContent
      */
-    public AbstractRoundContent getRoundContent() {
+    public AbstractRound getRoundContent() {
         return roundContent;
     }
     
     /**
-     * Sets round content.
+     * Sets round.
      *
-     * @param roundContent the round content
-     * @return the round content
+     * @param round the round
+     * @return the round
      */
-    public Game setRoundContent(AbstractRoundContent roundContent) {
-        this.roundContent = roundContent;
+    public Game setRound(AbstractRound round) {
+        this.roundContent = round;
         return this;
     }
     
@@ -324,7 +324,7 @@ public class Game implements IModel {
     /**
      * Pass to the next step.
      */
-    public void nextStep(RoundContentProperties prop) {
+    public void nextStep(RoundProperties prop) {
         
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
@@ -333,7 +333,7 @@ public class Game implements IModel {
             round = round.nextRound();
             
             // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-            roundContent = (round == null) ? null : round.createRoundContent(this, prop);
+            roundContent = (round == null) ? null : round.createRound(this, prop);
             nbMusicsPlayedInRound = INIT;
         }
     }

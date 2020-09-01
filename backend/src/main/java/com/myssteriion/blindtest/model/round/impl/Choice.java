@@ -1,6 +1,6 @@
-package com.myssteriion.blindtest.model.common.roundcontent.impl;
+package com.myssteriion.blindtest.model.round.impl;
 
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Choice round content.
+ * The Choice round.
  */
-public class ChoiceContent extends AbstractRoundContent {
+public class Choice extends AbstractRound {
     
     /**
      * The number of bonus points.
@@ -32,14 +32,14 @@ public class ChoiceContent extends AbstractRoundContent {
     
     
     /**
-     * Instantiates a new Choice content.
+     * Instantiates a new Choice.
      *
      * @param nbMusics     the nb musics
      * @param nbPointWon   the nb point won
      * @param nbPointBonus the nb point bonus
      * @param nbPointMalus the nb point malus
      */
-    public ChoiceContent(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
+    public Choice(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
         
         super(nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);

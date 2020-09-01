@@ -11,7 +11,7 @@ import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.properties.RoundProperties;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
@@ -46,7 +46,7 @@ public class GameService {
     private ConfigProperties configProperties;
     
     // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-    private RoundContentProperties prop;
+    private RoundProperties prop;
     
     /**
      * The game list.
@@ -63,7 +63,7 @@ public class GameService {
      * @param configProperties   the configProperties
      */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, ConfigProperties configProperties, RoundContentProperties prop) {
+    public GameService(MusicService musicService, ProfileService profileService, ConfigProperties configProperties, RoundProperties prop) {
         this.musicService = musicService;
         this.profileService = profileService;
         this.configProperties = configProperties;
