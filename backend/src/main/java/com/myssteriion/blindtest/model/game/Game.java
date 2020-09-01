@@ -2,9 +2,9 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
-import com.myssteriion.blindtest.model.common.Round;
+import com.myssteriion.blindtest.model.round.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
+import com.myssteriion.blindtest.model.round.AbstractRoundContent;
 import com.myssteriion.blindtest.properties.RoundContentProperties;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;

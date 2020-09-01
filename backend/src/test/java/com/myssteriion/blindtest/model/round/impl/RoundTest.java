@@ -1,11 +1,13 @@
-package com.myssteriion.blindtest.model.common;
+package com.myssteriion.blindtest.model.round.impl;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.ClassicContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.LuckyContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.RecoveryContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
+import com.myssteriion.blindtest.model.common.Duration;
+import com.myssteriion.blindtest.model.round.Round;
+import com.myssteriion.blindtest.model.round.impl.ChoiceContent;
+import com.myssteriion.blindtest.model.round.impl.ClassicContent;
+import com.myssteriion.blindtest.model.round.impl.LuckyContent;
+import com.myssteriion.blindtest.model.round.impl.RecoveryContent;
+import com.myssteriion.blindtest.model.round.impl.ThiefContent;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.Player;

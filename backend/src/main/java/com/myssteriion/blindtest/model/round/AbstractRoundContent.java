@@ -1,4 +1,4 @@
-package com.myssteriion.blindtest.model.common.roundcontent;
+package com.myssteriion.blindtest.model.round;
 
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
