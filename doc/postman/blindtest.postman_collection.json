@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f4d1f34c-53a0-4fb3-bb4e-b9e810ab7aac",
+		"_postman_id": "eb4e7b88-237b-414b-b2b2-46ceef183c74",
 		"name": "blindtest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -92,11 +92,23 @@
 				},
 				{
 					"name": "random",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"themes\": [\"ANNEES_90\", \"ANNEES_70\", \"SERIES_CINEMAS\"],\r\n    \"effects\": [\"NONE\", \"SPEED\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/musics/random?themes=ANNEES_90, ANNEES_70, SERIES_CINEMAS&effects=NONE, SPEED&connectionMode=OFFLINE",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/musics/random",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -106,23 +118,6 @@
 								"{{applicationContext}}",
 								"musics",
 								"random"
-							],
-							"query": [
-								{
-									"key": "themes",
-									"value": "ANNEES_90, ANNEES_70, SERIES_CINEMAS",
-									"description": "c'est une liste, valeurs possibles :\nANNEES_60\nANNEES_70\nANNEES_80\nANNEES_90\nANNEES_2000\nANNEES_2010\nSERIES_CINEMAS\nDISNEY"
-								},
-								{
-									"key": "effects",
-									"value": "NONE, SPEED",
-									"description": "c'est une liste, valeurs possibles :\nNONE\nSLOW\nSPEED\nMIX"
-								},
-								{
-									"key": "connectionMode",
-									"value": "OFFLINE",
-									"description": "OFFLINE, ONLINE, BOTH"
-								}
 							]
 						}
 					},
@@ -293,7 +288,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"profilesId\": [ 4, 1, 12 ],\n\t\"duration\": \"NORMAL\",\n\t\"sameProbability\": false,\n\t\"themes\": [\"ANNEES_60\", \"ANNEES_90\"],\n\t\"effects\": [\"NONE\"],\n\t\"connectionMode\": \"OFFLINE\"\n}",
+							"raw": "{\n\t\"profilesId\": [ 4, 1, 12 ],\n\t\"duration\": \"NORMAL\",\n\t\"themes\": [\"ANNEES_60\", \"ANNEES_90\"],\n\t\"effects\": [\"NONE\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +296,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/{{applicationContext}}/games",
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games/new",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -309,7 +304,8 @@
 							"port": "{{port}}",
 							"path": [
 								"{{applicationContext}}",
-								"games"
+								"games",
+								"new"
 							]
 						}
 					},
@@ -348,7 +344,7 @@
 					"response": []
 				},
 				{
-					"name": "findById",
+					"name": "find by id",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -374,81 +370,54 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/{{applicationContext}}/games?pageNumber=0&itemPerPage=3&showFinishedGames=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{applicationContext}}",
+								"games"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "itemPerPage",
+									"value": "3"
+								},
+								{
+									"key": "showFinishedGames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "param",
-			"item": [
-				{
-					"name": "spotify param",
-					"item": [
-						{
-							"name": "find",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"clientId\": \"18f51ad48e604459a14691b71df23ed5\",\n    \"clientSecret\": \"d0ec184391d747f4a70a183a8346f831\",\n    \"playlistIds\": {\n        \"ANNEES_60\": \"5tVSggHbQTo70gmlXDOeik\",\n        \"ANNEES_70\": \"1GnRHGxHVRZJIedhgJwUM5\",\n        \"ANNEES_80\": \"0WhtlnkS3XbJrhqHI99QHO\",\n        \"ANNEES_90\": \"43NSCwHSW6UBagdf2hwwcJ\",\n        \"ANNEES_2000\": \"7pcvMzNyxhV19P2Hg73nhP\",\n        \"ANNEES_2010\": \"0jS3l6oOBGLPPtrivEYhYC\",\n        \"SERIES_CINEMAS\": \"5b8O5LbaRq98GWqhxyirmW\",\n        \"DISNEY\": \"5dLVfusX1Aabt8267jHkDc\"\n    }\n}"
-								},
-								"url": {
-									"raw": "http://localhost:{{port}}/{{applicationContext}}/params/spotify-param",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{applicationContext}}",
-										"params",
-										"spotify-param"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
+			"item": [],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -1086,7 +1055,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "85f61815-70de-412a-aec4-4b7dd7dc7c4b",
+								"id": "2a37592e-eb1d-432d-ad19-58deb26fe2be",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"pm.collectionVariables.set('gameId', jsonData.id);"
@@ -1130,7 +1099,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "00b57873-e89b-4b5d-a2d4-1c50d58ae9f3",
+								"id": "e3e71666-90b5-41e2-92ea-01e25380127e",
 								"exec": [
 									""
 								],
@@ -1174,7 +1143,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "951c66cf-e3b9-446f-9857-f6712fdd748a",
+								"id": "fb91e07d-9529-49f9-a029-424617afd3a6",
 								"exec": [
 									""
 								],
@@ -2436,7 +2405,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "173506a0-e80a-49ca-b2dc-f02efc2caa8e",
+				"id": "2ab86e8b-36b1-43f7-a046-919e139c5068",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2446,7 +2415,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "5a068cd0-ef5a-4c51-a492-8840cf7fa666",
+				"id": "2785921e-d60f-4d45-9ce8-433a710d3712",
 				"type": "text/javascript",
 				"exec": [
 					""
