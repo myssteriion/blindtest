@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -137,15 +138,15 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
     /**
      * Randomly choose a music.
      *
-     * @param themes  the themes filter (optional)
-     * @param effects the effects filter (optional)
+     * @param musicFilter  musicFilter
      * @return the music
      * @throws NotFoundException the not found exception
      * @throws IOException       the io exception
      */
-    public MusicEntity random(List<Theme> themes, List<Effect> effects) throws NotFoundException, IOException {
-        
-        List<Theme> searchThemes = (CommonUtils.isNullOrEmpty(themes)) ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(themes);
+    public MusicEntity random(MusicFilter musicFilter) throws NotFoundException, IOException {
+    
+        List<Theme> searchThemes = ( CommonUtils.isNullOrEmpty(musicFilter) || CommonUtils.isNullOrEmpty(musicFilter.getThemes()) )
+                ? Theme.getSortedTheme() : CommonUtils.removeDuplicate(musicFilter.getThemes());
         
         List<MusicEntity> allMusics = new ArrayList<>( dao.findByThemeIn(searchThemes) );
         
@@ -161,7 +162,9 @@ public class MusicService extends AbstractCRUDService<MusicEntity, MusicDAO> {
         Path path = Paths.get(musicsFolderPath, music.getTheme().getFolderName(), music.getName());
         music.setFlux( new Flux(path.toFile()) );
         
-        List<Effect> searchEffects = (CommonUtils.isNullOrEmpty(effects)) ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(effects);
+        List<Effect> searchEffects = ( CommonUtils.isNullOrEmpty(musicFilter) || CommonUtils.isNullOrEmpty(musicFilter.getEffects()) )
+                ? Effect.getSortedEffect() : CommonUtils.removeDuplicate(musicFilter.getEffects());
+        
         music.setEffect( foundEffect(searchEffects) );
         
         return music;

@@ -22,9 +22,6 @@ public class Constant {
     public static final String SHOW_FINISHED_GAMES                  = "showFinishedGames";
     public static final String SHOW_FINISHED_GAMES_DEFAULT_VALUE    = "false";
     
-    public static final String THEMES       = "themes";
-    public static final String EFFECTS      = "effects";
-    
     public static final String DEFAULT_BACKGROUND       = "'#cccccc'";
     
     
