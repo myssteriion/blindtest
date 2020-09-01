@@ -1,10 +1,10 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -20,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class MusicControllerTest extends AbstractTest {
@@ -61,21 +60,23 @@ public class MusicControllerTest extends AbstractTest {
     @Test
     public void random() throws NotFoundException, IOException {
         
+        MusicFilter musicFilter = new MusicFilter();
+        
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
         MusicEntity music = new MusicEntity("name", Theme.ANNEES_60).setFlux(fluxMock);
-        Mockito.when(musicService.random(null, null)).thenReturn(music);
-        Mockito.when(musicService.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE))).thenReturn(music);
+        Mockito.when(musicService.random(null)).thenReturn(music);
+        Mockito.when(musicService.random(musicFilter)).thenReturn(music);
         
-        ResponseEntity<MusicEntity> re = musicController.random(null, null);
+        ResponseEntity<MusicEntity> re = musicController.random(null);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
         
-        re = musicController.random(null, null);
+        re = musicController.random(null);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
         
-        re = musicController.random(Collections.singletonList(Theme.ANNEES_60), Collections.singletonList(Effect.NONE));
+        re = musicController.random(musicFilter);
         Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
         Assert.assertEquals(music, re.getBody() );
     }

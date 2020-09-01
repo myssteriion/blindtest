@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.AbstractPowerMockTest;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.utils.CommonUtils;
@@ -70,8 +71,11 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         Mockito.doReturn(2, 3).when(musicService).getMusicNumber(Mockito.any(Theme.class));
         
         List<ThemeInfo> actual = musicService.computeThemesInfo();
-        Assert.assertEquals( new ThemeInfo(Theme.ANNEES_60, 2), actual.get(0) );
-        Assert.assertEquals( new ThemeInfo(Theme.ANNEES_70, 3), actual.get(1) );
+        Assert.assertEquals( Theme.ANNEES_60, actual.get(0).getTheme() );
+        Assert.assertEquals( Integer.valueOf(2), actual.get(0).getNbMusics() );
+    
+        Assert.assertEquals( Theme.ANNEES_70, actual.get(1).getTheme() );
+        Assert.assertEquals( Integer.valueOf(3), actual.get(1).getNbMusics() );
     }
     
     @Test
@@ -196,15 +200,17 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         allMusics.add( new MusicEntity("70_a", Theme.ANNEES_70) );
         
         try {
-            musicService.random(null, null);
+            musicService.random(null);
             Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
         }
         catch (NotFoundException e) {
             TestUtils.verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY])."), e);
         }
         
+        MusicFilter musicFilter = new MusicFilter().setThemes( Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70) );
+        
         try {
-            musicService.random(Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70), null);
+            musicService.random(musicFilter);
             Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
         }
         catch (NotFoundException e) {
@@ -223,10 +229,11 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         Flux fluxMock = Mockito.mock(Flux.class);
         PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
         
-        MusicEntity music = musicService.random(null, null);
+        MusicEntity music = musicService.random(null);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
-        music = musicService.random(Collections.singletonList(Theme.ANNEES_70), null);
+        musicFilter = new MusicFilter().setThemes( Collections.singletonList(Theme.ANNEES_70) );
+        music = musicService.random(musicFilter);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
         
@@ -237,10 +244,10 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         
         Mockito.when(dao.findByThemeIn(Mockito.anyList())).thenReturn(allMusics);
         
-        music = musicService.random(null, null);
+        music = musicService.random(null);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
         
-        music = musicService.random(null, null);
+        music = musicService.random(null);
         Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
     }
     
@@ -262,7 +269,7 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         catch (IllegalArgumentException e) {
             TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> name' est obligatoire."), e);
         }
-    
+        
         try {
             musicService.checkEntity(new MusicEntity("name", null));
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");

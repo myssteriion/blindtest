@@ -109,11 +109,11 @@ public class GameServiceTest extends AbstractTest {
         }
         
         try {
-            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5))).setDuration(Duration.NORMAL));
+            gameService.newGame( new NewGame().setProfilesId(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17))).setDuration(Duration.NORMAL));
             Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
         }
         catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("4 players at maximum"), e);
+            TestUtils.verifyException(new IllegalArgumentException("16 players at maximum"), e);
         }
         
         

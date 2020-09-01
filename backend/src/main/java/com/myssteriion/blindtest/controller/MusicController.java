@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.controller;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
+import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.tools.Constant;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,17 +71,15 @@ public class MusicController {
     /**
      * Randomly choose a music.
      *
-     * @param themes  the themes filter (optional)
-     * @param effects the effects filter (optional)
+     * @param musicFilter  the musicFilter)
      * @return a music
      * @throws NotFoundException NotFound exception
      */
     @GetMapping(path = "/random")
-    public ResponseEntity<MusicEntity> random(@RequestParam(value = Constant.THEMES, required = false) List<Theme> themes,
-                                              @RequestParam(value = Constant.EFFECTS, required = false) List<Effect> effects)
+    public ResponseEntity<MusicEntity> random(@RequestBody MusicFilter musicFilter)
             throws NotFoundException, IOException {
         
-        return RestUtils.create200(  musicService.random(themes, effects) );
+        return RestUtils.create200(  musicService.random(musicFilter) );
     }
     
 }
