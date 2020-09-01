@@ -45,13 +45,15 @@ export class ProfileResource {
 	 *
 	 * @param name the name filter
 	 * @param pageNumber the page number
+	 * @param itemPerPage the item per page
+	 * @return profiles list
 	 */
-	public findAllBySearchName(name: string, pageNumber: number): Observable< Page<Profile> > {
+	public findAllBySearchName(name: string, pageNumber: number, itemPerPage: string): Observable< Page<Profile> > {
 		
 		let params = new HttpParams();
 		params = params.set("name", name);
 		params = params.set("pageNumber", pageNumber.toString());
-		params = params.set("itemPerPage", environment.itemPerPageProfiles.toString());
+		params = params.set("itemPerPage", itemPerPage);
 		
 		return this._http.get< Page<Profile> >( this.path, { params: params } );
 	}

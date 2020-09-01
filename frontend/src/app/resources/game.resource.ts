@@ -54,12 +54,14 @@ export class GameResource {
 	 *
 	 * @param pageNumber 		the page number
 	 * @param showFinishedGames TRUE for show finished games, FALSE otherwise
+	 * @param itemPerPage       the item per page
+	 * @return game list
 	 */
-	public findAll(pageNumber: number, showFinishedGames: boolean): Observable< Page<Game> > {
+	public findAll(pageNumber: number, showFinishedGames: boolean, itemPerPage: string): Observable< Page<Game> > {
 		
 		let params = new HttpParams();
 		params = params.set("pageNumber", pageNumber.toString());
-		params = params.set("itemPerPage", environment.itemPerPageGames.toString());
+		params = params.set("itemPerPage", itemPerPage);
 		params = params.set("showFinishedGames", showFinishedGames + '');
 		
 		return this._http.get< Page<Game> >( this.path, { params: params } );

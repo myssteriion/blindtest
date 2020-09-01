@@ -59,6 +59,11 @@ export class GameResumeViewComponent implements OnInit {
 	 */
 	public showFinishedGames: boolean;
 	
+	/**
+	 * Games number per page.
+	 */
+	private gamesPerPage: string = "3";
+	
 	
 	
 	constructor(private _gameResource: GameResource,
@@ -95,7 +100,7 @@ export class GameResumeViewComponent implements OnInit {
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._gameResource.findAll(this.currentPage-1, this.showFinishedGames).subscribe(
+		this._gameResource.findAll(this.currentPage-1, this.showFinishedGames, this.gamesPerPage).subscribe(
 			response => {
 				
 				this.gamesPage = response;

@@ -67,6 +67,11 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private colorPickerIsOpen: boolean;
 	
+	/**
+	 * Avatars number per page.
+	 */
+	private avatarsPerPage: string = "12";
+	
 	
 	
 	constructor(private _avatarResource: AvatarResource,
@@ -114,7 +119,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private loadAvatars(pageNumber: number): void {
 		
-		this._avatarResource.findAllBySearchName(this.searchName, pageNumber-1).subscribe(
+		this._avatarResource.findAllBySearchName(this.searchName, pageNumber-1, this.avatarsPerPage).subscribe(
 			response => {
 				
 				this.avatarsPage = response;
