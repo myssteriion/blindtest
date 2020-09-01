@@ -50,7 +50,7 @@ public class GameController {
      * @return a game
      * @throws NotFoundException NotFound exception
      */
-    @PostMapping
+    @PostMapping(path = "/new")
     public ResponseEntity<Game> newGame(@RequestBody NewGame newGame) throws NotFoundException {
         
         Game game = gameService.newGame(newGame);

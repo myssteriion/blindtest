@@ -30,7 +30,7 @@ export class GameResource {
 	 * @param newGame the new game
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
-		return this._http.post<Game>(this.path, newGame);
+		return this._http.post<Game>(this.path + "/new", newGame);
 	}
 	
 	/**
