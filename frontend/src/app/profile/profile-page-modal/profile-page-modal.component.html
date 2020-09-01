@@ -7,7 +7,7 @@
 <!-- modal body -->
 <div class="row profile-page-modal-body">
 	<div class="col">
-		<profile-page [canEdit]="false" [canSelect]="true" (onSelect)="onSelect.emit($event)"></profile-page>
+		<profile-page [profilesPerPage]="profilePerPage" [canEdit]="false" [canSelect]="true" (onSelect)="onSelect.emit($event)"></profile-page>
 	</div>
 </div>
 

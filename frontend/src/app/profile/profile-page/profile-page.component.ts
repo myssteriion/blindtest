@@ -24,6 +24,12 @@ import {Router} from '@angular/router';
 export class ProfilePageComponent implements OnInit {
 	
 	/**
+	 * Profiles number per page.
+	 */
+	@Input()
+	private profilesPerPage: ProfilesPerPage;
+	
+	/**
 	 * If can create/update/delete profile.
 	 */
 	@Input()
@@ -99,7 +105,7 @@ export class ProfilePageComponent implements OnInit {
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._profileResource.findAllBySearchName(this.name, this.currentPage-1).subscribe(
+		this._profileResource.findAllBySearchName(this.name, this.currentPage-1, this.profilesPerPage).subscribe(
 			response => {
 				this.page = response;
 				this.showProfiles = true;
@@ -139,6 +145,22 @@ export class ProfilePageComponent implements OnInit {
 			() => { this.loadProfiles(true); },
 			() => { /* do nothing */ }
 		);
+	}
+	
+	
+	/**
+	 * Get dynamically "col-x" css.
+	 */
+	public getColClass(): string {
+		
+		var colCss: string = "col-";
+		
+		switch (this.profilesPerPage) {
+			case ProfilesPerPage.FIFTEEN:	colCss += "4"; break;
+			case ProfilesPerPage.SIXTEEN:	colCss += "3"; break;
+		}
+		
+		return colCss;
 	}
 	
 }

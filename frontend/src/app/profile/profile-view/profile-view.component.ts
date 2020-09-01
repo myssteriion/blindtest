@@ -14,9 +14,17 @@ import {SLIDE_ANIMATION} from 'src/app/tools/constant';
 })
 export class ProfileViewComponent implements OnInit {
 	
+	/**
+	 * The profiles number per page.
+	 */
+	private profilePerPage: ProfilesPerPage;
+	
+	
+	
 	constructor() { }
 	
 	ngOnInit(): void {
+		this.profilePerPage = ProfilesPerPage.SIXTEEN;
 	}
 	
 }

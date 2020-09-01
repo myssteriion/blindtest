@@ -18,6 +18,10 @@ export class ProfilePageModalComponent implements OnInit {
 	 */
 	@Input()
 	public page: Page<Profile>;
+	
+	/**
+	 * The modal title.
+	 */
 	@Input()
 	public title: string;
 	
@@ -27,11 +31,18 @@ export class ProfilePageModalComponent implements OnInit {
 	@Output()
 	public onSelect = new EventEmitter();
 	
+	/**
+	 * The profiles number per page.
+	 */
+	private profilePerPage: ProfilesPerPage;
+	
 	
 	
 	constructor(private _ngbActiveModal: NgbActiveModal) {}
 	
-	ngOnInit() { }
+	ngOnInit() {
+		this.profilePerPage = ProfilesPerPage.FIFTEEN;
+	}
 	
 	
 	

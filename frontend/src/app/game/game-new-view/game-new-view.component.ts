@@ -5,13 +5,12 @@ import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {EFFECTS, GAME_PREFIX_PATH, SLIDE_ANIMATION, THEMES, MAX_PLAYERS, MIN_PLAYERS} from "../../tools/constant";
+import {EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
 import {NewGame} from "../../interfaces/game/newgame.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
-import {environment} from "../../../environments/environment";
 import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
 import {ThemeInfo} from "../../interfaces/music/theme.info";
@@ -68,11 +67,6 @@ export class GameNewViewComponent implements OnInit {
 	 * Players profiles and empty names.
 	 */
 	public playersProfiles: Profile[];
-	
-	/**
-	 * The min musics number for the same probability mode (tooltip).
-	 */
-	public nbMusicsMinLabelHelp: number = environment.nbMusicsMinLabelHelp;
 	
 	public faQuestionCircle = faQuestionCircle;
 	public faSyncAlt = faSyncAlt;
