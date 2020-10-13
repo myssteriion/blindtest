@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.round.impl;
 import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.common.RoundName;
 import com.myssteriion.blindtest.tools.Constant;
 
 /**
@@ -30,7 +31,7 @@ public class Lucky extends AbstractRound {
      * @param nbPointBonus the nb bonus point
      */
     public Lucky(int nbMusics, int nbPointWon, int nbPointBonus) {
-        super(nbMusics, nbPointWon);
+        super(RoundName.LUCKY, nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
     }
     

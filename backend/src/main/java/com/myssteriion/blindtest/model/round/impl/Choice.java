@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.model.common.RoundName;
 import com.myssteriion.blindtest.tools.Constant;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Choice extends AbstractRound {
      */
     public Choice(int nbMusics, int nbPointWon, int nbPointBonus, int nbPointMalus) {
         
-        super(nbMusics, nbPointWon);
+        super(RoundName.CHOICE, nbMusics, nbPointWon);
         this.nbPointBonus = Math.max(nbPointBonus, 0);
         this.nbPointMalus = Math.min(nbPointMalus, 0);
         this.order = new ArrayList<>();
@@ -134,7 +135,7 @@ public class Choice extends AbstractRound {
                     player.setTurnToChoose(false);
                 });
         
-        if ( !isLastMusic(game) )
+        if ( !isLastStep(game) )
             game.getPlayers().get( order.remove(0) ).setTurnToChoose(true);
         
         return game;

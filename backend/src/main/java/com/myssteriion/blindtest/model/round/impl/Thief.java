@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.round.impl;
 import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.common.RoundName;
 
 /**
  * The Thief round.
@@ -25,7 +26,7 @@ public class Thief extends AbstractRound {
      */
     public Thief(int nbMusics, int nbPointWon, int nbPointLoose) {
         
-        super(nbMusics, nbPointWon);
+        super(RoundName.THIEF, nbMusics, nbPointWon);
         this.nbPointLoose = Math.min(nbPointLoose, 0);
     }
     

@@ -1,5 +1,6 @@
 package com.myssteriion.blindtest.model.round;
 
+import com.myssteriion.blindtest.model.common.RoundName;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.utils.CommonUtils;
@@ -8,6 +9,11 @@ import com.myssteriion.utils.CommonUtils;
  * Abstract class for all round.
  */
 public abstract class AbstractRound {
+    
+    /**
+     * The round name.
+     */
+    private RoundName roundName;
     
     /**
      * The musics number.
@@ -24,15 +30,26 @@ public abstract class AbstractRound {
     /**
      * Instantiates a new AbstractRound.
      *
+     * @param roundName  the roundName
      * @param nbMusics   the nb musics
      * @param nbPointWon the nb point won
      */
-    public AbstractRound(int nbMusics, int nbPointWon) {
+    public AbstractRound(RoundName roundName, int nbMusics, int nbPointWon) {
+        this.roundName = roundName;
         this.nbMusics = Math.max(nbMusics, 0);
         this.nbPointWon = Math.max(nbPointWon, 0);
     }
     
     
+    
+    /**
+     * Gets roundName.
+     *
+     * @return The roundName.
+     */
+    public RoundName getRoundName() {
+        return roundName;
+    }
     
     /**
      * Gets nb musics.
@@ -97,6 +114,19 @@ public abstract class AbstractRound {
     
     
     /**
+     * Test if the round is last step.
+     *
+     * @param game the game
+     * @return TRUE if the round is last step, FALSE otherwise
+     */
+    public boolean isLastStep(Game game) {
+        
+        CommonUtils.verifyValue("game", game);
+        
+        return game.getNbMusicsPlayedInRound() == nbMusics - 1;
+    }
+    
+    /**
      * Test if the round is finished.
      *
      * @param game the game
@@ -109,23 +139,11 @@ public abstract class AbstractRound {
         return game.getNbMusicsPlayedInRound() == nbMusics;
     }
     
-    /**
-     * Test if the round is last step.
-     *
-     * @param game the game
-     * @return TRUE if the round is last step, FALSE otherwise
-     */
-    public boolean isLastMusic(Game game) {
-        
-        CommonUtils.verifyValue("game", game);
-        
-        return game.getNbMusicsPlayedInRound() == nbMusics - 1;
-    }
-    
     
     @Override
     public String toString() {
-        return "nbMusics=" + nbMusics +
+        return "roundName=" + roundName +
+                ", nbMusics=" + nbMusics +
                 ", nbPointWon=" + nbPointWon;
     }
     

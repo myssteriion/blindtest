@@ -4,6 +4,7 @@ import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.Player;
+import com.myssteriion.blindtest.model.common.RoundName;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 
@@ -29,7 +30,7 @@ public class Friendship extends AbstractRound {
      * @param nbPointWon the nb point won
      */
     public Friendship(int nbMusics, int nbPointWon) {
-        super(nbMusics, nbPointWon);
+        super(RoundName.FRIENDSHIP, nbMusics, nbPointWon);
     }
     
     

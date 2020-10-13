@@ -3,6 +3,7 @@ package com.myssteriion.blindtest.model.round.impl;
 import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
+import com.myssteriion.blindtest.model.common.RoundName;
 
 /**
  * The Recovery round.
@@ -16,7 +17,7 @@ public class Recovery extends AbstractRound {
      * @param nbPointWon   the nb point won
      */
     public Recovery(int nbMusics, int nbPointWon) {
-        super(nbMusics, nbPointWon);
+        super(RoundName.RECOVERY, nbMusics, nbPointWon);
     }
     
     
