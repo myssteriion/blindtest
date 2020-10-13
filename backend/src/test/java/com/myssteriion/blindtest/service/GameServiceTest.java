@@ -3,7 +3,6 @@ package com.myssteriion.blindtest.service;
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.round.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
@@ -11,6 +10,7 @@ import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
+import com.myssteriion.blindtest.model.round.impl.Classic;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
@@ -35,13 +35,16 @@ public class GameServiceTest extends AbstractTest {
     @Mock
     private ProfileService profileService;
     
+    @Mock
+    private RoundService roundService;
+    
     private GameService gameService;
     
     
     
     @Before
     public void before() {
-        gameService = new GameService(musicService, profileService, configProperties, roundProperties);
+        gameService = new GameService(musicService, profileService, roundService);
     }
     
     
@@ -220,7 +223,7 @@ public class GameServiceTest extends AbstractTest {
         List<String> playersName = Collections.singletonList(profile.getName());
         musicResult = new MusicResult().setGameId(0).setMusic(music).setAuthorWinners(playersName);
         Game game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(1), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );
@@ -244,7 +247,7 @@ public class GameServiceTest extends AbstractTest {
         
         musicResult = new MusicResult().setGameId(0).setMusic(music).setLosers(playersName);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 100, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(1), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );
@@ -267,7 +270,7 @@ public class GameServiceTest extends AbstractTest {
         
         musicResult =  new MusicResult().setGameId(0).setMusic(music).setAuthorWinners(playersName);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 200, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(2), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );
@@ -293,7 +296,7 @@ public class GameServiceTest extends AbstractTest {
         game = gameService.apply(musicResult);
         game = gameService.apply(musicResult);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 200, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(2), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 2, game.getPlayers().get(0).getRank() );
@@ -317,7 +320,7 @@ public class GameServiceTest extends AbstractTest {
         playersName = Collections.singletonList(profile.getName());
         musicResult =  new MusicResult().setGameId(0).setMusic(music).setAuthorWinners(playersName);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 300, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(3), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );
@@ -341,7 +344,7 @@ public class GameServiceTest extends AbstractTest {
         playersName = Collections.singletonList(profile.getName());
         musicResult =  new MusicResult().setGameId(0).setMusic(music).setTitleWinners(playersName);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 400, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(3), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );
@@ -365,7 +368,7 @@ public class GameServiceTest extends AbstractTest {
         playersName = Collections.singletonList(profile.getName());
         musicResult =  new MusicResult().setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(playersName);
         game = gameService.apply(musicResult);
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 600, game.getPlayers().get(0).getScore() );
         Assert.assertEquals( Integer.valueOf(3), game.getPlayers().get(0).getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assert.assertEquals( 1, game.getPlayers().get(0).getRank() );

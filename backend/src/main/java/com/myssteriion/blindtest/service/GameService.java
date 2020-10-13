@@ -10,8 +10,7 @@ import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
 import com.myssteriion.blindtest.model.game.Player;
-import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.properties.RoundProperties;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
@@ -43,10 +42,7 @@ public class GameService {
     
     private ProfileService profileService;
     
-    private ConfigProperties configProperties;
-    
-    // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-    private RoundProperties prop;
+    private RoundService roundService;
     
     /**
      * The game list.
@@ -58,16 +54,15 @@ public class GameService {
     /**
      * Instantiates a new Game service
      *
-     * @param musicService       the musicService
-     * @param profileService     the profileService
-     * @param configProperties   the configProperties
+     * @param musicService      the musicService
+     * @param profileService    the profileService
+     * @param roundService      the roundService
      */
     @Autowired
-    public GameService(MusicService musicService, ProfileService profileService, ConfigProperties configProperties, RoundProperties prop) {
+    public GameService(MusicService musicService, ProfileService profileService, RoundService roundService) {
         this.musicService = musicService;
         this.profileService = profileService;
-        this.configProperties = configProperties;
-        this.prop = prop;
+        this.roundService = roundService;
     }
     
     
@@ -85,9 +80,9 @@ public class GameService {
         
         List<Player> players = cratePlayersList( newGame.getProfilesId() );
         
-        // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-        Game game = new Game(players , newGame.getDuration(), newGame.getThemes(), newGame.getEffects(), prop );
+        Game game = new Game( players, newGame.getDuration(), newGame.getThemes(), newGame.getEffects() );
         game.setId( findNextId() );
+        game.setRound( roundService.createFirstRound(game) );
         
         games.add(game);
         
@@ -196,8 +191,12 @@ public class GameService {
             
             game.incrementListenedMusics( musicResult.getMusic().getTheme() );
             
+            // increment cpt
+            game.incrementNbMusicsPlayed();
+            
             // apply score
-            game = game.getRoundContent().apply(game, musicResult);
+            AbstractRound round = game.getRound();
+            game = round.apply(game, musicResult);
             
             // update profileStat
             List<Player> players = game.getPlayers();
@@ -223,7 +222,7 @@ public class GameService {
                     player.incrementFoundMusics( musicResult.getMusic().getTheme(), GoodAnswer.TITLE );
                 }
                 
-                if ( game.isLastStep() ) {
+                if ( game.isFinished() ) {
                     profileStat.incrementPlayedGames( game.getDuration() );
                     profileStat.addBestScoreIfBetter( game.getDuration(), player.getScore() );
                     profileStat.incrementWonGames( player.getRank() );
@@ -232,8 +231,10 @@ public class GameService {
                 profileService.update(profile);
             }
             
-            // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-            game.nextStep(prop);
+            if ( round.isFinished(game) ) {
+                game.setRound( roundService.createNextRound(game) );
+                game.initNbMusicsPlayedInRound();
+            }
         }
         
         return game;

@@ -3,10 +3,13 @@ package com.myssteriion.blindtest.integrationtest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.round.Round;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.round.impl.Choice;
+import com.myssteriion.blindtest.model.round.impl.Classic;
+import com.myssteriion.blindtest.model.round.impl.Friendship;
+import com.myssteriion.blindtest.model.round.impl.Lucky;
+import com.myssteriion.blindtest.model.round.impl.Recovery;
 import com.myssteriion.blindtest.model.round.impl.Thief;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
@@ -42,11 +45,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** CLASSIC Round **********/
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        AbstractRound round = game.getRoundContent();
+        AbstractRound round = game.getRound();
         int nbMusicPlayed = 0;
         int nbPointWon = round.getNbPointWon();
         int foundName1 = 0;
@@ -89,11 +92,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** CHOICE Round **********/
-        Assert.assertEquals( Round.CHOICE, game.getRound() );
+        Assert.assertEquals( Choice.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        round = game.getRoundContent();
+        round = game.getRound();
         nbPointWon = round.getNbPointWon();
         int nbPointBonus = ((Choice) round).getNbPointBonus();
         int nbPointMalus = ((Choice) round).getNbPointMalus();
@@ -169,11 +172,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** LUCKY Round **********/
-        Assert.assertEquals( Round.LUCKY, game.getRound() );
+        Assert.assertEquals( Lucky.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        round = game.getRoundContent();
+        round = game.getRound();
         nbPointWon = round.getNbPointWon();
         
         for (int i = 0; i < round.getNbMusics(); i++) {
@@ -203,11 +206,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** FRIENDSHIP Round **********/
-        Assert.assertEquals( Round.FRIENDSHIP, game.getRound() );
+        Assert.assertEquals( Friendship.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        round = game.getRoundContent();
+        round = game.getRound();
         nbPointWon = round.getNbPointWon();
         
         for (int i = 0; i < round.getNbMusics(); i++) {
@@ -237,11 +240,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** THIEF Round **********/
-        Assert.assertEquals( Round.THIEF, game.getRound() );
+        Assert.assertEquals( Thief.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        round = game.getRoundContent();
+        round = game.getRound();
         nbPointWon = round.getNbPointWon();
         int nbPointLoose = ((Thief) round).getNbPointLoose();
         
@@ -285,11 +288,11 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** RECOVERY Round **********/
-        Assert.assertEquals( Round.RECOVERY, game.getRound() );
+        Assert.assertEquals( Recovery.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        round = game.getRoundContent();
+        round = game.getRound();
         nbPointWon = round.getNbPointWon();
         
         for (int i = 0; i < round.getNbMusics(); i++) {

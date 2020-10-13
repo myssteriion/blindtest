@@ -82,7 +82,6 @@ public class ProfileServiceTest extends AbstractTest {
     public void update() throws NotFoundException, ConflictException {
         
         String name = "name";
-        String avatarName = "avatarName";
         
         
         try {
