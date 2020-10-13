@@ -198,6 +198,11 @@ public class GameService {
             AbstractRound round = game.getRound();
             game = round.apply(game, musicResult);
             
+            if ( round.isFinished(game) ) {
+                game.setRound( roundService.createNextRound(game) );
+                game.initNbMusicsPlayedInRound();
+            }
+            
             // update profileStat
             List<Player> players = game.getPlayers();
             
@@ -229,11 +234,6 @@ public class GameService {
                 }
                 
                 profileService.update(profile);
-            }
-            
-            if ( round.isFinished(game) ) {
-                game.setRound( roundService.createNextRound(game) );
-                game.initNbMusicsPlayedInRound();
             }
         }
         

@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.service;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.persistence.dao.ProfileDAO;
 import com.myssteriion.utils.exception.ConflictException;

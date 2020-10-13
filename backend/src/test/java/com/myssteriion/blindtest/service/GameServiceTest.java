@@ -10,6 +10,7 @@ import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
 import com.myssteriion.blindtest.model.game.Game;
 import com.myssteriion.blindtest.model.game.MusicResult;
 import com.myssteriion.blindtest.model.game.NewGame;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.blindtest.model.round.impl.Classic;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
 import java.util.Arrays;
@@ -35,7 +37,7 @@ public class GameServiceTest extends AbstractTest {
     @Mock
     private ProfileService profileService;
     
-    @Mock
+    @Autowired
     private RoundService roundService;
     
     private GameService gameService;
@@ -399,7 +401,7 @@ public class GameServiceTest extends AbstractTest {
         
         // classic : 15 à 100pts / 1 à 200pts (15 car 20 - 1 loser - 3 ou profile1 gagne - 1 ou profile gagne auteur et titre)
         // choice : 4 à 150pts / 8 à 100 pts
-        // lucky : 10 à 150pts / 10 à 100 pts (le 10*100 c'est la aléatoire)
+        // lucky : 10 à 150pts / 10 à 100 pts (le 10*100 c'est aléatoire)
         // friendship : 10 à 150pts
         // thief : 20 à 100pts
         // recovery : 10 à 30pts
@@ -455,7 +457,7 @@ public class GameServiceTest extends AbstractTest {
         Mockito.when(musicService.getMusicNumber(Mockito.any(Theme.class))).thenReturn(10);
         
         NewGame ng = new NewGame().setProfilesId(new HashSet<>(Arrays.asList(0, 1))).setDuration(Duration.NORMAL);
-        Game expected = gameService.newGame(ng);
+        gameService.newGame(ng);
         gameService.newGame(ng);
         gameService.newGame(ng);
         

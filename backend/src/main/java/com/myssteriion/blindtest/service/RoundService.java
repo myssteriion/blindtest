@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,14 +43,14 @@ public class RoundService {
         
         this.roundProperties = roundProperties;
         this.first = RoundName.CLASSIC;
-        this.order = Map.ofEntries(
-                new AbstractMap.SimpleEntry<>(first, RoundName.CHOICE),
-                new AbstractMap.SimpleEntry<>(RoundName.CHOICE,  RoundName.LUCKY),
-                new AbstractMap.SimpleEntry<>(RoundName.LUCKY, RoundName.FRIENDSHIP),
-                new AbstractMap.SimpleEntry<>(RoundName.FRIENDSHIP, RoundName.THIEF),
-                new AbstractMap.SimpleEntry<>(RoundName.THIEF, RoundName.RECOVERY),
-                new AbstractMap.SimpleEntry<>(RoundName.RECOVERY, null)
-        );
+        
+        this.order = new HashMap<>();
+        this.order.put(first, RoundName.CHOICE);
+        this.order.put(RoundName.CHOICE,  RoundName.LUCKY);
+        this.order.put(RoundName.LUCKY, RoundName.FRIENDSHIP);
+        this.order.put(RoundName.FRIENDSHIP, RoundName.THIEF);
+        this.order.put(RoundName.THIEF, RoundName.RECOVERY);
+        this.order.put(RoundName.RECOVERY, null);
     }
     
     
