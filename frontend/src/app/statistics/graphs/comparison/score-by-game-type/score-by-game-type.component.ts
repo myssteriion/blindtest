@@ -42,7 +42,7 @@ export class ScoreByGameTypeComponent implements OnInit {
             keys.forEach(key => {
                 series.push({
                     name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
-                    value: ToolsService.isNull(player.statistics.bestScores[key]) ? 0 : player.statistics.bestScores[key]
+                    value: ToolsService.isNull(player.profileStat.bestScores[key]) ? 0 : player.profileStat.bestScores[key]
                 });
             });
 

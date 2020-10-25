@@ -38,12 +38,12 @@ export class GlobalPercentagesComponent implements OnInit {
         this.players.forEach(player => {
             let listenedMusics = 0;
             let foundMusics = 0;
-            let musicKeys = Object.keys(player.statistics.listenedMusics);
+            let musicKeys = Object.keys(player.profileStat.listenedMusics);
             musicKeys.forEach(musicKey => {
-                listenedMusics = listenedMusics + player.statistics.listenedMusics[musicKey];
+                listenedMusics = listenedMusics + player.profileStat.listenedMusics[musicKey];
                 keys.forEach(key => {
-                    if (!ToolsService.isNull(player.statistics.foundMusics[musicKey])) {
-                        foundMusics = ToolsService.isNull(player.statistics.foundMusics[musicKey][key]) ? foundMusics : foundMusics + player.statistics.foundMusics[musicKey][key];
+                    if (!ToolsService.isNull(player.profileStat.foundMusics[musicKey])) {
+                        foundMusics = ToolsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? foundMusics : foundMusics + player.profileStat.foundMusics[musicKey][key];
                     }
                 })
             });

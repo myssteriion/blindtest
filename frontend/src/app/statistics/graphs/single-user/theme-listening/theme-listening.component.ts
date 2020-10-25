@@ -38,7 +38,7 @@ export class ThemeListeningComponent implements OnInit {
             keys.push(theme.enumVal);
         });
 
-        let listenedThemes = this.user.statistics.listenedMusics;
+        let listenedThemes = this.user.profileStat.listenedMusics;
 
         keys.forEach(key => {
             this.listenedMusicsByTheme.push({

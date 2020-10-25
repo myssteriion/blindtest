@@ -130,7 +130,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
             return selectedProfile.id === statistics.id
         });
         if (userProfile !== undefined) {
-            userProfile.statistics = statistics;
+            userProfile.profileStat = statistics;
         } else {
             let message = this._translate.instant("STATISTICS.USER_STATISTICS_BINDING_KO", {user: userProfile.name});
             this._toasterService.error(message);

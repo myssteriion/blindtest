@@ -43,7 +43,7 @@ export class UserThemeComparisonQuestionDetailComponent implements OnInit {
     private calculateStatistics() {
         this.stackedPercentages = [];
         this.players.forEach(player => {
-            let series = ToolsService.isNull(player.statistics.foundMusics[this.theme]) ? [] : this.getMusicWinForPlayer(player.statistics);
+            let series = ToolsService.isNull(player.profileStat.foundMusics[this.theme]) ? [] : this.getMusicWinForPlayer(player.profileStat);
             this.stackedPercentages.push({name: player.name, series: series})
         });
         this.stackedPercentages = ToolsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);

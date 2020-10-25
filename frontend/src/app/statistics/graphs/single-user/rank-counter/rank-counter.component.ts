@@ -36,7 +36,7 @@ export class RankCounterComponent implements OnInit {
         rankValues.forEach(rank => {
             this.rankCounter.push({
                 name: this._translate.instant("RANK_OCCUPIED." + rank),
-                value: ToolsService.isNull(this.user.statistics.wonGames[rank]) ? 0 : this.user.statistics.wonGames[rank]
+                value: ToolsService.isNull(this.user.profileStat.wonGames[rank]) ? 0 : this.user.profileStat.wonGames[rank]
             });
         });
     }

@@ -41,7 +41,7 @@ export class UserRankComparisonComponent implements OnInit {
     private calculateStatistics() {
         this.rankResults = [];
         this.players.forEach(player => {
-            let series = ToolsService.isNull(player.statistics.wonGames) ? [] : this.getRanksForPlayer(player.statistics.wonGames);
+            let series = ToolsService.isNull(player.profileStat.wonGames) ? [] : this.getRanksForPlayer(player.profileStat.wonGames);
             this.rankResults.push({name: player.name, series: series})
         });
         this.rankResults = ToolsService.sortByAlphabeticalAndNumerical(this.rankResults);

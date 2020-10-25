@@ -42,7 +42,7 @@ export class PlayedGamesComponent implements OnInit {
             keys.forEach(key => {
                 series.push({
                     name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
-                    value: ToolsService.isNull(player.statistics.playedGames[key]) ? 0 : player.statistics.playedGames[key]
+                    value: ToolsService.isNull(player.profileStat.playedGames[key]) ? 0 : player.profileStat.playedGames[key]
                 });
             });
 

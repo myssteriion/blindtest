@@ -45,9 +45,9 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
         this.maxCount = 0;
 
         this.players.forEach(player => {
-            let foundMusics = ToolsService.isNull(player.statistics.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.statistics);
-            if (!ToolsService.isNull(player.statistics.listenedMusics[this.theme]) && player.statistics.listenedMusics[this.theme] > this.maxCount) {
-                this.maxCount = player.statistics.listenedMusics[this.theme];
+            let foundMusics = ToolsService.isNull(player.profileStat.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.profileStat);
+            if (!ToolsService.isNull(player.profileStat.listenedMusics[this.theme]) && player.profileStat.listenedMusics[this.theme] > this.maxCount) {
+                this.maxCount = player.profileStat.listenedMusics[this.theme];
             }
             this.questionsAnswered.push({
                 name: player.name,

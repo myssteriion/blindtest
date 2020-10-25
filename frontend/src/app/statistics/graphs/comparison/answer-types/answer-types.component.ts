@@ -38,7 +38,7 @@ export class AnswerTypesComponent implements OnInit {
         let keys = GOOD_ANSWERS;
 
         this.players.forEach(player => {
-            let musicKeys = Object.keys(player.statistics.foundMusics);
+            let musicKeys = Object.keys(player.profileStat.foundMusics);
             let series = [];
             let values = {
                 AUTHOR: 0,
@@ -47,9 +47,9 @@ export class AnswerTypesComponent implements OnInit {
             };
 
             musicKeys.forEach(musicKey => {
-                if (!ToolsService.isNull(player.statistics.foundMusics[musicKey])) {
+                if (!ToolsService.isNull(player.profileStat.foundMusics[musicKey])) {
                     keys.forEach(key => {
-                        values[key] = ToolsService.isNull(player.statistics.foundMusics[musicKey][key]) ? values[key] : values[key] + player.statistics.foundMusics[musicKey][key]
+                        values[key] = ToolsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? values[key] : values[key] + player.profileStat.foundMusics[musicKey][key]
                     })
                 }
             });

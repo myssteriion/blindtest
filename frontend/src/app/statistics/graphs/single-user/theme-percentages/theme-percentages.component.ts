@@ -31,8 +31,8 @@ export class ThemePercentagesComponent implements OnInit {
         THEMES.forEach(theme => {
             keys.push(theme.enumVal);
         });
-        let listenedThemes = this.user.statistics.listenedMusics;
-        let foundThemes = this.user.statistics.foundMusics;
+        let listenedThemes = this.user.profileStat.listenedMusics;
+        let foundThemes = this.user.profileStat.foundMusics;
         let typeKeys = GOOD_ANSWERS;
 
         keys.forEach(key => {

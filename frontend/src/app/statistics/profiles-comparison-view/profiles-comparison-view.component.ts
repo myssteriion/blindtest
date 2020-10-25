@@ -36,7 +36,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
     private getAvailableThemes(): void {
         let themesToFilter = [];
         this.selectedUsers.forEach(user => {
-            let keys = Object.keys(user.statistics.listenedMusics);
+            let keys = Object.keys(user.profileStat.listenedMusics);
             themesToFilter = themesToFilter.concat(keys);
         });
 
