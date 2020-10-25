@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Music} from "../interfaces/entity/music.interface";
 import {ToolsService} from "../tools/tools.service";
-import {ThemeInfo} from "../interfaces/music/theme.info";
+import {ThemeInfo} from "../interfaces/music/theme-info.interface";
 import {Page} from "../interfaces/base/page.interface";
 
 /**

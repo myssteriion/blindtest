@@ -13,7 +13,7 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
 import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
-import {ThemeInfo} from "../../interfaces/music/theme.info";
+import {ThemeInfo} from "../../interfaces/music/theme-info.interface";
 
 /**
  * The new game view.
