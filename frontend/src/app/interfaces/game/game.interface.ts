@@ -1,6 +1,6 @@
 import {Player} from './player.interface';
-import {AbstractRoundContent} from "../common/roundcontent/abstract-round.content";
 import {ListenedMusics} from "./statistic/listened-musics.interface";
+import {AbstractRound} from "../round/abstract.round.interface";
 
 /**
  * Game.
@@ -15,10 +15,7 @@ export interface Game {
 	
 	nbMusicsPlayed: number,
 	nbMusicsPlayedInRound: number,
-	round: RoundName,
-	roundContent: AbstractRoundContent,
+	round: AbstractRound,
 	
-	firstStep: boolean,
-	lastStep: boolean,
 	finished: boolean
 }

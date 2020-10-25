@@ -19,7 +19,7 @@ import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custo
 import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
 import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
 import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {ToasterService} from "../../services/toaster.service";
@@ -322,9 +322,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private getTitle(): string {
 		
 		let params = {
-			name_round: this._translate.instant("ROUND." + this.game.round + ".NAME"),
+			name_round: this._translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
 			current_music: this.game.nbMusicsPlayedInRound + 1,
-			total_musics:  this.game.roundContent.nbMusics
+			total_musics:  this.game.round.nbMusics
 		};
 		
 		return this._translate.instant("GAME.CURRENT_VIEW.TITLE", params);
@@ -382,7 +382,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.countdown.setShow(false);
 		this.postCountdown.setShow(false);
 		
-		if (this.game.round === RoundName.CHOICE) {
+		if (this.game.round.roundName === RoundName.CHOICE) {
 			
 			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'md', keyboard: false } );
 			modalRef.componentInstance.filteredThemes = this.game.themes;
@@ -459,7 +459,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private rollThemeEffect(): void {
 		
-		let rollTheme: boolean = !(this.game.round === RoundName.CHOICE || this.game.themes.length === 1);
+		let rollTheme: boolean = !(this.game.round.roundName === RoundName.CHOICE || this.game.themes.length === 1);
 		let rollEffect: boolean = this.game.effects.length > 1;
 		
 		this.themeEffect.setShow(true);
@@ -640,9 +640,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.game.nbMusicsPlayed = appliedGame.nbMusicsPlayed;
 		this.game.nbMusicsPlayedInRound = appliedGame.nbMusicsPlayedInRound;
 		this.game.round = appliedGame.round;
-		this.game.roundContent = appliedGame.roundContent;
-		this.game.firstStep = appliedGame.firstStep;
-		this.game.lastStep = appliedGame.lastStep;
+		this.game.round = appliedGame.round;
 		this.game.finished = appliedGame.finished;
 	}
 	

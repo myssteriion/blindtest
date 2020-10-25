@@ -1,8 +1,8 @@
 import {AbstractRound} from "../abstract.round.interface";
 
 /**
- * ThiefContent.
+ * Thief.
  */
-export interface ThiefContent extends AbstractRound {
+export interface Thief extends AbstractRound {
 	nbPointLoose: number
 }

@@ -1,7 +1,7 @@
 import {AbstractRound} from "../abstract.round.interface";
 
 /**
- * RecoveryContent.
+ * Recovery.
  */
-export interface RecoveryContent extends AbstractRound {
+export interface Recovery extends AbstractRound {
 }

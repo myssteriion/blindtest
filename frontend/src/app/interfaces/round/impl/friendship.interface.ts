@@ -1,8 +1,8 @@
 import {AbstractRound} from "../abstract.round.interface";
 
 /**
- * FriendshipContent.
+ * Friendship.
  */
-export interface FriendshipContent extends AbstractRound {
+export interface Friendship extends AbstractRound {
 	nbTeams: number
 }

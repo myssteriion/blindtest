@@ -1,9 +1,9 @@
 import {AbstractRound} from "../abstract.round.interface";
 
 /**
- * LuckyContent.
+ * Lucky.
  */
-export interface LuckyContent extends AbstractRound {
+export interface Lucky extends AbstractRound {
 	nbPointBonus: number
 	nbPlayers: number
 }

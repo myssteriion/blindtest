@@ -1,7 +1,7 @@
 import {AbstractRound} from "../abstract.round.interface";
 
 /**
- * ClassicContent.
+ * Classic.
  */
-export interface ClassicContent extends AbstractRound {
+export interface Classic extends AbstractRound {
 }
