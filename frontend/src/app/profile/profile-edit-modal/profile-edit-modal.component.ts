@@ -48,14 +48,14 @@ export class ProfileEditModalComponent implements OnInit {
 	private avatarsPage: Page<Avatar>;
 	
 	/**
-	 * Show/hide avatars page.
+	 * If avatars page is empty.
 	 */
-	public showAvatars: boolean;
+	public avatarsPageIsEmpty: boolean;
 	
 	/**
 	 * Show/hide pageable.
 	 */
-	private showPageable: boolean;
+	private showAvatarsPageable: boolean;
 	
 	/**
 	 * The search name filter.
@@ -83,8 +83,8 @@ export class ProfileEditModalComponent implements OnInit {
 	
 	public ngOnInit(): void {
 		
-		this.showAvatars = false;
-		this.showPageable = false;
+		this.avatarsPageIsEmpty = true;
+		this.showAvatarsPageable = false;
 		this.searchName = "";
 		this.colorPickerIsOpen = false;
 		
@@ -123,8 +123,8 @@ export class ProfileEditModalComponent implements OnInit {
 			response => {
 				
 				this.avatarsPage = response;
-				this.showAvatars = this.avatarsPage.totalElements > 0;
-				this.showPageable = this.avatarsPage.totalPages > 1;
+				this.avatarsPageIsEmpty = this.avatarsPage.empty;
+				this.showAvatarsPageable = this.avatarsPage.totalPages > 1;
 			},
 			error => {
 				
