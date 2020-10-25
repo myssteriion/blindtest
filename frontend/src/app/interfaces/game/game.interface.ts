@@ -1,5 +1,5 @@
 import {Player} from './player.interface';
-import {AbstractRoundContent} from "../common/roundcontent/abstract.round.content";
+import {AbstractRoundContent} from "../common/roundcontent/abstract-round.content";
 import {ListenedMusics} from "./statistic/listened-musics.interface";
 
 /**

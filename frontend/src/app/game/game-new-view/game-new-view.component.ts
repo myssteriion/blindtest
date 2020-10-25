@@ -6,7 +6,7 @@ import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import {EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
-import {NewGame} from "../../interfaces/game/newgame.interface";
+import {NewGame} from "../../interfaces/game/new-game.interface";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";

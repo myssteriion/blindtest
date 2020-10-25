@@ -1,4 +1,4 @@
-import {AbstractRoundContent} from "../abstract.round.content";
+import {AbstractRoundContent} from "../abstract-round.content";
 
 /**
  * LuckyContent.
