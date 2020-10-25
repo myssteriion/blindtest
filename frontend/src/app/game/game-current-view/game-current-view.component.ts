@@ -24,6 +24,7 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {ToasterService} from "../../services/toaster.service";
 import {PlayerCardComponent} from "../../player/player-card/player-card.component";
+import {MusicFilter} from "../../interfaces/music/music-filter.interface";
 
 /**
  * The current game view.
@@ -409,7 +410,12 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private callNextMusic(themes: Theme[]): void {
 		
-		this._musicResource.random(themes, this.game.effects).subscribe(
+		let musicFilter: MusicFilter = {
+			themes: themes,
+			effects: this.game.effects
+		};
+		
+		this._musicResource.random(musicFilter).subscribe(
 			response => {
 				
 				this.currentMusic = response;

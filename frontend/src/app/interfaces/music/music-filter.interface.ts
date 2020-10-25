@@ -1,7 +1,7 @@
 /**
- * ThemeInfo.
+ * MusicFilter.
  */
-export interface ThemeInfo {
-	theme: Theme,
-	nbMusics: number
+export interface MusicFilter {
+	themes: Theme[],
+	effects: Effect[]
 }
