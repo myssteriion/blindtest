@@ -444,16 +444,16 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
 				
 				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
+				modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.RANDOM_MUSIC_ERROR");
 				modalRef.componentInstance.suggestions = undefined;
 				modalRef.componentInstance.error = errorAlert;
 				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
 				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("GAME.CURRENT_VIEW.RETRY_IN_OFFLINE_MODE_ERROR");
+				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 				
 				modalRef.result.then(
 					() => { this.callNextMusic(themes); },
-					() => { this.callNextMusic(themes); }
+					() => { this._router.navigateByUrl(HOME_PATH); }
 				);
 			}
 		);

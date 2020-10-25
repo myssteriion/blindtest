@@ -71,7 +71,7 @@ public class MusicController {
     /**
      * Randomly choose a music.
      *
-     * @param musicFilter  the musicFilter)
+     * @param musicFilter the musicFilter)
      * @return a music
      * @throws NotFoundException NotFound exception
      */

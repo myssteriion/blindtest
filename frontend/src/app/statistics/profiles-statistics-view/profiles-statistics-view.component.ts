@@ -82,12 +82,8 @@ export class ProfilesStatisticsViewComponent implements OnInit {
 				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
 	
 				modalRef.result.then(
-					(result) => {
-						this.getAllPlayers(pageNumber);
-					},
-					(reason) => {
-						this._router.navigateByUrl(HOME_PATH);
-					}
+					() => { this.getAllPlayers(pageNumber); },
+					() => { this._router.navigateByUrl(HOME_PATH); }
 				);
         	}
         )
