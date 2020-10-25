@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {ToolsService} from "../../../../../tools/tools.service";
 import {GOOD_ANSWERS} from "../../../../../tools/constant";
-import {Profile} from "../../../../../interfaces/dto/profile.interface";
+import {Profile} from "../../../../../interfaces/entity/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/graph.constant";
 
@@ -45,9 +45,9 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
         this.maxCount = 0;
 
         this.players.forEach(player => {
-            let foundMusics = ToolsService.isNull(player.statistics.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.statistics);
-            if (!ToolsService.isNull(player.statistics.listenedMusics[this.theme]) && player.statistics.listenedMusics[this.theme] > this.maxCount) {
-                this.maxCount = player.statistics.listenedMusics[this.theme];
+            let foundMusics = ToolsService.isNull(player.profileStat.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.profileStat);
+            if (!ToolsService.isNull(player.profileStat.listenedMusics[this.theme]) && player.profileStat.listenedMusics[this.theme] > this.maxCount) {
+                this.maxCount = player.profileStat.listenedMusics[this.theme];
             }
             this.questionsAnswered.push({
                 name: player.name,

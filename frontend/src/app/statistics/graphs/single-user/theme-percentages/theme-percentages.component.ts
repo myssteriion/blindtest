@@ -3,7 +3,7 @@ import {THEMES, GOOD_ANSWERS} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
-import {Profile} from "../../../../interfaces/dto/profile.interface";
+import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
@@ -31,8 +31,8 @@ export class ThemePercentagesComponent implements OnInit {
         THEMES.forEach(theme => {
             keys.push(theme.enumVal);
         });
-        let listenedThemes = this.user.statistics.listenedMusics;
-        let foundThemes = this.user.statistics.foundMusics;
+        let listenedThemes = this.user.profileStat.listenedMusics;
+        let foundThemes = this.user.profileStat.foundMusics;
         let typeKeys = GOOD_ANSWERS;
 
         keys.forEach(key => {

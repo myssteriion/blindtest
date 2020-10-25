@@ -40,7 +40,7 @@
 		<!-- round -->
 		<div *ngIf="!game.finished" class="row">
 			<div class="col-4 game-card-labels font-size-small">{{ "GAME.GAME_CARD.ROUND_LABEL" | translate }}</div>
-			<div class="col-8 font-size-small">{{ 'ROUND.' + game.round + '.NAME' | translate }}</div>
+			<div class="col-8 font-size-small">{{ 'ROUND.' + game.round.roundName + '.NAME' | translate }}</div>
 		</div>
 		
 		<!-- finished game -->

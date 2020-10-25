@@ -3,7 +3,7 @@ import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from '../../../../tools/tools.service'
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
-import {Profile} from "../../../../interfaces/dto/profile.interface";
+import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
@@ -38,7 +38,7 @@ export class ThemeListeningComponent implements OnInit {
             keys.push(theme.enumVal);
         });
 
-        let listenedThemes = this.user.statistics.listenedMusics;
+        let listenedThemes = this.user.profileStat.listenedMusics;
 
         keys.forEach(key => {
             this.listenedMusicsByTheme.push({

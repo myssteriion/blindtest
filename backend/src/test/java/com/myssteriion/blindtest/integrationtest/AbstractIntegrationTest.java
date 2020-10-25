@@ -12,6 +12,7 @@ import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.blindtest.service.ProfileService;
+import com.myssteriion.blindtest.service.RoundService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
@@ -41,6 +42,8 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     
     protected ProfileService profileService;
     
+    protected RoundService roundService;
+    
     protected GameService gameService;
     
     
@@ -54,7 +57,9 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
         
         profileService = new ProfileService(profileDAO, avatarService);
         
-        gameService = new GameService(musicService, profileService, configProperties, roundContentProperties);
+        roundService = new RoundService(roundProperties);
+        
+        gameService = new GameService(musicService, profileService, roundService);
         
         clearDataBase();
         insertData();

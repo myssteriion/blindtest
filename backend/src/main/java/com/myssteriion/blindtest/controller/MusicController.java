@@ -75,10 +75,8 @@ public class MusicController {
      * @return a music
      * @throws NotFoundException NotFound exception
      */
-    @GetMapping(path = "/random")
-    public ResponseEntity<MusicEntity> random(@RequestBody MusicFilter musicFilter)
-            throws NotFoundException, IOException {
-        
+    @PostMapping(path = "/random")
+    public ResponseEntity<MusicEntity> random(@RequestBody MusicFilter musicFilter) throws NotFoundException, IOException {
         return RestUtils.create200(  musicService.random(musicFilter) );
     }
     

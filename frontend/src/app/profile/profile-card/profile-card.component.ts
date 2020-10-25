@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/dto/profile.interface';
+import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';

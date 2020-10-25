@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest;
 
 import com.myssteriion.blindtest.properties.ConfigProperties;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.properties.RoundProperties;
 import com.myssteriion.utils.cipher.StringCipher;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,6 @@ public abstract class AbstractTest {
     protected ConfigProperties configProperties;
     
     @Autowired
-    protected RoundContentProperties roundContentProperties;
+    protected RoundProperties roundProperties;
     
 }

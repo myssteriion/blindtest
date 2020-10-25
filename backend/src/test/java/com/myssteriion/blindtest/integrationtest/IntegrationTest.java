@@ -3,11 +3,14 @@ package com.myssteriion.blindtest.integrationtest;
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.GoodAnswer;
-import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.ChoiceContent;
-import com.myssteriion.blindtest.model.common.roundcontent.impl.ThiefContent;
+import com.myssteriion.blindtest.model.round.AbstractRound;
+import com.myssteriion.blindtest.model.round.impl.Choice;
+import com.myssteriion.blindtest.model.round.impl.Classic;
+import com.myssteriion.blindtest.model.round.impl.Friendship;
+import com.myssteriion.blindtest.model.round.impl.Lucky;
+import com.myssteriion.blindtest.model.round.impl.Recovery;
+import com.myssteriion.blindtest.model.round.impl.Thief;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.model.entity.ProfileStatEntity;
@@ -42,13 +45,13 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** CLASSIC Round **********/
-        Assert.assertEquals( Round.CLASSIC, game.getRound() );
+        Assert.assertEquals( Classic.class, game.getRound().getClass() );
         Assert.assertEquals( 0, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        AbstractRoundContent roundContent = game.getRoundContent();
+        AbstractRound round = game.getRound();
         int nbMusicPlayed = 0;
-        int nbPointWon = roundContent.getNbPointWon();
+        int nbPointWon = round.getNbPointWon();
         int foundName1 = 0;
         int foundName2 = 0;
         int foundName3 = 0;
@@ -56,7 +59,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
         int scoreName2 = 0;
         int scoreName3 = 0;
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();
@@ -89,16 +92,16 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** CHOICE Round **********/
-        Assert.assertEquals( Round.CHOICE, game.getRound() );
+        Assert.assertEquals( Choice.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        roundContent = game.getRoundContent();
-        nbPointWon = roundContent.getNbPointWon();
-        int nbPointBonus = ((ChoiceContent) roundContent).getNbPointBonus();
-        int nbPointMalus = ((ChoiceContent) roundContent).getNbPointMalus();
+        round = game.getRound();
+        nbPointWon = round.getNbPointWon();
+        int nbPointBonus = ((Choice) round).getNbPointBonus();
+        int nbPointMalus = ((Choice) round).getNbPointMalus();
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();
@@ -169,14 +172,14 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** LUCKY Round **********/
-        Assert.assertEquals( Round.LUCKY, game.getRound() );
+        Assert.assertEquals( Lucky.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        roundContent = game.getRoundContent();
-        nbPointWon = roundContent.getNbPointWon();
+        round = game.getRound();
+        nbPointWon = round.getNbPointWon();
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();
@@ -203,14 +206,14 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** FRIENDSHIP Round **********/
-        Assert.assertEquals( Round.FRIENDSHIP, game.getRound() );
+        Assert.assertEquals( Friendship.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        roundContent = game.getRoundContent();
-        nbPointWon = roundContent.getNbPointWon();
+        round = game.getRound();
+        nbPointWon = round.getNbPointWon();
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();
@@ -237,15 +240,15 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** THIEF Round **********/
-        Assert.assertEquals( Round.THIEF, game.getRound() );
+        Assert.assertEquals( Thief.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        roundContent = game.getRoundContent();
-        nbPointWon = roundContent.getNbPointWon();
-        int nbPointLoose = ((ThiefContent) roundContent).getNbPointLoose();
+        round = game.getRound();
+        nbPointWon = round.getNbPointWon();
+        int nbPointLoose = ((Thief) round).getNbPointLoose();
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();
@@ -285,14 +288,14 @@ public class IntegrationTest extends AbstractIntegrationTest {
         
         
         /********** RECOVERY Round **********/
-        Assert.assertEquals( Round.RECOVERY, game.getRound() );
+        Assert.assertEquals( Recovery.class, game.getRound().getClass() );
         Assert.assertEquals( nbMusicPlayed, game.getNbMusicsPlayed() );
         Assert.assertEquals( 0, game.getNbMusicsPlayedInRound() );
         
-        roundContent = game.getRoundContent();
-        nbPointWon = roundContent.getNbPointWon();
+        round = game.getRound();
+        nbPointWon = round.getNbPointWon();
         
-        for (int i = 0; i < roundContent.getNbMusics(); i++) {
+        for (int i = 0; i < round.getNbMusics(); i++) {
             
             List<String> winners = new ArrayList<>();
             List<String> losers = new ArrayList<>();

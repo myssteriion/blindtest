@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {DURATIONS} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service'
 import {TranslateService} from "@ngx-translate/core";
-import {Profile} from "../../../../interfaces/dto/profile.interface";
+import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
@@ -42,7 +42,7 @@ export class PlayedGamesComponent implements OnInit {
             keys.forEach(key => {
                 series.push({
                     name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
-                    value: ToolsService.isNull(player.statistics.playedGames[key]) ? 0 : player.statistics.playedGames[key]
+                    value: ToolsService.isNull(player.profileStat.playedGames[key]) ? 0 : player.profileStat.playedGames[key]
                 });
             });
 

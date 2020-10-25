@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AVATAR_NOT_FOUND} from "./constant";
-import {Avatar} from "../interfaces/dto/avatar.interface";
-import {Music} from "../interfaces/dto/music.interface";
+import {Avatar} from "../interfaces/entity/avatar.interface";
+import {Music} from "../interfaces/entity/music.interface";
 
 /**
  * Tools service.

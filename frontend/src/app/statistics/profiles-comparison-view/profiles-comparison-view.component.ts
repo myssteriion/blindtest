@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ToolsService} from "../../tools/tools.service";
 import {THEMES} from "../../tools/constant";
-import {Profile} from "../../interfaces/dto/profile.interface";
+import {Profile} from "../../interfaces/entity/profile.interface";
 
 /**
  * The theme comparison view.
@@ -36,7 +36,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
     private getAvailableThemes(): void {
         let themesToFilter = [];
         this.selectedUsers.forEach(user => {
-            let keys = Object.keys(user.statistics.listenedMusics);
+            let keys = Object.keys(user.profileStat.listenedMusics);
             themesToFilter = themesToFilter.concat(keys);
         });
 

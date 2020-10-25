@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Game} from "../../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {LuckyContent} from "../../../interfaces/common/roundcontent/impl/lucky.content";
-import {FriendshipContent} from "../../../interfaces/common/roundcontent/impl/friendship.content";
+import {Lucky} from "../../../interfaces/round/impl/lucky.interface";
+import {Friendship} from "../../../interfaces/round/impl/friendship.interface";
 
 /**
  * The round info modal.
@@ -34,19 +34,19 @@ export class RoundInfoModalComponent {
 	public getDescription(): string {
 		
 		let params = {
-			roundName: this._translate.instant("ROUND." + this.game.round + ".NAME"),
-			nbMusics: this.game.roundContent.nbMusics,
+			roundName: this._translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
+			nbMusics: this.game.round.nbMusics,
 			nbPlayers: undefined,
 			nbTeams: undefined
 		};
 		
-		if (this.game.round === Round.LUCKY)
-			params.nbPlayers = (<LuckyContent>this.game.roundContent).nbPlayers;
+		if (this.game.round.roundName === RoundName.LUCKY)
+			params.nbPlayers = (<Lucky>this.game.round).nbPlayers;
 		
-		if (this.game.round === Round.FRIENDSHIP)
-			params.nbTeams = (<FriendshipContent>this.game.roundContent).nbTeams;
+		if (this.game.round.roundName === RoundName.FRIENDSHIP)
+			params.nbTeams = (<Friendship>this.game.round).nbTeams;
 		
-		return this._translate.instant("ROUND." + this.game.round + ".DESCRIPTION", params);
+		return this._translate.instant("ROUND." + this.game.round.roundName + ".DESCRIPTION", params);
 	}
 	
 	/**
@@ -54,9 +54,9 @@ export class RoundInfoModalComponent {
 	 */
 	public getNpPointWon(): string {
 		
-		let npPointWon = this.game.roundContent.nbPointWon.toString();
+		let npPointWon = this.game.round.nbPointWon.toString();
 		
-		if (this.game.round === Round.RECOVERY)
+		if (this.game.round.roundName === RoundName.RECOVERY)
 			npPointWon += " x " + this._translate.instant("COMMON.RANK");
 		
 		return npPointWon;
@@ -66,21 +66,21 @@ export class RoundInfoModalComponent {
 	 * If lose point part is showed.
 	 */
 	public showNpPointLose(): boolean {
-		return this.game.round === Round.THIEF;
+		return this.game.round.roundName === RoundName.THIEF;
 	}
 	
 	/**
 	 * If bonus point part is showed.
 	 */
 	public showNpPointBonus(): boolean {
-		return this.game.round === Round.CHOICE || this.game.round === Round.LUCKY;
+		return this.game.round.roundName === RoundName.CHOICE || this.game.round.roundName === RoundName.LUCKY;
 	}
 	
 	/**
 	 * If malus point part is showed.
 	 */
 	public showNpPointMalus(): boolean {
-		return this.game.round === Round.CHOICE;
+		return this.game.round.roundName === RoundName.CHOICE;
 	}
 	
 	/**

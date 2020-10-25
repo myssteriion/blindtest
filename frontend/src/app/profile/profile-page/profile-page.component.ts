@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/dto/profile.interface';
+import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from 'src/app/interfaces/base/page.interface';
 import {ProfileEditModalComponent} from "../profile-edit-modal/profile-edit-modal.component";

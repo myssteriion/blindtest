@@ -2,10 +2,8 @@ package com.myssteriion.blindtest.model.game;
 
 import com.myssteriion.blindtest.model.common.Duration;
 import com.myssteriion.blindtest.model.common.Effect;
-import com.myssteriion.blindtest.model.common.Round;
 import com.myssteriion.blindtest.model.common.Theme;
-import com.myssteriion.blindtest.model.common.roundcontent.AbstractRoundContent;
-import com.myssteriion.blindtest.properties.RoundContentProperties;
+import com.myssteriion.blindtest.model.round.AbstractRound;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.model.IModel;
 
@@ -63,12 +61,7 @@ public class Game implements IModel {
     /**
      * The current round.
      */
-    private Round round;
-    
-    /**
-     * The implementation of the current round.
-     */
-    private AbstractRoundContent roundContent;
+    private AbstractRound round;
     
     
     
@@ -78,17 +71,15 @@ public class Game implements IModel {
     public Game() {
     }
     
-    
-    
     /**
      * Instantiates a new Game.
      *
-     * @param players        the players
-     * @param duration       the duration
-     * @param themes         the themes
-     * @param effects        the effects
+     * @param players   the players
+     * @param duration  the duration
+     * @param themes    the themes
+     * @param effects   the effects
      */
-    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects, RoundContentProperties prop) {
+    public Game(List<Player> players, Duration duration, List<Theme> themes, List<Effect> effects) {
         
         this.players = players;
         this.duration = duration;
@@ -97,9 +88,6 @@ public class Game implements IModel {
         
         this.nbMusicsPlayed = INIT;
         this.nbMusicsPlayedInRound = INIT;
-        this.round = Round.getFirst();
-        // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-        this.roundContent = this.round.createRoundContent(this, prop);
     }
     
     
@@ -267,7 +255,7 @@ public class Game implements IModel {
      *
      * @return the round
      */
-    public Round getRound() {
+    public AbstractRound getRound() {
         return round;
     }
     
@@ -277,28 +265,8 @@ public class Game implements IModel {
      * @param round the round
      * @return the round
      */
-    public Game setRound(Round round) {
+    public Game setRound(AbstractRound round) {
         this.round = round;
-        return this;
-    }
-    
-    /**
-     * Gets roundContent.
-     *
-     * @return the roundContent
-     */
-    public AbstractRoundContent getRoundContent() {
-        return roundContent;
-    }
-    
-    /**
-     * Sets round content.
-     *
-     * @param roundContent the round content
-     * @return the round content
-     */
-    public Game setRoundContent(AbstractRoundContent roundContent) {
-        this.roundContent = roundContent;
         return this;
     }
     
@@ -322,38 +290,18 @@ public class Game implements IModel {
     }
     
     /**
-     * Pass to the next step.
+     * Increment nbMusicsPlayed and nbMusicsPlayedInRound.
      */
-    public void nextStep(RoundContentProperties prop) {
-        
+    public void incrementNbMusicsPlayed() {
         nbMusicsPlayed++;
         nbMusicsPlayedInRound++;
-        
-        if ( roundContent != null && roundContent.isFinished(this) ) {
-            round = round.nextRound();
-            
-            // TODO refactor en supprimant car BeanFactory n'existe plus pour la class ROUND
-            roundContent = (round == null) ? null : round.createRoundContent(this, prop);
-            nbMusicsPlayedInRound = INIT;
-        }
     }
     
     /**
-     * Test if it's the first step.
-     *
-     * @return TRUE if it's the first step, FALSE otherwise
+     * Init nbMusicsPlayedInRound.
      */
-    public boolean isFirstStep() {
-        return nbMusicsPlayed == INIT;
-    }
-    
-    /**
-     * Test if it's the last step.
-     *
-     * @return TRUE if it's the last step, FALSE otherwise
-     */
-    public boolean isLastStep() {
-        return round != null && roundContent != null && round.isLast() && roundContent.isLastMusic(this);
+    public void initNbMusicsPlayedInRound() {
+        nbMusicsPlayedInRound = INIT;
     }
     
     /**
@@ -375,8 +323,7 @@ public class Game implements IModel {
                 ", listenedMusics=" + listenedMusics +
                 ", nbMusicsPlayed=" + nbMusicsPlayed +
                 ", nbMusicsPlayedInRound=" + nbMusicsPlayedInRound +
-                ", round=" + round +
-                ", roundContent={" + roundContent + "}";
+                ", round={" + round + "}";
     }
     
 }
