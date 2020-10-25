@@ -40,30 +40,35 @@
 		</div>
 		
 		<!-- avatar -->
-		<div *ngIf="showAvatars" class="row profile-edit-avatar">
+		<div class="row profile-edit-avatar">
 			<div class="col-4 font-size-normal">{{ 'PROFILE.EDIT_MODAL.AVATAR_LABEL' | translate }}</div>
 			<div class="col-8"><img src="{{ getImgFromAvatar(newProfile.avatar) }}"/></div>
 		</div>
 		
 		<!-- avatars page -->
-		<div *ngIf="showAvatars">
-			<!-- 1st line -> filter input ; pagination -->
-			<div class="row justify-content-center profile-edit-avatar-line-one">
-				<div class="col-6">
-					<input class="form-control font-size-normal" [(ngModel)]="searchName" placeholder="{{ 'COMMON.SEARCH' | translate }}"
-						   (ngModelChange)="loadAvatars(1)" maxlength="15">
-				</div>
-				<div *ngIf="showPageable" class="col-6">
-					<ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
-									[collectionSize]="avatarsPage.totalElements" [pageSize]="avatarsPage.size" [maxSize]="3"
-									(pageChange)="loadAvatars($event)">
-					</ngb-pagination>
-				</div>
+		<!-- 1st line -> filter input ; pagination -->
+		<div class="row justify-content-center profile-edit-avatar-line-one">
+			<div class="col-6">
+				<input class="form-control font-size-normal" [(ngModel)]="searchName" placeholder="{{ 'COMMON.SEARCH' | translate }}"
+					   (ngModelChange)="loadAvatars(1)" maxlength="15">
 			</div>
-			
-			<!-- avatars page -->
-			<div class="row justify-content-center profile-edit-avatars">
-				<img *ngFor="let avatar of avatarsPage.content" src="{{ getImgFromAvatar(avatar) }}" (click)="selectAvatar(avatar)"/>
+			<div *ngIf="showAvatarsPageable" class="col-6">
+				<ngb-pagination class="d-flex justify-content-center font-size-normal" [ellipses]="false" [rotate]="true"
+								[collectionSize]="avatarsPage.totalElements" [pageSize]="avatarsPage.size" [maxSize]="3"
+								(pageChange)="loadAvatars($event)">
+				</ngb-pagination>
+			</div>
+		</div>
+		
+		<!-- avatars page -->
+		<div *ngIf="!avatarsPageIsEmpty" class="row justify-content-center profile-edit-avatars">
+			<img *ngFor="let avatar of avatarsPage.content" src="{{ getImgFromAvatar(avatar) }}" (click)="selectAvatar(avatar)"/>
+		</div>
+		
+		<!-- no result -->
+		<div *ngIf="avatarsPageIsEmpty" class="row justify-content-center">
+			<div class="col-6 no-result-label font-size-normal alert alert-info">
+				<div>{{ 'COMMON.NO_RESULT' | translate }}</div>
 			</div>
 		</div>
 	
