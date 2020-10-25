@@ -40,10 +40,10 @@ export class RoundInfoModalComponent {
 			nbTeams: undefined
 		};
 		
-		if (this.game.round === Round.LUCKY)
+		if (this.game.round === RoundName.LUCKY)
 			params.nbPlayers = (<LuckyContent>this.game.roundContent).nbPlayers;
 		
-		if (this.game.round === Round.FRIENDSHIP)
+		if (this.game.round === RoundName.FRIENDSHIP)
 			params.nbTeams = (<FriendshipContent>this.game.roundContent).nbTeams;
 		
 		return this._translate.instant("ROUND." + this.game.round + ".DESCRIPTION", params);
@@ -56,7 +56,7 @@ export class RoundInfoModalComponent {
 		
 		let npPointWon = this.game.roundContent.nbPointWon.toString();
 		
-		if (this.game.round === Round.RECOVERY)
+		if (this.game.round === RoundName.RECOVERY)
 			npPointWon += " x " + this._translate.instant("COMMON.RANK");
 		
 		return npPointWon;
@@ -66,21 +66,21 @@ export class RoundInfoModalComponent {
 	 * If lose point part is showed.
 	 */
 	public showNpPointLose(): boolean {
-		return this.game.round === Round.THIEF;
+		return this.game.round === RoundName.THIEF;
 	}
 	
 	/**
 	 * If bonus point part is showed.
 	 */
 	public showNpPointBonus(): boolean {
-		return this.game.round === Round.CHOICE || this.game.round === Round.LUCKY;
+		return this.game.round === RoundName.CHOICE || this.game.round === RoundName.LUCKY;
 	}
 	
 	/**
 	 * If malus point part is showed.
 	 */
 	public showNpPointMalus(): boolean {
-		return this.game.round === Round.CHOICE;
+		return this.game.round === RoundName.CHOICE;
 	}
 	
 	/**

@@ -382,7 +382,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		this.countdown.setShow(false);
 		this.postCountdown.setShow(false);
 		
-		if (this.game.round === Round.CHOICE) {
+		if (this.game.round === RoundName.CHOICE) {
 			
 			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'md', keyboard: false } );
 			modalRef.componentInstance.filteredThemes = this.game.themes;
@@ -459,7 +459,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private rollThemeEffect(): void {
 		
-		let rollTheme: boolean = !(this.game.round === Round.CHOICE || this.game.themes.length === 1);
+		let rollTheme: boolean = !(this.game.round === RoundName.CHOICE || this.game.themes.length === 1);
 		let rollEffect: boolean = this.game.effects.length > 1;
 		
 		this.themeEffect.setShow(true);

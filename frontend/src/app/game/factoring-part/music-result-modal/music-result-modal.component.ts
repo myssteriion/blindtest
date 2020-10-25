@@ -29,7 +29,7 @@ export class MusicResultModalComponent implements OnInit {
 	 * The round.
 	 */
 	@Input()
-	private round: Round;
+	private round: RoundName;
 	
 	/**
 	 * The players.
@@ -144,7 +144,7 @@ export class MusicResultModalComponent implements OnInit {
 	 * If th loser column is showed.
 	 */
 	public showLoserColumn(): boolean {
-		return this.round === Round.THIEF;
+		return this.round === RoundName.THIEF;
 	}
 	
 	/**

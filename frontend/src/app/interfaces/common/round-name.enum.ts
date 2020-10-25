@@ -1,7 +1,7 @@
 /**
- * Round.
+ * RoundName.
  */
-const enum Round {
+const enum RoundName {
 	CLASSIC = "CLASSIC",
 	CHOICE = "CHOICE",
 	LUCKY = "LUCKY",
