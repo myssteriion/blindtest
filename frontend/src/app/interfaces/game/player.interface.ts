@@ -1,4 +1,4 @@
-import {Profile} from "../dto/profile.interface";
+import {Profile} from "../entity/profile.interface";
 import {FoundMusics} from "./statistic/found-musics.interface";
 
 /**

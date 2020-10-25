@@ -1,4 +1,4 @@
-import {Music} from "../dto/music.interface";
+import {Music} from "../entity/music.interface";
 
 /**
  * MusicResult.

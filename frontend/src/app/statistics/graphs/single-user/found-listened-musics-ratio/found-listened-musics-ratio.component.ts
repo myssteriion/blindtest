@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
 import {ToolsService} from '../../../../tools/tools.service';
-import {ProfileStatistics} from "../../../../interfaces/common/profile-statistics.interface";
+import {ProfileStat} from "../../../../interfaces/entity/profile-stat.interface";
 import {COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE} from "../../../../tools/graph.constant";
 
 /**
@@ -14,7 +14,7 @@ import {COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE} from "../../../../tools/graph.con
 })
 export class FoundListenedMusicsRatioComponent implements OnInit {
     @Input()
-    private statistics: ProfileStatistics;
+    private statistics: ProfileStat;
 
     public totalMusicsFound: number = 0;
     public totalMusicsListened: number = 0;

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HOME_PATH, SLIDE_ANIMATION} from '../../tools/constant';
 import {ProfileStatisticsResource} from "../../resources/profile-statistics.resource";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Profile} from "../../interfaces/dto/profile.interface";
+import {Profile} from "../../interfaces/entity/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ToasterService} from "../../services/toaster.service";
 import {ProfileResource} from "../../resources/profile.resource";

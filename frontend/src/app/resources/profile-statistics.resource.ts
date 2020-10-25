@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {Page} from '../interfaces/base/page.interface';
 import {environment} from 'src/environments/environment';
-import {ProfileStatistics} from '../interfaces/common/profile-statistics.interface';
+import {ProfileStat} from '../interfaces/entity/profile-stat.interface';
 
 /**
  * Profile resource.
@@ -26,13 +26,13 @@ export class ProfileStatisticsResource {
 	 *
 	 * @param profiles list of profiles
 	 */
-	public getStatisticsForProfile(profiles): Observable< Page<ProfileStatistics> > {
+	public getStatisticsForProfile(profiles): Observable< Page<ProfileStat> > {
 		let query = "";
 		profiles.forEach(profile => {
 			query = query + profile.id + ',';
 		});
 		query = query.substr(0, query.length - 1);
-		return this._http.get<Page<ProfileStatistics>>(this._statisticsPath + "?profilesIds=" + query);
+		return this._http.get<Page<ProfileStat>>(this._statisticsPath + "?profilesIds=" + query);
 	}
 	
 }

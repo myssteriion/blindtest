@@ -1,5 +1,5 @@
 import {Avatar} from './avatar.interface';
-import {ProfileStatistics} from '../common/profile-statistics.interface';
+import {ProfileStat} from './profile-stat.interface';
 
 /**
  * Profile.
@@ -9,5 +9,5 @@ export interface Profile {
 	name: string,
 	background: string,
 	avatar?: Avatar,
-	profileStat?: ProfileStatistics
+	profileStat?: ProfileStat
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/dto/profile.interface';
+import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {Page} from 'src/app/interfaces/base/page.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Profile} from 'src/app/interfaces/dto/profile.interface';
-import {Avatar} from 'src/app/interfaces/dto/avatar.interface';
+import {Profile} from 'src/app/interfaces/entity/profile.interface';
+import {Avatar} from 'src/app/interfaces/entity/avatar.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
 import {ToolsService} from "../../tools/tools.service";
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';

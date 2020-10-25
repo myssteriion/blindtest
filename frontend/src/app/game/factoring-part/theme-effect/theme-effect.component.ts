@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EFFECTS, MARIO_KART_SOUND, THEMES} from "../../../tools/constant";
 import {ToolsService} from "../../../tools/tools.service";
-import {Music} from "../../../interfaces/dto/music.interface";
+import {Music} from "../../../interfaces/entity/music.interface";
 
 /**
  * The theme effect part.

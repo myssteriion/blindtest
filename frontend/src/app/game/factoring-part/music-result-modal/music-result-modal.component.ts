@@ -3,7 +3,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {GameResource} from "../../../resources/game.resource";
 import {MusicResult} from "../../../interfaces/game/music.result.interface";
-import {Music} from "../../../interfaces/dto/music.interface";
+import {Music} from "../../../interfaces/entity/music.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlertModalComponent} from "../../../common/error-alert/error-alert-modal.component";
 import {ErrorAlert} from "../../../interfaces/base/error.alert.interface";

@@ -6,7 +6,7 @@ import {NewGame} from "../interfaces/game/newgame.interface";
 import {Game} from "../interfaces/game/game.interface";
 import {MusicResult} from "../interfaces/game/music.result.interface";
 import {Page} from "../interfaces/base/page.interface";
-import {Avatar} from "../interfaces/dto/avatar.interface";
+import {Avatar} from "../interfaces/entity/avatar.interface";
 
 /**
  * Game resource.

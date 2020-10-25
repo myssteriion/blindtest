@@ -11,7 +11,7 @@ import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.co
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
-import {Music} from "../../interfaces/dto/music.interface";
+import {Music} from "../../interfaces/entity/music.interface";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {CountdownConfig} from 'ngx-countdown';
 import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
