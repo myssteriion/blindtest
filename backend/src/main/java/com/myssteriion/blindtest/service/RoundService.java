@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class RoundService {
     
+    /**
+     * The round properties.
+     */
     private RoundProperties roundProperties;
     
     /**
