@@ -18,7 +18,7 @@ import org.springframework.context.annotation.PropertySource;
         "com.myssteriion.utils"
 })
 @PropertySource("${SPRING_CONFIG_LOCATION}/musics-blindtest/application.properties")
-public class BlindtestApplication extends SpringBootServletInitializer {
+public class BlindTestApplication extends SpringBootServletInitializer {
     
     @Value("${cipher.algorithm}")
     private String cipherAlgorithm;
@@ -44,7 +44,7 @@ public class BlindtestApplication extends SpringBootServletInitializer {
     
     
     public static void main(String[] args) {
-        SpringApplication.run(BlindtestApplication.class, args);
+        SpringApplication.run(BlindTestApplication.class, args);
     }
     
 }
