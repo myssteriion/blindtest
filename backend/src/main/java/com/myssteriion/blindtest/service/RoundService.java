@@ -110,6 +110,7 @@ public class RoundService {
         
         CommonUtils.verifyValue("roundName", roundName);
         CommonUtils.verifyValue("game", game);
+        CommonUtils.verifyValue("game -> duration", game.getDuration());
         
         double durationRatio = game.getDuration().getRatio();
         
