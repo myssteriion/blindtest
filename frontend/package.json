@@ -10,7 +10,11 @@
         "lint": "ng lint",
         "e2e": "ng e2e"
     },
-    "private": true,
+    "author": {
+        "name": "myssterrion",
+        "email": "myssteriion@hotmail.com"
+    },
+    "private": false,
     "dependencies": {
         "@angular/animations": "^8.2.14",
         "@angular/cdk": "^8.2.3",
