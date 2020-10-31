@@ -99,6 +99,12 @@ public class RoundServiceTest extends AbstractTest {
         
         game.setRound( roundService.createNextRound(game) );
         Assert.assertTrue(game.getRound() instanceof Recovery);
+    
+        game.setRound( roundService.createNextRound(game) );
+        Assert.assertNull( game.getRound() );
+    
+        game.setRound( roundService.createNextRound(game) );
+        Assert.assertNull( game.getRound() );
     }
     
     @Test
