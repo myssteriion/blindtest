@@ -1,11 +1,13 @@
 # Musics Blindtest
 
 ## Info Techiques
-**nom :** musics-blindtest
+**nom appli:** musics-blindtest
 
-**java :** 11
-
-**gradle :** 6.6
+| Quoi      | Version   |
+| ---       | ---       |
+| java      | 11        |
+| gradle    | 6.6       |
+| tomcat    | 9.0.37    |
 
 ### Build
 Le projet est découpé en 3 sous-module: **conf**, **backend** et **frontend**.
@@ -23,6 +25,14 @@ La conf possède un paramètre de build : **-Penv**.
 #### All
 Il est possible de tout build d'un coup si le besoin est (notament pour packager la version PROD). Le dossier delivery contiendra tout ce qu'il faut.
 - clean build -Penv="{dev|prod}" [-x test]
+
+#### Paramétrage intelliJ
+##### Tomcat 
+|Ou             | Quoi                                                                              |
+|---            | ---                                                                               |
+| port          | 9500                                                                              |
+| env           | SPRING_CONFIG_LOCATION=file:[...]/musics-blindtest/conf/dist/                     |
+| VM options    | -Dlogging.config="[...]/musics-blindtest/conf/dist/musics-blindtest/logback.xml"  |
 
 ## Module Conf
 La conf applicative du backend. Le paramètre de build permet de déterminer le dossier à utiliser. Le dossier **common** étant utilisé de base.
