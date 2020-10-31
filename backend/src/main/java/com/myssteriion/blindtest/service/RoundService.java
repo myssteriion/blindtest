@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class RoundService {
     
+    /**
+     * The round properties.
+     */
     private RoundProperties roundProperties;
     
     /**
@@ -107,6 +110,7 @@ public class RoundService {
         
         CommonUtils.verifyValue("roundName", roundName);
         CommonUtils.verifyValue("game", game);
+        CommonUtils.verifyValue("game -> duration", game.getDuration());
         
         double durationRatio = game.getDuration().getRatio();
         

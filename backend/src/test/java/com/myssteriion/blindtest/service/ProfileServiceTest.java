@@ -58,8 +58,7 @@ public class ProfileServiceTest extends AbstractTest {
         profileService = Mockito.spy( new ProfileService(profileDao, avatarService) );
         MockitoAnnotations.initMocks(profileService);
         
-        ProfileEntity profileMock = new ProfileEntity().setName(name);
-        profileMock.setId(1);
+        ProfileEntity profileMock = new ProfileEntity().setName(name).setId(1).setAvatar(new AvatarEntity());
         Mockito.doReturn(null).doReturn(profileMock).doReturn(null).when(profileService).find(Mockito.any(ProfileEntity.class));
         Mockito.when(profileDao.save(Mockito.any(ProfileEntity.class))).thenReturn(profileMock);
         

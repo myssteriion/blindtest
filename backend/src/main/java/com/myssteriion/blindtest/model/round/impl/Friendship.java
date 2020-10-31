@@ -53,6 +53,7 @@ public class Friendship extends AbstractRound {
         
         int nbPlayers = game.getPlayers().size();
         if (nbPlayers == 2) {
+            nbTeams = 2;
             game.getPlayers().get(0).setTeamNumber(0);
             game.getPlayers().get(1).setTeamNumber(1);
         }
@@ -98,7 +99,7 @@ public class Friendship extends AbstractRound {
         CommonUtils.verifyValue("game", game);
         CommonUtils.verifyValue("musicResult", musicResult);
         
-        // le super n'est pas appelé dans cette redéfinition
+        // le super n'est pas appelé
         game.getPlayers().stream()
                 .filter( player -> musicResult.hadPenalty(player.getProfile().getName()) )
                 .forEach( player -> player.addScore(nbPointWon * -2) );

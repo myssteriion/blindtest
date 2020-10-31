@@ -30,7 +30,7 @@
 		<appender-ref ref="STDOUT"/>
 	</logger>
 	
-	<logger name="com.myssteriion.blindtest.BlindtestApplication" level="INFO" additivity="false">
+	<logger name="com.myssteriion.blindtest.BlindTestApplication" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT"/>
 	</logger>
 	
