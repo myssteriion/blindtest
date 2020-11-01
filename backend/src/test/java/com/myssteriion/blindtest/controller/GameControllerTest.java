@@ -12,8 +12,8 @@ import com.myssteriion.blindtest.model.game.Player;
 import com.myssteriion.blindtest.service.GameService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class GameControllerTest extends AbstractTest {
+class GameControllerTest extends AbstractTest {
     
     @Mock
     private GameService gameService;
@@ -38,7 +38,7 @@ public class GameControllerTest extends AbstractTest {
     
     
     @Test
-    public void newGame() throws NotFoundException {
+    void newGame() throws NotFoundException {
         
         Integer profileId = 0;
         List<Player> players = Arrays.asList(
@@ -51,12 +51,12 @@ public class GameControllerTest extends AbstractTest {
                 .setDuration(Duration.NORMAL);
         
         ResponseEntity<Game> re = gameController.newGame(newGame);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertNotNull( re.getBody() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertNotNull( re.getBody() );
     }
     
     @Test
-    public void apply() throws NotFoundException, ConflictException {
+    void apply() throws NotFoundException, ConflictException {
         
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
@@ -67,13 +67,13 @@ public class GameControllerTest extends AbstractTest {
         MusicResult musicResult = new MusicResult().setGameId(0).setMusic(music);
         
         ResponseEntity<Game> re = gameController.apply(musicResult);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertNotNull( re.getBody() );
-        Assert.assertEquals( players.size(), re.getBody().getPlayers().size() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertNotNull( re.getBody() );
+        Assertions.assertEquals( players.size(), re.getBody().getPlayers().size() );
     }
     
     @Test
-    public void findById() throws NotFoundException {
+    void findById() throws NotFoundException {
         
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
@@ -84,13 +84,13 @@ public class GameControllerTest extends AbstractTest {
         Mockito.when(gameService.findById( Mockito.anyInt()) ).thenReturn(game);
         
         ResponseEntity<Game> re = gameController.findById(game.getId());
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertNotNull( re.getBody() );
-        Assert.assertSame( game, re.getBody() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertNotNull( re.getBody() );
+        Assertions.assertSame( game, re.getBody() );
     }
     
     @Test
-    public void findAll() {
+    void findAll() {
         
         List<Player> players = Arrays.asList(
                 new Player(new ProfileEntity().setName("name")),
@@ -101,9 +101,9 @@ public class GameControllerTest extends AbstractTest {
         Mockito.when(gameService.findAll( Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean() )).thenReturn( new PageImpl<>(Collections.singletonList(game)) );
         
         ResponseEntity< Page<Game> > re = gameController.findAll(0, 1, false);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertNotNull( re.getBody() );
-        Assert.assertSame( game, re.getBody().getContent().get(0) );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertNotNull( re.getBody() );
+        Assertions.assertSame( game, re.getBody().getContent().get(0) );
     }
     
 }

@@ -16,7 +16,7 @@ import com.myssteriion.blindtest.service.RoundService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class AbstractIntegrationTest extends AbstractTest {
+abstract class AbstractIntegrationTest extends AbstractTest {
     
     @Autowired
     protected AvatarDAO avatarDAO;
@@ -48,8 +48,8 @@ public abstract class AbstractIntegrationTest extends AbstractTest {
     
     
     
-    @Before
-    public void before() throws ConflictException, NotFoundException {
+    @BeforeEach
+    void before() throws ConflictException, NotFoundException {
         
         avatarService = new AvatarService(avatarDAO, configProperties);
         

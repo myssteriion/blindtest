@@ -44,7 +44,7 @@ public class Flux {
     public Flux(File file) throws IOException {
         
         if (file == null)
-            throw new IllegalArgumentException("Le champ 'file' est obligatoire.");
+            throw new IllegalArgumentException( String.format(CommonConstant.MANDATORY, "file") );
         
         this.name = file.getName();
         this.fileExists = file.exists() && file.isFile();

@@ -11,9 +11,9 @@ import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 @PrepareForTest({ MusicService.class, CommonUtils.class })
-public class MusicServiceTest extends AbstractPowerMockTest {
+class MusicServiceTest extends AbstractPowerMockTest {
     
     @Mock
     private MusicDAO dao;
@@ -37,62 +37,47 @@ public class MusicServiceTest extends AbstractPowerMockTest {
     
     
     
-    @Before
-    public void before() {
+    @BeforeEach
+    void before() {
         musicService = new MusicService(dao, configProperties);
     }
     
     
     
     @Test
-    public void getMusicNumber() {
+    void getMusicNumber() {
+        
+        TestUtils.assertThrowMandatoryField("theme", () -> musicService.getMusicNumber(null) );
         
         Mockito.when(dao.countByTheme(Mockito.any(Theme.class))).thenReturn(2, 3);
         
         Theme theme = Theme.ANNEES_80;
-        
-        try {
-            musicService.getMusicNumber(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'theme' est obligatoire."), e);
-        }
-        
-        Assert.assertEquals( Integer.valueOf(2), musicService.getMusicNumber(theme) );
-        Assert.assertEquals( Integer.valueOf(3), musicService.getMusicNumber(theme) );
+        Assertions.assertEquals( Integer.valueOf(2), musicService.getMusicNumber(theme) );
+        Assertions.assertEquals( Integer.valueOf(3), musicService.getMusicNumber(theme) );
     }
     
     @Test
-    public void computeThemesInfo() {
+    void computeThemesInfo() {
         
         musicService = Mockito.spy( new MusicService(dao, configProperties) );
         MockitoAnnotations.initMocks(musicService);
         Mockito.doReturn(2, 3).when(musicService).getMusicNumber(Mockito.any(Theme.class));
         
         List<ThemeInfo> actual = musicService.computeThemesInfo();
-        Assert.assertEquals( Theme.ANNEES_60, actual.get(0).getTheme() );
-        Assert.assertEquals( Integer.valueOf(2), actual.get(0).getNbMusics() );
-    
-        Assert.assertEquals( Theme.ANNEES_70, actual.get(1).getTheme() );
-        Assert.assertEquals( Integer.valueOf(3), actual.get(1).getNbMusics() );
+        Assertions.assertEquals( Theme.ANNEES_60, actual.get(0).getTheme() );
+        Assertions.assertEquals( Integer.valueOf(2), actual.get(0).getNbMusics() );
+        
+        Assertions.assertEquals( Theme.ANNEES_70, actual.get(1).getTheme() );
+        Assertions.assertEquals( Integer.valueOf(3), actual.get(1).getNbMusics() );
     }
     
     @Test
-    public void save() throws ConflictException {
+    void save() throws ConflictException {
+        
+        TestUtils.assertThrowMandatoryField("music", () -> musicService.save(null) );
         
         String name = "name";
         Theme theme = Theme.ANNEES_80;
-        
-        
-        try {
-            musicService.save(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
-        }
-        
         
         musicService = Mockito.spy( new MusicService(dao, configProperties) );
         MockitoAnnotations.initMocks(musicService);
@@ -103,48 +88,27 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         Mockito.when(dao.save(Mockito.any(MusicEntity.class))).thenReturn(musicMock);
         
         MusicEntity music = new MusicEntity(name, theme);
-        Assert.assertSame(musicMock, musicService.save(music) );
+        Assertions.assertSame(musicMock, musicService.save(music) );
         
-        try {
-            musicService.save(music);
-            Assert.fail("Doit lever une DaoException car le mock throw.");
-        }
-        catch (ConflictException e) {
-            TestUtils.verifyException(new ConflictException("music already exists."), e);
-        }
+        TestUtils.assertThrow( ConflictException.class, "music already exists.", () -> musicService.save(music) );
         
         MusicEntity musicSaved = musicService.save(music);
-        Assert.assertEquals( Integer.valueOf(1), musicSaved.getId() );
-        Assert.assertEquals( name, musicSaved.getName() );
-        Assert.assertEquals( theme, musicSaved.getTheme() );
-        Assert.assertEquals( 0, musicSaved.getPlayed() );
+        Assertions.assertEquals( Integer.valueOf(1), musicSaved.getId() );
+        Assertions.assertEquals( name, musicSaved.getName() );
+        Assertions.assertEquals( theme, musicSaved.getTheme() );
+        Assertions.assertEquals( 0, musicSaved.getPlayed() );
     }
     
     @Test
-    public void update() throws NotFoundException, ConflictException {
+    void update() throws NotFoundException, ConflictException {
+        
+        TestUtils.assertThrowMandatoryField("music", () -> musicService.update(null) );
         
         String name = "name";
         Theme theme = Theme.ANNEES_80;
         
-        
-        try {
-            musicService.update(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
-        }
-        
-        
         MusicEntity music = new MusicEntity(name, theme);
-        try {
-            musicService.update(music);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> id' est obligatoire."), e);
-        }
-        
+        TestUtils.assertThrowMandatoryField("music -> id", () -> musicService.update(music) );
         
         MusicEntity musicStatMockNotSame = new MusicEntity(name, theme);
         musicStatMockNotSame.setId(2);
@@ -154,44 +118,36 @@ public class MusicServiceTest extends AbstractPowerMockTest {
                 Optional.of(musicStatMockNotSame), Optional.of(musicStatMockSame));
         Mockito.when(dao.save(Mockito.any(MusicEntity.class))).thenReturn(music);
         
-        try {
-            music.setId(1);
-            musicService.update(music);
-            Assert.fail("Doit lever une DaoException car le mock throw.");
-        }
-        catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("music not found."), e);
-        }
+        music.setId(1);
+        TestUtils.assertThrow( NotFoundException.class, "music not found.", () -> musicService.update(music) );
         
         music.setId(1);
         MusicEntity musicSaved = musicService.update(music);
-        Assert.assertEquals( Integer.valueOf(1), musicSaved.getId() );
-        Assert.assertEquals( "name", musicSaved.getName() );
+        Assertions.assertEquals( Integer.valueOf(1), musicSaved.getId() );
+        Assertions.assertEquals( "name", musicSaved.getName() );
     }
     
     @Test
-    public void find() {
+    void find() {
+        
+        TestUtils.assertThrowMandatoryField("music", () -> musicService.find(null) );
         
         MusicEntity musicMock = new MusicEntity("name", Theme.ANNEES_80);
         Mockito.when(dao.findByNameAndTheme(Mockito.anyString(), Mockito.any(Theme.class))).thenReturn(Optional.empty(), Optional.of(musicMock));
         
-        
-        try {
-            musicService.find(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un param est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
-        }
-        
         MusicEntity music = new MusicEntity("name", Theme.ANNEES_80);
-        Assert.assertNull( musicService.find(music) );
-        Assert.assertNotNull( musicService.find(music) );
+        Assertions.assertNull( musicService.find(music) );
+        Assertions.assertNotNull( musicService.find(music) );
     }
     
     @SuppressWarnings("unchecked")
     @Test
-    public void random() throws Exception {
+    void random() throws Exception {
+        
+        TestUtils.assertThrow( NotFoundException.class, "No music found for themes ([ANNEES_60, ANNEES_70, " +
+                        "ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY]).",
+                () -> musicService.random(null) );
+        
         
         MusicEntity expected = new MusicEntity("60_a", Theme.ANNEES_60);
         
@@ -199,23 +155,9 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         allMusics.add(expected);
         allMusics.add( new MusicEntity("70_a", Theme.ANNEES_70) );
         
-        try {
-            musicService.random(null);
-            Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
-        }
-        catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70, ANNEES_80, ANNEES_90, ANNEES_2000, ANNEES_2010, SERIES_CINEMAS, DISNEY])."), e);
-        }
-        
         MusicFilter musicFilter = new MusicFilter().setThemes( Arrays.asList(Theme.ANNEES_60, Theme.ANNEES_70) );
-        
-        try {
-            musicService.random(musicFilter);
-            Assert.fail("Doit lever une NotFoundException car le mock ne retrourne une liste vide.");
-        }
-        catch (NotFoundException e) {
-            TestUtils.verifyException(new NotFoundException("No music found for themes ([ANNEES_60, ANNEES_70])."), e);
-        }
+        TestUtils.assertThrow( NotFoundException.class, "No music found for themes ([ANNEES_60, ANNEES_70]).",
+                () -> musicService.random(musicFilter) );
         
         
         MusicEntity expected2 = new MusicEntity("60_a", Theme.ANNEES_60);
@@ -230,11 +172,11 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         PowerMockito.whenNew(Flux.class).withArguments(File.class).thenReturn(fluxMock);
         
         MusicEntity music = musicService.random(null);
-        Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
+        Assertions.assertTrue( music.equals(expected) || music.equals(expected2) );
         
-        musicFilter = new MusicFilter().setThemes( Collections.singletonList(Theme.ANNEES_70) );
+        musicFilter.setThemes( Collections.singletonList(Theme.ANNEES_70) );
         music = musicService.random(musicFilter);
-        Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
+        Assertions.assertTrue( music.equals(expected) || music.equals(expected2) );
         
         
         
@@ -245,38 +187,18 @@ public class MusicServiceTest extends AbstractPowerMockTest {
         Mockito.when(dao.findByThemeIn(Mockito.anyList())).thenReturn(allMusics);
         
         music = musicService.random(null);
-        Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
+        Assertions.assertTrue( music.equals(expected) || music.equals(expected2) );
         
         music = musicService.random(null);
-        Assert.assertTrue( music.equals(expected) || music.equals(expected2) );
+        Assertions.assertTrue( music.equals(expected) || music.equals(expected2) );
     }
     
     @Test
-    public void checkEntity() {
+    void checkEntity() {
         
-        try {
-            musicService.checkEntity(null);
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music' est obligatoire."), e);
-        }
-        
-        try {
-            musicService.checkEntity(new MusicEntity());
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> name' est obligatoire."), e);
-        }
-        
-        try {
-            musicService.checkEntity(new MusicEntity("name", null));
-            Assert.fail("Doit lever une IllegalArgumentException car un champ est KO.");
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'music -> theme' est obligatoire."), e);
-        }
+        TestUtils.assertThrowMandatoryField("music", () -> musicService.checkEntity(null) );
+        TestUtils.assertThrowMandatoryField("music -> name", () -> musicService.checkEntity(new MusicEntity()) );
+        TestUtils.assertThrowMandatoryField("music -> theme", () -> musicService.checkEntity(new MusicEntity("name", null)) );
         
         musicService.checkEntity(new MusicEntity("name", Theme.ANNEES_60));
     }

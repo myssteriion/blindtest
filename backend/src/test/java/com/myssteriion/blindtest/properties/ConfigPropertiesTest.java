@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.properties;
 
 import com.myssteriion.blindtest.AbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ConfigPropertiesTest extends AbstractTest {
+class ConfigPropertiesTest extends AbstractTest {
     
     @Autowired
     private ConfigProperties props;
@@ -13,13 +13,13 @@ public class ConfigPropertiesTest extends AbstractTest {
     
     
     @Test
-    public void getAvatarsFolder() {
-        Assert.assertEquals( "avatars", props.getAvatarsFolderPath() );
+    void getAvatarsFolder() {
+        Assertions.assertEquals( "avatars", props.getAvatarsFolderPath() );
     }
     
     @Test
-    public void getMusicsFolder() {
-        Assert.assertEquals( "musics", props.getMusicsFolderPath() );
+    void getMusicsFolder() {
+        Assertions.assertEquals( "musics", props.getMusicsFolderPath() );
     }
     
 }
