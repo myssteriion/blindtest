@@ -334,6 +334,9 @@ class GameServiceTest extends AbstractTest {
         // recovery : 10 à 30pts
         Assertions.assertTrue( profileStat.getBestScores().get(Duration.NORMAL) >= Integer.valueOf(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 10*150 + 20*100 + 10*30)
                 && profileStat.getBestScores().get(Duration.NORMAL) <= Integer.valueOf(15*100 + 1*200 + 4*150 + 8*100 + 10*150 + 10*100 + 10*150 + 20*100 + 10*30) );
+    
+        game = gameService.apply(musicResult);
+        Assertions.assertTrue( game.isFinished() );
     }
     
     @Test

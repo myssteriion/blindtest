@@ -92,6 +92,8 @@ class RoundServiceTest extends AbstractTest {
     @Test
     void isLastRound() {
         
+        Assertions.assertFalse( roundService.isLastRound(null));
+        
         Assertions.assertFalse( roundService.isLastRound(RoundName.CLASSIC));
         Assertions.assertFalse( roundService.isLastRound(RoundName.CHOICE));
         Assertions.assertFalse( roundService.isLastRound(RoundName.LUCKY));

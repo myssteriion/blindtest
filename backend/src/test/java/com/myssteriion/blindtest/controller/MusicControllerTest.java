@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
@@ -47,8 +48,9 @@ class MusicControllerTest extends AbstractTest {
         List<ThemeInfo> themesInfo = Arrays.asList(
                 new ThemeInfo(Theme.ANNEES_60, 2),
                 new ThemeInfo(Theme.ANNEES_70, 12),
-                new ThemeInfo(Theme.ANNEES_80, 22)
+                new ThemeInfo().setTheme(Theme.ANNEES_80).setNbMusics(22)
         );
+        
         
         Mockito.when(musicService.computeThemesInfo()).thenReturn(themesInfo);
         
@@ -60,7 +62,7 @@ class MusicControllerTest extends AbstractTest {
     @Test
     void random() throws NotFoundException, IOException {
         
-        MusicFilter musicFilter = new MusicFilter();
+        MusicFilter musicFilter = new MusicFilter().setThemes( Theme.getSortedTheme() ).setEffects( Effect.getSortedEffect() );
         
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
