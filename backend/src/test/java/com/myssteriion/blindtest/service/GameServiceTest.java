@@ -150,7 +150,7 @@ class GameServiceTest extends AbstractTest {
         
         
         List<String> playersName = Collections.singletonList(profile.getName());
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(null).setLosers(null).setPenalties(null);
         Game game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 100, game.getPlayers().get(0).getScore() );
@@ -174,7 +174,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getFoundMusics() );
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
-        musicResult.setGameId(0).setMusic(music).setLosers(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(null).setTitleWinners(null).setLosers(playersName).setPenalties(null);
         game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 100, game.getPlayers().get(0).getScore() );
@@ -197,7 +197,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getFoundMusics() );
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(null).setLosers(null).setPenalties(null);
         game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 200, game.getPlayers().get(0).getScore() );
@@ -221,7 +221,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
         playersName = Collections.singletonList(profile1.getName());
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(null).setLosers(null).setPenalties(null);
         game = gameService.apply(musicResult);
         game = gameService.apply(musicResult);
         game = gameService.apply(musicResult);
@@ -247,7 +247,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
         playersName = Collections.singletonList(profile.getName());
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(null).setLosers(null).setPenalties(null);
         game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 300, game.getPlayers().get(0).getScore() );
@@ -271,7 +271,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
         playersName = Collections.singletonList(profile.getName());
-        musicResult.setGameId(0).setMusic(music).setTitleWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(null).setTitleWinners(playersName).setLosers(null).setPenalties(null);
         game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 400, game.getPlayers().get(0).getScore() );
@@ -295,7 +295,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
         playersName = Collections.singletonList(profile.getName());
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(playersName).setLosers(null).setPenalties(null);
         game = gameService.apply(musicResult);
         Assertions.assertEquals( Classic.class, game.getRound().getClass() );
         Assertions.assertEquals( 600, game.getPlayers().get(0).getScore() );
@@ -318,7 +318,7 @@ class GameServiceTest extends AbstractTest {
         Assertions.assertEquals( Integer.valueOf(3), profileStat1.getFoundMusics().get(Theme.ANNEES_60).get(GoodAnswer.AUTHOR) );
         Assertions.assertNull( profileStat1.getPlayedGames() );
         
-        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName);
+        musicResult.setGameId(0).setMusic(music).setAuthorWinners(playersName).setTitleWinners(null).setLosers(null).setPenalties(null);
         while (game.getRound() != null)
             game = gameService.apply(musicResult);
         

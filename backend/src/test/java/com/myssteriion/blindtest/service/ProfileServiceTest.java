@@ -85,8 +85,8 @@ class ProfileServiceTest extends AbstractTest {
         Mockito.when(profileDao.save(Mockito.any(ProfileEntity.class))).thenThrow(dive).thenReturn(profile);
         
         profile.setId(1);
-        TestUtils.assertThrow( NotFoundException.class, "profile not found.", () -> profileService.save(profile) );
-        TestUtils.assertThrow( ConflictException.class, "profile already exists.", () -> profileService.save(profile) );
+        TestUtils.assertThrow( NotFoundException.class, "profile not found.", () -> profileService.update(profile) );
+        TestUtils.assertThrow( ConflictException.class, "profile already exists.", () -> profileService.update(profile) );
         
         profile.setId(1);
         profile.setName("pouet");

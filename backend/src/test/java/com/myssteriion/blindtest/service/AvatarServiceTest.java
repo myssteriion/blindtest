@@ -103,9 +103,9 @@ class AvatarServiceTest extends AbstractPowerMockTest {
                 Optional.of(avatarStatMockNotSame), Optional.of(avatarStatMockSame));
         Mockito.when(dao.save(Mockito.any(AvatarEntity.class))).thenReturn(avatar);
         
+        avatar.setId(1);
         TestUtils.assertThrow( NotFoundException.class, "avatar not found.", () -> avatarService.update(avatar) );
         
-        avatar.setId(1);
         AvatarEntity avatarSaved = avatarService.update(avatar);
         Assertions.assertEquals( Integer.valueOf(1), avatarSaved.getId() );
         Assertions.assertEquals( "name", avatarSaved.getName() );
