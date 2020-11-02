@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.properties;
 
 import com.myssteriion.blindtest.AbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RoundPropertiesTest extends AbstractTest {
+class RoundPropertiesTest extends AbstractTest {
     
     @Autowired
     private RoundProperties props;
@@ -13,26 +13,26 @@ public class RoundPropertiesTest extends AbstractTest {
     
     
     @Test
-    public void getterSetter() {
+    void getterSetter() {
         
-        Assert.assertEquals( Integer.valueOf(20), props.getClassicNbMusics() );
-        Assert.assertEquals( Integer.valueOf(100), props.getClassicNbPointWon() );
+        Assertions.assertEquals( Integer.valueOf(20), props.getClassicNbMusics() );
+        Assertions.assertEquals( Integer.valueOf(100), props.getClassicNbPointWon() );
         
-        Assert.assertEquals( Integer.valueOf(12), props.getChoiceNbMusics() );
-        Assert.assertEquals( Integer.valueOf(100), props.getChoiceNbPointWon() );
-        Assert.assertEquals( Integer.valueOf(50), props.getChoiceNbPointBonus() );
-        Assert.assertEquals( Integer.valueOf(-50), props.getChoiceNbPointMalus() );
+        Assertions.assertEquals( Integer.valueOf(12), props.getChoiceNbMusics() );
+        Assertions.assertEquals( Integer.valueOf(100), props.getChoiceNbPointWon() );
+        Assertions.assertEquals( Integer.valueOf(50), props.getChoiceNbPointBonus() );
+        Assertions.assertEquals( Integer.valueOf(-50), props.getChoiceNbPointMalus() );
         
-        Assert.assertEquals( Integer.valueOf(10), props.getLuckyNbMusics() );
-        Assert.assertEquals( Integer.valueOf(150), props.getLuckyNbPointWon() );
-        Assert.assertEquals( Integer.valueOf(100), props.getLuckyNbPointBonus() );
+        Assertions.assertEquals( Integer.valueOf(10), props.getLuckyNbMusics() );
+        Assertions.assertEquals( Integer.valueOf(150), props.getLuckyNbPointWon() );
+        Assertions.assertEquals( Integer.valueOf(100), props.getLuckyNbPointBonus() );
         
-        Assert.assertEquals( Integer.valueOf(20), props.getThiefNbMusics() );
-        Assert.assertEquals( Integer.valueOf(100), props.getThiefNbPointWon() );
-        Assert.assertEquals( Integer.valueOf(-100), props.getThiefNbPointLoose() );
+        Assertions.assertEquals( Integer.valueOf(20), props.getThiefNbMusics() );
+        Assertions.assertEquals( Integer.valueOf(100), props.getThiefNbPointWon() );
+        Assertions.assertEquals( Integer.valueOf(-100), props.getThiefNbPointLoose() );
         
-        Assert.assertEquals( Integer.valueOf(10), props.getRecoveryNbMusics() );
-        Assert.assertEquals( Integer.valueOf(30), props.getRecoveryNbPointWon() );
+        Assertions.assertEquals( Integer.valueOf(10), props.getRecoveryNbMusics() );
+        Assertions.assertEquals( Integer.valueOf(30), props.getRecoveryNbPointWon() );
     }
     
 }

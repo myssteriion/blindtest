@@ -111,16 +111,16 @@ public class GameService {
         for ( Theme theme : newGame.getThemes() ) {
             Integer nbMusic = musicService.getMusicNumber(theme);
             if (nbMusic == 0)
-                throw new NotFoundException("Zero music found ('" + theme + "')");
+                throw new NotFoundException("Zero music found ('" + theme + "').");
         }
         
         
         Set<Integer> profilesId = newGame.getProfilesId();
         if (profilesId.size() < Constant.MIN_PLAYERS)
-            throw new IllegalArgumentException(Constant.MIN_PLAYERS + " players at minimum");
+            throw new IllegalArgumentException(Constant.MIN_PLAYERS + " players at minimum.");
         
         if (profilesId.size() > Constant.MAX_PLAYERS)
-            throw new IllegalArgumentException(Constant.MAX_PLAYERS + " players at maximum");
+            throw new IllegalArgumentException(Constant.MAX_PLAYERS + " players at maximum.");
     }
     
     /**

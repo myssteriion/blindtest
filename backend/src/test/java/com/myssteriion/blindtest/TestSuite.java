@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest;
 
-import com.googlecode.junittoolbox.SuiteClasses;
-import com.googlecode.junittoolbox.WildcardPatternSuite;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectPackages;
 import org.junit.runner.RunWith;
 
-@RunWith(WildcardPatternSuite.class)
-@SuiteClasses("**/*Test.class")
+@RunWith(JUnitPlatform.class)
+@SelectPackages("com.myssteriion.blindtest")
 public class TestSuite {
 
 }

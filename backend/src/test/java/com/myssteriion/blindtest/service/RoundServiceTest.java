@@ -14,41 +14,31 @@ import com.myssteriion.blindtest.model.round.impl.Lucky;
 import com.myssteriion.blindtest.model.round.impl.Recovery;
 import com.myssteriion.blindtest.model.round.impl.Thief;
 import com.myssteriion.utils.test.TestUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-public class RoundServiceTest extends AbstractTest {
+class RoundServiceTest extends AbstractTest {
     
     private RoundService roundService;
     
     
-    @Before
-    public void before() {
+    @BeforeEach
+    void before() {
         roundService = new RoundService(roundProperties);
     }
     
     
     
     @Test
-    public void createFirstRound() {
+    void createFirstRound() {
         
-        try {
-            roundService.createFirstRound(null);
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
-        }
+        TestUtils.assertThrowMandatoryField("game", () -> roundService.createFirstRound(null) );
         
         Game game = new Game();
-        try {
-            roundService.createFirstRound(game);
-        }
-        catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'game -> duration' est obligatoire."), e);
-        }
+        TestUtils.assertThrowMandatoryField("game -> duration", () -> roundService.createFirstRound(game) );
         
         game.setDuration(Duration.NORMAL)
                 .setPlayers(Arrays.asList(
@@ -57,24 +47,16 @@ public class RoundServiceTest extends AbstractTest {
                 ));
         
         AbstractRound round = roundService.createFirstRound(game);
-        Assert.assertTrue(round instanceof Classic);
+        Assertions.assertTrue(round instanceof Classic);
     }
     
     @Test
-    public void createNextRound() {
+    void createNextRound() {
         
-        try {
-            roundService.createNextRound(null);
-        } catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'game' est obligatoire."), e);
-        }
+        TestUtils.assertThrowMandatoryField("game", () -> roundService.createNextRound(null) );
         
         Game game = new Game();
-        try {
-            roundService.createFirstRound(game);
-        } catch (IllegalArgumentException e) {
-            TestUtils.verifyException(new IllegalArgumentException("Le champ 'game -> duration' est obligatoire."), e);
-        }
+        TestUtils.assertThrowMandatoryField("game -> duration", () -> roundService.createFirstRound(game) );
         
         game.setDuration(Duration.NORMAL)
                 .setPlayers(Arrays.asList(
@@ -83,39 +65,41 @@ public class RoundServiceTest extends AbstractTest {
                 ));
         
         game.setRound( roundService.createFirstRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Classic);
+        Assertions.assertTrue(game.getRound() instanceof Classic);
         
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Choice);
+        Assertions.assertTrue(game.getRound() instanceof Choice);
         
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Lucky);
+        Assertions.assertTrue(game.getRound() instanceof Lucky);
         
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Friendship);
+        Assertions.assertTrue(game.getRound() instanceof Friendship);
         
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Thief);
+        Assertions.assertTrue(game.getRound() instanceof Thief);
         
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertTrue(game.getRound() instanceof Recovery);
-    
+        Assertions.assertTrue(game.getRound() instanceof Recovery);
+        
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertNull( game.getRound() );
-    
+        Assertions.assertNull( game.getRound() );
+        
         game.setRound( roundService.createNextRound(game) );
-        Assert.assertNull( game.getRound() );
+        Assertions.assertNull( game.getRound() );
     }
     
     @Test
-    public void isLastRound() {
+    void isLastRound() {
         
-        Assert.assertFalse( roundService.isLastRound(RoundName.CLASSIC));
-        Assert.assertFalse( roundService.isLastRound(RoundName.CHOICE));
-        Assert.assertFalse( roundService.isLastRound(RoundName.LUCKY));
-        Assert.assertFalse( roundService.isLastRound(RoundName.FRIENDSHIP));
-        Assert.assertFalse( roundService.isLastRound(RoundName.THIEF));
-        Assert.assertTrue( roundService.isLastRound(RoundName.RECOVERY));
+        Assertions.assertFalse( roundService.isLastRound(null));
+        
+        Assertions.assertFalse( roundService.isLastRound(RoundName.CLASSIC));
+        Assertions.assertFalse( roundService.isLastRound(RoundName.CHOICE));
+        Assertions.assertFalse( roundService.isLastRound(RoundName.LUCKY));
+        Assertions.assertFalse( roundService.isLastRound(RoundName.FRIENDSHIP));
+        Assertions.assertFalse( roundService.isLastRound(RoundName.THIEF));
+        Assertions.assertTrue( roundService.isLastRound(RoundName.RECOVERY));
     }
     
 }

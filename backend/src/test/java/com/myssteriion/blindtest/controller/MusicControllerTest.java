@@ -1,6 +1,7 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
+import com.myssteriion.blindtest.model.common.Effect;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
@@ -9,8 +10,8 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.model.Empty;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class MusicControllerTest extends AbstractTest {
+class MusicControllerTest extends AbstractTest {
     
     @Mock
     private MusicService musicService;
@@ -33,34 +34,35 @@ public class MusicControllerTest extends AbstractTest {
     
     
     @Test
-    public void refresh() {
+    void refresh() {
         
         Mockito.doNothing().when(musicService).init();
         
         ResponseEntity<Empty> re = musicController.refresh();
-        Assert.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
+        Assertions.assertEquals( HttpStatus.NO_CONTENT, re.getStatusCode() );
     }
     
     @Test
-    public void computeThemesInfo() {
+    void computeThemesInfo() {
         
         List<ThemeInfo> themesInfo = Arrays.asList(
                 new ThemeInfo(Theme.ANNEES_60, 2),
                 new ThemeInfo(Theme.ANNEES_70, 12),
-                new ThemeInfo(Theme.ANNEES_80, 22)
+                new ThemeInfo().setTheme(Theme.ANNEES_80).setNbMusics(22)
         );
+        
         
         Mockito.when(musicService.computeThemesInfo()).thenReturn(themesInfo);
         
         ResponseEntity< Page<ThemeInfo> > re = musicController.computeThemesInfo();
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals( themesInfo, re.getBody().getContent() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertEquals( themesInfo, re.getBody().getContent() );
     }
     
     @Test
-    public void random() throws NotFoundException, IOException {
+    void random() throws NotFoundException, IOException {
         
-        MusicFilter musicFilter = new MusicFilter();
+        MusicFilter musicFilter = new MusicFilter().setThemes( Theme.getSortedTheme() ).setEffects( Effect.getSortedEffect() );
         
         Flux fluxMock = Mockito.mock(Flux.class);
         Mockito.when(fluxMock.isFileExists()).thenReturn(false, true);
@@ -69,16 +71,16 @@ public class MusicControllerTest extends AbstractTest {
         Mockito.when(musicService.random(musicFilter)).thenReturn(music);
         
         ResponseEntity<MusicEntity> re = musicController.random(null);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals(music, re.getBody() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertEquals(music, re.getBody() );
         
         re = musicController.random(null);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals(music, re.getBody() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertEquals(music, re.getBody() );
         
         re = musicController.random(musicFilter);
-        Assert.assertEquals( HttpStatus.OK, re.getStatusCode() );
-        Assert.assertEquals(music, re.getBody() );
+        Assertions.assertEquals( HttpStatus.OK, re.getStatusCode() );
+        Assertions.assertEquals(music, re.getBody() );
     }
     
 }
