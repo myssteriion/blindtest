@@ -1,12 +1,9 @@
 package com.myssteriion.blindtest.controller;
 
-import com.myssteriion.blindtest.model.common.Effect;
-import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
-import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.model.Empty;
 import com.myssteriion.utils.rest.RestUtils;
@@ -18,11 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Controller for music.
