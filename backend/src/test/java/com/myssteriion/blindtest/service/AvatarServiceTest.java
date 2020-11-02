@@ -1,9 +1,8 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.AbstractPowerMockTest;
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
@@ -12,18 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 
-@PrepareForTest({ AvatarService.class, CommonUtils.class })
-class AvatarServiceTest extends AbstractPowerMockTest {
+class AvatarServiceTest extends AbstractTest {
     
     @Mock
     private AvatarDAO dao;
@@ -38,30 +32,6 @@ class AvatarServiceTest extends AbstractPowerMockTest {
     }
     
     
-    
-    @Test
-    void init() throws Exception {
-        
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.isFile()).thenReturn(true);
-        Mockito.when(mockFile.getName()).thenReturn("file.png");
-        
-        File mockDirectory = Mockito.mock(File.class);
-        Mockito.when(mockDirectory.isFile()).thenReturn(false);
-        
-        PowerMockito.mockStatic(CommonUtils.class);
-        PowerMockito.when(CommonUtils.getChildren(Mockito.any(File.class))).thenReturn(Arrays.asList(mockFile, mockDirectory));
-        PowerMockito.when(CommonUtils.hadImageExtension(Mockito.anyString())).thenReturn(true);
-        
-        
-        Mockito.doReturn(null).when(avatarService).save(Mockito.any(AvatarEntity.class));
-        
-        AvatarEntity avatarMock = new AvatarEntity();
-        Mockito.when(dao.findByName(Mockito.anyString())).thenReturn(Optional.empty(), Optional.of(avatarMock));
-        
-        avatarService.init();
-        Mockito.verify(dao, Mockito.times(1)).save(Mockito.any(AvatarEntity.class));
-    }
     
     @Test
     void save() throws ConflictException {

@@ -1,13 +1,12 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.AbstractPowerMockTest;
+import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
-import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.test.TestUtils;
@@ -18,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,8 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@PrepareForTest({ MusicService.class, CommonUtils.class })
-class MusicServiceTest extends AbstractPowerMockTest {
+class MusicServiceTest extends AbstractTest {
     
     @Mock
     private MusicDAO dao;

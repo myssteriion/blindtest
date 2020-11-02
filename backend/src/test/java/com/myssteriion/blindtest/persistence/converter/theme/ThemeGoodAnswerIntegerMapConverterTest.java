@@ -11,7 +11,7 @@ import com.myssteriion.utils.test.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.powermock.reflect.Whitebox;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,14 +42,14 @@ class ThemeGoodAnswerIntegerMapConverterTest extends AbstractTest {
         JsonProcessingException jpe = Mockito.mock(JsonProcessingException.class);
         ObjectMapper mapper = Mockito.mock(ObjectMapper.class);
         Mockito.when(mapper.writeValueAsString(Mockito.any())).thenThrow(jpe);
-        Whitebox.setInternalState(converter, "mapper", mapper);
+        ReflectionTestUtils.setField(converter, "mapper", mapper);
         
         try {
             TestUtils.assertThrow( CustomRuntimeException.class, "Can't parse json.",
                     () -> converter.convertToDatabaseColumn(map) );
         }
         finally {
-            Whitebox.setInternalState( converter, "mapper", new ObjectMapper() );
+            ReflectionTestUtils.setField( converter, "mapper", new ObjectMapper() );
         }
     }
     
