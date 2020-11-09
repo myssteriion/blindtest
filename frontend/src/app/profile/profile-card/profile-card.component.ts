@@ -7,7 +7,6 @@ import {ToolsService} from "../../tools/tools.service";
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
-import {ToasterService} from 'src/app/services/toaster.service';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {HTTP_CONFLICT} from "../../tools/constant";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";

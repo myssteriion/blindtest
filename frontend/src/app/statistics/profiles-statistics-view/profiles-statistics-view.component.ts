@@ -4,12 +4,12 @@ import {ProfileStatisticsResource} from "../../resources/profile-statistics.reso
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Profile} from "../../interfaces/entity/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {ToasterService} from "../../services/toaster.service";
 import {ProfileResource} from "../../resources/profile.resource";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {Router} from "@angular/router";
 import {ToolsService} from "../../tools/tools.service";
+import {ToasterService} from "myssteriion-utils";
 
 /**
  * The profiles statistics view.

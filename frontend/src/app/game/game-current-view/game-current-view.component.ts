@@ -22,9 +22,9 @@ import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/ch
 import {DomSanitizer} from '@angular/platform-browser';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {ToasterService} from "../../services/toaster.service";
 import {PlayerCardComponent} from "../../player/player-card/player-card.component";
 import {MusicFilter} from "../../interfaces/music/music-filter.interface";
+import {ToasterService} from "myssteriion-utils";
 
 /**
  * The current game view.

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Profile} from "../../interfaces/entity/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from 'src/app/tools/tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
@@ -14,6 +13,7 @@ import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-m
 import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
 import {ThemeInfo} from "../../interfaces/music/theme-info.interface";
+import {ToasterService} from "myssteriion-utils";
 
 /**
  * The new game view.

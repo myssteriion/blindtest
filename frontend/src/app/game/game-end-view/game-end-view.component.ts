@@ -21,8 +21,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {ToasterService} from "../../services/toaster.service";
 import {ToolsService} from "../../tools/tools.service";
+import {HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
 
 /**
  * The end game view.

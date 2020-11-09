@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {GAME_PREFIX_PATH, HOME_PATH, OPACITY_ANIMATION, SLIDE_ANIMATION} from "../../tools/constant";
 import {GameResource} from "../../resources/game.resource";
 import {Router} from '@angular/router';
-import {ToasterService} from "../../services/toaster.service";
 import {TranslateService} from '@ngx-translate/core';
 import {Game} from "../../interfaces/game/game.interface";
 import {Page} from "../../interfaces/base/page.interface";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToasterService} from "myssteriion-utils";
 
 /**
  * The resume game view.

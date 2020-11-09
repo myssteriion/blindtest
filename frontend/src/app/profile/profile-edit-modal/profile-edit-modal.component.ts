@@ -6,11 +6,9 @@ import {ToolsService} from "../../tools/tools.service";
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from "../../interfaces/base/page.interface";
-import {ToasterService} from "../../services/toaster.service";
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {HTTP_CONFLICT} from "../../tools/constant";
 import {DEFAULT_BACKGROUND} from "../../tools/constant";
 
 declare var $: any;

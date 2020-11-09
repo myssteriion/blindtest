@@ -71,7 +71,6 @@ import {GameCardComponent} from './game/game-card/game-card.component';
 import {GlobalErrorHandler} from "./tools/global-error-handler";
 
 import {ToolsService} from "./tools/tools.service";
-import {ToasterService} from "./services/toaster.service";
 
 import {ProfileResource} from "./resources/profile.resource";
 import {AvatarResource} from "./resources/avatar.resource";
@@ -81,6 +80,7 @@ import {MusicResource} from "./resources/music.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatTabsModule} from "@angular/material/tabs";
+import {ToasterService} from "myssteriion-utils";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
