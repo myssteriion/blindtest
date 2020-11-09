@@ -92,11 +92,8 @@
 				},
 				{
 					"name": "random",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -325,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"gameId\": 0,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
+							"raw": "{\n\t\"gameId\": 1,\n\t\"music\": {\n\t\t\"name\": \"Thierry Hazard - Danser le jerk.mp3\",\n\t\t\"theme\": \"ANNEES_90\"\n\t},\n\t\"authorWinners\": [ \"Darkana\" ],\n\t\"titleWinners\": [ ],\n\t\"losers\": [ ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:{{port}}/{{applicationContext}}/games/apply",
