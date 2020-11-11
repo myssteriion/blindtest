@@ -2,7 +2,6 @@ package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
 import com.myssteriion.blindtest.model.common.Effect;
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.model.entity.MusicEntity;
 import com.myssteriion.blindtest.model.music.MusicFilter;
@@ -10,6 +9,7 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.utils.exception.NotFoundException;
 import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.model.entity.impl.Flux;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,11 +1,11 @@
 package com.myssteriion.blindtest.model.entity;
 
 import com.myssteriion.blindtest.model.common.Effect;
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.model.entity.AbstractEntity;
+import com.myssteriion.utils.model.entity.impl.Flux;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;

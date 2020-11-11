@@ -1,10 +1,10 @@
 package com.myssteriion.blindtest.controller;
 
 import com.myssteriion.blindtest.AbstractTest;
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.model.entity.impl.Flux;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,6 +1,5 @@
 package com.myssteriion.blindtest.service;
 
-import com.myssteriion.blindtest.model.common.Flux;
 import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.persistence.dao.AvatarDAO;
 import com.myssteriion.blindtest.properties.ConfigProperties;
@@ -10,6 +9,7 @@ import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.CustomRuntimeException;
 import com.myssteriion.utils.exception.NotFoundException;
+import com.myssteriion.utils.model.entity.impl.Flux;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
