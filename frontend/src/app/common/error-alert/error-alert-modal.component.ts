@@ -3,7 +3,7 @@ import {ErrorAlert} from 'src/app/interfaces/base/error.alert.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {ToolsService} from "../../tools/tools.service";
-import {HOME_PATH, HTTP_GATEWAY_TIMEOUT, HTTP_NOT_FOUND} from "../../tools/constant";
+import {HTTP_GATEWAY_TIMEOUT} from "myssteriion-utils";
 
 @Component({
 	selector: 'error-alert-modal',

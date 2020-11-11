@@ -2,7 +2,6 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {
 	GAME_PREFIX_PATH,
 	HOME_PATH,
-	HTTP_NOT_FOUND,
 	OLYMPIA_ANTHEM_SOUND,
 	RANKS_FIRST,
 	RANKS_SECOND,

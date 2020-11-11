@@ -8,8 +8,8 @@ import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.co
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {HTTP_CONFLICT} from "../../tools/constant";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
+import {HTTP_CONFLICT, ToasterService} from "myssteriion-utils";
 
 /**
  * Profile card.

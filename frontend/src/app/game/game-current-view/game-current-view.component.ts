@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, HTTP_NOT_FOUND, SLIDE_ANIMATION} from "../../tools/constant";
+import {ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, SLIDE_ANIMATION} from "../../tools/constant";
 import {Game} from "../../interfaces/game/game.interface";
 import {TranslateService} from '@ngx-translate/core';
 import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {PlayerCardComponent} from "../../player/player-card/player-card.component";
 import {MusicFilter} from "../../interfaces/music/music-filter.interface";
-import {ToasterService} from "myssteriion-utils";
+import {HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
 
 /**
  * The current game view.

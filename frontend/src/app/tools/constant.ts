@@ -185,18 +185,3 @@ export const GAME_PREFIX_PATH = "game/";
  * EndGame prefix path.
  */
 export const END_GAME_PREFIX_PATH = "game/end/";
-
-/**
- * 404 http code.
- */
-export const HTTP_NOT_FOUND = 404;
-
-/**
- * 409 http code.
- */
-export const HTTP_CONFLICT = 409;
-
-/**
- * 504 http code.
- */
-export const HTTP_GATEWAY_TIMEOUT = 504;
