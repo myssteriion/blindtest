@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
 import {Game} from "../../../interfaces/game/game.interface";
-import {ToolsService} from "../../../tools/tools.service";
+import {UtilsService} from "../../../tools/utils.service";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison view.
@@ -34,8 +35,7 @@ export class ThemeComparisonViewComponent implements OnInit {
 
 
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService) { }
 
     ngOnInit(): void {
 
@@ -60,7 +60,7 @@ export class ThemeComparisonViewComponent implements OnInit {
     public getNbMusicsInTheme(): number {
 
         let nbMusics: number = 0;
-        if ( !ToolsService.isNull(this.game.listenedMusics[this.selectedTheme]) )
+        if ( !this._commonUtilsService.isNull(this.game.listenedMusics[this.selectedTheme]) )
             nbMusics = this.game.listenedMusics[this.selectedTheme];
 
         return nbMusics;

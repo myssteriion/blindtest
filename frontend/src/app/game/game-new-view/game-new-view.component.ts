@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Profile} from "../../interfaces/entity/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from 'src/app/tools/tools.service';
+import {UtilsService} from 'src/app/tools/utils.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import {EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
@@ -13,7 +13,7 @@ import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-m
 import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 import {MusicResource} from "../../resources/music.resource";
 import {ThemeInfo} from "../../interfaces/music/theme-info.interface";
-import {ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, ToasterService} from "myssteriion-utils";
 
 /**
  * The new game view.
@@ -78,7 +78,8 @@ export class GameNewViewComponent implements OnInit {
 				private _ngbModal: NgbModal,
 				private _gameResource: GameResource,
 				private _musicResource: MusicResource,
-				private _router: Router) {}
+				private _router: Router,
+				private _commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		
@@ -360,7 +361,7 @@ export class GameNewViewComponent implements OnInit {
 	 * Disabled launch game button.
 	 */
 	public launchGameIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedDuration) || this.playersProfiles.length < MIN_PLAYERS;
+		return this._commonUtilsService.isNull(this.selectedDuration) || this.playersProfiles.length < MIN_PLAYERS;
 	}
 	
 	/**

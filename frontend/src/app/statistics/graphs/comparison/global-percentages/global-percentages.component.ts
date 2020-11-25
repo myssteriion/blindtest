@@ -1,9 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The global percentages view.
@@ -21,8 +22,8 @@ export class GlobalPercentagesComponent implements OnInit {
     public view = HORIZONTAL_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) { }
 
     ngOnInit() {
         this.calculateStatistics()
@@ -42,8 +43,8 @@ export class GlobalPercentagesComponent implements OnInit {
             musicKeys.forEach(musicKey => {
                 listenedMusics = listenedMusics + player.profileStat.listenedMusics[musicKey];
                 keys.forEach(key => {
-                    if (!ToolsService.isNull(player.profileStat.foundMusics[musicKey])) {
-                        foundMusics = ToolsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? foundMusics : foundMusics + player.profileStat.foundMusics[musicKey][key];
+                    if (!this._commonUtilsService.isNull(player.profileStat.foundMusics[musicKey])) {
+                        foundMusics = this._commonUtilsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? foundMusics : foundMusics + player.profileStat.foundMusics[musicKey][key];
                     }
                 })
             });
@@ -55,7 +56,7 @@ export class GlobalPercentagesComponent implements OnInit {
             });
         });
 
-        this.percentages = ToolsService.sortByAlphabeticalAndNumerical(this.percentages);
+        this.percentages = this._utilsService.sortByAlphabeticalAndNumerical(this.percentages);
     }
 
 }

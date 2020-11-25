@@ -1,10 +1,11 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from '../../../../../tools/tools.service'
+import {UtilsService} from '../../../../../tools/utils.service'
 import {GOOD_ANSWERS} from '../../../../../tools/constant'
 import {Profile} from "../../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The user theme comparison question detail view.
@@ -25,8 +26,9 @@ export class UserThemeComparisonQuestionDetailComponent implements OnInit {
     public view = HORIZONTAL_STACKED_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
-    }
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) { }
 
     ngOnInit() {
         this.calculateStatistics();
@@ -43,10 +45,10 @@ export class UserThemeComparisonQuestionDetailComponent implements OnInit {
     private calculateStatistics() {
         this.stackedPercentages = [];
         this.players.forEach(player => {
-            let series = ToolsService.isNull(player.profileStat.foundMusics[this.theme]) ? [] : this.getMusicWinForPlayer(player.profileStat);
+            let series = this._commonUtilsService.isNull(player.profileStat.foundMusics[this.theme]) ? [] : this.getMusicWinForPlayer(player.profileStat);
             this.stackedPercentages.push({name: player.name, series: series})
         });
-        this.stackedPercentages = ToolsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);
+        this.stackedPercentages = this._utilsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);
     }
 
     /**
@@ -58,7 +60,7 @@ export class UserThemeComparisonQuestionDetailComponent implements OnInit {
         let listenedMusicsInTheme = playerStats.listenedMusics[this.theme];
         let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
-            let value = ToolsService.isNull(playerStats.foundMusics[this.theme][typeKey]) ? 0 : playerStats.foundMusics[this.theme][typeKey];
+            let value = this._commonUtilsService.isNull(playerStats.foundMusics[this.theme][typeKey]) ? 0 : playerStats.foundMusics[this.theme][typeKey];
             foundMusics.push({
                 name: this._translate.instant("STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME." + typeKey),
                 value: Math.floor(value / listenedMusicsInTheme * 100)

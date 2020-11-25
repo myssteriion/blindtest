@@ -3,7 +3,8 @@ import {Player} from "../../interfaces/game/player.interface";
 import {faCookieBite, faMedal, faPoo, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
 import {ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION} from "../../tools/constant";
-import {ToolsService} from "../../tools/tools.service";
+import {UtilsService} from "../../tools/utils.service";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * Player card.
@@ -59,7 +60,8 @@ export class PlayerCardComponent implements OnInit {
 	
 	
 	
-	constructor(private _translate: TranslateService) {
+	constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService) {
 	}
 	
 	ngOnInit(): void {
@@ -150,7 +152,7 @@ export class PlayerCardComponent implements OnInit {
 			this.showAddScore = true;
 			
 			this.player.score = player.score;
-			await ToolsService.sleep(100);
+			await this._commonUtilsService.sleep(100);
 			this.showAddScore = false;
 		}
 	}

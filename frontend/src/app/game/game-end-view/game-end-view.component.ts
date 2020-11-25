@@ -13,15 +13,13 @@ import {GameResource} from "../../resources/game.resource";
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {Player} from 'src/app/interfaces/game/player.interface';
 import {faDoorClosed, faDoorOpen, faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {ToolsService} from "../../tools/tools.service";
-import {HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
 
 /**
  * The end game view.
@@ -77,7 +75,8 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 				private _ngbModal: NgbModal,
 				private _translate: TranslateService,
 				private _router: Router,
-				private _toasterService: ToasterService) {
+				private _toasterService: ToasterService,
+				private _commonUtilsService: CommonUtilsService) {
 	}
 	
 	ngOnInit(): void {
@@ -96,7 +95,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !ToolsService.isNull(this.audio) ) {
+		if ( !this._commonUtilsService.isNull(this.audio) ) {
 			this.audio.pause();
 			this.audio = undefined;
 		}

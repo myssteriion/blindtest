@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ToolsService} from "../../tools/tools.service";
+import {UtilsService} from "../../tools/utils.service";
 import {THEMES} from "../../tools/constant";
 import {Profile} from "../../interfaces/entity/profile.interface";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison view.
@@ -21,8 +22,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
     public selectedTheme: Theme = null;
     public noThemesAvailable = true;
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService) { }
 
     ngOnInit(): void {
         this.availableThemes = [];
@@ -46,7 +46,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
                 return themeToFilter === theme.enumVal
             });
 
-            if (!ToolsService.isNull(themeExists)) {
+            if (!this._commonUtilsService.isNull(themeExists)) {
                 this.availableThemes.push(themeExists);
             }
         });

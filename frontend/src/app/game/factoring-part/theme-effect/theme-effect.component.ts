@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EFFECTS, MARIO_KART_SOUND, THEMES} from "../../../tools/constant";
-import {ToolsService} from "../../../tools/tools.service";
-import {Music} from "../../../interfaces/entity/music.interface";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { EFFECTS, MARIO_KART_SOUND, THEMES } from "../../../tools/constant";
+import { Music } from "../../../interfaces/entity/music.interface";
+import { CommonUtilsService } from "myssteriion-utils";
 
 /**
  * The theme effect part.
@@ -40,7 +40,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	
 	
 	
-	constructor() { }
+	constructor(private _commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit() {
 		this.theme = THEMES[0];
@@ -52,7 +52,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !ToolsService.isNull(this.audio) ) {
+		if ( !this._commonUtilsService.isNull(this.audio) ) {
 			this.audio.pause();
 			this.audio = undefined;
 		}
@@ -102,12 +102,12 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 				
 				while (!this.audio.ended) {
 					if (rollTheme)
-						this.theme = THEMES[ToolsService.random(0, THEMES.length - 1)];
+						this.theme = THEMES[this._commonUtilsService.random(0, THEMES.length - 1)];
 					
 					if (rollEffect)
-						this.effect = EFFECTS[ToolsService.random(0, EFFECTS.length - 1)];
+						this.effect = EFFECTS[this._commonUtilsService.random(0, EFFECTS.length - 1)];
 					
-					await ToolsService.sleep(100);
+					await this._commonUtilsService.sleep(100);
 				}
 				
 				this.theme = THEMES[themeIndex];

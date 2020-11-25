@@ -1,10 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {THEMES, GOOD_ANSWERS} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme percentages view.
@@ -22,7 +23,9 @@ export class ThemePercentagesComponent implements OnInit {
     public view = HORIZONTAL_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) {
     }
 
     ngOnInit() {
@@ -37,10 +40,10 @@ export class ThemePercentagesComponent implements OnInit {
 
         keys.forEach(key => {
             let series = [];
-            if (!ToolsService.isNull(foundThemes[key])) {
+            if (!this._commonUtilsService.isNull(foundThemes[key])) {
                 typeKeys.forEach(typeKey => {
-                    let byTypeValue = ToolsService.isNull(foundThemes[key][typeKey]) ? 0 : foundThemes[key][typeKey];
-                    let listenedMusicsInTheme = ToolsService.isNull(listenedThemes[key]) ? 0 : parseInt(listenedThemes[key]);
+                    let byTypeValue = this._commonUtilsService.isNull(foundThemes[key][typeKey]) ? 0 : foundThemes[key][typeKey];
+                    let listenedMusicsInTheme = this._commonUtilsService.isNull(listenedThemes[key]) ? 0 : parseInt(listenedThemes[key]);
                     series.push({
                         name: this._translate.instant("STATISTICS.CATEGORIES.FOUND_MUSICS_BY_THEME." + typeKey),
                         value: Math.floor(byTypeValue / listenedMusicsInTheme * 100)
@@ -51,7 +54,7 @@ export class ThemePercentagesComponent implements OnInit {
             this.stackedPercentages.push({name: this._translate.instant("THEMES." + key), series: series})
         });
 
-        this.stackedPercentages = ToolsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);
+        this.stackedPercentages = this._utilsService.sortByAlphabeticalAndNumerical(this.stackedPercentages);
     }
 
 }

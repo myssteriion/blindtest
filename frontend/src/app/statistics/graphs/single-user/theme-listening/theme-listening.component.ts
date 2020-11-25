@@ -1,10 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme listening statistics view.
@@ -26,7 +27,9 @@ export class ThemeListeningComponent implements OnInit {
     public view = HORIZONTAL_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) {
     }
 
     ngOnInit() {
@@ -43,14 +46,14 @@ export class ThemeListeningComponent implements OnInit {
         keys.forEach(key => {
             this.listenedMusicsByTheme.push({
                 name: this._translate.instant("THEMES." + key),
-                value: ToolsService.isNull(listenedThemes[key]) ? 0 : parseInt(listenedThemes[key])
+                value: this._commonUtilsService.isNull(listenedThemes[key]) ? 0 : parseInt(listenedThemes[key])
             });
             if (this.maxCount < parseInt(listenedThemes[key])) {
                 this.maxCount = parseInt(listenedThemes[key]);
             }
         });
 
-        this.listenedMusicsByTheme = ToolsService.sortByAlphabeticalAndNumerical(this.listenedMusicsByTheme);
+        this.listenedMusicsByTheme = this._utilsService.sortByAlphabeticalAndNumerical(this.listenedMusicsByTheme);
     }
 
 }

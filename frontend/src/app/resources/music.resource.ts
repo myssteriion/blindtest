@@ -3,10 +3,11 @@ import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Music} from "../interfaces/entity/music.interface";
-import {ToolsService} from "../tools/tools.service";
+import {UtilsService} from "../tools/utils.service";
 import {ThemeInfo} from "../interfaces/music/theme-info.interface";
 import {Page} from "../interfaces/base/page.interface";
 import {MusicFilter} from "../interfaces/music/music-filter.interface";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * Music resource.
@@ -21,7 +22,8 @@ export class MusicResource {
 	
 	
 	
-	constructor(private _http: HttpClient) { }
+	constructor(private _http: HttpClient,
+				private _commonUtilsService: CommonUtilsService) { }
 	
 	
 	
@@ -40,8 +42,8 @@ export class MusicResource {
 	public random(musicFilter: MusicFilter): Observable<Music> {
 		
 		let queryParam = "?";
-		if ( !ToolsService.isNull(musicFilter) && !ToolsService.isNull(musicFilter.themes) )	queryParam += "&themes=" + musicFilter.themes;
-		if ( !ToolsService.isNull(musicFilter) && !ToolsService.isNull(musicFilter.effects) ) queryParam += "&effects=" + musicFilter.effects;
+		if ( !this._commonUtilsService.isNull(musicFilter) && !this._commonUtilsService.isNull(musicFilter.themes) ) queryParam += "&themes=" + musicFilter.themes;
+		if ( !this._commonUtilsService.isNull(musicFilter) && !this._commonUtilsService.isNull(musicFilter.effects) ) queryParam += "&effects=" + musicFilter.effects;
 		
 		return this._http.post<Music>(this.path + "/random" + queryParam, musicFilter);
 	}

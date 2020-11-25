@@ -1,4 +1,4 @@
-import {Flux} from '../common/flux.interface';
+import { Flux } from "myssteriion-utils";
 
 /**
  * Avatar.

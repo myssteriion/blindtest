@@ -1,8 +1,9 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {ToolsService} from '../../../../tools/tools.service';
+import {UtilsService} from '../../../../tools/utils.service';
 import {ProfileStat} from "../../../../interfaces/entity/profile-stat.interface";
 import {COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The listened / found musics ratio view.
@@ -21,7 +22,7 @@ export class FoundListenedMusicsRatioComponent implements OnInit {
     public view = LINEAR_GAUGE_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor() {
+    constructor(private _commonUtilsService: CommonUtilsService) {
     }
 
     ngOnInit() {
@@ -36,7 +37,7 @@ export class FoundListenedMusicsRatioComponent implements OnInit {
 
         keys.forEach(key => {
             this.totalMusicsListened += this.statistics.listenedMusics[key];
-            this.totalMusicsFound = ToolsService.isNull(this.statistics.foundMusics[key]) ? this.totalMusicsFound : this.totalMusicsFound + this.getAllMusicsFound(this.statistics.foundMusics[key])
+            this.totalMusicsFound = this._commonUtilsService.isNull(this.statistics.foundMusics[key]) ? this.totalMusicsFound : this.totalMusicsFound + this.getAllMusicsFound(this.statistics.foundMusics[key])
         });
     }
 
@@ -48,7 +49,7 @@ export class FoundListenedMusicsRatioComponent implements OnInit {
         let foundMusics = 0;
         let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(typeKey => {
-            foundMusics = ToolsService.isNull(musicsForTheme[typeKey]) ? foundMusics : foundMusics + musicsForTheme[typeKey];
+            foundMusics = this._commonUtilsService.isNull(musicsForTheme[typeKey]) ? foundMusics : foundMusics + musicsForTheme[typeKey];
         });
         return foundMusics;
     }

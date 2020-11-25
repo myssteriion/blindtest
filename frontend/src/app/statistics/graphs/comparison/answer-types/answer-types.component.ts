@@ -1,10 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The answer type view.
@@ -23,7 +24,9 @@ export class AnswerTypesComponent implements OnInit {
     public results: ComplexGraphStatisticsInterface[] = [];
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) {
     }
 
     ngOnInit() {
@@ -47,9 +50,9 @@ export class AnswerTypesComponent implements OnInit {
             };
 
             musicKeys.forEach(musicKey => {
-                if (!ToolsService.isNull(player.profileStat.foundMusics[musicKey])) {
+                if (!this._commonUtilsService.isNull(player.profileStat.foundMusics[musicKey])) {
                     keys.forEach(key => {
-                        values[key] = ToolsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? values[key] : values[key] + player.profileStat.foundMusics[musicKey][key]
+                        values[key] = this._commonUtilsService.isNull(player.profileStat.foundMusics[musicKey][key]) ? values[key] : values[key] + player.profileStat.foundMusics[musicKey][key]
                     })
                 }
             });
@@ -67,7 +70,7 @@ export class AnswerTypesComponent implements OnInit {
                 series: series
             })
         });
-        this.results = ToolsService.sortByAlphabeticalAndNumerical(this.results);
+        this.results = this._utilsService.sortByAlphabeticalAndNumerical(this.results);
     }
 
 }

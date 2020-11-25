@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {Avatar} from 'src/app/interfaces/entity/avatar.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
-import {ToolsService} from "../../tools/tools.service";
+import {UtilsService} from "../../tools/utils.service";
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from "../../interfaces/base/page.interface";
@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {DEFAULT_BACKGROUND} from "../../tools/constant";
-import {HTTP_CONFLICT, ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, HTTP_CONFLICT, ToasterService} from "myssteriion-utils";
 
 declare var $: any;
 
@@ -78,7 +78,9 @@ export class ProfileEditModalComponent implements OnInit {
 				private _profileResource: ProfileResource,
 				private _toasterService: ToasterService,
 				private _translate: TranslateService,
-				private _ngbModal: NgbModal) { }
+				private _ngbModal: NgbModal,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) { }
 	
 	public ngOnInit(): void {
 		
@@ -151,7 +153,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 * @param avatar the avatar
 	 */
 	private getImgFromAvatar(avatar: Avatar): string {
-		return ToolsService.getImgFromAvatar(avatar);
+		return this._utilsService.getImgFromAvatar(avatar);
 	}
 	
 	/**
@@ -167,7 +169,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 * Test if the save button is disabled.
 	 */
 	public disabledSave(): boolean {
-		return this.colorPickerIsOpen || ToolsService.isNullOrEmpty(this.newProfile.name) || ToolsService.isNull(this.newProfile.background);
+		return this.colorPickerIsOpen || this._commonUtilsService.isNullOrEmpty(this.newProfile.name) || this._commonUtilsService.isNull(this.newProfile.background);
 	}
 	
 	/**

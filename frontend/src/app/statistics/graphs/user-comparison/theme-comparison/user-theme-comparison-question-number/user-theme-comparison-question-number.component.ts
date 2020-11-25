@@ -1,9 +1,10 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {ToolsService} from "../../../../../tools/tools.service";
+import {UtilsService} from "../../../../../tools/utils.service";
 import {GOOD_ANSWERS} from "../../../../../tools/constant";
 import {Profile} from "../../../../../interfaces/entity/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison question number view.
@@ -25,8 +26,7 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
     public view = HORIZONTAL_STACKED_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService) { }
 
     // Detect changes on input fields
     ngOnChanges(changes: SimpleChanges) {
@@ -45,8 +45,8 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
         this.maxCount = 0;
 
         this.players.forEach(player => {
-            let foundMusics = ToolsService.isNull(player.profileStat.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.profileStat);
-            if (!ToolsService.isNull(player.profileStat.listenedMusics[this.theme]) && player.profileStat.listenedMusics[this.theme] > this.maxCount) {
+            let foundMusics = this._commonUtilsService.isNull(player.profileStat.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.profileStat);
+            if (!this._commonUtilsService.isNull(player.profileStat.listenedMusics[this.theme]) && player.profileStat.listenedMusics[this.theme] > this.maxCount) {
                 this.maxCount = player.profileStat.listenedMusics[this.theme];
             }
             this.questionsAnswered.push({
@@ -64,7 +64,7 @@ export class UserThemeComparisonQuestionNumberComponent implements OnInit {
         let foundMusics = 0;
         let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(key => {
-            if (!ToolsService.isNull(playerStats.foundMusics[this.theme][key])) {
+            if (!this._commonUtilsService.isNull(playerStats.foundMusics[this.theme][key])) {
                 foundMusics += playerStats.foundMusics[this.theme][key];
             }
         });

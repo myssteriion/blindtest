@@ -1,9 +1,10 @@
 import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {ToolsService} from "../../../../tools/tools.service";
+import {UtilsService} from "../../../../tools/utils.service";
 import {Game} from "../../../../interfaces/game/game.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison question number view.
@@ -35,8 +36,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
 
 
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService) { }
 
     ngOnInit() {
         this.calculateStatistics();
@@ -59,7 +59,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
         this.maxCount = this.game.listenedMusics[this.theme];
 
         this.game.players.forEach(player => {
-            let foundMusics = ToolsService.isNull(player.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.foundMusics[this.theme]);
+            let foundMusics = this._commonUtilsService.isNull(player.foundMusics[this.theme]) ? 0 : this.getAllMusicsForPlayer(player.foundMusics[this.theme]);
             this.questionsAnswered.push({
                 name: player.profile.name,
                 value: foundMusics
@@ -75,7 +75,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
         let foundMusics = 0;
         let typeKeys = GOOD_ANSWERS;
         typeKeys.forEach(key => {
-            if (!ToolsService.isNull(musicsForTheme[key])) {
+            if (!this._commonUtilsService.isNull(musicsForTheme[key])) {
                 foundMusics += musicsForTheme[key];
             }
         });
@@ -88,7 +88,7 @@ export class ThemeComparisonQuestionNumberComponent implements OnInit {
     public getMaximum(): number {
 
         let nbMusics: number = 0;
-        if ( !ToolsService.isNull(this.game.listenedMusics[this.theme]) )
+        if ( !this._commonUtilsService.isNull(this.game.listenedMusics[this.theme]) )
             nbMusics = this.game.listenedMusics[this.theme];
 
         return nbMusics;

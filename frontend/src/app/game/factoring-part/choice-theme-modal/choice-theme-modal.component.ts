@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ToolsService} from "../../../tools/tools.service";
-import {THEMES} from 'src/app/tools/constant';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { THEMES } from 'src/app/tools/constant';
+import { CommonUtilsService } from "myssteriion-utils";
 
 /**
  * The choice theme modal.
@@ -37,7 +37,8 @@ export class ChoiceThemeModalComponent implements OnInit {
 	
 	
 	
-	constructor(private _ngbActiveModal: NgbActiveModal) {}
+	constructor(private _ngbActiveModal: NgbActiveModal,
+				private _commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		
@@ -57,7 +58,7 @@ export class ChoiceThemeModalComponent implements OnInit {
 	 * If the button is disabled.
 	 */
 	public closeIsDisabled(): boolean {
-		return ToolsService.isNull(this.selectedTheme);
+		return this._commonUtilsService.isNull(this.selectedTheme);
 	}
 	
 	/**

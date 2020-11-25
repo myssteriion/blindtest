@@ -3,7 +3,7 @@ import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
-import {ToolsService} from "../../tools/tools.service";
+import {UtilsService} from "../../tools/utils.service";
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
@@ -72,7 +72,8 @@ export class ProfileCardComponent {
 	constructor(private _ngbModal: NgbModal,
 				private _profileResource: ProfileResource,
 				private _translate: TranslateService,
-				private _toasterService: ToasterService) {
+				private _toasterService: ToasterService,
+				private _utilsService: UtilsService) {
 		
 	}
 	
@@ -82,7 +83,7 @@ export class ProfileCardComponent {
 	 * Get image from avatar.
 	 */
 	public getImgFromAvatar(): string {
-		return ToolsService.getImgFromAvatar(this.profile.avatar);
+		return this._utilsService.getImgFromAvatar(this.profile.avatar);
 	}
 	
 	/**

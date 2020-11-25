@@ -1,10 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {DURATIONS} from '../../../../tools/constant';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The number of games played view.
@@ -23,8 +24,9 @@ export class PlayedGamesComponent implements OnInit {
     public results: ComplexGraphStatisticsInterface[] = [];
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
-    }
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) { }
 
     ngOnInit() {
         this.calculateStatistics();
@@ -42,7 +44,7 @@ export class PlayedGamesComponent implements OnInit {
             keys.forEach(key => {
                 series.push({
                     name: this._translate.instant('STATISTICS.CATEGORIES.BEST_SCORE.' + key),
-                    value: ToolsService.isNull(player.profileStat.playedGames[key]) ? 0 : player.profileStat.playedGames[key]
+                    value: this._commonUtilsService.isNull(player.profileStat.playedGames[key]) ? 0 : player.profileStat.playedGames[key]
                 });
             });
 
@@ -51,7 +53,7 @@ export class PlayedGamesComponent implements OnInit {
                 series: series
             })
         });
-        this.results = ToolsService.sortByAlphabeticalAndNumerical(this.results);
+        this.results = this._utilsService.sortByAlphabeticalAndNumerical(this.results);
     }
 
 }

@@ -12,7 +12,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
 import {Music} from "../../interfaces/entity/music.interface";
-import {ToolsService} from 'src/app/tools/tools.service';
+import {UtilsService} from 'src/app/tools/utils.service';
 import {CountdownConfig} from 'ngx-countdown';
 import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
@@ -24,7 +24,7 @@ import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {PlayerCardComponent} from "../../player/player-card/player-card.component";
 import {MusicFilter} from "../../interfaces/music/music-filter.interface";
-import {HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
 
 /**
  * The current game view.
@@ -158,7 +158,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				private _ngbModal: NgbModal,
 				private _musicResource: MusicResource,
 				private _sanitizer: DomSanitizer,
-				private _toasterService: ToasterService) { }
+				private _toasterService: ToasterService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsSerice: UtilsService) { }
 	
 	ngOnInit(): void {
 		
@@ -208,12 +210,12 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !ToolsService.isNull(this.previewAudio) ) {
+		if ( !this._commonUtilsService.isNull(this.previewAudio) ) {
 			this.previewAudio.pause();
 			this.previewAudio = undefined;
 		}
 		
-		if ( !ToolsService.isNull(this.audio) ) {
+		if ( !this._commonUtilsService.isNull(this.audio) ) {
 			this.audio.nativeElement.pause();
 			this.audio.nativeElement = undefined;
 			this.audio = undefined;
@@ -421,7 +423,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				this.currentMusic = response;
 				
 				this.previewAudio = new Audio();
-				this.previewAudio.src = ToolsService.getAudioFromMusic(this.currentMusic);
+				this.previewAudio.src = this._utilsSerice.getAudioFromMusic(this.currentMusic);
 				this.previewAudio.volume = 1.0;
 				
 				let playbackRate = GameCurrentViewComponent.NORMAL_SPEED;
@@ -566,7 +568,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		let currentTime = this.previewAudio.currentTime;
 		this.previewAudio = undefined;
 		
-		this.audio.nativeElement.src = ToolsService.getAudioFromMusic(this.currentMusic);
+		this.audio.nativeElement.src = this._utilsSerice.getAudioFromMusic(this.currentMusic);
 		this.audio.nativeElement.controls = true;
 		this.audio.nativeElement.load();
 		this.audio.nativeElement.currentTime = currentTime;
@@ -603,7 +605,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 							this.showNextMusic = true;
 							if (this.game.nbMusicsPlayedInRound === 0) {
 								this.openRoundInfoModal();
-								if ( !ToolsService.isNull(this.audio) )
+								if ( !this._commonUtilsService.isNull(this.audio) )
 									this.audio.nativeElement.volume = 0.05;
 							}
 						} );
@@ -631,13 +633,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			let newPlayerName = appliedPlayer.profile.name;
 			
 			let foundPlayerComponent = this.leftPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
-			if ( ToolsService.isNull(foundPlayerComponent) )
+			if ( this._commonUtilsService.isNull(foundPlayerComponent) )
 				foundPlayerComponent = this.rightPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
 			
 			this.currentPlayersToUpdate.push( foundPlayerComponent.getPlayer().profile.name );
 			foundPlayerComponent.updatePLayer(appliedPlayer);
 			if (i % 2 === 1 || i === appliedPlayers.length-1) {
-				await ToolsService.sleep(ADD_SCORE_DURING);
+				await this._commonUtilsService.sleep(ADD_SCORE_DURING);
 				this.currentPlayersToUpdate = [];
 			}
 		}
@@ -654,7 +656,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * Test if the opacity css must me apply for player.
 	 */
 	private addOpacityOnPlayer(player: Player): boolean {
-		return !ToolsService.isNull(this.currentPlayersToUpdate) && this.currentPlayersToUpdate.length > 0 &&
+		return !this._commonUtilsService.isNull(this.currentPlayersToUpdate) && this.currentPlayersToUpdate.length > 0 &&
 			this.currentPlayersToUpdate.findIndex(playerName => playerName === player.profile.name) === -1;
 	}
 	

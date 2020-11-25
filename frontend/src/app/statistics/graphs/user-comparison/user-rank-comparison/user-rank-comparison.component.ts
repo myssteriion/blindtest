@@ -1,9 +1,10 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from '../../../../tools/tools.service'
+import {UtilsService} from '../../../../tools/utils.service'
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The user rank comparison view.
@@ -23,8 +24,9 @@ export class UserRankComparisonComponent implements OnInit {
     public view = HORIZONTAL_STACKED_BAR_GRAPH_SIZE;
     public colorScheme = COLOR_SCHEME;
 
-    constructor(private _translate: TranslateService) {
-    }
+    constructor(private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService,
+				private _utilsService: UtilsService) { }
 
     ngOnInit() {
         this.calculateStatistics()
@@ -41,10 +43,10 @@ export class UserRankComparisonComponent implements OnInit {
     private calculateStatistics() {
         this.rankResults = [];
         this.players.forEach(player => {
-            let series = ToolsService.isNull(player.profileStat.wonGames) ? [] : this.getRanksForPlayer(player.profileStat.wonGames);
+            let series = this._commonUtilsService.isNull(player.profileStat.wonGames) ? [] : this.getRanksForPlayer(player.profileStat.wonGames);
             this.rankResults.push({name: player.name, series: series})
         });
-        this.rankResults = ToolsService.sortByAlphabeticalAndNumerical(this.rankResults);
+        this.rankResults = this._utilsService.sortByAlphabeticalAndNumerical(this.rankResults);
     }
 
     /**
@@ -57,7 +59,7 @@ export class UserRankComparisonComponent implements OnInit {
         rankValues.forEach(rank => {
             userRanks.push({
                 name: this._translate.instant("RANK_OCCUPIED." + rank),
-                value: ToolsService.isNull(playerStats[rank]) ? 0 : playerStats[rank]
+                value: this._commonUtilsService.isNull(playerStats[rank]) ? 0 : playerStats[rank]
             });
         });
         return userRanks;

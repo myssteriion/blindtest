@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ErrorAlert} from 'src/app/interfaces/base/error.alert.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
-import {ToolsService} from "../../tools/tools.service";
-import {HTTP_GATEWAY_TIMEOUT} from "myssteriion-utils";
+import {UtilsService} from "../../tools/utils.service";
+import {CommonUtilsService, HTTP_GATEWAY_TIMEOUT} from "myssteriion-utils";
 
 @Component({
 	selector: 'error-alert-modal',
@@ -66,7 +66,8 @@ export class ErrorAlertModalComponent implements OnInit {
 	
 	
 	constructor(private _ngbActiveModal: NgbActiveModal,
-				private _translate: TranslateService) { }
+				private _translate: TranslateService,
+				private _commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		this.showError = this.error.status === 0;
@@ -93,7 +94,7 @@ export class ErrorAlertModalComponent implements OnInit {
 	 * If show suggestions.
 	 */
 	public showSuggestions(): boolean {
-		return !ToolsService.isNull(this.suggestions) && this.suggestions.length > 0;
+		return !this._commonUtilsService.isNull(this.suggestions) && this.suggestions.length > 0;
 	}
 	
 	/**

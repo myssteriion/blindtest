@@ -8,8 +8,8 @@ import {ProfileResource} from "../../resources/profile.resource";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {Router} from "@angular/router";
-import {ToolsService} from "../../tools/tools.service";
-import {ToasterService} from "myssteriion-utils";
+import {UtilsService} from "../../tools/utils.service";
+import {CommonUtilsService, ToasterService} from "myssteriion-utils";
 
 /**
  * The profiles statistics view.
@@ -35,8 +35,8 @@ export class ProfilesStatisticsViewComponent implements OnInit {
                 private _toasterService: ToasterService,
                 private _ngbModal: NgbModal,
                 private _profileResource: ProfileResource,
-                private _router: Router) {
-    }
+                private _router: Router,
+				private _utilsService: UtilsService) { }
 
     ngOnInit() {
         this.getAllPlayers(0);
@@ -48,7 +48,7 @@ export class ProfilesStatisticsViewComponent implements OnInit {
      * @param profile
      */
     private getImgFromAvatar(profile): string {
-        return ToolsService.getImgFromAvatar(profile.avatar);
+        return this._utilsService.getImgFromAvatar(profile.avatar);
     }
 
     /**

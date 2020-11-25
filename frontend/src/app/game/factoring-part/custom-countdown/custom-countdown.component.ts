@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {COUNTDOWN_SOUND, REDUCTION_ANIMATION} from "../../../tools/constant";
-import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
-import {ToolsService} from "../../../tools/tools.service";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { COUNTDOWN_SOUND, REDUCTION_ANIMATION } from "../../../tools/constant";
+import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
+import { CommonUtilsService } from "myssteriion-utils";
 
 /**
  * The custom countdown part.
@@ -74,7 +74,7 @@ export class CustomCountdownComponent implements OnInit {
 	
 	
 	
-	constructor() { }
+	constructor(private _commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		this.show = false;
@@ -121,7 +121,7 @@ export class CustomCountdownComponent implements OnInit {
 			
 			if (this.animation === "reduction") {
 				this.animationTriggerValue = "big";
-				await ToolsService.sleep(100);
+				await this._commonUtilsService.sleep(100);
 			}
 			
 			if (this.sound) {
@@ -141,7 +141,7 @@ export class CustomCountdownComponent implements OnInit {
 	 * @param color the color
 	 */
 	public setColor(color: string) {
-		this.color = ( ToolsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
+		this.color = ( this._commonUtilsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
 	}
 	
 }

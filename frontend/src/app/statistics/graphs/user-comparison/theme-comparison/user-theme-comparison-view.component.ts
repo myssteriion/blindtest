@@ -1,8 +1,9 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {Game} from "../../../../interfaces/game/game.interface";
-import {ToolsService} from "../../../../tools/tools.service";
+import {UtilsService} from "../../../../tools/utils.service";
 import {COLOR_SCHEME} from "../../../../tools/graph.constant";
+import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison view.
@@ -26,8 +27,7 @@ export class UserThemeComparisonViewComponent implements OnInit {
     public colorScheme = COLOR_SCHEME;
     public themes = THEMES;
 
-    constructor() {
-    }
+    constructor(private _commonUtilsService: CommonUtilsService) { }
 
     ngOnInit(): void {
         this.availableThemes = [];
@@ -35,7 +35,7 @@ export class UserThemeComparisonViewComponent implements OnInit {
             let themeExists = this.gameStatistics.themes.find(gameTheme => {
                 return theme.enumVal === gameTheme
             });
-            if (!ToolsService.isNull(themeExists)) {
+            if (!this._commonUtilsService.isNull(themeExists)) {
                 this.availableThemes.push(themeExists)
             }
         });

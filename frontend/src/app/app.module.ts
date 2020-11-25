@@ -68,7 +68,7 @@ import {EndGameRanksComponent} from "./game/game-end-view/end-game-ranks/end-gam
 import {ParamsViewComponent} from './params-view/params-view.component';
 import {GameCardComponent} from './game/game-card/game-card.component';
 
-import {ToolsService} from "./tools/tools.service";
+import {UtilsService} from "./tools/utils.service";
 
 import {ProfileResource} from "./resources/profile.resource";
 import {AvatarResource} from "./resources/avatar.resource";
@@ -78,7 +78,7 @@ import {MusicResource} from "./resources/music.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatTabsModule} from "@angular/material/tabs";
-import {GlobalErrorHandler, ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, GlobalErrorHandler, ToasterService} from "myssteriion-utils";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -182,7 +182,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AvatarResource,
 		ProfileStatisticsResource,
 		GameResource,
-		ToolsService,
+		CommonUtilsService,
+		UtilsService,
 		ToasterService,
 		MusicResource
 	],
