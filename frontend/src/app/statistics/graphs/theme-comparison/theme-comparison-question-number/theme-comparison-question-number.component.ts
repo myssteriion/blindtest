@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {UtilsService} from "../../../../tools/utils.service";
+import {UtilsService} from "../../../../services/utils.service";
 import {Game} from "../../../../interfaces/game/game.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME} from "../../../../tools/graph.constant";

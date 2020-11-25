@@ -12,7 +12,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Player} from 'src/app/interfaces/game/player.interface';
 import {MusicResource} from "../../resources/music.resource";
 import {Music} from "../../interfaces/entity/music.interface";
-import {UtilsService} from 'src/app/tools/utils.service';
+import {UtilsService} from 'src/app/services/utils.service';
 import {CountdownConfig} from 'ngx-countdown';
 import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
 import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";

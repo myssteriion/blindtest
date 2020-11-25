@@ -68,7 +68,7 @@ import {EndGameRanksComponent} from "./game/game-end-view/end-game-ranks/end-gam
 import {ParamsViewComponent} from './params-view/params-view.component';
 import {GameCardComponent} from './game/game-card/game-card.component';
 
-import {UtilsService} from "./tools/utils.service";
+import {UtilsService} from "./services/utils.service";
 
 import {ProfileResource} from "./resources/profile.resource";
 import {AvatarResource} from "./resources/avatar.resource";

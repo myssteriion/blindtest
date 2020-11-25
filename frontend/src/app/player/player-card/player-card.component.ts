@@ -3,7 +3,7 @@ import {Player} from "../../interfaces/game/player.interface";
 import {faCookieBite, faMedal, faPoo, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from '@ngx-translate/core';
 import {ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION} from "../../tools/constant";
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {CommonUtilsService} from "myssteriion-utils";
 
 /**

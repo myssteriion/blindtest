@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../../tools/constant';
 import {TranslateService} from '@ngx-translate/core';
-import {UtilsService} from '../../../../tools/utils.service'
+import {UtilsService} from '../../../../services/utils.service'
 import {SimpleGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";

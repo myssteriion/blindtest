@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {THEMES} from "../../tools/constant";
 import {Profile} from "../../interfaces/entity/profile.interface";
 import {CommonUtilsService} from "myssteriion-utils";

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {Avatar} from 'src/app/interfaces/entity/avatar.interface';
 import {AvatarResource} from 'src/app/resources/avatar.resource';
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileResource} from 'src/app/resources/profile.resource';
 import {Page} from "../../interfaces/base/page.interface";

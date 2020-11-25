@@ -56,6 +56,5 @@ La conf applicative du backend. Le paramètre de build permet de déterminer le 
 | player        | les composants relatifs à l'objet "player"                                                                                                                                    |
 | profile       | les composants relatifs à l'objet "profile"                                                                                                                                   |
 | resources     | les resources (call les controllers backend)                                                                                                                                  |
-| servives      | les services indépendant (toaster)                                                                                                                                            |
+| services      | les services indépendants                                                                                                                                           |
 | statistics    | les composants relatifs à l'objet "statistics"                                                                                                                                |
-| tools         | les utilitaires (constantes, fonctions...)                                                                                                                                    |

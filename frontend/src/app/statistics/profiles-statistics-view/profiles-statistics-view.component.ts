@@ -8,7 +8,7 @@ import {ProfileResource} from "../../resources/profile.resource";
 import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
 import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
 import {Router} from "@angular/router";
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {CommonUtilsService, ToasterService} from "myssteriion-utils";
 
 /**

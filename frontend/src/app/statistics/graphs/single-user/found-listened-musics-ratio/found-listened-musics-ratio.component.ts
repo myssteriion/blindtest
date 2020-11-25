@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {UtilsService} from '../../../../tools/utils.service';
+import {UtilsService} from '../../../../services/utils.service';
 import {ProfileStat} from "../../../../interfaces/entity/profile-stat.interface";
 import {COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE} from "../../../../tools/graph.constant";
 import {CommonUtilsService} from "myssteriion-utils";

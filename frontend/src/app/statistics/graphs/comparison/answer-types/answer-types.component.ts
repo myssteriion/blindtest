@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {GOOD_ANSWERS} from '../../../../tools/constant';
-import {UtilsService} from '../../../../tools/utils.service'
+import {UtilsService} from '../../../../services/utils.service'
 import {TranslateService} from "@ngx-translate/core";
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Profile} from "../../interfaces/entity/profile.interface";
 import {TranslateService} from '@ngx-translate/core';
-import {UtilsService} from 'src/app/tools/utils.service';
+import {UtilsService} from 'src/app/services/utils.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
 import {EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES} from "../../tools/constant";

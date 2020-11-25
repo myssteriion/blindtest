@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {UtilsService} from '../../../../tools/utils.service'
+import {UtilsService} from '../../../../services/utils.service'
 import {Profile} from "../../../../interfaces/entity/profile.interface";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ErrorAlert} from 'src/app/interfaces/base/error.alert.interface';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {CommonUtilsService, HTTP_GATEWAY_TIMEOUT} from "myssteriion-utils";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AVATAR_NOT_FOUND } from "./constant";
+import { AVATAR_NOT_FOUND } from "../tools/constant";
 import { Avatar } from "../interfaces/entity/avatar.interface";
 import { Music } from "../interfaces/entity/music.interface";
 import { CommonUtilsService } from "myssteriion-utils";
@@ -29,13 +29,14 @@ export class UtilsService {
 	 * @param music the music
 	 */
 	public getAudioFromMusic(music: Music): string {
-		return ( this._commonUtilsService.isNull(music) ) ? AVATAR_NOT_FOUND : this._commonUtilsService.getImgFromFlux(music.flux)
+		return ( this._commonUtilsService.isNull(music) ) ? null : this._commonUtilsService.getImgFromFlux(music.flux)
 	}
 	
 	/**
 	 * Sort values by alphabetical and numerical order
 	 * @param array
 	 */
+	// TODO
 	public sortByAlphabeticalAndNumerical(array): Array<any> {
 		array.sort(function (a, b) {
 			let textA = a.name.toUpperCase();
@@ -49,6 +50,7 @@ export class UtilsService {
 	 * Sort values by alphabetical and numerical order
 	 * @param array
 	 */
+	// TODO
 	public sortByAlphabeticalAndNumericalThemes(array): Array<any> {
 		array.sort(function (a, b) {
 			let textA = a.toUpperCase();

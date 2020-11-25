@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {UtilsService} from "../../../../../tools/utils.service";
+import {UtilsService} from "../../../../../services/utils.service";
 import {GOOD_ANSWERS} from "../../../../../tools/constant";
 import {Profile} from "../../../../../interfaces/entity/profile.interface";
 import {SimpleGraphStatisticsInterface} from "../../../../../interfaces/common/graph.interface";

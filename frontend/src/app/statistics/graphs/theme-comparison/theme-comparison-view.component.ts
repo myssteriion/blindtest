@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SLIDE_ANIMATION, THEMES} from '../../../tools/constant';
 import {Game} from "../../../interfaces/game/game.interface";
-import {UtilsService} from "../../../tools/utils.service";
+import {UtilsService} from "../../../services/utils.service";
 import {CommonUtilsService} from "myssteriion-utils";
 
 /**

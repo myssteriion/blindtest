@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {Music} from "../interfaces/entity/music.interface";
-import {UtilsService} from "../tools/utils.service";
+import {UtilsService} from "../services/utils.service";
 import {ThemeInfo} from "../interfaces/music/theme-info.interface";
 import {Page} from "../interfaces/base/page.interface";
 import {MusicFilter} from "../interfaces/music/music-filter.interface";

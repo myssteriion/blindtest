@@ -3,7 +3,7 @@ import {Profile} from 'src/app/interfaces/entity/profile.interface';
 import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
-import {UtilsService} from "../../tools/utils.service";
+import {UtilsService} from "../../services/utils.service";
 import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
 import {ProfileResource} from "../../resources/profile.resource";
 import {TranslateService} from '@ngx-translate/core';
