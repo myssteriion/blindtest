@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { AVATAR_NOT_FOUND } from "./constant";
 import { Avatar } from "../interfaces/entity/avatar.interface";
 import { Music } from "../interfaces/entity/music.interface";
@@ -15,7 +15,7 @@ export class UtilsService {
 	
 	
 	/**
-	 * Get the 'image' from avatar. If the avatar is null, 'not-found' image is used.
+	 * Get the "image" from avatar. If the avatar is null, "not-found" image is used.
 	 *
 	 * @param avatar the avatar
 	 */
@@ -24,7 +24,7 @@ export class UtilsService {
 	}
 	
 	/**
-	 * Get the 'audio' from music.
+	 * Get the "audio" from music.
 	 *
 	 * @param music the music
 	 */
