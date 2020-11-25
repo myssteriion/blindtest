@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+    }
+}
+
 ext {
 	currentVersion = "3.0.0-SNAPSHOT"
 	springBootVersion = "2.3.5.RELEASE"
@@ -11,6 +22,7 @@ repositories {
 
 apply plugin: "war"
 apply plugin: "idea"
+apply plugin: "org.sonarqube"
 
 group = "com.myssteriion"
 version = "$currentVersion"
