@@ -20,7 +20,12 @@
 						"tsConfig": "tsconfig.app.json",
 						"aot": false,
 						"assets": [
-							"src/assets"
+							"src/assets",
+							{
+								"glob": "**",
+								"input": "./node_modules/myssteriion-utils/assets",
+								"output": "assets/myssteriion-utils"
+							}
 						],
 						"styles": [
 							"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

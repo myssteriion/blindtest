@@ -1,6 +1,15 @@
 {
 	"name": "musics-blindtest",
 	"version": "3.0.0-SNAPSHOT",
+	"license": "UNLICENSED",
+	"author": {
+		"name": "myssteriion",
+		"email": "myssteriion@hotmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/myssteriion/musics-blindtest.git"
+	},
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve --proxy-config proxy.conf.json",
@@ -9,10 +18,6 @@
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e"
-	},
-	"author": {
-		"name": "myssterrion",
-		"email": "myssteriion@hotmail.com"
 	},
 	"private": false,
 	"dependencies": {
@@ -46,6 +51,7 @@
 		"ngx-color-picker": "^10.1.0",
 		"ngx-countdown": "^8.0.4",
 		"ngx-toastr": "^11.3.3",
+		"ngx-translate-multi-http-loader": "3.0.0",
 		"popper.js": "^1.16.1",
 		"rxjs": "^6.6.3",
 		"tslib": "1.9.0",

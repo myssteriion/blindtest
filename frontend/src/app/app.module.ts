@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ToastrModule} from "ngx-toastr";
@@ -17,7 +16,7 @@ import {NgHttpLoaderModule} from "ng-http-loader";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {NavbarModule, WavesModule, ButtonsModule, IconsModule} from 'angular-bootstrap-md'
+import {ButtonsModule, IconsModule, NavbarModule, WavesModule} from 'angular-bootstrap-md'
 import {ColorPickerModule} from 'ngx-color-picker';
 
 import {AppComponent} from "./app.component";
@@ -34,7 +33,6 @@ import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component";
 import {HeaderComponent} from "./common/header/header.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
-import {SignatureViewComponent} from "./common/signature-view/signature-view.component";
 import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
 import {GameResumeViewComponent} from "./game/game-resume-view/game-resume-view.component";
 import {PlayerCardComponent} from "./player/player-card/player-card.component";
@@ -78,11 +76,15 @@ import {MusicResource} from "./resources/music.resource";
 
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatTabsModule} from "@angular/material/tabs";
-import {CommonUtilsService, GlobalErrorHandler, ToasterService} from "myssteriion-utils";
+import {CommonUtilsService, GlobalErrorHandler, MyssteriionUtilsModule, ToasterService} from "myssteriion-utils";
+import {MultiTranslateHttpLoader} from "ngx-translate-multi-http-loader";
 
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-	return new TranslateHttpLoader(http);
+
+export function getMultiTranslateHttpLoader(http: HttpClient) {
+	return new MultiTranslateHttpLoader(http, [
+		{ prefix: "./assets/i18n/", suffix: ".json" },
+		{ prefix: "./assets/myssteriion-utils/i18n/", suffix: ".json" }
+	]);
 }
 
 @NgModule({
@@ -99,7 +101,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GameNewViewComponent,
 		NavbarMenuComponent,
 		HomeViewComponent,
-		SignatureViewComponent,
 		GameCurrentViewComponent,
 		GameResumeViewComponent,
 		PlayerCardComponent,
@@ -144,6 +145,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		ErrorAlertModalComponent
 	],
 	imports: [
+		MyssteriionUtilsModule,
 		BrowserModule,
 		AppRoutingModule,
 		NgbModule,
@@ -157,7 +159,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
-				useFactory: HttpLoaderFactory,
+				useFactory: getMultiTranslateHttpLoader,
 				deps: [HttpClient]
 			}
 		}),

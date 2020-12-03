@@ -4,6 +4,7 @@ import {ROUTES_WITH_HOME} from "./tools/constant";
 import {Router} from '@angular/router';
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {Spinkit} from 'ng-http-loader';
+import {environment} from "../environments/environment";
 
 /**
  * App root.
@@ -21,6 +22,19 @@ export class AppComponent {
 	@ViewChild('navbarMenu', { static: false })
 	private navbarMenu: NavbarMenuComponent;
 	
+	/**
+	 * The author.
+	 */
+	public author: string = "Myssteriion";
+	
+	/**
+	 * The version.
+	 */
+	public version: string = environment.version;
+	
+	/**
+	 * For ng-http-loader.
+	 */
 	Spinkit = Spinkit;
 	
 	
