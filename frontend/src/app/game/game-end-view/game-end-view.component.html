@@ -6,14 +6,14 @@
 			<header [title]="'GAME.END_VIEW.TITLE' | translate"></header>
 		</div>
 		<div class="col-2 game-end-view-exit">
-			<fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
+			<fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-orangered" size="2x" (click)="exit()"
 					 (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
 					 matTooltip="{{ 'GAME.END_VIEW.BACK_TO_HOME' | translate }}" matTooltipShowDelay="500">
 			</fa-icon>
-			<fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-2" size="2x" [icon]="faMusic" (click)="stopMusic()"
+			<fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-orangered" size="2x" [icon]="faMusic" (click)="stopMusic()"
 					 matTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500">
 			</fa-icon>
-			<fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-2" size="2x" [icon]="faVolumeMute" (click)="playMusic()"
+			<fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-orangered" size="2x" [icon]="faVolumeMute" (click)="playMusic()"
 					 matTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500">
 			</fa-icon>
 		</div>

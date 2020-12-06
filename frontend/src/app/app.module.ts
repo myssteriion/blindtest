@@ -182,12 +182,12 @@ export function getMultiTranslateHttpLoader(http: HttpClient) {
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
 		AvatarResource,
-		ProfileStatisticsResource,
+		MusicResource,
 		GameResource,
+		ProfileStatisticsResource,
 		CommonUtilsService,
-		UtilsService,
 		ToasterService,
-		MusicResource
+		UtilsService,
 	],
 	bootstrap: [AppComponent]
 })

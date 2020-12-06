@@ -1,27 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-@font-face {
-	font-family: "Averia Sans Libre";
-	src: url("assets/fonts/Averia_Sans_Libre/AveriaSansLibre-Regular.ttf");
-}
-
-* {
-	font-family: 'Averia Sans Libre', Georgia, serif;
-}
-
-input, .pagination, .alert, .box-shadow {
-	box-shadow: 0.27em 0.27em 0.15em silver;
-}
-
-.no-box-shadow {
-	box-shadow: none;
-}
-
-button:disabled {
-	cursor: not-allowed;
-}
-
 html {
-	min-height: 100%;
 	cursor: url(assets/images/icons/default.svg) 6 0, default;
 }
 
@@ -29,30 +6,6 @@ body {
 	background: url("assets/images/background/background.png") no-repeat center center fixed;
 	background-size: cover;
 	overflow-x: hidden;
-}
-
-mat-radio-button {
-	padding-right: 0.65em;
-}
-
-.container-fluid-forced-marge {
-	padding-left: 6.7em;
-	padding-right: 6.7em;
-}
-
-.pagination .page-item .page-link {
-	border-radius: 0 !important;
-}
-
-.pagination .active .page-link {
-	background-color: #138496;
-	border-color: #17a2b8;
-	color: white;
-}
-
-.pagination .page-link {
-	color: #138496;
-	border-color: #17a2b8;
 }
 
 .no-result-label {
@@ -65,35 +18,8 @@ mat-radio-button {
 }
 
 .inner-html-special-text {
-	color: orangered;
-	font-style: italic;
-	font-weight: bold;
+	color: orangered !important;
 }
-
-.font-size-very-very-very-small { font-size: 0.65em; }
-.font-size-very-very-small { font-size: 0.8em; }
-.font-size-very-small, .toast-container { font-size: 1em; }
-.font-size-small { font-size: 1.2em; }
-.font-size-normal { font-size: 1.35em; }
-.font-size-large { font-size: 1.6em; }
-.font-size-title { font-size: 2.5em; }
-
-.modal-title {
-	font-size: 1.7em;
-	color: orangered;
-}
-
-.mat-tooltip {
-	font-size: 0.8em !important;
-	max-width: 27em !important;
-	background-color: #515151;
-	opacity: 1;
-}
-
-.padding-bottom-1em {
-	padding-bottom: 0.65em;
-}
-
 
 /****************** nav ******************/
 .navbar-menu-theme {
@@ -114,19 +40,7 @@ mat-radio-button {
 }
 
 /****************** icon ******************/
-fa-icon {
-	padding: 0.33em;
-}
-
-fa-icon:hover {
-	cursor: pointer;
-}
-
-.fa-icon-custom-hover-1:hover {
-	color: #eeeeee;
-}
-
-.fa-icon-custom-hover-2:hover {
+.fa-icon-custom-hover-orangered:hover {
 	color: orangered;
 }
 
@@ -159,25 +73,6 @@ fa-icon:hover {
 }
 
 /*************** table ***************/
-.container-table table {
-	min-width: 100%;
-	background-color: white;
-}
-
 .container-table table th {
-	text-align: center;
-	height: 2em;
-	background-color: #ffc066;
-	position: sticky;
-	top: 0;
-	z-index: 1;
-}
-
-.container-table table td {
-	text-align: center;
-	height: 1.6em;
-}
-
-.container-table-odd {
-	background-color: #e6e6e6;
+	background-color: #ffc066 !important;
 }

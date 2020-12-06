@@ -14,8 +14,8 @@
 		<ul class="navbar-nav ml-auto nav-flex-icons">
 			<li class="nav-item">
 				<a class="nav-link navbar-menu-icons">
-					<fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faMusic" (click)="stopMusic()" matTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
-					<fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-1" [icon]="faVolumeMute" (click)="playMusic()" matTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+					<fa-icon *ngIf="musicIsPlaying" class="fa-icon-custom-hover-white" [icon]="faMusic" (click)="stopMusic()" matTooltip="{{ 'COMMON.STOP_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
+					<fa-icon *ngIf="!musicIsPlaying" class="fa-icon-custom-hover-white" [icon]="faVolumeMute" (click)="playMusic()" matTooltip="{{ 'COMMON.START_MUSIC_TOOLTIP' | translate }}" matTooltipShowDelay="500"></fa-icon>
 				</a>
 			</li>
 		</ul>

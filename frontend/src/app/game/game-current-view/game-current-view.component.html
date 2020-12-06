@@ -6,10 +6,10 @@
 			<header [title]="getTitle()"></header>
 		</div>
 		<div class="col-2 game-current-view-exit">
-			<fa-icon [icon]="faQuestionCircle" class="fa-icon-custom-hover-2" size="2x" (click)="openRoundInfoModal()"
+			<fa-icon [icon]="faQuestionCircle" class="fa-icon-custom-hover-orangered" size="2x" (click)="openRoundInfoModal()"
 					 matTooltip="{{ 'GAME.CURRENT_VIEW.ROUND_INFO' | translate }}" matTooltipShowDelay="500">
 			</fa-icon>
-			<fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-2" size="2x" (click)="exit()"
+			<fa-icon [icon]="currentExitIcon" class="fa-icon-custom-hover-orangered" size="2x" (click)="exit()"
 					 (mouseenter)="currentExitIcon=faDoorOpen" (mouseleave)="currentExitIcon=faDoorClosed"
 					 matTooltip="{{ 'GAME.CURRENT_VIEW.EXIT' | translate }}" matTooltipShowDelay="500">
 			</fa-icon>
