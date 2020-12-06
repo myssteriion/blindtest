@@ -31,7 +31,7 @@
 							"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
 							"node_modules/@ng-select/ng-select/themes/material.theme.css",
-							"src/styles.css",
+							"src/styles.scss",
 							"node_modules/ngx-toastr/toastr.css",
 							"node_modules/myssteriion-utils/assets/style/font-style-Averia-Sans-Libre.scss",
 							"node_modules/myssteriion-utils/assets/style/common-style.scss"
@@ -100,7 +100,7 @@
 						],
 						"styles": [
 							"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-							"src/styles.css"
+							"src/styles.scss"
 						],
 						"scripts": []
 					}

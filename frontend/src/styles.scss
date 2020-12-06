@@ -1,3 +1,7 @@
+$color-theme: orangered;
+
+
+
 html {
 	cursor: url(assets/images/icons/default.svg) 6 0, default;
 }
@@ -17,9 +21,6 @@ body {
 	transform: scale(1);
 }
 
-.inner-html-special-text {
-	color: orangered !important;
-}
 
 /****************** nav ******************/
 .navbar-menu-theme {
@@ -41,7 +42,7 @@ body {
 
 /****************** icon ******************/
 .fa-icon-custom-hover-orangered:hover {
-	color: orangered;
+	color: $color-theme;
 }
 
 /*************** graphs ***************/
@@ -75,4 +76,15 @@ body {
 /*************** table ***************/
 .container-table table th {
 	background-color: #ffc066 !important;
+}
+
+
+
+/*************** utils ***************/
+.header-title {
+	color: $color-theme !important;
+}
+
+.inner-html-special-text {
+	color: $color-theme !important;
 }

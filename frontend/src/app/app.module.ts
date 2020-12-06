@@ -31,7 +31,6 @@ import {ProfileViewComponent} from "./profile/profile-view/profile-view.componen
 import {ConfirmModalComponent} from "./common/modal/confirm/confirm-modal.component";
 import {NavbarMenuComponent} from "./common/navbar-menu/navbar-menu.component";
 import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component";
-import {HeaderComponent} from "./common/header/header.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
 import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
 import {GameResumeViewComponent} from "./game/game-resume-view/game-resume-view.component";
@@ -97,7 +96,6 @@ export function getMultiTranslateHttpLoader(http: HttpClient) {
 		ProfilePageModalComponent,
 		ProfileEditModalComponent,
 		ConfirmModalComponent,
-		HeaderComponent,
 		GameNewViewComponent,
 		NavbarMenuComponent,
 		HomeViewComponent,
