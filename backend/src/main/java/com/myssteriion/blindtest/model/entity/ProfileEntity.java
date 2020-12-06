@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myssteriion.blindtest.tools.Constant;
-import com.myssteriion.utils.model.entity.AbstractEntity;
+import com.myssteriion.utils.entity.AbstractEntity;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.CascadeType;

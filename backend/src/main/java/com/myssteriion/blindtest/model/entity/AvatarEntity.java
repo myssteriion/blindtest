@@ -1,7 +1,7 @@
 package com.myssteriion.blindtest.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.myssteriion.utils.model.entity.AbstractEntity;
+import com.myssteriion.utils.entity.AbstractEntity;
 import com.myssteriion.utils.model.entity.impl.Flux;
 
 import javax.persistence.Column;

@@ -1,6 +1,6 @@
 package com.myssteriion.blindtest;
 
-import com.myssteriion.utils.cipher.StringCipher;
+import com.myssteriion.utils.model.other.StringCipher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

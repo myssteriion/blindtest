@@ -4,7 +4,7 @@ import com.myssteriion.blindtest.model.entity.AvatarEntity;
 import com.myssteriion.blindtest.service.AvatarService;
 import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
-import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.model.impl.Empty;
 import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

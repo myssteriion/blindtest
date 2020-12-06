@@ -8,7 +8,7 @@ import com.myssteriion.blindtest.persistence.converter.theme.ThemeGoodAnswerInte
 import com.myssteriion.blindtest.persistence.converter.theme.ThemeIntegerMapConverter;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
-import com.myssteriion.utils.model.entity.AbstractEntity;
+import com.myssteriion.utils.entity.AbstractEntity;
 import com.myssteriion.utils.persistence.converter.impl.StringIntegerMapConverter;
 import org.hibernate.annotations.ColumnDefault;
 

@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.entity.ProfileEntity;
 import com.myssteriion.blindtest.service.ProfileService;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
-import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.model.impl.Empty;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

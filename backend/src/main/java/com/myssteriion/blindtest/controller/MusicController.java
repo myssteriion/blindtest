@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.music.MusicFilter;
 import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.service.MusicService;
 import com.myssteriion.utils.exception.NotFoundException;
-import com.myssteriion.utils.model.Empty;
+import com.myssteriion.utils.model.impl.Empty;
 import com.myssteriion.utils.rest.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
