@@ -1,8 +1,9 @@
-import { UtilsService } from "../../src/app/services/utils.service";
-import { BASE64, CommonUtilsService, DATA } from "myssteriion-utils";
-import { AVATAR_NOT_FOUND } from "../../src/app/tools/constant";
+import { BASE64, CommonUtilsService, DATA, Flux } from "myssteriion-utils";
+import { Theme } from "../../src/app/interfaces/common/theme.enum";
 import { Avatar } from "../../src/app/interfaces/entity/avatar";
 import { Music } from "../../src/app/interfaces/entity/music";
+import { UtilsService } from "../../src/app/services/utils.service";
+import { AVATAR_NOT_FOUND } from "../../src/app/tools/constant";
 
 describe("UtilsService", () => {
 	
@@ -18,52 +19,79 @@ describe("UtilsService", () => {
 	
 	it("should be return AVATAR_NOT_FOUND (getImgFromAvatar)", () => {
 		
-		expect( service.getImgFromAvatar(undefined) ).toEqual(AVATAR_NOT_FOUND);
-		expect( service.getImgFromAvatar(null) ).toEqual(AVATAR_NOT_FOUND);
-		
-		let avatar: Avatar = { name: "avatarName" };
+		let avatar = new Avatar();
+		avatar.name = "avatarName";
 		expect( service.getImgFromAvatar(avatar) ).toEqual(AVATAR_NOT_FOUND);
 		
-		avatar = { name: "avatarName", flux: { name: "fluxName", fileExists: undefined, contentFlux: "contentFlux", contentType: "contentType" } };
+		avatar = new Avatar();
+		avatar.name = "avatarName";
+		avatar.flux = new Flux();
+		avatar.flux.name = "fluxName";
+		avatar.flux.contentFlux = "contentFlux";
+		avatar.flux.contentType = "contentType";
 		expect( service.getImgFromAvatar(avatar) ).toEqual(AVATAR_NOT_FOUND);
 		
-		avatar = { name: "avatarName", flux: { name: "fluxName", fileExists: null, contentFlux: "contentFlux", contentType: "contentType" } };
-		expect( service.getImgFromAvatar(avatar) ).toEqual(AVATAR_NOT_FOUND);
-		
-		avatar = { name: "avatarName", flux: { name: "fluxName", fileExists: false, contentFlux: "contentFlux", contentType: "contentType" } };
+		avatar = new Avatar();
+		avatar.name = "avatarName";
+		avatar.flux = new Flux();
+		avatar.flux.name = "fluxName";
+		avatar.flux.fileExists = false;
+		avatar.flux.contentFlux = "contentFlux";
+		avatar.flux.contentType = "contentType";
 		expect( service.getImgFromAvatar(avatar) ).toEqual(AVATAR_NOT_FOUND);
 	});
 	
 	it("should be return flux (getImgFromAvatar)", () => {
 		
-		let avatar: Avatar = { name: "avatarName", flux: { name: "fluxName", fileExists: true, contentFlux: "contentFlux", contentType: "contentType" } };
+		let avatar = new Avatar();
+		avatar.name = "avatarName";
+		avatar.flux = new Flux();
+		avatar.flux.name = "fluxName";
+		avatar.flux.fileExists = true;
+		avatar.flux.contentFlux = "contentFlux";
+		avatar.flux.contentType = "contentType";
 		expect( service.getImgFromAvatar(avatar) ).toEqual(DATA + "contentFlux" + BASE64 + "contentType");
 	});
 	
 	
 	it("should be return null (getAudioFromMusic)", () => {
 		
-		expect( service.getAudioFromMusic(undefined) ).toBeNull();
-		expect( service.getAudioFromMusic(null) ).toBeNull();
-		
-		let music: Music = { name: "musicName", theme: Theme.ANNEES_60 };
+		let music = new Music();
+		music.name = "musicName";
+		music.theme = Theme.ANNEES_60;
 		expect( service.getAudioFromMusic(music) ).toBeNull();
 		
-		music = { name: "musicName", theme: Theme.ANNEES_60, flux: { name: "fluxName", fileExists: undefined, contentFlux: "contentFlux", contentType: "contentType" } };
+		music = new Music();
+		music.name = "musicName";
+		music.theme = Theme.ANNEES_60;
+		music.flux = new Flux();
+		music.flux.name = "fluxName";
+		music.flux.contentFlux = "contentFlux";
+		music.flux.contentType = "contentType";
 		expect( service.getAudioFromMusic(music) ).toBeNull();
 		
-		music = { name: "musicName", theme: Theme.ANNEES_60, flux: { name: "fluxName", fileExists: null, contentFlux: "contentFlux", contentType: "contentType" } };
-		expect( service.getAudioFromMusic(music) ).toBeNull();
-		
-		music = { name: "musicName", theme: Theme.ANNEES_60, flux: { name: "fluxName", fileExists: false, contentFlux: "contentFlux", contentType: "contentType" } };
+		music = new Music();
+		music.name = "musicName";
+		music.theme = Theme.ANNEES_60;
+		music.flux = new Flux();
+		music.flux.name = "fluxName";
+		music.flux.fileExists = false;
+		music.flux.contentFlux = "contentFlux";
+		music.flux.contentType = "contentType";
 		expect( service.getAudioFromMusic(music) ).toBeNull();
 	});
 	
 	it("should be return flux (getAudioFromMusic)", () => {
 		
-		let music = { name: "musicName", theme: Theme.ANNEES_60, flux: { name: "fluxName", fileExists: undefined, contentFlux: "contentFlux", contentType: "contentType" } };
+		let music = new Music();
+		music.name = "musicName";
+		music.theme = Theme.ANNEES_60;
+		music.flux = new Flux();
+		music.flux.name = "fluxName";
+		music.flux.fileExists = true;
+		music.flux.contentFlux = "contentFlux";
+		music.flux.contentType = "contentType";
 		expect( service.getAudioFromMusic(music) ).toEqual(DATA + "contentFlux" + BASE64 + "contentType");
 	});
-	
 	
 });
