@@ -22,7 +22,7 @@
 			<div class="col-4 game-card-labels font-size-small">{{ "GAME.GAME_CARD.THEMES_LABEL" | translate }}</div>
 			<div class="col-8">
 				<div class="game-card-content-img">
-					<img *ngFor="let theme of game.themes" src="{{ getJsonTheme(theme).srcImg }}" class="game-card-img" matTooltip="{{ getJsonTheme(theme).tooltip | translate }}" matTooltipShowDelay="500">
+					<img *ngFor="let theme of game.themes" src="{{ getObjTheme(theme).srcImg }}" class="game-card-img" matTooltip="{{ getObjTheme(theme).tooltip | translate }}" matTooltipShowDelay="500">
 				</div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 			<div class="col-4 game-card-labels font-size-small">{{ "GAME.GAME_CARD.EFFECTS_LABEL" | translate }}</div>
 			<div class="col-8">
 				<div class="game-card-content-img">
-					<img *ngFor="let effect of game.effects" src="{{ getJsonEffect(effect).srcImg }}" class="game-card-img" matTooltip="{{ getJsonEffect(effect).tooltip | translate }}" matTooltipShowDelay="500">
+					<img *ngFor="let effect of game.effects" src="{{ getObjEffect(effect).srcImg }}" class="game-card-img" matTooltip="{{ getObjEffect(effect).tooltip | translate }}" matTooltipShowDelay="500">
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import com.myssteriion.blindtest.model.common.Theme;
 import com.myssteriion.blindtest.persistence.converter.ThemeConverter;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.entity.AbstractEntity;
-import com.myssteriion.utils.model.entity.impl.Flux;
+import com.myssteriion.utils.model.other.Flux;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -20,7 +20,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
 /**
- * The MusicDTO.
+ * The Music.
  */
 @Entity
 @Table(name = "music",

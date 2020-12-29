@@ -1,22 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/entity/profile.interface';
-import {ProfileResource} from 'src/app/resources/profile.resource';
-import {Page} from 'src/app/interfaces/base/page.interface';
-import {ProfileEditModalComponent} from "../profile-edit-modal/profile-edit-modal.component";
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {HOME_PATH, OPACITY_ANIMATION} from "../../tools/constant";
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { ModalService, Page } from "myssteriion-utils";
+import { Profile } from 'src/app/interfaces/entity/profile';
+import { ProfileResource } from 'src/app/resources/profile.resource';
+import { HOME_PATH, OPACITY_ANIMATION } from "../../tools/constant";
+import { ProfileEditModalComponent } from "../profile-edit-modal/profile-edit-modal.component";
+import { ProfilesPerPage } from "./common/profiles-per-page.enum";
 
 /**
  * The profiles view.
  */
 @Component({
-	selector: 'profile-page',
-	templateUrl: './profile-page.component.html',
-	styleUrls: ['./profile-page.component.css'],
+	selector: "profile-page",
+	templateUrl: "./profile-page.component.html",
+	styleUrls: ["./profile-page.component.css"],
 	animations: [
 		OPACITY_ANIMATION
 	]
@@ -33,19 +32,19 @@ export class ProfilePageComponent implements OnInit {
 	 * If can create/update/delete profile.
 	 */
 	@Input()
-	private canEdit: boolean;
+	public canEdit: boolean;
 	
 	/**
 	 * If can select profile card.
 	 */
 	@Input()
-	private canSelect: boolean;
+	public canSelect: boolean;
 	
 	/**
 	 * On select profile card.
 	 */
 	@Output()
-	private onSelect = new EventEmitter();
+	public onSelect = new EventEmitter();
 	
 	/**
 	 * If view is loaded.
@@ -55,34 +54,35 @@ export class ProfilePageComponent implements OnInit {
 	/**
 	 * Profiles page.
 	 */
-	private page: Page<Profile>;
+	public page: Page<Profile>;
 	
 	/**
 	 * The current page.
 	 */
-	private currentPage: number;
+	public currentPage: number;
 	
 	/**
 	 * Show/hide profiles pages.
 	 */
-	private showProfiles: boolean;
+	public showProfiles: boolean;
 	
 	/**
 	 * Show/hide pageable.
 	 */
-	private showPageable: boolean;
+	public showPageable: boolean;
 	
 	/**
 	 * The search name filter.
 	 */
-	private name: string;
+	public name: string;
 	
 	
 	
-	constructor(private _profileResource: ProfileResource,
-				private _ngbModal: NgbModal,
-				private _translate: TranslateService,
-				private _router: Router) {}
+	constructor(private profileResource: ProfileResource,
+				private ngbModal: NgbModal,
+				private translate: TranslateService,
+				private router: Router,
+				private modalService: ModalService) {}
 	
 	ngOnInit(): void {
 		
@@ -99,13 +99,13 @@ export class ProfilePageComponent implements OnInit {
 	 *
 	 * @param initPageNumber TRUE for force page number to 1
 	 */
-	private loadProfiles(initPageNumber: boolean): void {
+	public loadProfiles(initPageNumber: boolean): void {
 		
 		this.showProfiles = false;
 		if (initPageNumber)
 			this.currentPage = 1;
 		
-		this._profileResource.findAllBySearchName(this.name, this.currentPage-1, this.profilesPerPage).subscribe(
+		this.profileResource.findAllBySearchName(this.name, this.currentPage-1, this.profilesPerPage).subscribe(
 			response => {
 				this.page = response;
 				this.showProfiles = true;
@@ -114,20 +114,12 @@ export class ProfilePageComponent implements OnInit {
 			},
 			error => {
 				
-				console.log("e", error.status, error);
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+				let text: string = this.translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.GO_HOME");
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("PROFILE.PAGE.LOAD_PROFILES_ERROR");
-				modalRef.componentInstance.suggestions = undefined;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.loadProfiles(true); },
-					() => { this._router.navigateByUrl(HOME_PATH); }
+					() => { this.router.navigateByUrl(HOME_PATH); }
 				);
 			}
 		);
@@ -136,9 +128,9 @@ export class ProfilePageComponent implements OnInit {
 	/**
 	 * Open modal for create new profile.
 	 */
-	private createProfile(): void {
+	public createProfile(): void {
 		
-		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
+		const modalRef = this.ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.create = true;
 		
 		modalRef.result.then(
@@ -149,9 +141,9 @@ export class ProfilePageComponent implements OnInit {
 	
 	
 	/**
-	 * Get dynamically "col-x" css.
+	 * Get "col-x" css.
 	 */
-	public getColClass(): string {
+	public getCssCol(): string {
 		
 		var colCss: string = "col-";
 		

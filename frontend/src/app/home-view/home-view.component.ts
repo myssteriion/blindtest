@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
-import {LOGO, ROUTES_WITHOUT_HOME, SLIDE_ANIMATION} from "../tools/constant";
+import { Component } from '@angular/core';
+import { ROUTES_WITHOUT_HOME, SLIDE_ANIMATION } from "../tools/constant";
 
 /**
  * HomeView.
  */
 @Component({
-	selector: 'home-view',
-	templateUrl: './home-view.component.html',
+	templateUrl: "./home-view.component.html",
 	styleUrls: ['./home-view.component.css'],
 	animations: [
 		SLIDE_ANIMATION
@@ -22,14 +21,5 @@ export class HomeViewComponent {
 	
 	
 	constructor() { }
-	
-	
-	
-	/**
-	 * Gets logo.
-	 */
-	public getLogo(): string {
-		return LOGO;
-	}
 	
 }

@@ -1,22 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
-import {FFXII_THEME, LOGO, ROUTES_WITHOUT_HOME} from "../../tools/constant";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { faMusic, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import { FFXII_THEME, LOGO, ROUTES_WITHOUT_HOME } from "../../tools/constant";
 
 /**
  * Navbar menu.
  */
 @Component({
-	selector: 'navbar-menu',
-	templateUrl: './navbar-menu.component.html',
-	styleUrls: ['./navbar-menu.component.css']
+	selector: "navbar-menu",
+	templateUrl: "./navbar-menu.component.html",
+	styleUrls: ["./navbar-menu.component.css"]
 })
 export class NavbarMenuComponent implements OnInit, OnDestroy {
 	
 	/**
 	 * Audio.
 	 */
-	private audio;
+	private audio: any;
 	
 	/**
 	 * If the music must be played.
@@ -28,12 +28,12 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	 */
 	public routes = ROUTES_WITHOUT_HOME;
 	
-	private faMusic = faMusic;
-	private faVolumeMute = faVolumeMute;
+	public faMusic = faMusic;
+	public faVolumeMute = faVolumeMute;
 	
 	
 	
-	constructor(private _router: Router) { }
+	constructor(private router: Router) { }
 	
 	ngOnInit(): void {
 		
@@ -56,30 +56,27 @@ export class NavbarMenuComponent implements OnInit, OnDestroy {
 	
 	/**
 	 * Gets logo.
+	 *
+	 * @return the logo path
 	 */
 	public getLogo(): string {
 		return LOGO;
 	}
 	
 	/**
-	 * Add 'isActive' css fot the current url.
+	 * Test if the url is the current url.
 	 *
-	 * @param path
+	 * @param url
+	 * @return TRUE if the url is the current url, FALSE otherwise
 	 */
-	private isActive(path: string): string {
-		
-		let customCss = "";
-		
-		if (path === this._router.url)
-			customCss = 'active';
-		
-		return customCss
+	public isActive(url: string): boolean {
+		return (url === this.router.url);
 	}
 	
 	/**
 	 * Play music.
 	 */
-	private playMusic(): void {
+	public playMusic(): void {
 		
 		this.musicIsPlaying = true;
 		this.audio.play();

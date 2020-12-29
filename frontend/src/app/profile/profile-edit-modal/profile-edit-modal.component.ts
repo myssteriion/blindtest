@@ -1,16 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Profile} from 'src/app/interfaces/entity/profile.interface';
-import {Avatar} from 'src/app/interfaces/entity/avatar.interface';
-import {AvatarResource} from 'src/app/resources/avatar.resource';
-import {UtilsService} from "../../services/utils.service";
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProfileResource} from 'src/app/resources/profile.resource';
-import {Page} from "../../interfaces/base/page.interface";
-import {TranslateService} from '@ngx-translate/core';
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {DEFAULT_BACKGROUND} from "../../tools/constant";
-import {CommonUtilsService, HTTP_CONFLICT, ToasterService} from "myssteriion-utils";
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { CommonUtilsService, HTTP_CONFLICT, ModalService, Page, ToasterService } from "myssteriion-utils";
+import { Avatar } from 'src/app/interfaces/entity/avatar';
+import { Profile } from 'src/app/interfaces/entity/profile';
+import { AvatarResource } from 'src/app/resources/avatar.resource';
+import { ProfileResource } from 'src/app/resources/profile.resource';
+import { UtilsService } from "../../services/utils.service";
+import { DEFAULT_BACKGROUND } from "../../tools/constant";
 
 declare var $: any;
 
@@ -18,9 +15,8 @@ declare var $: any;
  * Profile creation/edition modal.
  */
 @Component({
-	selector: 'profile-edit-modal',
-	templateUrl: './profile-edit-modal.component.html',
-	styleUrls: ['./profile-edit-modal.component.css']
+	templateUrl: "./profile-edit-modal.component.html",
+	styleUrls: ["./profile-edit-modal.component.css"]
 })
 export class ProfileEditModalComponent implements OnInit {
 	
@@ -44,7 +40,7 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * The avatars page.
 	 */
-	private avatarsPage: Page<Avatar>;
+	public avatarsPage: Page<Avatar>;
 	
 	/**
 	 * If avatars page is empty.
@@ -54,17 +50,17 @@ export class ProfileEditModalComponent implements OnInit {
 	/**
 	 * Show/hide pageable.
 	 */
-	private showAvatarsPageable: boolean;
+	public showAvatarsPageable: boolean;
 	
 	/**
 	 * The search name filter.
 	 */
-	private searchName: string;
+	public searchName: string;
 	
 	/**
 	 * If the color picker is open.
 	 */
-	private colorPickerIsOpen: boolean;
+	public colorPickerIsOpen: boolean;
 	
 	/**
 	 * Avatars number per page.
@@ -73,14 +69,15 @@ export class ProfileEditModalComponent implements OnInit {
 	
 	
 	
-	constructor(private _avatarResource: AvatarResource,
-				private _ngbActiveModal: NgbActiveModal,
-				private _profileResource: ProfileResource,
-				private _toasterService: ToasterService,
-				private _translate: TranslateService,
-				private _ngbModal: NgbModal,
-				private _commonUtilsService: CommonUtilsService,
-				private _utilsService: UtilsService) { }
+	constructor(private avatarResource: AvatarResource,
+				private ngbActiveModal: NgbActiveModal,
+				private profileResource: ProfileResource,
+				private toasterService: ToasterService,
+				private translate: TranslateService,
+				private ngbModal: NgbModal,
+				private commonUtilsService: CommonUtilsService,
+				private utilsService: UtilsService,
+				private modalService: ModalService) { }
 	
 	public ngOnInit(): void {
 		
@@ -91,21 +88,19 @@ export class ProfileEditModalComponent implements OnInit {
 		
 		if (this.create) {
 			
-			this.newProfile = {
-				id: null,
-				background: DEFAULT_BACKGROUND,
-				name: "",
-				avatar: null
-			};
+			this.newProfile = new Profile();
+			this.newProfile.id = null;
+			this.newProfile.background = DEFAULT_BACKGROUND;
+			this.newProfile.name = "";
+			this.newProfile.avatar = null;
 		}
 		else {
 			
-			this.newProfile = {
-				id: this.profile.id,
-				background: this.profile.background,
-				name: this.profile.name,
-				avatar: this.profile.avatar
-			};
+			this.newProfile = new Profile();
+			this.newProfile.id = this.profile.id;
+			this.newProfile.background = this.profile.background;
+			this.newProfile.name = this.profile.name;
+			this.newProfile.avatar = this.profile.avatar;
 		}
 		
 		this.loadAvatars(1);
@@ -118,9 +113,9 @@ export class ProfileEditModalComponent implements OnInit {
 	 *
 	 * @param pageNumber the page number
 	 */
-	private loadAvatars(pageNumber: number): void {
+	public loadAvatars(pageNumber: number): void {
 		
-		this._avatarResource.findAllBySearchName(this.searchName, pageNumber-1, this.avatarsPerPage).subscribe(
+		this.avatarResource.findAllBySearchName(this.searchName, pageNumber-1, this.avatarsPerPage).subscribe(
 			response => {
 				
 				this.avatarsPage = response;
@@ -129,17 +124,10 @@ export class ProfileEditModalComponent implements OnInit {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+				let text: string = this.translate.instant("PROFILE.EDIT_MODAL.AVATAR_LOAD_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.CANCEL_MODIFICATION");
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.AVATAR_LOAD_ERROR");
-				modalRef.componentInstance.suggestions = undefined;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.loadAvatars(1); },
 					() => { this.cancel() }
 				);
@@ -148,28 +136,31 @@ export class ProfileEditModalComponent implements OnInit {
 	}
 	
 	/**
-	 * Gets image from avatar.
+	 * Get the B64 image from avatar. If the avatar is null, "not-found" image is used.
 	 *
 	 * @param avatar the avatar
+	 * @return B64 image from avatar
 	 */
-	private getImgFromAvatar(avatar: Avatar): string {
-		return this._utilsService.getImgFromAvatar(avatar);
+	public getImgFromAvatar(avatar: Avatar): string {
+		return this.utilsService.getImgFromAvatar(avatar);
 	}
 	
 	/**
 	 * Select an avatar.
 	 *
-	 * @param avatar the avatar selected
+	 * @param avatar the avatar to select
 	 */
-	private selectAvatar(avatar: Avatar): void {
+	public selectAvatar(avatar: Avatar): void {
 		this.newProfile.avatar = avatar;
 	}
 	
 	/**
-	 * Test if the save button is disabled.
+	 * Test if the save button must be disable.
+	 *
+	 * @return TRUE if the save button must be disable, FALSE otherwise
 	 */
-	public disabledSave(): boolean {
-		return this.colorPickerIsOpen || this._commonUtilsService.isNullOrEmpty(this.newProfile.name) || this._commonUtilsService.isNull(this.newProfile.background);
+	public saveButtonIsDisable(): boolean {
+		return this.colorPickerIsOpen || this.commonUtilsService.isNullOrEmpty(this.newProfile.name) || this.commonUtilsService.isNull(this.newProfile.background);
 	}
 	
 	/**
@@ -177,12 +168,11 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	public save(): void {
 		
-		let profileTmp: Profile = {
-			id: this.newProfile.id,
-			background: this.newProfile.background,
-			name: this.newProfile.name,
-			avatar: this.newProfile.avatar
-		};
+		let profileTmp: Profile = new Profile();
+		profileTmp.id = this.newProfile.id;
+		profileTmp.background = this.newProfile.background;
+		profileTmp.name = this.newProfile.name;
+		profileTmp.avatar = this.newProfile.avatar;
 		
 		
 		if (this.create)
@@ -198,31 +188,24 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private createProfile(profileTmp: Profile): void {
 		
-		this._profileResource.create(profileTmp).subscribe(
+		this.profileResource.create(profileTmp).subscribe(
 			response => {
 				
 				this.profile = response;
-				this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.CREATED_TOASTER", { profile_name: this.profile.name } ) );
-				this._ngbActiveModal.close(this.profile);
+				this.toasterService.success( this.translate.instant("PROFILE.EDIT_MODAL.CREATED_TOASTER", { profile_name: this.profile.name } ) );
+				this.ngbActiveModal.close(this.profile);
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
-				
-				if (errorAlert.status === HTTP_CONFLICT) {
-					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+				if (error.status === HTTP_CONFLICT) {
+					this.toasterService.error( this.translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.CREATE_ERROR");
-					modalRef.componentInstance.suggestions = undefined;
-					modalRef.componentInstance.error = errorAlert;
-					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-					modalRef.componentInstance.showRetry = true;
-					modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
+					let text: string = this.translate.instant("PROFILE.EDIT_MODAL.CREATE_ERROR");
+					let closeLabel: string = this.translate.instant("COMMON.CANCEL_MODIFICATION");
 					
-					modalRef.result.then(
+					this.modalService.openErrorModal(text, error, true, closeLabel).then(
 						() => { this.save(); },
 						() => { this.cancel(); }
 					);
@@ -238,31 +221,24 @@ export class ProfileEditModalComponent implements OnInit {
 	 */
 	private updateProfile(profileTmp: Profile): void {
 		
-		this._profileResource.update(profileTmp).subscribe(
+		this.profileResource.update(profileTmp).subscribe(
 			response => {
 				
 				this.profile = response;
-				this._toasterService.success( this._translate.instant("PROFILE.EDIT_MODAL.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
-				this._ngbActiveModal.close(this.profile);
+				this.toasterService.success( this.translate.instant("PROFILE.EDIT_MODAL.UPDATED_TOASTER", { profile_name: this.profile.name } ) );
+				this.ngbActiveModal.close(this.profile);
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
-				
-				if (errorAlert.status === HTTP_CONFLICT) {
-					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+				if (error.status === HTTP_CONFLICT) {
+					this.toasterService.error( this.translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-					modalRef.componentInstance.text = this._translate.instant("PROFILE.EDIT_MODAL.UPDATE_ERROR");
-					modalRef.componentInstance.suggestions = undefined;
-					modalRef.componentInstance.error = errorAlert;
-					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-					modalRef.componentInstance.showRetry = true;
-					modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CANCEL_MODIFICATION");
+					let text: string = this.translate.instant("PROFILE.EDIT_MODAL.UPDATE_ERROR");
+					let closeLabel: string = this.translate.instant("COMMON.CANCEL_MODIFICATION");
 					
-					modalRef.result.then(
+					this.modalService.openErrorModal(text, error, true, closeLabel).then(
 						() => { this.save(); },
 						() => { this.cancel(); }
 					);
@@ -275,7 +251,7 @@ export class ProfileEditModalComponent implements OnInit {
 	 * Cancel the modal.
 	 */
 	public cancel(): void {
-		this._ngbActiveModal.dismiss();
+		this.ngbActiveModal.dismiss();
 	}
 	
 }

@@ -1,13 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Game} from "../../../interfaces/game/game.interface";
-import {RANKS_FIRST, RANKS_SECOND, RANKS_THIRD} from "../../../tools/constant";
-import {Player} from "../../../interfaces/game/player.interface";
-import {TranslateService} from '@ngx-translate/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Game } from "../../../interfaces/game/game";
+import { Player } from "../../../interfaces/game/player";
+import { RANKS_FIRST, RANKS_SECOND, RANKS_THIRD } from "../../../tools/constant";
 
 @Component({
-	selector: 'end-game-ranks',
-	templateUrl: './end-game-ranks.component.html',
-	styleUrls: ['./end-game-ranks.component.css']
+	selector: "end-game-ranks",
+	templateUrl: "./end-game-ranks.component.html",
+	styleUrls: ["./end-game-ranks.component.css"]
 })
 export class EndGameRanksComponent implements OnInit {
 	
@@ -33,21 +33,22 @@ export class EndGameRanksComponent implements OnInit {
 	
 	
 	/**
-	 * If rank had player.
+	 * Test if rank contains player.
 	 *
 	 * @param rank the rank
+	 * @return TRUE if rank contains player, FALSE otherwise
 	 */
-	private hadPlayerByRank(rank: number): boolean {
+	public hadPlayerByRank(rank: number): boolean {
 		return (this.game.players.filter(player => player.rank === rank).length) > 0;
 	}
 	
 	/**
-	 * Gets rank logo.
+	 * Gets rank image.
 	 *
 	 * @param rank the rank
-	 * @return the image
+	 * @return the rank image
 	 */
-	private getImgByRank(rank: number): string {
+	public getImgRank(rank: number): string {
 		switch (rank) {
 			case 1:     return RANKS_FIRST;
 			case 2:     return RANKS_SECOND;
@@ -60,9 +61,9 @@ export class EndGameRanksComponent implements OnInit {
 	 * Gets rank tooltip.
 	 *
 	 * @param rank the rank
-	 * @return the tooltip
+	 * @return the rank tooltip
 	 */
-	private getTooltipByRank(rank: number): string {
+	public getTooltipRank(rank: number): string {
 		return this._translate.instant("RANK." + rank);
 	}
 	
@@ -72,7 +73,7 @@ export class EndGameRanksComponent implements OnInit {
 	 * @param rank the rank
 	 * @return players list
 	 */
-	private getPlayersByRank(rank: number): Player[] {
+	public getPlayersByRank(rank: number): Player[] {
 		return this.game.players.filter(player => player.rank === rank);
 	}
 	

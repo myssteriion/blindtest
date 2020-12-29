@@ -20,7 +20,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 /**
- * The ProfileEntity.
+ * The Profile.
  */
 @Entity
 @Table(name = "profile",
@@ -55,7 +55,7 @@ public class ProfileEntity extends AbstractEntity<ProfileEntity> {
     private AvatarEntity avatar;
     
     /**
-     * The profile.
+     * The profileStat.
      */
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn( name = "profile_stat_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "profile__profile_stat_id__fk") )

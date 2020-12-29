@@ -78,7 +78,7 @@
 <!-- modal footer -->
 <div class="row profile-edit-footer">
 	<div class="col">
-		<button class="btn btn-success font-size-normal box-shadow" (click)="save()" [disabled]="disabledSave()">{{ 'COMMON.SAVE' | translate }}</button>
+		<button class="btn btn-success font-size-normal box-shadow" (click)="save()" [disabled]="saveButtonIsDisable()">{{ 'COMMON.SAVE' | translate }}</button>
 		<button class="btn btn-danger font-size-normal box-shadow" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
 	</div>
 </div>

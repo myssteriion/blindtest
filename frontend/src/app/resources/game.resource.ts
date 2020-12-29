@@ -1,12 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http"
-import {Observable} from "rxjs";
-import {environment} from "src/environments/environment";
-import {NewGame} from "../interfaces/game/new-game.interface";
-import {Game} from "../interfaces/game/game.interface";
-import {MusicResult} from "../interfaces/game/music-result.interface";
-import {Page} from "../interfaces/base/page.interface";
-import {Avatar} from "../interfaces/entity/avatar.interface";
+import { HttpClient, HttpParams } from "@angular/common/http"
+import { Injectable } from "@angular/core";
+import { Page } from "myssteriion-utils";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { Game } from "../interfaces/game/game";
+import { MusicResult } from "../interfaces/game/music-result";
+import { NewGame } from "../interfaces/game/new-game";
 
 /**
  * Game resource.
@@ -21,7 +20,7 @@ export class GameResource {
 	
 	
 	
-	constructor(private _http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 	
 	
 	
@@ -30,7 +29,7 @@ export class GameResource {
 	 * @param newGame the new game
 	 */
 	public newGame(newGame: NewGame): Observable<Game> {
-		return this._http.post<Game>(this.path + "/new", newGame);
+		return this.http.post<Game>(this.path + "/new", newGame);
 	}
 	
 	/**
@@ -38,15 +37,17 @@ export class GameResource {
 	 * @param musicResult the music result
 	 */
 	public apply(musicResult: MusicResult): Observable<Game> {
-		return this._http.post<Game>(this.path + "/apply", musicResult);
+		return this.http.post<Game>(this.path + "/apply", musicResult);
 	}
 	
 	/**
 	 * Find game by id.
+	 *
 	 * @param id the id
+	 * @return game
 	 */
 	public findById(id: number): Observable<Game> {
-		return this._http.get<Game>(this.path + "/" + id);
+		return this.http.get<Game>(this.path + "/" + id);
 	}
 	
 	/**
@@ -64,7 +65,7 @@ export class GameResource {
 		params = params.set("itemPerPage", itemPerPage);
 		params = params.set("showFinishedGames", showFinishedGames + '');
 		
-		return this._http.get< Page<Game> >( this.path, { params: params } );
+		return this.http.get< Page<Game> >( this.path, { params: params } );
 	}
 	
 }

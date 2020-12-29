@@ -6,7 +6,7 @@
 	
 	<links>
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item" *ngFor="let route of routes" [ngClass]="isActive(route.path)">
+			<li class="nav-item" *ngFor="let route of routes" [ngClass]="{ 'active': isActive(route.path) }">
 				<a class="nav-link" [routerLink]="route.path">{{ route.name | translate }}</a>
 			</li>
 		</ul>

@@ -1,15 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/entity/profile.interface';
-import {Page} from 'src/app/interfaces/base/page.interface';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Page } from "myssteriion-utils";
+import { Profile } from 'src/app/interfaces/entity/profile';
+import { ProfilesPerPage } from "../profile-page/common/profiles-per-page.enum";
 
 /**
  * The profiles view.
  */
 @Component({
-	selector: 'profile-page-modal',
-	templateUrl: './profile-page-modal.component.html',
-	styleUrls: ['./profile-page-modal.component.css']
+	selector: "profile-page-modal",
+	templateUrl: "./profile-page-modal.component.html",
+	styleUrls: ["./profile-page-modal.component.css"]
 })
 export class ProfilePageModalComponent implements OnInit {
 	
@@ -34,11 +35,11 @@ export class ProfilePageModalComponent implements OnInit {
 	/**
 	 * The profiles number per page.
 	 */
-	private profilePerPage: ProfilesPerPage;
+	public profilePerPage: ProfilesPerPage;
 	
 	
 	
-	constructor(private _ngbActiveModal: NgbActiveModal) {}
+	constructor(private ngbActiveModal: NgbActiveModal) {}
 	
 	ngOnInit() {
 		this.profilePerPage = ProfilesPerPage.FIFTEEN;
@@ -50,7 +51,7 @@ export class ProfilePageModalComponent implements OnInit {
 	 * Close modal.
 	 */
 	public close(): void {
-		this._ngbActiveModal.close();
+		this.ngbActiveModal.close();
 	}
 	
 }

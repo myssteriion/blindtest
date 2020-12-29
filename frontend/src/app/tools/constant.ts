@@ -1,5 +1,9 @@
-import {trigger, state, style, transition, animate} from '@angular/animations';
-import {faGamepad, faAngleDoubleRight, faAddressCard, faChartBar, faCog} from '@fortawesome/free-solid-svg-icons';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { faGamepad, faAngleDoubleRight, faAddressCard, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { Theme } from "../interfaces/common/theme.enum";
+import { Effect } from "../interfaces/common/effect.enum";
+import { GoodAnswer } from "../interfaces/common/good-answer.enum";
+import { Duration } from "../interfaces/common/duration.enum";
 
 /**
  * The max players number.
@@ -45,14 +49,14 @@ export const OLYMPIA_ANTHEM_SOUND = "assets/sounds/olympia_anthem.mp3";
  * Path to "themes" in assets folder.
  */
 export const THEMES = [
-	{srcImg: "assets/images/themes/60.png", enumVal: Theme.ANNEES_60, tooltip: "THEMES.ANNEES_60"},
-	{srcImg: "assets/images/themes/70.png", enumVal: Theme.ANNEES_70, tooltip: "THEMES.ANNEES_70"},
-	{srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80, tooltip: "THEMES.ANNEES_80"},
-	{srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90, tooltip: "THEMES.ANNEES_90"},
-	{srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000, tooltip: "THEMES.ANNEES_2000"},
-	{srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010, tooltip: "THEMES.ANNEES_2010"},
-	{srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY, tooltip: "THEMES.DISNEY"},
-	{srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS"}
+	{ srcImg: "assets/images/themes/60.png", enumVal: Theme.ANNEES_60, tooltip: "THEMES.ANNEES_60" },
+	{ srcImg: "assets/images/themes/70.png", enumVal: Theme.ANNEES_70, tooltip: "THEMES.ANNEES_70" },
+	{ srcImg: "assets/images/themes/80.png", enumVal: Theme.ANNEES_80, tooltip: "THEMES.ANNEES_80" },
+	{ srcImg: "assets/images/themes/90.png", enumVal: Theme.ANNEES_90, tooltip: "THEMES.ANNEES_90" },
+	{ srcImg: "assets/images/themes/2000.png", enumVal: Theme.ANNEES_2000, tooltip: "THEMES.ANNEES_2000" },
+	{ srcImg: "assets/images/themes/2010.png", enumVal: Theme.ANNEES_2010, tooltip: "THEMES.ANNEES_2010" },
+	{ srcImg: "assets/images/themes/disney.png", enumVal: Theme.DISNEY, tooltip: "THEMES.DISNEY" },
+	{ srcImg: "assets/images/themes/series-cinemas.png", enumVal: Theme.SERIES_CINEMAS, tooltip: "THEMES.SERIES_CINEMAS" }
 ];
 
 /**

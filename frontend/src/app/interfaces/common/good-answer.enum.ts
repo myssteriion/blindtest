@@ -1,7 +1,7 @@
 /**
  * Good answers
  */
-const enum GoodAnswer {
+export enum GoodAnswer {
 	AUTHOR = "AUTHOR",
 	TITLE = "TITLE",
 	BOTH = "BOTH"

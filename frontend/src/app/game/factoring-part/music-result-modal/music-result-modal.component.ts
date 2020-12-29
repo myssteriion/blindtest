@@ -1,21 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Player} from 'src/app/interfaces/game/player.interface';
-import {GameResource} from "../../../resources/game.resource";
-import {MusicResult} from "../../../interfaces/game/music-result.interface";
-import {Music} from "../../../interfaces/entity/music.interface";
-import {TranslateService} from '@ngx-translate/core';
-import {ErrorAlertModalComponent} from "../../../common/error-alert/error-alert-modal.component";
-import {ErrorAlert} from "../../../interfaces/base/error.alert.interface";
-import {environment} from "../../../../environments/environment";
+import { Component, Input, OnInit } from "@angular/core";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { ModalService } from "myssteriion-utils";
+import { Player } from "src/app/interfaces/game/player";
+import { environment } from "../../../../environments/environment";
+import { RoundName } from "../../../interfaces/common/round-name.enum";
+import { Theme } from "../../../interfaces/common/theme.enum";
+import { Music } from "../../../interfaces/entity/music";
+import { MusicResult } from "../../../interfaces/game/music-result";
+import { GameResource } from "../../../resources/game.resource";
 
 /**
  * The music result modal.
  */
 @Component({
-	selector: 'music-result-modal',
-	templateUrl: './music-result-modal.component.html',
-	styleUrls: ['./music-result-modal.component.css']
+	templateUrl: "./music-result-modal.component.html",
+	styleUrls: ["./music-result-modal.component.css"]
 })
 export class MusicResultModalComponent implements OnInit {
 	
@@ -29,19 +29,19 @@ export class MusicResultModalComponent implements OnInit {
 	 * The round.
 	 */
 	@Input()
-	private round: RoundName;
+	public round: RoundName;
 	
 	/**
 	 * The players.
 	 */
 	@Input()
-	private players: Player[];
+	public players: Player[];
 	
 	/**
 	 * The music.
 	 */
 	@Input()
-	private music: Music;
+	public music: Music;
 	
 	/**
 	 * The table headers.
@@ -56,19 +56,20 @@ export class MusicResultModalComponent implements OnInit {
 	/**
 	 * Drop down choice list.
 	 */
-	private nbLoseChoices: PLayerLoserItem[];
+	public nbLoseChoices: PLayerLoserItem[];
 	
 	
 	
-	constructor(private _ngbActiveModal: NgbActiveModal,
-				private _gameResource: GameResource,
-				private _translate: TranslateService,
-				private _ngbModal: NgbModal) {}
+	constructor(private ngbActiveModal: NgbActiveModal,
+				private gameResource: GameResource,
+				private translate: TranslateService,
+				private ngbModal: NgbModal,
+				private modalService: ModalService) {}
 	
 	ngOnInit(): void {
 		
 		this.nbLoseChoices = [];
-		this._translate.get("COMMON.MANY_TIMES").subscribe(
+		this.translate.get("COMMON.MANY_TIMES").subscribe(
 			value => {
 				for (let i = 0; i <= environment.nbLoseMax; i++)
 					this.nbLoseChoices.push( { id: i, label: i + " " + value } );
@@ -104,6 +105,8 @@ export class MusicResultModalComponent implements OnInit {
 	
 	/**
 	 * Test if the movie title must be use.
+	 *
+	 * @return TRUE if the movie title must be use, FALSE otherwise
 	 */
 	private useMovieTitle(): boolean {
 		return this.music.theme === Theme.SERIES_CINEMAS || this.music.theme === Theme.DISNEY;
@@ -123,7 +126,9 @@ export class MusicResultModalComponent implements OnInit {
 	}
 	
 	/**
-	 * If th author column is showed.
+	 * Test if the author column must be shown.
+	 *
+	 * @return TRUE if the author column must be shown, FALSE otherwise
 	 */
 	public showAuthorColumn(): boolean {
 		return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
@@ -132,7 +137,9 @@ export class MusicResultModalComponent implements OnInit {
 	}
 	
 	/**
-	 * If th author column is showed.
+	 * Test if the title column must be shown.
+	 *
+	 * @return TRUE if the title column must be shown, FALSE otherwise
 	 */
 	public showTitleColumn(): boolean {
 		return this.music.theme === Theme.ANNEES_60 || this.music.theme === Theme.ANNEES_70 || this.music.theme === Theme.ANNEES_80
@@ -141,7 +148,9 @@ export class MusicResultModalComponent implements OnInit {
 	}
 	
 	/**
-	 * If th loser column is showed.
+	 * Test if the loser column must be shown.
+	 *
+	 * @return TRUE if the loser column must be shown, FALSE otherwise
 	 */
 	public showLoserColumn(): boolean {
 		return this.round === RoundName.THIEF;
@@ -149,6 +158,8 @@ export class MusicResultModalComponent implements OnInit {
 	
 	/**
 	 * Gets music name.
+	 *
+	 * @return the music name
 	 */
 	public getMusicName(): string {
 		
@@ -177,10 +188,9 @@ export class MusicResultModalComponent implements OnInit {
 				losers.push(playerLine.name);
 		}
 		
-		let copyMusic: Music = {
-			name: this.music.name,
-			theme: this.music.theme,
-		};
+		let copyMusic: Music = new Music();
+		copyMusic.name = this.music.name;
+		copyMusic.theme = this.music.theme;
 		
 		let musicResult: MusicResult = {
 			gameId: this.gameId,
@@ -191,25 +201,18 @@ export class MusicResultModalComponent implements OnInit {
 			penalties: penalties
 		};
 		
-		this._gameResource.apply(musicResult).subscribe(
+		this.gameResource.apply(musicResult).subscribe(
 			value => {
-				this._ngbActiveModal.close(value);
+				this.ngbActiveModal.close(value);
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+				let text: string = this.translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.GO_HOME");
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("GAME.MUSIC_RESULT_MODAL.SAVE_ERROR");
-				modalRef.componentInstance.suggestions = undefined;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.save(); },
-					() => { this._ngbActiveModal.dismiss(); }
+					() => { this.ngbActiveModal.dismiss(); }
 				);
 			}
 		);

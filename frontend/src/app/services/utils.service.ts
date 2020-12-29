@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { AVATAR_NOT_FOUND } from "../tools/constant";
-import { Avatar } from "../interfaces/entity/avatar.interface";
-import { Music } from "../interfaces/entity/music.interface";
 import { CommonUtilsService } from "myssteriion-utils";
+import { Avatar } from "../interfaces/entity/avatar";
+import { Music } from "../interfaces/entity/music";
+import { AVATAR_NOT_FOUND } from "../tools/constant";
 
 /**
  * Tools service.
@@ -10,26 +10,28 @@ import { CommonUtilsService } from "myssteriion-utils";
 @Injectable()
 export class UtilsService {
 	
-	constructor(private _commonUtilsService: CommonUtilsService) { }
+	constructor(private commonUtilsService: CommonUtilsService) { }
 	
 	
 	
 	/**
-	 * Get the "image" from avatar. If the avatar is null, "not-found" image is used.
+	 * Get the B64 image from avatar. If the avatar is null, "not-found" image is used.
 	 *
 	 * @param avatar the avatar
+	 * @return B64 image from avatar
 	 */
-	public getImgFromAvatar(avatar: Avatar): string {
-		return ( this._commonUtilsService.isNull(avatar) ) ? AVATAR_NOT_FOUND : this._commonUtilsService.getImgFromFlux(avatar.flux)
+	public getImgFromAvatar(avatar: Avatar): string | null {
+		return (avatar && avatar.flux) ? this.commonUtilsService.transformToB64(avatar.flux) : AVATAR_NOT_FOUND;
 	}
 	
 	/**
 	 * Get the "audio" from music.
 	 *
 	 * @param music the music
+	 * @return NULL if the music or flux is null or if not exists, the audio otherwise
 	 */
-	public getAudioFromMusic(music: Music): string {
-		return ( this._commonUtilsService.isNull(music) ) ? null : this._commonUtilsService.getImgFromFlux(music.flux)
+	public getAudioFromMusic(music: Music): string | null {
+		return (music && music.flux) ? this.commonUtilsService.transformToB64(music.flux) : null;
 	}
 	
 	/**
@@ -37,7 +39,7 @@ export class UtilsService {
 	 * @param array
 	 */
 	// TODO
-	public sortByAlphabeticalAndNumerical(array): Array<any> {
+	public sortByAlphabeticalAndNumerical(array: Array<any>): Array<any> {
 		array.sort(function (a, b) {
 			let textA = a.name.toUpperCase();
 			let textB = b.name.toUpperCase();
@@ -51,7 +53,7 @@ export class UtilsService {
 	 * @param array
 	 */
 	// TODO
-	public sortByAlphabeticalAndNumericalThemes(array): Array<any> {
+	public sortByAlphabeticalAndNumericalThemes(array: Array<any>): Array<any> {
 		array.sort(function (a, b) {
 			let textA = a.toUpperCase();
 			let textB = b.toUpperCase();

@@ -8,8 +8,11 @@
 ####### Node #######
 frontend/node_modules/
 
+####### Test #######
+frontend/out-tsc/
+
 ####### Dist #######
 delivery/
 backend/build/
-frontend/dist/
+frontend/dist
 conf/dist/

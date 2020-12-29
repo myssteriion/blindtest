@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http'
-import {Observable} from 'rxjs';
-import {Page} from '../interfaces/base/page.interface';
-import {environment} from 'src/environments/environment';
-import {ProfileStat} from '../interfaces/entity/profile-stat.interface';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core';
+import { Page } from "myssteriion-utils";
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Profile } from "../interfaces/entity/profile";
+import { ProfileStat } from '../interfaces/entity/profile-stat';
 
 /**
  * Profile resource.
@@ -14,10 +15,10 @@ export class ProfileStatisticsResource {
 	/**
 	 * Rest path.
 	 */
-	private _statisticsPath = environment.backendPath + "/profilestats";
+	private path = environment.backendPath + "/profilestats";
 	
 	
-	constructor(private _http: HttpClient) {
+	constructor(private http: HttpClient) {
 	}
 	
 	
@@ -25,14 +26,15 @@ export class ProfileStatisticsResource {
 	 * Get statistics for defined profiles.
 	 *
 	 * @param profiles list of profiles
+	 * @return the profileStat list
 	 */
-	public getStatisticsForProfile(profiles): Observable< Page<ProfileStat> > {
+	public getStatisticsForProfile(profiles: Profile[]): Observable< Page<ProfileStat> > {
 		let query = "";
 		profiles.forEach(profile => {
 			query = query + profile.id + ',';
 		});
 		query = query.substr(0, query.length - 1);
-		return this._http.get<Page<ProfileStat>>(this._statisticsPath + "?profilesIds=" + query);
+		return this.http.get<Page<ProfileStat>>(this.path + "?profilesIds=" + query);
 	}
 	
 }

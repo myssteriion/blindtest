@@ -1,8 +1,8 @@
 import { UtilsService } from "../../src/app/services/utils.service";
 import { BASE64, CommonUtilsService, DATA } from "myssteriion-utils";
 import { AVATAR_NOT_FOUND } from "../../src/app/tools/constant";
-import { Avatar } from "../../src/app/interfaces/entity/avatar.interface";
-import { Music } from "../../src/app/interfaces/entity/music.interface";
+import { Avatar } from "../../src/app/interfaces/entity/avatar";
+import { Music } from "../../src/app/interfaces/entity/music";
 
 describe("UtilsService", () => {
 	

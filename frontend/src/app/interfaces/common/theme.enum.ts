@@ -1,7 +1,7 @@
 /**
  * Theme.
  */
-const enum Theme {
+export enum Theme {
 	ANNEES_60 = "ANNEES_60",
 	ANNEES_70 = "ANNEES_70",
 	ANNEES_80 = "ANNEES_80",

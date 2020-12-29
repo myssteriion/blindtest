@@ -1,29 +1,27 @@
-import {Component, OnInit} from '@angular/core';
-import {SLIDE_ANIMATION} from 'src/app/tools/constant';
+import { Component } from '@angular/core';
+import { SLIDE_ANIMATION } from 'src/app/tools/constant';
+import { ProfilesPerPage } from "../profile-page/common/profiles-per-page.enum";
 
 /**
  * The profiles view.
  */
 @Component({
-	selector: 'profile-view',
-	templateUrl: './profile-view.component.html',
-	styleUrls: ['./profile-view.component.css'],
+	templateUrl: "./profile-view.component.html",
+	styleUrls: ["./profile-view.component.css"],
 	animations: [
 		SLIDE_ANIMATION
 	]
 })
-export class ProfileViewComponent implements OnInit {
+export class ProfileViewComponent {
 	
 	/**
 	 * The profiles number per page.
 	 */
-	private profilePerPage: ProfilesPerPage;
+	public profilePerPage: ProfilesPerPage;
 	
 	
 	
-	constructor() { }
-	
-	ngOnInit(): void {
+	constructor() {
 		this.profilePerPage = ProfilesPerPage.SIXTEEN;
 	}
 	

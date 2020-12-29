@@ -1,18 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Player} from "../../interfaces/game/player.interface";
-import {faCookieBite, faMedal, faPoo, faUserFriends} from '@fortawesome/free-solid-svg-icons';
-import {TranslateService} from '@ngx-translate/core';
-import {ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION} from "../../tools/constant";
-import {UtilsService} from "../../services/utils.service";
-import {CommonUtilsService} from "myssteriion-utils";
+import { Component, Input, OnInit } from '@angular/core';
+import { faCookieBite, faMedal, faPoo, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { CommonUtilsService } from "myssteriion-utils";
+import { Player } from "../../interfaces/game/player";
+import { ADD_SCORE_ANIMATION, RANK_ICON_ANIMATION } from "../../tools/constant";
 
 /**
  * Player card.
  */
 @Component({
-	selector: 'player-card',
-	templateUrl: './player-card.component.html',
-	styleUrls: ['./player-card.component.css'],
+	selector: "player-card",
+	templateUrl: "./player-card.component.html",
+	styleUrls: ["./player-card.component.css"],
 	animations: [
 		RANK_ICON_ANIMATION, ADD_SCORE_ANIMATION
 	]
@@ -46,22 +45,22 @@ export class PlayerCardComponent implements OnInit {
 	/**
 	 * If show/hide add score.
 	 */
-	private showAddScore: boolean;
+	public showAddScore: boolean;
 	
 	/**
 	 * Score to add.
 	 */
-	private scoreToAdd: number;
+	public scoreToAdd: number;
 	
-	private faMedal = faMedal;
-	private faPoo = faPoo;
-	private faCookieBite = faCookieBite;
-	private faUserFriends = faUserFriends;
+	public faMedal = faMedal;
+	public faPoo = faPoo;
+	public faCookieBite = faCookieBite;
+	public faUserFriends = faUserFriends;
 	
 	
 	
-	constructor(private _translate: TranslateService,
-				private _commonUtilsService: CommonUtilsService) {
+	constructor(private translate: TranslateService,
+				private commonUtilsService: CommonUtilsService) {
 	}
 	
 	ngOnInit(): void {
@@ -72,59 +71,75 @@ export class PlayerCardComponent implements OnInit {
 	
 	
 	/**
-	 * If the 1st medal must be show.
+	 * Test if has 1st medal.
+	 *
+	 * @return TRUE if had 1st medal, FALSE otherwise
 	 */
-	private showFirstMedal(): boolean {
+	public hasFirstMedal(): boolean {
 		return this.displayMedal && this.player.rank === 1;
 	}
 	
 	/**
-	 * If the 1st medal must be show.
+	 * Test if has 2nd medal.
+	 *
+	 * @return TRUE if had 2nd medal, FALSE otherwise
 	 */
-	private showSecondMedal(): boolean {
+	public hasSecondMedal(): boolean {
 		return this.displayMedal && this.player.rank === 2;
 	}
 	
 	/**
-	 * If the 1st medal must be show.
+	 * Test if has 3rd medal.
+	 *
+	 * @return TRUE if had 3rd medal, FALSE otherwise
 	 */
-	private showThirdMedal(): boolean {
+	public hasThirdMedal(): boolean {
 		return this.displayMedal && this.player.rank === 3;
 	}
 	
 	/**
-	 * Test if the cookie must be show.
+	 * Test if has cookie.
+	 *
+	 * @return TRUE if had cookie, FALSE otherwise
 	 */
-	private showCookie(): boolean {
+	public hasCookie(): boolean {
 		return this.displayMedal && this.player.rank === 4;
 	}
 	
 	/**
-	 * Test if the poop must be show.
+	 * Test if has poop must be show.
+	 *
+	 * @return TRUE if the poop must be show, FALSE otherwise
 	 */
-	private showPoop(): boolean {
+	public hasPoop(): boolean {
 		return this.displayMedal && this.player.last;
 	}
 	
 	/**
-	 * Test ig the team must be show.
+	 * Test if has team.
+	 *
+	 * @return TRUE if has team., FALSE otherwise
 	 */
-	public showTeam(): boolean {
+	public hasTeam(): boolean {
 		return this.displayMedal && this.player.teamNumber != -1;
 	}
 	
 	/**
-	 * Add css color.
+	 * Gets css team color.
+	 *
+	 * @return css team color
 	 */
-	private getTeamClass(): string {
+	public getCssTeam(): string {
 		return "player-card-team-" + this.player.teamNumber;
 	}
 	
 	/**
-	 * If show/hide icon(s).
+	 * Test if has icon(s).
+	 *
+	 * @return TRUE if has icon(s), FALSE otherwise
 	 */
-	public showIcon(): boolean {
-		return this.showFirstMedal() || this.showSecondMedal() || this.showThirdMedal() || this.showCookie() || this.showPoop();
+	public hasIcon(): boolean {
+		return this.hasFirstMedal() || this.hasSecondMedal() || this.hasThirdMedal() || this.hasCookie() || this.hasPoop();
 	}
 	
 	/**
@@ -137,7 +152,7 @@ export class PlayerCardComponent implements OnInit {
 	/**
 	 * Update player.
 	 *
-	 * @param player tht player
+	 * @param player the player
 	 */
 	public async updatePLayer(player: Player): Promise<void> {
 		
@@ -152,7 +167,7 @@ export class PlayerCardComponent implements OnInit {
 			this.showAddScore = true;
 			
 			this.player.score = player.score;
-			await this._commonUtilsService.sleep(100);
+			await this.commonUtilsService.sleep(100);
 			this.showAddScore = false;
 		}
 	}

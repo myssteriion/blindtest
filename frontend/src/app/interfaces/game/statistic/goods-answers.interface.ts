@@ -1,3 +1,4 @@
+import { GoodAnswer } from "../../common/good-answer.enum";
 /**
  * Goods Answers.
  */

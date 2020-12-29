@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UtilsService} from '../../../../services/utils.service'
-import {Profile} from "../../../../interfaces/entity/profile.interface";
+import {Profile} from "../../../../interfaces/entity/profile";
 import {ComplexGraphStatisticsInterface} from "../../../../interfaces/common/graph.interface";
 import {COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE} from "../../../../tools/graph.constant";
 import {CommonUtilsService} from "myssteriion-utils";
@@ -10,15 +10,15 @@ import {CommonUtilsService} from "myssteriion-utils";
  * The user rank comparison view.
  */
 @Component({
-    selector: 'user-rank-comparison',
-    templateUrl: './user-rank-comparison.component.html',
-    styleUrls: ['./user-rank-comparison.component.css']
+    selector: "user-rank-comparison",
+    templateUrl: "./user-rank-comparison.component.html",
+    styleUrls: ["./user-rank-comparison.component.css"]
 })
 
 export class UserRankComparisonComponent implements OnInit {
 
     @Input()
-    private players: Profile[];
+    public players: Profile[];
 
     public rankResults: ComplexGraphStatisticsInterface[] = [];
     public view = HORIZONTAL_STACKED_BAR_GRAPH_SIZE;
@@ -53,16 +53,17 @@ export class UserRankComparisonComponent implements OnInit {
      * Get ranks for player
      * @param playerStats
      */
-    private getRanksForPlayer(playerStats) {
-        let userRanks = [];
-        let rankValues = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH"];
-        rankValues.forEach(rank => {
-            userRanks.push({
-                name: this._translate.instant("RANK_OCCUPIED." + rank),
-                value: this._commonUtilsService.isNull(playerStats[rank]) ? 0 : playerStats[rank]
-            });
-        });
-        return userRanks;
+    private getRanksForPlayer(playerStats: any): any[] {
+        // let userRanks = [];
+        // let rankValues = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH"];
+        // rankValues.forEach(rank => {
+        //     userRanks.push({
+        //         name: this._translate.instant("RANK_OCCUPIED." + rank),
+        //         value: this._commonUtilsService.isNull(playerStats[rank]) ? 0 : playerStats[rank]
+        //     });
+        // });
+        // return userRanks;
+		return [];
     }
 
 }

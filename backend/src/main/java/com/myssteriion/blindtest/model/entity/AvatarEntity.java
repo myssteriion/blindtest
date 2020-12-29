@@ -2,7 +2,7 @@ package com.myssteriion.blindtest.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myssteriion.utils.entity.AbstractEntity;
-import com.myssteriion.utils.model.entity.impl.Flux;
+import com.myssteriion.utils.model.other.Flux;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 /**
- * The AvatarDTO.
+ * The Avatar.
  */
 @Entity
 @Table(name = "avatar", uniqueConstraints={ @UniqueConstraint(name = "avatar__name__unique", columnNames={"name"}) })
@@ -30,7 +30,7 @@ public class AvatarEntity extends AbstractEntity<AvatarEntity> {
     private String name;
     
     /**
-     * If the file exists.
+     * The flux.
      */
     @Transient
     private Flux flux;

@@ -6,15 +6,18 @@ import com.myssteriion.utils.model.IModel;
 
 import java.util.List;
 
+/**
+ * The MusicFilter.
+ */
 public class MusicFilter implements IModel {
     
     /**
-     * Themes.
+     * The themes.
      */
     private List<Theme> themes;
     
     /**
-     * Effects
+     * The effects
      */
     private List<Effect> effects;
     

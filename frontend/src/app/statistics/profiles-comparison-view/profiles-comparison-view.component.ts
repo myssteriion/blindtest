@@ -1,16 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { Theme } from "../../interfaces/common/theme.enum";
 import {UtilsService} from "../../services/utils.service";
 import {THEMES} from "../../tools/constant";
-import {Profile} from "../../interfaces/entity/profile.interface";
+import {Profile} from "../../interfaces/entity/profile";
 import {CommonUtilsService} from "myssteriion-utils";
 
 /**
  * The theme comparison view.
  */
 @Component({
-    selector: 'profiles-comparison-view',
-    templateUrl: './profiles-comparison-view.component.html',
-    styleUrls: ['./profiles-comparison-view.component.css']
+    selector: "profiles-comparison-view",
+    templateUrl: "./profiles-comparison-view.component.html",
+    styleUrls: ["./profiles-comparison-view.component.css"]
 })
 export class ProfilesComparisonViewComponent implements OnInit {
 
@@ -18,7 +19,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
     public selectedUsers: Profile[];
 
     public themes = THEMES;
-    public availableThemes = null;
+    public availableThemes: any[] = null;
     public selectedTheme: Theme = null;
     public noThemesAvailable = true;
 
@@ -34,7 +35,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Get all available themes
      */
     private getAvailableThemes(): void {
-        let themesToFilter = [];
+        let themesToFilter: any[] = [];
         this.selectedUsers.forEach(user => {
             let keys = Object.keys(user.profileStat.listenedMusics);
             themesToFilter = themesToFilter.concat(keys);
@@ -56,7 +57,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
      * Update theme on event received
      * @param theme
      */
-    public onThemeChange(theme): void {
+    public onThemeChange(theme: Theme): void {
         this.selectedTheme = theme;
     }
 

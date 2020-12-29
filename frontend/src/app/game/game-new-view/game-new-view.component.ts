@@ -1,27 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {Profile} from "../../interfaces/entity/profile.interface";
-import {TranslateService} from '@ngx-translate/core';
-import {UtilsService} from 'src/app/services/utils.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProfilePageModalComponent} from 'src/app/profile/profile-page-modal/profile-page-modal.component';
-import {EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES} from "../../tools/constant";
-import {NewGame} from "../../interfaces/game/new-game.interface";
-import {GameResource} from "../../resources/game.resource";
-import {Router} from '@angular/router';
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from 'src/app/common/error-alert/error-alert-modal.component';
-import {faQuestionCircle, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
-import {MusicResource} from "../../resources/music.resource";
-import {ThemeInfo} from "../../interfaces/music/theme-info.interface";
-import {CommonUtilsService, ToasterService} from "myssteriion-utils";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { faQuestionCircle, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { CommonUtilsService, ModalService, ToasterService } from "myssteriion-utils";
+import { ProfilePageModalComponent } from 'src/app/profile/profile-page-modal/profile-page-modal.component';
+import { Duration } from "../../interfaces/common/duration.enum";
+import { Effect } from "../../interfaces/common/effect.enum";
+import { Theme } from "../../interfaces/common/theme.enum";
+import { Profile } from "../../interfaces/entity/profile";
+import { NewGame } from "../../interfaces/game/new-game";
+import { ThemeInfo } from "../../interfaces/music/theme-info";
+import { GameResource } from "../../resources/game.resource";
+import { MusicResource } from "../../resources/music.resource";
+import { EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES } from "../../tools/constant";
 
 /**
  * The new game view.
  */
 @Component({
-	selector: 'game-new-view',
-	templateUrl: './game-new-view.component.html',
-	styleUrls: ['./game-new-view.component.css'],
+	templateUrl: "./game-new-view.component.html",
+	styleUrls: ["./game-new-view.component.css"],
 	animations: [
 		SLIDE_ANIMATION
 	]
@@ -73,13 +72,14 @@ export class GameNewViewComponent implements OnInit {
 	
 	
 	
-	constructor(private _translate : TranslateService,
-				private _toasterService: ToasterService,
-				private _ngbModal: NgbModal,
-				private _gameResource: GameResource,
-				private _musicResource: MusicResource,
-				private _router: Router,
-				private _commonUtilsService: CommonUtilsService) { }
+	constructor(private translate : TranslateService,
+				private toasterService: ToasterService,
+				private ngbModal: NgbModal,
+				private gameResource: GameResource,
+				private musicResource: MusicResource,
+				private router: Router,
+				private commonUtilsService: CommonUtilsService,
+				private modalService: ModalService) { }
 	
 	ngOnInit(): void {
 		
@@ -102,23 +102,16 @@ export class GameNewViewComponent implements OnInit {
 		
 		this.themesInfo = [];
 		
-		this._musicResource.computeThemesInfo().subscribe(
+		this.musicResource.computeThemesInfo().subscribe(
 			response => {
 				this.themesInfo = response.content;
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+				let text: string = this.translate.instant("GAME.NEW_VIEW.COMPUTE_THEMES_INFO_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.CLOSE");
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.COMPUTE_THEMES_INFO_ERROR");
-				modalRef.componentInstance.suggestions = undefined;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.computeThemesInfo(); },
 					() => { /* do nothing */ }
 				);
@@ -128,7 +121,9 @@ export class GameNewViewComponent implements OnInit {
 	
 	
 	/**
-	 * Gets players label.
+	 * Gets min/max players label.
+	 *
+	 * @return min/max players label
 	 */
 	public getPlayersLabel(): string {
 		
@@ -137,7 +132,7 @@ export class GameNewViewComponent implements OnInit {
 			maxPlayers: MAX_PLAYERS
 		};
 		
-		return this._translate.instant("GAME.NEW_VIEW.PLAYERS_LIST_LABEL", params);
+		return this.translate.instant("GAME.NEW_VIEW.PLAYERS_LIST_LABEL", params);
 	}
 	
 	/**
@@ -157,9 +152,10 @@ export class GameNewViewComponent implements OnInit {
 	}
 	
 	/**
-	 * Tests if the theme is selected.
+	 * Test if the theme is selected.
 	 *
 	 * @param theme the theme
+	 * @return TRUE if the theme is selected, FALSE otherwise
 	 */
 	public themeIsSelected(theme: Theme): boolean {
 		return (this.selectedThemes.findIndex(thm => thm === theme)) !== -1;
@@ -170,31 +166,17 @@ export class GameNewViewComponent implements OnInit {
 	 * Gets the number of musics OR theme percent.
 	 *
 	 * @param theme the theme
+	 * @return the number of musics OR theme percent
 	 */
 	public getThemeInfo(theme: Theme): string {
 		return this.getThemePercent(theme);
 	}
 	
 	/**
-	 * Gets the number of musics in theme.
-	 *
-	 * @param theme the theme
-	 */
-	private getNumberOfMusicsInTheme(theme: Theme): string {
-		
-		let nbMusics: number = 0;
-		
-		let index = this.themesInfo.findIndex(thm => thm.theme === theme);
-		if (index != -1)
-			nbMusics = this.themesInfo[index].nbMusics;
-		
-		return nbMusics.toString();
-	}
-	
-	/**
 	 * Get theme percent.
 	 *
 	 * @param theme the theme
+	 * @return theme percent
 	 */
 	private getThemePercent(theme: Theme): string {
 		
@@ -207,9 +189,10 @@ export class GameNewViewComponent implements OnInit {
 	}
 	
 	/**
-	 * Compute nb musics for the theme according to the "selectedConnectionMode" field.
+	 * Compute nb musics for the theme (0 if the theme isn't selected).
 	 *
 	 * @param theme the theme
+	 * @return compute nb musics for the theme
 	 */
 	private computeThemeNbMusics(theme: Theme): number {
 		
@@ -223,7 +206,9 @@ export class GameNewViewComponent implements OnInit {
 	}
 	
 	/**
-	 * Compute nb musics for all themes according to the "selectedConnectionMode" field.
+	 * Compute nb musics for all themes (the theme must be selected).
+	 *
+	 * @return compute nb musics for all themes
 	 */
 	private computeTotalNbMusics(): number {
 		
@@ -254,9 +239,10 @@ export class GameNewViewComponent implements OnInit {
 	}
 	
 	/**
-	 * Tests if the effect is selected.
+	 * Test if the effect is selected.
 	 *
 	 * @param effect the effect
+	 * @return TRUE if the effect is selected, FALSE otherwise
 	 */
 	public effectIsSelected(effect: Effect): boolean {
 		return (this.selectedEffect.findIndex(eff => eff === effect)) !== -1;
@@ -265,6 +251,8 @@ export class GameNewViewComponent implements OnInit {
 	
 	/**
 	 * Gets empty players.
+	 *
+	 * @return empty names list
 	 */
 	public getEmptyNames(): string[] {
 		
@@ -272,7 +260,7 @@ export class GameNewViewComponent implements OnInit {
 		var emptyNames = [];
 		
 		while (index <= MAX_PLAYERS) {
-			emptyNames.push( this._translate.instant("GAME.NEW_VIEW.PLAYER") + " " + index );
+			emptyNames.push( this.translate.instant("GAME.NEW_VIEW.PLAYER") + " " + index );
 			index++;
 		}
 		
@@ -282,7 +270,7 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Deselect profile.
 	 *
-	 * @param profile
+	 * @param profile the profile
 	 */
 	public deselectProfile(profile: Profile): void {
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
@@ -293,24 +281,24 @@ export class GameNewViewComponent implements OnInit {
 	/**
 	 * Select profile.
 	 *
-	 * @param profile
+	 * @param profile the profile
 	 */
 	public selectProfile(profile: Profile): void {
 		
 		let index: number = this.playersProfiles.findIndex((p) => p.id === profile.id);
 		
 		if ( this.playersProfiles.length >= MAX_PLAYERS ) {
-			let message = this._translate.instant( "GAME.NEW_VIEW.MAX_PLAYERS_ERROR", { max_players: MAX_PLAYERS}  );
-			this._toasterService.error(message);
+			let message = this.translate.instant( "GAME.NEW_VIEW.MAX_PLAYERS_ERROR", { max_players: MAX_PLAYERS}  );
+			this.toasterService.error(message);
 		}
 		else if (index !== -1) {
-			let message = this._translate.instant( "GAME.NEW_VIEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
-			this._toasterService.error(message);
+			let message = this.translate.instant( "GAME.NEW_VIEW.DUPLICATE_PLAYERS_ERROR", { player_name: profile.name } );
+			this.toasterService.error(message);
 		}
 		else {
 			this.playersProfiles.push(profile);
-			let message = this._translate.instant( "GAME.NEW_VIEW.PLAYERS_ADDED", { player_name: profile.name } );
-			this._toasterService.success(message);
+			let message = this.translate.instant( "GAME.NEW_VIEW.PLAYERS_ADDED", { player_name: profile.name } );
+			this.toasterService.success(message);
 		}
 	}
 	
@@ -331,25 +319,16 @@ export class GameNewViewComponent implements OnInit {
 			effects: this.selectedEffect
 		};
 		
-		this._gameResource.newGame(newGame).subscribe(
+		this.gameResource.newGame(newGame).subscribe(
 			response => {
-				this._router.navigateByUrl(GAME_PREFIX_PATH + response.id);
+				this.router.navigateByUrl(GAME_PREFIX_PATH + response.id);
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = { status: error.status, name: error.name, error: error.error };
+				let text: string = this.translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.CLOSE");
 				
-				let suggestions = [];
-				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, { backdrop: 'static', size: 'md' } );
-				modalRef.componentInstance.text = this._translate.instant("GAME.NEW_VIEW.LAUNCH_GAME_ERROR");
-				modalRef.componentInstance.suggestions = suggestions;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = false;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, false, closeLabel).then(
 					() => { /* do nothing */ },
 					() => { /* do nothing */ }
 				);
@@ -358,10 +337,12 @@ export class GameNewViewComponent implements OnInit {
 	}
 	
 	/**
-	 * Disabled launch game button.
+	 * Test if launch game button must be disable.
+	 *
+	 * @return TRUE if launch game button must be disable, FALSE otherwise
 	 */
-	public launchGameIsDisabled(): boolean {
-		return this._commonUtilsService.isNull(this.selectedDuration) || this.playersProfiles.length < MIN_PLAYERS;
+	public launchGameButtonIsDisabled(): boolean {
+		return this.commonUtilsService.isNull(this.selectedDuration) || this.playersProfiles.length < MIN_PLAYERS;
 	}
 	
 	/**
@@ -369,13 +350,13 @@ export class GameNewViewComponent implements OnInit {
 	 */
 	public selectProfiles(): void {
 		
-		const modalRef = this._ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' } );
-		modalRef.componentInstance.title = this._translate.instant("PROFILE.PAGE_MODAL.TITLE");
+		const modalRef = this.ngbModal.open(ProfilePageModalComponent, { backdrop: 'static', size: 'xl' } );
+		modalRef.componentInstance.title = this.translate.instant("PROFILE.PAGE_MODAL.TITLE");
 		modalRef.componentInstance.canEdit = false;
 		modalRef.componentInstance.canSelect = true;
 		modalRef.componentInstance.canDeselect = false;
 		modalRef.componentInstance.onSelect.subscribe(
-			profile => { this.selectProfile(profile); }
+			(profile: Profile) => { this.selectProfile(profile); }
 		);
 		
 		modalRef.result.then(

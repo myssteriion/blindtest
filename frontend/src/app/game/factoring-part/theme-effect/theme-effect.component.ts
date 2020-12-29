@@ -1,15 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EFFECTS, MARIO_KART_SOUND, THEMES } from "../../../tools/constant";
-import { Music } from "../../../interfaces/entity/music.interface";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonUtilsService } from "myssteriion-utils";
+import { Music } from "../../../interfaces/entity/music";
+import { EFFECTS, MARIO_KART_SOUND, THEMES } from "../../../tools/constant";
 
 /**
  * The theme effect part.
  */
 @Component({
-	selector: 'theme-effect',
-	templateUrl: './theme-effect.component.html',
-	styleUrls: ['./theme-effect.component.css']
+	selector: "theme-effect",
+	templateUrl: "./theme-effect.component.html",
+	styleUrls: ["./theme-effect.component.css"]
 })
 export class ThemeEffectComponent implements OnInit, OnDestroy {
 	
@@ -26,21 +26,21 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	/**
 	 * The theme image.
 	 */
-	private theme: {};
+	public theme: {};
 	
 	/**
 	 * The effect image.
 	 */
-	private effect: {};
+	public effect: {};
 	
 	/**
 	 * Audio.
 	 */
-	private audio;
+	private audio: any;
 	
 	
 	
-	constructor(private _commonUtilsService: CommonUtilsService) { }
+	constructor(private commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit() {
 		this.theme = THEMES[0];
@@ -52,7 +52,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !this._commonUtilsService.isNull(this.audio) ) {
+		if ( !this.commonUtilsService.isNull(this.audio) ) {
 			this.audio.pause();
 			this.audio = undefined;
 		}
@@ -102,12 +102,12 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 				
 				while (!this.audio.ended) {
 					if (rollTheme)
-						this.theme = THEMES[this._commonUtilsService.random(0, THEMES.length - 1)];
+						this.theme = THEMES[this.commonUtilsService.random(0, THEMES.length - 1)!];
 					
 					if (rollEffect)
-						this.effect = EFFECTS[this._commonUtilsService.random(0, EFFECTS.length - 1)];
+						this.effect = EFFECTS[this.commonUtilsService.random(0, EFFECTS.length - 1)!];
 					
-					await this._commonUtilsService.sleep(100);
+					await this.commonUtilsService.sleep(100);
 				}
 				
 				this.theme = THEMES[themeIndex];

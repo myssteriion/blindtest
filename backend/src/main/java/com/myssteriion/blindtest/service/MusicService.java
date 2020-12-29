@@ -11,7 +11,7 @@ import com.myssteriion.blindtest.tools.Constant;
 import com.myssteriion.utils.CommonConstant;
 import com.myssteriion.utils.CommonUtils;
 import com.myssteriion.utils.exception.NotFoundException;
-import com.myssteriion.utils.model.entity.impl.Flux;
+import com.myssteriion.utils.model.other.Flux;
 import com.myssteriion.utils.service.AbstractCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 /**
  * Effect.
  */
-const enum Effect {
+export enum Effect {
 	NONE = "NONE",
 	SLOW = "SLOW",
 	SPEED = "SPEED",

@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http"
-import {Observable} from "rxjs";
-import {Avatar} from "src/app/interfaces/entity/avatar.interface";
-import {Page} from "src/app/interfaces/base/page.interface";
-import {environment} from "src/environments/environment";
+import { HttpClient, HttpParams } from "@angular/common/http"
+import { Injectable } from "@angular/core";
+import { Page } from "myssteriion-utils";
+import { Observable } from "rxjs";
+import { Avatar } from "src/app/interfaces/entity/avatar";
+import { environment } from "src/environments/environment";
 
 /**
  * Avatar resource.
@@ -18,7 +18,7 @@ export class AvatarResource {
 	
 	
 	
-	constructor(private _http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 	
 	
 	
@@ -37,7 +37,7 @@ export class AvatarResource {
 		params = params.set("pageNumber", pageNumber.toString());
 		params = params.set("itemPerPage", itemPerPage);
 		
-		return this._http.get< Page<Avatar> >( this.path, { params: params } );
+		return this.http.get< Page<Avatar> >( this.path, { params: params } );
 	}
 	
 }

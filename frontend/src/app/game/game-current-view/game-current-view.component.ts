@@ -1,38 +1,38 @@
-import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, SLIDE_ANIMATION} from "../../tools/constant";
-import {Game} from "../../interfaces/game/game.interface";
-import {TranslateService} from '@ngx-translate/core';
-import {faDoorClosed, faDoorOpen, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {GameResource} from "../../resources/game.resource";
-import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Player} from 'src/app/interfaces/game/player.interface';
-import {MusicResource} from "../../resources/music.resource";
-import {Music} from "../../interfaces/entity/music.interface";
-import {UtilsService} from 'src/app/services/utils.service';
-import {CountdownConfig} from 'ngx-countdown';
-import {ThemeEffectComponent} from "../factoring-part/theme-effect/theme-effect.component";
-import {CustomCountdownComponent} from "../factoring-part/custom-countdown/custom-countdown.component";
-import {MusicResultModalComponent} from "../factoring-part/music-result-modal/music-result-modal.component";
-import {RoundInfoModalComponent} from '../factoring-part/round-info-modal/round-info-modal.component';
-import {ChoiceThemeModalComponent} from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
-import {DomSanitizer} from '@angular/platform-browser';
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {PlayerCardComponent} from "../../player/player-card/player-card.component";
-import {MusicFilter} from "../../interfaces/music/music-filter.interface";
-import {CommonUtilsService, HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
+import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faDoorClosed, faDoorOpen, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, ToasterService } from "myssteriion-utils";
+import { CountdownConfig } from 'ngx-countdown';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Player } from 'src/app/interfaces/game/player';
+import { UtilsService } from 'src/app/services/utils.service';
+import { Effect } from "../../interfaces/common/effect.enum";
+import { RoundName } from "../../interfaces/common/round-name.enum";
+import { Theme } from "../../interfaces/common/theme.enum";
+import { Music } from "../../interfaces/entity/music";
+import { Game } from "../../interfaces/game/game";
+import { MusicFilter } from "../../interfaces/music/music-filter";
+import { PlayerCardComponent } from "../../player/player-card/player-card.component";
+import { GameResource } from "../../resources/game.resource";
+import { MusicResource } from "../../resources/music.resource";
+import { ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, SLIDE_ANIMATION } from "../../tools/constant";
+import { ChoiceThemeModalComponent } from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
+import { CustomCountdownComponent } from "../factoring-part/custom-countdown/custom-countdown.component";
+import { MusicResultModalComponent } from "../factoring-part/music-result-modal/music-result-modal.component";
+import { RoundInfoModalComponent } from '../factoring-part/round-info-modal/round-info-modal.component';
+import { ThemeEffectComponent } from "../factoring-part/theme-effect/theme-effect.component";
 
 /**
  * The current game view.
  */
 @Component({
-	selector: 'game-current-view',
-	templateUrl: './game-current-view.component.html',
-	styleUrls: ['./game-current-view.component.css'],
+	templateUrl: "./game-current-view.component.html",
+	styleUrls: ["./game-current-view.component.css"],
 	animations: [
 		SLIDE_ANIMATION
 	]
@@ -47,7 +47,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * The current exit icon.
 	 */
-	private currentExitIcon;
+	public currentExitIcon: IconDefinition;
 	
 	/**
 	 * If view is loaded.
@@ -69,7 +69,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * The pre countdown config.
 	 */
-	private preCountdownConfig: CountdownConfig;
+	public preCountdownConfig: CountdownConfig;
 	
 	/**
 	 * The countdown component.
@@ -80,7 +80,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * The countdown config.
 	 */
-	private countdownConfig: CountdownConfig;
+	public countdownConfig: CountdownConfig;
 	
 	/**
 	 * The post countdown component.
@@ -91,7 +91,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * The post countdown config.
 	 */
-	private postCountdownConfig: CountdownConfig;
+	public postCountdownConfig: CountdownConfig;
 	
 	/**
 	 * Current music.
@@ -101,40 +101,40 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * Show next music button.
 	 */
-	private showNextMusic: boolean;
+	public showNextMusic: boolean;
 	
 	/**
 	 * Show pass music button.
 	 */
-	private showPassMusic: boolean;
+	public showPassMusic: boolean;
 	
 	/**
 	 * Preview audio.
 	 */
-	private previewAudio;
+	private previewAudio: any;
 	
 	/**
 	 * Show audio.
 	 */
-	private showAudio: boolean;
+	public showAudio: boolean;
 	
 	/**
 	 * Audio.
 	 */
 	@ViewChild("audio", { static: false })
-	private audio;
+	private audio: any;
 	
 	/**
 	 * Left player.
 	 */
 	@ViewChildren("leftPlayers")
-	private leftPlayersComponent: QueryList<PlayerCardComponent>;
+	public leftPlayersComponent: QueryList<PlayerCardComponent>;
 	
 	/**
 	 * Left player.
 	 */
 	@ViewChildren("rightPlayers")
-	private rightPlayersComponent: QueryList<PlayerCardComponent>;
+	public rightPlayersComponent: QueryList<PlayerCardComponent>;
 	
 	/**
 	 * During update phase, the current players to update.
@@ -145,22 +145,23 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	private static NORMAL_SPEED = 1;
 	private static FAST_SPEED = 2;
 	
-	private faDoorClosed = faDoorClosed;
-	private faDoorOpen = faDoorOpen;
-	private faQuestionCircle = faQuestionCircle;
+	public faDoorClosed = faDoorClosed;
+	public faDoorOpen = faDoorOpen;
+	public faQuestionCircle = faQuestionCircle;
 	
 	
 	
-	constructor(private _gameResource: GameResource,
-				private _translate: TranslateService,
-				private _activatedRoute: ActivatedRoute,
-				private _router: Router,
-				private _ngbModal: NgbModal,
-				private _musicResource: MusicResource,
-				private _sanitizer: DomSanitizer,
-				private _toasterService: ToasterService,
-				private _commonUtilsService: CommonUtilsService,
-				private _utilsSerice: UtilsService) { }
+	constructor(private gameResource: GameResource,
+				private translate: TranslateService,
+				private activatedRoute: ActivatedRoute,
+				private router: Router,
+				private ngbModal: NgbModal,
+				private musicResource: MusicResource,
+				private sanitizer: DomSanitizer,
+				private toasterService: ToasterService,
+				private commonUtilsService: CommonUtilsService,
+				private utilsService: UtilsService,
+				private modalService: ModalService) { }
 	
 	ngOnInit(): void {
 		
@@ -172,7 +173,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		
 		this.showAudio = false;
 		
-		this._translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
+		this.translate.get("GAME.CURRENT_VIEW.LISTEN").subscribe(
 			value => {
 				this.preCountdownConfig = {
 					demand: true,
@@ -185,7 +186,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			}
 		);
 		
-		this._translate.get("GAME.CURRENT_VIEW.FINISH").subscribe(
+		this.translate.get("GAME.CURRENT_VIEW.FINISH").subscribe(
 			value => {
 				this.countdownConfig = {
 					demand: true,
@@ -210,12 +211,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !this._commonUtilsService.isNull(this.previewAudio) ) {
+		
+		if ( !this.commonUtilsService.isNull(this.previewAudio) ) {
 			this.previewAudio.pause();
 			this.previewAudio = undefined;
 		}
 		
-		if ( !this._commonUtilsService.isNull(this.audio) ) {
+		if ( !this.commonUtilsService.isNull(this.audio) ) {
 			this.audio.nativeElement.pause();
 			this.audio.nativeElement = undefined;
 			this.audio = undefined;
@@ -233,12 +235,12 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			response => {
 				
 				let gameId = Number(response);
-				this._gameResource.findById(gameId).subscribe(
+				this.gameResource.findById(gameId).subscribe(
 					response => {
 						
 						this.game = response;
 						if (this.game.finished)
-							this._router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
+							this.router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
 						else {
 							
 							this.isLoaded = true;
@@ -249,25 +251,18 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 					},
 					error => {
 						
-						let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
-						
-						if (errorAlert.status === HTTP_NOT_FOUND) {
-							this._toasterService.error( this._translate.instant("GAME.CURRENT_VIEW.GAME_NOT_FOUND") );
-							this._router.navigateByUrl(HOME_PATH);
+						if (error.status === HTTP_NOT_FOUND) {
+							this.toasterService.error( this.translate.instant("GAME.CURRENT_VIEW.GAME_NOT_FOUND") );
+							this.router.navigateByUrl(HOME_PATH);
 						}
 						else {
 							
-							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-							modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.FOUND_GAME_ERROR");
-							modalRef.componentInstance.suggestions = undefined;
-							modalRef.componentInstance.error = errorAlert;
-							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-							modalRef.componentInstance.showRetry = true;
-							modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
+							let text: string = this.translate.instant("GAME.CURRENT_VIEW.FOUND_GAME_ERROR");
+							let closeLabel: string = this.translate.instant("COMMON.GO_HOME");
 							
-							modalRef.result.then(
+							this.modalService.openErrorModal(text, error, true, closeLabel).then(
 								() => { this.getGame(); },
-								() => { this._router.navigateByUrl(HOME_PATH); }
+								() => { this.router.navigateByUrl(HOME_PATH); }
 							);
 						}
 					}
@@ -278,12 +273,12 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 	
 	/**
-	 * Get id param.
+	 * Gets id param.
 	 *
 	 * @return the observable
 	 */
 	private getIdParam(): Observable<string> {
-		return this._activatedRoute.params.pipe( map(param => param.id) );
+		return this.activatedRoute.params.pipe( map(param => param.id) );
 	}
 	
 	/**
@@ -291,7 +286,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 *
 	 * @param left TRUE for left players, FALSE for right players
 	 */
-	private getPlayers(left: boolean): Player[] {
+	public getPlayers(left: boolean): Player[] {
 		
 		let gamePlayers = this.game.players;
 		
@@ -304,9 +299,11 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 	
 	/**
-	 * Add padding class for players list.
+	 * Gets css padding for players list.
+	 *
+	 * @return gets css padding
 	 */
-	private addPaddingClass(): string {
+	public addCssPadding(): string {
 		
 		let css = "game-current-view-players-padding-";
 		
@@ -320,49 +317,50 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	
 	
 	/**
-	 * Get the view title.
+	 * Gets the view title.
+	 *
+	 * @return gets the title
 	 */
-	private getTitle(): string {
+	public getTitle(): string {
 		
 		let params = {
-			name_round: this._translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
+			name_round: this.translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
 			current_music: this.game.nbMusicsPlayedInRound + 1,
 			total_musics:  this.game.round.nbMusics
 		};
 		
-		return this._translate.instant("GAME.CURRENT_VIEW.TITLE", params);
+		return this.translate.instant("GAME.CURRENT_VIEW.TITLE", params);
 	}
 	
 	/**
 	 * Open modal for exit game.
 	 */
-	private exit(): void {
+	public exit(): void {
 		
-		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'md' } );
-		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
-		modalRef.componentInstance.body = this.getFormattedLabel();
+		let title: string = this.translate.instant("COMMON.WARNING");
+		let body: string = this.getExitFormattedLabel();
 		
-		modalRef.result.then(
-			() => { this._router.navigateByUrl(HOME_PATH); },
+		this.modalService.openConfirmModal(title, body).then(
+			() => { this.router.navigateByUrl(HOME_PATH); },
 			() => { /* do nothing */ }
 		);
 	}
 	
 	/**
-	 * Gets formatted text for the body modal.
+	 * Gets exit formatted text for the body modal.
 	 *
-	 * @private
+	 * @return gets exit formatted text for the body modal
 	 */
-	private getFormattedLabel(): string {
+	private getExitFormattedLabel(): string {
 		
 		let body: string =
 			"<div class='row padding-bottom-1em'><div class='col'>" +
-			this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_1") +
+			this.translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_1") +
 			"</div></div>";
 		
 		body +=
 			"<div class='row padding-bottom-1em'><div class='col'>" +
-			this._translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_2") +
+			this.translate.instant("GAME.CURRENT_VIEW.EXIT_BODY_MODAL_2") +
 			"</div></div>";
 		
 		return body;
@@ -373,7 +371,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * Gets next music.
 	 */
-	private nextMusic(): void {
+	public nextMusic(): void {
 		
 		this.showNextMusic = false;
 		
@@ -387,9 +385,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		
 		if (this.game.round.roundName === RoundName.CHOICE) {
 			
-			const modalRef = this._ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'md', keyboard: false } );
+			const modalRef = this.ngbModal.open(ChoiceThemeModalComponent, { backdrop: 'static', size: 'md', keyboard: false } );
 			modalRef.componentInstance.filteredThemes = this.game.themes;
-			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose ).profile.name;
+			modalRef.componentInstance.playerName = this.game.players.find( player => player.turnToChoose )?.profile.name;
 			
 			modalRef.result.then(
 				(result: Theme) => {
@@ -417,13 +415,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			effects: this.game.effects
 		};
 		
-		this._musicResource.random(musicFilter).subscribe(
+		this.musicResource.random(musicFilter).subscribe(
 			response => {
 				
 				this.currentMusic = response;
 				
 				this.previewAudio = new Audio();
-				this.previewAudio.src = this._utilsSerice.getAudioFromMusic(this.currentMusic);
+				this.previewAudio.src = this.utilsService.getAudioFromMusic(this.currentMusic);
 				this.previewAudio.volume = 1.0;
 				
 				let playbackRate = GameCurrentViewComponent.NORMAL_SPEED;
@@ -443,19 +441,12 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
+				let text: string = this.translate.instant("GAME.CURRENT_VIEW.RANDOM_MUSIC_ERROR");
+				let closeLabel: string = this.translate.instant("COMMON.GO_HOME");
 				
-				const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-				modalRef.componentInstance.text = this._translate.instant("GAME.CURRENT_VIEW.RANDOM_MUSIC_ERROR");
-				modalRef.componentInstance.suggestions = undefined;
-				modalRef.componentInstance.error = errorAlert;
-				modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-				modalRef.componentInstance.showRetry = true;
-				modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
-				
-				modalRef.result.then(
+				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.callNextMusic(themes); },
-					() => { this._router.navigateByUrl(HOME_PATH); }
+					() => { this.router.navigateByUrl(HOME_PATH); }
 				);
 			}
 		);
@@ -488,7 +479,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * When the pre countdown is ended.
 	 */
-	private onPreCountdownEnd(): void {
+	public onPreCountdownEnd(): void {
 		this.startCountdown();
 	}
 	
@@ -510,7 +501,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 *
 	 * @param timeLeft the timeLeft
 	 */
-	private onCountdownEvent(timeLeft): void {
+	public onCountdownEvent(timeLeft: string): void {
 		
 		if (timeLeft === "15") this.countdown.setColor(CustomCountdownComponent.YELLOW_COLOR);
 		if (timeLeft === "05") this.countdown.setColor(CustomCountdownComponent.RED_COLOR);
@@ -568,7 +559,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		let currentTime = this.previewAudio.currentTime;
 		this.previewAudio = undefined;
 		
-		this.audio.nativeElement.src = this._utilsSerice.getAudioFromMusic(this.currentMusic);
+		this.audio.nativeElement.src = this.utilsService.getAudioFromMusic(this.currentMusic);
 		this.audio.nativeElement.controls = true;
 		this.audio.nativeElement.load();
 		this.audio.nativeElement.currentTime = currentTime;
@@ -586,7 +577,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private fillResult(): void {
 		
-		const modalRef = this._ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
+		const modalRef = this.ngbModal.open(MusicResultModalComponent, { backdrop: 'static', size: 'lg', keyboard: false } );
 		modalRef.componentInstance.gameId = this.game.id;
 		modalRef.componentInstance.round = this.game.round;
 		modalRef.componentInstance.players = this.game.players;
@@ -596,7 +587,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			(result: Game) => {
 				
 				if (result.finished) {
-					this._router.navigateByUrl(END_GAME_PREFIX_PATH + this.game.id);
+					this.router.navigateByUrl(END_GAME_PREFIX_PATH + this.game.id);
 				}
 				else {
 					
@@ -605,21 +596,22 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 							this.showNextMusic = true;
 							if (this.game.nbMusicsPlayedInRound === 0) {
 								this.openRoundInfoModal();
-								if ( !this._commonUtilsService.isNull(this.audio) )
+								if ( !this.commonUtilsService.isNull(this.audio) )
 									this.audio.nativeElement.volume = 0.05;
 							}
 						} );
 				}
 			},
 			() => {
-				this._router.navigateByUrl(HOME_PATH);
+				this.router.navigateByUrl(HOME_PATH);
 			}
 		);
 	}
 	
 	/**
 	 * Update left/right players.
-	 * @private
+	 *
+	 * @return promise
 	 */
 	private async updatePlayers(appliedGame: Game): Promise<void> {
 		
@@ -633,13 +625,13 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			let newPlayerName = appliedPlayer.profile.name;
 			
 			let foundPlayerComponent = this.leftPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
-			if ( this._commonUtilsService.isNull(foundPlayerComponent) )
+			if ( this.commonUtilsService.isNull(foundPlayerComponent) )
 				foundPlayerComponent = this.rightPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
 			
-			this.currentPlayersToUpdate.push( foundPlayerComponent.getPlayer().profile.name );
-			foundPlayerComponent.updatePLayer(appliedPlayer);
+			this.currentPlayersToUpdate.push( foundPlayerComponent!.getPlayer().profile.name );
+			foundPlayerComponent!.updatePLayer(appliedPlayer);
 			if (i % 2 === 1 || i === appliedPlayers.length-1) {
-				await this._commonUtilsService.sleep(ADD_SCORE_DURING);
+				await this.commonUtilsService.sleep(ADD_SCORE_DURING);
 				this.currentPlayersToUpdate = [];
 			}
 		}
@@ -653,19 +645,21 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	}
 	
 	/**
-	 * Test if the opacity css must me apply for player.
+	 * Test if the opacity css must be apply for player.
+	 *
+	 * @return TRUE if the opacity css must be apply for player, FALSE otherwise
 	 */
-	private addOpacityOnPlayer(player: Player): boolean {
-		return !this._commonUtilsService.isNull(this.currentPlayersToUpdate) && this.currentPlayersToUpdate.length > 0 &&
+	public addOpacityOnPlayer(player: Player): boolean {
+		return !this.commonUtilsService.isNull(this.currentPlayersToUpdate) && this.currentPlayersToUpdate.length > 0 &&
 			this.currentPlayersToUpdate.findIndex(playerName => playerName === player.profile.name) === -1;
 	}
 	
 	/**
 	 * Open round info modal.
 	 */
-	private openRoundInfoModal(): void {
+	public openRoundInfoModal(): void {
 		
-		const modalRef = this._ngbModal.open(RoundInfoModalComponent, { backdrop: 'static', size: 'md' } );
+		const modalRef = this.ngbModal.open(RoundInfoModalComponent, { backdrop: 'static', size: 'md' } );
 		modalRef.componentInstance.game = this.game;
 		
 		modalRef.result.then(

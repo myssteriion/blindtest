@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector: 'profile-card-empty',
-	templateUrl: './profile-card-empty.component.html',
-	styleUrls: ['./profile-card-empty.component.css']
+	selector: "profile-card-empty",
+	templateUrl: "./profile-card-empty.component.html",
+	styleUrls: ["./profile-card-empty.component.css"]
 })
 export class ProfileCardEmptyComponent {
 	

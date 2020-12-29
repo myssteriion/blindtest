@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { COUNTDOWN_SOUND, REDUCTION_ANIMATION } from "../../../tools/constant";
-import { CountdownComponent, CountdownConfig } from 'ngx-countdown';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { CommonUtilsService } from "myssteriion-utils";
+import { CountdownComponent, CountdownConfig } from "ngx-countdown";
+import { CountdownEvent } from "ngx-countdown/interfaces";
+import { COUNTDOWN_SOUND, REDUCTION_ANIMATION } from "../../../tools/constant";
 
 /**
  * The custom countdown part.
  */
 @Component({
-	selector: 'custom-countdown',
-	templateUrl: './custom-countdown.component.html',
-	styleUrls: ['./custom-countdown.component.css'],
+	selector: "custom-countdown",
+	templateUrl: "./custom-countdown.component.html",
+	styleUrls: ["./custom-countdown.component.css"],
 	animations: [
 		REDUCTION_ANIMATION
 	]
@@ -74,7 +75,7 @@ export class CustomCountdownComponent implements OnInit {
 	
 	
 	
-	constructor(private _commonUtilsService: CommonUtilsService) { }
+	constructor(private commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		this.show = false;
@@ -110,7 +111,7 @@ export class CustomCountdownComponent implements OnInit {
 	/**
 	 * The event callback. Send event on done.
 	 */
-	public async countdownEvent(event) {
+	public async countdownEvent(event: CountdownEvent) {
 		
 		if (event.action === "done") {
 			this.onEnd.emit();
@@ -121,7 +122,7 @@ export class CustomCountdownComponent implements OnInit {
 			
 			if (this.animation === "reduction") {
 				this.animationTriggerValue = "big";
-				await this._commonUtilsService.sleep(100);
+				await this.commonUtilsService.sleep(100);
 			}
 			
 			if (this.sound) {
@@ -140,8 +141,8 @@ export class CustomCountdownComponent implements OnInit {
 	 *
 	 * @param color the color
 	 */
-	public setColor(color: string) {
-		this.color = ( this._commonUtilsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
+	public setColor(color: string): void {
+		this.color = ( this.commonUtilsService.isNullOrEmpty(color) ) ? CustomCountdownComponent.BLUE_COLOR : color;
 	}
 	
 }

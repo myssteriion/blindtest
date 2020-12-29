@@ -1,23 +1,20 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Profile} from 'src/app/interfaces/entity/profile.interface';
-import {faEdit, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProfileEditModalComponent} from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
-import {UtilsService} from "../../services/utils.service";
-import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
-import {ProfileResource} from "../../resources/profile.resource";
-import {TranslateService} from '@ngx-translate/core';
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {HTTP_CONFLICT, ToasterService} from "myssteriion-utils";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { faEdit, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { HTTP_CONFLICT, ModalService, ToasterService } from "myssteriion-utils";
+import { Profile } from 'src/app/interfaces/entity/profile';
+import { ProfileEditModalComponent } from 'src/app/profile/profile-edit-modal/profile-edit-modal.component';
+import { ProfileResource } from "../../resources/profile.resource";
+import { UtilsService } from "../../services/utils.service";
 
 /**
  * Profile card.
  */
 @Component({
-	selector: 'profile-card',
-	templateUrl: './profile-card.component.html',
-	styleUrls: ['./profile-card.component.css']
+	selector: "profile-card",
+	templateUrl: "./profile-card.component.html",
+	styleUrls: ["./profile-card.component.css"]
 })
 export class ProfileCardComponent {
 	
@@ -31,7 +28,7 @@ export class ProfileCardComponent {
 	 * If can update/delete profile.
 	 */
 	@Input()
-	private canEdit: boolean;
+	public canEdit: boolean;
 	
 	/**
 	 * Event after update/delete profile.
@@ -43,7 +40,7 @@ export class ProfileCardComponent {
 	 * If can select profile.
 	 */
 	@Input()
-	private canSelect: boolean;
+	public canSelect: boolean;
 	
 	/**
 	 * On select.
@@ -55,25 +52,26 @@ export class ProfileCardComponent {
 	 * If can deselect profile.
 	 */
 	@Input()
-	private canDeselect: boolean;
+	public canDeselect: boolean;
 	
 	/**
 	 * On deselect.
 	 */
 	@Output()
-	private onDeselect = new EventEmitter();
+	public onDeselect = new EventEmitter();
 	
-	private faEdit = faEdit;
-	private faTrashAlt = faTrashAlt;
-	private faTimes = faTimes;
+	public faEdit = faEdit;
+	public faTrashAlt = faTrashAlt;
+	public faTimes = faTimes;
 	
 	
 	
-	constructor(private _ngbModal: NgbModal,
-				private _profileResource: ProfileResource,
-				private _translate: TranslateService,
-				private _toasterService: ToasterService,
-				private _utilsService: UtilsService) {
+	constructor(private ngbModal: NgbModal,
+				private profileResource: ProfileResource,
+				private translate: TranslateService,
+				private toasterService: ToasterService,
+				private utilsService: UtilsService,
+				private modalService: ModalService) {
 		
 	}
 	
@@ -82,16 +80,16 @@ export class ProfileCardComponent {
 	/**
 	 * Get image from avatar.
 	 */
-	public getImgFromAvatar(): string {
-		return this._utilsService.getImgFromAvatar(this.profile.avatar);
+	public getImgFromAvatar(): string | null {
+		return this.utilsService.getImgFromAvatar(this.profile.avatar);
 	}
 	
 	/**
 	 * Open modal for edit profile and emit it.
 	 */
-	private edit(): void {
+	public edit(): void {
 		
-		const modalRef = this._ngbModal.open(ProfileEditModalComponent, { backdrop: 'static', size: 'md' } );
+		const modalRef = this.ngbModal.open(ProfileEditModalComponent, { backdrop: "static", size: "md" } );
 		modalRef.componentInstance.profile = this.profile;
 		modalRef.componentInstance.create = false;
 		
@@ -104,13 +102,12 @@ export class ProfileCardComponent {
 	/**
 	 * Open modal for delete profile.
 	 */
-	private delete(): void {
+	public delete(): void {
 		
-		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static' } );
-		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
-		modalRef.componentInstance.body = this._translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
+		let title: string = this.translate.instant("COMMON.WARNING");
+		let body: string = this.translate.instant("PROFILE.CARD.DELETE_BODY", { profile_name: this.profile.name } );
 		
-		modalRef.result.then(
+		this.modalService.openConfirmModal(title, body).then(
 			() => { this.deletedProfile() },
 			() => { /* do nothing */ }
 		);
@@ -121,29 +118,22 @@ export class ProfileCardComponent {
 	 */
 	private deletedProfile(): void {
 		
-		this._profileResource.delete(this.profile).subscribe(
+		this.profileResource.delete(this.profile).subscribe(
 			response => {
-				this._toasterService.success( this._translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
+				this.toasterService.success( this.translate.instant("PROFILE.CARD.DELETED_TOASTER", { profile_name: this.profile.name } ) );
 				this.onEdit.emit();
 			},
 			error => {
 				
-				let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
-				
-				if (errorAlert.status === HTTP_CONFLICT) {
-					this._toasterService.error( this._translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
+				if (error.status === HTTP_CONFLICT) {
+					this.toasterService.error( this.translate.instant("PROFILE.EDIT_MODAL.PROFILE_ALREADY_EXISTS_ERROR") );
 				}
 				else {
 					
-					const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-					modalRef.componentInstance.text = this._translate.instant("PROFILE.CARD.DELETE_ERROR");
-					modalRef.componentInstance.suggestions = undefined;
-					modalRef.componentInstance.error = errorAlert;
-					modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-					modalRef.componentInstance.showRetry = true;
-					modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.CLOSE");
+					let text: string = this.translate.instant("PROFILE.CARD.DELETE_ERROR");
+					let closeLabel: string = this.translate.instant("COMMON.CLOSE");
 					
-					modalRef.result.then(
+					this.modalService.openErrorModal(text, error, true, closeLabel).then(
 						() => { this.deletedProfile(); },
 						() => { /* do nothing */ }
 					);
@@ -161,7 +151,9 @@ export class ProfileCardComponent {
 	}
 	
 	/**
-	 * Test if icons need to be show.
+	 * Test if icons must be show.
+	 *
+	 * @return TRUE if the icon must be show, FALSE otherwise
 	 */
 	public showIcons(): boolean {
 		return this.canEdit || this.canDeselect;

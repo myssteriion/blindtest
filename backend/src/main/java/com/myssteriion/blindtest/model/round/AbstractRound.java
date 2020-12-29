@@ -123,7 +123,7 @@ public abstract class AbstractRound {
         
         CommonUtils.verifyValue("game", game);
         
-        return game.getNbMusicsPlayedInRound() == nbMusics - 1;
+        return game.getNbMusicsPlayedInRound() == nbMusics;
     }
     
     /**

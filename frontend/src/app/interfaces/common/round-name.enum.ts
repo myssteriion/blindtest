@@ -1,7 +1,7 @@
 /**
  * RoundName.
  */
-const enum RoundName {
+export enum RoundName {
 	CLASSIC = "CLASSIC",
 	CHOICE = "CHOICE",
 	LUCKY = "LUCKY",

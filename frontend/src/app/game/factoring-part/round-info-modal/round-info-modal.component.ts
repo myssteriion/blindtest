@@ -1,17 +1,17 @@
-import {Component, Input} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Game} from "../../../interfaces/game/game.interface";
-import {TranslateService} from '@ngx-translate/core';
-import {Lucky} from "../../../interfaces/round/impl/lucky.interface";
-import {Friendship} from "../../../interfaces/round/impl/friendship.interface";
+import { Component, Input } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { RoundName } from "../../../interfaces/common/round-name.enum";
+import { Game } from "../../../interfaces/game/game";
+import { Friendship } from "../../../interfaces/round/impl/friendship";
+import { Lucky } from "../../../interfaces/round/impl/lucky";
 
 /**
  * The round info modal.
  */
 @Component({
-	selector: 'round-info-modal',
-	templateUrl: './round-info-modal.component.html',
-	styleUrls: ['./round-info-modal.component.css']
+	templateUrl: "./round-info-modal.component.html",
+	styleUrls: ["./round-info-modal.component.css"]
 })
 export class RoundInfoModalComponent {
 	
@@ -23,21 +23,23 @@ export class RoundInfoModalComponent {
 	
 	
 	
-	constructor(private _ngbActiveModal: NgbActiveModal,
-				private _translate: TranslateService) {}
+	constructor(private ngbActiveModal: NgbActiveModal,
+				private translate: TranslateService) {}
 	
 	
 	
 	/**
 	 * Gets the round description.
+	 *
+	 * @return gets the round description
 	 */
 	public getDescription(): string {
 		
 		let params = {
-			roundName: this._translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
+			roundName: this.translate.instant("ROUND." + this.game.round.roundName + ".NAME"),
 			nbMusics: this.game.round.nbMusics,
-			nbPlayers: undefined,
-			nbTeams: undefined
+			nbPlayers: 0,
+			nbTeams: 0
 		};
 		
 		if (this.game.round.roundName === RoundName.LUCKY)
@@ -46,38 +48,46 @@ export class RoundInfoModalComponent {
 		if (this.game.round.roundName === RoundName.FRIENDSHIP)
 			params.nbTeams = (<Friendship>this.game.round).nbTeams;
 		
-		return this._translate.instant("ROUND." + this.game.round.roundName + ".DESCRIPTION", params);
+		return this.translate.instant("ROUND." + this.game.round.roundName + ".DESCRIPTION", params);
 	}
 	
 	/**
 	 * Gets nb point won.
+	 *
+	 * @return gets nb point won
 	 */
-	public getNpPointWon(): string {
+	public getNbPointWon(): string {
 		
 		let npPointWon = this.game.round.nbPointWon.toString();
 		
 		if (this.game.round.roundName === RoundName.RECOVERY)
-			npPointWon += " x " + this._translate.instant("COMMON.RANK");
+			npPointWon += " x " + this.translate.instant("COMMON.RANK");
 		
 		return npPointWon;
 	}
 	
 	/**
-	 * If lose point part is showed.
+	 * Test if lose point part must be shown.
+	 *
+	 * @return TRUE if lose point part must be shown, FALSE otherwise
 	 */
-	public showNpPointLose(): boolean {
+	public showNbPointLose(): boolean {
 		return this.game.round.roundName === RoundName.THIEF;
 	}
 	
 	/**
-	 * If bonus point part is showed.
+	 * Test if bonus point part must be shown.
+	 *
+	 * @return TRUE if bonus point part must be shown, FALSE otherwise
 	 */
-	public showNpPointBonus(): boolean {
+	public showNbPointBonus(): boolean {
 		return this.game.round.roundName === RoundName.CHOICE || this.game.round.roundName === RoundName.LUCKY;
 	}
 	
 	/**
-	 * If malus point part is showed.
+	 * Test if malus point part is showed.
+	 *
+	 * @return TRUE if malus point part must be shown, FALSE otherwise
 	 */
 	public showNpPointMalus(): boolean {
 		return this.game.round.roundName === RoundName.CHOICE;
@@ -87,7 +97,7 @@ export class RoundInfoModalComponent {
 	 * Close modal.
 	 */
 	public close(): void {
-		this._ngbActiveModal.close();
+		this.ngbActiveModal.close();
 	}
 	
 }

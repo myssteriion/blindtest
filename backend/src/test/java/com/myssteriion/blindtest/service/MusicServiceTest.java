@@ -8,7 +8,7 @@ import com.myssteriion.blindtest.model.music.ThemeInfo;
 import com.myssteriion.blindtest.persistence.dao.MusicDAO;
 import com.myssteriion.utils.exception.ConflictException;
 import com.myssteriion.utils.exception.NotFoundException;
-import com.myssteriion.utils.model.entity.impl.Flux;
+import com.myssteriion.utils.model.other.Flux;
 import com.myssteriion.utils.test.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

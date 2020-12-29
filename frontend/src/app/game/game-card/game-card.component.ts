@@ -1,14 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Game} from "../../interfaces/game/game.interface";
-import {faUsers} from '@fortawesome/free-solid-svg-icons';
-import {EFFECTS, THEMES} from "../../tools/constant";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { Effect } from "../../interfaces/common/effect.enum";
+import { Theme } from "../../interfaces/common/theme.enum";
+import { Game } from "../../interfaces/game/game";
+import { EFFECTS, THEMES } from "../../tools/constant";
 
 @Component({
-	selector: 'game-card',
-	templateUrl: './game-card.component.html',
-	styleUrls: ['./game-card.component.css']
+	selector: "game-card",
+	templateUrl: "./game-card.component.html",
+	styleUrls: ["./game-card.component.css"]
 })
-export class GameCardComponent implements OnInit {
+export class GameCardComponent {
 	
 	/**
 	 * The game.
@@ -29,13 +31,12 @@ export class GameCardComponent implements OnInit {
 	
 	constructor() { }
 	
-	ngOnInit() {
-	}
-	
 	
 	
 	/**
-	 * Get players names.
+	 * Gets concatenate players names (separator: ",").
+	 *
+	 * @return gets concatenate players names
 	 */
 	public getPlayersNames(): string {
 		
@@ -52,24 +53,26 @@ export class GameCardComponent implements OnInit {
 	}
 	
 	/**
-	 * Return Constant.THEMES[theme].
+	 * Return the object theme.
 	 *
 	 * @param theme
+	 * @return the object theme
 	 */
-	public getJsonTheme(theme: Theme): any {
+	public getObjTheme(theme: Theme): any {
 		return this.themes.find(thm => {
 			return thm.enumVal === theme;
 		});
 	}
 	
 	/**
-	 * Return Constant.EFFETS[effect].
+	 * Return the object effect.
 	 *
 	 * @param effect
+	 * @return the object effect
 	 */
-	public getJsonEffect(effect: Effect): any {
-		return this.effects.find(thm => {
-			return thm.enumVal === effect;
+	public getObjEffect(effect: Effect): any {
+		return this.effects.find(eff => {
+			return eff.enumVal === effect;
 		});
 	}
 	

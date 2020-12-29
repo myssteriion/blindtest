@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { THEMES } from 'src/app/tools/constant';
+import { Component, Input, OnInit } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonUtilsService } from "myssteriion-utils";
+import { THEMES } from "src/app/tools/constant";
+import { Theme } from "../../../interfaces/common/theme.enum";
 
 /**
  * The choice theme modal.
  */
 @Component({
-	selector: 'choice-theme-modal',
-	templateUrl: './choice-theme-modal.component.html',
-	styleUrls: ['./choice-theme-modal.component.css']
+	templateUrl: "./choice-theme-modal.component.html",
+	styleUrls: ["./choice-theme-modal.component.css"]
 })
 export class ChoiceThemeModalComponent implements OnInit {
 	
@@ -17,7 +17,7 @@ export class ChoiceThemeModalComponent implements OnInit {
 	 * Themes list.
 	 */
 	@Input()
-	private filteredThemes: Theme[];
+	public filteredThemes: Theme[];
 	
 	/**
 	 * Player name.
@@ -33,12 +33,12 @@ export class ChoiceThemeModalComponent implements OnInit {
 	/**
 	 * Selected theme.
 	 */
-	private selectedTheme: Theme;
+	public selectedTheme: Theme;
 	
 	
 	
-	constructor(private _ngbActiveModal: NgbActiveModal,
-				private _commonUtilsService: CommonUtilsService) { }
+	constructor(private ngbActiveModal: NgbActiveModal,
+				private commonUtilsService: CommonUtilsService) { }
 	
 	ngOnInit(): void {
 		
@@ -46,26 +46,27 @@ export class ChoiceThemeModalComponent implements OnInit {
 		THEMES.forEach(theme => {
 			
 			let index = this.filteredThemes.findIndex(thm => thm === theme.enumVal);
-			if (index !== -1) {
+			if (index !== -1)
 				this.themes.push(theme);
-			}
 		});
 	}
 	
 	
 	
 	/**
-	 * If the button is disabled.
+	 * Test if the close button must be disable.
+	 *
+	 * @return TRUE is the close button must be disable, FALSE otherwise
 	 */
-	public closeIsDisabled(): boolean {
-		return this._commonUtilsService.isNull(this.selectedTheme);
+	public closeButtonIsDisable(): boolean {
+		return this.commonUtilsService.isNull(this.selectedTheme);
 	}
 	
 	/**
 	 * Close modal.
 	 */
 	public close(): void {
-		this._ngbActiveModal.close(this.selectedTheme);
+		this.ngbActiveModal.close(this.selectedTheme);
 	}
 	
 }

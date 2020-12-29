@@ -58,7 +58,7 @@ body {
 	text-align: center;
 	font-size: 0.8em;
 	padding: 0.65em;
-	
+
 	background-color: #cbc7cc;
 	border-bottom: 0.07em solid black;
 	border-top-left-radius: 1.35em;
@@ -81,10 +81,6 @@ body {
 
 
 /*************** utils ***************/
-.header-title {
-	color: $color-theme !important;
-}
-
-.inner-html-special-text {
+.header-title, .modal-title, .inner-html-special-text {
 	color: $color-theme !important;
 }

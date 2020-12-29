@@ -1,33 +1,23 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {
-	GAME_PREFIX_PATH,
-	HOME_PATH,
-	OLYMPIA_ANTHEM_SOUND,
-	RANKS_FIRST,
-	RANKS_SECOND,
-	RANKS_THIRD,
-	SLIDE_ANIMATION
-} from "../../tools/constant";
-import {Game} from "../../interfaces/game/game.interface";
-import {GameResource} from "../../resources/game.resource";
-import {Observable} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
-import {faDoorClosed, faDoorOpen, faMusic, faVolumeMute} from '@fortawesome/free-solid-svg-icons';
-import {ConfirmModalComponent} from "../../common/modal/confirm/confirm-modal.component";
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from '@ngx-translate/core';
-import {ErrorAlert} from "../../interfaces/base/error.alert.interface";
-import {ErrorAlertModalComponent} from "../../common/error-alert/error-alert-modal.component";
-import {CommonUtilsService, HTTP_NOT_FOUND, ToasterService} from "myssteriion-utils";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from "@angular/material/tabs/tab-group";
+import { ActivatedRoute, Router } from '@angular/router';
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faDoorClosed, faDoorOpen, faMusic, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, ToasterService } from "myssteriion-utils";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Game } from "../../interfaces/game/game";
+import { GameResource } from "../../resources/game.resource";
+import { GAME_PREFIX_PATH, HOME_PATH, OLYMPIA_ANTHEM_SOUND, SLIDE_ANIMATION } from "../../tools/constant";
 
 /**
  * The end game view.
  */
 @Component({
-	selector: 'game-end-view',
-	templateUrl: './game-end-view.component.html',
-	styleUrls: ['./game-end-view.component.css'],
+	templateUrl: "./game-end-view.component.html",
+	styleUrls: ["./game-end-view.component.css"],
 	animations: [
 		SLIDE_ANIMATION
 	]
@@ -47,12 +37,12 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	/**
 	 * The current exit icon.
 	 */
-	private currentExitIcon;
+	public currentExitIcon: IconDefinition;
 	
 	/**
 	 * Audio.
 	 */
-	private audio;
+	private audio: any;
 	
 	/**
 	 * Show graph.
@@ -64,19 +54,20 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 */
 	public musicIsPlaying: boolean;
 	
-	private faDoorClosed = faDoorClosed;
-	private faDoorOpen = faDoorOpen;
-	private faMusic = faMusic;
-	private faVolumeMute = faVolumeMute;
+	public faDoorClosed = faDoorClosed;
+	public faDoorOpen = faDoorOpen;
+	public faMusic = faMusic;
+	public faVolumeMute = faVolumeMute;
 	
 	
-	constructor(private _gameResource: GameResource,
-				private _activatedRoute: ActivatedRoute,
-				private _ngbModal: NgbModal,
-				private _translate: TranslateService,
-				private _router: Router,
-				private _toasterService: ToasterService,
-				private _commonUtilsService: CommonUtilsService) {
+	constructor(private gameResource: GameResource,
+				private activatedRoute: ActivatedRoute,
+				private ngbModal: NgbModal,
+				private translate: TranslateService,
+				private router: Router,
+				private toasterService: ToasterService,
+				private commonUtilsService: CommonUtilsService,
+				private modalService: ModalService) {
 	}
 	
 	ngOnInit(): void {
@@ -95,7 +86,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if ( !this._commonUtilsService.isNull(this.audio) ) {
+		if ( !this.commonUtilsService.isNull(this.audio) ) {
 			this.audio.pause();
 			this.audio = undefined;
 		}
@@ -112,37 +103,30 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 			response => {
 				
 				let gameId = Number(response);
-				this._gameResource.findById(gameId).subscribe(
+				this.gameResource.findById(gameId).subscribe(
 					response => {
 						
 						this.game = response;
 						
 						if (!this.game.finished)
-							this._router.navigateByUrl(GAME_PREFIX_PATH + gameId);
+							this.router.navigateByUrl(GAME_PREFIX_PATH + gameId);
 						else
 							this.isLoaded = true;
 					},
 					error => {
 						
-						let errorAlert: ErrorAlert = ErrorAlertModalComponent.parseError(error);
-						
-						if (errorAlert.status === HTTP_NOT_FOUND) {
-							this._toasterService.error( this._translate.instant("GAME.END_VIEW.GAME_NOT_FOUND") );
-							this._router.navigateByUrl(HOME_PATH);
+						if (error.status === HTTP_NOT_FOUND) {
+							this.toasterService.error( this.translate.instant("GAME.END_VIEW.GAME_NOT_FOUND") );
+							this.router.navigateByUrl(HOME_PATH);
 						}
 						else {
 							
-							const modalRef = this._ngbModal.open(ErrorAlertModalComponent, ErrorAlertModalComponent.getModalOptions() );
-							modalRef.componentInstance.text = this._translate.instant("GAME.END_VIEW.FOUND_GAME_ERROR");
-							modalRef.componentInstance.suggestions = undefined;
-							modalRef.componentInstance.error = errorAlert;
-							modalRef.componentInstance.level = ErrorAlertModalComponent.ERROR;
-							modalRef.componentInstance.showRetry = true;
-							modalRef.componentInstance.closeLabel = this._translate.instant("COMMON.GO_HOME");
+							let text: string = this.translate.instant("GAME.END_VIEW.FOUND_GAME_ERROR");
+							let closeLabel: string = this.translate.instant("COMMON.GO_HOME");
 							
-							modalRef.result.then(
+							this.modalService.openErrorModal(text, error, true, closeLabel).then(
 								() => { this.getGame(); },
-								() => { this._router.navigateByUrl(HOME_PATH); }
+								() => { this.router.navigateByUrl(HOME_PATH); }
 							);
 						}
 					}
@@ -158,21 +142,20 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 * @return the observable
 	 */
 	private getIdParam(): Observable<string> {
-		return this._activatedRoute.params.pipe( map(param => param.id) );
+		return this.activatedRoute.params.pipe( map(param => param.id) );
 	}
 	
 	
 	/**
 	 * Open modal for back to home.
 	 */
-	private exit(): void {
+	public exit(): void {
 		
-		const modalRef = this._ngbModal.open( ConfirmModalComponent, { backdrop: 'static', size: 'md' } );
-		modalRef.componentInstance.title = this._translate.instant("COMMON.WARNING");
-		modalRef.componentInstance.body = this._translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
+		let title: string = this.translate.instant("COMMON.WARNING");
+		let body: string = this.translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
 		
-		modalRef.result.then(
-			() => { this._router.navigateByUrl(HOME_PATH); },
+		this.modalService.openConfirmModal(title, body).then(
+			() => { this.router.navigateByUrl(HOME_PATH); },
 			() => { /* do nothing */ }
 		);
 	}
@@ -180,7 +163,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	/**
 	 * Play music.
 	 */
-	private playMusic(): void {
+	public playMusic(): void {
 		
 		this.musicIsPlaying = true;
 		this.audio.play();
@@ -202,7 +185,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 	 *
 	 * @param event the event
 	 */
-	public onChangeTab(event) {
+	public onChangeTab(event: MatTabChangeEvent): void {
 		this.showGraph = event.index === 1;
 	}
 	
