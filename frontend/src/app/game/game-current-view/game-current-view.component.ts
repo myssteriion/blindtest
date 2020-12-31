@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { faDoorClosed, faDoorOpen, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, ToasterService } from "myssteriion-utils";
-import { CountdownConfig } from 'ngx-countdown';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Player } from 'src/app/interfaces/game/player';
-import { UtilsService } from 'src/app/services/utils.service';
+import { faDoorClosed, faDoorOpen, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, RoutingService, ToasterService } from "myssteriion-utils";
+import { CountdownConfig } from "ngx-countdown";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Player } from "src/app/interfaces/game/player";
+import { UtilsService } from "src/app/services/utils.service";
 import { Effect } from "../../interfaces/common/effect.enum";
 import { RoundName } from "../../interfaces/common/round-name.enum";
 import { Theme } from "../../interfaces/common/theme.enum";
@@ -20,11 +20,12 @@ import { MusicFilter } from "../../interfaces/music/music-filter";
 import { PlayerCardComponent } from "../../player/player-card/player-card.component";
 import { GameResource } from "../../resources/game.resource";
 import { MusicResource } from "../../resources/music.resource";
-import { ADD_SCORE_DURING, END_GAME_PREFIX_PATH, HOME_PATH, SLIDE_ANIMATION } from "../../tools/constant";
+import { ADD_SCORE_DURING, SLIDE_ANIMATION } from "../../tools/constant";
+import { GAME_END_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
 import { ChoiceThemeModalComponent } from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
 import { CustomCountdownComponent } from "../factoring-part/custom-countdown/custom-countdown.component";
 import { MusicResultModalComponent } from "../factoring-part/music-result-modal/music-result-modal.component";
-import { RoundInfoModalComponent } from '../factoring-part/round-info-modal/round-info-modal.component';
+import { RoundInfoModalComponent } from "../factoring-part/round-info-modal/round-info-modal.component";
 import { ThemeEffectComponent } from "../factoring-part/theme-effect/theme-effect.component";
 
 /**
@@ -154,7 +155,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	constructor(private gameResource: GameResource,
 				private translate: TranslateService,
 				private activatedRoute: ActivatedRoute,
-				private router: Router,
+				private routingService : RoutingService,
 				private ngbModal: NgbModal,
 				private musicResource: MusicResource,
 				private sanitizer: DomSanitizer,
@@ -240,7 +241,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 						
 						this.game = response;
 						if (this.game.finished)
-							this.router.navigateByUrl(END_GAME_PREFIX_PATH + gameId);
+							this.routingService.goTo(GAME_END_ROUTE, { id: gameId });
 						else {
 							
 							this.isLoaded = true;
@@ -253,7 +254,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 						
 						if (error.status === HTTP_NOT_FOUND) {
 							this.toasterService.error( this.translate.instant("GAME.CURRENT_VIEW.GAME_NOT_FOUND") );
-							this.router.navigateByUrl(HOME_PATH);
+							this.routingService.goTo(HOME_ROUTE);
 						}
 						else {
 							
@@ -262,7 +263,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 							
 							this.modalService.openErrorModal(text, error, true, closeLabel).then(
 								() => { this.getGame(); },
-								() => { this.router.navigateByUrl(HOME_PATH); }
+								() => { this.routingService.goTo(HOME_ROUTE); }
 							);
 						}
 					}
@@ -341,7 +342,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		let body: string = this.getExitFormattedLabel();
 		
 		this.modalService.openConfirmModal(title, body).then(
-			() => { this.router.navigateByUrl(HOME_PATH); },
+			() => { this.routingService.goTo(HOME_ROUTE); },
 			() => { /* do nothing */ }
 		);
 	}
@@ -446,7 +447,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				
 				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.callNextMusic(themes); },
-					() => { this.router.navigateByUrl(HOME_PATH); }
+					() => { this.routingService.goTo(HOME_ROUTE); }
 				);
 			}
 		);
@@ -587,7 +588,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			(result: Game) => {
 				
 				if (result.finished) {
-					this.router.navigateByUrl(END_GAME_PREFIX_PATH + this.game.id);
+					this.routingService.goTo(GAME_END_ROUTE, { id: this.game.id });
 				}
 				else {
 					
@@ -603,7 +604,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				}
 			},
 			() => {
-				this.router.navigateByUrl(HOME_PATH);
+				this.routingService.goTo(HOME_ROUTE);
 			}
 		);
 	}

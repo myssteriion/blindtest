@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ModalService, Page, ToasterService } from "myssteriion-utils";
+import { Component, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { ModalService, Page, RoutingService, ToasterService } from "myssteriion-utils";
 import { Game } from "../../interfaces/game/game";
 import { GameResource } from "../../resources/game.resource";
-import { GAME_PREFIX_PATH, HOME_PATH, OPACITY_ANIMATION, SLIDE_ANIMATION } from "../../tools/constant";
+import { OPACITY_ANIMATION, SLIDE_ANIMATION } from "../../tools/constant";
+import { GAME_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
 
 /**
  * The resume game view.
@@ -62,7 +62,7 @@ export class GameResumeViewComponent implements OnInit {
 	
 	
 	constructor(private gameResource: GameResource,
-				private router: Router,
+				private routingService: RoutingService,
 				private toasterService: ToasterService,
 				private translate: TranslateService,
 				private modalService: ModalService) { }
@@ -111,7 +111,7 @@ export class GameResumeViewComponent implements OnInit {
 				
 				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.loadGames(true); },
-					() => { this.router.navigateByUrl(HOME_PATH); }
+					() => { this.routingService.goTo(HOME_ROUTE); }
 				);
 			}
 		);
@@ -123,7 +123,7 @@ export class GameResumeViewComponent implements OnInit {
 	public selectGame(id: number): void {
 		
 		this.gameResource.findById(id).subscribe(
-			response => { this.router.navigateByUrl(GAME_PREFIX_PATH + response.id); },
+			response => { this.routingService.goTo(GAME_ROUTE, { id: response.id }); },
 			error => { this.toasterService.error( this.translate.instant("GAME.RESUME_VIEW.GAME_NOT_FOUND") ); }
 		);
 	}

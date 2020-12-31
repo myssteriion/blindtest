@@ -1,9 +1,8 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { faGamepad, faAngleDoubleRight, faAddressCard, faChartBar } from '@fortawesome/free-solid-svg-icons';
-import { Theme } from "../interfaces/common/theme.enum";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { Duration } from "../interfaces/common/duration.enum";
 import { Effect } from "../interfaces/common/effect.enum";
 import { GoodAnswer } from "../interfaces/common/good-answer.enum";
-import { Duration } from "../interfaces/common/duration.enum";
+import { Theme } from "../interfaces/common/theme.enum";
 
 /**
  * The max players number.
@@ -159,33 +158,3 @@ export const REDUCTION_ANIMATION =
 		transition('big => normal', [animate(250)])
 	]);
 
-/**
- * Route for the menu (button in view).
- */
-export const ROUTES_WITHOUT_HOME = [
-	{path: '/game/new', name: 'GAME.NEW_VIEW.TITLE', icon: faGamepad},
-	{path: '/game/resume', name: 'GAME.RESUME_VIEW.TITLE', icon: faAngleDoubleRight},
-	{path: '/profiles', name: 'PROFILE.VIEW.TITLE', icon: faAddressCard},
-	{path: '/statistics', name: 'STATISTICS.TITLE', icon: faChartBar}
-	// {path: '/params', name: 'PARAMS_VIEW.TITLE', icon: faCog}
-];
-
-/**
- * Route for the nav-bar (link in view).
- */
-export const ROUTES_WITH_HOME = [{path: '/home', name: 'HOME_VIEW.TITLE'}].concat(ROUTES_WITHOUT_HOME);
-
-/**
- * HOME path.
- */
-export const HOME_PATH = ROUTES_WITH_HOME[0].path;
-
-/**
- * Game prefix path.
- */
-export const GAME_PREFIX_PATH = "game/";
-
-/**
- * EndGame prefix path.
- */
-export const END_GAME_PREFIX_PATH = "game/end/";

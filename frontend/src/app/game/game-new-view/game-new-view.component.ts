@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { faQuestionCircle, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { CommonUtilsService, ModalService, ToasterService } from "myssteriion-utils";
-import { ProfilePageModalComponent } from 'src/app/profile/profile-page-modal/profile-page-modal.component';
+import { Component, OnInit } from "@angular/core";
+import { faQuestionCircle, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { CommonUtilsService, ModalService, RoutingService, ToasterService } from "myssteriion-utils";
+import { ProfilePageModalComponent } from "src/app/profile/profile-page-modal/profile-page-modal.component";
 import { Duration } from "../../interfaces/common/duration.enum";
 import { Effect } from "../../interfaces/common/effect.enum";
 import { Theme } from "../../interfaces/common/theme.enum";
@@ -13,7 +12,8 @@ import { NewGame } from "../../interfaces/game/new-game";
 import { ThemeInfo } from "../../interfaces/music/theme-info";
 import { GameResource } from "../../resources/game.resource";
 import { MusicResource } from "../../resources/music.resource";
-import { EFFECTS, GAME_PREFIX_PATH, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES } from "../../tools/constant";
+import { EFFECTS, MAX_PLAYERS, MIN_PLAYERS, SLIDE_ANIMATION, THEMES } from "../../tools/constant";
+import { GAME_ROUTE } from "../../tools/routing.constant";
 
 /**
  * The new game view.
@@ -74,10 +74,10 @@ export class GameNewViewComponent implements OnInit {
 	
 	constructor(private translate : TranslateService,
 				private toasterService: ToasterService,
+				private routingService : RoutingService,
 				private ngbModal: NgbModal,
 				private gameResource: GameResource,
 				private musicResource: MusicResource,
-				private router: Router,
 				private commonUtilsService: CommonUtilsService,
 				private modalService: ModalService) { }
 	
@@ -321,7 +321,7 @@ export class GameNewViewComponent implements OnInit {
 		
 		this.gameResource.newGame(newGame).subscribe(
 			response => {
-				this.router.navigateByUrl(GAME_PREFIX_PATH + response.id);
+				this.routingService.goTo(GAME_ROUTE, { id: response.id });
 			},
 			error => {
 				

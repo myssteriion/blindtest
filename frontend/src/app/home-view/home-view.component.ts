@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { ROUTES_WITHOUT_HOME, SLIDE_ANIMATION } from "../tools/constant";
+import { Component } from "@angular/core";
+import { Route } from "myssteriion-utils";
+import { SLIDE_ANIMATION } from "../tools/constant";
+import { ROUTES_WITHOUT_HOME } from "../tools/routing.constant";
 
 /**
  * HomeView.
@@ -16,7 +18,7 @@ export class HomeViewComponent {
 	/**
 	 * Routes (without home).
 	 */
-	public routes = ROUTES_WITHOUT_HOME;
+	public routes: Route[] = ROUTES_WITHOUT_HOME;
 	
 	
 	

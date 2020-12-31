@@ -5,9 +5,9 @@
 	
 	<!-- links -->
 	<div class="row">
-		<div class="col home-view-link" *ngFor="let route of routes" [routerLink]="route.path">
+		<div class="col home-view-link" *ngFor="let route of routes" [routerLink]="route.url">
 			<fa-icon [icon]="route.icon" size="4x"></fa-icon>
-			<div class="font-size-large fa-icon-custom-hover-orangered">{{ route.name | translate }}</div>
+			<div class="font-size-large fa-icon-custom-hover-orangered">{{ route.title | translate }}</div>
 		</div>
 	</div>
 

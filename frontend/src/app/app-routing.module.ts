@@ -1,31 +1,30 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-
-import {ProfileViewComponent} from './profile/profile-view/profile-view.component'
-import {GameNewViewComponent} from "./game/game-new-view/game-new-view.component";
-import {HomeViewComponent} from './home-view/home-view.component'
-import {GameCurrentViewComponent} from "./game/game-current-view/game-current-view.component";
-import {GameResumeViewComponent} from './game/game-resume-view/game-resume-view.component';
-import {GameEndViewComponent} from "./game/game-end-view/game-end-view.component";
-import {ProfilesStatisticsViewComponent} from './statistics/profiles-statistics-view/profiles-statistics-view.component';
-import {ParamsViewComponent} from "./params-view/params-view.component";
+import { NgModule } from "@angular/core";
+import { Route as AngularRoute, RouterModule } from "@angular/router";
+import { GameCurrentViewComponent } from "./game/game-current-view/game-current-view.component";
+import { GameEndViewComponent } from "./game/game-end-view/game-end-view.component";
+import { GameNewViewComponent } from "./game/game-new-view/game-new-view.component";
+import { GameResumeViewComponent } from "./game/game-resume-view/game-resume-view.component";
+import { HomeViewComponent } from "./home-view/home-view.component";
+import { ProfileViewComponent } from "./profile/profile-view/profile-view.component";
+import { ALL_ROUTES, HOME_ROUTE } from "./tools/routing.constant";
 
 
-const routes: Routes = [
-	{ path: 'home', component: HomeViewComponent },
-	{ path: 'game/new', component: GameNewViewComponent },
-	{ path: 'game/resume', component: GameResumeViewComponent },
-	{ path: 'game/:id', component: GameCurrentViewComponent },
-	{ path: 'game/end/:id', component: GameEndViewComponent },
-	{ path: 'profiles', component: ProfileViewComponent },
-	{ path: 'statistics', component: ProfilesStatisticsViewComponent },
-	// { path: 'params', component: ParamsViewComponent },
-	{ path: '', redirectTo: 'generic', pathMatch: 'full' },
-	{ path: '**', redirectTo: 'home' }
+/**
+ * All angular routes.
+ */
+const angularRoutes: AngularRoute[] = [
+	ALL_ROUTES[0].transformToAngularRoute(HomeViewComponent),
+	ALL_ROUTES[1].transformToAngularRoute(GameNewViewComponent),
+	ALL_ROUTES[2].transformToAngularRoute(GameResumeViewComponent),
+	ALL_ROUTES[3].transformToAngularRoute(ProfileViewComponent),
+	ALL_ROUTES[4].transformToAngularRoute(GameCurrentViewComponent),
+	ALL_ROUTES[5].transformToAngularRoute(GameEndViewComponent),
+	{ path: "", redirectTo: HOME_ROUTE.getAngularRouteUrl(), pathMatch: "full" },
+	{ path: "**", redirectTo: HOME_ROUTE.getAngularRouteUrl() }
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+	imports: [ RouterModule.forRoot(angularRoutes) ],
+	exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

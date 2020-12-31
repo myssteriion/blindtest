@@ -28,7 +28,6 @@ import { ProfileEditModalComponent } from "./profile/profile-edit-modal/profile-
 import { ProfilePageComponent } from "./profile/profile-page/profile-page.component";
 import { ProfilePageModalComponent } from "./profile/profile-page-modal/profile-page-modal.component";
 import { ProfileViewComponent } from "./profile/profile-view/profile-view.component"
-import { NavbarMenuComponent } from "./common/navbar-menu/navbar-menu.component";
 import { GameNewViewComponent } from "./game/game-new-view/game-new-view.component";
 import { HomeViewComponent } from "./home-view/home-view.component";
 import { GameCurrentViewComponent } from "./game/game-current-view/game-current-view.component";
@@ -79,7 +78,7 @@ import {
 	ModalService,
 	MyssteriionUtilsModule,
 	ToasterService,
-	getMultiTranslateHttpLoader
+	getMultiTranslateHttpLoader, RoutingService
 } from "myssteriion-utils";
 
 @NgModule({
@@ -92,7 +91,6 @@ import {
 		ProfilePageModalComponent,
 		ProfileEditModalComponent,
 		GameNewViewComponent,
-		NavbarMenuComponent,
 		HomeViewComponent,
 		GameCurrentViewComponent,
 		GameResumeViewComponent,
@@ -165,6 +163,7 @@ import {
 		ToasterService,
 		ModalService,
 		CommonUtilsService,
+		RoutingService,
 		[{provide: ErrorHandler, useClass: GlobalErrorHandler}],
 		ProfileResource,
 		AvatarResource,

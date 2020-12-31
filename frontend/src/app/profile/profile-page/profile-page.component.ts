@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { ModalService, Page } from "myssteriion-utils";
-import { Profile } from 'src/app/interfaces/entity/profile';
-import { ProfileResource } from 'src/app/resources/profile.resource';
-import { HOME_PATH, OPACITY_ANIMATION } from "../../tools/constant";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { ModalService, Page, RoutingService } from "myssteriion-utils";
+import { Profile } from "src/app/interfaces/entity/profile";
+import { ProfileResource } from "src/app/resources/profile.resource";
+import { OPACITY_ANIMATION } from "../../tools/constant";
+import { HOME_ROUTE } from "../../tools/routing.constant";
 import { ProfileEditModalComponent } from "../profile-edit-modal/profile-edit-modal.component";
 import { ProfilesPerPage } from "./common/profiles-per-page.enum";
 
@@ -81,7 +81,7 @@ export class ProfilePageComponent implements OnInit {
 	constructor(private profileResource: ProfileResource,
 				private ngbModal: NgbModal,
 				private translate: TranslateService,
-				private router: Router,
+				private routingService: RoutingService,
 				private modalService: ModalService) {}
 	
 	ngOnInit(): void {
@@ -119,7 +119,7 @@ export class ProfilePageComponent implements OnInit {
 				
 				this.modalService.openErrorModal(text, error, true, closeLabel).then(
 					() => { this.loadProfiles(true); },
-					() => { this.router.navigateByUrl(HOME_PATH); }
+					() => { this.routingService.goTo(HOME_ROUTE); }
 				);
 			}
 		);

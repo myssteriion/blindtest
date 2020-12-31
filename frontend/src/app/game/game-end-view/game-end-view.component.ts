@@ -1,16 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatTabChangeEvent } from "@angular/material/tabs/tab-group";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { faDoorClosed, faDoorOpen, faMusic, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, ToasterService } from "myssteriion-utils";
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { faDoorClosed, faDoorOpen, faMusic, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
+import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, RoutingService, ToasterService } from "myssteriion-utils";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { Game } from "../../interfaces/game/game";
 import { GameResource } from "../../resources/game.resource";
-import { GAME_PREFIX_PATH, HOME_PATH, OLYMPIA_ANTHEM_SOUND, SLIDE_ANIMATION } from "../../tools/constant";
+import { OLYMPIA_ANTHEM_SOUND, SLIDE_ANIMATION } from "../../tools/constant";
+import { GAME_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
 
 /**
  * The end game view.
@@ -64,7 +65,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 				private activatedRoute: ActivatedRoute,
 				private ngbModal: NgbModal,
 				private translate: TranslateService,
-				private router: Router,
+				private routingService: RoutingService,
 				private toasterService: ToasterService,
 				private commonUtilsService: CommonUtilsService,
 				private modalService: ModalService) {
@@ -109,7 +110,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 						this.game = response;
 						
 						if (!this.game.finished)
-							this.router.navigateByUrl(GAME_PREFIX_PATH + gameId);
+							this.routingService.goTo(GAME_ROUTE, { id: gameId });
 						else
 							this.isLoaded = true;
 					},
@@ -117,7 +118,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 						
 						if (error.status === HTTP_NOT_FOUND) {
 							this.toasterService.error( this.translate.instant("GAME.END_VIEW.GAME_NOT_FOUND") );
-							this.router.navigateByUrl(HOME_PATH);
+							this.routingService.goTo(HOME_ROUTE);
 						}
 						else {
 							
@@ -126,7 +127,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 							
 							this.modalService.openErrorModal(text, error, true, closeLabel).then(
 								() => { this.getGame(); },
-								() => { this.router.navigateByUrl(HOME_PATH); }
+								() => { this.routingService.goTo(HOME_ROUTE); }
 							);
 						}
 					}
@@ -155,7 +156,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		let body: string = this.translate.instant("GAME.END_VIEW.BACK_TO_HOME_BODY_MODAL");
 		
 		this.modalService.openConfirmModal(title, body).then(
-			() => { this.router.navigateByUrl(HOME_PATH); },
+			() => { this.routingService.goTo(HOME_ROUTE); },
 			() => { /* do nothing */ }
 		);
 	}
