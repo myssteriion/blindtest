@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Route } from "myssteriion-utils";
 import { Spinkit } from "ng-http-loader";
@@ -54,8 +53,7 @@ export class AppComponent {
 	
 	
 	
-	constructor(private translate: TranslateService,
-				private router: Router) {
+	constructor(private translate: TranslateService) {
 		
 		translate.setDefaultLang("fr");
 		translate.use("fr");

@@ -1,4 +1,3 @@
-import { translate } from "@angular/localize/src/translate";
 import { faAddressCard, faAngleDoubleRight, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { Route } from "myssteriion-utils";
 

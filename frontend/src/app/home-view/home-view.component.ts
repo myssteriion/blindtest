@@ -8,7 +8,7 @@ import { ROUTES_WITHOUT_HOME } from "../tools/routing.constant";
  */
 @Component({
 	templateUrl: "./home-view.component.html",
-	styleUrls: ['./home-view.component.css'],
+	styleUrls: ["./home-view.component.css"],
 	animations: [
 		SLIDE_ANIMATION
 	]
@@ -16,7 +16,7 @@ import { ROUTES_WITHOUT_HOME } from "../tools/routing.constant";
 export class HomeViewComponent {
 	
 	/**
-	 * Routes (without home).
+	 * Routes.
 	 */
 	public routes: Route[] = ROUTES_WITHOUT_HOME;
 	
