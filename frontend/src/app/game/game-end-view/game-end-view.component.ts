@@ -75,8 +75,7 @@ export class GameEndViewComponent implements OnInit, OnDestroy {
 		
 		this.musicIsPlaying = true;
 		
-		this.audio = new Audio();
-		this.audio.src = OLYMPIA_ANTHEM_SOUND;
+		this.audio = new Audio(OLYMPIA_ANTHEM_SOUND);
 		this.audio.loop = true;
 		this.audio.volume = 0.30;
 		this.audio.load();

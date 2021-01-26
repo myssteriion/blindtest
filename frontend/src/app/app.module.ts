@@ -34,7 +34,6 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
 import { ChoiceThemeModalComponent } from "./game/factoring-part/choice-theme-modal/choice-theme-modal.component";
-import { CustomCountdownComponent } from "./game/factoring-part/custom-countdown/custom-countdown.component";
 import { MusicResultModalComponent } from "./game/factoring-part/music-result-modal/music-result-modal.component";
 import { RoundInfoModalComponent } from "./game/factoring-part/round-info-modal/round-info-modal.component";
 import { ThemeEffectComponent } from "./game/factoring-part/theme-effect/theme-effect.component";
@@ -97,7 +96,6 @@ import { ThemeSelectionComponent } from "./statistics/theme-selection/theme-sele
 		GameResumeViewComponent,
 		PlayerCardComponent,
 		ThemeEffectComponent,
-		CustomCountdownComponent,
 		MusicResultModalComponent,
 		RoundInfoModalComponent,
 		ChoiceThemeModalComponent,

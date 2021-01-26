@@ -46,8 +46,7 @@ export class ThemeEffectComponent implements OnInit, OnDestroy {
 		this.theme = THEMES[0];
 		this.effect = EFFECTS[0];
 		
-		this.audio = new Audio();
-		this.audio.src = MARIO_KART_SOUND;
+		this.audio = new Audio(MARIO_KART_SOUND);
 		this.audio.load();
 	}
 	

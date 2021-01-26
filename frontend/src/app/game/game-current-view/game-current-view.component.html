@@ -31,9 +31,9 @@
 		<div class="col game-current-view-middle">
 			
 			<theme-effect #themeEffect></theme-effect>
-			<custom-countdown #preCountdown [animation]="'reduction'" [sound]="true" [countdownConfig]="preCountdownConfig" (onEvent)="undefined" (onEnd)="onPreCountdownEnd()"></custom-countdown>
-			<custom-countdown #countdown [animation]="''" [sound]="false" [countdownConfig]="countdownConfig" (onEvent)="onCountdownEvent($event)" (onEnd)="onCountdownEnd()"></custom-countdown>
-			<custom-countdown #postCountdown [animation]="''" [sound]="false" [countdownConfig]="postCountdownConfig" (onEvent)="undefined" (onEnd)="onPostCountdownEnd()"></custom-countdown>
+			<myst-countdown #preCountdown [hidden]="preCountdownHidden" [ngClass]="preCountdownCssClass" [countdownConfig]="preCountdownConfig" [playAnimation]="true" [audio]="countdownAudio" (onDone)="onPreCountdownEnd()"></myst-countdown>
+			<myst-countdown #countdown [hidden]="countdownHidden" [ngClass]="countdownCssClass" [countdownConfig]="countdownConfig" (onNotify)="onCountdownEvent($event)" (onDone)="onCountdownEnd()"></myst-countdown>
+			<myst-countdown #postCountdown [hidden]="postCountdownHidden" [ngClass]="postCountdownCssClass" [countdownConfig]="postCountdownConfig" (onDone)="onPostCountdownEnd()"></myst-countdown>
 			
 			<!-- next music -->
 			<div *ngIf="showNextMusic" class="row game-current-view-next-music">

@@ -5,7 +5,14 @@ import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { faDoorClosed, faDoorOpen, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateService } from "@ngx-translate/core";
-import { CommonUtilsService, HTTP_NOT_FOUND, ModalService, RoutingService, ToasterService } from "myssteriion-utils";
+import {
+	CommonUtilsService,
+	CountdownComponent,
+	HTTP_NOT_FOUND,
+	ModalService,
+	RoutingService,
+	ToasterService
+} from "myssteriion-utils";
 import { CountdownConfig } from "ngx-countdown";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -20,10 +27,9 @@ import { MusicFilter } from "../../interfaces/music/music-filter";
 import { PlayerCardComponent } from "../../player/player-card/player-card.component";
 import { GameResource } from "../../resources/game.resource";
 import { MusicResource } from "../../resources/music.resource";
-import { ADD_SCORE_DURING, SLIDE_ANIMATION } from "../../tools/constant";
+import { ADD_SCORE_DURING, COUNTDOWN_SOUND, SLIDE_ANIMATION } from "../../tools/constant";
 import { GAME_END_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
 import { ChoiceThemeModalComponent } from "../factoring-part/choice-theme-modal/choice-theme-modal.component";
-import { CustomCountdownComponent } from "../factoring-part/custom-countdown/custom-countdown.component";
 import { MusicResultModalComponent } from "../factoring-part/music-result-modal/music-result-modal.component";
 import { RoundInfoModalComponent } from "../factoring-part/round-info-modal/round-info-modal.component";
 import { ThemeEffectComponent } from "../factoring-part/theme-effect/theme-effect.component";
@@ -33,7 +39,7 @@ import { ThemeEffectComponent } from "../factoring-part/theme-effect/theme-effec
  */
 @Component({
 	templateUrl: "./game-current-view.component.html",
-	styleUrls: ["./game-current-view.component.css"],
+	styleUrls: ["./game-current-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]
@@ -65,7 +71,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * The pre countdown component.
 	 */
 	@ViewChild("preCountdown", { static: false })
-	private preCountdown: CustomCountdownComponent;
+	private preCountdown: CountdownComponent;
 	
 	/**
 	 * The pre countdown config.
@@ -73,10 +79,20 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	public preCountdownConfig: CountdownConfig;
 	
 	/**
+	 * The pre countdown hidden.
+	 */
+	public preCountdownHidden: boolean;
+	
+	/**
+	 * The pre countdown css class.
+	 */
+	public preCountdownCssClass: string;
+	
+	/**
 	 * The countdown component.
 	 */
 	@ViewChild("countdown", { static: false })
-	private countdown: CustomCountdownComponent;
+	private countdown: CountdownComponent;
 	
 	/**
 	 * The countdown config.
@@ -84,15 +100,40 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	public countdownConfig: CountdownConfig;
 	
 	/**
+	 * The countdown hidden.
+	 */
+	public countdownHidden: boolean;
+	
+	/**
+	 * The countdown css class.
+	 */
+	public countdownCssClass: string;
+	
+	/**
+	 * The countdown audio.
+	 */
+	public countdownAudio: any;
+	
+	/**
 	 * The post countdown component.
 	 */
 	@ViewChild("postCountdown", { static: false })
-	private postCountdown: CustomCountdownComponent;
+	private postCountdown: CountdownComponent;
 	
 	/**
 	 * The post countdown config.
 	 */
 	public postCountdownConfig: CountdownConfig;
+	
+	/**
+	 * The post countdown hidden.
+	 */
+	public postCountdownHidden: boolean;
+	
+	/**
+	 * The post countdown css class.
+	 */
+	public postCountdownCssClass: string;
 	
 	/**
 	 * Current music.
@@ -140,7 +181,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * During update phase, the current players to update.
 	 */
-	private currentPlayersToUpdate: String[];
+	private currentPlayersToUpdate: string[];
 	
 	private static SLOW_SPEED = 0.5;
 	private static NORMAL_SPEED = 1;
@@ -186,6 +227,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				};
 			}
 		);
+		this.preCountdownHidden = true;
+		this.preCountdownCssClass = "game-current-countdown-blue";
 		
 		this.translate.get("GAME.CURRENT_VIEW.FINISH").subscribe(
 			value => {
@@ -199,6 +242,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				};
 			}
 		);
+		this.countdownHidden = true;
+		this.countdownCssClass = "game-current-countdown-blue";
+		this.countdownAudio = new Audio(COUNTDOWN_SOUND);
 		
 		this.postCountdownConfig = {
 			demand: true,
@@ -207,6 +253,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 			stopTime: 0,
 			notify: []
 		};
+		this.postCountdownHidden = true;
+		this.postCountdownCssClass = "game-current-countdown-blue";
 		
 		this.getGame();
 	}
@@ -380,9 +428,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 		
 		this.showAudio = false;
 		
-		this.preCountdown.setShow(false);
-		this.countdown.setShow(false);
-		this.postCountdown.setShow(false);
+		this.preCountdownHidden = true;
+		this.countdownHidden = true;
+		this.postCountdownHidden = true;
 		
 		if (this.game.round.roundName === RoundName.CHOICE) {
 			
@@ -421,8 +469,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				
 				this.currentMusic = response;
 				
-				this.previewAudio = new Audio();
-				this.previewAudio.src = this.utilsService.getAudioFromMusic(this.currentMusic);
+				this.previewAudio = new Audio( this.utilsService.getAudioFromMusic(this.currentMusic) );
 				this.previewAudio.volume = 1.0;
 				
 				let playbackRate = GameCurrentViewComponent.NORMAL_SPEED;
@@ -473,7 +520,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 * Start the pre countdown.
 	 */
 	private startPreCountdown(): void {
-		this.preCountdown.setShow(true);
+		this.preCountdownHidden = false;
 		this.preCountdown.start();
 	}
 	
@@ -490,8 +537,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private startCountdown(): void {
 		
-		this.countdown.setColor(CustomCountdownComponent.GREEN_COLOR);
-		this.countdown.setShow(true);
+		this.countdownCssClass = "game-current-countdown-green";
+		this.countdownHidden = false;
 		this.countdown.start();
 		this.showPassMusic = true;
 		this.previewAudio.play();
@@ -504,8 +551,8 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	public onCountdownEvent(timeLeft: string): void {
 		
-		if (timeLeft === "15") this.countdown.setColor(CustomCountdownComponent.YELLOW_COLOR);
-		if (timeLeft === "05") this.countdown.setColor(CustomCountdownComponent.RED_COLOR);
+		if (timeLeft === "20") this.countdownCssClass = "game-current-countdown-yellow";
+		if (timeLeft === "10") this.countdownCssClass = "game-current-countdown-red";
 		
 		if (this.currentMusic.effect === Effect.MIX) {
 			
@@ -519,9 +566,9 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	/**
 	 * When the countdown is ended.
 	 */
-	private onCountdownEnd(): void {
+	public onCountdownEnd(): void {
 		
-		this.countdown.setColor(CustomCountdownComponent.BLUE_COLOR);
+		this.countdownCssClass = "game-current-countdown-blue";
 		this.showPassMusic = false;
 		this.previewAudio.pause();
 		
@@ -534,7 +581,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	public passMusic(): void {
 		
 		this.countdown.stop();
-		this.countdown.setShow(false);
+		this.countdownHidden = true;
 		this.onCountdownEnd();
 	}
 	
@@ -544,18 +591,18 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 	 */
 	private startPostCountdown(): void {
 		
-		this.preCountdown.setShow(false);
-		this.postCountdown.setShow(true);
+		this.preCountdownHidden = true;
+		this.postCountdownHidden = false;
 		this.postCountdown.start();
 	}
 	
 	/**
 	 * When the post countdown is ended.
 	 */
-	private onPostCountdownEnd(): void {
+	public onPostCountdownEnd(): void {
 		
-		this.countdown.setShow(false);
-		this.postCountdown.setShow(false);
+		this.countdownHidden = true;
+		this.postCountdownHidden = true;
 		
 		let currentTime = this.previewAudio.currentTime;
 		this.previewAudio = undefined;
@@ -630,7 +677,7 @@ export class GameCurrentViewComponent implements OnInit, OnDestroy {
 				foundPlayerComponent = this.rightPlayersComponent.find(value => value.getPlayer().profile.name === newPlayerName);
 			
 			this.currentPlayersToUpdate.push( foundPlayerComponent!.getPlayer().profile.name );
-			foundPlayerComponent!.updatePLayer(appliedPlayer);
+			foundPlayerComponent.updatePLayer(appliedPlayer);
 			if (i % 2 === 1 || i === appliedPlayers.length-1) {
 				await this.commonUtilsService.sleep(ADD_SCORE_DURING);
 				this.currentPlayersToUpdate = [];

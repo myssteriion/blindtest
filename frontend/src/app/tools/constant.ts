@@ -102,10 +102,10 @@ export const RANKS_THIRD = "assets/images/ranks/third.png";
  * Translation animation.
  */
 export const SLIDE_ANIMATION =
-	trigger('flyInOut', [
-		state('in', style({transform: 'translateX(0)'})),
-		transition('void => *', [
-			style({transform: 'translateX(100%)'}),
+	trigger("flyInOut", [
+		state( "in", style({ transform: "translateX(0)" }) ),
+		transition("void => *", [
+			style( { transform: "translateX(100%)" } ),
 			animate(750)
 		])
 	]);
@@ -114,10 +114,10 @@ export const SLIDE_ANIMATION =
  * Opacity animation.
  */
 export const OPACITY_ANIMATION =
-	trigger('opacityTrigger', [
-		transition(':enter', [
-			style({opacity: 0}),
-			animate('1s', style({opacity: 1})),
+	trigger("opacityTrigger", [
+		transition(":enter", [
+			style( { opacity: 0 } ),
+			animate( "1s", style({ opacity: 1 }) ),
 		])
 	]);
 
@@ -125,10 +125,10 @@ export const OPACITY_ANIMATION =
  * Rank icon animation.
  */
 export const RANK_ICON_ANIMATION =
-	trigger('rankIconTrigger', [
-		transition(':enter', [
-			style({opacity: 0}),
-			animate('1s', style({opacity: 1})),
+	trigger("rankIconTrigger", [
+		transition(":enter", [
+			style( { opacity: 0 } ),
+			animate( "1s", style({ opacity: 1 }) ),
 		])
 	]);
 
@@ -141,20 +141,10 @@ export const ADD_SCORE_DURING = 2000;
  * Rank icon animation.
  */
 export const ADD_SCORE_ANIMATION =
-	trigger('addScoreTrigger', [
-		transition(':leave', [
+	trigger("addScoreTrigger", [
+		transition(":leave", [
 			style({}),
-			animate('2s', style({opacity: 0, top: '-3em'})),
+			animate( "2s", style({ opacity: 0, top: '-3em' }) ),
 		])
-	]);
-
-/**
- * Reduction animation.
- */
-export const REDUCTION_ANIMATION =
-	trigger('reductionTrigger', [
-		state('big', style({transform: 'scale(3)'})),
-		state('normal', style({transform: 'scale(1)'})),
-		transition('big => normal', [animate(250)])
 	]);
 
