@@ -1,7 +1,7 @@
-<myst-navbar-menu [audioPath]="audioPath" [logoPath]="logoPath" [homeRoute]="homeRoute" [routes]="routes"></myst-navbar-menu>
+<myst-navbar-menu [config]="navbarMenuConfig"></myst-navbar-menu>
 
 <router-outlet></router-outlet>
 
-<myst-signature author="{{ author }}" version="{{ version }}"></myst-signature>
+<myst-signature [config]="signatureConfig"></myst-signature>
 
 <ng-http-loader [backgroundColor]="'orangered'" [spinner]="Spinkit.skThreeBounce" [debounceDelay]="500"></ng-http-loader>

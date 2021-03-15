@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { Route } from "myssteriion-utils";
+import { NavbarMenuConfig, Route, SignatureConfig } from "myssteriion-utils";
 import { Spinkit } from "ng-http-loader";
 import { environment } from "../environments/environment";
 import { FFXII_THEME, LOGO } from "./tools/constant";
@@ -14,37 +14,17 @@ import { HOME_ROUTE, ROUTES_WITHOUT_HOME } from "./tools/routing.constant";
 	templateUrl: "./app.component.html",
 	styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	
 	/**
-	 * The author.
+	 * The navbar menu config.
 	 */
-	public author: string = "Myssteriion";
+	public navbarMenuConfig: NavbarMenuConfig;
 	
 	/**
-	 * The version.
+	 * The signature config.
 	 */
-	public version: string = environment.version;
-	
-	/**
-	 * Audio path.
-	 */
-	public audioPath: string = FFXII_THEME;
-	
-	/**
-	 * Logo path.
-	 */
-	public logoPath: string = LOGO;
-	
-	/**
-	 * Home route.
-	 */
-	public homeRoute: Route = HOME_ROUTE;
-	
-	/**
-	 * Routes.
-	 */
-	public routes: Route[] = ROUTES_WITHOUT_HOME;
+	public signatureConfig: SignatureConfig;
 	
 	/**
 	 * For ng-http-loader.
@@ -53,10 +33,15 @@ export class AppComponent {
 	
 	
 	
-	constructor(private translate: TranslateService) {
+	constructor(private translate: TranslateService) { }
+	
+	ngOnInit(): void {
 		
-		translate.setDefaultLang("fr");
-		translate.use("fr");
+		this.translate.setDefaultLang("fr");
+		this.translate.use("fr");
+		
+		this.signatureConfig = { author: "Myssteriion", version: environment.version };
+		this.navbarMenuConfig = { homeRoute: HOME_ROUTE, routes: ROUTES_WITHOUT_HOME, logoPath: LOGO, audioPath: FFXII_THEME };
 	}
 	
 }
