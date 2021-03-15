@@ -10,7 +10,7 @@ import { SLIDE_ANIMATION, THEMES } from '../../../tools/constant';
 @Component({
 	selector: "theme-comparison-view",
 	templateUrl: "./theme-comparison-view.component.html",
-	styleUrls: ["./theme-comparison-view.component.css"],
+	styleUrls: ["./theme-comparison-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

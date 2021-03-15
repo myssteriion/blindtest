@@ -14,7 +14,7 @@ import { COLOR_SCHEME } from "../../../../tools/graph.constant";
 @Component({
 	selector: "theme-comparison-question-detail",
 	templateUrl: "./theme-comparison-question-detail.component.html",
-	styleUrls: ["./theme-comparison-question-detail.component.css"]
+	styleUrls: ["./theme-comparison-question-detail.component.scss"]
 })
 export class ThemeComparisonQuestionDetailComponent implements OnInit {
 	

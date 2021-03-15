@@ -7,7 +7,7 @@ import { ProfilesPerPage } from "../profile-page/common/profiles-per-page.enum";
  */
 @Component({
 	templateUrl: "./profile-view.component.html",
-	styleUrls: ["./profile-view.component.css"],
+	styleUrls: ["./profile-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

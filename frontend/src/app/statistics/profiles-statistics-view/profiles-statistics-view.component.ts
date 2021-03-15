@@ -16,7 +16,7 @@ import { HOME_ROUTE } from "../../tools/routing.constant";
 @Component({
 	selector: "profiles-statistics-view",
 	templateUrl: "./profiles-statistics-view.component.html",
-	styleUrls: ["./profiles-statistics-view.component.css"],
+	styleUrls: ["./profiles-statistics-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

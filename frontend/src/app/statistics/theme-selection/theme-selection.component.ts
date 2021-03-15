@@ -8,7 +8,7 @@ import { THEMES } from "../../tools/constant";
 @Component({
 	selector: "theme-selection",
 	templateUrl: "./theme-selection.component.html",
-	styleUrls: ["./theme-selection.component.css"]
+	styleUrls: ["./theme-selection.component.scss"]
 })
 export class ThemeSelectionComponent implements OnInit {
 	

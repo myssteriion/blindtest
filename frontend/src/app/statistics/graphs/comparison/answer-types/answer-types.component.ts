@@ -13,7 +13,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "answer-types",
 	templateUrl: "./answer-types.component.html",
-	styleUrls: ["./answer-types.component.css"]
+	styleUrls: ["./answer-types.component.scss"]
 })
 export class AnswerTypesComponent implements OnInit {
 	

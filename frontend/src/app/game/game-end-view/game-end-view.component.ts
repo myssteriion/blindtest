@@ -18,7 +18,7 @@ import { GAME_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
  */
 @Component({
 	templateUrl: "./game-end-view.component.html",
-	styleUrls: ["./game-end-view.component.css"],
+	styleUrls: ["./game-end-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

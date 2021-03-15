@@ -9,7 +9,7 @@ import { Theme } from "../../../interfaces/common/theme.enum";
  */
 @Component({
 	templateUrl: "./choice-theme-modal.component.html",
-	styleUrls: ["./choice-theme-modal.component.css"]
+	styleUrls: ["./choice-theme-modal.component.scss"]
 })
 export class ChoiceThemeModalComponent implements OnInit {
 	

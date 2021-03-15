@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
 	selector: "profile-card-empty",
 	templateUrl: "./profile-card-empty.component.html",
-	styleUrls: ["./profile-card-empty.component.css"]
+	styleUrls: ["./profile-card-empty.component.scss"]
 })
 export class ProfileCardEmptyComponent {
 	

@@ -20,7 +20,7 @@ import { GAME_ROUTE } from "../../tools/routing.constant";
  */
 @Component({
 	templateUrl: "./game-new-view.component.html",
-	styleUrls: ["./game-new-view.component.css"],
+	styleUrls: ["./game-new-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

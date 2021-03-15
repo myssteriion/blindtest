@@ -9,7 +9,7 @@ import { EFFECTS, MARIO_KART_SOUND, THEMES } from "../../../tools/constant";
 @Component({
 	selector: "theme-effect",
 	templateUrl: "./theme-effect.component.html",
-	styleUrls: ["./theme-effect.component.css"]
+	styleUrls: ["./theme-effect.component.scss"]
 })
 export class ThemeEffectComponent implements OnInit, OnDestroy {
 	

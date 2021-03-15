@@ -13,7 +13,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "played-games",
 	templateUrl: "./played-games.component.html",
-	styleUrls: ["./played-games.component.css"]
+	styleUrls: ["./played-games.component.scss"]
 })
 export class PlayedGamesComponent implements OnInit {
 	

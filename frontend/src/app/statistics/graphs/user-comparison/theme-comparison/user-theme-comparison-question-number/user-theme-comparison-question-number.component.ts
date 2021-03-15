@@ -12,7 +12,7 @@ import { COLOR_SCHEME, HORIZONTAL_STACKED_BAR_GRAPH_SIZE } from "../../../../../
 @Component({
 	selector: "user-theme-comparison-question-number",
 	templateUrl: "./user-theme-comparison-question-number.component.html",
-	styleUrls: ["./user-theme-comparison-question-number.component.css"]
+	styleUrls: ["./user-theme-comparison-question-number.component.scss"]
 })
 
 export class UserThemeComparisonQuestionNumberComponent implements OnInit {

@@ -11,7 +11,7 @@ import { COLOR_SCHEME } from "../../../../tools/graph.constant";
 @Component({
 	selector: "user-theme-comparison-view",
 	templateUrl: "./user-theme-comparison-view.component.html",
-	styleUrls: ["./user-theme-comparison-view.component.css"],
+	styleUrls: ["./user-theme-comparison-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

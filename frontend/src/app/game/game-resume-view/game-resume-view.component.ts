@@ -11,7 +11,7 @@ import { GAME_ROUTE, HOME_ROUTE } from "../../tools/routing.constant";
  */
 @Component({
 	templateUrl: "./game-resume-view.component.html",
-	styleUrls: ["./game-resume-view.component.css"],
+	styleUrls: ["./game-resume-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION,
 		OPACITY_ANIMATION

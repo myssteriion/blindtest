@@ -7,7 +7,7 @@ import { RANKS_FIRST, RANKS_SECOND, RANKS_THIRD } from "../../../tools/constant"
 @Component({
 	selector: "end-game-ranks",
 	templateUrl: "./end-game-ranks.component.html",
-	styleUrls: ["./end-game-ranks.component.css"]
+	styleUrls: ["./end-game-ranks.component.scss"]
 })
 export class EndGameRanksComponent implements OnInit {
 	

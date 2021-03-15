@@ -8,7 +8,7 @@ import { EFFECTS, THEMES } from "../../tools/constant";
 @Component({
 	selector: "game-card",
 	templateUrl: "./game-card.component.html",
-	styleUrls: ["./game-card.component.css"]
+	styleUrls: ["./game-card.component.scss"]
 })
 export class GameCardComponent {
 	

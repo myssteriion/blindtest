@@ -8,7 +8,7 @@ import { ROUTES_WITHOUT_HOME } from "../tools/routing.constant";
  */
 @Component({
 	templateUrl: "./home-view.component.html",
-	styleUrls: ["./home-view.component.css"],
+	styleUrls: ["./home-view.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

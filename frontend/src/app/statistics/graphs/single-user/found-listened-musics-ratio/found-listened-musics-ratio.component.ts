@@ -10,7 +10,7 @@ import { COLOR_SCHEME, LINEAR_GAUGE_GRAPH_SIZE } from "../../../../tools/graph.c
 @Component({
 	selector: "found-listened-musics-ratio",
 	templateUrl: "./found-listened-musics-ratio.component.html",
-	styleUrls: ["./found-listened-musics-ratio.component.css"]
+	styleUrls: ["./found-listened-musics-ratio.component.scss"]
 })
 export class FoundListenedMusicsRatioComponent implements OnInit {
 	

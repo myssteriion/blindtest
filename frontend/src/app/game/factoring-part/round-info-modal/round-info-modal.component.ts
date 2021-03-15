@@ -11,7 +11,7 @@ import { Lucky } from "../../../interfaces/round/impl/lucky";
  */
 @Component({
 	templateUrl: "./round-info-modal.component.html",
-	styleUrls: ["./round-info-modal.component.css"]
+	styleUrls: ["./round-info-modal.component.scss"]
 })
 export class RoundInfoModalComponent {
 	

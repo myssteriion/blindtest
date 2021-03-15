@@ -11,7 +11,7 @@ import {CommonUtilsService} from "myssteriion-utils";
 @Component({
     selector: "profiles-comparison-view",
     templateUrl: "./profiles-comparison-view.component.html",
-    styleUrls: ["./profiles-comparison-view.component.css"]
+    styleUrls: ["./profiles-comparison-view.component.scss"]
 })
 export class ProfilesComparisonViewComponent implements OnInit {
 
@@ -47,7 +47,7 @@ export class ProfilesComparisonViewComponent implements OnInit {
                 return themeToFilter === theme.enumVal
             });
 
-            if (!this._commonUtilsService.isNull(themeExists)) {
+            if (!this._commonUtilsService.isNullOrEmpty(themeExists)) {
                 this.availableThemes.push(themeExists);
             }
         });

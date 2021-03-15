@@ -13,7 +13,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "score-by-game-type",
 	templateUrl: "./score-by-game-type.component.html",
-	styleUrls: ["./score-by-game-type.component.css"]
+	styleUrls: ["./score-by-game-type.component.scss"]
 })
 export class ScoreByGameTypeComponent implements OnInit {
 	

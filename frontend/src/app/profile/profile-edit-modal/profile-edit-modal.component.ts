@@ -16,7 +16,7 @@ declare var $: any;
  */
 @Component({
 	templateUrl: "./profile-edit-modal.component.html",
-	styleUrls: ["./profile-edit-modal.component.css"]
+	styleUrls: ["./profile-edit-modal.component.scss"]
 })
 export class ProfileEditModalComponent implements OnInit {
 	

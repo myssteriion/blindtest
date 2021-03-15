@@ -13,7 +13,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "theme-listening-view",
 	templateUrl: "./theme-listening.component.html",
-	styleUrls: ["./theme-listening.component.css"],
+	styleUrls: ["./theme-listening.component.scss"],
 	animations: [
 		SLIDE_ANIMATION
 	]

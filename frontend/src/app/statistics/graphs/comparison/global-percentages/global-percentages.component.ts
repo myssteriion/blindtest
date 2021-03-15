@@ -12,7 +12,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "global-percentages-view",
 	templateUrl: "./global-percentages.component.html",
-	styleUrls: ["./global-percentages.component.css"]
+	styleUrls: ["./global-percentages.component.scss"]
 })
 export class GlobalPercentagesComponent implements OnInit {
 	

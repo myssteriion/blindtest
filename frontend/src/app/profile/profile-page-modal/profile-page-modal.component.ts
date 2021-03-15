@@ -10,7 +10,7 @@ import { ProfilesPerPage } from "../profile-page/common/profiles-per-page.enum";
 @Component({
 	selector: "profile-page-modal",
 	templateUrl: "./profile-page-modal.component.html",
-	styleUrls: ["./profile-page-modal.component.css"]
+	styleUrls: ["./profile-page-modal.component.scss"]
 })
 export class ProfilePageModalComponent implements OnInit {
 	

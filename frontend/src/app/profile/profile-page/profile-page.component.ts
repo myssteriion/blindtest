@@ -15,7 +15,7 @@ import { ProfilesPerPage } from "./common/profiles-per-page.enum";
 @Component({
 	selector: "profile-page",
 	templateUrl: "./profile-page.component.html",
-	styleUrls: ["./profile-page.component.css"],
+	styleUrls: ["./profile-page.component.scss"],
 	animations: [
 		OPACITY_ANIMATION
 	]

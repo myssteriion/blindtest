@@ -7,7 +7,7 @@ import { Game } from "../../../interfaces/game/game";
 @Component({
 	selector: "end-game-statistics-view",
 	templateUrl: "./end-game-statistics-view.component.html",
-	styleUrls: ["./end-game-statistics-view.component.css"]
+	styleUrls: ["./end-game-statistics-view.component.scss"]
 })
 export class EndGameStatisticsViewComponent {
 	

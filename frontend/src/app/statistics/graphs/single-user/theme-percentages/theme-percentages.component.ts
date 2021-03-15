@@ -12,7 +12,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "theme-percentages-view",
 	templateUrl: "./theme-percentages.component.html",
-	styleUrls: ["./theme-percentages.component.css"]
+	styleUrls: ["./theme-percentages.component.scss"]
 })
 export class ThemePercentagesComponent implements OnInit {
 	

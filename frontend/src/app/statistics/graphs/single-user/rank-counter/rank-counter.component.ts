@@ -11,7 +11,7 @@ import { COLOR_SCHEME, HORIZONTAL_BAR_GRAPH_SIZE } from "../../../../tools/graph
 @Component({
 	selector: "rank-counter",
 	templateUrl: "./rank-counter.component.html",
-	styleUrls: ["./rank-counter.component.css"]
+	styleUrls: ["./rank-counter.component.scss"]
 })
 export class RankCounterComponent implements OnInit {
 	

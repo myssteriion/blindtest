@@ -15,7 +15,7 @@ import { GameResource } from "../../../resources/game.resource";
  */
 @Component({
 	templateUrl: "./music-result-modal.component.html",
-	styleUrls: ["./music-result-modal.component.css"]
+	styleUrls: ["./music-result-modal.component.scss"]
 })
 export class MusicResultModalComponent implements OnInit {
 	
