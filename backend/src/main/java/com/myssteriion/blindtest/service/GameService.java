@@ -78,7 +78,7 @@ public class GameService {
         
         checkAndFillNewGame(newGame);
         
-        List<Player> players = cratePlayersList( newGame.getProfilesId() );
+        List<Player> players = createPlayersList( newGame.getProfilesId() );
         
         Game game = new Game( players, newGame.getDuration(), newGame.getThemes(), newGame.getEffects() );
         game.setId( findNextId() );
@@ -130,7 +130,7 @@ public class GameService {
      * @return the players list
      * @throws NotFoundException if a profile is not found
      */
-    private List<Player> cratePlayersList(Set<Integer> profilesId) throws NotFoundException {
+    private List<Player> createPlayersList(Set<Integer> profilesId) throws NotFoundException {
         
         Set<Player> players = new HashSet<>();
         
